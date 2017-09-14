@@ -141,11 +141,18 @@
 			},
 			tradeSocket() {
 				return this.$store.state.tradeSocket;
+			},
+			layer(){
+				return this.$store.state.market.layer;
 			}
 		},
 		watch: {
 			stopLossList: function(n, o){
 				this.hasNostopLossList00();
+			},
+			layer: function(n, o){
+				this.$refs.dialog.isShow = true;
+				this.msg = n.slice(0,-1);
 			}
 		},
 		methods: {

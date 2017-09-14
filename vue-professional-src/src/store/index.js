@@ -1476,7 +1476,8 @@ export default new Vuex.Store({
 				case 'OnRtnOrderTraded':
 //					console.log('成交单通知');
 					if(parameters!=null){
-						context.state.market.OnRspQryTradeDealListCont.push(parameters);
+//						context.state.market.OnRspQryTradeDealListCont.push(parameters);
+						context.state.market.OnRspQryTradeDealListCont.unshift(parameters);
 					}
 					context.dispatch('layerOnRtnOrderTraded',parameters);
 					break;
@@ -1510,24 +1511,24 @@ export default new Vuex.Store({
 				case "OnRspInsertCondition":
 //					console.log(parameters);
 					if(parameters.Status==0){
-						context.state.market.layer='设置条件单成功';
+						context.state.market.layer='设置条件单成功' + Math.floor(Math.random()*10);
 					}else{
-						context.state.market.layer='设置条件单失败，原因:【'+parameters.StatusMsg+'】';
+						context.state.market.layer='设置条件单失败，原因:【'+parameters.StatusMsg+'】' + Math.floor(Math.random()*10);
 					}
 					context.dispatch('dealWithOnRspInsertCondition',parameters);
 					break;
 				case 'OnRtnConditionState':
 //					console.log(parameters);
 					if(parameters.Status==0){
-						context.state.market.layer='【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,改单后已运行';
+						context.state.market.layer='【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,改单后已运行' + Math.floor(Math.random()*10);
 					}else if(parameters.Status==1){
-						context.state.market.layer='【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,已暂停';
+						context.state.market.layer='【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,已暂停' + Math.floor(Math.random()*10);
 					}else if(parameters.Status==2){
-						context.state.market.layer='【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,已触发';
+						context.state.market.layer='【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,已触发' + Math.floor(Math.random()*10);
 					}else if(parameters.Status==3){
-						context.state.market.layer='【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,已取消';
+						context.state.market.layer='【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,已取消' + Math.floor(Math.random()*10);
 					}else if(parameters.Status==4){
-						context.state.market.layer='【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,插入失败';
+						context.state.market.layer='【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,插入失败' + Math.floor(Math.random()*10);
 					}else if(parameters.Status==5){
 						context.state.market.layer='【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,触发失败';
 					}
@@ -1883,7 +1884,7 @@ export default new Vuex.Store({
 			}
 		},
 		updateStopLoss:function(context,parameters){
-			context.state.market.layer='单号【'+ parameters.StopLossNo+'】,更新成功';
+			context.state.market.layer='单号【'+ parameters.StopLossNo+'】,更新成功' + Math.floor(Math.random()*10);
 			if(parameters.Status>2){
 				context.state.market.stopLossTriggeredList.push(parameters);
 				context.state.market.hasYesstopLossList.push(parameters);
@@ -1925,9 +1926,9 @@ export default new Vuex.Store({
 		},
 		layerOnRspInsertStopLoss:function(context,parameters){
 			if(parameters.Status==0){
-				context.state.market.layer='提交成功,单号【'+ parameters.StopLossNo+'】';
+				context.state.market.layer='提交成功,单号【'+ parameters.StopLossNo+'】'+Math.floor(Math.random()*10);
 			}else{
-				context.state.market.layer='提交失败,原因:【'+parameters.StatusMsg+'】';
+				context.state.market.layer='提交失败,原因:【'+parameters.StatusMsg+'】'+Math.floor(Math.random()*10);
 			}
 		},
 		qryHisTrade:function(context){

@@ -155,6 +155,9 @@
 			tradeSocket() {
 				return this.$store.state.tradeSocket;
 			},
+			miniTikeSize(){
+				return this.orderTemplist[this.condition.CommodityNo].MiniTikeSize;
+			}
 		},
 		watch:{
 			parameters:function(n,o){
@@ -163,12 +166,22 @@
 						if(this.condition.CommodityNo==e.CommodityNo){
 							this.lastPrice00 = this.orderTemplist[this.condition.CommodityNo].LastQuotation.LastPrice;
 						}
-						
 					}.bind(this));
+				}
+			},
+			selectStopLossType00: function(n, o){
+				if(n == 2){
+					this.inputPrice = this.miniTikeSize;
+				}else if(n == 0){
+					this.inputPrice = this.condition.OpenAvgPrice;
 				}
 			},
 			inputPrice: function(n, o){
 				if(n != undefined){
+					if(this.selectStopLossType00 == 2){
+						this.percentLoss = '0.00';
+						return;
+					}
 					var openAvgPrice = JSON.parse(this.val).OpenAvgPrice;
 					this.percentLoss = parseFloat((n - openAvgPrice)/openAvgPrice*100).toFixed(2);
 				}
@@ -210,34 +223,42 @@
 //				if (d < 0.000000001 || b-d < 0.0000000001){
 //					alert("yes");
 //				}
-				var a0 = this.inputPrice;
-				var b0 = this.orderTemplist[this.condition.CommodityNo].MiniTikeSize
-				var d0 =a0%b0;
-				console.log(this.inputPrice);
+				
 				if(this.isstopm == true){
+					let a0,b0,d0;
+					if(!(this.inputPrice == '' || this.inputPrice == 0 || this.inputPrice == undefined)){
+						 a0 = this.inputPrice;
+						 b0 = this.orderTemplist[this.condition.CommodityNo].MiniTikeSize;
+						 d0 = a0%b0;
+					}
 					
 					if(this.inputPrice == '' || this.inputPrice == 0 || this.inputPrice == undefined){
 						this.$refs.dialog.isShow = true;
 						this.msg = '请输入止损价';
-					}else if(d0 >= 0.000000001 && parseFloat(b0-d0) >= 0.0000000001){
+					}else if(!(d0 < 0.000000001 || parseFloat(b0-d0) < 0.0000000001)){
+						//d0 >= 0.000000001 && parseFloat(b0-d0) >= 0.0000000001
 						this.$refs.dialog.isShow = true;
 						this.msg = '输入价格不符合最小变动价，最小变动价为：' + b0;
 					}else if(this.Num == '' || this.Num == 0 || this.Num == undefined){
 						this.$refs.dialog.isShow = true;
 						this.msg = '请输入止损手数';
 					}else{
-						if(this.condition.Drection == 0){
-							if(this.inputPrice >= this.templateListObj.LastPrice){
-								this.$refs.dialog.isShow = true;
-								this.msg = '输入价格应该低于最新价';
-								return;
+						if(this.selectStopLossType00 == 0){
+							if(this.condition.Drection == 0){
+								//if(this.inputPrice > this.templateListObj.LastPrice){
+								if(parseFloat(this.inputPrice) >= parseFloat(this.lastPrice00)){	
+									this.$refs.dialog.isShow = true;
+									this.msg = '输入价格应该低于最新价';
+									return;
+								}
 							}
-						}
-						if(this.condition.Drection == 1){
-							if(this.inputPrice <= this.templateListObj.LastPrice){
-								this.$refs.dialog.isShow = true;
-								this.msg = '输入价格应该高于最新价';
-								return;
+							if(this.condition.Drection == 1){
+								//if(this.inputPrice < this.templateListObj.LastPrice){
+								if(parseFloat(this.inputPrice) <= parseFloat(this.lastPrice00)){	
+									this.$refs.dialog.isShow = true;
+									this.msg = '输入价格应该高于最新价';
+									return;
+								}
 							}
 						}
 						this.$refs.alert.isshow = true;
@@ -272,32 +293,42 @@
 						this.str = b;
 					}
 				}else{
+					let a0,b0,d0;
+					if(!(this.zhiYinInputPrice == '' || this.zhiYinInputPrice == 0 || this.zhiYinInputPrice == undefined)){
+						 a0 = this.zhiYinInputPrice;
+						 b0 = this.orderTemplist[this.condition.CommodityNo].MiniTikeSize;
+						 d0 = a0%b0;
+					}
+					
 					if(this.zhiYinInputPrice == '' || this.zhiYinInputPrice == 0 || this.zhiYinInputPrice == undefined){
 						this.$refs.dialog.isShow = true;
 						this.msg = '请输入止盈价';
 					}else if(this.zhiYinNum == '' || this.zhiYinNum == 0 || this.zhiYinNum == undefined){
 						this.$refs.dialog.isShow = true;
-						this.msg = '请输入止赢手数';
+						this.msg = '请输入止盈手数';
 					}else if(d0 >= 0.000000001 && parseFloat(b0-d0) >= 0.0000000001){
 						this.$refs.dialog.isShow = true;
 						this.msg = '输入价格不符合最小变动价，最小变动价为：' + b0;
 					}else{
 						if(this.condition.Drection==0){
-							if(this.zhiYinInputPrice <= this.templateListObj.LastPrice){
+							
+							//if(this.zhiYinInputPrice < this.templateListObj.LastPrice){
+							if(parseFloat(this.zhiYinInputPrice) <= parseFloat(this.lastPrice00)){		
 								this.$refs.dialog.isShow = true;
 								this.msg = '输入价格应该高于最新价';
 								return;
 							}
 						}
 						if(this.condition.Drection==1){
-							if(this.zhiYinInputPrice >= this.templateListObj.LastPrice){
+							//if(this.zhiYinInputPrice > this.templateListObj.LastPrice){
+							if(parseFloat(this.zhiYinInputPrice) >= parseFloat(this.lastPrice00)){	
 								this.$refs.dialog.isShow = true;
 								this.msg = '输入价格应该低于最新价';
 								return;
 							}
 						}
 						this.$refs.alert.isshow = true;
-						this.tipsMsg = '是否添加限价止赢？';
+						this.tipsMsg = '是否添加限价止盈？';
 						let b={
 							"Method":'InsertStopLoss',
 							"Parameters":{
@@ -424,6 +455,8 @@
 	.inp {
 		width: 95px;
 		height: 33px;
+		line-height: 32px;
+		padding: 0;
 		border-radius: 3px;
 		border: 1px solid #14151d;
 		color: white;
@@ -563,6 +596,8 @@
 	.inp {
 		width: 95px*@ip6;
 		height: 33px*@ip6;
+		line-height: 32px*@ip6;
+		padding: 0;
 		border-radius: 3px*@ip6;
 		border: 1px solid #14151d;
 		color: white;
@@ -702,6 +737,8 @@
 	.inp {
 		width: 95px*@ip5;
 		height: 33px*@ip5;
+		line-height: 32px*@ip5;
+		padding: 0;
 		border-radius: 3px*@ip5;
 		border: 1px solid #14151d;
 		color: white;

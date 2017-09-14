@@ -1,9 +1,10 @@
 <template>
 	<div id="ifalert" v-if="isshow">
 		<alert title="提示" :line1="tipsAlert" :objstr="sendMsg" ref="alert"></alert>
+		<tipsDialog :msg="msgTips" ref="dialog"></tipsDialog>
 		<div class="ifalert_box">
 			<ul class="selectbar">
-				<li class="fontgray fl" :class="{selected: ifshow}" @tap="selection">价格条件</li>
+				<li class="fontgray fl" :class="{selected: ifshow}">价格条件</li>
 				<!--<li class="fontgray fl" :class="{selected: !ifshow}"@tap="selection">时间条件</li>-->
 			</ul>
 			<ul class="content">
@@ -13,17 +14,16 @@
 							<li class="fontgray">合约</li>
 							<li>
 								<input type="text" v-model="selectId" class="selectlong fontwhite" disabled />
-								<!--<select name="contract" class="selectlong fontwhite" v-model="selectId">
-									<option v-for="v in parameters" :value="v.CommodityNo+v.MainContract">{{v.CommodityName}}</option>
-								</select>-->
+							</li>
+							<li>
+								<span class="fontgray">最新：</span>
+								<span class="white">{{lastPrice}}</span>
 							</li>
 						</ol>
 					</li>
 					<li>
 						<ol>
-							<li class="fontgray">
-								价格
-							</li>
+							<li class="fontgray">价格</li>
 							<li>
 								<select class="fontwhite selectshort" v-model="selectPrice">
 									<option value="0">&nbsp;&nbsp;></option>
@@ -82,6 +82,7 @@
 </template>
 
 <script>
+	import tipsDialog from './tipsDialog.vue'
 	import alert from './Tradealert.vue'
 	export default {
 		name: 'ifalert',
@@ -102,6 +103,7 @@
 				holdNum:1,
 				additionFlag:false,
 				addtionPrice:'',
+				lastPrice: '0.00',
 				
 				timeAddtionPrice:'',
 				timeAddtionPrice00:'',
@@ -115,18 +117,20 @@
 				timeBuyOrSell:0,
 				additionValue:'',
 				tipsMsg: '',
-				str: ''
+				str: '',
+				msg: '',
+				moneyReg: /^(([1-9]\d*)|0)(\.\d*)?$/
 			}
 		},
 		props: ['objstr'],
-		components: {alert},
+		components: {alert, tipsDialog},
 		computed:{
-			height1(){
-				return $('#ifalert>div').css('height').slice(0,-2);
-			},
-			height2(){
-				return this.height1*1.1585;
-			},
+//			height1(){
+//				return $('#ifalert>div').css('height').slice(0,-2);
+//			},
+//			height2(){
+//				return this.height1*1.1585;
+//			},
 			parameters(){
 				return this.$store.state.market.Parameters;
 			},
@@ -140,18 +144,33 @@
 				return this.$store.state.tradeSocket;
 			},
 			objstrParms: function(){
-				return this.objstr;
+				if(this.objstr) return JSON.parse(this.objstr);
 			},
 			tipsAlert: function(){
 				return this.tipsMsg;
 			},
+			msgTips: function(){
+				return this.msg;
+			},
 			sendMsg: function(){
 				if(this.str) return JSON.stringify(this.str);
 			},
+			miniTikeSize(){
+				return this.orderTemplist[this.objstrParms.CommodityNo].MiniTikeSize;
+			}
 		},
 		watch:{
+			parameters:function(n,o){
+				if(this.objstrParms != undefined){
+					n.forEach(function(e,i){
+						if(this.objstrParms.CommodityNo == e.CommodityNo){
+							this.lastPrice = this.orderTemplist[this.objstrParms.CommodityNo].LastQuotation.LastPrice;
+						}
+					}.bind(this));
+				}
+			},
 			objstrParms:function(n,o){
-				let sb= JSON.parse(n);
+				let sb = n;
 				//价格条件
 				this.selectId = sb.CommodityNo+sb.ContractNo;
 				this.selectPrice = sb.CompareType;
@@ -169,7 +188,6 @@
 				this.holdNum = sb.Num;
 			},
 			selectAdditionalPrice: function(n,o){
-				console.log(n);
 				if(this.selectAdditionalPrice == 5){
 					 $(".additionalPrice").attr("disabled","disabled");
 					 this.inputAdditionalPrice = '';
@@ -178,72 +196,124 @@
 					this.inputAdditionalPrice = this.inputPrice;
 				}
 			},
-		},
-		methods:{
-			selection:function(e){
-				if(e.target.innerHTML == '价格条件'){
-					this.ifshow=true;
-					$('#ifalert>div').css('height',this.height1+'px');
-				}else{
-					this.ifshow=false;
-					$('#ifalert>div').css('height',this.height2+'px');
+			inputPrice: function(n, o){
+				if(n != undefined && this.moneyReg.test(n) == false){
+					this.inputPrice = parseFloat(this.templateList[this.objstrParms.CommodityNo].LastPrice).toFixed(this.orderTemplist[this.objstrParms.CommodityNo].DotSize);
 				}
 			},
+			inputAdditionalPrice: function(n, o){
+				if(n != undefined && this.moneyReg.test(n) == false){
+					this.inputAdditionalPrice = '';
+				}
+			},
+		},
+		methods:{
 			close: function() {
 				this.isshow = false;
 			},
 			confirm: function() {
-				this.$refs.alert.isshow = true;
-				this.tipsMsg = '是否修改价格条件单？';
-				function getNowFormatDate() {
-				    let date = new Date();
-				    let seperator1 = "-";
-				    let month = date.getMonth() + 1;
-				    let strDate = date.getDate();
-				    if (month >= 1 && month <= 9) {
-				        month = "0" + month;
-				    }
-				    if (strDate >= 0 && strDate <= 9) {
-				        strDate = "0" + strDate;
-				    }
-				    let currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate;
-				    return currentdate;
-				}
-				let dateTime= getNowFormatDate()+' '+this.time+':'+new Date().getSeconds();
-//				this.isshow = false;
-				let mmp = JSON.parse(this.objstrParms);
-				let b={
-					"Method":'ModifyCondition',
-					"Parameters":{
-						'ConditionNo':mmp.ConditionNo,
-						'ModifyFlag':0,
-						'Num':parseInt(this.holdNum),
-						'ConditionType':0,
-						'PriceTriggerPonit':parseFloat(this.inputPrice),
-						'CompareType':parseInt(this.selectPrice),
-						'TimeTriggerPoint':'',
-						'AB_BuyPoint':0.0,
-						'AB_SellPoint':0.0,
-						'OrderType':parseInt(this.selectMarketOrLimited),
-						'StopLossType':5,
-						'Drection':parseInt(this.selectBuyOrSell),
-						'StopLossDiff':0.0,
-						'StopWinDiff':0.0,
-						'AdditionFlag':(function(){
-											if(this.selectAdditionalPrice==5){
-												return false;
-											}else{
-												return true;
-											}
-									}.bind(this))(),
-						'AdditionType':parseInt(this.selectAdditionalPrice),
-						'AdditionPrice':parseFloat(this.inputAdditionalPrice)
-						
+				if(this.inputAdditionalPrice){
+					var d1 = this.inputAdditionalPrice % this.miniTikeSize;
+					if(d1 >= 0.000000001 && parseFloat(this.miniTikeSize-d1) >= 0.0000000001){
+						this.$refs.dialog.isShow = true;
+						this.msg = '输入附加价格不符合最小变动价，最小变动价为：' + this.miniTikeSize;
+						return;
 					}
-				};
-//				this.tradeSocket.send(JSON.stringify(b));		
-				this.str = b;
-				
+				}
+				//判断价格与附加价格是否形成区间
+				switch (this.selectPrice){
+					case 0:
+						if(this.selectAdditionalPrice == 0 || this.selectAdditionalPrice == 2 || this.inputAdditionalPrice &&  this.inputAdditionalPrice <= this.inputPrice){
+							this.$refs.dialog.isShow = true;
+							this.msg = '附加条件添加错误';
+							return;
+						}
+						break;
+					case 2:
+						if(this.selectAdditionalPrice == 0 || this.selectAdditionalPrice == 2 || this.inputAdditionalPrice &&  this.inputAdditionalPrice <= this.inputPrice){
+							this.$refs.dialog.isShow = true;
+							this.msg = '附加条件添加错误';
+							return;
+						}
+						break;
+					case 1:
+						if(this.selectAdditionalPrice == 1 || this.selectAdditionalPrice == 3 || this.inputAdditionalPrice &&  this.inputAdditionalPrice >= this.inputPrice){
+							this.$refs.dialog.isShow = true;
+							this.msg = '附加条件添加错误';
+							return;
+						}
+						break;
+					case 3:
+						if(this.selectAdditionalPrice == 1 || this.selectAdditionalPrice == 3 || this.inputAdditionalPrice &&  this.inputAdditionalPrice >= this.inputPrice){
+							this.$refs.dialog.isShow = true;
+							this.msg = '附加条件添加错误';
+							return;
+						}
+						break;
+					default:
+						break;
+				}
+				var d0 = this.inputPrice % this.miniTikeSize;
+				if(this.inputPrice == '' || this.inputPrice == 0 || this.inputPrice == undefined){
+					this.$refs.dialog.isShow = true;
+					this.msg = '请输入价格';
+				}else if(d0 >= 0.000000001 && parseFloat(this.miniTikeSize-d0) >= 0.0000000001){
+					this.$refs.dialog.isShow = true;
+					this.msg = '输入价格不符合最小变动价，最小变动价为：' + this.miniTikeSize;
+				}else if(this.holdNum == '' || this.holdNum == 0 || this.holdNum == undefined){
+					this.$refs.dialog.isShow = true;
+					this.msg = '请输入手数';
+				}else{
+					this.$refs.alert.isshow = true;
+					this.tipsMsg = '是否修改价格条件单？';
+					function getNowFormatDate() {
+					    let date = new Date();
+					    let seperator1 = "-";
+					    let month = date.getMonth() + 1;
+					    let strDate = date.getDate();
+					    if (month >= 1 && month <= 9) {
+					        month = "0" + month;
+					    }
+					    if (strDate >= 0 && strDate <= 9) {
+					        strDate = "0" + strDate;
+					    }
+					    let currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate;
+					    return currentdate;
+					}
+					let dateTime= getNowFormatDate()+' '+this.time+':'+new Date().getSeconds();
+					let mmp = this.objstrParms;
+					let b = {
+						"Method":'ModifyCondition',
+						"Parameters":{
+							'ConditionNo':mmp.ConditionNo,
+							'ModifyFlag':0,
+							'Num':parseInt(this.holdNum),
+							'ConditionType':0,
+							'PriceTriggerPonit':parseFloat(this.inputPrice),
+							'CompareType':parseInt(this.selectPrice),
+							'TimeTriggerPoint':'',
+							'AB_BuyPoint':0.0,
+							'AB_SellPoint':0.0,
+							'OrderType':parseInt(this.selectMarketOrLimited),
+							'StopLossType':5,
+							'Drection':parseInt(this.selectBuyOrSell),
+							'StopLossDiff':0.0,
+							'StopWinDiff':0.0,
+							'AdditionFlag':(function(){
+												if(this.selectAdditionalPrice==5){
+													return false;
+												}else{
+													return true;
+												}
+										}.bind(this))(),
+							'AdditionType':parseInt(this.selectAdditionalPrice),
+							'AdditionPrice':parseFloat(this.inputAdditionalPrice)
+							
+						}
+					};
+	//				this.tradeSocket.send(JSON.stringify(b));		
+					this.str = b;
+				}
 			}
 		},
 		mounted:function(){
@@ -253,6 +323,9 @@
 
 <style scoped lang="less">
 @import url("../assets/css/main.less");
+.white{
+	color: white;
+}
 /*ip6p及以上*/
 @media (min-width:411px) {
 	@width: 330px;
@@ -377,9 +450,13 @@
 		width: 275px;
 		text-align: center;
 	}
+	ul>li:nth-child(1)>ol>li:nth-child(2),
 	ul>li:nth-child(2)>ol>li:nth-child(2),
 	ul>li:nth-child(3)>ol>li:nth-child(2) {
 		padding-right: 8px;
+	}
+	ul>li:nth-child(1)>ol>li:nth-child(3){
+		padding-left: 8px;
 	}
 	.lot {
 		margin-left: 20px;
@@ -525,9 +602,13 @@
 		width: 275px*@ip6;
 		text-align: center;
 	}
+	ul>li:nth-child(1)>ol>li:nth-child(2),
 	ul>li:nth-child(2)>ol>li:nth-child(2),
 	ul>li:nth-child(3)>ol>li:nth-child(2) {
 		padding-right: 8px*@ip6;
+	}
+	ul>li:nth-child(1)>ol>li:nth-child(3){
+		padding-left: 8px*@ip5;
 	}
 	.lot {
 		margin-left: 20px*@ip6;
@@ -673,9 +754,13 @@
 		width: 275px*@ip5;
 		text-align: center;
 	}
+	ul>li:nth-child(1)>ol>li:nth-child(2),
 	ul>li:nth-child(2)>ol>li:nth-child(2),
 	ul>li:nth-child(3)>ol>li:nth-child(2) {
 		padding-right: 8px*@ip5;
+	}
+	ul>li:nth-child(1)>ol>li:nth-child(3){
+		padding-left: 8px*@ip5;
 	}
 	.lot {
 		margin-left: 20px*@ip5;

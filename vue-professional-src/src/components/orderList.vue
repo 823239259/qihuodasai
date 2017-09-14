@@ -154,8 +154,9 @@
 						i++;
 						this.$refs.stopmoneyalert.isshow = true;
 						this.selectedOrderList = qryHoldTotalArr[length-1-positionCurrent];
-						this.$refs.stopmoneyalert.inputPrice = this.selectedOrderList.OpenAvgPrice; 
-						this.$refs.stopmoneyalert.zhiYinInputPrice = this.selectedOrderList.OpenAvgPrice; 
+						this.$refs.stopmoneyalert.inputPrice = this.selectedOrderList.OpenAvgPrice;  //设置默认止损价
+						this.$refs.stopmoneyalert.zhiYinInputPrice = this.selectedOrderList.OpenAvgPrice;   //设置默认止盈价
+						this.$refs.stopmoneyalert.selectStopLossType00 = 0;  //默认止损价
 						return;
 					}
 				}
