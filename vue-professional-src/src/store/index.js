@@ -1511,24 +1511,24 @@ export default new Vuex.Store({
 				case "OnRspInsertCondition":
 //					console.log(parameters);
 					if(parameters.Status==0){
-						context.state.market.layer='设置条件单成功';
+						context.state.market.layer='设置条件单成功' + Math.floor(Math.random()*10);
 					}else{
-						context.state.market.layer='设置条件单失败，原因:【'+parameters.StatusMsg+'】';
+						context.state.market.layer='设置条件单失败，原因:【'+parameters.StatusMsg+'】' + Math.floor(Math.random()*10);
 					}
 					context.dispatch('dealWithOnRspInsertCondition',parameters);
 					break;
 				case 'OnRtnConditionState':
 //					console.log(parameters);
 					if(parameters.Status==0){
-						context.state.market.layer='【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,改单后已运行';
+						context.state.market.layer='【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,改单后已运行' + Math.floor(Math.random()*10);
 					}else if(parameters.Status==1){
-						context.state.market.layer='【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,已暂停';
+						context.state.market.layer='【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,已暂停' + Math.floor(Math.random()*10);
 					}else if(parameters.Status==2){
-						context.state.market.layer='【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,已触发';
+						context.state.market.layer='【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,已触发' + Math.floor(Math.random()*10);
 					}else if(parameters.Status==3){
-						context.state.market.layer='【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,已取消';
+						context.state.market.layer='【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,已取消' + Math.floor(Math.random()*10);
 					}else if(parameters.Status==4){
-						context.state.market.layer='【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,插入失败';
+						context.state.market.layer='【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,插入失败' + Math.floor(Math.random()*10);
 					}else if(parameters.Status==5){
 						context.state.market.layer='【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,触发失败';
 					}

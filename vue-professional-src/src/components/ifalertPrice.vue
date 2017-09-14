@@ -14,17 +14,16 @@
 							<li class="fontgray">合约</li>
 							<li>
 								<input type="text" v-model="selectId" class="selectlong fontwhite" disabled />
-								<!--<select name="contract" class="selectlong fontwhite" v-model="selectId">
-									<option v-for="v in parameters" :value="v.CommodityNo+v.MainContract">{{v.CommodityName}}</option>
-								</select>-->
+							</li>
+							<li>
+								<span class="fontgray">最新：</span>
+								<span class="white">{{lastPrice}}</span>
 							</li>
 						</ol>
 					</li>
 					<li>
 						<ol>
-							<li class="fontgray">
-								价格
-							</li>
+							<li class="fontgray">价格</li>
 							<li>
 								<select class="fontwhite selectshort" v-model="selectPrice">
 									<option value="0">&nbsp;&nbsp;></option>
@@ -104,6 +103,7 @@
 				holdNum:1,
 				additionFlag:false,
 				addtionPrice:'',
+				lastPrice: '0.00',
 				
 				timeAddtionPrice:'',
 				timeAddtionPrice00:'',
@@ -160,6 +160,15 @@
 			}
 		},
 		watch:{
+			parameters:function(n,o){
+				if(this.objstrParms != undefined){
+					n.forEach(function(e,i){
+						if(this.objstrParms.CommodityNo == e.CommodityNo){
+							this.lastPrice = this.orderTemplist[this.objstrParms.CommodityNo].LastQuotation.LastPrice;
+						}
+					}.bind(this));
+				}
+			},
 			objstrParms:function(n,o){
 				let sb = n;
 				//价格条件
@@ -314,6 +323,9 @@
 
 <style scoped lang="less">
 @import url("../assets/css/main.less");
+.white{
+	color: white;
+}
 /*ip6p及以上*/
 @media (min-width:411px) {
 	@width: 330px;
@@ -438,9 +450,13 @@
 		width: 275px;
 		text-align: center;
 	}
+	ul>li:nth-child(1)>ol>li:nth-child(2),
 	ul>li:nth-child(2)>ol>li:nth-child(2),
 	ul>li:nth-child(3)>ol>li:nth-child(2) {
 		padding-right: 8px;
+	}
+	ul>li:nth-child(1)>ol>li:nth-child(3){
+		padding-left: 8px;
 	}
 	.lot {
 		margin-left: 20px;
@@ -586,9 +602,13 @@
 		width: 275px*@ip6;
 		text-align: center;
 	}
+	ul>li:nth-child(1)>ol>li:nth-child(2),
 	ul>li:nth-child(2)>ol>li:nth-child(2),
 	ul>li:nth-child(3)>ol>li:nth-child(2) {
 		padding-right: 8px*@ip6;
+	}
+	ul>li:nth-child(1)>ol>li:nth-child(3){
+		padding-left: 8px*@ip5;
 	}
 	.lot {
 		margin-left: 20px*@ip6;
@@ -734,9 +754,13 @@
 		width: 275px*@ip5;
 		text-align: center;
 	}
+	ul>li:nth-child(1)>ol>li:nth-child(2),
 	ul>li:nth-child(2)>ol>li:nth-child(2),
 	ul>li:nth-child(3)>ol>li:nth-child(2) {
 		padding-right: 8px*@ip5;
+	}
+	ul>li:nth-child(1)>ol>li:nth-child(3){
+		padding-left: 8px*@ip5;
 	}
 	.lot {
 		margin-left: 20px*@ip5;
