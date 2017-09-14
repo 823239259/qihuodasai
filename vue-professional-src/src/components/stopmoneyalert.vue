@@ -223,10 +223,14 @@
 //				if (d < 0.000000001 || b-d < 0.0000000001){
 //					alert("yes");
 //				}
-				var a0 = this.inputPrice;
-				var b0 = this.orderTemplist[this.condition.CommodityNo].MiniTikeSize;
-				var d0 = a0%b0;
+				
 				if(this.isstopm == true){
+					let a0,b0,d0;
+					if(!(this.inputPrice == '' || this.inputPrice == 0 || this.inputPrice == undefined)){
+						 a0 = this.inputPrice;
+						 b0 = this.orderTemplist[this.condition.CommodityNo].MiniTikeSize;
+						 d0 = a0%b0;
+					}
 					
 					if(this.inputPrice == '' || this.inputPrice == 0 || this.inputPrice == undefined){
 						this.$refs.dialog.isShow = true;
@@ -289,6 +293,13 @@
 						this.str = b;
 					}
 				}else{
+					let a0,b0,d0;
+					if(!(this.zhiYinInputPrice == '' || this.zhiYinInputPrice == 0 || this.zhiYinInputPrice == undefined)){
+						 a0 = this.zhiYinInputPrice;
+						 b0 = this.orderTemplist[this.condition.CommodityNo].MiniTikeSize;
+						 d0 = a0%b0;
+					}
+					
 					if(this.zhiYinInputPrice == '' || this.zhiYinInputPrice == 0 || this.zhiYinInputPrice == undefined){
 						this.$refs.dialog.isShow = true;
 						this.msg = '请输入止盈价';
