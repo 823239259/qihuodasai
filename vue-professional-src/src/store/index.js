@@ -2018,6 +2018,7 @@ export default new Vuex.Store({
 			if(parameters.OrderStatus < 3 ){
 //				context.state.market.OnRspOrderInsertOrderListCont.push(parameters);
 				if(isExist==true){
+					
 					currentObj.delegatePrice = parameters.OrderPrice;
 					currentObj.delegateNum = parameters.OrderNum;
 					currentObj.ApplyOrderNum = parameters.OrderNum- parameters.TradeNum;
@@ -2028,6 +2029,7 @@ export default new Vuex.Store({
 					context.state.market.OnRspOrderInsertOrderListCont[context.state.market.OnRspOrderInsertOrderListCont.length-index-1].OrderNum
 						=parameters.OrderNum;
 					context.state.market.layer = parameters.StatusMsg + ':合约【'+ parameters.ContractCode +'】,订单号:【'+ parameters.OrderID +'】' + Math.floor(Math.random()*10);
+					
 				}
 			}else{
 				if(isExist==true){
