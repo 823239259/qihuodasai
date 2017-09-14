@@ -168,10 +168,12 @@
 							'type': 1,
 							'yzm': refresh_code_value
 						}, function(result) {
-							$("#codelayer").css("display", "none");
-							mui.toast("发送成功！");
-							var o = document.getElementById("code");
-							tzdr.smsTime(o);
+							if(result.code == 1){
+								$("#codelayer").css("display", "none");
+								mui.toast("发送成功！");
+								var o = document.getElementById("code");
+								tzdr.smsTime(o);
+							}						
 							return;
 						}, function(result) {
 							console.log("注册返回代码" + result.code + "信息：" + result.message)

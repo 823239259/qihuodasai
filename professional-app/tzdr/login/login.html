@@ -136,7 +136,7 @@
 				});
 				document.getElementById("back").addEventListener("tap", function() {
 					plus.nativeUI.closeWaiting();
-					mui.app_back("quotationMain", true);
+					mui.app_back("accountno", true);
 				});
 				/*重新获取图形验证码*/
 				document.getElementById("refresh_code").addEventListener("tap", function() {
@@ -179,43 +179,34 @@
 					'loginName': mobile,
 					'password': password,
 					'code': picCode
-				}, function(result) {
-					mui.toast("登录成功！");
-					//存储用户信息
-					mui.cacheUser.save(result.data.token, result.data.secret, mobile);
-					localStorage.removeItem("tipLogin");
-					if(win.backpageID) {
-						mui.app_back(win.backpageID, true); //放回businessPageId页面，并且刷新该页面信息
-						return;
-					}
-					var wsreload = plus.webview.getWebviewById("quotationMain");
-					if(wsreload != null) {
-						wsreload.reload();
-					}
-					mui.openWindow("../quotation/quotationMain.html", "quotationMain");
-					//退出图形验证码框
-					$("#codelayer").css("display", "none");
-					$("#refresh_code_value").val("");
-					clearinfo();
+				}, 
+				function(result) {		
+							mui.toast("登录成功！");
+							//存储用户信息
+							mui.cacheUser.save(result.data.token, result.data.secret, mobile);
+							localStorage.removeItem("tipLogin");
+							if(win.backpageID) {
+								mui.app_back(win.backpageID, true); //放回businessPageId页面，并且刷新该页面信息
+								return;
+							}
+							var wsreload = plus.webview.getWebviewById("quotationMain");
+							if(wsreload != null) {
+								wsreload.reload();
+							}
+							mui.openWindow("../quotation/quotationMain.html", "quotationMain");
+							//退出图形验证码框
+							$("#codelayer").css("display", "none");
+							$("#refresh_code_value").val("");
+							clearinfo();					
 					return;
-				}, function(result) {
-					console.log("登录路失败状态码：" + result.code + "信息：" + result.message);
-					if(result.code == 6) { //被冻结
-						console.log(result.data.date)
-						//						解冻时间，换算成了类似2.3小时
-						var restTime = ((result.data.date) / 3600).toString();
-						restTime = restTime.substring(0, 3)
-						console.log(restTime)
-						if(restTime == 3) {
-							mui.toast("密码输错已超过5次,账户将被被冻结3小时\n距解冻还有：" + restTime + "小时");
-						} else {
-							var restTimes = restTime.split(".", 2);
-							mui.toast("密码输错已超过5次,账户将被被冻结3小时\n距解冻还有：" + restTimes[0] + "小时" + restTimes[1] * 6 + "分钟");
-
-						}
+				}, 
+				function(result) {
+					if(result.code == 2 && result.data.num <=2) {
+						mui.toast(result.message);
 						return;
-					}
-					if(result.data.num != undefined && result.data.num != null && result.data.num >= 3) {
+						}
+					else if(result.code == 2 && result.data.num > 2) {
+
 						//  		图片验证码
 						$("#codelayer").css("display", "block");
 						$("#refresh_code").attr("src", tzdr.constants.api_domain + "sendImageCode?1=" + Math.random() * 1000 + "&mobile=" + mobile);
@@ -229,38 +220,47 @@
 								mui.toast("验证码不能为空！");
 								return;
 							};
-							//							
+														
 							mui.app_request('/login', {
 								'loginName': mobile,
 								'password': password,
 								'code': picCode
 							}, function(result) { //成功
-								console.log("登录路成功状态码：" + result.code + "信息：" + result.message);
-								mui.toast("登录成功");
-								//存储用户信息
-								mui.cacheUser.save(result.data.token, result.data.secret, mobile);
-								localStorage.removeItem("tipLogin");
-								if(win.backpageID) {
-									mui.app_back(win.backpageID, true); //放回businessPageId页面，并且刷新该页面信息
-									return;
-								}
-								var wsreload = plus.webview.getWebviewById("quotationMain");
-								if(wsreload != null) {
-									wsreload.reload();
-								}
-								mui.openWindow("../quotation/quotationMain.html", "quotationMain");
-
-								//退出图形验证码框
-								$("#codelayer").css("display", "none");
-								$("#refresh_code_value").val("");
-								clearinfo();
+//								console.log("登录路成功状态码：" + result.code + "信息：" + result.message);
+									
+										mui.toast("登录成功");
+										//存储用户信息
+										mui.cacheUser.save(result.data.token, result.data.secret, mobile);
+										localStorage.removeItem("tipLogin");
+										if(win.backpageID) {
+											mui.app_back(win.backpageID, true); //放回businessPageId页面，并且刷新该页面信息
+											return;
+											}
+										var wsreload = plus.webview.getWebviewById("quotationMain");
+										if(wsreload != null) {
+											wsreload.reload();
+											}
+										mui.openWindow("../quotation/quotationMain.html", "quotationMain");
+		
+										//退出图形验证码框
+										$("#codelayer").css("display", "none");
+										$("#refresh_code_value").val("");
+										clearinfo();
+																							
 								return;
-								//$("#refresh_code").attr("src", tzdr.constants.api_domain + "sendImageCode?1=" + Math.random() * 1000 + "&mobile=" + mobile);
 							}, function(result) { //失败
-								console.log("登录路失败状态码：" + result.code + "信息：" + result.message);
+//								console.log("登录路失败状态码：" + result.code + "信息：" + result.message);
 								$("#refresh_code").attr("src", tzdr.constants.api_domain + "sendImageCode?1=" + Math.random() * 1000 + "&mobile=" + mobile);
 								if(result.code == 6) {
-									mui.toast("密码输错已超过5次\n账户将被被冻结3小时");
+									var restTime = ((result.data.date) / 3600).toString();
+									restTime = restTime.substring(0, 3)
+									console.log(restTime)
+									if(restTime == 3) {
+										mui.toast("密码输错已超过5次,账户将被被冻结3小时\n距解冻还有：" + restTime + "小时");
+									} else {
+										var restTimes = restTime.split(".", 2);
+										mui.toast("密码输错已超过5次,账户将被被冻结3小时\n距解冻还有：" + restTimes[0] + "小时" + restTimes[1] * 6 + "分钟");
+									}
 									return;
 								} else if(result.code == 4) {
 									mui.toast("验证码输入错误");
@@ -269,24 +269,24 @@
 									mui.toast(result.message);
 									return;
 								}
-							})
+							},paramUrl)
 						});
 						return;
-					}
-					if(result.code == 2) {
-						mui.toast(result.message);
-						return;
-					} else if(result.code == 4) {
-						mui.toast("验证码输入错误");
-						return;
-					} else if(result.code == 6) {
-						mui.toast("密码输错已超过5次\n账户将被被冻结3小时");
-						return;
+					}					
+					else if(result.code == 6){
+						var restTime = ((result.data.date) / 3600).toString();						
+									restTime = restTime.substring(0, 3)
+//									console.log(restTime)
+									if(restTime == 3) {
+										mui.toast("密码输错已超过5次,账户将被被冻结3小时\n距解冻还有：" + restTime + "小时");
+									} else {
+										var restTimes = restTime.split(".", 2);
+										mui.toast("密码输错已超过5次,账户将被被冻结3小时\n距解冻还有：" + restTimes[0] + "小时" + restTimes[1] * 6 + "分钟");
+									}
+									return;
 					}
 				}, paramUrl);
-
 			}
-
 			/*按钮变色*/
 			function checkValue() {
 				var account = $("#account").val();
