@@ -3,7 +3,7 @@
 		<tipsDialog :msg="msgTips" ref="dialog"></tipsDialog>
 		<stopLossAlert ref="stoplossalert"></stopLossAlert>
 		<stopWinAlert ref="stopwinalert"></stopWinAlert>
-		<alert title="提示" :line1="tipsAlert" :objstr="sendMsg" ref="alert"></alert>
+		<alert title="提示" :line1="tipsAlert" :objstr="sendMsg" ref="alert" type="2"></alert>
 		<div class="head">
 			<topbar title="止损止盈"></topbar>
 			<back></back>
@@ -63,7 +63,7 @@
 						<span>触发条件</span>
 						<span>委托价</span>
 						<span>有效期</span>
-						<span>触发时间</span>
+						<span>下单时间</span>
 					</li>
 					<template v-for="k in hasYesstopLossList">
 						<li @tap="listTap" :id="k.StopLossNo">
@@ -229,8 +229,8 @@
 					this.tipsMsg = '是否删除止损单？';
 					this.hasNostopLossList.forEach(function(e,i){
 						if(e.StopLossNo==this.orderListId){
-							this.hasNostopLossList.splice(i,1);
-							this.stopLossList.splice(i,1);
+//							this.hasNostopLossList.splice(i,1);
+//							this.stopLossList.splice(i,1);
 							let b={
 								"Method":'ModifyStopLoss',
 								"Parameters":{
