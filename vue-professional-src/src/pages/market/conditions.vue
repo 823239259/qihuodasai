@@ -57,7 +57,7 @@
 						<span>条件</span>
 						<span>下单</span>
 						<span>有效日期</span>
-						<span>触发时间</span>
+						<span>下单时间</span>
 					</li>
 					<template v-for="k in yesListCont">
 						<li @tap="listTap" id="123">
