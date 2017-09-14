@@ -19,7 +19,7 @@
 							</li>
 							<li>
 								<span class="fontgray">最新：</span>
-								<span class="white">{{lastPrice}}</span>
+								<span class="white">{{lastPrice | toFixed(dosize)}}</span>
 							</li>
 						</ol>
 					</li>
@@ -84,7 +84,7 @@
 							</li>
 							<li>
 								<span class="fontgray">最新：</span>
-								<span class="white">{{lastPrice}}</span>
+								<span class="white">{{lastPrice | toFixed(dosize)}}</span>
 							</li>
 						</ol>
 					</li>
@@ -219,6 +219,19 @@
 			},
 			miniTikeSize(){
 				return this.orderTemplist[this.commodityNo].MiniTikeSize;
+			},
+			dosize(){
+				if(this.ifshow == true){
+					return this.orderTemplist[this.commodityNo].DotSize;
+				}else{
+					return this.orderTemplist[this.commodityNo00].DotSize;
+				}
+			}
+		},
+		filters:{
+			toFixed: function(value, dotSize){
+				if (!value) return '';
+				return parseFloat(value).toFixed(dotSize);
 			}
 		},
 		watch:{
@@ -265,7 +278,7 @@
 			},
 			selectTimeId:function(n,o){
 				if(n != undefined){
-					this.commodityNo = n.substring(0,n.length-4);
+//					this.commodityNo = n.substring(0,n.length-4);
 					this.commodityNo00 = n.substring(0,n.length-4);
 					this.contractNo00 = n.substring(n.length-4,n.length);
 //					this.timeAddtionPrice =  parseFloat(this.templateList[this.commodityNo00].LastPrice).toFixed(this.orderTemplist[this.commodityNo00].DotSize);

@@ -15,7 +15,7 @@
 						</li>
 						<li>
 							<span class="fontgray">最新：</span>
-							<span class="white">{{lastPrice}}</span>
+							<span class="white">{{lastPrice | toFixed(dosize)}}</span>
 						</li>
 					</ol>
 				</li>
@@ -155,6 +155,15 @@
 			},
 			miniTikeSize(){
 				return this.orderTemplist[this.objstrParms.CommodityNo].MiniTikeSize;
+			},
+			dosize(){
+				return this.orderTemplist[this.objstrParms.CommodityNo].DotSize;
+			}
+		},
+		filters:{
+			toFixed: function(value, dotSize){
+				if (!value) return '';
+				return parseFloat(value).toFixed(dotSize);
 			}
 		},
 		watch:{
