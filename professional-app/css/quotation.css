@@ -501,31 +501,55 @@ p{
 	left:2%;
 	padding-left: 2%;
 }
+.volume{
+	height:50px;
+	width: 17%;
+	text-align: right;
+	padding:9px 0px 13px;
+	font-size: 16px;
+	line-height: 14px;
+	color:#fafafa;
+	position: absolute;
+	top:0px;
+	right:2%;
+	padding-left: 2%;
+}
 .CommodityNoName{
 	color:#999999!important;
 }
 .productContentRight{
 	height:50px;
-	width: 66%;
+	width: 50%;
 	padding:9px 0px 13px;
-	text-align: center;
+	text-align: right;
 	line-height: 26px;
 	position: absolute;
 	top:0px;
-	right:2%;
+	right:20%;
 }
 .productContentRight span:nth-child(2) {
 	float: right;
-    line-height: 20px;
-    padding: 5px 0;
+    line-height: 50px;
+    /*padding: 5px 0;*/
     position: relative;
-    top: -10px;
+    top: -12px;
+    height: 50px;
 }
-.productContentRight span:nth-child(2) label{
+.productContentRight label:nth-child(1){
 	text-align: right;
 	display: inline-block;
     width: 100%;
     padding-right: 5%;
+    line-height: 50px;
+    height: 50px;
+    padding-right: 12PX;
+    display: block;
+}
+#showTwo{
+	display: none;
+}
+#showOne{
+	display: block;
 }
 .productContentRight span{
 	display: inline-block;
@@ -620,7 +644,7 @@ input{
 }
 #fisrtLlist #colse {
 	position: absolute;
-    right: 7px;
+    right: 10px;
     text-align: center;
     width: 30px;
     height: 30px;
@@ -628,6 +652,7 @@ input{
     top: 10px;
     font-size: 24px;
     z-index: 10;
+    padding-right: 10px;
 }
 #fisrtLlist #colse:active {
 	color: #fff;
@@ -652,14 +677,28 @@ input{
 /*新手指引end*/
 #fisrtLlist span{
 	display: inline-block;
-	width: 32%;
+	width: 25%;
 	text-align: center;
 }
 #fisrtLlist span:nth-child(1){
 	text-align: left;
 	padding-left: 2%;
 }
+#fisrtLlist span:nth-child(2){
+	padding-left: 10%;
+}
+.choose{
+	display: inline-block;
+	float:right;
+	width: 16px;
+	height: 16px;
+	margin-top: 10px;
+}
 #fisrtLlist span:nth-child(3){
+	padding-left: 6%;
+	text-align: right;
+}
+#fisrtLlist span:nth-child(4){
 	text-align: right;
 }
 .mui-btn, button, input[type=button], input[type=reset], input[type=submit]{
@@ -682,6 +721,12 @@ input{
 }
 #refresh{
 	color:#FFFFFF;
+}
+#toOneMin{
+	display: inline-block;
+	width: 22px;
+	height: 22px;
+	margin-top: 10px;
 }
 .mui-content{
 	background-color: #2B2B2B;

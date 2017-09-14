@@ -95,6 +95,16 @@
 		<script>
 			mui.init();
 			mui.plusReady(function() {
+//				弹窗客服
+				document.getElementById("telus").addEventListener("tap",function(){
+					mui.confirm("工作日：08:30-24:00      周末：09:00-17:00","400-852-8008",new Array("取消","呼叫"),function(e){
+						if(e.index == 1){
+							mui.toast("哈哈哈")							
+						}else{
+							mui.toast("已取消")
+						}
+					})
+				})
 				//初始化监听头部和底部事件
 				var dataUrl = {
 					home: "../future/cp.html",
@@ -173,7 +183,7 @@
 						return _html;
 					}
 				
-				
+				tzdr.online();
 			});
 		</script>
 	</head>
@@ -181,7 +191,7 @@
 	<body>
 		<header class="mui-bar mui-bar-nav own-topbg">
 			<h1 class="mui-title">我的账户</h1>
-			<a href="javascript:void(0)" class="top-tel" id="telBtn">在线客服</a>
+			<a href="javascript:void(0)" class="top-tel" id="online">在线客服</a>
 		</header>
 
 		<nav class="navlist">
@@ -207,7 +217,7 @@
 			</a>
 		</nav>
 		<div class="mui-content">
-			<div class="mui-content-padded ac_money" style="height: 120px;">
+			<div class="mui-content-padded ac_money" style="height: 80px;">
 				<div style="height: 75px; position: relative; padding: 15px; border-bottom: 1px solid #e7e7e7;">
 					<img src="../../images/headPortrait.png" alt="" style="width: 50px; position: absolute;" />
 					<p>未登录<span id="title_names"></span></p>
@@ -215,10 +225,14 @@
 				</div>
 				<!--<button class="btn_login">立即登陆</button>
 				<button class="btn_regist">快速注册</button>-->
-				<h2 style="padding-left: 65px; height: 38px; line-height: 38px;">账户余额:<span id="title_balance"></span></h2>
+				<!--<h2 style="padding-left: 65px; height: 38px; line-height: 38px;">账户余额:<span id="title_balance"></span></h2>-->
+			</div>
+			<div style="text-align: center; height: 60px;">
+				<button type="button" class="mui-btn" style="background-color:#ff6a00;color:white;width: 40%;margin-right: 10px;margin-top: 10px;border-radius: 3px;height: 40px;" id='login'>立即登录</button>
+				<button type="button" class="mui-btn mui-btn-warning mui-btn-outlined mui-btn-outlined" style="width: 40%;margin-top: 10px;border-radius: 3px;height: 40px;color:#ff6a00;" id="regist">快速注册</button>
 			</div>
 			<div class="mui-slider" id="slider">
-				<div class="mui-slider-group mui-slider-loop" id="bannerloop">
+				<div class="mui-slider-group mui-slider-loop" id="bannerloop"style="height: 120px;">
 					<div class="mui-slider-item">
 						<a href="javascript:void(0);"><img src="../../images/banner_load.jpg" /></a>
 					</div>
@@ -278,9 +292,9 @@
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="noviceGuide">
 					<div class="find_tab_div">
-						<img src="../../images/ac_071.png">
-						<div>
-							新手指引<br/><span>遇到问题，戳这里</span>
+						<img src="../../images/telephone.png">
+						<div id="telus">
+							联系我们<br/><span>客户专员，为您解惑</span>
 						</div>
 					</div>
 				</li>
@@ -293,11 +307,6 @@
 					</div>
 				</li>
 			</ul>
-		</div>
-		<div class="mui-backdrop"></div>
-		<div class="main_nolg">
-			<button class="mui-btn mui-btn-block sc_listbtn" type="button" id="login">立即登录</button>
-			<button type="button" class="mui-btn mui-btn-block lg-btnlogin" id="regist" style="border-radius: 20px;">新用户注册</button>
 		</div>
 	</body>
 	<script></script>
