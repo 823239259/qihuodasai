@@ -17,8 +17,9 @@
 									<option v-for="v in parameters" :value="v.CommodityNo+v.MainContract">{{v.CommodityName}}</option>
 								</select>
 							</li>
-							<li class="fl fontgray">
-								最新：<span class="fontwhite">00</span>
+							<li>
+								<span class="fontgray">最新：</span>
+								<span class="white">{{lastPrice}}</span>
 							</li>
 						</ol>
 					</li>
@@ -81,8 +82,9 @@
 									<option v-for="v in parameters" :value="v.CommodityNo+v.MainContract">{{v.CommodityName}}</option>
 								</select>
 							</li>
-							<li class="fl fontgray">
-								最新：<span class="fontwhite">00</span>
+							<li>
+								<span class="fontgray">最新：</span>
+								<span class="white">{{lastPrice}}</span>
 							</li>
 						</ol>
 					</li>
@@ -171,6 +173,7 @@
 				holdNum:1,
 				additionFlag:false,
 				addtionPrice:'',
+				lastPrice: '0.00',
 				
 				timeAddtionPrice:'',
 				timeAddtionPrice00:'',
@@ -189,7 +192,6 @@
 				moneyReg: /^(([1-9]\d*)|0)(\.\d*)?$/
 			}
 		},
-		props: ['objstr'],
 		components: {alert, tipsDialog},
 		computed:{
 			parameters(){
@@ -203,9 +205,6 @@
 			},
 			tradeSocket() {
 				return this.$store.state.tradeSocket;
-			},
-			objstrParms: function(){
-				return this.objstr;
 			},
 			tipsAlert: function(){
 				return this.tipsMsg;
@@ -221,6 +220,25 @@
 			}
 		},
 		watch:{
+			parameters:function(n,o){
+				if(this.ifshow == true){
+					if(this.commodityNo != undefined){
+						n.forEach(function(e,i){
+							if(this.commodityNo == e.CommodityNo){
+								this.lastPrice = this.orderTemplist[this.commodityNo].LastQuotation.LastPrice;
+							}
+						}.bind(this));
+					}
+				}else{
+					if(this.commodityNo00 != undefined){
+						n.forEach(function(e,i){
+							if(this.commodityNo00 == e.CommodityNo){
+								this.lastPrice = this.orderTemplist[this.commodityNo00].LastQuotation.LastPrice;
+							}
+						}.bind(this));
+					}
+				}
+			},
 			inputPrice: function(n, o){
 				if(n != undefined && this.moneyReg.test(n) == false){
 					this.inputPrice = parseFloat(this.templateList[this.commodityNo].LastPrice).toFixed(this.orderTemplist[this.commodityNo].DotSize);
@@ -480,6 +498,9 @@
 
 <style scoped lang="less">
 @import url("../assets/css/main.less");
+.white{
+	color: white;
+}
 /*ip6p及以上*/
 @media (min-width:411px) {
 	@width: 330px;
@@ -604,9 +625,13 @@
 		width: 275px;
 		text-align: center;
 	}
+	ul>li:nth-child(1)>ol>li:nth-child(2),
 	ul>li:nth-child(2)>ol>li:nth-child(2),
 	ul>li:nth-child(3)>ol>li:nth-child(2) {
 		padding-right: 8px;
+	}
+	ul>li:nth-child(1)>ol>li:nth-child(3){
+		padding-left: 8px;
 	}
 	.lot {
 		margin-left: 20px;
@@ -752,9 +777,13 @@
 		width: 275px*@ip6;
 		text-align: center;
 	}
+	ul>li:nth-child(1)>ol>li:nth-child(2),
 	ul>li:nth-child(2)>ol>li:nth-child(2),
 	ul>li:nth-child(3)>ol>li:nth-child(2) {
 		padding-right: 8px*@ip6;
+	}
+	ul>li:nth-child(1)>ol>li:nth-child(3){
+		padding-left: 8px*@ip6;
 	}
 	.lot {
 		margin-left: 20px*@ip6;
@@ -900,9 +929,13 @@
 		width: 275px*@ip5;
 		text-align: center;
 	}
+	ul>li:nth-child(1)>ol>li:nth-child(2),
 	ul>li:nth-child(2)>ol>li:nth-child(2),
 	ul>li:nth-child(3)>ol>li:nth-child(2) {
 		padding-right: 8px*@ip5;
+	}
+	ul>li:nth-child(1)>ol>li:nth-child(3){
+		padding-left: 8px*@ip6;
 	}
 	.lot {
 		margin-left: 20px*@ip5;
