@@ -43,10 +43,10 @@
 					for(var i=0;i<cnm.length;i++){
 						this.tradeSocket.send(JSON.stringify(cnm[i]));
 					}
-				}else if(this.type == '2'){
-					if(this.objstr) this.tradeSocket.send(this.objstr);
-					this.$parent.hasNostopLossList.splice(i,1);
-					this.$parent.stopLossList.splice(i,1);
+//				}else if(this.type == '2'){
+//					if(this.objstr) this.tradeSocket.send(this.objstr);
+//					this.$parent.hasNostopLossList.splice(i,1);
+//					this.$parent.stopLossList.splice(i,1);
 				}else{
 					if(this.objstr){
 						this.tradeSocket.send(this.objstr);

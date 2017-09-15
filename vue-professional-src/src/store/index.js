@@ -1885,8 +1885,13 @@ export default new Vuex.Store({
 			if(parameters.Status>2){
 				context.state.market.stopLossTriggeredList.push(parameters);
 				context.state.market.hasYesstopLossList.push(parameters);
+				context.state.market.hasNostopLossList.forEach(function(e,i){
+					if(e.StopLossNo==parameters.StopLossNo){
+						context.state.market.hasNostopLossList.splice(i,1);
+						context.state.market.stopLossList.splice(i,1);
+					}
+				});
 			}else if(parameters.Status==2){
-				
 				context.state.market.hasNostopLossList.forEach(function(e,i){
 					if(e.StopLossNo==parameters.StopLossNo){
 						context.state.market.hasNostopLossList.splice(i,1);
@@ -1900,8 +1905,6 @@ export default new Vuex.Store({
 				context.state.market.stopLossList.forEach(function(e,i){
 					if(e.StopLossNo==parameters.StopLossNo){
 						hasExist = true;
-						console.log('e:');console.log(e);
-						console.log('parameters');console.log(parameters);
 						e.HoldDrection = parameters.HoldDrection;
 						e.Num = parameters.Num;
 						e.OrderType = parameters.OrderType;

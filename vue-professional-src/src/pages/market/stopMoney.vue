@@ -3,7 +3,7 @@
 		<tipsDialog :msg="msgTips" ref="dialog"></tipsDialog>
 		<stopLossAlert ref="stoplossalert"></stopLossAlert>
 		<stopWinAlert ref="stopwinalert"></stopWinAlert>
-		<alert title="提示" :line1="tipsAlert" :objstr="sendMsg" ref="alert" type="2"></alert>
+		<alert title="提示" :line1="tipsAlert" :objstr="sendMsg" ref="alert"></alert>
 		<div class="head">
 			<topbar title="止损止盈"></topbar>
 			<back></back>
@@ -441,8 +441,8 @@
 			$(".list_cont_box").css("height", screenHeight - h - 20 + 'px');
 		},
 		activated: function(){
-			this.stopLossList;
-			this.stopLossTriggeredList;
+//			this.stopLossList;
+//			this.stopLossTriggeredList;
 			this.hasNostopLossList00();
 			this.hasYesstopLossList00();
 			//不更新画图
