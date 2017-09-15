@@ -1900,8 +1900,6 @@ export default new Vuex.Store({
 				context.state.market.stopLossList.forEach(function(e,i){
 					if(e.StopLossNo==parameters.StopLossNo){
 						hasExist = true;
-						console.log('e:');console.log(e);
-						console.log('parameters');console.log(parameters);
 						e.HoldDrection = parameters.HoldDrection;
 						e.Num = parameters.Num;
 						e.OrderType = parameters.OrderType;

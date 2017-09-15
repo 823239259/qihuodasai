@@ -191,6 +191,9 @@
 				}
 			},
 			"debug": false
+		},
+		"statusbar": {
+			"immersed": false /* 不支持沉浸式状态栏*/
 		}
 	},
 	"dependencies": {
@@ -1795,7 +1798,6 @@
 			]
 		}
 	},
-	"fullscreen": true,
 	"unpackage":[
 	  "css/mui.css",
 	  "js/mui.js"
