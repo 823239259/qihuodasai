@@ -127,7 +127,7 @@ function time() {
 })(mui);
 /*下拉刷新 上拉加载*/
 	
-	var url= tzdr.constants.api_domain + "crawler/getCrawlerByChannelLiveContent";
+	var url= tzdr.constants.api_domain + "crawler/getCrawler";
 	var urlTwo= tzdr.constants.api_domain + "crawler/getCrawlerCalendarByTime";
 	var dataAll;
 	var list = null;
@@ -136,8 +136,7 @@ function time() {
 	var list_numThere=0;
 	var params={
 	    pageIndex:0,
-	    size: 30,
-	    channelset:1
+	    size: 20
 	};
 	/*国家条件筛选*/
 	var valList="";
@@ -357,7 +356,7 @@ function time() {
 						var self = this;
 						setTimeout(function() {
 							fundmore();
-							if(list.length == 30){
+							if(list.length == 20){
 								self.endPullUpToRefresh(false);
 								num++;
 							}else{
@@ -634,16 +633,17 @@ function time() {
 		var self = this;
 		var params1={
 	        pageIndex:num,
-	        size: 30,
-	        channelset:1
+	        size: 20
 		};
   		newData(url,params1,forList,"","post");
 	}
 	// 7*24小时开始
 	function forList(res){ 
-//		console.log(JSON.stringify(res));
+		console.log(JSON.stringify(res.data[0].liveTitle));
+		console.log(JSON.stringify(res.data[0].createdAt));
 		if(!mui.isnull(res)){
   			list=res.data;
+
 			if(!mui.isnull(list)){
 				for(var i= 0;i<list.length; i++) {
 					fundList(list,i);
@@ -679,12 +679,12 @@ function time() {
 	}
 	function fundList(list,i){
 	  	var $fundList=document.body.querySelector("#directSeedNews .mui-table-view"); 
-	  	var time = tzdr.dateUtil.getFormatDataByLong(list[i].liveCreatetime/1000,"hh:mm");
+	  	var time = tzdr.dateUtil.getFormatDataByLong(list[i].createdAt/1000,"hh:mm");
 	  	//console.log(vs.dateUtil.getFormatDataByLong(list[i].liveCreatetime/1000,"yyyy-MM-dd"));
 	  	$("#result1").html(tzdr.dateUtil.getFormatDataByLong(list[i].liveCreatetime/1000,"yyyy-MM-dd"));
 	  	var li=document.createElement("li");
 	  	li.innerHTML = "<div class='content-left'>"+time+"</div>"+
 	  					"<div class='content-circular'></div>"+
-	  					"<div class='content-right'>"+list[i].liveContent+"<div class='xians' style='background: #fff;z-index: 999; width: 100%; position: absolute; top: 80px;'><span class='caoz'>展开</div></div>";
+	  					"<div class='content-right'>"+"&nbsp;&nbsp;"+list[i].liveTitle+"<div class='xians' style='background: #fff;z-index: 999; width: 100%; position: absolute; top: 80px;'><span class='caoz'>展开</div></div>";
 	  	$fundList.appendChild(li);
 	}
