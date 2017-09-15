@@ -88,6 +88,15 @@
 				"width": width - 125 + "px"
 			})*/
 			mui.plusReady(function() {
+//				到开户
+				$("#regLogin").on("tap",function(){
+					mui.openWindow({
+						url : "../future/cp.html",
+						in  : "cp"
+					})
+					console.log("111111")
+					mui.app_refresh("cp")
+				})
 				/*加载新手指南*/
 				var islogin = false;
 				var num = 0
