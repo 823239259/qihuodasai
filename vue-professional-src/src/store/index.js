@@ -1885,6 +1885,14 @@ export default new Vuex.Store({
 			if(parameters.Status>2){
 				context.state.market.stopLossTriggeredList.push(parameters);
 				context.state.market.hasYesstopLossList.push(parameters);
+				
+				context.state.market.hasNostopLossList.forEach(function(e,i){
+					if(e.StopLossNo==parameters.StopLossNo){
+						context.state.market.hasNostopLossList.splice(i,1);
+						context.state.market.stopLossList.splice(i,1);
+					}
+				});
+				
 			}else if(parameters.Status==2){
 				
 				context.state.market.hasNostopLossList.forEach(function(e,i){

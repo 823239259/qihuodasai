@@ -131,8 +131,6 @@
 				return this.$store.state.market.hasYesstopLossList;
 			},
 			stopLossList(){
-				console.log('1111');
-				console.log(this.$store.state.market.stopLossList);
 				return this.$store.state.market.stopLossList;
 			},
 			hasNostopLossList(){
