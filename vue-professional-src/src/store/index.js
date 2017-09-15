@@ -1483,7 +1483,6 @@ export default new Vuex.Store({
 					break;
 				
 				case 'OnRspQryStopLoss':
-					console.log('OnRspQryStopLoss');
 					if(parameters!=null){
 						if(parameters.Status==0||parameters.Status==1){
 							context.state.market.stopLossList.push(parameters);
@@ -1499,7 +1498,6 @@ export default new Vuex.Store({
 					context.dispatch('layerOnRspInsertStopLoss',parameters);
 					break;
 				case 'OnRspQryCondition':
-					console.log('OnRspQryCondition');
 					if(parameters!=null){
 						if(parameters.Status<2){
 							context.state.market.conditionList.push(parameters);
