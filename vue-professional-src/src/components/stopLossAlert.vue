@@ -37,10 +37,11 @@
 							<li class="fl"><input class='inp' type="text" v-model="Num" /></li>
 							<li class="fl  fontgray">
 								止损委托价：
-								<select name="" class='fontwhite selshort' v-model="orderType">
+								<span class="white">市价</span>
+								<!--<select name="" class='fontwhite selshort' v-model="orderType">
 									<option value="1">市价</option>
 									<option value="2">限价</option>
-								</select>
+								</select>-->
 							</li>
 						</ol>
 					</li>
@@ -229,6 +230,9 @@
 
 <style scoped lang="less">
 @import url("../assets/css/main.less");
+.white{
+	color: white;
+}
 /*ip6p及以上*/
 @media (min-width:411px) {
     @width: 330px;
