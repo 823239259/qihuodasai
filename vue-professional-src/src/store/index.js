@@ -1689,13 +1689,13 @@ export default new Vuex.Store({
 									if(e0.OrderType==1){
 										return '买,市价,'+e0.Num+'手'
 									}else{
-										return '买,限价,'+e0.Num+'手'
+										return '买,对手价,'+e0.Num+'手'
 									}
 								} else if(e0.Drection == 1){//卖
 									if(e0.OrderType==1){
 										return '卖,市价,'+e0.Num+'手'
 									}else{
-										return '卖,限价,'+e0.Num+'手'
+										return '卖,对手价,'+e0.Num+'手'
 									}
 								}
 								
@@ -1860,13 +1860,13 @@ export default new Vuex.Store({
 					if(e0.OrderType==1){
 						return '买,市价,'+e0.Num+'手'
 					}else{
-						return '买,限价,'+e0.Num+'手'
+						return '买,对手价,'+e0.Num+'手'
 					}
 				} else if(e0.Drection == 1){//卖
 					if(e0.OrderType==1){
 						return '卖,市价,'+e0.Num+'手'
 					}else{
-						return '卖,限价,'+e0.Num+'手'
+						return '卖,对手价,'+e0.Num+'手'
 					}
 				}
 				
@@ -2018,6 +2018,7 @@ export default new Vuex.Store({
 			if(parameters.OrderStatus < 3 ){
 //				context.state.market.OnRspOrderInsertOrderListCont.push(parameters);
 				if(isExist==true){
+					
 					currentObj.delegatePrice = parameters.OrderPrice;
 					currentObj.delegateNum = parameters.OrderNum;
 					currentObj.ApplyOrderNum = parameters.OrderNum- parameters.TradeNum;
@@ -2028,6 +2029,7 @@ export default new Vuex.Store({
 					context.state.market.OnRspOrderInsertOrderListCont[context.state.market.OnRspOrderInsertOrderListCont.length-index-1].OrderNum
 						=parameters.OrderNum;
 					context.state.market.layer = parameters.StatusMsg + ':合约【'+ parameters.ContractCode +'】,订单号:【'+ parameters.OrderID +'】' + Math.floor(Math.random()*10);
+					
 				}
 			}else{
 				if(isExist==true){

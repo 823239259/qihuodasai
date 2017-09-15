@@ -183,12 +183,19 @@
 						return;
 					}
 					var openAvgPrice = JSON.parse(this.val).OpenAvgPrice;
+//					this.inputPrice = openAvgPrice.toFixed(this.orderTemplistDotSize);
+					if(n.toString().split('.')[1] && n.toString().split('.')[1].length > this.orderTemplistDotSize){
+						this.inputPrice = openAvgPrice;
+					}
 					this.percentLoss = parseFloat((n - openAvgPrice)/openAvgPrice*100).toFixed(2);
 				}
 			},
 			zhiYinInputPrice: function(n, o){
 				if(n != undefined){
 					var openAvgPrice = JSON.parse(this.val).OpenAvgPrice;
+					if(n.toString().split('.')[1] && n.toString().split('.')[1].length > this.orderTemplistDotSize){
+						this.zhiYinInputPrice = openAvgPrice;
+					}
 					this.percentWin = parseFloat((n - openAvgPrice)/openAvgPrice*100).toFixed(2);
 				}
 			}
@@ -286,7 +293,7 @@
 													}
 												}).bind(this)(),
 								"HoldAvgPrice":this.condition.HoldAvgPrice,
-								"HoldDirection":this.condition.Drection,
+								"HoldDrection":this.condition.Drection,
 								"OrderType":parseInt(this.orderType),
 							}
 						};
@@ -340,7 +347,7 @@
 								"StopLossPrice":parseFloat(this.zhiYinInputPrice),
 								"StopLossDiff":0.00,
 								"HoldAvgPrice":this.condition.HoldAvgPrice,
-								"HoldDirection":this.condition.Drection,
+								"HoldDrection":this.condition.Drection,
 								"OrderType":parseInt(this.orderType)
 							}
 						};
