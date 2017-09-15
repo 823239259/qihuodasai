@@ -646,7 +646,7 @@ function time() {
 
 			if(!mui.isnull(list)){
 				for(var i= 0;i<list.length; i++) {
-					fundList(list,i);
+					fundList(list,i);		
 				}
 				for(var j= 0;j<$("#chartContainerContent1 ul li .content-right").length; j++){
 					if($("#chartContainerContent1 ul li .content-right").eq(j).height() > 85){
@@ -678,10 +678,12 @@ function time() {
 		}
 	}
 	function fundList(list,i){
+		
 	  	var $fundList=document.body.querySelector("#directSeedNews .mui-table-view"); 
-	  	var time = tzdr.dateUtil.getFormatDataByLong(list[i].createdAt/1000,"hh:mm");
+	  	var time = tzdr.dateUtil.getFormatDataByLong(list[i].createdAt,"hh:mm");
+	  	console.log(list[i].createdAt)
 	  	//console.log(vs.dateUtil.getFormatDataByLong(list[i].liveCreatetime/1000,"yyyy-MM-dd"));
-	  	$("#result1").html(tzdr.dateUtil.getFormatDataByLong(list[i].liveCreatetime/1000,"yyyy-MM-dd"));
+	  	$("#result1").html(tzdr.dateUtil.getFormatDataByLong(list[i].liveCreatetime,"yyyy-MM-dd"));
 	  	var li=document.createElement("li");
 	  	li.innerHTML = "<div class='content-left'>"+time+"</div>"+
 	  					"<div class='content-circular'></div>"+
