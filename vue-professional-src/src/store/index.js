@@ -383,7 +383,6 @@ export default new Vuex.Store({
 			state.market.lightChartTime.time = state.market.lightChartTime.time.slice(-50);
 			state.market.lightChartTime.price = state.market.lightChartTime.price.slice(-50);
 			state.market.option5 = {
-				backgroundColor: "#1f1f1f",
 				"tooltip": {
 					"show": false,
 				},

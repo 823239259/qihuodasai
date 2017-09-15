@@ -33,38 +33,25 @@
 
 <style scoped lang="less">
 @import url("../assets/css/main.less");
-
 /*ip5*/
 @media(max-width:370px) {
-	#lightchart {
-			width: 100%;
-			height: 390px*@ip5;
-		}
-		#lightcharts {
-			width: 100%;
-			height: 390px*@ip5;
-		}
+	#lightchart, #lightcharts{
+		width: 100%;
+		height: 390px*@ip5;
+	}
 }
 /*ip6*/
 @media (min-width:371px) and (max-width:410px) {
-    	#lightchart {
-			width: 100%;
-			height: 390px*@ip6;
-		}
-		#lightcharts {
-			width: 100%;
-			height: 390px*@ip6;
-		}
+	#lightchart, #lightcharts{
+		width: 100%;
+		height: 390px*@ip6;
+	}
 }
 /*ip6p及以上*/
 @media (min-width:411px) {
-    	#lightchart {
-			width: 100%;
-			height: 390px*@ip6p;
-		}
-		#lightcharts {
-			width: 100%;
-			height: 390px*@ip6p;
-		}
+	#lightchart, #lightcharts{
+		width: 100%;
+		height: 390px*@ip6p;
+	}
 }
 </style>
