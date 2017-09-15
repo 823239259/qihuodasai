@@ -293,7 +293,7 @@
 													}
 												}).bind(this)(),
 								"HoldAvgPrice":this.condition.HoldAvgPrice,
-								"HoldDirection":this.condition.Drection,
+								"HoldDrection":this.condition.Drection,
 								"OrderType":parseInt(this.orderType),
 							}
 						};
@@ -347,7 +347,7 @@
 								"StopLossPrice":parseFloat(this.zhiYinInputPrice),
 								"StopLossDiff":0.00,
 								"HoldAvgPrice":this.condition.HoldAvgPrice,
-								"HoldDirection":this.condition.Drection,
+								"HoldDrection":this.condition.Drection,
 								"OrderType":parseInt(this.orderType)
 							}
 						};
