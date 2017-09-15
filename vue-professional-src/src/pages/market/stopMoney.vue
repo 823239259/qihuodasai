@@ -157,7 +157,7 @@
 		},
 		methods: {
 			refresh: function(e) {
-				this.$router.push({path: '/space'});
+				this.$router.push({path: '/index', query: {isBack: 1}});
 			},
 			updateEvent: function(){
 				if(this.orderListId == '' || this.orderListId == null){
