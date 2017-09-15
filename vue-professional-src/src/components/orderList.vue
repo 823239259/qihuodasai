@@ -228,7 +228,7 @@
 				overflow-y: scroll;
 			}
 			li{
-				width: 480px;
+				width: 490px;
 				background: @deepblue;
 				padding-left: 15px;
 				border-top: 1px solid @black;
@@ -266,7 +266,7 @@
 						width: 65px;
 					}
 					&:nth-child(5){
-						width: 130px;
+						width: 140px;
 					}
 					&.red{
 						color: @red;
@@ -301,7 +301,7 @@
 				overflow-y: scroll;
 			}
 			li{
-				width: 480px*@ip6;
+				width: 490px*@ip6;
 				background: @deepblue;
 				padding-left: 15px*@ip6;
 				border-top: 1px solid @black;
@@ -339,7 +339,7 @@
 						width: 65px*@ip6;
 					}
 					&:nth-child(5){
-						width: 130px*@ip6;
+						width: 140px*@ip6;
 					}
 					&.red{
 						color: @red;
