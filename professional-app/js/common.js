@@ -538,13 +538,14 @@ var tzdr = {
 	operation: function() {
 		document.getElementById("quickMode").addEventListener("tap", function() {
 			$("#Operation_content").css("display", "block");
+			$("#quickMode").hide()
 		});
 		document.getElementById("Operation_Close").addEventListener("tap", function() {
 			$("#Operation_content").css("display", "none");
+			$("#quickMode").show()			
 		});
 	}
 }
-
 /**
  * 短信倒计时 60s
  * @param {Object} o  点击获取验证码对象

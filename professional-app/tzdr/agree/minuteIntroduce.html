@@ -10,98 +10,23 @@
 		<script type="text/javascript" src="../../js/mui.min.js"></script>
 		<script type="text/javascript" src="../../js/common.js"></script>
 		<style>
-			.minutes_titleOne {position: relative; height: 45px; margin: 0 60px; line-height: 45px;}
-			.minutes_titleOne p {font-size: 13px; margin-top: 0; margin-bottom: 0px; color: #343434; position: absolute; z-index: 2; text-align: center; width: 100%;}
-			.minutes_titleOne img{position: absolute; width: 100%; height: 100%;}
-			.minutes_titleTwo {position: relative; height: 50px; margin: 0 15px; line-height: 50px;}
-			.minutes_titleTwo img {position: absolute; width: 100%; height: 100%;}
-			.minutes_titleTwo p {font-size: 13px; margin-top: 0; margin-bottom: 0px; color: #343434; position: absolute; z-index: 2; text-align: left; width: 100%; padding-left: 5px;}
-			.minutes_titleThree {position: relative; height: 70px; margin: 0 15px; line-height: 35px;}
-			.minutes_titleThree img{position: absolute; width: 100%; height: 100%;}
-			.minutes_titleThree p {font-size: 13px; margin-top: 0; margin-bottom: 0px; color: #343434; position: absolute; z-index: 2; text-align: left; width: 100%; padding-left: 5px;}
-			.minutes_titleOne ,minutes_titleTwo, minutes_titleThree {margin-top: 15px; margin-bottom: 15px;}
-		
+			#mui-content {
+				height: 2100px;
+				margin-top: 40px;
+				background-image: url(../../images/oneStep_02.png);
+				background-size:contain;	
+				background-repeat: no-repeat;		
+
+			}
 		</style>
 	</head>
 
-	<body style="background: #5670b1">
+	<body>
 		<header class="mui-bar mui-bar-nav own-topbg">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><i>返回</i></a>
 			<h1 class="mui-title">一分钟介绍</h1>
 		</header>
-		<div class="mui-content">
-			<div class="minutes_titleOne">
-				<img src="../../images/minutes_lis1.png"/>
-				<p>1.完整的交易流程是怎样的？</p>
-			</div>
-			<div class="minutes_titleTwo">
-				<img src="../../images/minutes_lis2.png"/>
-				<p>注册>登录>实名认证>充值>申请方案>开始交易</p>
-			</div>
-			<div class="minutes_titleOne">
-				<img src="../../images/minutes_lis1.png"/>
-				<p>2.如何登录交易平台？</p>
-			</div>
-			<div class="minutes_titleThree">
-				<img src="../../images/minutes_lis3.png"/>
-				<p>① 注册：在“账户”中使用手机号注册。</br>② 登录：在“账户”中使用注册的手机号登录。</p>
-			</div>
-			<div class="minutes_titleOne">
-				<img src="../../images/minutes_lis1.png"/>
-				<p>3.如何进行实名认证？？</p>
-			</div>
-			<div class="minutes_titleThree">
-				<img src="../../images/minutes_lis3.png"/>
-				<p>① 在“账户”选择“实名认证”</br>② 输入身份信息完成认证</p>
-			</div>
-			<div class="minutes_titleOne">
-				<img src="../../images/minutes_lis1.png"/>
-				<p>4.如何充值？</p>
-			</div>
-			<div class="minutes_titleThree">
-				<img src="../../images/minutes_lis3.png"/>
-				<p>① 在“账户”中选择“我要充值”</br>② 选择合适的充值方式，根据提示完成充值</p>
-			</div>
-			<div class="minutes_titleOne">
-				<img src="../../images/minutes_lis1.png"/>
-				<p>5.如何申请方案？</p>
-			</div>
-			<div class="minutes_titleThree">
-				<img src="../../images/minutes_lis3.png"/>
-				<p>① 在“操盘申请”选择合适的资金方案</br>② 申请后，获取操盘帐号密码</p>
-			</div>
-			<div class="minutes_titleOne">
-				<img src="../../images/minutes_lis1.png"/>
-				<p>6.如何开始交易期货？</p>
-			</div>
-			<div class="minutes_titleThree" style="height: 105px;">
-				<img src="../../images/minutes_lis3.png" style="height: 105px;"/>
-				<p>① 在“操盘记录”选择“操盘中”方案，获取登录帐密</br>② 点击“立即操盘”，登录后就可开始交易</p>
-			</div>
-			<div class="minutes_titleOne">
-				<img src="../../images/minutes_lis1.png"/>
-				<p>7.如何买入期货？</p>
-			</div>
-			<div class="minutes_titleThree" style="height: 105px;">
-				<img src="../../images/minutes_lis3.png" style="height: 105px;"/>
-				<p>① 在“行情交易”选择期货合约</br>② 根据自己判断，看多点“买入”，看空点“卖出”交</p>
-			</div>
-			<div class="minutes_titleOne">
-				<img src="../../images/minutes_lis1.png"/>
-				<p>8.如何买入期货？</p>
-			</div>
-			<div class="minutes_titleThree">
-				<img src="../../images/minutes_lis3.png"/>
-				<p>① 在“交易中心”，选中持仓合约</br>② 点击“平仓”平掉单个合约</p>
-			</div>
-			<div class="minutes_titleOne">
-				<img src="../../images/minutes_lis1.png"/>
-				<p>9.盈亏怎么算？</p>
-			</div>
-			<div class="minutes_titleThree" style="line-height: 22px;">
-				<img src="../../images/minutes_lis3.png" style="height: 170px;"/>
-				<p style="padding-top: 6px;">盈亏金额 = 盈亏点数（平仓点位 - 建仓点位）X 一跳金额</br>如：48.21美金做多一手原油，建仓点位是48.21，当原油价格变成48.32时，您就盈利了12个点。而原油一个跳动是10美金，您就盈利了：10 X 12 = 120 美金。反之，若行情是下跌，那么就亏损了120美金。</p>
-			</div>
+		<div id="mui-content">
 		</div>
 	</body>
 	<script type="text/javascript" charset="utf-8">
@@ -110,6 +35,9 @@
 			document.getElementById("back").addEventListener("tap", function() {
 				mui.app_refresh(plus.webview.currentWebview().backPage);
 			});
+//			var width_1 = document.documentElement.clientWidth
+//			console.log(width)
+//			document.getElementById("mui-content").style.width=width_1+"px";
 //			var old_back = mui.back;
 //			mui.back = function() {
 //				var wobj = plus.webview.getWebviewById("quotationMain");
