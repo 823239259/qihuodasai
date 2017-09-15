@@ -183,7 +183,7 @@ mui.plusReady(function() {
 			        * 缓存行情信息
 			        */
 			        CacheQuoteBase.setCacheContractAttribute(comm);
-					
+			        
 					//如果是当前合约与品种更新乘数
 					if(valiationIsPresent(newCommdityNo, newContractNo)) {
 						$("#contractSize").val(comm.ContractSize);
