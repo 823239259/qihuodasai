@@ -14,8 +14,8 @@
 		<header class="mui-bar mui-bar-nav own-topbg">
 			<h1 class="mui-title">
 				<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" id="directSeedTitle">
-					<a class="mui-control-item title_school mui-active" href="#directSeedNews">7*24</a> 
-					<a class="mui-control-item title_school" href="#directSeedCalendar">日历</a>
+					<a  id="twentyFour" class="mui-control-item title_school mui-active" href="#directSeedNews">7*24</a> 
+					<a 	id="dataList" class="mui-control-item title_school" href="#directSeedCalendar">日历</a>
 					
 				</div>
 			</h1>
@@ -198,6 +198,15 @@
 			$("#" + id).css("display", "none");
 			$("#chioce").css("display", "none");
 		});
+		$("#dataList").on("tap",function(){
+			$("#dataList").css("background-color","#1f1f1f")
+			$("#twentyFour").css("background-color","#383838")
+		})
+		$("#twentyFour").on("tap",function(){
+			$("#dataList").css("background-color","#383838")
+			$("#twentyFour").css("background-color","#1f1f1f")
+		})	
 	</script>
+	
 
 </html>

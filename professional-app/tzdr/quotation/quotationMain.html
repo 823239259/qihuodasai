@@ -26,7 +26,7 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a ><img src="../../images/u164.png" id="toOneMin"/></a>
+			<a ><img src="../../images/u666_03.png" id="toOneMin"/></a>
 			<h1 class="mui-title" id="quotationTitle"><span>行情交易</span></h1>
 			<a class="mui-icon mui-icon-loop mui-pull-right" id="refresh"></a>
 		</header>
@@ -59,7 +59,7 @@
 					<p id="guideP">操盘流程：①->登录平台账号->②开交易账户->③登录交易账户，操盘->④操盘完成，终结方案 </p>
 					<span class="mui-pull-right" id="colse">×</span>
 				</div>
-				<p style="padding: 0 2%; background: #383838;"><span>合约名称</span><span>价格</span><span id="changeSwitch">涨跌幅<img src="../../images/u168.png" class="choose"/></span><span>成交量</span></p>
+				<p style="padding: 0 2%; background: #383838;"><span>合约名称</span><span>价格</span><span id="changeSwitch">涨跌幅</span><span>成交量</span></p>
 			</div>
 			<div class="productList">
 				<div class='openPage'>
@@ -474,21 +474,21 @@
 					};
 				}
 //				切换涨跌额
-				var showdata = true;
-				document.getElementById("changeSwitch").addEventListener("tap",function(){			
-					if(showdata == true){
-						$("#showOne").css("display","none");
-						$("#showTwo").css("display","block");	
-						$("#changeSwitch").html("涨跌额");	
-						showdata = false;
-					}
-					else if(showdata == false){
-						$("#showTwo").css("display","none");
-						$("#showOne").css("display","block");
-						$("#changeSwitch").html("涨跌幅");
-						showdata = true;
-					}
-				})
+//				var showdata = true;
+//				document.getElementById("changeSwitch").addEventListener("tap",function(){			
+//					if(showdata == true){
+//						$("#showOne").css("display","none");
+//						$("#showTwo").css("display","block");	
+//						$("#changeSwitch").html("涨跌额");	
+//						showdata = false;
+//					}
+//					else if(showdata == false){
+//						$("#showTwo").css("display","none");
+//						$("#showOne").css("display","block");
+//						$("#changeSwitch").html("涨跌幅");
+//						showdata = true;
+//					}
+//				})
 
 				document.getElementById("product").addEventListener("tap", function() {
 					sendMessage('Logout', '{"UserName":"' + marketUserName + '"}');
