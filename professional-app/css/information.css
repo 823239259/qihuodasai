@@ -58,8 +58,8 @@
 #chartContainerContent li {position: relative;overflow: hidden;}
 #chartContainerContent li:last-child .content-right{border-left: 1px solid #ffffff;}
 #chartContainerContent .content-left {position: absolute;font-size: 11px;color: #999999;width: 60px;padding-left: 15px;height: 16px;line-height: 16px;}
-#chartContainerContent .content-circular {position: absolute;font-size: 11px;width: 15px;height: 15px;background: #fcc900;border-radius: 15px;left: 53px;}
-#chartContainerContent .content-right {float: left; position: relative; font-size: 13px;color: #666666;margin-left: 60px;border-left: 1px solid #fcc900;padding-bottom: 10px;}
+#chartContainerContent .content-circular {position: absolute;font-size: 11px;width: 8px;height: 8px;background: #fcc900;border-radius: 15px;left: 52px;margin-top: 3px;}
+#chartContainerContent .content-right {float: left; position: relative; font-size: 13px;color: #666666;margin-left: 56px;border-left: 1px solid #fcc900;padding-bottom: 10px;}
 #chartContainerContent .content-right p {padding-left: 15px;padding-right: 15px;position: relative;top: -3px;color: #666;font-size: 13px;}
 #chartContainerContent1 {padding-top: 84px; padding-bottom: 60px;}
 #directSeedNews {position: static;}
@@ -173,4 +173,9 @@
 #twentyFour{
 	background-color: #1f1f1f;
 	color: white;
+	border-radius: 5px;
+}
+#dataList{
+	border-radius: 5px;
+	border: 1px solid #1f1f1f;
 }
