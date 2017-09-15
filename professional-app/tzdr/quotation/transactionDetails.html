@@ -137,6 +137,7 @@
 			<header class="mui-bar mui-bar-nav"> 
 			    <a class="mui-icon mui-icon-left-nav mui-pull-left quotationBack mui-action-back" id= "backClose"><i>返回</i></a>
 			    <h1 class="mui-title mainTitle"><p class="mainTitleFirst"></p><p id="CommodityNo"></p></h1>
+			    <span class="mui-icon mui-icon-help" style="color: white;margin-left: 130px;" id="toNoviceGuide"></span>
 			     <a class="mui-icon mui-icon-loop mui-pull-right" id="refresh" style="margin-right: 35px;"></a>
 			   	<a id="muneBox" href="#topPopover"></a>
 			</header>
@@ -145,11 +146,11 @@
 						<table cellpadding="0" cellspacing="0">
 							<thead>
 								<tr>
-									<td id="tradeMenu" >交易中心</td>
-									<td id="lightDiagram">闪电图</td>
 									<td id="HandicapButton">盘口</td>
+									<td id="lightDiagram">闪电图</td>
 									<td  id="timeChartMenu" value="0" class="mui-active">分时</td>
 									<td id="selectButon">K线</td>
+									<td id="tradeMenu" >交易中心</td>	
 								</tr>
 							</thead>
 						</table>
@@ -984,6 +985,13 @@
 					$("#doSize").val(param[4]);
 				}
 				mui.plusReady(function(){
+//					点击到交易规则
+					$("#toNoviceGuide").on("tap",function(){
+						mui.openWindow({
+							url:"../agree/noviceGuide.html",
+							id : "noviceGuide" 
+						})
+					})
 				loadCss();
 				var Proportion=1;
     			function loadCss(){
@@ -1027,6 +1035,7 @@
 		<script type="text/javascript">
 			mui.init();
 			mui.plusReady(function(){  
+				console.log(CacheQuoteBase)
 				$(function(){
 					$("#refresh").addClass("rotateClass");
 				})

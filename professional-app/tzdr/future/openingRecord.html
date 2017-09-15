@@ -120,17 +120,17 @@
 										<!--数据列表-->
 										<ul class="mui-table-view mui-table-view-chevron" id="list_ul">
 											<div id="no_list" style="display: none;">
-												<div id="newList" style="height: 90px;background-color: #2b2b2b;margin-top: -10px;">
+												<!--<div id="newList" style="height: 90px;background-color: #2b2b2b;margin-top: -10px;">
 													<p style="text-align: center;font-size: 16px;margin-top: 10px;">交易总盈亏：<b style="color: #ee6404;">0元</b></p>
 													<p style="text-align: center;font-size: 16px;margin-top: 10px;"><b style="margin-right: 30px;">开户中方案</b><b>操盘中方案</b><b style="margin-left: 30px;">已结算方案</b></p>
 													<p style="text-align: center;font-size: 16px;margin-top: 10px;color: white;"><b style="margin-right: 100px;">0</b><b>0</b><b style="margin-left: 100px;">0</b></p>
-												</div>
+												</div>-->
 												<img src="../../images/list_02.png" style="display: block;margin: 100px auto 0; width: 80px;"/>
 												<span style=" text-align: center; margin: 0 auto; width: 100%; display: block;">暂无操盘记录，赶快去申请吧！</span>
-												<!--<div class="main_nolg" style="position: relative;width: 100%; padding: 0 15px; left: 0; top: 80px; z-index: 50;">-->	
-													<!--<button class="mui-btn mui-btn-block sc_listbtn" type="button" id="login">立即登录</button>-->		
-													<!--<button type="button" class="mui-btn mui-btn-block lg-btnlogin" id="regist" style="border-radius: 20px;">新用户注册</button>-->
-												<!--</div>-->
+												<div class="main_nolg" style="position: relative;width: 100%; padding: 0 15px; left: 0; top: 80px; z-index: 50;">	
+													<button class="mui-btn mui-btn-block sc_listbtn" type="button" id="login">立即登录</button>		
+													<button type="button" class="mui-btn mui-btn-block lg-btnlogin" id="regist" style="border-radius: 20px;">新用户注册</button>
+												</div>
 											</div>
 										</ul>
 									</div>
@@ -165,20 +165,20 @@
 				id: "cp"
 			});
 		});
-		//登陆
-//		document.getElementById("login").addEventListener("tap", function() {
-//			mui.openWindow({
-//				url: "../login/login.html",
-//				id: "login"
-//			});
-//		});
-////		注册
-//document.getElementById("regist").addEventListener("tap", function() {
-//			mui.openWindow({
-//				url: "../login/regist.html",
-//				id: "regist"
-//			});
-//		});
+//		登陆
+		document.getElementById("login").addEventListener("tap", function() {
+			mui.openWindow({
+				url: "../login/login.html",
+				id: "login"
+			});
+		});
+//		注册
+document.getElementById("regist").addEventListener("tap", function() {
+			mui.openWindow({
+				url: "../login/regist.html",
+				id: "regist"
+			});
+		});
 		var kj = {
 			//开户
 			kh: "cp.html",
