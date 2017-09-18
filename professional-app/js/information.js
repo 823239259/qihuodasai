@@ -400,7 +400,7 @@ function time() {
 		var clickToday = index.find("span").attr("data-time");
 		var clickTomorrow  =  GetDateStrDate(clickToday);
 		console.log(clickToday);
-		console.log(clickTomorrow);
+//		console.log(clickTomorrow);
 	    var paramsThere={
 	        pageIndex:0,
 	        startTime:clickToday,
@@ -408,6 +408,9 @@ function time() {
 	    };
 	    list_numThere = 0;
 	    calendarData(urlTwo,paramsThere,finance,"","post");
+	    document.getElementById("weekLis").addEventListener("tap",function(){
+	    	document.getElementById("result").innerHTML = clickToday
+	    })
 	});
 	// 财经日历 ajax
 	function calendarData(url,params,success,error,method){
@@ -690,3 +693,5 @@ function time() {
 	  					"<div class='content-right'>"+"&nbsp;&nbsp;"+list[i].liveTitle+"<div class='xians' style='background: #fff;z-index: 999; width: 100%; position: absolute; top: 80px;'><span class='caoz'>展开</div></div>";
 	  	$fundList.appendChild(li);
 	}
+	
+
