@@ -88,6 +88,7 @@ function handleData(evt) {
 	var method = data.Method;
 	var parameters = data.Parameters;
 	linearlyLoadData(method);
+	console.log(JSON.stringify(parameters))
 	if(parameters != null) {
 		if(method == "OnRspLogin") {
 			$("#trade_login").text("登录");
@@ -131,6 +132,8 @@ function handleData(evt) {
 			}
 			//查询成交记录回复
 		} else if(method == "OnRspQryTrade") {
+			console.log('----------------');
+			console.log(JSON.stringify(parameters));
 			appendTradeSuccess(parameters);
 			//查询持仓信息回复
 		} else if(method == "OnRspQryHoldTotal") {

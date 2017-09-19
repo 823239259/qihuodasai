@@ -83,6 +83,7 @@
 			success: function(data) {
 				// plus.nativeUI.closeWaiting();
 				//获得服务器响应
+				console.log(typeof data)
 				var data = JSON.parse(data);
 				if(data.success) {
 					onSuccess(data);
@@ -108,7 +109,7 @@
 					mui.toast("当前网络不给力，请稍后再试");
 					return;
 				}
-				mui.toast("当前网络不给力，请稍后再试");
+//				mui.toast("当前网络不给力，请稍后再试");
 			}
 		});
 	}

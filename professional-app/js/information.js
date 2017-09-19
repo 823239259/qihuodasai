@@ -400,7 +400,7 @@ function time() {
 		var clickToday = index.find("span").attr("data-time");
 		var clickTomorrow  =  GetDateStrDate(clickToday);
 		console.log(clickToday);
-		console.log(clickTomorrow);
+//		console.log(clickTomorrow);
 	    var paramsThere={
 	        pageIndex:0,
 	        startTime:clickToday,
@@ -408,6 +408,9 @@ function time() {
 	    };
 	    list_numThere = 0;
 	    calendarData(urlTwo,paramsThere,finance,"","post");
+	    document.getElementById("weekLis").addEventListener("tap",function(){
+	    	document.getElementById("result").innerHTML = clickToday
+	    })
 	});
 	// 财经日历 ajax
 	function calendarData(url,params,success,error,method){
@@ -646,7 +649,7 @@ function time() {
 
 			if(!mui.isnull(list)){
 				for(var i= 0;i<list.length; i++) {
-					fundList(list,i);
+					fundList(list,i);		
 				}
 				for(var j= 0;j<$("#chartContainerContent1 ul li .content-right").length; j++){
 					if($("#chartContainerContent1 ul li .content-right").eq(j).height() > 85){
@@ -678,13 +681,17 @@ function time() {
 		}
 	}
 	function fundList(list,i){
+		
 	  	var $fundList=document.body.querySelector("#directSeedNews .mui-table-view"); 
-	  	var time = tzdr.dateUtil.getFormatDataByLong(list[i].createdAt/1000,"hh:mm");
+	  	var time = tzdr.dateUtil.getFormatDataByLong(list[i].createdAt,"hh:mm");
+	  	console.log(list[i].createdAt)
 	  	//console.log(vs.dateUtil.getFormatDataByLong(list[i].liveCreatetime/1000,"yyyy-MM-dd"));
-	  	$("#result1").html(tzdr.dateUtil.getFormatDataByLong(list[i].liveCreatetime/1000,"yyyy-MM-dd"));
+	  	$("#result1").html(tzdr.dateUtil.getFormatDataByLong(list[i].liveCreatetime,"yyyy-MM-dd"));
 	  	var li=document.createElement("li");
 	  	li.innerHTML = "<div class='content-left'>"+time+"</div>"+
 	  					"<div class='content-circular'></div>"+
 	  					"<div class='content-right'>"+"&nbsp;&nbsp;"+list[i].liveTitle+"<div class='xians' style='background: #fff;z-index: 999; width: 100%; position: absolute; top: 80px;'><span class='caoz'>展开</div></div>";
 	  	$fundList.appendChild(li);
 	}
+	
+
