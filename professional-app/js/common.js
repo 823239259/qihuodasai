@@ -18,21 +18,6 @@
 		return network;
 	}
 
-	//app版本
-	var app_version = "";
-	if(!app_version) {
-		mui.ajax("http://192.168.199.169:8080/vs-api/getVersion", {
-			timeout: 100000,
-			dataType: 'JSON', //服务器返回json格式数据
-			type: 'post', //HTTP请求类型
-			success: function(res) {
-				JSON.parse(res)
-				//console.log(res.data.version.iOS.version)
-			}
-			
-		});
-	}
-
 	function onNetChange() {
 		var nt = plus.networkinfo.getCurrentType();
 		if(nt == plus.networkinfo.CONNECTION_NONE) {
@@ -289,10 +274,10 @@ Date.prototype.format = function(format) {
 var tzdr = {
 	// 系统常量
 	constants: {
-		api_domain: "http://api.duokongtai.cn/",	//测试环境
-		api_recharge "http://www.duokongtai.cn/",	//充值
+		api_domain: "http://api.duokongtai.cn/",
+		api_recharge: "http://www.duokongtai.cn/",	//充值
 		//图片地址
-		base_images_url: 'http://test.manage.duokongtai.cn/',
+		base_images_url: 'http://manage.duokongtai.cn/',
 		//token
 		user_token: 'user_token',
 		//密钥 
