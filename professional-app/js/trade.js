@@ -88,7 +88,7 @@ function handleData(evt) {
 	var method = data.Method;
 	var parameters = data.Parameters;
 	linearlyLoadData(method);
-	console.log(JSON.stringify(parameters))
+//	console.log(JSON.stringify(parameters))
 	if(parameters != null) {
 		if(method == "OnRspLogin") {
 			$("#trade_login").text("登录");
@@ -132,8 +132,8 @@ function handleData(evt) {
 			}
 			//查询成交记录回复
 		} else if(method == "OnRspQryTrade") {
-			console.log('----------------');
-			console.log(JSON.stringify(parameters));
+//			console.log('----------------');
+//			console.log(JSON.stringify(parameters));
 			appendTradeSuccess(parameters);
 			//查询持仓信息回复
 		} else if(method == "OnRspQryHoldTotal") {
@@ -224,6 +224,8 @@ function handleData(evt) {
 			//录入止损止盈请求返回
 		} else if(method == "OnRspInsertStopLoss") {
 			var stopLossParam = parameters;
+//			console.log('------------------------->');
+//			console.log(JSON.stringify(parameters));
 			var message = "";
 			var status = stopLossParam.Status;
 			if(status == 4) {
@@ -1831,7 +1833,7 @@ $(function() {
 				return;
 			}
 			
-			console.log("等待行情连接时间（毫秒）：" + (new Date().getTime() - satartCheckTime));
+//			console.log("等待行情连接时间（毫秒）：" + (new Date().getTime() - satartCheckTime));
 			if (new Date().getTime() - satartCheckTime >= 6000) {	// 尝试连接超过6秒既重新登录
 				window.clearInterval(checkQuoteConnect); // 关闭尝试
 				plus.nativeUI.closeWaiting();
@@ -3162,9 +3164,8 @@ function doGetInsertStopLoss() {
 		var tradeparam = createInsertStopLossParam(exchangeNo, commodityNo, 
 				contractNo, stopNumber, stopLossType, 
 				parseFloat(Math.abs(stopLossDiff)).toFixed(contractObject.DotSize), 
-				$holdAvgPrice.text(), drection, choiceStopPrices1, 
+				$holdAvgPrice.text(), drection, 1, 
 				parseFloat(stopChoicePrices1).toFixed(contractObject.DotSize));
-		
 		if(tradeparam == undefined) {
 			tip("交易错误,请重试");
 		}
@@ -3195,7 +3196,7 @@ function doGetInsertLossLoss() {
 		var exchangeNo = localQuote.ExchangeNo;
 		var commodityNo = localQuote.CommodityNo;
 		var contractNo = localQuote.ContractNo;
-		var tradeparam = createInsertStopLossParam(exchangeNo, commodityNo, contractNo, stopNumber, stopLossType, parseFloat(Math.abs(stopLossDiff)).toFixed(2), $holdAvgPrice.text(), drection, choiceStopPrices4, parseFloat(lossChoicePrices2).toFixed(2));
+		var tradeparam = createInsertStopLossParam(exchangeNo, commodityNo, contractNo, stopNumber, stopLossType, parseFloat(Math.abs(stopLossDiff)).toFixed(2), $holdAvgPrice.text(), drection, 1, parseFloat(lossChoicePrices2).toFixed(2));
 		if(tradeparam == undefined) {
 			tip("交易错误,请重试");
 		}

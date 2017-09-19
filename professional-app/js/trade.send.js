@@ -207,6 +207,7 @@ var Trade = {
 							+' "HoldDrection":'+holdDrection+','
 							+' "OrderType":'+orderType+','
 							+' "StopLossPrice":'+stopLossPrice+'}';
+							
 				Trade.doSendMessage(TradeUrl.InsertStopLoss,param);
 			},
 			/**
