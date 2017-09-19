@@ -289,14 +289,10 @@ Date.prototype.format = function(format) {
 var tzdr = {
 	// 系统常量
 	constants: {
-		api_domain: "http://test.api.duokongtai.cn/",//测试环境
-//		api_domain: "http://192.168.199.169:8080/vs-api/",//高超测试环境
-		//api_domain: "http://192.168.0.221/", 
-		//		api_recharge "http://test.www.dktai.cn/",//充值
-		//		api_domain:"http://192.168.0.72:8080/vs-api/",
+		api_domain: "http://api.duokongtai.cn/",	//测试环境
+		api_recharge "http://www.duokongtai.cn/",	//充值
 		//图片地址
 		base_images_url: 'http://test.manage.duokongtai.cn/',
-		//		base_images_url:'http://manage.mzkqh.com/',
 		//token
 		user_token: 'user_token',
 		//密钥 
