@@ -39,6 +39,6 @@ pro.callService = function(){
 		},
 		"400-852-8008",["取消","呼叫"]);
 	});
-}
+};
 
 export default pro
