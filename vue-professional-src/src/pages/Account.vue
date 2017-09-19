@@ -26,7 +26,7 @@
 				</li>
 				<li @tap='tradeRecord'>
 					<img src="../assets/img/log.png" />
-					<span>操盘记录</span>
+					<span>开户记录</span>
 					<img src="../assets/img/arrow.png" class="img_arrow"/>
 					<span></span>
 				</li>
