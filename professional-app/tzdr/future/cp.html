@@ -442,17 +442,18 @@
 			<div class="mui-slider-group">
 				<!--财经日历-->
 				<div class="mui-slider-item mui-control-content mui-active" id="apply">
-					<h5 class="ap_choosetitle"><span>选择操盘保证金</span><b>（金额越多,可持仓手数越多）</b></h5>
 					<div class="mui-slider" id="slider">
-				<div class="mui-slider-group mui-slider-loop" id="bannerloop"style="height: 120px;">
-					<div class="mui-slider-item">
-						<a href="javascript:void(0);"><img src="../../images/banner_load.jpg" /></a>
+						<div class="mui-slider-group mui-slider-loop" id="bannerloop"style="height: 120px;">
+							<div class="mui-slider-item">
+								<a href="javascript:void(0);"><img src="../../images/banner_load.jpg" /></a>
+							</div>
+						</div>
+						<div class="mui-slider-indicator" id="indicatorid">
+		
+						</div>
 					</div>
-				</div>
-				<div class="mui-slider-indicator" id="indicatorid">
-
-				</div>
-			</div>
+					<h5 class="ap_choosetitle"><span>选择操盘保证金</span><b>（金额越多,可持仓手数越多）</b></h5>
+			
 					<ul class="mui-table-view mui-grid-view mui-grid-9 borderClass" id="bond_num">
 
 					</ul>
@@ -537,9 +538,8 @@
 			mui.openWindow("../agree/cpru.html");
 		});
 		tzdr.operation();
-		
-		
-//获取banner图片
+mui.plusReady(function(){
+	//获取banner图片
 var imgId = [];
 mui.app_request('banner/list', {
 		"type": 9
@@ -594,6 +594,8 @@ function addBanner(banner, firstend) {
 	timeNum++;
 	return _html;
 }
+})
+
 			
 	</script>
 </html>
