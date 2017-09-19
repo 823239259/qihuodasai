@@ -121,61 +121,61 @@
 						});
 				});
 				
-									//获取banner图片
-					var imgId = [];
-					mui.app_request('banner/list', {
-							"type": 9
-						},
-						function(result) {
-							var bannerLen = result.data.bannerList == null ? 0 : result.data.bannerList.length;
-							if(bannerLen > 0) {
-								var banner_content = '';
-								var indicator_content = '';
-								for(var i = 0; i < bannerLen; i++) {
-
-									if(i == 0) {
-										banner_content += addBanner(result.data.bannerList[bannerLen - 1], true);
-										indicator_content += '<div class="mui-indicator mui-active"></div>';
-									} else {
-										indicator_content += '<div class="mui-indicator"></div>';
-									}
-
-									banner_content += addBanner(result.data.bannerList[i]);
-
-									if(i == (bannerLen - 1)) {
-										banner_content += addBanner(result.data.bannerList[0], true);
-									}
-
-								}
-								//alert(banner_content);
-								document.getElementById('bannerloop').innerHTML = banner_content;
-								document.getElementById('indicatorid').innerHTML = indicator_content;
-							}
-							var slider = mui("#slider");
-							slider.slider({
-								interval: 3000
-							});
-
-						},
-						function() {
-
-						},imgId);
-					//新增banner 显示
-					var timeNum = 0;
-
-					function addBanner(banner, firstend) {
-						var _html = '';
-						if(firstend) {
-							_html = '<div class="mui-slider-item mui-slider-item-duplicate" >';
-						} else {
-							_html = '<div class="mui-slider-item">';
-						}
-						_html += '<a class="id" href="javascript:void(0);" id="' + banner.linkUrl + '" data-id="' + timeNum + '"><img src="' + tzdr.constants.base_images_url + banner.imgPath + '" title=""/>';
-						_html += '</a></div>';
-						imgId.push(banner.linkUrl);
-						timeNum++;
-						return _html;
-					}
+//									//获取banner图片
+//					var imgId = [];
+//					mui.app_request('banner/list', {
+//							"type": 9
+//						},
+//						function(result) {
+//							var bannerLen = result.data.bannerList == null ? 0 : result.data.bannerList.length;
+//							if(bannerLen > 0) {
+//								var banner_content = '';
+//								var indicator_content = '';
+//								for(var i = 0; i < bannerLen; i++) {
+//
+//									if(i == 0) {
+//										banner_content += addBanner(result.data.bannerList[bannerLen - 1], true);
+//										indicator_content += '<div class="mui-indicator mui-active"></div>';
+//									} else {
+//										indicator_content += '<div class="mui-indicator"></div>';
+//									}
+//
+//									banner_content += addBanner(result.data.bannerList[i]);
+//
+//									if(i == (bannerLen - 1)) {
+//										banner_content += addBanner(result.data.bannerList[0], true);
+//									}
+//
+//								}
+//								//alert(banner_content);
+//								document.getElementById('bannerloop').innerHTML = banner_content;
+//								document.getElementById('indicatorid').innerHTML = indicator_content;
+//							}
+//							var slider = mui("#slider");
+//							slider.slider({
+//								interval: 3000
+//							});
+//
+//						},
+//						function() {
+//
+//						},imgId);
+//					//新增banner 显示
+//					var timeNum = 0;
+//
+//					function addBanner(banner, firstend) {
+//						var _html = '';
+//						if(firstend) {
+//							_html = '<div class="mui-slider-item mui-slider-item-duplicate" >';
+//						} else {
+//							_html = '<div class="mui-slider-item">';
+//						}
+//						_html += '<a class="id" href="javascript:void(0);" id="' + banner.linkUrl + '" data-id="' + timeNum + '"><img src="' + tzdr.constants.base_images_url + banner.imgPath + '" title=""/>';
+//						_html += '</a></div>';
+//						imgId.push(banner.linkUrl);
+//						timeNum++;
+//						return _html;
+//					}
 				
 				tzdr.online();
 			});
@@ -225,7 +225,7 @@
 				<button type="button" class="mui-btn" style="background-color:#ff6a00;color:white;width: 40%;margin-right: 10px;margin-top: 10px;border-radius: 3px;height: 40px;" id='login'>立即登录</button>
 				<button type="button" class="mui-btn mui-btn-warning mui-btn-outlined mui-btn-outlined" style="width: 40%;margin-top: 10px;border-radius: 3px;height: 40px;color:#ff6a00;" id="regist">快速注册</button>
 			</div>
-			<div class="mui-slider" id="slider">
+			<!--<div class="mui-slider" id="slider">
 				<div class="mui-slider-group mui-slider-loop" id="bannerloop"style="height: 120px;">
 					<div class="mui-slider-item">
 						<a href="javascript:void(0);"><img src="../../images/banner_load.jpg" /></a>
@@ -234,7 +234,7 @@
 				<div class="mui-slider-indicator" id="indicatorid">
 
 				</div>
-			</div>
+			</div>-->
 			<ul class="mui-table-view mui-grid-view mui-grid-9" id="find-tab">
 				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="charge">
 					<div class="find_tab_div">

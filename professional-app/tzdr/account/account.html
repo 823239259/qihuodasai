@@ -302,7 +302,7 @@
 				</div>
 				<h2 style="padding-left: 65px; height: 38px; line-height: 38px;">账户余额：<span id="title_balance"></span></h2>
 				</div>
-				<div class="mui-slider" id="slider">
+				<!--<div class="mui-slider" id="slider">
 					<div class="mui-slider-group mui-slider-loop" id="bannerloop" style="height: 120px;">
 						<div class="mui-slider-item">
 							<a href="javascript:void(0);"><img src="../../images/banner_load.jpg" /></a>
@@ -311,7 +311,7 @@
 					<div class="mui-slider-indicator" id="indicatorid">
 
 					</div>
-				</div>
+				</div>-->
 				<ul class="mui-table-view mui-grid-view mui-grid-9" id="find-tab">
 					<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="charge">
 						<div class="find_tab_div">
@@ -461,89 +461,89 @@
 						"margin": "auto",
 					});
 					//获取banner图片
-					var imgId = [];
-					mui.app_request('banner/list', {
-							"type": 9
-						},
-						function(result) {
-							var bannerLen = result.data.bannerList == null ? 0 : result.data.bannerList.length;
-							if(bannerLen > 0) {
-								var banner_content = '';
-								var indicator_content = '';
-								for(var i = 0; i < bannerLen; i++) {
+//					var imgId = [];
+//					mui.app_request('banner/list', {
+//							"type": 9
+//						},
+//						function(result) {
+//							var bannerLen = result.data.bannerList == null ? 0 : result.data.bannerList.length;
+//							if(bannerLen > 0) {
+//								var banner_content = '';
+//								var indicator_content = '';
+//								for(var i = 0; i < bannerLen; i++) {
+//
+//									if(i == 0) {
+//										banner_content += addBanner(result.data.bannerList[bannerLen - 1], true);
+//										indicator_content += '<div class="mui-indicator mui-active"></div>';
+//									} else {
+//										indicator_content += '<div class="mui-indicator"></div>';
+//									}
+//
+//									banner_content += addBanner(result.data.bannerList[i]);
+//
+//									if(i == (bannerLen - 1)) {
+//										banner_content += addBanner(result.data.bannerList[0], true);
+//									}
+//
+//								}
+//								//alert(banner_content);
+//								document.getElementById('bannerloop').innerHTML = banner_content;
+//								document.getElementById('indicatorid').innerHTML = indicator_content;
+//							}
+//							var slider = mui("#slider");
+//							slider.slider({
+//								interval: 3000
+//							});
+//
+//						},
+//						function() {
+//
+//						});
+//					//新增banner 显示
+//					var timeNum = 0;
 
-									if(i == 0) {
-										banner_content += addBanner(result.data.bannerList[bannerLen - 1], true);
-										indicator_content += '<div class="mui-indicator mui-active"></div>';
-									} else {
-										indicator_content += '<div class="mui-indicator"></div>';
-									}
-
-									banner_content += addBanner(result.data.bannerList[i]);
-
-									if(i == (bannerLen - 1)) {
-										banner_content += addBanner(result.data.bannerList[0], true);
-									}
-
-								}
-								//alert(banner_content);
-								document.getElementById('bannerloop').innerHTML = banner_content;
-								document.getElementById('indicatorid').innerHTML = indicator_content;
-							}
-							var slider = mui("#slider");
-							slider.slider({
-								interval: 3000
-							});
-
-						},
-						function() {
-
-						});
-					//新增banner 显示
-					var timeNum = 0;
-
-					function addBanner(banner, firstend) {
-						var _html = '';
-						if(firstend) {
-							_html = '<div class="mui-slider-item mui-slider-item-duplicate" >';
-						} else {
-							_html = '<div class="mui-slider-item">';
-						}
-						_html += '<a class="id" href="javascript:void(0);" id="' + banner.linkUrl + '" data-id="' + timeNum + '"><img src="' + tzdr.constants.base_images_url + banner.imgPath + '" title=""/>';
-						_html += '</a></div>';
-						imgId.push(banner.linkUrl);
-						timeNum++;
-						return _html;
-					}
+//					function addBanner(banner, firstend) {
+//						var _html = '';
+//						if(firstend) {
+//							_html = '<div class="mui-slider-item mui-slider-item-duplicate" >';
+//						} else {
+//							_html = '<div class="mui-slider-item">';
+//						}
+//						_html += '<a class="id" href="javascript:void(0);" id="' + banner.linkUrl + '" data-id="' + timeNum + '"><img src="' + tzdr.constants.base_images_url + banner.imgPath + '" title=""/>';
+//						_html += '</a></div>';
+//						imgId.push(banner.linkUrl);
+//						timeNum++;
+//						return _html;
+//					}
 					//监听banner点击事件
-					var clickNum = 0;
-					mui("#bannerloop").on('tap', 'a', function() {
-						//获取id
-						var nid = this.getAttribute("id");
-						if(clickNum <= imgId.length - 1) {
-							var clickId = $(this).attr('data-id');
-							nid = imgId[clickId];
-							clickNum++;
-						}
-						var str = "http";
-						if(nid == "" || nid == null || nid.length == 0) {} else if(nid.indexOf(str) == -1) {
-							mui.openWindow({
-								url: "../../tzdr/news/news.html",
-								id: nid,
-								extras: {
-									nid: nid
-								}
-							});
-						} else {
-							mui.openWindow({
-								url: "../../tzdr/news/active.html",
-								id: "active",
-								extras: {
-									nid: nid
-								}
-							});
-						}
-					});
+//					var clickNum = 0;
+//					mui("#bannerloop").on('tap', 'a', function() {
+//						//获取id
+//						var nid = this.getAttribute("id");
+//						if(clickNum <= imgId.length - 1) {
+//							var clickId = $(this).attr('data-id');
+//							nid = imgId[clickId];
+//							clickNum++;
+//						}
+//						var str = "http";
+//						if(nid == "" || nid == null || nid.length == 0) {} else if(nid.indexOf(str) == -1) {
+//							mui.openWindow({
+//								url: "../../tzdr/news/news.html",
+//								id: nid,
+//								extras: {
+//									nid: nid
+//								}
+//							});
+//						} else {
+//							mui.openWindow({
+//								url: "../../tzdr/news/active.html",
+//								id: "active",
+//								extras: {
+//									nid: nid
+//								}
+//							});
+//						}
+//					});
 
 				});
 				tzdr.online();
