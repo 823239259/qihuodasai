@@ -50,7 +50,34 @@
 				</li>
 			</ul>
 		</div>
-		<button class="btn mt10" @tap='exit'>退出登录</button>
+		<div class="list_option mt10">
+			<ul>
+				<li @tap="dialPhone">
+					<img src="../assets/img/phone.png" />
+					<span>客服热线</span>
+					<img src="../assets/img/arrow.png" class="img_arrow"/>
+					<span>400-852-8008</span>
+				</li>
+				<li>
+					<button class="btn" @tap='exit'>退出登录</button>
+				</li>
+			</ul>
+		</div>
+		
+		<!--退出弹出框 s-->
+		<div class="exit_box" v-show="isexit">
+			<div class="bg"></div>
+			<ul>
+				<li @tap="confirmExit">
+					<span>确认退出</span>
+				</li>
+				<li @tap="cancel">
+					<span>取消退出</span>
+				</li>
+			</ul>
+		</div>
+		<!--退出弹出框 e-->
+		
 		<!--<button class="btn mt10" @tap='totest'>点我看其他demo</button>-->
 	</div>
 </template>
@@ -66,6 +93,7 @@
 		data(){
 			return {
 				isShow: false,
+				isexit: false,
 				msg: '',
 				balance: 0.00,
 				username: '',
@@ -104,6 +132,9 @@
 					this.$router.push({path:'/nameCertification'});
 				}
 			},
+			dialPhone: function(){
+				pro.callService();
+			},
 			totest: function(){
 				this.$router.push({path:'/test'});
 			},
@@ -111,8 +142,15 @@
 				this.$router.push({path:'/moneyLog'});
 			},
 			exit: function(){
+				this.isexit = true;
+			},
+			confirmExit: function(){
 				localStorage.removeItem("user");
-				this.$router.push({path:'/home'});
+				this.$router.push({path:'/login',query: {isJump: 2}});
+				this.isexit = false;
+			},
+			cancel: function(){
+				this.isexit = false;
 			},
 			getUserMsg: function(){
 				this.$http.post(this.PATH + '/user/getbalancerate', {emulateJSON: true},{
@@ -269,6 +307,39 @@
 		border-bottom: 1px solid @black;
 		color: @lightblue;
 	}
+	.exit_box{
+		.bg{
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			z-index: 1110;
+			background: #000;
+			opacity: 0.7;
+		}
+		ul{
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			z-index: 1111;
+			width: 100%;
+			background: @deepblue;
+			li{
+				height: 54px;
+				line-height: 54px;
+				border-bottom: 1px solid @black;
+				text-align: center;
+				span{
+					font-size: @fs16; 
+					color: @blue;
+				}
+				&:first-child span{
+					color: @white;
+				}
+			}
+		}
+	}
 }
 /*ip6*/
 @media (min-width:371px) and (max-width:410px) {
@@ -372,6 +443,39 @@
 	.border_bottom{
 		border-bottom: 1px solid @black;
 		color: @lightblue;
+	}
+	.exit_box{
+		.bg{
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			z-index: 1110;
+			background: #000;
+			opacity: 0.7;
+		}
+		ul{
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			z-index: 1111;
+			width: 100%;
+			background: @deepblue;
+			li{
+				height: 54px*@ip6;
+				line-height: 54px*@ip6;
+				border-bottom: 1px solid @black;
+				text-align: center;
+				span{
+					font-size: @fs16*@ip6; 
+					color: @blue;
+				}
+				&:first-child span{
+					color: @white;
+				}
+			}
+		}
 	}
 }
 /*ip5*/
@@ -477,7 +581,38 @@
 		border-bottom: 1px solid @black;
 		color: @lightblue;
 	}
+	.exit_box{
+		.bg{
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			z-index: 1110;
+			background: #000;
+			opacity: 0.7;
+		}
+		ul{
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			z-index: 1111;
+			width: 100%;
+			background: @deepblue;
+			li{
+				height: 54px*@ip5;
+				line-height: 54px*@ip5;
+				border-bottom: 1px solid @black;
+				text-align: center;
+				span{
+					font-size: @fs16*@ip5; 
+					color: @blue;
+				}
+				&:first-child span{
+					color: @white;
+				}
+			}
+		}
+	}
 }
-
-
 </style>

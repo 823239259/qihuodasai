@@ -536,6 +536,7 @@
 							if(data.code == 1){
 								this.$children[0].isShow = true;
 								this.msg = '操作成功';
+								localStorage.removeItem("tradeUser");
 								setTimeout(function(){
 									this.$router.replace({path: '/tradeRecord'});
 								}.bind(this), 1000);

@@ -2,7 +2,7 @@
 	<div id="login">
 		<tipsDialog :msg="msgTips" time="2000" ref="dialog"></tipsDialog>
 		<topbar title="登录"></topbar>
-		<back :title="isJumpEvent"></back>
+		<back :title="isJumpEvent" v-show="isback"></back>
 		<cs title="客服"></cs>
 		<div class="page_cont">
 			<div class="logo">
@@ -36,10 +36,29 @@
 	export default{
 		name:'login',
 		components: {topbar, back, cs, btn, tipsDialog, codeDialog},
+		data(){
+			return {
+				isJump: '',
+				isback: true,
+				eyeShow: false,
+				msg: '',
+				phone: '',
+				pwd: '',
+				token: '',
+				secret: '',
+				path: '',
+				str: '',
+				num: ''
+			}
+		},
 		computed: {
 			isJumpEvent: function(){
 				this.isJump = this.$route.query.isJump;
-				if(this.isJump == 1)  return true;
+				if(this.isJump == 1){
+					return true;
+				}else if(this.isJump == 2){
+					this.isback = false;
+				}
 			},
 			msgTips: function(){
 				return this.msg;
@@ -52,20 +71,6 @@
 			},
 			sendMsg(){
 				if(this.str) return JSON.stringify(this.str);
-			}
-		},
-		data(){
-			return {
-				isJump: '',
-				eyeShow: false,
-				msg: '',
-				phone: '',
-				pwd: '',
-				token: '',
-				secret: '',
-				path: '',
-				str: '',
-				num: ''
 			}
 		},
 		methods:{
