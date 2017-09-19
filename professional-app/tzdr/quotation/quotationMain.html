@@ -59,7 +59,7 @@
 					<p id="guideP">操盘流程：①->登录平台账号->②开交易账户->③登录交易账户，操盘->④操盘完成，终结方案 </p>
 					<span class="mui-pull-right" id="colse">×</span>
 				</div>
-				<p style="padding: 0 2%; background: #383838;"><span>合约名称</span><span>价格</span><span id="changeSwitch">涨跌幅</span><span>成交量</span></p>
+				<p style="padding: 0 2%; background: #383838;"><span>合约名称</span><span>最新价</span><span>成交量</span><span id="changeSwitch">涨跌幅</span></p>
 			</div>
 			<div class="productList">
 				<div class='openPage'>
@@ -407,10 +407,12 @@
 							"<p class='productName'>" + product.CommodityName[i] + "</p>"+
 							"<p class='grayFont CommodityNo'><span class='CommodityNoName'>" + product.CommodityNo2[i] + "</span>" + product.CommodityNo1[i] + "</p>"+
 						"</div>"+
-						"<div class='productContentRight' class='mui-col-xs-9'>"+
+						"<div class='productContentCenter' class='mui-col-xs-9'>"+
 							"<span class=' QLastPrice'>-</span>"+
-						"<span><label class=' ChangeRate' id='showOne'>-</label><label class='ChangeValue' id='showTwo'>-</label></span></div>"+
-						"<div class='volume'><span></span></div></div>";					
+						"</div>"+
+						"<div class='productContentRight' ><span><label class=' ChangeRate' id='showOne'>-</label><label class='ChangeValue' id='showTwo'>-</label></span></div>"+
+						"<div class='volume'><span></span></div>"+
+						"</div>";
 					};
 					//生成页面传递的数据
 					$(".productList").css("height", 48 * product.CommodityName.length - 50 + "px");
@@ -461,10 +463,10 @@
 							}
 							if(Number(MoreData.LastPrice) - Number(MoreData.PreSettlePrice) < 0) {
 								LastPrice[i].innerText = MoreData.LastPrice.toFixed(product.DotSize[i]);
-//								LastPrice[i].className = "greenFont QLastPrice";
+								LastPrice[i].className = "greenFont QLastPrice";
 							} else {
 								LastPrice[i].innerText = MoreData.LastPrice.toFixed(product.DotSize[i]);
-//								LastPrice[i].className = "redFont QLastPrice";
+								LastPrice[i].className = "redFont QLastPrice";
 							}
 							if(Number(MoreData.TotalVolume) != null){
 								Volume[i].innerHTML = MoreData.TotalVolume
