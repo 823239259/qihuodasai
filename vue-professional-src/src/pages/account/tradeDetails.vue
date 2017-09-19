@@ -130,7 +130,7 @@
 					<li>
 						<span>序号</span>
 						<span>成交日期</span>
-						<span>客服号</span>
+						<span>客户号</span>
 						<span>币种</span>
 						<span>交易所</span>
 						<span>品种</span>
