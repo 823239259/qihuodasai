@@ -220,8 +220,8 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 .sc_list .mui-table-view .mui-table-view-cell br { clear: both;}
 .sc_list .mui-table-view:before { background: none;}
 .sc_list .mui-table-view:after { background: none;}
-.sc_list .mui-table-view li h4 { width: 100%; text-align: left; color: #999999; font-weight: normal; font-size: 16px; margin-bottom: 10px;}
-.sc_list .mui-table-view li .sc_data { width: 45%; float: left; overflow: hidden; font-size: 16px;}
+.sc_list .mui-table-view li h4 { width: 100%; text-align: left; color: #999999; font-weight: normal; font-size: 16px; margin-bottom: 10px;padding-left: 10px;}
+.sc_list .mui-table-view li .sc_data { width: 45%; float: left; overflow: hidden; font-size: 16px;padding-left: 8px;}
 .sc_list .mui-table-view li label { padding-right: 5px; line-height: 26px; display: block; float: left;  font-size: 14px;}
 .sc_list .mui-table-view li span { line-height: 26px; display: block; float: left; font-size: 14px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
 .sc_list .mui-table-view li .sc_money { width: 55%; float: right;font-size: 16px;}

@@ -67,14 +67,18 @@ i{
 	
 }*/
 #openPay {
-	height: 40px;
+    position: fixed;
+    bottom: 55px;
+    left: 1%;
+    height: 40px;
+    width: 98%;
     line-height: 40px;
     border-radius: 5px;
     text-align: center;
     background: #ffde3d;
     font-size: 16px;
     color: #333333;
-    margin-top: 15px;
+    
 }
 #buttomDiv button{
 	display: inline-block;
