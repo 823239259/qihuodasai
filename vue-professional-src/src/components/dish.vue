@@ -122,12 +122,14 @@
 				</ul>
 			</div>
 		</div>
-		<div class="oprtate_num">
-			<operatenum></operatenum>
-		</div>
-		<div class="btn_box">
-			<chartBtn type="buy" class="fl" @tap.native='buy'></chartBtn>
-			<chartBtn type="sell" class="fr" @tap.native='sell'></chartBtn>
+		<div class="tools">
+			<div class="oprtate_num">
+				<operatenum></operatenum>
+			</div>
+			<div class="btn_box">
+				<chartBtn type="buy" class="fl" @tap.native='buy'></chartBtn>
+				<chartBtn type="sell" class="fr" @tap.native='sell'></chartBtn>
+			</div>
 		</div>
 		<alert title="提示" line1="你还未登录，请先登录" jump="true"></alert>
 		<tipsDialog :msg="msgTips"></tipsDialog>
@@ -288,8 +290,6 @@
 				}else{
 					return 0;
 				}
-				
-				
 			}
 		},
 		methods:{
@@ -416,38 +416,31 @@
 	    		}
 	    	}
 	    }
-	    .operate_num_box{
+	    .tools{
 	    	width: 100%;
-	    	height: 55px;
-	    	margin-top: 15px;
-	    	padding: 5px 15px;
-	    	background: @deepblue;
-	    	.operate_num{
-	    		height: 45px;
-	    		border-radius: 5px;
-	    		border: 1px solid #12121a;
-	    		background: @black;
-	    	}
-	    }
-	    .oprtate_num{
-	    	width: 100%;
-	    	height: 55px;
-	    	background: @deepblue;
-	    	padding: 5px 15px;
-	    	margin-top: 10px;
-	    }
-	    .btn_box{
-	    	width: 100%;
-	    	height: 65px;
-	    	padding: 5px 15px;
-	    	background: @deepblue;
-	    	margin-top: 10px;
-	    	div:first-child{
-	    		float: left;
-	    	}
-	    	div:last-child{
-	    		float: right;
-	    	}
+	    	position: fixed;
+	    	bottom: 0;
+	    	left: 0;
+	    	.oprtate_num{
+		    	width: 100%;
+		    	height: 55px;
+		    	background: @deepblue;
+		    	padding: 5px 15px;
+		    	margin-top: 10px;
+		    }
+		    .btn_box{
+		    	width: 100%;
+		    	height: 65px;
+		    	padding: 5px 15px;
+		    	background: @deepblue;
+		    	margin-top: 10px;
+		    	div:first-child{
+		    		float: left;
+		    	}
+		    	div:last-child{
+		    		float: right;
+		    	}
+		    }
 	    }
 	}
 	/*ip6*/
@@ -500,25 +493,31 @@
 	    		}
 	    	}
 	    }
-	    .oprtate_num{
+	    .tools{
 	    	width: 100%;
-	    	height: 55px*@ip6;
-	    	background: @deepblue;
-	    	padding: 5px*@ip6 15px*@ip6;
-	    	margin-top: 10px*@ip6;
-	    }
-	    .btn_box{
-	    	width: 100%;
-	    	height: 65px*@ip6;
-	    	padding: 5px*@ip6 15px*@ip6;
-	    	background: @deepblue;
-	    	margin-top: 10px*@ip6;
-	    	div:first-child{
-	    		float: left;
-	    	}
-	    	div:last-child{
-	    		float: right;
-	    	}
+	    	position: fixed;
+	    	bottom: 0;
+	    	left: 0;
+	    	.oprtate_num{
+		    	width: 100%;
+		    	height: 55px*@ip6;
+		    	background: @deepblue;
+		    	padding: 5px*@ip6 15px*@ip6;
+		    	margin-top: 10px*@ip6;
+		    }
+		    .btn_box{
+		    	width: 100%;
+		    	height: 65px*@ip6;
+		    	padding: 5px*@ip6 15px*@ip6;
+		    	background: @deepblue;
+		    	margin-top: 10px*@ip6;
+		    	div:first-child{
+		    		float: left;
+		    	}
+		    	div:last-child{
+		    		float: right;
+		    	}
+		    }
 	    }
 	}
 	/*ip5*/
@@ -571,27 +570,31 @@
 	    		}
 	    	}
 	    }
-	    .oprtate_num{
+	    .tools{
 	    	width: 100%;
-	    	height: 55px*@ip5;
-	    	background: @deepblue;
-	    	padding: 5px*@ip5 15px*@ip5;
-	    	margin-top: 10px*@ip5;
-	    }
-	    .btn_box{
-	    	width: 100%;
-	    	height: 65px*@ip5;
-	    	padding: 5px*@ip5 15px*@ip5;
-	    	background: @deepblue;
-	    	margin-top: 10px*@ip5;
-	    	div:first-child{
-	    		float: left;
-	    	}
-	    	div:last-child{
-	    		float: right;
-	    	}
+	    	position: fixed;
+	    	bottom: 0;
+	    	left: 0;
+	    	.oprtate_num{
+		    	width: 100%;
+		    	height: 55px*@ip5;
+		    	background: @deepblue;
+		    	padding: 5px*@ip5 15px*@ip5;
+		    	margin-top: 10px*@ip5;
+		    }
+		    .btn_box{
+		    	width: 100%;
+		    	height: 65px*@ip5;
+		    	padding: 5px*@ip5 15px*@ip5;
+		    	background: @deepblue;
+		    	margin-top: 10px*@ip5;
+		    	div:first-child{
+		    		float: left;
+		    	}
+		    	div:last-child{
+		    		float: right;
+		    	}
+		    }
 	    }
 	}
-	
-	
 </style>
