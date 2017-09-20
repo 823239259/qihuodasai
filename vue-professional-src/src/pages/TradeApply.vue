@@ -788,9 +788,13 @@
 		overflow-x: scroll;
 		ul{
 			width: 930px;
-			&.list_head li span{
-				&:first-child{
-					color: @blue;
+			&.list_head{
+				overflow: hidden;
+				background: #36394d;
+				li span{
+					&:first-child{
+						color: @blue;
+					}
 				}
 			}
 			&.list_cont li span{

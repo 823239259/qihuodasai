@@ -35,6 +35,7 @@ import moneyPwd from '../pages/account/moneyPwd.vue'
 import addMoney from '../pages/account/addMoney.vue'
 import service from '../pages/service.vue'
 import tradeLogin from '../pages/market/tradeLogin.vue'
+import help from '../pages/help.vue'
 Vue.use(Router)
 
 const router = new Router({
@@ -43,6 +44,10 @@ const router = new Router({
 		{
 			path: '/',
 			component: home
+		},
+		{
+			path: '/help',
+			component: help
 		},
 		{
 			path: '/tradeLogin',
