@@ -127,8 +127,9 @@ mui.plusReady(function() {
 				var quoteParam = jsonData;
 				if(quoteParam.Parameters == null) return;
 				var subscribeParam = quoteParam.Parameters;
+//				console.log(JSON.stringify(subscribeParam))
 				var newCommdityNo = subscribeParam.CommodityNo;
-				var newContractNo = subscribeParam.ContractNo;
+				var newContractNo = subscribeParam.ContractNo;		
 				marketLoadParam[newCommdityNo] = subscribeParam;
 				lightChartData(quoteParam);   //绘制闪电图
 				$("#refresh").removeClass("rotateClass");
@@ -156,6 +157,7 @@ mui.plusReady(function() {
 					setHandicap(subscribeParam);
 				}
 				updateStopAndLossLastPrice(subscribeParam);
+				updateShowRuleLastPrice(subscribeParam);
 				updateDesignateByQuote(subscribeParam);
 				updateFloatProfit(subscribeParam);
 				//计算浮动盈亏总和

@@ -2098,7 +2098,7 @@ $(function() {
 		}
 
 	});
-	/*$("#chioceContract1").change(function(){
+	$("#chioceContract1").change(function(){
 		var $this = $(this);
 		var contractCode = $this.val();
 		var localQuote = getLocalCacheQuote(contractCode);
@@ -2108,21 +2108,26 @@ $(function() {
 			
 		}
 		$("#ConditoionTimePricesInput").val(0);
-	});*/
+	});
 });
 /**
  * 初始化增加条件单弹出框
  */
 function initConditionData() {
+	var showConditionPrice = document.getElementById("showConditionPrice").innerHTML
 	var chioceContract = $("#chioceContract").val();
 	var localQuote = getLocalCacheQuote(chioceContract);
+//	console.log('------------------??>>>>>>>>>>>>>>>');
+//	console.log(parseFloat(JSON.stringify(localQuote.LastPrice)));
 	if(localQuote != undefined) {
 		$("#ConditoionPricesInput").val(localQuote.LastPrice);
 	}
+	document.getElementById("showConditionPrice").innerHTML = localQuote.LastPrice;
 	var chioceContractTime = $("#chioceContract1").val();
-	localQuote = getLocalCacheQuote(chioceContractTime);
+	localQuote = getLocalCacheQuote(chioceContractTime);	
+	document.getElementById("showConditionPrice1").innerHTML = localQuote.LastPrice;
 	if(localQuote != undefined) {
-		$("#ConditoionTimePricesInput").val(localQuote.LastPrice);
+		$("#ConditoionTimePricesInput").val(localQuote.LastPrice);	
 	}
 	$("#chiocePrices").val(0);
 	$("#shopDrection").val(0);
@@ -3636,6 +3641,23 @@ function updateStopAndLossLastPrice(param) {
 		}
 	}
 }
+//更新条件单最新价
+function updateShowRuleLastPrice(param) {
+	if(isLogin) {
+		var lastPrice = param.LastPrice;
+		var contractCode = $("#chioceContract").val();
+		var ulossContractCode = $("#ulossContractCode").text();
+		if(contractCode == ulossContractCode) {
+			$("#showConditionPrice").text(lastPrice);
+			$("#showConditionPrice").text(lastPrice);
+		}
+		if(contractCode == stopEvenTd) {
+			$("#showConditionPrice1").text(lastPrice);
+			$("#showConditionPrice1").text(lastPrice);
+		}
+	}
+}
+
 /**
  * 清除交易列表的数据并生成操作按钮
  */

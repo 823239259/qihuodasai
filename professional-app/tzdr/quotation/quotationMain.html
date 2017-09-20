@@ -361,6 +361,7 @@
 							insertData1(MoreData);
 							$("#refresh").removeClass("rotateClass");
 						} else if(method == "OnRtnQuote") {
+							
 							var MoreData = JSON.parse(evt.data).Parameters;
 							//更新行情的数据
 							insertData1(MoreData);

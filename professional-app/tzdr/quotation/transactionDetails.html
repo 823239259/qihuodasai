@@ -472,7 +472,7 @@
 						</div>
 					</div>
 				</div>
-<!---------------------------------止损单弹窗--------------------------->
+<!---------------------------------止损单右侧弹窗--------------------------->
 				<div id="popoverLoss" class="mui-popover">
 				    <div id="segmentedControlStopLoss" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary" style="border-bottom: 1px solid #121212;">
 				        <a class="mui-control-item mui-active" href="#stopTitle" >止损</a>
@@ -617,8 +617,9 @@
 				    					<select class="mui-btn mui-btn-block selectComm" id="chioceContract">
 				    					</select> 
 				    				</td>
-				    				<td></td>
-				    				<td></td>
+				    				<td>最新</td>
+				    				<!--显示条件单--条件价格-->
+				    				<td><span id="showConditionPrice"></span></td>
 				    			</tr>
 				    			<tr>
 				    				<td >方式</td>
@@ -673,8 +674,9 @@
 				    					<select class="mui-btn mui-btn-block selectComm" id="chioceContract1">
 				    					</select>
 				    				</td>
-				    				<td></td>
-				    				<td></td>
+				    				<td>最新</td>
+				    				<!--显示条件单——时间条件价格-->
+				    				<td><span id="showConditionPrice1"></span></td>
 				    			</tr>
 				    			<tr>
 				    				<td >时间</td>
