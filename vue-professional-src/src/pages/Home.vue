@@ -8,7 +8,7 @@
 			<div>
 				<topbar title="行情" :connected='!isconnected'></topbar>
 				<button class="help" @tap="toHelp"></button>
-				<button id="refresh" @tap="refresh"></button>
+				<button id="refresh" :class="{dynamic: isdynamic == true, static: isdynamic == false}" @tap="refresh"></button>
 				<!--选择条-->
 
 				<div id="selectbar">
@@ -25,7 +25,7 @@
 								<li class="fl fontgray">合约名称</li>
 								<li class="fl fontgray">成交量</li>
 								<li class="fl fontgray">最新价</li>
-								<li class="fl fontgray">涨跌幅 <!--<i></i>--></li>
+								<li class="fl fontgray" @tap="switchEvent">{{title}}<i class="icon_sj"></i></li>
 							</ol>
 						</li>
 					</ul>
@@ -38,12 +38,15 @@
 										<h5 class="fontgray">{{v.CommodityNo}}{{v.MainContract}}</h5>
 									</li>
 									<li class="fl">{{v.LastQuotation.TotalVolume}}</li>
-									<li :class="['fl',{'fontgreen':v.LastQuotation.ChangeRate<0},{'fontred':v.LastQuotation.ChangeRate>0},{'fontwhite':v.LastQuotation.ChangeRate==0}]">{{v.LastQuotation.LastPrice | fixNum2(v.DotSize)}}</li>
-									<li :class="['fl',{'fontgreen':v.LastQuotation.ChangeRate<0},{'fontred':v.LastQuotation.ChangeRate>0},{'fontwhite':v.LastQuotation.ChangeRate==0}]">{{v.LastQuotation.ChangeRate | fixNum}}%</li>
+									<li class="fl" :class="{fontgreen: v.LastQuotation.ChangeRate < 0, fontred: v.LastQuotation.ChangeRate > 0, fontwhite: v.LastQuotation.ChangeRate == 0}">{{v.LastQuotation.LastPrice | fixNum2(v.DotSize)}}</li>
+									<li class="fl" :class="{fontgreen: v.LastQuotation.ChangeRate < 0, fontred: v.LastQuotation.ChangeRate > 0, fontwhite: v.LastQuotation.ChangeRate == 0}" v-show="isswitch">{{v.LastQuotation.ChangeRate | fixNum}}%</li>
+									<li class="fl" :class="{fontgreen: v.LastQuotation.ChangeRate < 0, fontred: v.LastQuotation.ChangeRate > 0, fontwhite: v.LastQuotation.ChangeRate == 0}" v-show="!isswitch">{{v.LastQuotation.ChangeValue | fixNum2(v.DotSize)}}</li>
 								</ol>
 							</li>
 						</template>
+						<p class="tips">没有更多的合约可加载啦~</p>
 					</ul>
+					
 				</div>
 			</div>
 		</template>
@@ -64,6 +67,9 @@
 			return {
 				time: 3,
 				msg: '',
+				title: '涨跌幅',
+				isdynamic: true,
+				isswitch: true
 			}
 		},
 		filters:{
@@ -104,6 +110,9 @@
 				if(n && this.guideshow == false){
 					this.$children[0].isShow = true;
 					this.msg = n.slice(0,-1);
+					setTimeout(function(){
+						this.isdynamic = false;
+					}.bind(this),1000);
 				}
 			},
 			guideshow: function(n, o){
@@ -121,7 +130,6 @@
 				var sw = window.screen.width;
 				if(n == true) {
 					if(sw <= 370) {
-						
 						$('#home').css('padding-top', 50 * 0.7729 + 'px');
 						$('#selectbar').css('top', 50 * 0.7729 + 'px');
 					} else if(sw <= 410) {
@@ -150,13 +158,22 @@
 				'initQuoteClient'
 			]),
 			refresh: function(e) {
-				this.$router.push({path: '/space'});
+				window.location.reload();
 			},
 			toHelp: function(){
 				this.$router.push({path: '/help'});
 			},
 			selectClass: function(e) {
 				$(e.target).addClass('current').siblings('li').removeClass('current');
+			},
+			switchEvent: function(e){
+				if($(e.currentTarget).text() == '涨跌幅'){
+					this.title = '涨跌额';
+					this.isswitch = false;
+				}else{
+					this.title = '涨跌幅';
+					this.isswitch = true;
+				}
 			},
 			toDetail: function(a) {
 				this.Parameters.forEach(function(e){
@@ -276,7 +293,9 @@
 		margin-top: 45px;
 	}
 	#datalist>ul>li>ol>li:first-child {
-		width: 35%;
+		width: 36%;
+		/*text-align: left;
+		padding-left: 15px;*/
 	}
 	#datalist>ul:first-child {
 		width: 100%;
@@ -296,12 +315,14 @@
 		width: 100%;
 		height: 40px;
 	}
-	i {
+	.icon_sj{
 		display: inline-block;
-		width: 9px;
-		height: 12px;
+		width: 8px;
+		height: 8px;
+		overflow: hidden;
+		background: url(../assets/img/sanjiao.png) no-repeat center center;
 		background-size: 100% 100%;
-		background-image: url(../assets/img/updown.png);
+		margin: 18px 0 0 0;
 	}
 	s {
 		width: 15px;
@@ -332,12 +353,24 @@
 		background-color: transparent;
 		border: none;
 		outline: none;
-		background-image: url('../assets/img/refresh.png');
 		background-size: 100% 100%;
 		position: fixed;
 		z-index: 1000;
 		right: 7%;
 		top: 2%;
+		&.dynamic{
+			background-image: url('../assets/img/refresh.gif');
+		}
+		&.static{
+			background-image: url('../assets/img/refresh.png');
+		}
+	}
+	.tips{
+		width: 100%;
+		text-align: center;
+		padding: 10px 15px;
+		color: #fff;
+		font-size: 14px;
 	}
 	
 	/*ip5*/
@@ -367,6 +400,11 @@
 			box-sizing: content-box;
 			padding-bottom: 58px*@ip5;
 		}
+		#datalist>ul>li>ol>li {
+			text-align: center;
+			width: 21%;
+			font-size: 12px;
+		}
 		#home {
 			padding-top: 50px*@ip5+30px;
 			padding-bottom: 50px*@ip5;
@@ -378,14 +416,24 @@
 			width: 50px*@ip5;
 			height: 50px*@ip5;
 			overflow: hidden;
+			background: none;
 			background: url(../assets/img/help.png) no-repeat 15px*@ip5 15px*@ip5;
 			background-size: 20px*@ip5 20px*@ip5;
 			border: none;
 			outline: none;
-			position: absolute;
+			position: fixed;
 			top: 0;
 			left: 0;
 			z-index: 1000;
+		}
+		.icon_sj{
+			display: inline-block;
+			width: 6px;
+			height: 6px;
+			overflow: hidden;
+			background: url(../assets/img/sanjiao.png) no-repeat center center;
+			background-size: 100% 100%;
+			margin: 18px 0 0 0;
 		}
 	}
 	
@@ -431,7 +479,7 @@
 			background-size: 20px*@ip6 20px*@ip6;
 			border: none;
 			outline: none;
-			position: absolute;
+			position: fixed;
 			top: 0;
 			left: 0;
 			z-index: 1000;
@@ -475,7 +523,7 @@
 			background-size: 20px 20px;
 			border: none;
 			outline: none;
-			position: absolute;
+			position: fixed;
 			top: 0;
 			left: 0;
 			z-index: 1000;
