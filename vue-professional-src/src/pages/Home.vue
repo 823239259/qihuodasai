@@ -7,6 +7,7 @@
 			</div>
 			<div>
 				<topbar title="行情" :connected='!isconnected'></topbar>
+				<button class="help" @tap="toHelp"></button>
 				<button id="refresh" @tap="refresh"></button>
 				<!--选择条-->
 
@@ -55,19 +56,14 @@
 	import tipsDialog from '../components/tipsDialog.vue'
 	import topbar from '../components/Topbar.vue'
 	import guide from './Guide.vue'
-//	import Vue from 'vue'
-//	import Vuex from 'vuex'
 	import VueNativeSock from 'vue-native-websocket'
 	import { mapMutations,mapActions } from 'vuex'
-	
-	
 	export default {
 		name: 'home',
 		data() {
 			return {
 				time: 3,
 				msg: '',
-//				isBack: ''
 			}
 		},
 		filters:{
@@ -79,11 +75,7 @@
 				return num.toFixed(dotsize);
 			}
 		},
-		components: {
-			topbar,
-			guide,
-			tipsDialog
-		},
+		components: {topbar, guide, tipsDialog},
 		computed: {
 			msgTips: function(){
 				return this.msg;
@@ -158,15 +150,15 @@
 				'initQuoteClient'
 			]),
 			refresh: function(e) {
-//				this.$router.push({path: '/index', query: {isBack: 1}});
 				this.$router.push({path: '/space'});
+			},
+			toHelp: function(){
+				this.$router.push({path: '/help'});
 			},
 			selectClass: function(e) {
 				$(e.target).addClass('current').siblings('li').removeClass('current');
 			},
 			toDetail: function(a) {
-//				this.$children[0].isShow = true;
-//				this.msg = '该功能正在开发中，敬请期待';
 				this.Parameters.forEach(function(e){
 					if(e.CommodityName == $(a.currentTarget).children().find('h5:first-child').text()){
 						this.$store.state.market.currentdetail=e;
@@ -230,16 +222,12 @@
 		activated:function(){
 			this.$store.state.market.currentNo='';
 			this.$store.state.isshow.isklineshow = false;
-			//提示框
-//			this.$children[1].isShow = true;
-			
 		}
 	}
 </script>
 
 <style scoped lang="less">
 	@import url("../assets/css/main.less");
-	@width: 100%;
 	#home {
 		background: #1b1b26;
 	}	
@@ -251,11 +239,9 @@
 		font-size: 12px;
 		color: #2a2a31;
 		position: fixed;
-		/*top: 50px;*/
 	}
-	
 	#selectbar {
-		width: @width;
+		width: 100%;
 		overflow-x: scroll;
 		padding: 0 2%;
 		line-height: 45px;
@@ -265,63 +251,51 @@
 		height: 45px;
 		position: fixed;
 	}
-	
 	#selectbar ul {
 		box-sizing: content-box;
 		width: 150%;
 	}
-	
 	#selectbar li {
 		height: 45px;
 		margin: 0 2%;
 		color: #ccd5ff;
 		text-align: center;
 		border-bottom: 3px solid transparent;
-		/*border-bottom: 3px solid #ffd400;*/
 	}
-	
 	#selectbar>ul>li.current {
 		color: #ffd400;
 		border-bottom: 3px solid #ffd400;
 	}
-	
 	#datalist>ul>li>ol>li {
 		text-align: center;
 		width: 21%;
 		font-size: 14px;
 	}
-	
 	#datalist {
 		overflow: hidden;
 		margin-top: 45px;
 	}
-	
 	#datalist>ul>li>ol>li:first-child {
 		width: 35%;
 	}
-	
 	#datalist>ul:first-child {
 		width: 100%;
 		position: fixed;
 	}
-	
 	#datalist>ul:nth-child(2) {
 		margin-top: 40px;
 		box-sizing: content-box;
 		padding-bottom: 55px;
 	}
-	
 	#datalist>ul:first-child>li:first-child {
-		width: @width;
+		width: 100%;
 		line-height: 40px;
 		background: #36394d;
 	}
-	
 	#datalist>ul>li>ol {
 		width: 100%;
 		height: 40px;
 	}
-	
 	i {
 		display: inline-block;
 		width: 9px;
@@ -329,7 +303,6 @@
 		background-size: 100% 100%;
 		background-image: url(../assets/img/updown.png);
 	}
-	
 	s {
 		width: 15px;
 		height: 15px;
@@ -340,7 +313,6 @@
 		transform: translateY(3px);
 		margin-left: (15/414)*414px;
 	}
-	
 	.list {
 		height: 55px;
 		width: 100%;
@@ -348,15 +320,12 @@
 		background-color: #242633;
 		border-bottom: 1px solid #1b1b26;
 	}
-	
 	.list>ol>li:nth-child(2) {
 		color: #fff;
 	}
-	
 	.list h5 {
 		margin-top: 8%;
 	}
-	
 	#refresh {
 		width: 17px;
 		height: 17px;
@@ -370,8 +339,8 @@
 		right: 7%;
 		top: 2%;
 	}
-	/*ip5*/
 	
+	/*ip5*/
 	@media(max-width:370px) {
 		#home {
 			background: #1b1b26;
@@ -393,9 +362,6 @@
 			right: 16px*@ip5;
 			top: 16px*@ip5;
 		}
-		#datalist>ul>li:first-child {
-			/*top: 80px*@ip5+45px;*/
-		}
 		#datalist>ul:nth-child(2) {
 			margin-top: 50px*@ip5;
 			box-sizing: content-box;
@@ -405,15 +371,25 @@
 			padding-top: 50px*@ip5+30px;
 			padding-bottom: 50px*@ip5;
 		}
-		#datalist>ul>li:nth-child(2) {
-			/*margin-top: 85px;*/
-		}
 		#selectbar {
 			top: 50px*@ip5+30px;
 		}
+		.help{
+			width: 50px*@ip5;
+			height: 50px*@ip5;
+			overflow: hidden;
+			background: url(../assets/img/help.png) no-repeat 15px*@ip5 15px*@ip5;
+			background-size: 20px*@ip5 20px*@ip5;
+			border: none;
+			outline: none;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 1000;
+		}
 	}
-	/*ip6*/
 	
+	/*ip6*/
 	@media (min-width:371px) and (max-width:410px) {
 		#home {
 			background: #1b1b26;
@@ -435,9 +411,6 @@
 			right: 16px*@ip6;
 			top: 16px*@ip6;
 		}
-		#datalist>ul>li:first-child {
-			/*top: 80px*@ip6+45px;*/
-		}
 		#datalist>ul:nth-child(2) {
 			margin-top: 42px*@ip6;
 			box-sizing: content-box;
@@ -447,15 +420,25 @@
 			padding-top: 50px*@ip6+30px;
 			padding-bottom: 50px*@ip6;
 		}
-		#datalist>ul>li:nth-child(2) {
-			/*margin-top: 85px;*/
-		}
 		#selectbar {
 			top: 50px*@ip6+30px;
 		}
+		.help{
+			width: 50px*@ip6;
+			height: 50px*@ip6;
+			overflow: hidden;
+			background: url(../assets/img/help.png) no-repeat 15px*@ip6 15px*@ip6;
+			background-size: 20px*@ip6 20px*@ip6;
+			border: none;
+			outline: none;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 1000;
+		}
 	}
-	/*ip6p及以上*/
 	
+	/*ip6p及以上*/
 	@media (min-width:411px) {
 		#home {
 			background: #1b1b26;
@@ -477,18 +460,25 @@
 			right: 16px;
 			top: 16px;
 		}
-		#datalist>ul>li:first-child {
-			/*top: 80px*@ip6p+45px;*/
-		}
 		#home {
 			padding-top: 50px*@ip6p+30px;
 			padding-bottom: 50px*@ip6p;
 		}
-		#datalist>ul>li:nth-child(2) {
-			/*margin-top: 85px;*/
-		}
 		#selectbar {
 			top: 50px*@ip6p+30px;
+		}
+		.help{
+			width: 50px;
+			height: 50px;
+			overflow: hidden;
+			background: url(../assets/img/help.png) no-repeat 15px 15px;
+			background-size: 20px 20px;
+			border: none;
+			outline: none;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 1000;
 		}
 	}
 </style>

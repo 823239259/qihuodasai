@@ -34,7 +34,6 @@
 		width: 75px;
 		height: 40px;
 	}
-	
 	#moneyradio div {
 		/*text-align: center;*/
 		padding-left: 10%;
@@ -47,7 +46,6 @@
 		line-height: 40px;
 		position: relative;
 	}
-	
 	#moneyradio div span {
 		position: absolute;
 		top: 3%;
@@ -57,14 +55,13 @@
 		font-size: @fs16;
 		transform: scale(0.625) translateX(60%);
 	}
-	
 	#moneyradio div.current {
 		color: #ffd400;
 		background-image: url(../assets/img/gouy.png);
 		background-size: 100% 100%;
 	}
-	/*ip5*/
 	
+	/*ip5*/
 	@media(max-width:370px) {
 		#moneyradio {
 			width: 75px*@ip5;
@@ -91,8 +88,8 @@
 			background-size: 100% 100%;
 		}
 	}
-	/*ip6*/
 	
+	/*ip6*/
 	@media (min-width:371px) and (max-width:410px) {
 		#moneyradio {
 			width: 75px*@ip6;

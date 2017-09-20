@@ -117,7 +117,7 @@
 				this.$router.push({path:'/withdrawal'});
 			},
 			tradeRecord: function(){
-				this.$router.push({path: '/tradeRecord'});
+				this.$router.push({path: '/tradeapply', query: {type: 1}});
 			},
 			editPwd: function(){
 				this.$router.push({path:'/editPwd'});

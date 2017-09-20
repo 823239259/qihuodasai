@@ -28,7 +28,6 @@ import editPhone from '../pages/account/editPhone.vue'
 import editPwd from '../pages/account/editPwd.vue'
 import recharge from '../pages/account/recharge.vue'
 import withdrawal from '../pages/account/withdrawal.vue'
-import tradeRecord from '../pages/account/tradeRecord.vue'
 import tradeDetails from '../pages/account/tradeDetails.vue'
 import bindBankCard from '../pages/account/bindBankCard.vue'
 import payWays from '../pages/account/payWays.vue'
@@ -36,6 +35,7 @@ import moneyPwd from '../pages/account/moneyPwd.vue'
 import addMoney from '../pages/account/addMoney.vue'
 import service from '../pages/service.vue'
 import tradeLogin from '../pages/market/tradeLogin.vue'
+import help from '../pages/help.vue'
 Vue.use(Router)
 
 const router = new Router({
@@ -44,6 +44,10 @@ const router = new Router({
 		{
 			path: '/',
 			component: home
+		},
+		{
+			path: '/help',
+			component: help
 		},
 		{
 			path: '/tradeLogin',
@@ -72,10 +76,6 @@ const router = new Router({
 		{
 			path: '/bindBankCard',
 			component: bindBankCard
-		},
-		{
-			path: '/tradeRecord',
-			component: tradeRecord
 		},
 		{
 			path: '/tradeDetails',

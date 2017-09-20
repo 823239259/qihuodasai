@@ -26,6 +26,11 @@
 			<btn name="立即登录" color="blue" @tap.native='login'></btn>
 			<btn name="开户申请" color="yellow" @tap.native='openApply'></btn>
 			<p class="tips">点击登录，表示同意<span class="yellow" @tap="toAgreement">《期货大赛用户协议》</span></p>
+			<div class="mark">
+				<h3>操盘交易账户≠注册登录账户</h3>
+				<p><span>交易账户：</span>申请方案后系统自动发放，用于实盘或模拟盘交易的账号。可查询交易明细，结算后将会更换。</p>
+				<p><span>登录账户：</span>使用手机注册后的平台账号，用于登录APP和网站，进行充值、提现、查看资金明细等。</p>
+			</div>
 		</div>
 		<div class="shade" v-show="shadeShow"></div>
 	</div>
@@ -200,6 +205,24 @@
     			text-align: center;
     			margin-top: 15px;
     		}
+    		.mark{
+    			width: 100%;
+    			padding: 0 15px;
+    			margin-top: 10px;
+    			h3{
+    				font-size: @fs18;
+    				color: @white;
+    				padding: 20px 0;
+    			}
+    			p{
+    				line-height: 20px;
+    				font-size: @fs14;
+    				margin-bottom: 15px;
+    				span{
+    					color: @white;
+    				}
+    			}
+    		}
     	}
     }
 }
@@ -231,6 +254,24 @@
     			text-align: center;
     			margin-top: 15px*@ip6;
     		}
+    		.mark{
+    			width: 100%;
+    			padding: 0 15px*@ip6;
+    			margin-top: 10px*@ip6;
+    			h3{
+    				font-size: @fs18*@ip6;
+    				color: @white;
+    				padding: 20px*@ip6 0;
+    			}
+    			p{
+    				line-height: 20px*@ip6;
+    				font-size: @fs14*@ip6;
+    				margin-bottom: 15px*@ip6;
+    				span{
+    					color: @white;
+    				}
+    			}
+    		}
     	}
     }
 }
@@ -261,6 +302,24 @@
     		.tips{
     			text-align: center;
     			margin-top: 15px*@ip5;
+    		}
+    		.mark{
+    			width: 100%;
+    			padding: 0 15px*@ip5;
+    			margin-top: 10px*@ip5;
+    			h3{
+    				font-size: @fs18*@ip5;
+    				color: @white;
+    				padding: 20px*@ip5 0;
+    			}
+    			p{
+    				line-height: 20px*@ip5;
+    				font-size: @fs14*@ip5;
+    				margin-bottom: 15px*@ip5;
+    				span{
+    					color: @white;
+    				}
+    			}
     		}
     	}
     }

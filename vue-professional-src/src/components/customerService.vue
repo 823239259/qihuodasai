@@ -1,13 +1,20 @@
 <template>
 	<div id="customerService">
-		<button @tap='customerService' id='btn'>{{title}}</button>
+		<button @tap='customerService' :class="classEvent" id='btn'>{{title}}</button>
 	</div>
 </template>
 
 <script>
 	export default{
 		name:'customerService',
-		props: ['title', 'type'],
+		props: ['title', 'type', 'status'],
+		computed: {
+			classEvent: function(){
+				if(this.status == 1){
+					return 'left';
+				}
+			}
+		},
 		methods: {
 			customerService: function() {
 				if(this.type != 1){
@@ -37,6 +44,9 @@
 		top: 0;
 		right: 0;
 		z-index: 1000;
+		&.left{
+			left: 0;
+		}
     }
 }
 /*ip6*/
@@ -53,6 +63,9 @@
 		top: 0;
 		right: 0;
 		z-index: 1000;
+		&.left{
+			left: 0;
+		}
     }
 }
 /*ip5*/
@@ -69,6 +82,9 @@
 		top: 0;
 		right: 0;
 		z-index: 1000;
+		&.left{
+			left: 0;
+		}
 	}
 }	
 </style>
