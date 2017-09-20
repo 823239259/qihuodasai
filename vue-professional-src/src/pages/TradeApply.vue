@@ -706,6 +706,11 @@
 			//初始化页面显示申请开户
 			this.isselected = 0;
 			this.show = true;
+			//判断是否显示开户记录
+			if(this.$route.query.type == '1'){
+				this.isselected = 1;
+				this.show = false;
+			}
 			//获取本地用户信息
 			this.userInfo = JSON.parse(localStorage.user);
 			//获取操盘记录列表
