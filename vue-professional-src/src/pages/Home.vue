@@ -1,7 +1,7 @@
 <template>
 	<div id="home">
 		<template>
-			<tipsDialog :msg="msgTips"></tipsDialog>
+			<tipsDialog :msg="msgTips" ref="dialog"></tipsDialog>
 			<div class="disconnect" v-show="isconnected">
 				<i class="icon"></i>
 				<span>交易、行情未连接，网络恢复时会自动连接！</span>
@@ -9,7 +9,7 @@
 			<topbar title="行情" :colorName="bg"></topbar>
 			<button class="help" @tap="toHelp"></button>
 			<button id="refresh" :class="{dynamic: isdynamic == true, static: isdynamic == false}" @tap="refresh"></button>
-			<i class="icon_connected" v-show="isconnected"></i>
+			<i class="icon_connected" v-show="iconIsconnected"></i>
 			<div class="page_cont">
 				<div id="selectbar">
 					<ul>
@@ -70,7 +70,9 @@
 				title: '涨跌幅',
 				isdynamic: true,
 				isswitch: true,
-				colors: ''
+				colors: '',
+				isconnected: false,
+				iconIsconnected: false
 			}
 		},
 		filters:{
@@ -96,9 +98,9 @@
 			quoteIndex(){
 				return this.$store.state.market.quoteIndex;
 			},
-			isconnected() {
-				return this.$store.state.isshow.isconnected;
-			},
+//			isconnected() {
+//				return this.$store.state.isshow.isconnected;
+//			},
 			guideshow(){
 				return this.$store.state.isshow.guideshow;
 			},
@@ -111,14 +113,8 @@
 			PATH: function(){
 				return this.$store.getters.PATH;
 			},
-			net(){
-				return pro.netIsconnected();
-			}
 		},
 		watch: {
-			net: function(n, o){
-				console.log(n);
-			},
 			quoteIndex: function(n, o){
 //				if(this.Parameters[n].LastQuotation.ChangeRate < 0){
 //					$("#datalist>.cont>li").eq(n).addClass("green");
@@ -136,7 +132,7 @@
 			},
 			quoteConnectedMsg: function(n, o){
 				if(n && this.guideshow == false){
-					this.$children[0].isShow = true;
+					this.$refs.dialog.isShow = true;
 					this.msg = n.slice(0,-1);
 					setTimeout(function(){
 						this.isdynamic = false;
@@ -145,7 +141,7 @@
 			},
 			guideshow: function(n, o){
 				if(n == false){
-					this.$children[0].isShow = true;
+					this.$refs.dialog.isShow = true;
 					this.msg = '行情服务器连接成功';
 				}
 			},
@@ -160,7 +156,12 @@
 				'initQuoteClient'
 			]),
 			refresh: function(e) {
-				window.location.reload();
+				if(pro.netIsconnected()){
+					window.location.reload();
+				}else{
+					this.$refs.dialog.isShow = true;
+					this.msg = '网络未连接，行情、交易不能刷新'
+				}
 			},
 			toHelp: function(){
 				this.$router.push({path: '/help'});
@@ -203,7 +204,7 @@
 						}
 					}
 				}.bind(this), function() {
-					this.$children[0].isShow = true;
+					this.$refs.dialog.isShow = true;
 					this.msg = '网络不给力，请稍后再试！'
 				});
 			}
@@ -213,6 +214,21 @@
 			this.initQuoteClient();
 			//取当前版本号
 			this.getVersion();
+			
+		},
+		updated: function(){
+			//判断网络
+			pro.netIsconnected(function(){
+				this.isconnected = true;
+				setTimeout(function(){
+					this.isconnected = false;
+					this.iconIsconnected = true;
+					this.colors = 'red';
+				}.bind(this), 2000);
+			}.bind(this), function(){
+				this.iconIsconnected = false;
+				this.colors = '';
+			}.bind(this));
 		},
 		activated:function(){
 			this.$store.state.market.currentNo='';
