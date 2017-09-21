@@ -94,16 +94,16 @@ function time() {
     }
 }
 /*年月日-日历*/
-(function($) {
-	$.init();
-	var result = $('#result')[0];
-	var btns = $('.btn');
+(function(a) {
+	a.init();
+	var result = a('#result')[0];
+	var btns = a('.btn');
 	btns.each(function(i, btn) {
 		btn.addEventListener('tap', function() {
 			var optionsJson = this.getAttribute('data-options') || '{}';
 			var options = JSON.parse(optionsJson);
 			var id = this.getAttribute('id');
-			var picker = new $.DtPicker(options);
+			var picker = new a.DtPicker(options);
 			picker.show(function(rs) {
 				result.innerText = rs.y.text+'-'+ rs.m.text + '-'+ rs.d.text;
 				var calendar = rs.y.text+'-'+ rs.m.text + '-'+ rs.d.text;
@@ -118,8 +118,37 @@ function time() {
 			    calendarData(urlTwo,paramsThere,finance,"","post");
 			    var div1 = document.getElementById('mui-scroll-one');
           		div1.style.transform="translate3d(0px, 0px, 0px)";
-			    //$("#chartContainerContentOne .mui-scroll").setAttribute('style', 'translate3d(0px, 0px, 0px)');
-			    //$("#chartContainerContentOne .mui-scroll").css("transform","translate3d(0px, 0px, 0px)");
+//			    $("#chartContainerContentOne .mui-scroll").setAttribute('style', 'translate3d(0px, 0px, 0px)');
+//			    $("#chartContainerContentOne .mui-scroll").css("transform","translate3d(0px, 0px, 0px)");
+				var arys1= new Array(); 
+				arys1=calendar.split('-');
+				var ssdate=new Date(arys1[0],parseInt(arys1[1]-1),arys1[2]);  
+    			var week = ssdate.getDay(); 
+    			console.log(week)
+    			
+				 if(week==1){
+				 		$(".mui-control-item").removeClass("mui-active");
+				        $(".monday").parent().addClass("mui-active");
+				   }else if(week==2){
+				   	$(".mui-control-item").removeClass("mui-active");
+				        $(".tuesday").parent().addClass("mui-active");
+				   }else if(week==3){
+				   	$(".mui-control-item").removeClass("mui-active");
+				        $(".wednesday").parent().addClass("mui-active");
+				   }else if(week==4){
+				   	$(".mui-control-item").removeClass("mui-active");
+				        $(".thursday").parent().addClass("mui-active");
+				   }else if(week==5){
+				   	$(".mui-control-item").removeClass("mui-active");
+				        $(".friday").parent().addClass("mui-active");
+				   }else if(week==6){
+				   	$(".mui-control-item").removeClass("mui-active");
+				        $(".saturday").parent().addClass("mui-active");
+				   }else if(week==0){
+				   	$(".mui-control-item").removeClass("mui-active");
+				        $(".sunday").parent().addClass("mui-active");
+				    }
+				console.log(calendar);
 				picker.dispose();
 			});
 		}, false);
@@ -191,9 +220,9 @@ function time() {
 	$("#confirmBottonProfit").on("tap",function() {
 		var listFour=[];
 		if(valList.length>0 && valListOne.length >0) {
-			console.log("都点击的时候")
+//			console.log("都点击的时候")
 			if(valList.indexOf("全部")>=0 && valListOne.indexOf("重要")>=0){
-				console.log("全部国家，全部重要性");//只判断重要性
+//				console.log("全部国家，全部重要性");//只判断重要性
 				for(var i=0;i<listThere.length;i++){
 	            	if(listThere[i].importance ==3){
 	            		listFour.push(listThere[i]);
@@ -207,7 +236,7 @@ function time() {
 				$("#"+id).css("display","none");
 				$("#chioce").css("display","none");
 			}else if(valList.indexOf("全部")>=0 && valListOne.indexOf("重要") ==-1) {
-				console.log("全部国家，没有重要性");//不需要循环只需要放进去
+//				console.log("全部国家，没有重要性");//不需要循环只需要放进去
 				$("#chartContainerContentOne .nodata").remove();
 				$("#chartContainerContentOne .mui-table-view").empty();
 				finance12(listThere);
@@ -216,7 +245,7 @@ function time() {
 				$("#"+id).css("display","none");
 				$("#chioce").css("display","none");
 			}else if(valList.indexOf("全部")==-1 && valListOne.indexOf("重要")==-1) {
-				console.log("一些国家，没有重要性");
+//				console.log("一些国家，没有重要性");
 				for(var i=0;i<listThere.length;i++){
 	            	for(var g = 0;g<valListtwo.length;g++) {
 			    		if(valListtwo[g] == listThere[i].country){
@@ -232,7 +261,7 @@ function time() {
 				$("#"+id).css("display","none");
 				$("#chioce").css("display","none");
 			}else if (valList.indexOf("全部")==-1 && valListOne.indexOf("重要")>=0) {
-				console.log("一些国家，有重要性");
+//				console.log("一些国家，有重要性");
 				for(var i=0;i<listThere.length;i++){
 	            	for(var g = 0;g<valListtwo.length;g++) {
 			    		if(valListtwo[g] == listThere[i].country && listThere[i].importance ==3){
@@ -249,7 +278,7 @@ function time() {
 				$("#chioce").css("display","none");
 			}
 		}else if(valList.length == 0 && valListOne.length >0) {
-			console.log("只点击的重要时候")
+//			console.log("只点击的重要时候")
 			if(valList.indexOf("全部")==-1 && valListOne.indexOf("重要")>=0) {
 				for(var i=0;i<listThere.length;i++){
 		    		if(listThere[i].importance ==3){
@@ -273,7 +302,7 @@ function time() {
 				$("#chioce").css("display","none");
 			}
 		}else if(valList.length > 0 && valListOne.length ==0) {
-			console.log("只点击的国家时候");
+//			console.log("只点击的国家时候");
 			if(valList.indexOf("全部")==-1 && valListOne.indexOf("重要")==-1) {
 				for(var i=0;i<listThere.length;i++){
 	            	for(var g = 0;g<valListtwo.length;g++) {
@@ -299,7 +328,7 @@ function time() {
 				$("#chioce").css("display","none");
 			}
 		}else{
-			console.log("第一次进来什么都没有点的");
+//			console.log("第一次进来什么都没有点的");
 			$("#chartContainerContentOne .nodata").remove();
 			$("#chartContainerContentOne .mui-table-view").empty();
     		finance12(listThere);
@@ -399,7 +428,7 @@ function time() {
 		var index = $(this);
 		var clickToday = index.find("span").attr("data-time");
 		var clickTomorrow  =  GetDateStrDate(clickToday);
-		console.log(clickToday);
+//		console.log(clickToday);
 //		console.log(clickTomorrow);
 	    var paramsThere={
 	        pageIndex:0,
@@ -449,7 +478,6 @@ function time() {
 	function finance(res){
 		if(!mui.isnull(res)){
 			listThere = res.data;
-			console.log(listThere);
 			if(listThere.length>0) {
 				mui.each(listThere,function(i,item){
 					if(i<100){
@@ -642,8 +670,8 @@ function time() {
 	}
 	// 7*24小时开始
 	function forList(res){ 
-		console.log(JSON.stringify(res.data[0].liveTitle));
-		console.log(JSON.stringify(res.data[0].createdAt));
+//		console.log(JSON.stringify(res.data[0].liveTitle));
+//		console.log(JSON.stringify(res.data[0].createdAt));
 		if(!mui.isnull(res)){
   			list=res.data;
 
@@ -684,7 +712,7 @@ function time() {
 		
 	  	var $fundList=document.body.querySelector("#directSeedNews .mui-table-view"); 
 	  	var time = tzdr.dateUtil.getFormatDataByLong(list[i].createdAt,"hh:mm");
-	  	console.log(list[i].createdAt)
+//	  	console.log(list[i].createdAt)
 	  	//console.log(vs.dateUtil.getFormatDataByLong(list[i].liveCreatetime/1000,"yyyy-MM-dd"));
 	  	$("#result1").html(tzdr.dateUtil.getFormatDataByLong(list[i].liveCreatetime,"yyyy-MM-dd"));
 	  	var li=document.createElement("li");
