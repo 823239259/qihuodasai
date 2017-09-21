@@ -62,6 +62,7 @@
 				<p style="padding: 0 2%; background: #383838;"><span>合约名称</span><span>最新价</span><span>成交量</span><span id="changeSwitch">涨跌幅</span></p>
 			</div>
 			<div class="productList">
+
 				<div class='openPage'>
 					<div class="productContentLeft" class="mui-col-xs-3">
 						<p class="productName">-</p>
@@ -203,6 +204,7 @@
 					</div>
 				</div>
 			</div>
+			<div class="whitespace" style="height:50px;width:100%"></div>
 			<!--新手指南-->
 			<div id="guideMask" class="mui-backdrop"><img id="guideContent" src="../../images/minute.png" alt="" /></div>
 			<!--快捷入口-->
@@ -400,8 +402,8 @@
 					
 					var productList = document.getElementsByClassName("productList")[0];
 					productList.innerHTML = "";
-					console.log(product.CommodityName);
-					console.log(product.TotalVolume);
+//					console.log(product.CommodityName);
+//					console.log(product.TotalVolume);
 					for(var i = 0; i < product.CommodityName.length; i++) {
 						productList.innerHTML += "<div class='openPage'>"+
 						"<div class='productContentLeft' class='mui-col-xs-3'>"+

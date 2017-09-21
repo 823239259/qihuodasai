@@ -472,7 +472,7 @@ p{
 .productList {
 	width: 100%;
 	margin-top: 45px;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 .productList span,.productList p{
 	color:#FFFFFF;
