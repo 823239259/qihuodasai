@@ -41,4 +41,36 @@ pro.callService = function(){
 	});
 };
 
+/**
+ * 判断是否已连接
+ * @param {} 
+ * 
+ */
+pro.netIsconnected = function(){
+	mui.plusReady(function() {
+		document.addEventListener("netchange",onNetChange,false);
+		function onNetChange(){
+			//获取当前网络类型
+			var nt = plus.networkinfo.getCurrentType();
+			switch(nt){
+				case plus.networkinfo.CONNECTION_ETHERNET:
+				case plus.networkinfo.CONNECTION_WIFI:
+//					mui.toast("当前网络为WiFi");
+					return '1';
+					break;
+				case plus.networkinfo.CONNECTION_CELL2G:
+				case plus.networkinfo.CONNECTION_CELL3G:
+				case plus.networkinfo.CONNECTION_CELL4G:
+//					mui.toast("当前网络非WiFi");
+					return '2';
+					break;
+				default:
+//					mui.toast("当前没有网络");
+					return '0';
+					break;
+		　　	}
+		}
+	});
+}
+
 export default pro

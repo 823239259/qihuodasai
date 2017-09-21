@@ -2,30 +2,29 @@
 	<div id="home">
 		<template>
 			<tipsDialog :msg="msgTips"></tipsDialog>
-			<div id="disconnect" v-show='!isconnected'>
-				<div><s></s>&nbsp;&nbsp;行情连接已断开，<span>{{time}}</span>秒后自动重连</div>
+			<div class="disconnect" v-show="isconnected">
+				<i class="icon"></i>
+				<span>交易、行情未连接，网络恢复时会自动连接！</span>
 			</div>
-			<div>
-				<topbar title="行情" :connected='!isconnected'></topbar>
-				<button class="help" @tap="toHelp"></button>
-				<button id="refresh" :class="{dynamic: isdynamic == true, static: isdynamic == false}" @tap="refresh"></button>
-				<!--选择条-->
-
+			<topbar title="行情" :colorName="bg"></topbar>
+			<button class="help" @tap="toHelp"></button>
+			<button id="refresh" :class="{dynamic: isdynamic == true, static: isdynamic == false}" @tap="refresh"></button>
+			<i class="icon_connected" v-show="isconnected"></i>
+			<div class="page_cont">
 				<div id="selectbar">
 					<ul>
-						<li @tap="selectClass" class="fl fontsm current">国际期货</li>
-						<!--<li @tap="selectClass" class="fl fontsm">亚洲指数</li>
-						<li @tap="selectClass" class="fl fontsm">欧美指数</li>-->
+						<li @tap="selectClass" class="current">国际期货</li>
+						<!--<li @tap="selectClass">亚洲指数</li>-->
 					</ul>
 				</div>
 				<div id="datalist">
-					<ul>
+					<ul class="head">
 						<li>
 							<ol>
-								<li class="fl fontgray">合约名称</li>
-								<li class="fl fontgray">成交量</li>
-								<li class="fl fontgray">最新价</li>
-								<li class="fl fontgray" @tap="switchEvent">{{title}}<i class="icon_sj"></i></li>
+								<li>合约名称</li>
+								<li>成交量</li>
+								<li>最新价</li>
+								<li @tap="switchEvent">{{title}}<i class="icon_sj"></i></li>
 							</ol>
 						</li>
 					</ul>
@@ -33,14 +32,14 @@
 						<template v-for="(v,i) in Parameters">
 							<li class="list cl" @tap='toDetail'>
 								<ol>
-									<li class="fl">
-										<h5 class="fontwhite">{{v.CommodityName}}</h5>
-										<h5 class="fontgray">{{v.CommodityNo}}{{v.MainContract}}</h5>
+									<li>
+										<h5>{{v.CommodityName}}</h5>
+										<h5>{{v.CommodityNo}}{{v.MainContract}}</h5>
 									</li>
-									<li class="fl">{{v.LastQuotation.TotalVolume}}</li>
-									<li class="fl" :class="{fontgreen: v.LastQuotation.ChangeRate < 0, fontred: v.LastQuotation.ChangeRate > 0, fontwhite: v.LastQuotation.ChangeRate == 0}">{{v.LastQuotation.LastPrice | fixNum2(v.DotSize)}}</li>
-									<li class="fl" :class="{fontgreen: v.LastQuotation.ChangeRate < 0, fontred: v.LastQuotation.ChangeRate > 0, fontwhite: v.LastQuotation.ChangeRate == 0}" v-show="isswitch">{{v.LastQuotation.ChangeRate | fixNum}}%</li>
-									<li class="fl" :class="{fontgreen: v.LastQuotation.ChangeRate < 0, fontred: v.LastQuotation.ChangeRate > 0, fontwhite: v.LastQuotation.ChangeRate == 0}" v-show="!isswitch">{{v.LastQuotation.ChangeValue | fixNum2(v.DotSize)}}</li>
+									<li>{{v.LastQuotation.TotalVolume}}</li>
+									<li :class="{green: v.LastQuotation.ChangeRate < 0, red: v.LastQuotation.ChangeRate > 0}">{{v.LastQuotation.LastPrice | fixNum2(v.DotSize)}}</li>
+									<li :class="{green: v.LastQuotation.ChangeRate < 0, red: v.LastQuotation.ChangeRate > 0}" v-show="isswitch">{{v.LastQuotation.ChangeRate | fixNum}}%</li>
+									<li :class="{green: v.LastQuotation.ChangeRate < 0, red: v.LastQuotation.ChangeRate > 0}" v-show="!isswitch">{{v.LastQuotation.ChangeValue | fixNum2(v.DotSize)}}</li>
 								</ol>
 							</li>
 						</template>
@@ -61,6 +60,7 @@
 	import guide from './Guide.vue'
 	import VueNativeSock from 'vue-native-websocket'
 	import { mapMutations,mapActions } from 'vuex'
+	import pro from '../assets/common.js'
 	export default {
 		name: 'home',
 		data() {
@@ -70,6 +70,7 @@
 				title: '涨跌幅',
 				isdynamic: true,
 				isswitch: true,
+				colors: ''
 			}
 		},
 		filters:{
@@ -85,6 +86,9 @@
 		computed: {
 			msgTips: function(){
 				return this.msg;
+			},
+			bg: function(){
+				if(this.colors) return this.colors;
 			},
 			Parameters(){
 				return this.$store.state.market.Parameters;
@@ -107,41 +111,28 @@
 			PATH: function(){
 				return this.$store.getters.PATH;
 			},
+			net(){
+				return pro.netIsconnected();
+			}
 		},
 		watch: {
-			quoteIndex: function(n, o){
-				if(this.Parameters[n].LastQuotation.ChangeRate < 0){
-					$("#datalist>.cont>li").eq(n).addClass("green");
-					setTimeout(function(){
-						$("#datalist>.cont>li").eq(n).removeClass("green");
-					}, 500);
-				}else if(this.Parameters[n].LastQuotation.ChangeRate == 0){
-					return true;
-				}else{
-					$("#datalist>.cont>li").eq(n).addClass("red");
-					setTimeout(function(){
-						$("#datalist>.cont>li").eq(n).removeClass("red");
-					}, 500);
-				}
+			net: function(n, o){
+				console.log(n);
 			},
-			Parameters: function(n, o){
-				this.arr = o;
-//				setTimeout(function(){
-//					n.forEach(function(v, k){
-//						if(v.LastQuotation.ChangeRate < 0){
-//							
-//							$("#datalist>.cont>li").eq(k).addClass("green");
-//							setTimeout(function(){
-//								$("#datalist>.cont>li").eq(k).removeClass("green");
-//							}, 500);
-//						}else{
-//							$("#datalist>.cont>li").eq(k).addClass("red");
-//							setTimeout(function(){
-//								$("#datalist>.cont>li").eq(k).removeClass("red");
-//							}, 500);
-//						}
-//					});
-//				}, 2000);
+			quoteIndex: function(n, o){
+//				if(this.Parameters[n].LastQuotation.ChangeRate < 0){
+//					$("#datalist>.cont>li").eq(n).addClass("green");
+//					setTimeout(function(){
+//						$("#datalist>.cont>li").eq(n).removeClass("green");
+//					}, 500);
+//				}else if(this.Parameters[n].LastQuotation.ChangeRate == 0){
+//					return true;
+//				}else{
+//					$("#datalist>.cont>li").eq(n).addClass("red");
+//					setTimeout(function(){
+//						$("#datalist>.cont>li").eq(n).removeClass("red");
+//					}, 500);
+//				}
 			},
 			quoteConnectedMsg: function(n, o){
 				if(n && this.guideshow == false){
@@ -163,32 +154,6 @@
 					window.location.reload();
 				}
 			},
-			isconnected: function(n, o) {
-				var sw = window.screen.width;
-				if(n == true) {
-					if(sw <= 370) {
-						$('#home').css('padding-top', 50 * 0.7729 + 'px');
-						$('#selectbar').css('top', 50 * 0.7729 + 'px');
-					} else if(sw <= 410) {
-						$('#home').css('padding-top', 50 * 0.9058 + 'px');
-						$('#selectbar').css('top', 50 * 0.9058 + 'px');
-					} else {
-						$('#home').css('padding-top', '50px');
-						$('#selectbar').css('top', '50px');
-					}
-				} else {
-					if(sw <= 370) {
-						$('#home').css('padding-top', 50 * 0.7729 + 30 + 'px');
-						$('#selectbar').css('top', 50 * 0.7729 + 30 + 'px');
-					} else if(sw <= 410) {
-						$('#home').css('padding-top', 50 * 0.9058 + 30 + 'px');
-						$('#selectbar').css('top', 50 * 0.9058 + 30 + 'px');
-					} else {
-						$('#home').css('padding-top', '80px');
-						$('#selectbar').css('top', '80px');
-					}
-				}
-			}
 		},
 		methods: {
 			...mapActions([
@@ -248,30 +213,6 @@
 			this.initQuoteClient();
 			//取当前版本号
 			this.getVersion();
-			var sw = window.screen.width;
-			if(this.isconnected) {
-				if(sw <= 370) {
-					$('#home').css('padding-top', 50 * 0.7729 + 'px');
-					$('#selectbar').css('top', 50 * 0.7729 + 'px');
-				} else if(sw <= 410) {
-					$('#home').css('padding-top', 50 * 0.9058 + 'px');
-					$('#selectbar').css('top', 50 * 0.9058 + 'px');
-				} else {
-					$('#home').css('padding-top', '50px');
-					$('#selectbar').css('top', '50px');
-				}
-			} else {
-				if(sw <= 370) {
-					$('#home').css('padding-top', 50 * 0.7729 + 30 + 'px');
-					$('#selectbar').css('top', 50 * 0.7729 + 30 + 'px');
-				} else if(sw <= 410) {
-					$('#home').css('padding-top', 50 * 0.9058 + 30 + 'px');
-					$('#selectbar').css('top', 50 * 0.9058 + 30 + 'px');
-				} else {
-					$('#home').css('padding-top', '80px');
-					$('#selectbar').css('top', '80px');
-				}
-			};
 		},
 		activated:function(){
 			this.$store.state.market.currentNo='';
@@ -281,268 +222,42 @@
 </script>
 
 <style scoped lang="less">
-	@import url("../assets/css/main.less");
+@import url("../assets/css/base.less");
+/*ip6p及以上*/
+@media (min-width:411px) {
 	#home {
-		background: #1b1b26;
-	}	
-	#disconnect {
 		width: 100%;
-		height: 30px;
-		background-color: #fff7cc;
-		line-height: 30px;
-		font-size: 12px;
-		color: #2a2a31;
-		position: fixed;
-	}
-	#selectbar {
-		width: 100%;
-		overflow-x: scroll;
-		padding: 0 2%;
-		line-height: 45px;
 		overflow: hidden;
-		background-color: #242633;
-		border-bottom: 1px solid #1b1b26;
-		height: 45px;
-		position: fixed;
-	}
-	#selectbar ul {
-		box-sizing: content-box;
-		width: 150%;
-	}
-	#selectbar li {
-		height: 45px;
-		margin: 0 2%;
-		color: #ccd5ff;
-		text-align: center;
-		border-bottom: 3px solid transparent;
-	}
-	#selectbar>ul>li.current {
-		color: #ffd400;
-		border-bottom: 3px solid #ffd400;
-	}
-	#datalist ul li{
-		&.green{
-			background: #294743;
-		}
-		&.red{
-			background: #502e38;
-		}
-	}
-	#datalist>ul>li>ol>li {
-		text-align: center;
-		width: 21%;
-		font-size: 14px;
-	}
-	#datalist {
-		overflow: hidden;
-		margin-top: 45px;
-	}
-	#datalist>ul>li>ol>li:first-child {
-		width: 36%;
-		/*text-align: left;
-		padding-left: 15px;*/
-	}
-	#datalist>ul:first-child {
-		width: 100%;
-		position: fixed;
-	}
-	#datalist>ul:nth-child(2) {
-		margin-top: 40px;
-		box-sizing: content-box;
-		padding-bottom: 55px;
-	}
-	#datalist>ul:first-child>li:first-child {
-		width: 100%;
-		line-height: 40px;
-		background: #36394d;
-	}
-	#datalist>ul>li>ol {
-		width: 100%;
-		height: 40px;
-	}
-	.icon_sj{
-		display: inline-block;
-		width: 8px;
-		height: 8px;
-		overflow: hidden;
-		background: url(../assets/img/sanjiao.png) no-repeat center center;
-		background-size: 100% 100%;
-		margin: 18px 0 0 0;
-	}
-	s {
-		width: 15px;
-		height: 15px;
-		background-image: url(../assets/img/tanhao.png);
-		background-size: 100% 100%;
-		background-repeat: no-repeat;
-		display: inline-block;
-		transform: translateY(3px);
-		margin-left: (15/414)*414px;
-	}
-	.list {
-		height: 55px;
-		width: 100%;
-		line-height: 55px;
-		background-color: #242633;
-		border-bottom: 1px solid #1b1b26;
-	}
-	.list>ol>li:nth-child(2) {
-		color: #fff;
-	}
-	.list h5 {
-		margin-top: 8%;
-	}
-	#refresh {
-		width: 17px;
-		height: 17px;
-		background-color: transparent;
-		border: none;
-		outline: none;
-		background-size: 100% 100%;
-		position: fixed;
-		z-index: 1000;
-		right: 7%;
-		top: 2%;
-		&.dynamic{
-			background-image: url('../assets/img/refresh.gif');
-		}
-		&.static{
-			background-image: url('../assets/img/refresh.png');
-		}
-	}
-	.tips{
-		width: 100%;
-		text-align: center;
-		padding: 10px 15px;
-		color: #fff;
-		font-size: 14px;
-	}
-	
-	/*ip5*/
-	@media(max-width:370px) {
-		#home {
-			background: #1b1b26;
-			height: 736px*@ip5 - 20px;
-		}
-		#disconnect {
-			top: 50px*@ip5
-		}
-		#refresh {
-			width: 17px*@ip5;
-			height: 17px*@ip5;
-			background-color: transparent;
-			border: none;
-			outline: none;
-			background-image: url('../assets/img/refresh.png');
-			background-size: 100% 100%;
-			position: fixed;
-			z-index: 1000;
-			right: 16px*@ip5;
-			top: 16px*@ip5;
-		}
-		#datalist>ul:nth-child(2) {
-			margin-top: 50px*@ip5;
-			box-sizing: content-box;
-			padding-bottom: 58px*@ip5;
-		}
-		#datalist>ul>li>ol>li {
-			text-align: center;
-			width: 21%;
-			font-size: 12px;
-		}
-		#home {
-			padding-top: 50px*@ip5+30px;
-			padding-bottom: 50px*@ip5;
-		}
-		#selectbar {
-			top: 50px*@ip5+30px;
-		}
-		.help{
-			width: 50px*@ip5;
-			height: 50px*@ip5;
+		background: @black;
+		.disconnect {
+			width: 100%;
+			height: 50px;
 			overflow: hidden;
-			background: none;
-			background: url(../assets/img/help.png) no-repeat 15px*@ip5 15px*@ip5;
-			background-size: 20px*@ip5 20px*@ip5;
-			border: none;
-			outline: none;
+			background-color: #fff7cc;
 			position: fixed;
 			top: 0;
 			left: 0;
-			z-index: 1000;
-		}
-		.icon_sj{
-			display: inline-block;
-			width: 6px;
-			height: 6px;
-			overflow: hidden;
-			background: url(../assets/img/sanjiao.png) no-repeat center center;
-			background-size: 100% 100%;
-			margin: 18px 0 0 0;
-		}
-	}
-	
-	/*ip6*/
-	@media (min-width:371px) and (max-width:410px) {
-		#home {
-			background: #1b1b26;
-			height: 736px*@ip6 - 20px;
-		}
-		#disconnect {
-			top: 50px*@ip6
+			z-index: 1111;
+			.icon{
+				float: left;
+				display: inline-block;
+				width: 18px;
+				height: 18px;
+				overflow: hidden;
+				background: url(../assets/img/tanhao.png) no-repeat center center;
+				background-size: 100% 100%;
+				margin: 15px 15px 0 15px;
+			}
+			span{
+				display: inline-block;
+				line-height: 52px;
+				font-size: @fs16;
+				color: @black;
+			}
 		}
 		#refresh {
-			width: 17px*@ip6;
-			height: 17px*@ip6;
-			background-color: transparent;
-			border: none;
-			outline: none;
-			background-image: url('../assets/img/refresh.png');
-			background-size: 100% 100%;
-			position: fixed;
-			z-index: 1000;
-			right: 16px*@ip6;
-			top: 16px*@ip6;
-		}
-		#datalist>ul:nth-child(2) {
-			margin-top: 42px*@ip6;
-			box-sizing: content-box;
-			padding-bottom: 55px*@ip6;
-		}
-		#home {
-			padding-top: 50px*@ip6+30px;
-			padding-bottom: 50px*@ip6;
-		}
-		#selectbar {
-			top: 50px*@ip6+30px;
-		}
-		.help{
-			width: 50px*@ip6;
-			height: 50px*@ip6;
-			overflow: hidden;
-			background: url(../assets/img/help.png) no-repeat 15px*@ip6 15px*@ip6;
-			background-size: 20px*@ip6 20px*@ip6;
-			border: none;
-			outline: none;
-			position: fixed;
-			top: 0;
-			left: 0;
-			z-index: 1000;
-		}
-	}
-	
-	/*ip6p及以上*/
-	@media (min-width:411px) {
-		#home {
-			background: #1b1b26;
-			height: 736px*@ip6p - 20px;
-		}
-		#disconnect {
-			top: 50px*@ip6p
-		}
-		#refresh {
-			width: 17px*@ip6p;
-			height: 17px*@ip6p;
+			width: 18px;
+			height: 18px;
 			background-color: transparent;
 			border: none;
 			outline: none;
@@ -552,13 +267,24 @@
 			z-index: 1000;
 			right: 16px;
 			top: 16px;
+			&.dynamic{
+				background-image: url('../assets/img/refresh.gif');
+			}
+			&.static{
+				background-image: url('../assets/img/refresh.png');
+			}
 		}
-		#home {
-			padding-top: 50px*@ip6p+30px;
-			padding-bottom: 50px*@ip6p;
-		}
-		#selectbar {
-			top: 50px*@ip6p+30px;
+		.icon_connected{
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+			background: url(../assets/img/tanhao_03.png) no-repeat center center;
+			background-size: 100% 100%;
+		    margin: 6px 6px 0 0;
+			position: fixed;
+			top: 0;
+			right: 0;
+			z-index: 1000;
 		}
 		.help{
 			width: 50px;
@@ -573,5 +299,500 @@
 			left: 0;
 			z-index: 1000;
 		}
+		.page_cont{
+			width: 100%;
+			overflow: hidden;
+			padding-top: 50px;
+			#selectbar{
+				position: fixed;
+				top: 50px;
+				left: 0;
+				z-index: 1111;
+				width: 100%;
+				height: 45px;
+				overflow: hidden;
+				padding: 0 15px;
+				background: @deepblue;
+				border-bottom: 1px solid @black;
+				ul{
+					li{
+						float: left;
+						height: 45px;
+						line-height: 45px;
+						border-bottom: 5px solid @deepblue;
+						margin-left: 20px;
+						color: #ccd4ff;
+						font-size: @fs16;
+						&:first-child{
+							margin: 0;
+						}
+						&.current{
+							color: @yellow;
+							border-color: @yellow;
+						}
+					}
+				}
+				
+			}
+			#datalist {
+				width: 100%;
+				overflow: hidden;
+				background: @deepblue;
+				padding: 45px 0 50px 0;
+				ul{
+					width: 100%;
+					&.head{
+						position: fixed;
+						top: 95px;
+						left: 0;
+						li{
+							height: 45px;
+							line-height: 45px;
+							background: #36394d;
+							color: @blue;
+						}
+					}
+					&.cont{
+						padding-top: 45px;
+					}
+					li{
+						float: left;
+						width: 100%;
+						height: 60px;
+						overflow: hidden;
+						padding: 0 15px;
+						background: @deepblue;
+						border-bottom: 1px solid @black;
+						color: @white;
+						font-size: @fs16;
+						li{
+							line-height: 60px;
+							text-align: right;
+							padding: 0;
+							border: 0; 
+							&:nth-child(1){
+								width: 34%;
+								text-align: left;
+								h5{
+									line-height: 22px;
+									color: @blue;
+									&:first-child{
+										color: @white;
+										margin-top: 10px;
+									}
+								}
+							}
+							&:nth-child(2){
+								width: 20%;
+							}
+							&:nth-child(3){
+								width: 22%;
+							}
+							&:nth-child(4){
+								width: 22%;
+							}
+							&.red{
+								color: @red;
+							}
+							&.green{
+								color: @green;
+							}
+						}
+					}
+					.tips{
+						width: 100%;
+						overflow: hidden;
+						background: @black;
+						text-align: center;
+						padding: 15px;
+						color: #fff;
+						font-size: @fs14;
+					}
+				}
+			}
+		}
 	}
+}
+
+/*ip6*/
+@media (min-width:371px) and (max-width:410px) {
+    #home {
+		width: 100%;
+		overflow: hidden;
+		background: @black;
+		.disconnect {
+			width: 100%;
+			height: 50px*@ip6;
+			overflow: hidden;
+			background-color: #fff7cc;
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 1111;
+			.icon{
+				float: left;
+				display: inline-block;
+				width: 18px*@ip6;
+				height: 18px*@ip6;
+				overflow: hidden;
+				background: url(../assets/img/tanhao.png) no-repeat center center;
+				background-size: 100% 100%;
+				margin: 15px*@ip6 15px*@ip6 0 15px*@ip6;
+			}
+			span{
+				display: inline-block;
+				line-height: 52px*@ip6;
+				font-size: @fs16*@ip6;
+				color: @black;
+			}
+		}
+		#refresh {
+			width: 18px*@ip6;
+			height: 18px*@ip6;
+			background-color: transparent;
+			border: none;
+			outline: none;
+			background-image: url('../assets/img/refresh.png');
+			background-size: 100% 100%;
+			position: fixed;
+			z-index: 1000;
+			right: 16px*@ip6;
+			top: 16px*@ip6;
+			&.dynamic{
+				background-image: url('../assets/img/refresh.gif');
+			}
+			&.static{
+				background-image: url('../assets/img/refresh.png');
+			}
+		}
+		.icon_connected{
+			display: inline-block;
+			width: 20px*@ip6;
+			height: 20px*@ip6;
+			background: url(../assets/img/tanhao_03.png) no-repeat center center;
+			background-size: 100% 100%;
+		    margin: 6px*@ip6 6px*@ip6 0 0;
+			position: fixed;
+			top: 0;
+			right: 0;
+			z-index: 1000;
+		}
+		.help{
+			width: 50px*@ip6;
+			height: 50px*@ip6;
+			overflow: hidden;
+			background: url(../assets/img/help.png) no-repeat 15px 15px;
+			background-size: 20px*@ip6 20px*@ip6;
+			border: none;
+			outline: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 1000;
+		}
+		.page_cont{
+			width: 100%;
+			overflow: hidden;
+			padding-top: 50px*@ip6;
+			#selectbar{
+				position: fixed;
+				top: 50px*@ip6;
+				left: 0;
+				z-index: 1111;
+				width: 100%;
+				height: 45px*@ip6;
+				overflow: hidden;
+				padding: 0 15px*@ip6;
+				background: @deepblue;
+				border-bottom: 1px solid @black;
+				ul{
+					li{
+						float: left;
+						height: 45px*@ip6;
+						line-height: 45px*@ip6;
+						border-bottom: 5px*@ip6 solid @deepblue;
+						margin-left: 20px*@ip6;
+						color: #ccd4ff;
+						font-size: @fs16*@ip6;
+						&:first-child{
+							margin: 0;
+						}
+						&.current{
+							color: @yellow;
+							border-color: @yellow;
+						}
+					}
+				}
+				
+			}
+			#datalist {
+				width: 100%;
+				overflow: hidden;
+				background: @deepblue;
+				padding: 45px*@ip6 0 50px*@ip6 0;
+				ul{
+					width: 100%;
+					&.head{
+						position: fixed;
+						top: 95px*@ip6;
+						left: 0;
+						li{
+							height: 45px*@ip6;
+							line-height: 45px*@ip6;
+							background: #36394d;
+							color: @blue;
+						}
+					}
+					&.cont{
+						padding-top: 45px*@ip6;
+					}
+					li{
+						float: left;
+						width: 100%;
+						height: 60px*@ip6;
+						overflow: hidden;
+						padding: 0 15px*@ip6;
+						background: @deepblue;
+						border-bottom: 1px solid @black;
+						color: @white;
+						font-size: @fs16*@ip6;
+						li{
+							line-height: 60px*@ip6;
+							text-align: right;
+							padding: 0;
+							border: 0; 
+							&:nth-child(1){
+								width: 34%;
+								text-align: left;
+								h5{
+									line-height: 22px*@ip6;
+									color: @blue;
+									&:first-child{
+										color: @white;
+										margin-top: 10px*@ip6;
+									}
+								}
+							}
+							&:nth-child(2){
+								width: 20%;
+							}
+							&:nth-child(3){
+								width: 22%;
+							}
+							&:nth-child(4){
+								width: 22%;
+							}
+							&.red{
+								color: @red;
+							}
+							&.green{
+								color: @green;
+							}
+						}
+					}
+					.tips{
+						width: 100%;
+						overflow: hidden;
+						background: @black;
+						text-align: center;
+						padding: 15px*@ip6;
+						color: #fff;
+						font-size: @fs14*@ip6;
+					}
+				}
+			}
+		}
+	}
+}
+
+/*ip5*/
+@media(max-width:370px) {
+	#home {
+		width: 100%;
+		overflow: hidden;
+		background: @black;
+		.disconnect {
+			width: 100%;
+			height: 50px*@ip5;
+			overflow: hidden;
+			background-color: #fff7cc;
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 1111;
+			.icon{
+				float: left;
+				display: inline-block;
+				width: 18px*@ip5;
+				height: 18px*@ip5;
+				overflow: hidden;
+				background: url(../assets/img/tanhao.png) no-repeat center center;
+				background-size: 100% 100%;
+				margin: 15px*@ip5 15px*@ip5 0 15px*@ip5;
+			}
+			span{
+				display: inline-block;
+				line-height: 52px*@ip5;
+				font-size: @fs16*@ip5;
+				color: @black;
+			}
+		}
+		#refresh {
+			width: 18px*@ip5;
+			height: 18px*@ip5;
+			background-color: transparent;
+			border: none;
+			outline: none;
+			background-image: url('../assets/img/refresh.png');
+			background-size: 100% 100%;
+			position: fixed;
+			z-index: 1000;
+			right: 16px*@ip5;
+			top: 16px*@ip5;
+			&.dynamic{
+				background-image: url('../assets/img/refresh.gif');
+			}
+			&.static{
+				background-image: url('../assets/img/refresh.png');
+			}
+		}
+		.icon_connected{
+			display: inline-block;
+			width: 20px*@ip5;
+			height: 20px*@ip5;
+			background: url(../assets/img/tanhao_03.png) no-repeat center center;
+			background-size: 100% 100%;
+		    margin: 6px*@ip5 6px*@ip5 0 0;
+			position: fixed;
+			top: 0;
+			right: 0;
+			z-index: 1000;
+		}
+		.help{
+			width: 50px*@ip5;
+			height: 50px*@ip5;
+			overflow: hidden;
+			background: url(../assets/img/help.png) no-repeat 15px 15px;
+			background-size: 20px*@ip5 20px*@ip5;
+			border: none;
+			outline: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 1000;
+		}
+		.page_cont{
+			width: 100%;
+			overflow: hidden;
+			padding-top: 50px*@ip5;
+			#selectbar{
+				position: fixed;
+				top: 50px*@ip5;
+				left: 0;
+				z-index: 1111;
+				width: 100%;
+				height: 45px*@ip5;
+				overflow: hidden;
+				padding: 0 15px*@ip5;
+				background: @deepblue;
+				border-bottom: 1px solid @black;
+				ul{
+					li{
+						float: left;
+						height: 45px*@ip5;
+						line-height: 45px*@ip5;
+						border-bottom: 5px*@ip5 solid @deepblue;
+						margin-left: 20px*@ip5;
+						color: #ccd4ff;
+						font-size: @fs16*@ip5;
+						&:first-child{
+							margin: 0;
+						}
+						&.current{
+							color: @yellow;
+							border-color: @yellow;
+						}
+					}
+				}
+				
+			}
+			#datalist {
+				width: 100%;
+				overflow: hidden;
+				background: @deepblue;
+				padding: 45px*@ip5 0 50px*@ip5 0;
+				ul{
+					width: 100%;
+					&.head{
+						position: fixed;
+						top: 95px*@ip5;
+						left: 0;
+						li{
+							height: 45px*@ip5;
+							line-height: 45px*@ip5;
+							background: #36394d;
+							color: @blue;
+						}
+					}
+					&.cont{
+						padding-top: 45px*@ip5;
+					}
+					li{
+						float: left;
+						width: 100%;
+						height: 60px*@ip5;
+						overflow: hidden;
+						padding: 0 15px*@ip5;
+						background: @deepblue;
+						border-bottom: 1px solid @black;
+						color: @white;
+						font-size: @fs16*@ip5;
+						li{
+							line-height: 60px*@ip5;
+							text-align: right;
+							padding: 0;
+							border: 0; 
+							&:nth-child(1){
+								width: 34%;
+								text-align: left;
+								h5{
+									line-height: 22px*@ip5;
+									color: @blue;
+									&:first-child{
+										color: @white;
+										margin-top: 10px*@ip5;
+									}
+								}
+							}
+							&:nth-child(2){
+								width: 20%;
+							}
+							&:nth-child(3){
+								width: 22%;
+							}
+							&:nth-child(4){
+								width: 22%;
+							}
+							&.red{
+								color: @red;
+							}
+							&.green{
+								color: @green;
+							}
+						}
+					}
+					.tips{
+						width: 100%;
+						overflow: hidden;
+						background: @black;
+						text-align: center;
+						padding: 15px*@ip5;
+						color: #fff;
+						font-size: @fs14*@ip5;
+					}
+				}
+			}
+		}
+	}
+}		
 </style>

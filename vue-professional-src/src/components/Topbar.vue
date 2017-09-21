@@ -1,19 +1,19 @@
 <template>
-	<div id="topbar">
-		<h3>{{title}}<span v-show="connected">(未连接)</span></h3>
+	<div id="topbar" :class="colorClass">
+		<h3>{{title}}</h3>
 	</div>
 </template>
 
 <script>
 	export default {
 		name: 'topbar',
-		props: ['title', 'connected'],
-		mounted: function() {
-			var width = parseInt($('#topbar').css('width'));
-			var height = width * 0.128;
-
-			//			$('#topbar').css({'height':height+'px','lineHeight':height+'px'});
-			//			$('h3').css({'lineHeight':height+'px'})
+		props: ['title', 'colorName'],
+		computed: {
+			colorClass: function(){
+				if(this.colorName == 'red'){
+					return 'red';
+				}
+			}
 		}
 	}
 </script>
@@ -28,11 +28,14 @@
 			width: 100%;
 			height: 50px*@ip5;
 			border-bottom: 1px solid @black;
-			background-color: #242633;
+			background: #242633;
 			text-align: center;
 			position: fixed;
 			top: 0;
 			z-index: 999;
+			&.red{
+				background: #a73d42;
+			}
 		}
 		#topbar h3 {
 			color: #fff;
@@ -53,6 +56,9 @@
 			position: fixed;
 			top: 0;
 			z-index: 999;
+			&.red{
+				background: #a73d42;
+			}
 		}
 		#topbar h3 {
 			color: #fff;
@@ -73,6 +79,9 @@
 			position: fixed;
 			top: 0;
 			z-index: 999;
+			&.red{
+				background: #a73d42;
+			}
 		}
 		#topbar h3 {
 			color: #fff;

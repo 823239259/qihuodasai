@@ -8,7 +8,7 @@ Vue.use(Vuex)
 var isshow = {
 	state: {
 		navBarShow: true,
-		isconnected: true,
+		isconnected: false,
 		bottomshow: false,
 		pshow: false,
 		sshow: false,
@@ -2461,13 +2461,6 @@ export default new Vuex.Store({
 					var key=JSON.parse(evt.data).Parameters.CommodityNo;
 					context.state.market.templateList[key]=JSON.parse(evt.data).Parameters;
 //					console.log(context.state.market.templateList);
-					context.state.market.tempListArr.push(context.state.market.templateList);
-					
-					if(context.state.market.tempListArr.length==2){
-						context.state.market.tempListArr.shift();
-					}
-					
-					console.log(context.state.market.tempListArr);
 					context.state.market.markettemp.forEach(function(e, i) {
 						//如果拿到的数据的CommodityNo与缓存的数据的CommodityNo相等
 						if(JSON.parse(evt.data).Parameters.CommodityNo == e.CommodityNo) {
