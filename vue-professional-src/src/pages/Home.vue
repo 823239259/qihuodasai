@@ -29,7 +29,7 @@
 							</ol>
 						</li>
 					</ul>
-					<ul>
+					<ul class="cont">
 						<template v-for="(v,i) in Parameters">
 							<li class="list cl" @tap='toDetail'>
 								<ol>
@@ -69,7 +69,7 @@
 				msg: '',
 				title: '涨跌幅',
 				isdynamic: true,
-				isswitch: true
+				isswitch: true,
 			}
 		},
 		filters:{
@@ -89,6 +89,9 @@
 			Parameters(){
 				return this.$store.state.market.Parameters;
 			},
+			quoteIndex(){
+				return this.$store.state.market.quoteIndex;
+			},
 			isconnected() {
 				return this.$store.state.isshow.isconnected;
 			},
@@ -106,6 +109,40 @@
 			},
 		},
 		watch: {
+			quoteIndex: function(n, o){
+				if(this.Parameters[n].LastQuotation.ChangeRate < 0){
+					$("#datalist>.cont>li").eq(n).addClass("green");
+					setTimeout(function(){
+						$("#datalist>.cont>li").eq(n).removeClass("green");
+					}, 500);
+				}else if(this.Parameters[n].LastQuotation.ChangeRate == 0){
+					return true;
+				}else{
+					$("#datalist>.cont>li").eq(n).addClass("red");
+					setTimeout(function(){
+						$("#datalist>.cont>li").eq(n).removeClass("red");
+					}, 500);
+				}
+			},
+			Parameters: function(n, o){
+				this.arr = o;
+//				setTimeout(function(){
+//					n.forEach(function(v, k){
+//						if(v.LastQuotation.ChangeRate < 0){
+//							
+//							$("#datalist>.cont>li").eq(k).addClass("green");
+//							setTimeout(function(){
+//								$("#datalist>.cont>li").eq(k).removeClass("green");
+//							}, 500);
+//						}else{
+//							$("#datalist>.cont>li").eq(k).addClass("red");
+//							setTimeout(function(){
+//								$("#datalist>.cont>li").eq(k).removeClass("red");
+//							}, 500);
+//						}
+//					});
+//				}, 2000);
+			},
 			quoteConnectedMsg: function(n, o){
 				if(n && this.guideshow == false){
 					this.$children[0].isShow = true;
@@ -282,6 +319,14 @@
 	#selectbar>ul>li.current {
 		color: #ffd400;
 		border-bottom: 3px solid #ffd400;
+	}
+	#datalist ul li{
+		&.green{
+			background: #294743;
+		}
+		&.red{
+			background: #502e38;
+		}
 	}
 	#datalist>ul>li>ol>li {
 		text-align: center;
