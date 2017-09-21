@@ -8,7 +8,7 @@ Vue.use(Vuex)
 var isshow = {
 	state: {
 		navBarShow: true,
-		isconnected: true,
+		isconnected: false,
 		bottomshow: false,
 		pshow: false,
 		sshow: false,
