@@ -83,6 +83,7 @@ var market = {
 		ifUpdateAccountProfit:false,//// 是否可以更新账户盈亏标志：资金信息显示完毕就可以更新盈亏
 		qryHoldTotalArr:[],//持仓合计回复数组
 		qryHoldTotalKV:{},
+		quoteIndex: '',
 		/**
 		 * 缓存账户信息
 		 */
@@ -2460,6 +2461,13 @@ export default new Vuex.Store({
 					var key=JSON.parse(evt.data).Parameters.CommodityNo;
 					context.state.market.templateList[key]=JSON.parse(evt.data).Parameters;
 //					console.log(context.state.market.templateList);
+					context.state.market.tempListArr.push(context.state.market.templateList);
+					
+					if(context.state.market.tempListArr.length==2){
+						context.state.market.tempListArr.shift();
+					}
+					
+					console.log(context.state.market.tempListArr);
 					context.state.market.markettemp.forEach(function(e, i) {
 						//如果拿到的数据的CommodityNo与缓存的数据的CommodityNo相等
 						if(JSON.parse(evt.data).Parameters.CommodityNo == e.CommodityNo) {
@@ -2468,7 +2476,10 @@ export default new Vuex.Store({
 							//将显示数据进行更新
 							context.state.market.Parameters.forEach(function(a, r) {
 								if(a.CommodityNo == e.CommodityNo) {
+									context.state.market.quoteOldData = a.LastQuotation.LastPrice;
 									context.state.market.Parameters.splice(r, 1, e);
+									context.state.market.quoteIndex = r;
+									
 								}
 							});
 							if(context.state.market.currentNo == e.CommodityNo) {
