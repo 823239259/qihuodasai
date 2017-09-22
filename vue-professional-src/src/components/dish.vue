@@ -131,8 +131,8 @@
 				<chartBtn type="sell" class="fr" @tap.native='sell'></chartBtn>
 			</div>
 		</div>
-		<alert title="提示" line1="你还未登录，请先登录" jump="true"></alert>
-		<tipsDialog :msg="msgTips"></tipsDialog>
+		<alert title="提示" :line1="promptMsg" jump="true" ref="alert"></alert>
+		<tipsDialog :msg="msgTips" ref="dialog"></tipsDialog>
 	</div>
 </template>
 
@@ -147,6 +147,7 @@
 		data(){
 			return{
 				msg: '',
+				promptMsg: '',
 				buyText: {},
 				defaultParameters: {
 					ChangeValue: 0,
@@ -189,6 +190,9 @@
 			},
 			layer(){
 				return this.$store.state.market.layer;
+			},
+			operateOrderLength(){
+				return this.$store.state.account.operateOrderLength;
 			},
 			detail(){
 				return this.$parent.detail;
@@ -295,9 +299,14 @@
 		methods:{
 			buy:function(){
 				if(JSON.parse(localStorage.getItem('tradeUser')) == null){
-					this.$children[4].isshow = true;
+					if(this.operateOrderLength > 0){
+						this.$router.push({path: '/tradeLogin'});
+					}else{
+						this.$refs.alert.isshow = true;
+						this.promptMsg = '您目前没有交易账户，赶紧去申请吧~';
+					}
 				}else if(this.$children[1].defaultNum == 0){
-					this.$children[5].isShow = true;
+					this.$refs.dialog.isShow = true;
 					this.msg = '手数不能为0';
 				}else{
 					this.$children[0].isshow = true;
@@ -326,9 +335,14 @@
 			},
 			sell:function(){
 				if(JSON.parse(localStorage.getItem('tradeUser')) == null){
-					this.$children[4].isshow = true;
+					if(this.operateOrderLength > 0){
+						this.$router.push({path: '/tradeLogin'});
+					}else{
+						this.$refs.alert.isshow = true;
+						this.promptMsg = '您目前没有交易账户，赶紧去申请吧~';
+					}
 				}else if(this.$children[1].defaultNum == 0){
-					this.$children[5].isShow = true;
+					this.$refs.dialog.isShow = true;
 					this.msg = '手数不能为0';
 				}else{
 					this.$children[0].isshow = true;

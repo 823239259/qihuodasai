@@ -40,7 +40,8 @@ var account = {
 		//存不知道有用没的数据
 		tempList: [],
 		//存合约列表
-		programList: []
+		programList: [],
+		operateOrderLength: 0   //操盘中方案的条数
 	}
 }
 

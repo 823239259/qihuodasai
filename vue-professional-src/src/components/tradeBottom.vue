@@ -58,8 +58,8 @@
 				<chartBtn type="buy" class="fl" @tap.native='buyOrder'></chartBtn>
 				<chartBtn type="sell" class="fr" @tap.native='sellOrder'></chartBtn>
 			</div>
-			<alert title="提示" line1="你还未登录，请先登录" jump="true"></alert>
-			<tipsDialog :msg="msgTips"></tipsDialog>
+			<alert title="提示" :line1="promptMsg" jump="true" ref="alert"></alert>
+			<tipsDialog :msg="msgTips" ref="dialog"></tipsDialog>
 		</div>
 	</div>
 </template>
@@ -74,29 +74,25 @@
 			chartBtn, alert, tipsDialog
 		},
 		filters:{
-			fixNum:function(num){
+			fixNum: function(num){
 				if(num>=0){
 					return '+'+num.toFixed(2);
 				}else{
 					return ' '+num.toFixed(2);
 				}
 			},
-			fixNum2:function(num,dotsize){
-//				if(num>=0){
-					return num.toFixed(dotsize);
-//				}else{
-//					return ' '+num.toFixed(dotsize);
-//				}
+			fixNum2: function(num,dotsize){
+				return num.toFixed(dotsize);
 			},
-			fixNum3:function(num,dotsize){
-				if(num>=0){
+			fixNum3: function(num,dotsize){
+				if(num >= 0){
 					return num.toFixed(dotsize);
 				}else{
 					return num.toFixed(dotsize);
 				}
 			},
-			fixNum4:function(num,dotsize){
-				if(num>=0){
+			fixNum4: function(num,dotsize){
+				if(num >= 0){
 					return num.toFixed(dotsize);
 				}else{
 					return num.toFixed(dotsize);
@@ -109,75 +105,8 @@
 				msg: '',
 				lotnum: 1,
 				numReg: /^[0-9]*$/,
-				buyText: {}
-			}
-		},
-		methods: {
-			add() {
-				this.lotnum++;
-			},
-			min() {
-				this.lotnum--;
-			},
-			buyOrder:function(){
-				if(JSON.parse(localStorage.getItem('tradeUser')) == null){
-					this.$children[3].isshow = true;
-				}else if(this.lotnum == 0){
-					this.$children[4].isShow = true;
-					this.msg = '手数不能为0';
-				}else{
-					this.$children[0].isshow = true;
-					var buildIndex = 0;
-					if(buildIndex > 100){
-						buildIndex = 0;
-					}
-					var b ={
-						"Method":'InsertOrder',
-						"Parameters": {
-							"ExchangeNo": this.detail.LastQuotation.ExchangeNo,
-							"CommodityNo": this.detail.LastQuotation.CommodityNo,
-							"ContractNo": this.detail.LastQuotation.ContractNo,
-							"OrderNum": this.lotnum,
-							"Drection": 0,
-							"PriceType": 1,
-							"LimitPrice": 0.00,
-							"TriggerPrice": 0,
-							"OrderRef": this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
-						}
-					};
-					this.buyText = b;
-//					this.tradeSocket.send(JSON.stringify(b));
-				}
-			},
-			sellOrder:function(){
-				if(JSON.parse(localStorage.getItem('tradeUser')) == null){
-					this.$children[3].isshow = true;
-				}else if(this.lotnum == 0){
-					this.$children[4].isShow = true;
-					this.msg = '手数不能为0';
-				}else{
-					this.$children[0].isshow = true;
-					var buildIndex=0;
-					if(buildIndex>100){
-						buildIndex=0;
-					}
-					var b={
-						"Method":'InsertOrder',
-						"Parameters":{
-							"ExchangeNo":this.detail.LastQuotation.ExchangeNo,
-							"CommodityNo":this.detail.LastQuotation.CommodityNo,
-							"ContractNo":this.detail.LastQuotation.ContractNo,
-							"OrderNum": this.lotnum,
-							"Drection":1,
-							"PriceType":1,
-							"LimitPrice":0.00,
-							"TriggerPrice":0,
-							"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
-						}
-					};
-					this.buyText = b;
-//					this.tradeSocket.send(JSON.stringify(b));
-				}
+				buyText: {},
+				promptMsg: ''
 			}
 		},
 		computed:{
@@ -186,6 +115,9 @@
 			},
 			layer(){
 				return this.$store.state.market.layer;
+			},
+			operateOrderLength(){
+				return this.$store.state.account.operateOrderLength;
 			},
 			//映射假数据
 			Data(){
@@ -245,6 +177,84 @@
 				if(this.numReg.test(n) == false || n < 0){
 					this.lotnum = 0;
 				};
+			}
+		},
+		methods: {
+			add() {
+				this.lotnum++;
+			},
+			min() {
+				this.lotnum--;
+			},
+			buyOrder:function(){
+				if(JSON.parse(localStorage.getItem('tradeUser')) == null){
+					if(this.operateOrderLength > 0){
+						this.$router.push({path: '/tradeLogin'});
+					}else{
+						this.$refs.alert.isshow = true;
+						this.promptMsg = '您目前没有交易账户，赶紧去申请吧~';
+					}
+				}else if(this.lotnum == 0){
+					this.$refs.dialog.isShow = true;
+					this.msg = '手数不能为0';
+				}else{
+					this.$children[0].isshow = true;
+					var buildIndex = 0;
+					if(buildIndex > 100){
+						buildIndex = 0;
+					}
+					var b ={
+						"Method":'InsertOrder',
+						"Parameters": {
+							"ExchangeNo": this.detail.LastQuotation.ExchangeNo,
+							"CommodityNo": this.detail.LastQuotation.CommodityNo,
+							"ContractNo": this.detail.LastQuotation.ContractNo,
+							"OrderNum": this.lotnum,
+							"Drection": 0,
+							"PriceType": 1,
+							"LimitPrice": 0.00,
+							"TriggerPrice": 0,
+							"OrderRef": this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+						}
+					};
+					this.buyText = b;
+//					this.tradeSocket.send(JSON.stringify(b));
+				}
+			},
+			sellOrder:function(){
+				if(JSON.parse(localStorage.getItem('tradeUser')) == null){
+					if(this.operateOrderLength > 0){
+						this.$router.push({path: '/tradeLogin'});
+					}else{
+						this.$refs.alert.isshow = true;
+						this.promptMsg = '您目前没有交易账户，赶紧去申请吧~';
+					}
+				}else if(this.lotnum == 0){
+					this.$refs.dialog.isShow = true;
+					this.msg = '手数不能为0';
+				}else{
+					this.$children[0].isshow = true;
+					var buildIndex=0;
+					if(buildIndex>100){
+						buildIndex=0;
+					}
+					var b={
+						"Method":'InsertOrder',
+						"Parameters":{
+							"ExchangeNo":this.detail.LastQuotation.ExchangeNo,
+							"CommodityNo":this.detail.LastQuotation.CommodityNo,
+							"ContractNo":this.detail.LastQuotation.ContractNo,
+							"OrderNum": this.lotnum,
+							"Drection":1,
+							"PriceType":1,
+							"LimitPrice":0.00,
+							"TriggerPrice":0,
+							"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+						}
+					};
+					this.buyText = b;
+//					this.tradeSocket.send(JSON.stringify(b));
+				}
 			}
 		}
 	}

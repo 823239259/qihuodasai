@@ -1,5 +1,6 @@
 <template>
-	<div id="detailTopbar">
+	<div id="detailTopbar" :class="colorClass">
+		<tipsDialog :msg="sysMsg" ref="dialog"></tipsDialog>
 		<back @tap.native='clearPositionListCont'></back>
 		<div>
 			<h4 class="fontwhite">{{cname}}</h4>
@@ -14,20 +15,41 @@
 	import back from '../components/back.vue'
 	import refresh from '../components/Refresh.vue'
 	import menus from '../components/menu.vue'
+	import tipsDialog from '../components/tipsDialog.vue'
 	export default{
 		name:'detailTopbar',
-		components:{
-			back,refresh,menus
+		components:{back, refresh, menus, tipsDialog},
+		props:['cname','cnum','mc','colorName'],
+		data(){
+			return{
+				msg: ''
+			}
 		},
-		props:['cname','cnum','mc'],
+		computed: {
+			colorClass: function(){
+				if(this.colorName == 'red'){
+					return 'red';
+				}
+			},
+			sysMsg: function(){
+				return this.msg;
+			}
+		},
 		methods:{
 			clearPositionListCont:function(){
 				this.$store.state.market.positionListCont=[];
 				this.$router.push({path: '/index', query: {isBack: 1}});
 			},
 			tradeRefresh: function(){
-//				window.location.reload();
-				this.$router.push({path: '/index', query: {isBack: 1}});
+				if(this.$parent.iconIsconnected == true){
+					this.$refs.dialog.isShow = true;
+					this.msg = '网络未连接，交易不能刷新！';
+					return false;
+				}else{
+					console.log(7777);
+					this.$router.push({path: '/index', query: {isBack: 1}});
+				}
+				
 			}
 		}
 	}
@@ -43,6 +65,9 @@
 	position: fixed;
 	top: 0;
 	z-index: 1100;
+	&.red{
+		background: #a73d42;
+	}
 }
 #detailTopbar>div:nth-child(2){
 	width: 100%;
@@ -86,12 +111,15 @@ h6{
 }
 /*ip5*/
 @media(max-width:370px) {
-    #detailTopbar{
+#detailTopbar{
 	width: 100%;
 	height: @height*@ip5;
 	background-color: #242633;
 	position: fixed;
 	top: 0;
+	&.red{
+		background: #a73d42;
+	}
 }
 #detailTopbar>div:nth-child(2){
 	width: 100%;
@@ -130,12 +158,15 @@ h6{
 }
 /*ip6*/
 @media (min-width:371px) and (max-width:410px) {
-    #detailTopbar{
+#detailTopbar{
 	width: 100%;
 	height: @height*@ip6;
 	background-color: #242633;
 	position: fixed;
 	top: 0;
+	&.red{
+		background: #a73d42;
+	}
 }
 #detailTopbar>div:nth-child(2){
 	width: 100%;

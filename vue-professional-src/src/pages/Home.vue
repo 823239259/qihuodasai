@@ -44,6 +44,7 @@
 							</li>
 						</template>
 						<p class="tips">没有更多的合约可加载啦~</p>
+						<div class="empty"></div>
 					</ul>
 					
 				</div>
@@ -137,6 +138,11 @@
 					setTimeout(function(){
 						this.isdynamic = false;
 					}.bind(this),1000);
+					//改变页面样式
+					if(this.msg == '交易服务器断开，正在重连'){
+						this.iconIsconnected = true;
+						this.colors = 'red';
+					}
 				}
 			},
 			guideshow: function(n, o){
@@ -214,7 +220,6 @@
 			this.initQuoteClient();
 			//取当前版本号
 			this.getVersion();
-			
 		},
 		updated: function(){
 			//判断网络
@@ -354,7 +359,7 @@
 				width: 100%;
 				overflow: hidden;
 				background: @deepblue;
-				padding: 45px 0 50px 0;
+				padding: 45px 0 0 0;
 				ul{
 					width: 100%;
 					&.head{
@@ -423,6 +428,12 @@
 						padding: 15px;
 						color: #fff;
 						font-size: @fs14;
+					}
+					.empty{
+						width: 100%;
+						height: 50px;
+						overflow: hidden;
+						background: @black;
 					}
 				}
 			}
@@ -545,7 +556,7 @@
 				width: 100%;
 				overflow: hidden;
 				background: @deepblue;
-				padding: 45px*@ip6 0 50px*@ip6 0;
+				padding: 45px*@ip6 0 0 0;
 				ul{
 					width: 100%;
 					&.head{
@@ -614,6 +625,12 @@
 						padding: 15px*@ip6;
 						color: #fff;
 						font-size: @fs14*@ip6;
+					}
+					.empty{
+						width: 100%;
+						height: 50px*@ip6;
+						overflow: hidden;
+						background: @black;
 					}
 				}
 			}
@@ -736,7 +753,7 @@
 				width: 100%;
 				overflow: hidden;
 				background: @deepblue;
-				padding: 45px*@ip5 0 50px*@ip5 0;
+				padding: 45px*@ip5 0 0 0;
 				ul{
 					width: 100%;
 					&.head{
@@ -805,6 +822,12 @@
 						padding: 15px*@ip5;
 						color: #fff;
 						font-size: @fs14*@ip5;
+					}
+					.empty{
+						width: 100%;
+						height: 50px*@ip5;
+						overflow: hidden;
+						background: @black;
 					}
 				}
 			}
