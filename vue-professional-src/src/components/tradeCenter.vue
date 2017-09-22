@@ -5,7 +5,7 @@
 		<changealert :price="bindPrice" :num="bindNum"></changealert>
 		<!--<alert title="确认下单" line1="确认下单吗？" :line2="insertOrder" addr="127.0.0.1" :objstr='objst'></alert>-->
 		<alert title="确认下单" :line1="insertOrder" :objstr='objst'></alert>
-		<div class="money_total border_bottom">
+		<div class="money_total border_bottom" @tap="toMoneyDetails">
 			<span>总资产</span>
 			<span class="white">{{this.jCacheTotalAccount.TodayBalance | fixNum}}</span>
 			<i>|</i>
@@ -14,9 +14,9 @@
 			<i>|</i>
 			<span>平仓线</span>
 			<span class="white">{{forceLine}}</span>
-			<!--<div class="icon_arrow fr">
+			<div class="icon_arrow fr">
 				<a href="#" class="icon"></a>
-			</div>-->
+			</div>
 		</div>
 		<div class="order_type border_bottom">
 			<div class="order_type_left fl">
@@ -374,12 +374,6 @@
 			layer: function(n, o){
 				setTimeout(function(){
 					this.$refs.dialog.isShow = true;
-//					if(this.$children[7].isShow != undefined){
-//						this.$children[7].isShow = true;
-//					}
-//					if(this.$children[8].isShow != undefined){
-//						this.$children[8].isShow = true;
-//					}
 					this.msg = n.slice(0,-1);
 				}.bind(this), 1000);
 			},
@@ -480,6 +474,9 @@
 			}
 		},
 		methods: {
+			toMoneyDetails: function(){
+				this.$router.push({path: '/moneyDetails'});
+			},
 			cancelAllOrder:function(){
 				if(this.$store.state.market.orderListCont.length > 0){
 					this.$children[6].isshow = true;

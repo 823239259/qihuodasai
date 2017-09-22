@@ -22,7 +22,7 @@
 <script>
 	export default {
 		name: 'alert',
-		props: ['title', 'line1', 'addr', 'objstr','type', 'jump'],
+		props: ['title', 'line1', 'addr', 'objstr','type', 'jump', 'status'],
 		data() {
 			return {
 				isshow: false,
@@ -57,6 +57,9 @@
 				}
 				this.isshow = false;
 				this.$parent.isshow = false;
+				if(this.status == 1){
+					this.$parent.status = 1;
+				}
 			}
 		}
 	}

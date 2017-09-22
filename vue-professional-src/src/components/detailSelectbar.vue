@@ -16,8 +16,8 @@
 					</ol>
 				</transition>
 			</li>
-			<li :class="[fontgray,fl,{current:pshow}]" @click='sel'>盘口</li>
-			<li :class="[fontgray,fl,{current:jshow}]" @click='sel'>交易中心</li>
+			<li :class="[fontgray,fl,{current:pshow}]" @tap='sel'>盘口</li>
+			<li :class="[fontgray,fl,{current:jshow}]" @tap.stop='sel'>交易中心</li>
 		</ul>
 	</div>
 </template>
