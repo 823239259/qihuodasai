@@ -3,7 +3,7 @@
 		<topbar title="新手指南"></topbar>
 		<back></back>
 		<div class="page_cont">
-			<img src="../assets/img/help_02.png"/>
+			<img src="../assets/img/help_00.png"/>
 		</div>
 	</div>
 </template>
