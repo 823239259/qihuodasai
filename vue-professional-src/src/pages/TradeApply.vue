@@ -127,7 +127,7 @@
 								<span>{{k.tradTime}}</span>
 							</li>
 							<li class="even">
-								<span>最小变动单位0.01，跳动一下扣除10美元</span>
+								<span>{{k.dosize}}</span>
 							</li>
 						</ul>
 					</template>
@@ -208,6 +208,7 @@
 				timeout: 5000
 			}).then(function(e) {
 				this.temp = e.body.data;
+				console.log(this.temp);
 				this.temp.contractList.forEach(function(o, i) {
 					switch(o.tradeType) {
 						case 0:   //return '富时A50'
@@ -712,7 +713,7 @@
 				this.show = false;
 			}
 			//获取本地用户信息
-			this.userInfo = JSON.parse(localStorage.user);
+			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
 			//获取操盘记录列表
 			this.getOperateDetails();
 			//判断是否登录
