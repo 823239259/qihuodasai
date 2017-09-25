@@ -22,7 +22,8 @@
 		methods:{
 			toHome:function(){
 				localStorage.guideshow = '关闭';
-				this.$store.state.isshow.guideshow=false;
+				this.$store.state.isshow.guideshow = false;
+				this.$store.state.isshow.helpshow = true;
 			}
 		}
 	}
@@ -33,6 +34,6 @@
 	#guide{
 		position: fixed;
 		top: 0;
-		z-index: 1000;
+		z-index: 1115;
 	}
 </style>

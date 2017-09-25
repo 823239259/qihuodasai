@@ -20,9 +20,7 @@ new Vue({
      		<navbar v-show="navbarshow"></navbar>
      	</div>	
   `,
-	components: {
-		navbar
-	},
+	components: {navbar},
 	computed: {
 		navbarshow() {
 			return this.$store.state.isshow.navBarShow
@@ -34,9 +32,9 @@ new Vue({
 	mounted: function() {
 		var lg = localStorage.guideshow;
 		if(lg == undefined) {
-			this.$store.state.isshow.guideshow = true
+			this.$store.state.isshow.guideshow = true;
 		} else {
-			this.$store.state.isshow.guideshow = false
+			this.$store.state.isshow.guideshow = false;
 		}
 
 		//		http://154w3c3370.iok.la:16433/vs-api

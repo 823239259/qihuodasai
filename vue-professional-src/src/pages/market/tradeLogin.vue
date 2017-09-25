@@ -33,6 +33,7 @@
 			</div>
 		</div>
 		<div class="shade" v-show="shadeShow"></div>
+		<novice v-if="helpshow"></novice>
 	</div>
 </template>
 
@@ -44,15 +45,19 @@
 	import btn from '../../components/bigBtn.vue'
 	import tipsDialog from '../../components/tipsDialog.vue'
 	import pro from '../../assets/common.js'
+	import novice from '../noviceLogin.vue'
 	export default{
 		name:'login',
-		components: {topbar, back, cs, btn, tipsDialog},
+		components: {topbar, back, cs, btn, tipsDialog, novice},
 		computed: {
 			msgTips: function(){
 				return this.msg;
 			},
 			PATH: function(){
 				return this.$store.getters.PATH;
+			},
+			helpshow(){
+				return this.$store.state.isshow.helpshow;
 			},
 			tradeSocket() {
 				return this.$store.state.tradeSocket;
@@ -70,7 +75,7 @@
 				token: '',
 				secret: '',
 				tradeUser: '',
-				shadeShow: false
+				shadeShow: false,
 			}
 		},
 		methods:{
@@ -142,12 +147,16 @@
 		watch: {
 			tradeUser: function(n, o){
 				this.username = n;
-			}
+			},
 		},
 		mounted: function(){
 			//页面高度计算
 			var h = window.screen.height - 20 - $("#topbar").height();
 			$("#login").height(h);
+			//判断是否进入新手指引
+//			if(localStorage.helpeshow){
+//				this.helpshow = JSON.parse(localStorage.helpeshow);
+//			}
 		},
 		activated: function(){
 			this.username = this.$route.query.user;

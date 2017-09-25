@@ -14,6 +14,8 @@
 		<chartfens v-if='fshow'></chartfens>
 		<kline v-if='kshow'></kline>
 		<lightchart v-if='sshow'></lightchart>
+		//新手指南
+		<novice v-if="helpshow"></novice>
 	</div>
 </template>
 
@@ -28,19 +30,10 @@
 	import lightchart from '../../components/lightchart.vue'
 	import tipsDialog from '../../components/tipsDialog.vue'
 	import pro from '../../assets/common.js'
+	import novice from '../noviceTrade.vue'
 	export default {
 		name: 'orderdetail',
-		components: {
-			topbar,
-			selectbar,
-			tradebottom,
-			tradecenter,
-			dish,
-			chartfens,
-			kline,
-			lightchart,
-			tipsDialog
-		},
+		components: {topbar, selectbar, tradebottom, tradecenter, dish, chartfens, kline, lightchart, tipsDialog, novice},
 		data() {
 			return {
 				CommodityName: '',
@@ -49,7 +42,7 @@
 				iconIsconnected: false,
 				isconnected: false,
 				colors: '',
-				userInfo: ''
+				userInfo: '',
 			}
 		},
 		computed: {
@@ -64,6 +57,9 @@
 			},
 			sysMsg: function(){
 				return this.msg;
+			},
+			helpshow(){
+				return this.$store.state.isshow.helpshow;
 			},
 			detail() {
 				return this.$store.state.market.currentdetail;
@@ -124,31 +120,33 @@
 		},
 		methods: {
 			getOperateDetails: function(){
-				this.$http.post(this.PATH + '/user/ftrade/list', {emulateJSON: true}, {
-					headers: {
-						'token':  this.userInfo.token,
-						'secret': this.userInfo.secret
-					},
-					params: {},
-					timeout: 5000
-				}).then(function(e) {
-					var data = e.body;
-					if(data.success == true ){
-						if(data.code == 1){
-							var tradeList = data.data.tradeList;
-							if(tradeList){
-								tradeList.forEach(function(o, i){
-									if(o.stateType == 4) this.$store.state.account.operateOrderLength += 1;
-								}.bind(this));
+				if(this.userInfo){
+					this.$http.post(this.PATH + '/user/ftrade/list', {emulateJSON: true}, {
+						headers: {
+							'token':  this.userInfo.token,
+							'secret': this.userInfo.secret
+						},
+						params: {},
+						timeout: 5000
+					}).then(function(e) {
+						var data = e.body;
+						if(data.success == true ){
+							if(data.code == 1){
+								var tradeList = data.data.tradeList;
+								if(tradeList){
+									tradeList.forEach(function(o, i){
+										if(o.stateType == 4) this.$store.state.account.operateOrderLength += 1;
+									}.bind(this));
+								}
 							}
+						}else{
+							
 						}
-					}else{
-						
-					}
-				}.bind(this), function() {
-					this.$refs.dialog.isShow = true;
-					this.msg = '网络不给力，请稍后再试！'
-				});
+					}.bind(this), function() {
+						this.$refs.dialog.isShow = true;
+						this.msg = '网络不给力，请稍后再试！'
+					});
+				}
 			}
 		},
 		activated: function() {
@@ -175,9 +173,13 @@
 				this.$children[0].isShow = false;
 			}
 			//获取本地用户信息
-			this.userInfo = JSON.parse(localStorage.user);
+			if(localStorage.user) this.userInfo = JSON.parse(localStorage.user);
 			//获取当前平台账户是否有操盘记录
 			this.getOperateDetails();
+			//判断是否进入新手指引
+//			if(localStorage.helpeshow){
+//				this.helpshow = JSON.parse(localStorage.helpeshow);
+//			}
 		},
 		updated: function(){
 			//判断网络

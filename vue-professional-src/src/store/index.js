@@ -15,6 +15,7 @@ var isshow = {
 		fshow: true,
 		kshow: false,
 		guideshow: false,
+		helpshow: false,
 		//是否进入过分时
 		isfensshow: false,
 		//判断是否是直接画图

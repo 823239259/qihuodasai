@@ -51,6 +51,7 @@
 			</div>
 		</template>
 		<guide v-if='guideshow'></guide>
+		<novice v-if="helpshow"></novice>
 	</div>
 
 </template>
@@ -59,6 +60,7 @@
 	import tipsDialog from '../components/tipsDialog.vue'
 	import topbar from '../components/Topbar.vue'
 	import guide from './Guide.vue'
+	import novice from './noviceQuote.vue'
 	import VueNativeSock from 'vue-native-websocket'
 	import { mapMutations,mapActions } from 'vuex'
 	import pro from '../assets/common.js'
@@ -73,7 +75,7 @@
 				isswitch: true,
 				colors: '',
 				isconnected: false,
-				iconIsconnected: false
+				iconIsconnected: false,
 			}
 		},
 		filters:{
@@ -85,7 +87,7 @@
 				return num.toFixed(dotsize);
 			}
 		},
-		components: {topbar, guide, tipsDialog},
+		components: {topbar, guide, tipsDialog, novice},
 		computed: {
 			msgTips: function(){
 				return this.msg;
@@ -99,11 +101,11 @@
 			quoteIndex(){
 				return this.$store.state.market.quoteIndex;
 			},
-//			isconnected() {
-//				return this.$store.state.isshow.isconnected;
-//			},
 			guideshow(){
 				return this.$store.state.isshow.guideshow;
+			},
+			helpshow(){
+				return this.$store.state.isshow.helpshow;
 			},
 			quoteConnectedMsg(){
 				return this.$store.state.market.quoteConnectedMsg;
@@ -220,6 +222,10 @@
 			this.initQuoteClient();
 			//取当前版本号
 			this.getVersion();
+			//判断是否进入新手指引
+//			if(localStorage.helpeshow){
+//				this.helpshow = JSON.parse(localStorage.helpeshow);
+//			}
 		},
 		updated: function(){
 			//判断网络
