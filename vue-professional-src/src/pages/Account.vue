@@ -146,7 +146,7 @@
 			},
 			confirmExit: function(){
 				localStorage.removeItem("user");
-				this.$router.push({path:'/login',query: {isJump: 2}});
+				this.$router.replace({path:'/login'});
 				this.isexit = false;
 			},
 			cancel: function(){
@@ -190,11 +190,9 @@
 		mounted: function(){
 			//页面高度计算
 			$("#account").css("height",window.screen.height - 20 + "px");
-//			//获取用户账户信息
-//			this.getUserMsg();
 		},
 		activated: function(){
-			this.userInfo = JSON.parse(localStorage.user);
+			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
 			//获取用户账户信息
 			this.getUserMsg();
 		}
