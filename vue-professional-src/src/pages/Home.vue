@@ -120,16 +120,16 @@
 		watch: {
 			quoteIndex: function(n, o){
 //				if(this.Parameters[n].LastQuotation.ChangeRate < 0){
-//					$("#datalist>.cont>li").eq(n).addClass("green");
+//					$("#datalist>.cont>li").eq(n).addClass("bggreen");
 //					setTimeout(function(){
-//						$("#datalist>.cont>li").eq(n).removeClass("green");
+//						$("#datalist>.cont>li").eq(n).removeClass("bggreen");
 //					}, 500);
 //				}else if(this.Parameters[n].LastQuotation.ChangeRate == 0){
 //					return true;
 //				}else{
-//					$("#datalist>.cont>li").eq(n).addClass("red");
+//					$("#datalist>.cont>li").eq(n).addClass("bgred");
 //					setTimeout(function(){
-//						$("#datalist>.cont>li").eq(n).removeClass("red");
+//						$("#datalist>.cont>li").eq(n).removeClass("bgred");
 //					}, 500);
 //				}
 			},
@@ -222,10 +222,6 @@
 			this.initQuoteClient();
 			//取当前版本号
 			this.getVersion();
-			//判断是否进入新手指引
-//			if(localStorage.helpeshow){
-//				this.helpshow = JSON.parse(localStorage.helpeshow);
-//			}
 		},
 		updated: function(){
 			//判断网络
@@ -392,11 +388,18 @@
 						border-bottom: 1px solid @black;
 						color: @white;
 						font-size: @fs16;
+						&.bgred{
+							background: #502e38;
+						}
+						&.bggreen{
+							background: #294743;
+						}
 						li{
 							line-height: 60px;
 							text-align: right;
 							padding: 0;
-							border: 0; 
+							border: 0;
+							background: none;
 							&:nth-child(1){
 								width: 34%;
 								text-align: left;
