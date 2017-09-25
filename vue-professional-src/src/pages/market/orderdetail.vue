@@ -7,14 +7,13 @@
 		</div>
 		<topbar :cname='detail.CommodityName' :cnum='detail.CommodityNo + detail.MainContract' :colorName="bg"></topbar>
 		<i class="icon_connected" v-show="iconIsconnected"></i>
-		<selectbar></selectbar>
+		<selectbar ref="selectBar"></selectbar>
 		<dish v-if="pshow"></dish>
 		<tradebottom v-if='s'></tradebottom>
 		<tradecenter v-if='jshow'></tradecenter>
 		<chartfens v-if='fshow'></chartfens>
 		<kline v-if='kshow'></kline>
 		<lightchart v-if='sshow'></lightchart>
-		//新手指南
 		<novice v-if="helpshow"></novice>
 	</div>
 </template>
@@ -101,6 +100,21 @@
 			},
 			tradeLoginSuccessMsg(){
 				return this.$store.state.market.tradeLoginSuccessMsg;
+			},
+			sshow(){
+				return this.$store.state.isshow.sshow;
+			},
+			fshow(){
+				return this.$store.state.isshow.fshow;
+			},
+			kshow(){
+				return this.$store.state.isshow.kshow;
+			},
+			pshow(){
+				return this.$store.state.isshow.pshow;
+			},
+			jshow(){
+				return this.$store.state.isshow.bottomshow;
 			}
 		},
 		watch: {
@@ -176,10 +190,122 @@
 			if(localStorage.user) this.userInfo = JSON.parse(localStorage.user);
 			//获取当前平台账户是否有操盘记录
 			this.getOperateDetails();
-			//判断是否进入新手指引
-//			if(localStorage.helpeshow){
-//				this.helpshow = JSON.parse(localStorage.helpeshow);
-//			}
+			//下拉刷新
+			var obj = document.getElementById("orderdetail");
+			var startx, starty, overx, overy;
+			//touchstart事件,当鼠标点击屏幕时触发
+			obj.addEventListener('touchstart', function(event) { 
+				startx = event.touches[0].clientX;
+				starty = event.touches[0].clientY;
+			}, false);
+			//touchmove事件,当鼠标在屏幕移动时触发
+			obj.addEventListener('touchmove', function(event) {
+				overx = event.touches[0].clientX;
+				overy = event.touches[0].clientY; 
+				if(this.sshow == true){
+					if(startx-overx > 10){
+						return;
+					}else if(overx-startx > 10){
+						this.$store.state.isshow.sshow = false;
+						this.$store.state.isshow.fshow = true;
+						this.$store.state.isshow.kshow = false;
+						this.$store.state.isshow.pshow = false;
+						this.$store.state.isshow.bottomshow = false;
+						this.$store.state.isshow.islightshow = false;
+						this.$store.state.isshow.isklineshow = false;
+					}
+				}else if(this.fshow == true){
+					if(startx-overx > 10){         //左滑动判断
+                    	this.$store.state.isshow.sshow = true;
+						this.$store.state.isshow.fshow = false;
+						this.$store.state.isshow.kshow = false;
+						this.$store.state.isshow.pshow = false;
+						this.$store.state.isshow.bottomshow = false;
+						this.$store.state.isshow.isfensshow = false;
+						this.$store.state.isshow.isklineshow = false;
+	                }else if(overx-startx > 10){       //右滑动判断
+	                	this.$store.state.isshow.sshow = false;
+						this.$store.state.isshow.fshow = false;
+						this.$store.state.isshow.kshow = true;
+						this.$store.state.isshow.pshow = false;
+						this.$store.state.isshow.bottomshow = false;
+						this.$store.state.isshow.isfensshow = false;
+						this.$store.state.isshow.islightshow = false;
+						//默认一分钟K线
+						this.$store.state.market.selectTime=1;
+						var b = '{"Method":"QryHistory","Parameters":{"ExchangeNo":"' + this.detail.LastQuotation.ExchangeNo + '","CommodityNo":"' + this.detail.CommodityNo + '","ContractNo":"' + this.detail.LastQuotation.ContractNo + '","HisQuoteType":' + 1 + ',"BeginTime":"","EndTime":"","Count":' + 0 + '}}'
+						this.quoteSocket.send(b);
+	                }
+				}else if(this.kshow == true){
+					if(startx-overx > 10){
+						this.$store.state.isshow.sshow = false;
+						this.$store.state.isshow.fshow = true;
+						this.$store.state.isshow.kshow = false;
+						this.$store.state.isshow.pshow = false;
+						this.$store.state.isshow.bottomshow = false;
+						this.$store.state.isshow.islightshow = false;
+						this.$store.state.isshow.isklineshow = false;
+					}else if(overx-startx > 10){
+						this.$store.state.isshow.sshow = false;
+						this.$store.state.isshow.fshow = false;
+						this.$store.state.isshow.kshow = false;
+						this.$store.state.isshow.pshow = true;
+						this.$store.state.isshow.bottomshow = false;
+						this.$store.state.isshow.isfensshow = false;
+						this.$store.state.isshow.islightshow = false;
+						this.$store.state.isshow.isklineshow = false;
+					}
+				}else if(this.pshow == true){
+					if(startx-overx > 10){
+						this.$store.state.isshow.sshow = false;
+						this.$store.state.isshow.fshow = false;
+						this.$store.state.isshow.kshow = true;
+						this.$store.state.isshow.pshow = false;
+						this.$store.state.isshow.bottomshow = false;
+						this.$store.state.isshow.isfensshow = false;
+						this.$store.state.isshow.islightshow = false;
+						//默认一分钟K线
+						this.$store.state.market.selectTime=1;
+						var b = '{"Method":"QryHistory","Parameters":{"ExchangeNo":"' + this.detail.LastQuotation.ExchangeNo + '","CommodityNo":"' + this.detail.CommodityNo + '","ContractNo":"' + this.detail.LastQuotation.ContractNo + '","HisQuoteType":' + 1 + ',"BeginTime":"","EndTime":"","Count":' + 0 + '}}'
+						this.quoteSocket.send(b);
+					}else if(overx-startx > 10){
+						var tradeConfig =this.$store.state.market.tradeConfig;
+						if(JSON.parse(localStorage.getItem('tradeUser')) == null){
+							console.log(this.$refs.selectBar);
+							this.$refs.selectBar.$refs.alert.isshow = true;
+//							this.$children[0].isshow = true;
+						}else{
+							this.$store.state.isshow.sshow = false;
+							this.$store.state.isshow.fshow = false;
+							this.$store.state.isshow.kshow = false;
+							this.$store.state.isshow.pshow = false;
+							this.$store.state.isshow.bottomshow = true;
+							this.$store.state.isshow.isfensshow = false;
+							this.$store.state.isshow.islightshow = false;
+							this.$store.state.isshow.isklineshow = false;
+						}
+					}
+				}else{
+					if(startx-overx > 10){
+						this.$store.state.isshow.sshow = false;
+						this.$store.state.isshow.fshow = false;
+						this.$store.state.isshow.kshow = false;
+						this.$store.state.isshow.pshow = true;
+						this.$store.state.isshow.bottomshow = false;
+						this.$store.state.isshow.isfensshow = false;
+						this.$store.state.isshow.islightshow = false;
+						this.$store.state.isshow.isklineshow = false;
+					}else if(overx-startx > 10){
+						return;
+					}
+				}
+			}.bind(this), false);
+			//touchend事件,当鼠标离开屏幕时触发
+			obj.addEventListener('touchend', function(event) {
+				if(overy - starty > 10){
+					
+				}
+			}.bind(this), false);
 		},
 		updated: function(){
 			//判断网络

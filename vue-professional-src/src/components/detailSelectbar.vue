@@ -1,6 +1,6 @@
 <template>
 	<div id="detailselectbar">
-		<alert title="提示" line1="你还未登录，请先登录" jump="true"></alert>
+		<alert title="提示" line1="你还未登录，请先登录" jump="true" ref="alert"></alert>
 		<ul>
 			<li :class="[fontgray,fl,{current:sshow}]" @tap='sel'>闪电图</li>
 			<li :class="[fontgray,fl,{current:fshow}]" @tap='sel'>分时</li>
