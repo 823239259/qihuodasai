@@ -38,6 +38,22 @@ import tradeLogin from '../pages/market/tradeLogin.vue'
 import help from '../pages/help.vue'
 //各种合约交易规则
 import cl from '../pages/role/cl.vue'
+import cn from '../pages/role/cn.vue'
+import es from '../pages/role/es.vue'
+import fdax from '../pages/role/fdax.vue'
+import fdxm from '../pages/role/fdxm.vue'
+import gc from '../pages/role/gc.vue'
+import hg from '../pages/role/hg.vue'
+import hhi from '../pages/role/hhi.vue'
+import hsi from '../pages/role/hsi.vue'
+import mch from '../pages/role/mch.vue'
+import mhi from '../pages/role/mhi.vue'
+import ng from '../pages/role/ng.vue'
+import nk from '../pages/role/nk.vue'
+import nq from '../pages/role/nq.vue'
+import qm from '../pages/role/qm.vue'
+import si from '../pages/role/si.vue'
+import ym from '../pages/role/ym.vue'
 Vue.use(Router)
 
 const router = new Router({
@@ -50,6 +66,70 @@ const router = new Router({
 		{
 			path: '/cl',
 			component: cl
+		},
+		{
+			path: '/cn',
+			component: cn
+		},
+		{
+			path: '/es',
+			component: es
+		},
+		{
+			path: '/fdax',
+			component: fdax
+		},
+		{
+			path: '/fdxm',
+			component: fdxm
+		},
+		{
+			path: '/gc',
+			component: gc
+		},
+		{
+			path: '/hg',
+			component: hg
+		},
+		{
+			path: '/hhi',
+			component: hhi
+		},
+		{
+			path: '/hsi',
+			component: hsi
+		},
+		{
+			path: '/mch',
+			component: mch
+		},
+		{
+			path: '/mhi',
+			component: mhi
+		},
+		{
+			path: '/ng',
+			component: ng
+		},
+		{
+			path: '/nk',
+			component: nk
+		},
+		{
+			path: '/nq',
+			component: nq
+		},
+		{
+			path: '/qm',
+			component: qm
+		},
+		{
+			path: '/si',
+			component: si
+		},
+		{
+			path: '/ym',
+			component: ym
 		},
 		{
 			path: '/help',

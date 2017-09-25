@@ -26,7 +26,8 @@
 			return{
 				msg: '',
 				istitle: true,
-				user: ''
+				user: '',
+				pathName: ''
 			}
 		},
 		computed: {
@@ -37,11 +38,70 @@
 			},
 			sysMsg: function(){
 				return this.msg;
+			},
+			detail() {
+				return this.$store.state.market.currentdetail;
 			}
 		},
 		methods:{
 			toRole: function(){
-				this.$router.push({path: '/cl'});
+				var name = this.detail.CommodityNo;
+				switch (name){
+					case 'CL':
+						this.pathName = 'cl';
+						break;
+					case 'HSI':
+						this.pathName = 'hsi';
+						break;
+					case 'GC':
+						this.pathName = 'gc';
+						break;
+					case 'FDAX':
+						this.pathName = 'fdax';
+						break;
+					case 'MHI':
+						this.pathName = 'mhi';
+						break;
+					case 'CN':
+						this.pathName = 'cn';
+						break;
+					case 'HG':
+						this.pathName = 'hg';
+						break;
+					case 'SI':
+						this.pathName = 'si';
+						break;
+					case 'YM':
+						this.pathName = 'ym';
+						break;
+					case 'NQ':
+						this.pathName = 'nq';
+						break;
+					case 'ES':
+						this.pathName = 'es';
+						break;
+					case 'NK':
+						this.pathName = 'nk';
+						break;
+					case 'HHI':
+						this.pathName = 'hhi';
+						break;
+					case 'MCH':
+						this.pathName = 'mch';
+						break;
+					case 'QM':
+						this.pathName = 'qm';
+						break;
+					case 'FDXM':
+						this.pathName = 'fdxm';
+						break;
+					case 'NG':
+						this.pathName = 'ng';
+						break;
+					default:
+						break;
+				}
+				this.$router.push({path: '/' + this.pathName});
 			},
 			clearPositionListCont:function(){
 				this.$store.state.market.positionListCont=[];
