@@ -56,6 +56,8 @@
 				this.isJump = this.$route.query.isJump;
 				if(this.isJump == 1){
 					return true;
+				}else if(this.isJump == 2){
+					return 'home';
 				}
 			},
 			msgTips: function(){

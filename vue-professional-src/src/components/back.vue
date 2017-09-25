@@ -22,6 +22,9 @@
 				}else{
 					return false;
 				}
+				if(this.title == 'home'){
+					this.$router.push({path: 'home'});
+				}
 			}
 		}
 	}
