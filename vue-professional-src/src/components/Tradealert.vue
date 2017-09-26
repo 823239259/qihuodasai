@@ -10,7 +10,7 @@
 					<!--<p class="fontwhite">{{line2}}</p>-->
 				</li>
 				<li>
-					<div class="fontgray fl" @tap='confirm(addr,objstr)'>确认</div>
+					<div class="fontgray fl" @tap='confirm(addr,objstr)'>{{confirmName}}</div>
 					<div class="fontgray fl" @tap="close">取消</div>
 				</li>
 			</ul>
@@ -22,7 +22,7 @@
 <script>
 	export default {
 		name: 'alert',
-		props: ['title', 'line1', 'addr', 'objstr','type', 'jump', 'status'],
+		props: ['title', 'line1', 'addr', 'objstr','type', 'jump', 'status', 'name'],
 		data() {
 			return {
 				isshow: false,
@@ -31,6 +31,13 @@
 		computed:{
 			tradeSocket:function(){
 				return this.$store.state.tradeSocket;
+			},
+			confirmName: function(){
+				if(this.name){
+					return this.name;
+				}else{
+					return '确认';
+				}
 			}
 		},
 		methods: {

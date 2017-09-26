@@ -787,7 +787,7 @@
 		background: @deepblue;
 		overflow-x: scroll;
 		ul{
-			width: 930px;
+			width: 950px;
 			&.list_head{
 				overflow: hidden;
 				background: #36394d;
@@ -1074,7 +1074,7 @@
 		background: @deepblue;
 		overflow-x: scroll;
 		ul{
-			width: 930px*@ip6;
+			width: 950px*@ip6;
 			&.list_head li span{
 				&:first-child{
 					color: @blue;
@@ -1356,7 +1356,7 @@
 		background: @deepblue;
 		overflow-x: scroll;
 		ul{
-			width: 930px*@ip5;
+			width: 950px*@ip5;
 			&.list_head li span{
 				&:first-child{
 					color: @blue;

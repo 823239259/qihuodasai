@@ -58,7 +58,7 @@
 				<chartBtn type="buy" class="fl" @tap.native='buyOrder'></chartBtn>
 				<chartBtn type="sell" class="fr" @tap.native='sellOrder'></chartBtn>
 			</div>
-			<alert title="提示" :line1="promptMsg" jump="true" ref="alert"></alert>
+			<alert title="提示" :line1="promptMsg" jump="true" ref="alert" :name="confirmName"></alert>
 			<tipsDialog :msg="msgTips" ref="dialog"></tipsDialog>
 		</div>
 	</div>
@@ -106,7 +106,8 @@
 				lotnum: 1,
 				numReg: /^[0-9]*$/,
 				buyText: {},
-				promptMsg: ''
+				promptMsg: '',
+				confirmName: ''
 			}
 		},
 		computed:{
@@ -191,6 +192,7 @@
 					if(this.operateOrderLength > 0){
 						this.$router.push({path: '/tradeLogin'});
 					}else{
+						this.confirmName = '去申请开户';
 						this.$refs.alert.isshow = true;
 						this.promptMsg = '您目前没有交易账户，赶紧去申请吧~';
 					}
@@ -226,6 +228,7 @@
 					if(this.operateOrderLength > 0){
 						this.$router.push({path: '/tradeLogin'});
 					}else{
+						this.confirmName = '去申请开户';
 						this.$refs.alert.isshow = true;
 						this.promptMsg = '您目前没有交易账户，赶紧去申请吧~';
 					}
