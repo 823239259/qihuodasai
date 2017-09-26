@@ -822,10 +822,10 @@
 					width: 110px;
 				}
 				&:nth-child(3){
-					width: 200px;
+					width: 220px;
 				}
 				&:nth-child(4){
-					width: 200px;
+					width: 220px;
 				}
 				&:nth-child(5){
 					width: 250px;
@@ -1105,10 +1105,10 @@
 					width: 110px*@ip6;
 				}
 				&:nth-child(3){
-					width: 200px*@ip6;
+					width: 220px*@ip6;
 				}
 				&:nth-child(4){
-					width: 200px*@ip6;
+					width: 220px*@ip6;
 				}
 				&:nth-child(5){
 					width: 250px*@ip6;
@@ -1388,10 +1388,10 @@
 					width: 110px*@ip5;
 				}
 				&:nth-child(3){
-					width: 200px*@ip5;
+					width: 220px*@ip5;
 				}
 				&:nth-child(4){
-					width: 200px*@ip5;
+					width: 220px*@ip5;
 				}
 				&:nth-child(5){
 					width: 250px*@ip5;
