@@ -195,7 +195,7 @@
 			if(localStorage.user) this.userInfo = JSON.parse(localStorage.user);
 			//获取当前平台账户是否有操盘记录
 			this.getOperateDetails();
-			//下拉刷新
+			//滑动事件
 			var obj = document.getElementById("orderdetail");
 			var startx, starty, overx, overy;
 			//touchstart事件,当鼠标点击屏幕时触发
@@ -302,9 +302,13 @@
 						this.quoteSocket.send(b);
 					}
 				}else{
+					var h = $(".list_cont_box").offset().top;
 					if(startx-overx > 10){
 						return;
 					}else if(overx-startx > 10){
+						if(starty >= h){
+							return;
+						}
 						this.cname = this.detail.CommodityName;
 						this.cnum = this.detail.CommodityNo + this.detail.MainContract;
 						this.$store.state.isshow.sshow = false;
@@ -320,9 +324,7 @@
 			}.bind(this), false);
 			//touchend事件,当鼠标离开屏幕时触发
 			obj.addEventListener('touchend', function(event) {
-				if(overy - starty > 10){
-					
-				}
+				//代码
 			}.bind(this), false);
 		},
 		updated: function(){
