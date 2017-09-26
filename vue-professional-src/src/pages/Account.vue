@@ -52,11 +52,13 @@
 		</div>
 		<div class="list_option mt10">
 			<ul>
-				<li @tap="dialPhone">
+				<li>
+					<a href="tel:4008528008">
 					<img src="../assets/img/phone.png" />
 					<span>客服热线</span>
 					<img src="../assets/img/arrow.png" class="img_arrow"/>
 					<span>400-852-8008</span>
+					</a>
 				</li>
 				<li>
 					<button class="btn" @tap='exit'>退出登录</button>
@@ -132,9 +134,9 @@
 					this.$router.push({path:'/nameCertification'});
 				}
 			},
-			dialPhone: function(){
-				pro.callService();
-			},
+//			dialPhone: function(){
+//				pro.callService();
+//			},
 			totest: function(){
 				this.$router.push({path:'/test'});
 			},
