@@ -111,7 +111,7 @@
     		p{
     			line-height: 26px;
     			color: @white;
-    			font-size: @fs14;;
+    			font-size: @fs14;
     			padding: 8px 15px;
     			border-bottom: 5px solid @black;
     		}
@@ -141,10 +141,100 @@
 }
 /*ip6*/
 @media (min-width:371px) and (max-width:410px) {
-	
+	#role{
+    	width: 100%;
+    	overflow: hidden;
+    	background: @black;
+    	padding-top: 50px*@ip6;
+    	.page_cont{
+    		overflow: hidden;
+    		background: @deepblue;
+    		h3{
+    			height: 42px*@ip6;
+    			line-height: 42px*@ip6;
+    			border-bottom: 1px solid @black;
+    			padding: 0 15px*@ip6;
+    			color: @yellow;
+    			font-size: @fs16*@ip6;
+    		}
+    		p{
+    			line-height: 26px*@ip6;
+    			color: @white;
+    			font-size: @fs14*@ip6;
+    			padding: 8px*@ip6 15px*@ip6;
+    			border-bottom: 5px*@ip6 solid @black;
+    		}
+    		.list{
+    			width: 398px*@ip6;
+    			overflow-x: scroll;
+    			padding: 0 15px*@ip6;
+    			table{
+    				width: 382px*@ip6;
+    				td{
+    					text-align: left;
+    					padding: 5px;
+    					border: 1px solid @white;
+    					font-size: @fs14*@ip6;
+    					color: @white;
+    					&:nth-child(1){
+    						width: 120px*@ip6;
+    					}
+    					&:nth-child(2){
+    						width: 200px*@ip6;
+    					}
+    				}
+    			}
+    		}
+    	}
+    }
 }
 /*ip5*/
 @media(max-width:370px) {
-	
+	#role{
+    	width: 100%;
+    	overflow: hidden;
+    	background: @black;
+    	padding-top: 50px*@ip5;
+    	.page_cont{
+    		overflow: hidden;
+    		background: @deepblue;
+    		h3{
+    			height: 42px*@ip5;
+    			line-height: 42px*@ip5;
+    			border-bottom: 1px solid @black;
+    			padding: 0 15px*@ip5;
+    			color: @yellow;
+    			font-size: @fs16*@ip5;
+    		}
+    		p{
+    			line-height: 26px*@ip5;
+    			color: @white;
+    			font-size: @fs14*@ip5;
+    			padding: 8px*@ip5 15px*@ip5;
+    			border-bottom: 5px*@ip5 solid @black;
+    		}
+    		.list{
+    			width: 398px*@ip5;
+    			overflow-x: scroll;
+    			padding: 0 15px*@ip5;
+    			table{
+    				width: 382px*@ip5;
+    				td{
+    					text-align: left;
+    					padding: 5px;
+    					border: 1px solid @white;
+    					font-size: @fs14*@ip5;
+    					color: @white;
+    					&:nth-child(1){
+    						width: 120px*@ip5;
+    					}
+    					&:nth-child(2){
+    						width: 200px*@ip5;
+    					}
+    				}
+    			}
+    		}
+    	}
+    }
 }
 </style>
