@@ -106,6 +106,9 @@
 				return this.$store.state.isshow.guideshow;
 			},
 			helpshow(){
+				if(this.$store.state.isshow.helpshow == true){
+					$("body").css({'overflow': 'hidden'});
+				}
 				return this.$store.state.isshow.helpshow;
 			},
 			quoteConnectedMsg(){
@@ -223,6 +226,8 @@
 			}
 		},
 		mounted: function() {
+			//初始化高度
+//			$("#datalist .cont").height(window.screen.height - $("#topbar").height() - $("#selectbar").height() - $("#datalist .head").height() - $("#navbar").height());
 			//初始化行情
 			this.initQuoteClient();
 			//取当前版本号
