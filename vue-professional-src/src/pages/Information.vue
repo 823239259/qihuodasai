@@ -648,7 +648,7 @@
 			//touchmove事件,当鼠标在屏幕移动时触发
 			obj.addEventListener('touchmove', function(event) {
 				if(scrollTop > 0) return true;
-				event.preventDefault();
+//				event.preventDefault();
 				overx = event.touches[0].clientX;
 				overy = event.touches[0].clientY; 
 				if(overy - starty > 10){
@@ -816,6 +816,7 @@ ul>li>h4 {
 #seven {
 	background: #242633;
 	padding-bottom: 50px;
+	overflow-y: scroll;
 }
 #seven:before {
 	content: '';
