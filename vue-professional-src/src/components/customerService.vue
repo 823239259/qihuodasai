@@ -33,6 +33,7 @@
 /*ip6p及以上*/
 @media (min-width:411px) {
     button{
+    	width: auto;
     	height: 50px;
 		padding: 0 15px;
 		overflow: hidden;
@@ -52,6 +53,7 @@
 /*ip6*/
 @media (min-width:371px) and (max-width:410px) {
     button{
+    	width: auto;
     	height: 50px*@ip6;
 		padding: 0 15px*@ip6;
 		overflow: hidden;
@@ -83,6 +85,9 @@
 		right: 0;
 		z-index: 1000;
 		&.left{
+			width: 60px;
+			padding: 0;
+			text-align: center;
 			left: 0;
 		}
 	}

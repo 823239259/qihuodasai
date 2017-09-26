@@ -97,7 +97,6 @@
 				if(this.colors) return this.colors;
 			},
 			Parameters(){
-				console.log(this.$store.state.market.Parameters);
 				return this.$store.state.market.Parameters;
 			},
 			quoteIndex(){
