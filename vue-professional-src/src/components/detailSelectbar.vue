@@ -35,9 +35,12 @@
 			}
 		},
 		computed: {
-			tradeConfig(){
-				return this.$store.state.market.tradeConfig;
-			}
+//			tradeConfig(){
+//				return this.$store.state.market.tradeConfig;
+//			},
+			detail() {
+				return this.$store.state.market.currentdetail;
+			},
 		},
 		watch: {
 			kshow: function(n, o) {
@@ -80,6 +83,8 @@
 				var tex = e.currentTarget.innerText;
 				switch(tex) {
 					case '闪电图':
+						this.$parent.cname = this.$parent.detail.CommodityName;
+						this.$parent.cnum = this.$parent.detail.CommodityNo + this.$parent.detail.MainContract;
 						this.$store.state.isshow.sshow = true;
 						this.$store.state.isshow.fshow = false;
 						this.$store.state.isshow.kshow = false;
@@ -90,6 +95,9 @@
 						this.$store.state.isshow.isklineshow = false;
 						break;
 					case '分时':
+					
+						this.$parent.cname = this.$parent.detail.CommodityName;
+						this.$parent.cnum = this.$parent.detail.CommodityNo + this.$parent.detail.MainContract;
 						this.$store.state.isshow.sshow = false;
 						this.$store.state.isshow.fshow = true;
 						this.$store.state.isshow.kshow = false;
@@ -100,6 +108,8 @@
 						this.$store.state.isshow.isklineshow = false;
 						break;
 					case '盘口':
+						this.$parent.cname = this.$parent.detail.CommodityName;
+						this.$parent.cnum = this.$parent.detail.CommodityNo + this.$parent.detail.MainContract;
 						this.$store.state.isshow.sshow = false;
 						this.$store.state.isshow.fshow = false;
 						this.$store.state.isshow.kshow = false;
@@ -111,10 +121,12 @@
 						this.$store.state.isshow.isklineshow = false;
 						break;
 					case '交易中心':
-						var tradeConfig =this.$store.state.market.tradeConfig;
+//						var tradeConfig =this.$store.state.market.tradeConfig;
 						if(JSON.parse(localStorage.getItem('tradeUser')) == null){
 							this.$children[0].isshow = true;
 						}else{
+							this.$parent.cname = '期货模拟账号';
+							this.$parent.cnum = JSON.parse(localStorage.tradeUser).username;
 							this.$store.state.isshow.sshow = false;
 							this.$store.state.isshow.fshow = false;
 							this.$store.state.isshow.kshow = false;
@@ -127,6 +139,8 @@
 						}
 						break;
 					case 'K线':
+						this.$parent.cname = this.$parent.detail.CommodityName;
+						this.$parent.cnum = this.$parent.detail.CommodityNo + this.$parent.detail.MainContract;
 						this.$store.state.isshow.sshow = false;
 						this.$store.state.isshow.fshow = false;
 						this.$store.state.isshow.kshow = true;
@@ -143,8 +157,6 @@
 						this.$store.state.market.selectTime=1;
 						var b = '{"Method":"QryHistory","Parameters":{"ExchangeNo":"' + this.$parent.detail.LastQuotation.ExchangeNo + '","CommodityNo":"' + this.$parent.detail.CommodityNo + '","ContractNo":"' + this.$parent.detail.LastQuotation.ContractNo + '","HisQuoteType":' + 1 + ',"BeginTime":"","EndTime":"","Count":' + 0 + '}}'
 						this.quoteSocket.send(b);
-						
-						
 						break;
 					default:
 						this.$store.state.isshow.sshow = false;

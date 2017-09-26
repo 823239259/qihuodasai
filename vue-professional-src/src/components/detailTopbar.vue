@@ -2,11 +2,11 @@
 	<div id="detailTopbar" :class="colorClass">
 		<tipsDialog :msg="sysMsg" ref="dialog"></tipsDialog>
 		<back @tap.native='clearPositionListCont'></back>
-		<div v-show="istitle">
+		<div class="title">
 			<h4 class="fontwhite">{{cname}}</h4>
 			<h6 class="fontwhite"><span>{{cnum}}</span><span>{{mc}}</span></h6>
 		</div>
-		<h3 v-show="!istitle">{{user}}</h3>
+		<!--<h3 v-show="!istitle">{{user}}</h3>-->
 		<span class="rule" @tap="toRole">规则</span>
 		<refresh @tap.native="tradeRefresh"></refresh>
 		<menus></menus>
@@ -25,8 +25,8 @@
 		data(){
 			return{
 				msg: '',
-				istitle: true,
-				user: '',
+//				istitle: true,
+//				user: '',
 				pathName: ''
 			}
 		},
@@ -41,6 +41,9 @@
 			},
 			detail() {
 				return this.$store.state.market.currentdetail;
+			},
+			bottomshow(){
+				return this.$store.state.isshow.bottomshow;
 			}
 		},
 		methods:{
@@ -119,9 +122,13 @@
 			}
 		},
 		activated: function(){
-			if(localStorage.tradeUser){
-				this.user = JSON.parse(localStorage.tradeUser).username;
-				this.istitle = false;
+			if(localStorage.tradeUser && this.bottomshow == true){
+//				this.user = JSON.parse(localStorage.tradeUser).username;
+				'cname','cnum','mc'
+				this.cname = '期货模拟账号';
+				this.cnum = JSON.parse(localStorage.tradeUser).username;
+				this.mc = '';
+//				this.istitle = false;
 			}
 		}
 	}
@@ -143,20 +150,21 @@
 			background: #a73d42;
 		}
 	}
-	#detailTopbar>div:nth-child(2){
+	#detailTopbar .title{
 		width: 100%;
-		height: @height;
-		margin-top: 8px;	
+		height: 50px;
+		margin-top: 8px;
+		padding-left: 45px;	
 	}
-	#detailTopbar>div:nth-child(2)>h4{
+	#detailTopbar .title h4{
 		font-weight: normal;
 		font-size: 16px;
-		text-align: center;
+		text-align: left;
 	}
-	#detailTopbar>div:nth-child(2)>h6{
+	#detailTopbar .title h6{
 		font-weight: 200;
-		font-size: 13px;
-		text-align: center;
+		font-size: 12px;
+		text-align: left;
 	}
 	#back{
 		position: absolute;
@@ -214,29 +222,40 @@
 		background-color: #242633;
 		position: fixed;
 		top: 0;
+		z-index: 1100;
 		&.red{
 			background: #a73d42;
 		}
 	}
-	#detailTopbar>div:nth-child(2){
+	#detailTopbar .title{
 		width: 100%;
-		height: @height*@ip6;
-		margin-top: 8px*@ip6;	
+		height: 50px*@ip6;
+		margin-top: 8px*@ip6;
+		padding-left: 45px*@ip6;	
 	}
-	#detailTopbar>div:nth-child(2)>h4{
+	#detailTopbar .title h4{
 		font-weight: normal;
 		font-size: 16px*@ip6;
-		text-align: center;
+		text-align: left;
 	}
-	#detailTopbar>div:nth-child(2)>h6{
+	#detailTopbar .title h6{
 		font-weight: 200;
-		font-size: 13px*@ip6;
-		text-align: center;
+		font-size: 12px*@ip6;
+		text-align: left;
 	}
 	#back{
 		position: absolute;
 		left: 0;
 		top: 0;
+	}
+	h3{
+		line-height: 50px*@ip6;
+		font-size: 16px*@ip6;
+		font-weight: normal;
+		color: #fff;
+		position: fixed;
+		top: 0;
+		left: 50px*@ip6;		
 	}
 	.rule{
 		display: inline-block;
@@ -273,30 +292,40 @@
 		background-color: #242633;
 		position: fixed;
 		top: 0;
+		z-index: 1100;
 		&.red{
 			background: #a73d42;
 		}
 	}
-	#detailTopbar>div:nth-child(2){
+	#detailTopbar .title{
 		width: 100%;
-		height: @height*@ip5;
-		margin-top: 8px*@ip5;	
+		height: 50px*@ip5;
+		margin-top: 8px*@ip5;
+		padding-left: 45px*@ip5;	
 	}
-	#detailTopbar>div:nth-child(2)>h4{
+	#detailTopbar .title h4{
 		font-weight: normal;
 		font-size: 16px*@ip5;
-		text-align: center;
+		text-align: left;
 	}
-	#detailTopbar>div:nth-child(2)>h6{
+	#detailTopbar .title h6{
 		font-weight: 200;
-		font-size: 13px*@ip6;
-		text-align: center;
-		transform: scale(0.9);
+		font-size: 12px*@ip5;
+		text-align: left;
 	}
 	#back{
 		position: absolute;
 		left: 0;
 		top: 0;
+	}
+	h3{
+		line-height: 50px*@ip5;
+		font-size: 16px*@ip5;
+		font-weight: normal;
+		color: #fff;
+		position: fixed;
+		top: 0;
+		left: 50px*@ip5;		
 	}
 	.rule{
 		display: inline-block;

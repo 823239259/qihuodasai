@@ -3,7 +3,6 @@
 		<div>
 			<div class="icon icon_menu" @tap='openmenu'></div>
 			<div class="shade" v-show="shadeShow" @tap="openShade"></div>
-			<!--<transition name="topdown" mode="out-in">-->
 			<div class="menulist" v-show="open">
 				<ul>
 					<li class="fontgray" @tap="toConditions" v-show="hasLoginShow">条件单</li>
@@ -13,7 +12,6 @@
 					<li class="fontgray" @tap.stop="toTradeLogin">{{userTitle}}</li>
 				</ul>
 			</div>
-			<!--</transition>-->
 		</div>
 		<alert title="提示" :line1="promptMsg" status="1" ref="alert"></alert>
 	</div>
@@ -135,88 +133,6 @@
 	li:last-child {
 		border: none;
 	}
-	.shade{
-		position: fixed;
-		top: 50px;
-		left: 0;
-		z-index: 1110;
-		width: 100%;
-		height: 100%;
-		overflow: hidden;
-		background: #000;
-		/*opacity: 0.3;*/
-	}
-	/*ip5*/
-	@media(max-width:370px) {
-		.icon {
-			width: 50px*@ip5;
-			height: 50px*@ip5;
-			background: url('../assets/img/menu.png') no-repeat 15px*@ip5 15px*@ip5;
-			background-size: 20px*@ip5 20px*@ip5;
-		}
-		ul {
-			overflow: hidden;
-			border-radius: 3px*@ip5;
-			background-color: #242633;
-			box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5), -1px -1px 1px rgba(0, 0, 0, 0.5);
-			position: absolute;
-			top: 51px*@ip5;
-			right: 15px*@ip5;
-			z-index: 1111;
-		}
-		li {
-			width: @li_width*@ip5;
-			height: @li_height*@ip5;
-			border-bottom: 1px solid #1f202c;
-			line-height: @li_height*@ip5;
-			text-align: center;
-			font-size: 14px*@ip5;
-		}
-		.shade{
-			position: fixed;
-			top: 50px*@ip5;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			overflow: hidden;
-			background: transparent;
-		}
-	}
-	/*ip6*/
-	@media (min-width:371px) and (max-width:410px) {
-		.icon {
-			width: 50px*@ip6;
-			height: 50px*@ip6;
-			background: url('../assets/img/menu.png') no-repeat 15px*@ip6 15px*@ip6;
-			background-size: 20px*@ip6 20px*@ip6;
-		}
-		ul {
-			border-radius: 3px*@ip6;
-			background-color: #242633;
-			box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5), -1px -1px 1px rgba(0, 0, 0, 0.5);
-			position: absolute;
-			top: 51px*@ip6;
-			right: 15px*@ip6;
-			z-index: 1111;
-		}
-		li {
-			width: @li_width*@ip6;
-			height: @li_height*@ip6;
-			border-bottom: 1px solid #1f202c;
-			line-height: @li_height*@ip6;
-			text-align: center;
-			font-size: 14px*@ip6;
-		}
-		.shade{
-			position: fixed;
-			top: 50px*@ip6;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			overflow: hidden;
-			background: transparent;
-		}
-	}
 	/*ip6p及以上*/
 	@media (min-width:411px) {
 		.icon {
@@ -225,7 +141,7 @@
 			background: url('../assets/img/menu.png') no-repeat 15px 15px;
 			background-size: 20px 20px;
 		}
-		ul {
+		.menulist{
 			border-radius: 3px;
 			background-color: #242633;
 			box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5), -1px -1px 1px rgba(0, 0, 0, 0.5);
@@ -246,6 +162,80 @@
 			position: fixed;
 			top: 50px*@ip6p;
 			left: 0;
+			z-index: 1110;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			background: transparent;
+		}
+	}
+	
+	/*ip6*/
+	@media (min-width:371px) and (max-width:410px) {
+		.icon {
+			width: 50px*@ip6;
+			height: 50px*@ip6;
+			background: url('../assets/img/menu.png') no-repeat 15px*@ip6 15px*@ip6;
+			background-size: 20px*@ip6 20px*@ip6;
+		}
+		.menulist{
+			position: fixed;
+			top: 51px*@ip6;
+			right: 15px*@ip6;
+			z-index: 1111;
+			background-color: #242633;
+			border-radius: 3px*@ip6;
+			box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5), -1px -1px 1px rgba(0, 0, 0, 0.5);
+			li {
+				width: @li_width*@ip6;
+				height: @li_height*@ip6;
+				border-bottom: 1px solid #1f202c;
+				line-height: @li_height*@ip6;
+				text-align: center;
+				font-size: 14px*@ip6;
+			}
+		}
+		.shade{
+			position: fixed;
+			top: 50px*@ip6;
+			left: 0;
+			z-index: 1110;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			background: transparent;
+		}
+	}
+	/*ip5*/
+	@media(max-width:370px) {
+		.icon {
+			width: 50px*@ip5;
+			height: 50px*@ip5;
+			background: url('../assets/img/menu.png') no-repeat 15px*@ip5 15px*@ip5;
+			background-size: 20px*@ip5 20px*@ip5;
+		}
+		.menulist{
+			position: fixed;
+			top: 51px*@ip5;
+			right: 15px*@ip5;
+			z-index: 1111;
+			background-color: #242633;
+			border-radius: 3px*@ip5;
+			box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5), -1px -1px 1px rgba(0, 0, 0, 0.5);
+			li {
+				width: @li_width*@ip5;
+				height: @li_height*@ip5;
+				border-bottom: 1px solid #1f202c;
+				line-height: @li_height*@ip5;
+				text-align: center;
+				font-size: 14px*@ip5;
+			}
+		}
+		.shade{
+			position: fixed;
+			top: 50px*@ip5;
+			left: 0;
+			z-index: 1110;
 			width: 100%;
 			height: 100%;
 			overflow: hidden;

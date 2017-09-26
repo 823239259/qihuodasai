@@ -5,7 +5,8 @@
 			<i class="icon"></i>
 			<span>交易、行情未连接，网络恢复时会自动连接！</span>
 		</div>
-		<topbar :cname='detail.CommodityName' :cnum='detail.CommodityNo + detail.MainContract' :colorName="bg"></topbar>
+		<!--<topbar :cname='detail.CommodityName' :cnum='detail.CommodityNo + detail.MainContract' :colorName="bg"></topbar>-->
+		<topbar :cname="cname" :cnum="cnum" :colorName="bg" ref="topbar"></topbar>
 		<i class="icon_connected" v-show="iconIsconnected"></i>
 		<selectbar ref="selectBar"></selectbar>
 		<dish v-if="pshow"></dish>
@@ -42,6 +43,8 @@
 				isconnected: false,
 				colors: '',
 				userInfo: '',
+				cname: '',
+				cnum: ''
 			}
 		},
 		computed: {
@@ -61,6 +64,8 @@
 				return this.$store.state.isshow.helpshow;
 			},
 			detail() {
+				this.cname = this.$store.state.market.currentdetail.CommodityName;
+				this.cnum = this.$store.state.market.currentdetail.CommodityNo + this.$store.state.market.currentdetail.MainContract;
 				return this.$store.state.market.currentdetail;
 			},
 			Parameters() {
@@ -206,6 +211,8 @@
 					if(startx-overx > 10){
 						return;
 					}else if(overx-startx > 10){
+						this.cname = this.detail.CommodityName;
+						this.cnum = this.detail.CommodityNo + this.detail.MainContract;
 						this.$store.state.isshow.sshow = false;
 						this.$store.state.isshow.fshow = true;
 						this.$store.state.isshow.kshow = false;
@@ -216,6 +223,8 @@
 					}
 				}else if(this.fshow == true){
 					if(startx-overx > 10){         //左滑动判断
+						this.cname = this.detail.CommodityName;
+						this.cnum = this.detail.CommodityNo + this.detail.MainContract;
                     	this.$store.state.isshow.sshow = true;
 						this.$store.state.isshow.fshow = false;
 						this.$store.state.isshow.kshow = false;
@@ -224,6 +233,8 @@
 						this.$store.state.isshow.isfensshow = false;
 						this.$store.state.isshow.isklineshow = false;
 	                }else if(overx-startx > 10){       //右滑动判断
+	                	this.cname = this.detail.CommodityName;
+						this.cnum = this.detail.CommodityNo + this.detail.MainContract;
 	                	this.$store.state.isshow.sshow = false;
 						this.$store.state.isshow.fshow = false;
 						this.$store.state.isshow.kshow = true;
@@ -238,6 +249,8 @@
 	                }
 				}else if(this.kshow == true){
 					if(startx-overx > 10){
+						this.cname = this.detail.CommodityName;
+						this.cnum = this.detail.CommodityNo + this.detail.MainContract;
 						this.$store.state.isshow.sshow = false;
 						this.$store.state.isshow.fshow = true;
 						this.$store.state.isshow.kshow = false;
@@ -246,6 +259,8 @@
 						this.$store.state.isshow.islightshow = false;
 						this.$store.state.isshow.isklineshow = false;
 					}else if(overx-startx > 10){
+						this.cname = this.detail.CommodityName;
+						this.cnum = this.detail.CommodityNo + this.detail.MainContract;
 						this.$store.state.isshow.sshow = false;
 						this.$store.state.isshow.fshow = false;
 						this.$store.state.isshow.kshow = false;
@@ -257,6 +272,8 @@
 					}
 				}else if(this.pshow == true){
 					if(startx-overx > 10){
+						this.cname = this.detail.CommodityName;
+						this.cnum = this.detail.CommodityNo + this.detail.MainContract;
 						this.$store.state.isshow.sshow = false;
 						this.$store.state.isshow.fshow = false;
 						this.$store.state.isshow.kshow = true;
@@ -269,12 +286,11 @@
 						var b = '{"Method":"QryHistory","Parameters":{"ExchangeNo":"' + this.detail.LastQuotation.ExchangeNo + '","CommodityNo":"' + this.detail.CommodityNo + '","ContractNo":"' + this.detail.LastQuotation.ContractNo + '","HisQuoteType":' + 1 + ',"BeginTime":"","EndTime":"","Count":' + 0 + '}}'
 						this.quoteSocket.send(b);
 					}else if(overx-startx > 10){
-						var tradeConfig =this.$store.state.market.tradeConfig;
 						if(JSON.parse(localStorage.getItem('tradeUser')) == null){
-							console.log(this.$refs.selectBar);
 							this.$refs.selectBar.$refs.alert.isshow = true;
-//							this.$children[0].isshow = true;
 						}else{
+							this.cname = '期货模拟账号';
+							this.cnum = JSON.parse(localStorage.tradeUser).username;
 							this.$store.state.isshow.sshow = false;
 							this.$store.state.isshow.fshow = false;
 							this.$store.state.isshow.kshow = false;
@@ -287,6 +303,8 @@
 					}
 				}else{
 					if(startx-overx > 10){
+						this.cname = this.detail.CommodityName;
+						this.cnum = this.detail.CommodityNo + this.detail.MainContract;
 						this.$store.state.isshow.sshow = false;
 						this.$store.state.isshow.fshow = false;
 						this.$store.state.isshow.kshow = false;
