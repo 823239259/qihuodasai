@@ -2471,10 +2471,8 @@ export default new Vuex.Store({
 							//将显示数据进行更新
 							context.state.market.Parameters.forEach(function(a, r) {
 								if(a.CommodityNo == e.CommodityNo) {
-									context.state.market.quoteOldData = a.LastQuotation.LastPrice;
 									context.state.market.Parameters.splice(r, 1, e);
 									context.state.market.quoteIndex = r;
-									
 								}
 							});
 							if(context.state.market.currentNo == e.CommodityNo) {

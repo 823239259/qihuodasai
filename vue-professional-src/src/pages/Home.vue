@@ -76,6 +76,7 @@
 				colors: '',
 				isconnected: false,
 				iconIsconnected: false,
+				arr: ''
 			}
 		},
 		filters:{
@@ -96,6 +97,7 @@
 				if(this.colors) return this.colors;
 			},
 			Parameters(){
+				console.log(this.$store.state.market.Parameters);
 				return this.$store.state.market.Parameters;
 			},
 			quoteIndex(){
@@ -119,6 +121,10 @@
 		},
 		watch: {
 			quoteIndex: function(n, o){
+				if(this.arr[n].LastQuotation.LastPrice != this.Parameters[n].LastQuotation.LastPrice){
+					console.log(1);
+				}
+				
 //				if(this.Parameters[n].LastQuotation.ChangeRate < 0){
 //					$("#datalist>.cont>li").eq(n).addClass("bggreen");
 //					setTimeout(function(){
@@ -222,6 +228,9 @@
 			this.initQuoteClient();
 			//取当前版本号
 			this.getVersion();
+		},
+		beforeUpdate: function(){
+			this.arr = this.Parameters;
 		},
 		updated: function(){
 			//判断网络
@@ -421,11 +430,23 @@
 							&:nth-child(4){
 								width: 22%;
 							}
+							&:nth-child(5){
+								width: 22%;
+							}
 							&.red{
 								color: @red;
 							}
 							&.green{
 								color: @green;
+							}
+							.icon_sj{
+								display: inline-block;
+								width: 7px;
+								height: 7px;
+								overflow: hidden;
+								background: url(../assets/img/sanjiao.png) no-repeat center center;
+								background-size: 100% 100%;
+								margin: 0 0 0 2px;
 							}
 						}
 					}
@@ -592,6 +613,12 @@
 						border-bottom: 1px solid @black;
 						color: @white;
 						font-size: @fs16*@ip6;
+						&.bgred{
+							background: #502e38;
+						}
+						&.bggreen{
+							background: #294743;
+						}
 						li{
 							line-height: 60px*@ip6;
 							text-align: right;
@@ -618,11 +645,23 @@
 							&:nth-child(4){
 								width: 22%;
 							}
+							&:nth-child(5){
+								width: 22%;
+							}
 							&.red{
 								color: @red;
 							}
 							&.green{
 								color: @green;
+							}
+							.icon_sj{
+								display: inline-block;
+								width: 7px*@ip6;
+								height: 7px*@ip6;
+								overflow: hidden;
+								background: url(../assets/img/sanjiao.png) no-repeat center center;
+								background-size: 100% 100%;
+								margin: 0 0 0 2px*@ip6;
 							}
 						}
 					}
@@ -789,6 +828,12 @@
 						border-bottom: 1px solid @black;
 						color: @white;
 						font-size: @fs16*@ip5;
+						&.bgred{
+							background: #502e38;
+						}
+						&.bggreen{
+							background: #294743;
+						}
 						li{
 							line-height: 60px*@ip5;
 							text-align: right;
@@ -815,11 +860,23 @@
 							&:nth-child(4){
 								width: 22%;
 							}
+							&:nth-child(5){
+								width: 22%;
+							}
 							&.red{
 								color: @red;
 							}
 							&.green{
 								color: @green;
+							}
+							.icon_sj{
+								display: inline-block;
+								width: 7px*@ip5;
+								height: 7px*@ip5;
+								overflow: hidden;
+								background: url(../assets/img/sanjiao.png) no-repeat center center;
+								background-size: 100% 100%;
+								margin: 0 0 0 2px*@ip5;
 							}
 						}
 					}
