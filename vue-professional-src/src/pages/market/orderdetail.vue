@@ -209,8 +209,6 @@
 				overy = event.touches[0].clientY; 
 				if(this.sshow == true){
 					if(startx-overx > 10){
-						return;
-					}else if(overx-startx > 10){
 						this.cname = this.detail.CommodityName;
 						this.cnum = this.detail.CommodityNo + this.detail.MainContract;
 						this.$store.state.isshow.sshow = false;
@@ -220,20 +218,12 @@
 						this.$store.state.isshow.bottomshow = false;
 						this.$store.state.isshow.islightshow = false;
 						this.$store.state.isshow.isklineshow = false;
+					}else if(overx-startx > 10){
+						return;
 					}
 				}else if(this.fshow == true){
 					if(startx-overx > 10){         //左滑动判断
 						this.cname = this.detail.CommodityName;
-						this.cnum = this.detail.CommodityNo + this.detail.MainContract;
-                    	this.$store.state.isshow.sshow = true;
-						this.$store.state.isshow.fshow = false;
-						this.$store.state.isshow.kshow = false;
-						this.$store.state.isshow.pshow = false;
-						this.$store.state.isshow.bottomshow = false;
-						this.$store.state.isshow.isfensshow = false;
-						this.$store.state.isshow.isklineshow = false;
-	                }else if(overx-startx > 10){       //右滑动判断
-	                	this.cname = this.detail.CommodityName;
 						this.cnum = this.detail.CommodityNo + this.detail.MainContract;
 	                	this.$store.state.isshow.sshow = false;
 						this.$store.state.isshow.fshow = false;
@@ -246,19 +236,19 @@
 						this.$store.state.market.selectTime=1;
 						var b = '{"Method":"QryHistory","Parameters":{"ExchangeNo":"' + this.detail.LastQuotation.ExchangeNo + '","CommodityNo":"' + this.detail.CommodityNo + '","ContractNo":"' + this.detail.LastQuotation.ContractNo + '","HisQuoteType":' + 1 + ',"BeginTime":"","EndTime":"","Count":' + 0 + '}}'
 						this.quoteSocket.send(b);
-	                }
-				}else if(this.kshow == true){
-					if(startx-overx > 10){
-						this.cname = this.detail.CommodityName;
+	                }else if(overx-startx > 10){       //右滑动判断
+	                	this.cname = this.detail.CommodityName;
 						this.cnum = this.detail.CommodityNo + this.detail.MainContract;
-						this.$store.state.isshow.sshow = false;
-						this.$store.state.isshow.fshow = true;
+                    	this.$store.state.isshow.sshow = true;
+						this.$store.state.isshow.fshow = false;
 						this.$store.state.isshow.kshow = false;
 						this.$store.state.isshow.pshow = false;
 						this.$store.state.isshow.bottomshow = false;
-						this.$store.state.isshow.islightshow = false;
+						this.$store.state.isshow.isfensshow = false;
 						this.$store.state.isshow.isklineshow = false;
-					}else if(overx-startx > 10){
+	                }
+				}else if(this.kshow == true){
+					if(startx-overx > 10){
 						this.cname = this.detail.CommodityName;
 						this.cnum = this.detail.CommodityNo + this.detail.MainContract;
 						this.$store.state.isshow.sshow = false;
@@ -269,23 +259,19 @@
 						this.$store.state.isshow.isfensshow = false;
 						this.$store.state.isshow.islightshow = false;
 						this.$store.state.isshow.isklineshow = false;
-					}
-				}else if(this.pshow == true){
-					if(startx-overx > 10){
+					}else if(overx-startx > 10){
 						this.cname = this.detail.CommodityName;
 						this.cnum = this.detail.CommodityNo + this.detail.MainContract;
 						this.$store.state.isshow.sshow = false;
-						this.$store.state.isshow.fshow = false;
-						this.$store.state.isshow.kshow = true;
+						this.$store.state.isshow.fshow = true;
+						this.$store.state.isshow.kshow = false;
 						this.$store.state.isshow.pshow = false;
 						this.$store.state.isshow.bottomshow = false;
-						this.$store.state.isshow.isfensshow = false;
 						this.$store.state.isshow.islightshow = false;
-						//默认一分钟K线
-						this.$store.state.market.selectTime=1;
-						var b = '{"Method":"QryHistory","Parameters":{"ExchangeNo":"' + this.detail.LastQuotation.ExchangeNo + '","CommodityNo":"' + this.detail.CommodityNo + '","ContractNo":"' + this.detail.LastQuotation.ContractNo + '","HisQuoteType":' + 1 + ',"BeginTime":"","EndTime":"","Count":' + 0 + '}}'
-						this.quoteSocket.send(b);
-					}else if(overx-startx > 10){
+						this.$store.state.isshow.isklineshow = false;
+					}
+				}else if(this.pshow == true){
+					if(startx-overx > 10){
 						if(JSON.parse(localStorage.getItem('tradeUser')) == null){
 							this.$refs.selectBar.$refs.alert.isshow = true;
 						}else{
@@ -300,9 +286,25 @@
 							this.$store.state.isshow.islightshow = false;
 							this.$store.state.isshow.isklineshow = false;
 						}
+					}else if(overx-startx > 10){
+						this.cname = this.detail.CommodityName;
+						this.cnum = this.detail.CommodityNo + this.detail.MainContract;
+						this.$store.state.isshow.sshow = false;
+						this.$store.state.isshow.fshow = false;
+						this.$store.state.isshow.kshow = true;
+						this.$store.state.isshow.pshow = false;
+						this.$store.state.isshow.bottomshow = false;
+						this.$store.state.isshow.isfensshow = false;
+						this.$store.state.isshow.islightshow = false;
+						//默认一分钟K线
+						this.$store.state.market.selectTime=1;
+						var b = '{"Method":"QryHistory","Parameters":{"ExchangeNo":"' + this.detail.LastQuotation.ExchangeNo + '","CommodityNo":"' + this.detail.CommodityNo + '","ContractNo":"' + this.detail.LastQuotation.ContractNo + '","HisQuoteType":' + 1 + ',"BeginTime":"","EndTime":"","Count":' + 0 + '}}'
+						this.quoteSocket.send(b);
 					}
 				}else{
 					if(startx-overx > 10){
+						return;
+					}else if(overx-startx > 10){
 						this.cname = this.detail.CommodityName;
 						this.cnum = this.detail.CommodityNo + this.detail.MainContract;
 						this.$store.state.isshow.sshow = false;
@@ -313,8 +315,6 @@
 						this.$store.state.isshow.isfensshow = false;
 						this.$store.state.isshow.islightshow = false;
 						this.$store.state.isshow.isklineshow = false;
-					}else if(overx-startx > 10){
-						return;
 					}
 				}
 			}.bind(this), false);
