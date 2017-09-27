@@ -171,19 +171,19 @@
 		activated: function() {
 			this.CommodityName = this.$route.query.CommodityName;
 			this.EngName = this.$route.query.EngName;
-			this.$store.state.isshow.sshow = false;
-			this.$store.state.isshow.fshow = true;
-			this.$store.state.isshow.kshow = false;
-			this.$store.state.isshow.pshow = false;
-			this.$store.state.isshow.bottomshow = false;
-			this.$store.state.isshow.islightshow = false;
+//			this.$store.state.isshow.sshow = false;
+//			this.$store.state.isshow.fshow = true;
+//			this.$store.state.isshow.kshow = false;
+//			this.$store.state.isshow.pshow = false;
+//			this.$store.state.isshow.bottomshow = false;
+//			this.$store.state.isshow.islightshow = false;
 		},
 		mounted: function() {
-			this.$store.state.isshow.fshow = true;
-			this.$store.state.isshow.pshow = false;
-			this.$store.state.isshow.sshow = false;
-			this.$store.state.isshow.kshow = false;
-			this.$store.state.isshow.bottomshow = false;
+//			this.$store.state.isshow.fshow = true;
+//			this.$store.state.isshow.pshow = false;
+//			this.$store.state.isshow.sshow = false;
+//			this.$store.state.isshow.kshow = false;
+//			this.$store.state.isshow.bottomshow = false;
 			//判断交易账号是否已登录
 			if(localStorage.tradeUser != null || localStorage.tradeUser != undefined){
 				this.$children[0].isShow = true;
