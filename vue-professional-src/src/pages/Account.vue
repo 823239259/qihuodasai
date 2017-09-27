@@ -148,7 +148,7 @@
 			},
 			confirmExit: function(){
 				localStorage.removeItem("user");
-				this.$router.replace({path:'/login', query: {isJump: 2}});
+				this.$router.push({path:'/login', query: {isJump: 2}});
 				this.isexit = false;
 			},
 			cancel: function(){
@@ -197,6 +197,12 @@
 			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
 			//获取用户账户信息
 			this.getUserMsg();
+			//判断是否登录
+			if(!localStorage.user) {
+				this.$router.replace({
+					'path': '/home'
+				});
+			}
 		}
 	}
 </script>

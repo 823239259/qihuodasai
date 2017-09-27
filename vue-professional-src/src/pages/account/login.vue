@@ -2,7 +2,7 @@
 	<div id="login">
 		<tipsDialog :msg="msgTips" time="2000" ref="dialog"></tipsDialog>
 		<topbar title="登录"></topbar>
-		<back :title="isJumpEvent" v-show="isback"></back>
+		<back v-show="isback"></back>
 		<cs title="客服"></cs>
 		<div class="page_cont">
 			<div class="logo">
@@ -56,8 +56,6 @@
 				this.isJump = this.$route.query.isJump;
 				if(this.isJump == 1){
 					return true;
-				}else if(this.isJump == 2){
-					return 'home';
 				}
 			},
 			msgTips: function(){
