@@ -59,7 +59,7 @@
 					<p id="guideP">操盘流程：①->登录平台账号->②开交易账户->③登录交易账户，操盘->④操盘完成，终结方案 </p>
 					<span class="mui-pull-right" id="colse">×</span>
 				</div>
-				<p style="padding: 0 2%; background: #383838;"><span>合约名称</span><span>最新价</span><span>成交量</span><span id="changeSwitch">涨跌幅</span></p>
+				<p style="padding: 0 2%; background: #383838;"><span>合约名称</span><span>最新价</span><span>成交量</span><span id="changeSwitch" style="padding-right: 8px;">涨跌幅</span></p>
 			</div>
 			<div class="productList">
 
@@ -457,12 +457,20 @@
 								ChangeValue[i].innerText = MoreData.ChangeValue.toFixed(2);
 								ChangeValue[i].className = "greenBg ChangeValue";
 								ChangeRate[i].innerText = MoreData.ChangeRate.toFixed(2) + "%";
-								ChangeRate[i].className = "greenBg ChangeRate";
+//								ChangeRate[i].className = "greenBg ChangeRate";
+								ChangeRate[i].style.textAlign = "center"
+								ChangeRate[i].style.width = "65px";
+								ChangeRate[i].style.borderRadius = "5px";
+								ChangeRate[i].style.backgroundColor = "#16a951";
 							} else {
 								ChangeValue[i].innerText = MoreData.ChangeValue.toFixed(1);
 								ChangeValue[i].className = "redBg ChangeValue";
 								ChangeRate[i].innerText = "+" + MoreData.ChangeRate.toFixed(2) + "%";
-								ChangeRate[i].className = "redBg ChangeRate";
+//								ChangeRate[i].className = "redBg ChangeRate";
+								ChangeRate[i].style.width = "65px";
+								ChangeRate[i].style.borderRadius = "5px";
+								ChangeRate[i].style.backgroundColor = "#e9392a";
+								
 							}
 							if(Number(MoreData.LastPrice) - Number(MoreData.PreSettlePrice) < 0) {
 								LastPrice[i].innerText = MoreData.LastPrice.toFixed(product.DotSize[i]);
