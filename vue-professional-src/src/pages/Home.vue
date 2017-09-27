@@ -248,8 +248,8 @@
 			}.bind(this), function(){
 				this.iconIsconnected = false;
 				this.colors = '';
-				//初始化行情
-				this.initQuoteClient();
+				//刷新页面
+				window.location.reload();
 			}.bind(this));
 		},
 		activated:function(){
