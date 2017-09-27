@@ -292,17 +292,17 @@
 			}
 		}
 		#refresh {
-			width: 18px;
-			height: 18px;
+			width: 50px;
+			height: 50px;
 			background-color: transparent;
 			border: none;
 			outline: none;
-			background-image: url('../assets/img/refresh.png');
-			background-size: 100% 100%;
+			background: url('../assets/img/refresh.png') no-repeat 16px 16px;
+			background-size: 18px 18px;
 			position: fixed;
 			z-index: 1000;
-			right: 16px;
-			top: 16px;
+			right: 0;
+			top: 0;
 			&.dynamic{
 				background-image: url('../assets/img/refresh.gif');
 			}
@@ -508,17 +508,17 @@
 			}
 		}
 		#refresh {
-			width: 18px*@ip6;
-			height: 18px*@ip6;
+			width: 50px*@ip6;
+			height: 50px*@ip6;
 			background-color: transparent;
 			border: none;
 			outline: none;
-			background-image: url('../assets/img/refresh.png');
-			background-size: 100% 100%;
+			background: url('../assets/img/refresh.png') no-repeat 16px*@ip6 16px*@ip6;
+			background-size: 18px*@ip6 18px*@ip6;
 			position: fixed;
 			z-index: 1000;
-			right: 16px*@ip6;
-			top: 16px*@ip6;
+			right: 0;
+			top: 0;
 			&.dynamic{
 				background-image: url('../assets/img/refresh.gif');
 			}
@@ -723,17 +723,17 @@
 			}
 		}
 		#refresh {
-			width: 18px*@ip5;
-			height: 18px*@ip5;
+			width: 50px*@ip5;
+			height: 50px*@ip5;
 			background-color: transparent;
 			border: none;
 			outline: none;
-			background-image: url('../assets/img/refresh.png');
-			background-size: 100% 100%;
+			background: url('../assets/img/refresh.png') no-repeat 16px*@ip5 16px*@ip5;
+			background-size: 18px*@ip5 18px*@ip5;
 			position: fixed;
 			z-index: 1000;
-			right: 16px*@ip5;
-			top: 16px*@ip5;
+			right: 0;
+			top: 0;
 			&.dynamic{
 				background-image: url('../assets/img/refresh.gif');
 			}
