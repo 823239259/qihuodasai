@@ -18,7 +18,11 @@
 		methods:{
 			goback:function(e){
 				if(!$(e.currentTarget).hasClass("current")){
-					this.$router.go(-1);
+					if(!localStorage.user){
+						this.$router.push({path: '/home'});
+					}else{
+						this.$router.go(-1);
+					}
 				}else{
 					return false;
 				}

@@ -198,11 +198,11 @@
 			//获取用户账户信息
 			this.getUserMsg();
 			//判断是否登录
-			if(!localStorage.user) {
-				this.$router.replace({
-					'path': '/home'
-				});
-			}
+//			if(!localStorage.user) {
+//				this.$router.replace({
+//					'path': '/home'
+//				});
+//			}
 		}
 	}
 </script>
