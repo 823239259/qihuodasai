@@ -120,6 +120,9 @@
 			PATH: function(){
 				return this.$store.getters.PATH;
 			},
+			tradeLoginSuccessMsg(){
+				return this.$store.state.market.tradeLoginSuccessMsg;
+			}
 		},
 		watch: {
 			quoteIndex: function(n, o){
@@ -149,10 +152,15 @@
 						this.isdynamic = false;
 					}.bind(this),1000);
 					//改变页面样式
-					if(this.msg == '交易服务器断开，正在重连'){
-						this.iconIsconnected = true;
-						this.colors = 'red';
-					}
+//					if(this.msg == '交易服务器断开，正在重连'){
+//						this.iconIsconnected = true;
+//						this.colors = 'red';
+//					}
+				}
+			},
+			tradeLoginSuccessMsg: function(n, o){
+				if(n == '交易服务器连接成功'){
+					window.location.reload();
 				}
 			},
 			guideshow: function(n, o){
@@ -176,7 +184,7 @@
 					window.location.reload();
 				}else{
 					this.$refs.dialog.isShow = true;
-					this.msg = '网络未连接，行情、交易不能刷新'
+					this.msg = '网络未连接，行情、交易不能刷新';
 				}
 			},
 			toHelp: function(){
