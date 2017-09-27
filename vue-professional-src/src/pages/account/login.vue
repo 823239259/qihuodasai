@@ -2,7 +2,7 @@
 	<div id="login">
 		<tipsDialog :msg="msgTips" time="2000" ref="dialog"></tipsDialog>
 		<topbar title="登录"></topbar>
-		<back v-show="isback"></back>
+		<back :title="isJumpEvent"></back>
 		<cs title="客服"></cs>
 		<div class="page_cont">
 			<div class="logo">
@@ -39,7 +39,6 @@
 		data(){
 			return {
 				isJump: '',
-				isback: true,
 				eyeShow: false,
 				msg: '',
 				phone: '',

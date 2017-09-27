@@ -148,7 +148,7 @@
 			},
 			confirmExit: function(){
 				localStorage.removeItem("user");
-				this.$router.push({path:'/login', query: {isJump: 2}});
+				this.$router.push({path:'/login'});
 				this.isexit = false;
 			},
 			cancel: function(){

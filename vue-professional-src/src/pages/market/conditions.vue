@@ -316,9 +316,7 @@
 				}
 			},
 			addConditions: function(){
-				if(this.$refs.ifalert.isshow == false){
-					this.$refs.ifalert.isshow = true;
-				}
+				if(this.$refs.ifalert.isshow == false) this.$refs.ifalert.isshow = true;
 			},
 			regroupConditionList:function(){
 				this.conditionList.forEach(function(e,i){
