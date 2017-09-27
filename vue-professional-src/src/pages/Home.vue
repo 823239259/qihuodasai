@@ -158,11 +158,6 @@
 //					}
 				}
 			},
-			tradeLoginSuccessMsg: function(n, o){
-				if(n == '交易服务器连接成功'){
-					window.location.reload();
-				}
-			},
 			guideshow: function(n, o){
 				if(n == false){
 					this.$refs.dialog.isShow = true;
