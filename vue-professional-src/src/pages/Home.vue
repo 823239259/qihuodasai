@@ -623,7 +623,8 @@
 							line-height: 60px*@ip6;
 							text-align: right;
 							padding: 0;
-							border: 0; 
+							border: 0;
+							background: none; 
 							&:nth-child(1){
 								width: 34%;
 								text-align: left;
@@ -839,6 +840,7 @@
 							text-align: right;
 							padding: 0;
 							border: 0; 
+							background: none; 
 							&:nth-child(1){
 								width: 34%;
 								text-align: left;
