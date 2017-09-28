@@ -1972,11 +1972,8 @@ export default new Vuex.Store({
 		},
 		layerMessage:function(context,parameters){
 			if(parameters!=null){
-//				console.log(parameters);
-//				context.state.market.qryHoldTotalArr
 				if(parameters.OrderStatus==5){
 					context.state.market.layer = parameters.StatusMsg+Math.floor(Math.random()*10);
-//					console.log(parameters.StatusMsg);
 					return;
 				}
 				
@@ -2045,8 +2042,6 @@ export default new Vuex.Store({
 		appendApply:function(context,parameters){
 			if( parameters.OrderStatus < 3 ) { // 订单已提交、排队中、部分成交 显示到挂单列表
 				context.state.market.OnRspOrderInsertOrderListCont.push(parameters);
-			}else{
-				context.state.market.OnRspOrderInsertOrderListCont.splice(context.state.market.OnRspOrderInsertOrderListCont.length-1,1);
 			}
 		},
 		appendOrder00:function(context,parameters){
