@@ -47,7 +47,9 @@
 				</div>
 			</li>
 		</ul>
-		<bbtn :name="btnName" @tap.native="tocom"></bbtn>
+		<a href="javascript:void(0);">
+			<bbtn :name="btnName" @tap.native="tocom"></bbtn>
+		</a>
 	</div>
 </template>
 
@@ -215,7 +217,7 @@
 					this.msg = '服务器连接失败';
 				});
 			},
-			tocom: function() {
+			tocom: function(e) {
 				//资金足够的时候
 				if(this.enough) {
 					this.$http.post(
@@ -269,10 +271,11 @@
 						this.msg = '服务器连接失败';
 					});
 				}else{    //资金不足的时候
+					$(e.currentTarget).parent().attr("href","tel:4008528008");
 //					this.$router.replace({
 //						path: '/recharge'
 //					});
-					pro.callService();
+//					pro.callService();
 				}
 			}
 		},
