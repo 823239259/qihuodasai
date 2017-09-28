@@ -445,7 +445,6 @@
 					if(data.success == true) {
 						if(data.code == 1) {
 							this.tradeDetails = data.data.details;
-							console.log(data);
 							this.tradeDetailsId = this.tradeDetails.id;
 							this.tradeDetails.outDiskVoList.forEach(function(x, i) {
 								switch(x.tradeType) {
@@ -610,7 +609,7 @@
 			this.isShow = true;
 			//获取操盘明细
 			this.getTradeDetails();
-			this.type = this.$route.query.type.toString();
+			this.type = this.$route.query.type;
 			switch(this.type) {
 				case '1':
 					this.openShow = true;

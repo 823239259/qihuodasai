@@ -2052,6 +2052,8 @@ export default new Vuex.Store({
 		updateOrder:function(context,parameters){
 			context.state.market.OnRspOrderInsertEntrustCont.forEach(function(e,i){
 				if(e.OrderID == parameters.OrderID){
+					parameters['Drection'] = e.Drection;	
+					parameters['OrderPriceType']=e.OrderPriceType;
 					context.state.market.OnRspOrderInsertEntrustCont.splice(i,1,parameters);
 				}
 			});
