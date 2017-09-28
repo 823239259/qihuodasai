@@ -1877,11 +1877,10 @@ export default new Vuex.Store({
 			b.time = e0.InsertDateTime;	
 			if(e0.Status<2){
 				context.state.market.conditionList.push(parameters);
-//				console.log(JSON.stringify(b));
 				context.state.market.noListCont.push(b);
 			}else{
 				context.state.market.triggerConditionList.push(parameters);
-				context.state.market.yesListCont.push(b);
+//				context.state.market.yesListCont.push(b);
 			}
 		},
 		updateStopLoss:function(context,parameters){
