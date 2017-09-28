@@ -537,7 +537,7 @@
 								this.msg = '操作成功';
 								localStorage.removeItem("tradeUser");
 								setTimeout(function(){
-									this.$router.replace({path: '/tradeRecord'});
+									this.$router.push({path: '/tradeapply'});
 								}.bind(this), 1000);
 							}
 						}else{
