@@ -86,6 +86,7 @@ var market = {
 		qryHoldTotalArr:[],//持仓合计回复数组
 		qryHoldTotalKV:{},
 		quoteIndex: '',
+		quoteColor: '',
 		/**
 		 * 缓存账户信息
 		 */
@@ -2465,8 +2466,12 @@ export default new Vuex.Store({
 					var key = JSON.parse(evt.data).Parameters.CommodityNo;
 					context.state.market.Parameters.forEach(function(a, r) {
 						if(a.CommodityNo == key){
-							if(JSON.parse(evt.data).Parameters.LastPrice != a.LastQuotation.LastPrice){
+							if(JSON.parse(evt.data).Parameters.LastPrice > a.LastQuotation.LastPrice){
 								context.state.market.quoteIndex = r;   //行情变颜色
+								context.state.market.quoteColor = 'red';
+							}else if(JSON.parse(evt.data).Parameters.LastPrice < a.LastQuotation.LastPrice){
+								context.state.market.quoteIndex = r;   //行情变颜色
+								context.state.market.quoteColor = 'green';
 							}
 						}
 					});

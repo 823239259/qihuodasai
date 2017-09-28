@@ -102,6 +102,9 @@
 			quoteIndex(){
 				return this.$store.state.market.quoteIndex;
 			},
+			quoteColor(){
+				return this.$store.state.market.quoteColor;
+			},
 			guideshow(){
 				return this.$store.state.isshow.guideshow;
 			},
@@ -126,17 +129,15 @@
 		},
 		watch: {
 			quoteIndex: function(n, o){
-				if(this.Parameters[n].LastQuotation.ChangeRate < 0){
-					$("#datalist>.cont>li").eq(n).addClass("bggreen");
-					setTimeout(function(){
-						$("#datalist>.cont>li").eq(n).removeClass("bggreen");
-					}, 500);
-				}else if(this.Parameters[n].LastQuotation.ChangeRate == 0){
-					return true;
-				}else{
+				if(this.quoteColor == 'red'){
 					$("#datalist>.cont>li").eq(n).addClass("bgred");
 					setTimeout(function(){
 						$("#datalist>.cont>li").eq(n).removeClass("bgred");
+					}, 500);
+				}else{
+					$("#datalist>.cont>li").eq(n).addClass("bggreen");
+					setTimeout(function(){
+						$("#datalist>.cont>li").eq(n).removeClass("bggreen");
 					}, 500);
 				}
 			},
