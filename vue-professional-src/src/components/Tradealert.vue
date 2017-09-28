@@ -61,6 +61,8 @@
 				}
 				if(this.jump && this.jump == 'true'){
 					this.$router.push({path: '/tradeLogin'});
+				}else if(this.jump && this.jump == 'false'){
+					this.$router.push({path: '/tradeapply'});
 				}
 				this.isshow = false;
 				this.$parent.isshow = false;

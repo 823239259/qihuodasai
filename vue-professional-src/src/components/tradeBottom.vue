@@ -58,7 +58,7 @@
 				<chartBtn type="buy" class="fl" @tap.native='buyOrder'></chartBtn>
 				<chartBtn type="sell" class="fr" @tap.native='sellOrder'></chartBtn>
 			</div>
-			<alert title="提示" :line1="promptMsg" jump="true" ref="alert" :name="confirmName"></alert>
+			<alert title="提示" :line1="promptMsg" jump="false" ref="alert" :name="confirmName"></alert>
 			<tipsDialog :msg="msgTips" ref="dialog"></tipsDialog>
 		</div>
 	</div>
