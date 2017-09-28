@@ -736,7 +736,6 @@
 			appendOrderList: function(obj){
 				this.obj = [];
 				obj.forEach(function(e){
-					console.log(e);
 					var orderTemplist = this.orderTemplist;
 					if(e.CommodityNo!=''){
 						var obj={};
