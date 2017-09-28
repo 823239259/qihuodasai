@@ -2460,9 +2460,16 @@ export default new Vuex.Store({
 					
 					context.state.market.subscribeIndex++;
 				} else if(context.state.wsjsondata.Method == "OnRtnQuote") { // 最新行情
-					var key=JSON.parse(evt.data).Parameters.CommodityNo;
+					var val = JSON.parse(evt.data).Parameters;
+					var key = JSON.parse(evt.data).Parameters.CommodityNo;
+					context.state.market.Parameters.forEach(function(a, r) {
+						if(a.CommodityNo == key){
+							if(JSON.parse(evt.data).Parameters.LastPrice != a.LastQuotation.LastPrice){
+								context.state.market.quoteIndex = r;   //行情变颜色
+							}
+						}
+					});
 					context.state.market.templateList[key]=JSON.parse(evt.data).Parameters;
-//					console.log(context.state.market.templateList);
 					context.state.market.markettemp.forEach(function(e, i) {
 						//如果拿到的数据的CommodityNo与缓存的数据的CommodityNo相等
 						if(JSON.parse(evt.data).Parameters.CommodityNo == e.CommodityNo) {
@@ -2472,7 +2479,6 @@ export default new Vuex.Store({
 							context.state.market.Parameters.forEach(function(a, r) {
 								if(a.CommodityNo == e.CommodityNo) {
 									context.state.market.Parameters.splice(r, 1, e);
-									context.state.market.quoteIndex = r;
 								}
 							});
 							if(context.state.market.currentNo == e.CommodityNo) {

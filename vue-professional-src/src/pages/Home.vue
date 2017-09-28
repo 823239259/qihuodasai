@@ -126,23 +126,19 @@
 		},
 		watch: {
 			quoteIndex: function(n, o){
-				if(this.arr[n].LastQuotation.LastPrice != this.Parameters[n].LastQuotation.LastPrice){
-					console.log(1);
+				if(this.Parameters[n].LastQuotation.ChangeRate < 0){
+					$("#datalist>.cont>li").eq(n).addClass("bggreen");
+					setTimeout(function(){
+						$("#datalist>.cont>li").eq(n).removeClass("bggreen");
+					}, 500);
+				}else if(this.Parameters[n].LastQuotation.ChangeRate == 0){
+					return true;
+				}else{
+					$("#datalist>.cont>li").eq(n).addClass("bgred");
+					setTimeout(function(){
+						$("#datalist>.cont>li").eq(n).removeClass("bgred");
+					}, 500);
 				}
-				
-//				if(this.Parameters[n].LastQuotation.ChangeRate < 0){
-//					$("#datalist>.cont>li").eq(n).addClass("bggreen");
-//					setTimeout(function(){
-//						$("#datalist>.cont>li").eq(n).removeClass("bggreen");
-//					}, 500);
-//				}else if(this.Parameters[n].LastQuotation.ChangeRate == 0){
-//					return true;
-//				}else{
-//					$("#datalist>.cont>li").eq(n).addClass("bgred");
-//					setTimeout(function(){
-//						$("#datalist>.cont>li").eq(n).removeClass("bgred");
-//					}, 500);
-//				}
 			},
 			quoteConnectedMsg: function(n, o){
 				if(n && this.guideshow == false){
@@ -151,11 +147,6 @@
 					setTimeout(function(){
 						this.isdynamic = false;
 					}.bind(this),1000);
-					//改变页面样式
-//					if(this.msg == '交易服务器断开，正在重连'){
-//						this.iconIsconnected = true;
-//						this.colors = 'red';
-//					}
 				}
 			},
 			guideshow: function(n, o){
@@ -237,7 +228,7 @@
 			this.getVersion();
 		},
 		beforeUpdate: function(){
-			this.arr = this.Parameters;
+//			this.arr = this.Parameters;
 		},
 		updated: function(){
 			//判断网络
