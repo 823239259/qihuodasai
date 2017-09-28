@@ -34,8 +34,8 @@
 		}
 		
 	}
-	/*ip5*/
 	
+	/*ip5*/
 	@media(max-width:370px) {
 		#paytopbar {
 			position: fixed;
@@ -47,6 +47,7 @@
 				width: 100%;
 				height: 50px*@ip5;
 				li:first-child {
+					height: 16px;
 					font-size: 16px*@ip5;
 				}
 				li:last-child {
@@ -55,8 +56,8 @@
 			}
 		}
 	}
-	/*ip6*/
 	
+	/*ip6*/
 	@media (min-width:371px) and (max-width:410px) {
 		#paytopbar {
 			position: fixed;
@@ -76,8 +77,8 @@
 			}
 		}
 	}
-	/*ip6p及以上*/
 	
+	/*ip6p及以上*/
 	@media (min-width:411px) {
 		#paytopbar {
 			position: fixed;

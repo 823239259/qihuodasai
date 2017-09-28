@@ -208,6 +208,7 @@
 				timeout: 5000
 			}).then(function(e) {
 				this.temp = e.body.data;
+				this.$store.state.tempTradeapply = this.temp;
 				this.temp.contractList.forEach(function(o, i) {
 					switch(o.tradeType) {
 						case 0:   //return '富时A50'
