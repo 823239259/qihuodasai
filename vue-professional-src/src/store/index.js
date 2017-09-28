@@ -2030,6 +2030,8 @@ export default new Vuex.Store({
 					context.state.market.layer = parameters.StatusMsg + ':合约【'+ parameters.ContractCode +'】,订单号:【'+ parameters.OrderID +'】' + Math.floor(Math.random()*10);
 					
 				}
+			}else if(parameters.OrderStatus == 6){
+				return true;
 			}else{
 				if(isExist==true){
 					context.state.market.orderListCont.splice(index,1);
