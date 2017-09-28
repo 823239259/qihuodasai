@@ -255,8 +255,12 @@
 				}
 			},
 			inputPrice: function(n, o){
-				if(n != undefined && this.moneyReg.test(n) == false){
-					this.inputPrice = parseFloat(this.templateList[this.commodityNo].LastPrice).toFixed(this.orderTemplist[this.commodityNo].DotSize);
+				if(n != undefined){
+					if(n == ''){
+						return true;
+					}else if(this.moneyReg.test(n) == false){
+						this.inputPrice = parseFloat(this.templateList[this.commodityNo].LastPrice).toFixed(this.orderTemplist[this.commodityNo].DotSize);
+					}
 				}
 			},
 			inputAdditionalPrice: function(n, o){
