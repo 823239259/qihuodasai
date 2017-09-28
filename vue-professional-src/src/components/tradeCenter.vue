@@ -432,7 +432,7 @@
 						}
 					}();
 					obj.delegatePrice = function(){
-						if(e.OrderPrice==0){
+						if(e.OrderPriceType==1){
 							return '市价';
 						}else{
 							return e.OrderPrice;
@@ -736,6 +736,7 @@
 			appendOrderList: function(obj){
 				this.obj = [];
 				obj.forEach(function(e){
+					console.log(e);
 					var orderTemplist = this.orderTemplist;
 					if(e.CommodityNo!=''){
 						var obj={};
@@ -749,7 +750,7 @@
 							}
 						}();
 						obj.delegatePrice = function(){
-							if(e.OrderPrice==0){
+							if(e.OrderPriceType==1){
 								return '市价';
 							}else{
 								return parseFloat(e.OrderPrice).toFixed(orderTemplist[e.CommodityNo].DotSize);
@@ -864,7 +865,7 @@
 					}
 				}();
 				obj.delegatePrice = function(){
-					if(e.OrderPrice==0){
+					if(e.OrderPriceType==1){
 						return '市价';
 					}else{
 						return e.OrderPrice;
