@@ -222,6 +222,10 @@
 						return;
 					}
 				}else if(this.fshow == true){
+					var chartfH = $("#chartfens").offset().top + $("#chartfens").height();
+					if(starty < chartfH){
+						return;
+					}
 					if(startx-overx > 50){         //左滑动判断
 						this.cname = this.detail.CommodityName;
 						this.cnum = this.detail.CommodityNo + this.detail.MainContract;
@@ -248,6 +252,10 @@
 						this.$store.state.isshow.isklineshow = false;
 	                }
 				}else if(this.kshow == true){
+					var chartkH = $("#klines").offset().top + $("#klines").height();
+					if(starty < chartkH){
+						return;
+					}
 					if(startx-overx > 50){
 						this.cname = this.detail.CommodityName;
 						this.cnum = this.detail.CommodityNo + this.detail.MainContract;
