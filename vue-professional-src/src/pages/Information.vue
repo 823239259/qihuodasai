@@ -68,7 +68,7 @@
 								<!--{{key.localDateTime | getTime('HH:mm')}}-->
 								{{key.timestamp | getTime('HH:mm')}}
 							</span>
-							<img :src="key.flagUrl" />
+							<img :src="key.country | countryImg" />
 							<span class="state fontgray">
 								{{key.country}}
 							</span>
@@ -346,6 +346,65 @@
 				}
 				
 				//				};
+			},
+			countryImg: function(e){
+				switch(e){
+					case '中国':
+						return require('../assets/img/country/China.png');
+						break;
+					case '英国':
+						return require('../assets/img/country/Britain.png');
+						break;
+					case '意大利':
+						return require('../assets/img/country/Italy.png');
+						break;
+					case '新西兰':
+						return require('../assets/img/country/Zealand.png');
+						break;
+					case '西班牙':
+						return require('../assets/img/country/Spain.png');
+						break;
+					case '瑞士':
+						return require('../assets/img/country/Switzerland.png');
+						break;
+					case '瑞典':
+						return require('../assets/img/country/Sweden.png');
+						break;
+					case '日本':
+						return require('../assets/img/country/Japan.png');
+						break;
+					case '欧元区':
+						return require('../assets/img/country/Eurozone.png');
+						break;
+					case '美国':
+						return require('../assets/img/country/USA.png');
+						break;
+					case '韩国':
+						return require('../assets/img/country/Seoul.png');
+						break;
+					case '法国':
+						return require('../assets/img/country/France.png');
+						break;
+					case '俄罗斯':
+						return require('../assets/img/country/Russia.png');
+						break;
+					case '德国':
+						return require('../assets/img/country/Germany.png');
+						break;
+					case '比利时':
+						return require('../assets/img/country/Belgium.png');
+						break;
+					case '澳大利亚':
+						return require('../assets/img/country/Australia.png');
+						break;
+					case '奥地利':
+						return require('../assets/img/country/Austria.png');
+						break;
+					default:
+						return require('../assets/img/country/allCity.png');
+						break;
+				}
+				console.log(e);
 			}
 		},
 		watch: {
@@ -444,19 +503,18 @@
 					this.getdate();
 				}
 				this.$http.post(
-					this.PATH + '/crawler/getCrawlerCalendarByTime', {
-						emulateJSON: true
-					}, {
+					this.PATH + '/crawler/getCrawlerCalendar', {emulateJSON: true}, {
 						params: {
+							size: 30,
 							startTime: starttime,
 							endTime: endtime
 						},
 						timeout: 5000
 					}
-
 				).then(function(e) {
 					var arr1 = [];
 					var arr2 = e.body.data.data;
+					console.log(arr2);
 					//筛选出重要为3星的
 					if(this.isimp == true) {
 						arr2.forEach(function(a) {
