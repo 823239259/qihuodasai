@@ -730,33 +730,12 @@
 			    interval: 0 //自动轮播周期，若为0则不自动播放，默认为0;
 			});
 			//保证金置顶
-//			window.onscroll = function() {
-//				var scroH = this.scrollTop();
-//				console.log(scroH);
-//				var h = $("#margin_trade_static").offset().top;
-//				console.log(h);
-//				if(scroH >= h){
-//					$(".margin_trade_fixed").css({
-//						"display": "block",
-//					});
-//				}else{
-//					$(".margin_trade_fixed").css({
-//						"display": "none",
-//					});
-//				}
-//			}
-				window.addEventListener('scroll', this.scrollEvent);
-			
-//			$(window).on('scroll', function(){
-//				var scroH = $(this).scrollTop();
-//				var h = $(".margin_trade").offset().top;
-//				if(scroH >= h){
-//					console.log(this)
-//					this.bondShow = true;
-//				}else{
-//					this.bondShow = false;
-//				}
-//			});
+			window.addEventListener('scroll', this.scrollEvent)
+//			var obj = document.getElementById('applydetail');
+//			obj.addEventListener("touchmove",function(e){
+//				e.preventDefault();
+//				this.scrollEvent();
+//			}.bind(this), false);
 		},
 		activated: function() {
 			//初始化页面显示申请开户
