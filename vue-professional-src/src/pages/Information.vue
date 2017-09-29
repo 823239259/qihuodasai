@@ -404,7 +404,6 @@
 						return require('../assets/img/country/allCity.png');
 						break;
 				}
-				console.log(e);
 			}
 		},
 		watch: {
@@ -514,7 +513,6 @@
 				).then(function(e) {
 					var arr1 = [];
 					var arr2 = e.body.data.data;
-					console.log(arr2);
 					//筛选出重要为3星的
 					if(this.isimp == true) {
 						arr2.forEach(function(a) {
