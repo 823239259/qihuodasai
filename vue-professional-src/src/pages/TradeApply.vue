@@ -37,7 +37,37 @@
 				<!--轮播 e-->
 				
 				<!--选择操盘保证金-->
-				<div class="margin_trade">
+				<div class="margin_trade" id="margin_trade_static">
+					<p class="fontwhite">选择操盘保证金（金额越多，可持仓手数越多）</p>
+					<ul>
+						<li class="fl" @tap='choose'>
+							<mr num='3000'></mr>
+						</li>
+						<li class="fl" @tap='choose'>
+							<mr num='6000'></mr>
+						</li>
+						<li class="fl" @tap='choose'>
+							<mr num='10000'></mr>
+						</li>
+						<li class="fl" @tap='choose'>
+							<mr num='12000'></mr>
+						</li>
+						<li class="fl" @tap='choose'>
+							<mr num='15000'></mr>
+						</li>
+						<li class="fl" @tap='choose'>
+							<mr num='50000'></mr>
+						</li>
+						<li class="fl" @tap='choose'>
+							<mr num='100000'></mr>
+						</li>
+						<li class="fl" @tap='choose'>
+							<mr num='200000'></mr>
+						</li>
+					</ul>
+				</div>
+				<!--选择操盘保证金-->
+				<div class="margin_trade margin_trade_fixed" v-show="bondShow">
 					<p class="fontwhite">选择操盘保证金（金额越多，可持仓手数越多）</p>
 					<ul>
 						<li class="fl" @tap='choose'>
@@ -196,7 +226,10 @@
 				emptyShow: false,
 				tradeList: '',
 				userInfo: '',
-				msg: ''
+				msg: '',
+				bondShow: false,
+				scroH: '',
+				h: ''
 			}
 		},
 		created: function(){
@@ -673,12 +706,20 @@
 					this.$refs.dialog.isShow = true;
 					this.msg = '网络不给力，请稍后再试！'
 				});
+			},
+			scrollEvent: function(){
+				var h = document.getElementById('margin_trade_static').scrollTop - document.body.scrollTop + $('#margin_trade_static').height();
+				if(h < 0){
+					this.bondShow = true;
+				}else{
+					this.bondShow = false;
+				}
 			}
 		},
 		mounted: function() {
 			//初始化页面高度
 			var h = window.screen.height - $("#topbar").height() - $("#navbar").height() - 20;
-			$(".main").height(h);
+//			$(".main").height(h);
 			$('.margin_trade>ul>li:first-child>div>div').addClass('current');
 			//初始化banner
 			this.getBanner();
@@ -687,21 +728,32 @@
 			    interval: 0 //自动轮播周期，若为0则不自动播放，默认为0;
 			});
 			//保证金置顶
-			$(".main").scroll(function(){
-				var scroH = $(this).scrollTop();
-				var h = $(".margin_trade").offset().top;
-				if(scroH >= h){
-					$(".margin_trade").css({
-						"position": "fixed",
-						"top": $("#topbar").height(),
-						"z-index": 1111
-					})
-				}else{
-					$(".margin_trade").css({
-						"position": "static",
-					});
-				}
-			});
+//			window.onscroll = function() {
+//				var scroH = this.scrollTop();
+//				console.log(scroH);
+//				var h = $("#margin_trade_static").offset().top;
+//				console.log(h);
+//				if(scroH >= h){
+//					$(".margin_trade_fixed").css({
+//						"display": "block",
+//					});
+//				}else{
+//					$(".margin_trade_fixed").css({
+//						"display": "none",
+//					});
+//				}
+//			}
+			window.addEventListener('scroll', this.scrollEvent);
+//			$(window).on('scroll', function(){
+//				var scroH = $(this).scrollTop();
+//				var h = $(".margin_trade").offset().top;
+//				if(scroH >= h){
+//					console.log(this)
+//					this.bondShow = true;
+//				}else{
+//					this.bondShow = false;
+//				}
+//			});
 		},
 		activated: function() {
 			//初始化页面显示申请开户
@@ -736,7 +788,6 @@
 	}
 	.main{
 		width: 100%;
-		overflow-y: auto;
 	}
 	.margin_trade {
 		height: 158px;
@@ -755,6 +806,11 @@
 					margin: 0 auto;
 				}
 			}
+		}
+		&.margin_trade_fixed{
+			position: fixed;
+			top: 50px;
+			z-index: 1111;
 		}
 	}
 	.margin_trade_show {
@@ -1023,7 +1079,6 @@
 	}
 	.main{
 		width: 100%;
-		overflow-y: auto;
 	}
 	.margin_trade {
 		height: 158px*@ip6;
@@ -1042,6 +1097,11 @@
 					margin: 0 auto;
 				}
 			}
+		}
+		&.margin_trade_fixed{
+			position: fixed;
+			top: 50px*@ip6;
+			z-index: 1111;
 		}
 	}
 	.margin_trade_show {
@@ -1306,7 +1366,6 @@
 	}
 	.main{
 		width: 100%;
-		overflow-y: auto;
 	}
 	.margin_trade {
 		height: 158px*@ip5;
@@ -1325,6 +1384,11 @@
 					margin: 0 auto;
 				}
 			}
+		}
+		&.margin_trade_fixed{
+			position: fixed;
+			top: 50px*@ip5;
+			z-index: 1111;
 		}
 	}
 	.margin_trade_show {
