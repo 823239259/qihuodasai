@@ -400,6 +400,9 @@
 					case '奥地利':
 						return require('../assets/img/country/Austria.png');
 						break;
+					case '加拿大':
+						return require('../assets/img/country/Canada.png');
+						break;
 					default:
 						return require('../assets/img/country/allCity.png');
 						break;
