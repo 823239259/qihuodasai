@@ -438,7 +438,7 @@
 				this.getnews(this.startT, this.endT);
 			},
 			news: function(n, o) {
-				if(n.length > 0) {
+				if(n != undefined && n.length > 0) {
 					this.isnull = false;
 					$('#tishi').text('暂无所选数据，点击此处加载全部数据');
 					n.forEach(function(e) {
