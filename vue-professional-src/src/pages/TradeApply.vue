@@ -708,11 +708,13 @@
 				});
 			},
 			scrollEvent: function(){
-				var h = document.getElementById('margin_trade_static').scrollTop - document.body.scrollTop + $('#margin_trade_static').height();
-				if(h < 0){
-					this.bondShow = true;
-				}else{
-					this.bondShow = false;
+				if(this.show == true){
+					var h = document.getElementById('margin_trade_static').scrollTop - document.body.scrollTop + $('#margin_trade_static').height();
+					if(h < 0){
+						this.bondShow = true;
+					}else{
+						this.bondShow = false;
+					}
 				}
 			}
 		},
@@ -743,7 +745,8 @@
 //					});
 //				}
 //			}
-			window.addEventListener('scroll', this.scrollEvent);
+				window.addEventListener('scroll', this.scrollEvent);
+			
 //			$(window).on('scroll', function(){
 //				var scroH = $(this).scrollTop();
 //				var h = $(".margin_trade").offset().top;
