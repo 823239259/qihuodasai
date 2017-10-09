@@ -157,7 +157,6 @@ mui.plusReady(function() {
 					setHandicap(subscribeParam);
 				}
 				updateStopAndLossLastPrice(subscribeParam);
-				updateShowRuleLastPrice(subscribeParam);
 				updateDesignateByQuote(subscribeParam);
 				updateFloatProfit(subscribeParam);
 				//计算浮动盈亏总和
