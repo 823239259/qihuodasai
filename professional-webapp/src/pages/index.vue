@@ -94,7 +94,7 @@
 <style scoped lang="scss">
 @import url("../assets/css/common.scss");
 #index{
-	background: red;
+	
 }
 
 
