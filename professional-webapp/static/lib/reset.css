@@ -27,6 +27,13 @@ table {
 ul, ol, li {
  	list-style: none;
 }
+input, button, select, textarea {
+    font-size: 14px;
+    font-family: "\5FAE\8F6F\96C5\9ED1"; 
+    vertical-align: middle;
+    outline: none;
+    -webkit-appearance: none;
+}
 body {
  	line-height: 1;
  	-webkit-text-size-adjust: none;
