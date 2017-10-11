@@ -6,15 +6,33 @@
 						<img src="./assets/images/logo.png" alt="" />
 					</li>
 					<li>
-						<i></i>
+						<i class="spirt_1"></i>
 						行情
 					</li>
-					<li>交易</li>
-					<li>开户</li>
-					<li>直播</li>
-					<li>日历</li>
-					<li>下载</li>
-					<li>我的</li>
+					<li>
+						<i class="spirt_2"></i>
+						交易
+					</li>
+					<li>
+						<i class="spirt_3"></i>
+						开户
+					</li>
+					<li>
+						<i class="spirt_4"></i>
+						直播
+					</li>
+					<li>
+						<i class="spirt_5"></i>
+						日历
+					</li>
+					<li>
+						<i class="spirt_6"></i>
+						下载
+					</li>
+					<li>
+						<i class="spirt_7"></i>
+						我的
+					</li>
 				</ul>
 			</div>
 		<div id="container_top">
@@ -31,10 +49,7 @@
 			<span>美黄金<label></label></span>
 			<span>恒指期货<label></label></span>
 		</div>
-		<div id="container">
-			
-		</div>
-		
+		<router-view></router-view>
 	</div>
 </template>
 
