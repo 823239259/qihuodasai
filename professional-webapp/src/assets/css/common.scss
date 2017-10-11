@@ -3,4 +3,66 @@
  * @author: name  
  * @update: time (2017-04-13 18:32)  
  */
+//颜色
+$black : #242633;
+$yellow : #ffd400;
+$red : #ff4c4c;
+$green : #3ec181;
+$gary_white : #ccd5ff;
+$gray : #7a7f99;
+$highLight : #474c66;
+$depLight : #2d3040;
+$white :　#ffffff;
+$bottom_color : #36394d;
+//字体
+$fs12 : 12px;
+$fs14 : 14px;
 
+//容器框架
+#container {
+    width: 100%;
+    height: 980px;
+    background-color: $black;
+    min-width: 1280px;
+}
+//左部固定
+#container_left {
+    width: 60px;
+    background-color: $depLight;
+    float: left;
+    height: 100%;
+    font-size: $fs12;
+    color: $yellow;
+    ul {
+        li {
+            display: block;
+            height: 60px;
+            text-align: center;
+        }
+    }
+}
+
+//上部固定
+#container_top {
+    width: 95%;
+    float: left;
+    background-color: $depLight;
+    height: 40px;
+    line-height: 40px;
+    margin: 5px 10px;
+    font-size: $fs12;
+}
+#container_top li {
+    float: left;
+}
+//下部固定
+#container_buttom {
+    position: absolute;
+    top: 100%;
+    background-color: $bottom_color;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    font-size: $fs12;
+
+}
