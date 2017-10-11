@@ -1,6 +1,7 @@
 <template>
 	<div id="test">
 		<h1>{{ msg }}</h1>
+		<button @click="clickEvent">我是按钮</button>
 	</div>
 </template>
 
@@ -12,6 +13,14 @@
 				msg: 'Welcome to Your Vue.js App'
 			}
 		},
+		methods: {
+			clickEvent: function(){
+				layer.msg('hello');
+			}
+		},
+		mounted: function(){
+			
+		}
 		
 	}
 </script>
