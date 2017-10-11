@@ -2,6 +2,7 @@
 	<div id="test">
 		<h1>{{ msg }}</h1>
 		<button @click="clickEvent">我是按钮</button>
+		<i class="ifont">&#xe611;</i>
 	</div>
 </template>
 
