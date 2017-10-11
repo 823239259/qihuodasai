@@ -25,8 +25,7 @@ ul, ol, li {
  	list-style: none;
 }
 input, button, select, textarea {
-    font-size: 14px;
-    font-family: "\5FAE\8F6F\96C5\9ED1"; 
+    font-family: "\5B8B\4F53"; 
     vertical-align: middle;
     outline: none;
     -webkit-appearance: none;
@@ -38,7 +37,7 @@ body {
  	background-color: #fff;
 }
 html, body {
-	font-family: "\5FAE\8F6F\96C5\9ED1","\5B8B\4F53","arial",
+	font-family: "\5B8B\4F53","\5FAE\8F6F\96C5\9ED1","arial",
  	background: #242633;
  	color: #a3aacc;
  	font-size: 14px;
