@@ -30,17 +30,16 @@ input, button, select, textarea {
     outline: none;
     -webkit-appearance: none;
 }
-body {
- 	line-height: 1;
+/*body {
  	-webkit-text-size-adjust: none;
  	-webkit-tap-highlight-color: rgba(0, 0, 0, 0.5);
- 	background-color: #fff;
-}
+}*/
 html, body {
-	font-family: "\5B8B\4F53","\5FAE\8F6F\96C5\9ED1","arial",
- 	background: #242633;
+	font-family: "\5B8B\4F53","\5FAE\8F6F\96C5\9ED1","arial";
+	background: #242633;
  	color: #a3aacc;
  	font-size: 14px;
+ 	line-height: 1;
 }
 .clearfix:before, .clearfix:after{
 	 clear: both; 
