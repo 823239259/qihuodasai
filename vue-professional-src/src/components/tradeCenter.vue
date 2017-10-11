@@ -20,13 +20,13 @@
 		</div>
 		<div class="order_type border_bottom">
 			<div class="order_type_left fl">
-				<div class="cont">
+				<div class="cont" @tap="showSelect">
 					<span class="white">{{commodityName00}}</span>
 					<span>{{commodityNo00}}</span>
 					<i class="icon_search"></i>
-					<select v-model="selectId">
+					<!--<select v-model="selectId">
 						<option  v-for="v in parameters" :value="v.CommodityName + '&' + v.CommodityNo + '&' + v.MainContract">{{v.CommodityName}} {{v.CommodityNo}} {{v.MainContract}}</option>
-					</select>
+					</select>-->
 				</div>
 			</div>
 			<div class="order_type_right fl">
@@ -187,7 +187,7 @@
 		data(){
 			return {
 				msg: '',
-				selectId:'',
+//				selectId:'',
 				isShow: true,
 				positionShow: true,
 				orderShow: false,
@@ -243,6 +243,9 @@
 			},
 			layer(){
 				return this.$store.state.market.layer;
+			},
+			selectId: function(){
+				return this.$store.state.market.selectId;
 			},
 			cancelAllOrderAlertObj:function(){
 				if(this.buyText){
@@ -474,6 +477,9 @@
 			}
 		},
 		methods: {
+			showSelect: function(){
+				this.$parent.$refs.orderTypeList.isshow = true;
+			},
 			toMoneyDetails: function(){
 				this.$router.push({path: '/moneyDetails'});
 			},
@@ -1309,6 +1315,30 @@
 				}
 			}
 		}
+		/*.order_select{
+			.bg{
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				z-index: 1111;
+				width: 100%;
+				height: 100%;
+				background: #000;
+				opacity: 0.7;
+			}
+			ul{
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				z-index: 1112;
+				width: 100%;
+				overflow: hidden;
+				background: @deepblue;
+				
+			}
+		}*/
 	}
 	
 	/*ip6*/

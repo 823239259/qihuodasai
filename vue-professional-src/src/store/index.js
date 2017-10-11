@@ -104,7 +104,8 @@ var market = {
 				RiskRate : 0.0	// 风险率
 			}
 		},
-		
+		//切换后合约的名字
+		selectId: '',
 		//订阅推送次数统计
 		subscribeIndex:1,
 		

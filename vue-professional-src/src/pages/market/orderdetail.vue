@@ -16,6 +16,7 @@
 		<kline v-if='kshow'></kline>
 		<lightchart v-if='sshow'></lightchart>
 		<novice v-if="helpshow"></novice>
+		<orderTypeList ref="orderTypeList"></orderTypeList>
 	</div>
 </template>
 
@@ -31,9 +32,10 @@
 	import tipsDialog from '../../components/tipsDialog.vue'
 	import pro from '../../assets/common.js'
 	import novice from '../noviceTrade.vue'
+	import orderTypeList from '../../components/orderTypeList.vue'
 	export default {
 		name: 'orderdetail',
-		components: {topbar, selectbar, tradebottom, tradecenter, dish, chartfens, kline, lightchart, tipsDialog, novice},
+		components: {topbar, selectbar, tradebottom, tradecenter, dish, chartfens, kline, lightchart, tipsDialog, novice, orderTypeList},
 		data() {
 			return {
 				CommodityName: '',
