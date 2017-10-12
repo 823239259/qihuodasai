@@ -8,10 +8,10 @@
 						<span>国际期货</span>
 					</li>
 					<li>
-						<span>国际期货</span>
+						<span>国内期货</span>
 					</li>
 					<li>
-						<span>国际期货</span>
+						<span>添加外汇</span>
 					</li>
 				</ul>
 			</div>
@@ -65,9 +65,9 @@
 		</div>
 		<div class="echarts_box">
 			<div class="title">
-				<span>美黄金</span>
-				<span>CG1708</span>
-				<div>
+				<span class="fl">美黄金</span>
+				<span class="fl">CG1708</span>
+				<div class="add fr">
 					<i class="ifont">&#xe600;</i>
 					<span>添加自选</span>
 				</div>
@@ -90,13 +90,25 @@
 
 <style lang="scss" scoped>
 	@import "../assets/css/common.scss";
-	#index{
-		width: 100%;
-	}
 	.order{
 		width: 100%;
+		overflow: hidden;
+		padding-right: 410px;
+		box-sizing: border-box;
+	}
+	.echarts_box{
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 400px;
 		.title{
-			color: $yellow;
+			height: 40px;
+			line-height: 40px;
+			span{
+				font-size: $fs16;
+				color: $white;
+				background: $blue;
+			}
 		}
 	}
 
