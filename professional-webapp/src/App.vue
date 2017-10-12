@@ -64,6 +64,7 @@
 		<div class="main">
 			<router-view></router-view>
 		</div>
+		<!--登录弹窗-->
 		<div id="login" style="display: none;">
 			<input type="text"  id=""  placeholder="请输入手机号码"/>
 			<input type="password"  id=""  placeholder="请输入密码"/>
@@ -71,6 +72,7 @@
 			<button>登录</button>
 			<p>还没有期货大赛账号？<span>立即注册</span></p>
 		</div>
+		<!--注册弹窗-->
 		<div id="register" style="display: none;">
 			<input type="text"  id=""  placeholder="请输入手机号码"/>
 			<input type="password"  id=""  placeholder="验证码"/>
@@ -79,6 +81,7 @@
 			<button>注册</button>
 			<p>已有期货大赛账号？<span>立即登录</span></p>
 		</div>
+		<!--忘记密码弹窗-->
 		<div id="forgetPassword" style="display: none;">
 			<input type="text"  id="" placeholder="请输入手机号码" />
 			<input type="password" id="" placeholder="验证码" />
@@ -94,26 +97,28 @@
 		name: 'app',
 		methods : {
 			toRegister : function(){
-				layer.open({
-					  title: '注册',
-					  content: '这里是注册'
-					}); 
+				console.log('1111111111111')
+//				layer.open({
+//					  title: '注册',
+//					  content: '这里是注册'
+//					}); 
 			},
-			toLogin : function(item){
-				layer.open({  
-                     type : 1,  
-                     title : "登录",  
-                     area : ["300px", "230px"], 
-                     content : $("#login"),  
-                     btn : ["确认"],  
-                             yes: function (index) {  
-  
-                                 alert("确认");  
-  
-                             },  
-                             cancel: function () { //点击关闭按钮  
-                     }  
-                 });  
+			toLogin : function(){
+				console.log('22222222222222222')
+//				layer.open({  
+//                   type : 1,  
+//                   title : "登录",  
+//                   area : ["300px", "230px"], 
+//                   content : $("#login"),  
+//                   btn : ["确认"],  
+//                           yes: function (index) {  
+//
+//                               alert("确认");  
+//
+//                           },  
+//                           cancel: function () { //点击关闭按钮  
+//                   }  
+//               });  
 			}
 		}
 	}
@@ -211,6 +216,6 @@
 		min-width: 1210px;
 		overflow: hidden;
 		overflow-x: auto;
-		padding: 50px 0 0 70px;
+		margin: 50px 0 0 70px;
 	}
 </style>
