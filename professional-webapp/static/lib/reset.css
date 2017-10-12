@@ -55,16 +55,6 @@ a {
  	text-decoration: none;
  	-webkit-backface-visibility: hidden;
 }
-/*****排版*****/
-.clear{
-	clear: both;
-}
-.fl{ 
-	float: left;
-}
-.fr{ 
-	float: right;
-}
 
 /*****实用字体库*****/
 @font-face {

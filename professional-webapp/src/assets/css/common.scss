@@ -9,7 +9,7 @@ $black: #242633;
 $yellow: #ffd400;
 $red: #ff4c4c;
 $green: #3dcc85;
-$white:　#ffffff;
+$white: #ffffff;
 $deepblue: #292c3b;
 $blue: #2d3040;
 $lightblue: #a3aacc;
@@ -27,6 +27,17 @@ $yh: "\5FAE\8F6F\96C5\9ED1"; /*微软雅黑*/
 $st: "\5B8B\4F53"; /*宋体*/
 $ht: "\9ED1\4F53"; /*黑体*/
 $arial: Arial;
+
+/*****排版*****/
+.clear{
+    clear: both;
+}
+.fl{ 
+    float: left;
+}
+.fr{ 
+    float: right;
+}
 
 /*****按钮*****/
 .btn{
