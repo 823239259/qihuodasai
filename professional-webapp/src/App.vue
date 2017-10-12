@@ -49,10 +49,10 @@
 					<i>客服热线<span>400-852-8008</span></i>
 				</li>
 				<li>
-					<span id="register">注册</span>
+					<span id="register" v-on:click="toRegister">注册</span>
 				</li>
 				<li>
-					<span id="login">登录</span>
+					<span id="login" v-on:click="toLogin">登录</span>
 				</li>
 			</ul>
 		</div>
@@ -62,12 +62,58 @@
 			<span>恒指期货<label></label></span>
 		</div>
 		<router-view></router-view>
+		<div id="login" style="display: none;">
+			<input type="text"  id=""  placeholder="请输入手机号码"/>
+			<input type="password"  id=""  placeholder="请输入密码"/>
+			<p>忘记密码</p>
+			<button>登录</button>
+			<p>还没有期货大赛账号？<span>立即注册</span></p>
+		</div>
+		<div id="register" style="display: none;">
+			<input type="text"  id=""  placeholder="请输入手机号码"/>
+			<input type="password"  id=""  placeholder="验证码"/>
+			<input type="password" id="" placeholder="请输入密码（6-16位密码）" />
+			<p>注册即表示同意并已阅读<span>《用户注册协议》</span></p>
+			<button>注册</button>
+			<p>已有期货大赛账号？<span>立即登录</span></p>
+		</div>
+		<div id="forgetPassword" style="display: none;">
+			<input type="text"  id="" placeholder="请输入手机号码" />
+			<input type="password" id="" placeholder="验证码" />
+			<label>60s</label>
+			<button>下一步</button>
+			<p>没有期货大赛账号？<span>立即注册</span></p>
+		</div>
 	</div>
 </template>
 
 <script>
 	export default {
-		name: 'app'
+		name: 'app',
+		methods : {
+			toRegister : function(){
+				layer.open({
+					  title: '注册',
+					  content: '这里是注册'
+					}); 
+			},
+			toLogin : function(item){
+				layer.open({  
+                     type : 1,  
+                     title : "登录",  
+                     area : ["300px", "230px"], 
+                     content : $("#login"),  
+                     btn : ["确认"],  
+                             yes: function (index) {  
+  
+                                 alert("确认");  
+  
+                             },  
+                             cancel: function () { //点击关闭按钮  
+                     }  
+                 });  
+			}
+		}
 	}
 </script>
 
@@ -144,8 +190,6 @@
 	    	padding: 5px 8px;	
 	    }
 	}
-	
-	
 	
 	/*底部栏*/
 	#container_buttom {
