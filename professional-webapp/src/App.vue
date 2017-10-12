@@ -2,34 +2,34 @@
 	<div id="app">
 		<div id="nav" class="container_left">
 			<ul>
-				<li>
+				<li @click="toIndex">
 					<img src="./assets/images/logo.png" alt="logo" />
 				</li>
-				<li class="current">
+				<li class="current" @click="toIndex">
 					<i class="icon icon_quote"></i>
 					<p>行情</p>
 				</li>
-				<li>
+				<li @click="toTrade">
 					<i class="icon icon_trade"></i>
 					<p>交易</p>
 				</li>
-				<li>
+				<li @click="toOpenAccount">
 					<i class="icon icon_open"></i>
 					<p>开户</p>
 				</li>
-				<li>
+				<li @click="toLiveStream">
 					<i class="icon icon_live"></i>
 					<p>直播</p>
 				</li>
-				<li>
+				<li @click="toCalendar">
 					<i class="icon icon_calendar"></i>
 					<p>日历</p>
 				</li>
-				<li>
+				<li @click="toDownload">
 					<i class="icon icon_download"></i>
 					<p>下载</p>
 				</li>
-				<li>
+				<li @click="toAccount">
 					<i class="icon icon_account"></i>
 					<p>我的</p>
 				</li>
@@ -70,6 +70,14 @@
 				<span class="green">3360.81 -2.82 -0.08%</span>
 				<i class="ifont green">&#xe76a;</i>
 			</p>
+			<p class="net net_yes">
+				<i class="icon icon_yes"></i>
+				<span>已连接</span>
+			</p>
+			<!--<p class="net net_no">
+				<i class="icon icon_no"></i>
+				<span>已断开</span>
+			</p>-->
 		</div>
 		<div class="container">
 			<router-view></router-view>
@@ -80,13 +88,28 @@
 <script>
 	export default {
 		name: 'app',
-		methods : {
-			toRegister : function(){
-				console.log('111')
+		methods: {
+			toIndex: function(){
+				this.$router.push({path: '/index'});
 			},
-			toLogin : function(){
-				console.log('2222')  
-			}
+			toTrade: function(){
+				this.$router.push({path: '/trade'});
+			},
+			toOpenAccount: function(){
+				this.$router.push({path: '/openAccount'});
+			},
+			toLiveStream: function(){
+				this.$router.push({path: '/liveStream'});
+			},
+			toCalendar: function(){
+				this.$router.push({path: '/calendar'});
+			},
+			toDownload: function(){
+				this.$router.push({path: '/download'});
+			},
+			toAccount: function(){
+				this.$router.push({path: '/account'});
+			},
 		}
 	}
 </script>
@@ -265,6 +288,26 @@
 	    	}
 	    	.red{
 	    		color: $red;
+	    	}
+	    	&.net{
+	    		float: right;
+	    		margin-right: 20px;
+	    		.icon{
+	    			margin: 0;
+	    			float: left;
+	    			width: 16px;
+	    			height: 16px;
+	    			margin: 7px 5px 0 0;
+	    		}
+	    		.icon_yes{
+	    			background: url(assets/images/net_yes.png) no-repeat center center;
+	    		}
+	    		.icon_no{
+	    			background: url(assets/images/net_no.png) no-repeat center center;
+	    		}
+	    		span{
+	    			color: $white;
+	    		}
 	    	}
 	    }
 	}
