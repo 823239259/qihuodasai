@@ -46,13 +46,13 @@
 				</li>
 				<li>
 					<i class="ifont">&#xe611;</i>
-					<span>客服热线:400-852-8008</span>
-				</li>
-				<li>
-					<span id="login">登录</span>
+					<i>客服热线<span>400-852-8008</span></i>
 				</li>
 				<li>
 					<span id="register">注册</span>
+				</li>
+				<li>
+					<span id="login">登录</span>
 				</li>
 			</ul>
 		</div>
@@ -104,16 +104,44 @@
 	    line-height: 40px;
 	    margin: 5px 10px;
 	    font-size: $fs12;
-	    ul{
-	    	li{
+	    ul {
+	    	li {
 	    		float: left;
-	    		i{
-	    			color: $lightblue;
-	    		}
-	    		span{
+	    		margin: 0 20px;
+	    		span {
 	    			font-size: $fs12;
 	    		}
+	    		&:nth-child(1){
+	    			i {
+		    			color: $lightblue;
+		    		}
+	    		}
+	    		&:nth-child(2){
+	    			i {
+		    			color: $yellow;
+		    		}
+		    		span {
+		    			color: $yellow;
+		    		}
+	    		}
+	    		&:nth-child(3){
+	    			i {
+		    			color: $lightblue;
+		    		}
+	    		}
+	    		&:nth-child(4){
+	    			float: right;
+	    		}
+	    		&:nth-child(5){
+	    			float: right;
+	    		}
+	    		
 		    }
+	    }
+	    #register {
+	    	border: 1px solid $yellow;
+	    	border-radius: 10px;
+	    	padding: 5px 8px;	
 	    }
 	}
 	
