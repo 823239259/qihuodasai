@@ -3,45 +3,57 @@
 		<div id="container_left">
 				<ul>
 					<li>
-						<img src="./assets/images/logo.png" alt="" />
+						<img src="./assets/images/logo.png" alt="logo" />
 					</li>
 					<li>
-						<i class="spirt_1"></i>
-						行情
+						<img src="./assets/images/icon_quote.png" alt="行情" />
+						<p>行情</p>
 					</li>
 					<li>
-						<i class="spirt_2"></i>
-						交易
+						<img src="./assets/images/icon_trade.png" alt="交易" />
+						<p>交易</p>
 					</li>
 					<li>
-						<i class="spirt_3"></i>
-						开户
+						<img src="./assets/images/icon_open.png" alt="开户" />
+						<p>开户</p>
 					</li>
 					<li>
-						<i class="spirt_4"></i>
-						直播
+						<img src="./assets/images/icon_live.png" alt="直播" />
+						<p>直播</p>
 					</li>
 					<li>
-						<i class="spirt_5"></i>
-						日历
+						<img src="./assets/images/icon_calendar.png" alt="日历" />
+						<p>日历</p>
 					</li>
 					<li>
-						<i class="spirt_6"></i>
-						下载
+						<img src="./assets/images/icon_download.png" alt="下载" />
+						<p>下载</p>
 					</li>
 					<li>
-						<i class="spirt_7"></i>
-						我的
+						<img src="./assets/images/icon_account.png" alt="我的" />
+						<p>我的</p>
 					</li>
 				</ul>
 			</div>
 		<div id="container_top">
 			<ul>
-				<li>放大</li>
-				<li>在线客服</li>
-				<li>客服热线</li>
-				<li>登录</li>
-				<li>注册</li>
+				<li>
+					<i class="ifont">&#xe62e;</i>
+				</li>
+				<li>
+					<i class="ifont">&#xe68f;</i>
+					<span>在线客服</span>
+				</li>
+				<li>
+					<i class="ifont">&#xe611;</i>
+					<span>客服热线:400-852-8008</span>
+				</li>
+				<li>
+					<span id="login">登录</span>
+				</li>
+				<li>
+					<span id="register">注册</span>
+				</li>
 			</ul>
 		</div>
 		<div id="container_buttom">
@@ -70,7 +82,7 @@
 	/*左部导航*/
 	#container_left {
 	    width: 60px;
-	    background-color: $depLight;
+	    background-color: $blue;
 	    float: left;
 	    height: 100%;
 	    font-size: $fs12;
@@ -87,15 +99,26 @@
 	#container_top {
 	    width: 95%;
 	    float: left;
-	    background-color: $depLight;
+	    background-color: $blue;
 	    height: 40px;
 	    line-height: 40px;
 	    margin: 5px 10px;
 	    font-size: $fs12;
+	    ul{
+	    	li{
+	    		float: left;
+	    		i{
+	    			color: $lightblue;
+	    		}
+	    		span{
+	    			font-size: $fs12;
+	    		}
+		    }
+	    }
 	}
-	#container_top li {
-	    float: left;
-	}
+	
+	
+	
 	/*底部栏*/
 	#container_buttom {
 	    position: absolute;
