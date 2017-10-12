@@ -16,16 +16,28 @@ $lightblue: #a3aacc;
 $highLight: #474c66;
 $bottom_color: #36394d;
 
+/*****字体*****/
+$fs12: 12px;
+$fs14: 14px;
+$fs16: 16px;
+$fs17: 18px;
 
-//$gary_white : #ccd5ff;
-//$gray : #7a7f99;
-//$highLight : #474c66;
-//$depLight : #2d3040;
-//$bottom_color : #36394d;
+/*****字体*****/
+$yh: "\5FAE\8F6F\96C5\9ED1"; /*微软雅黑*/
+$st: "\5B8B\4F53"; /*宋体*/
+$ht: "\9ED1\4F53"; /*黑体*/
+$arial: Arial;
 
-
-//字体
-$fs12 : 12px;
-$fs14 : 14px;
-
-
+/*****按钮*****/
+.btn{
+    display: inline-block;
+    border-radius: 4px;
+    color: $black;
+    font-size: $fs16;
+    &.yellow{
+        background: $yellow;
+    }
+    &.blud{
+        background: $lightblue;
+    }
+}
