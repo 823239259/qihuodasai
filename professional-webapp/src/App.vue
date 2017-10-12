@@ -61,7 +61,9 @@
 			<span>美黄金<label></label></span>
 			<span>恒指期货<label></label></span>
 		</div>
-		<router-view></router-view>
+		<div class="main">
+			<router-view></router-view>
+		</div>
 		<div id="login" style="display: none;">
 			<input type="text"  id=""  placeholder="请输入手机号码"/>
 			<input type="password"  id=""  placeholder="请输入密码"/>
@@ -200,5 +202,15 @@
 	    height: 30px;
 	    line-height: 30px;
 	    font-size: $fs12;
+	}
+	.main{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		min-width: 1210px;
+		overflow: hidden;
+		overflow-x: auto;
+		padding: 50px 0 0 70px;
 	}
 </style>
