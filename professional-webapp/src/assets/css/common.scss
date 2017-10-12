@@ -40,6 +40,24 @@ $arial: Arial;
 }
 
 /*****按钮*****/
+table{
+    width: 100%;
+    tr{
+        background: $blue;
+        &:nth-child(even){
+            background: $deepblue;
+        }
+    }
+    td{
+        text-align: left;
+    }
+    .red{
+        color: $red;
+    }
+    .green{
+        color: $green;
+    }
+}
 .btn{
     display: inline-block;
     border-radius: 4px;

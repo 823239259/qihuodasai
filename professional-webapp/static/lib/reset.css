@@ -33,6 +33,9 @@ input, button, select, textarea {
 em, i{ 
 	font-style: normal;
 }
+div, p, ul, li, h1, h2, h3, h4, h5, h6{
+	box-sizing: border-box;
+}
 /*body {
  	-webkit-text-size-adjust: none;
  	-webkit-tap-highlight-color: rgba(0, 0, 0, 0.5);
