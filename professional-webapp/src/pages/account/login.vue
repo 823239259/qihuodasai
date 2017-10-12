@@ -6,14 +6,14 @@
 		<p class="span_right" v-on:click="toForgetPassword">忘记密码?</p>
 		<button class="btn yellow">登录</button>
 		<p class="color_light">还没有期货大赛账号？<span class="span_white">立即注册</span></p>
-		<FORGETPASSWORD class="forgetPassword_show" v-if="isshow_forgetpassword" />
+		<forgetPassword class="forgetPassword_show" v-if="isshow_forgetpassword" />
 	</div>
 </template>
 <script>
-	import FORGETPASSWORD from "./forgetPassword.vue"
+	import forgetPassword from "./forgetPassword.vue"
 	export default {
-		name : "LOGIN",
-		components : {FORGETPASSWORD},
+		name : "login",
+		components : {forgetPassword},
 		data(){
 			return {
 				isshow_forgetpassword : false

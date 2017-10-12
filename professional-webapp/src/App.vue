@@ -82,17 +82,17 @@
 		<div class="container">
 			<router-view></router-view>
 		</div>
-		<LOGIN class="loginShow" v-if="isshow_login"/>
-		<REGISTER class="resgisterShow" v-if="isshow_register"/>
+		<login class="loginShow" v-if="isshow_login"/>
+		<register class="resgisterShow" v-if="isshow_register"/>
 	</div>
 </template>
 
 <script>
-	import LOGIN from "./pages/account/login.vue"
-	import REGISTER from "./pages/account/register.vue"
+	import login from "./pages/account/login.vue"
+	import register from "./pages/account/register.vue"
 	export default {
 		name: 'app',
-		components : {LOGIN,REGISTER},
+		components : {login,register},
 		data(){
 			return {
 				isshow_login : false,
