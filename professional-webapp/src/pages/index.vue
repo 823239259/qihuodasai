@@ -146,9 +146,12 @@
 
 <style lang="scss" scoped>
 	@import "../assets/css/common.scss";
+	#index{
+		position: relative;
+	}
 	.echarts_box{
 		position: absolute;
-		top: 50px;
+		top: 0;
 		right: 0;
 		width: 400px;
 		overflow: hidden;

@@ -20,7 +20,8 @@ $bottom_color: #36394d;
 $fs12: 12px;
 $fs14: 14px;
 $fs16: 16px;
-$fs17: 18px;
+$fs18: 18px;
+$fs20: 20px;
 
 /*****字体*****/
 $yh: "\5FAE\8F6F\96C5\9ED1"; /*微软雅黑*/
@@ -39,7 +40,6 @@ $arial: Arial;
     float: right;
 }
 
-/*****按钮*****/
 table{
     width: 100%;
     tr{
@@ -58,6 +58,13 @@ table{
         color: $green;
     }
 }
+
+.icon{
+    display: inline-block;
+    overflow: hidden;
+}
+
+/*****按钮*****/
 .btn{
     display: inline-block;
     border-radius: 4px;

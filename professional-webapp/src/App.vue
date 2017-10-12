@@ -1,93 +1,86 @@
 <template>
 	<div id="app">
-		<div id="container_left">
-				<ul>
-					<li>
-						<img src="./assets/images/logo.png" alt="logo" />
-					</li>
-					<li>
-						<img src="./assets/images/icon_quote.png" alt="行情" />
-						<p>行情</p>
-					</li>
-					<li>
-						<img src="./assets/images/icon_trade.png" alt="交易" />
-						<p>交易</p>
-					</li>
-					<li>
-						<img src="./assets/images/icon_open.png" alt="开户" />
-						<p>开户</p>
-					</li>
-					<li>
-						<img src="./assets/images/icon_live.png" alt="直播" />
-						<p>直播</p>
-					</li>
-					<li>
-						<img src="./assets/images/icon_calendar.png" alt="日历" />
-						<p>日历</p>
-					</li>
-					<li>
-						<img src="./assets/images/icon_download.png" alt="下载" />
-						<p>下载</p>
-					</li>
-					<li>
-						<img src="./assets/images/icon_account.png" alt="我的" />
-						<p>我的</p>
-					</li>
-				</ul>
-			</div>
-		<div id="container_top">
+		<div id="nav" class="container_left">
 			<ul>
-				<li>
-					<i class="ifont">&#xe62e;</i>
+				<li @click="toIndex">
+					<img src="./assets/images/logo.png" alt="logo" />
 				</li>
-				<li>
-					<i class="ifont">&#xe68f;</i>
-					<span>在线客服</span>
+				<li class="current" @click="toIndex">
+					<i class="icon icon_quote"></i>
+					<p>行情</p>
 				</li>
-				<li>
-					<i class="ifont">&#xe611;</i>
-					<i>客服热线<span>400-852-8008</span></i>
+				<li @click="toTrade">
+					<i class="icon icon_trade"></i>
+					<p>交易</p>
 				</li>
-				<li>
-					<span id="register" v-on:click="toRegister">注册</span>
+				<li @click="toOpenAccount">
+					<i class="icon icon_open"></i>
+					<p>开户</p>
 				</li>
-				<li>
-					<span id="login" v-on:click="toLogin">登录</span>
+				<li @click="toLiveStream">
+					<i class="icon icon_live"></i>
+					<p>直播</p>
+				</li>
+				<li @click="toCalendar">
+					<i class="icon icon_calendar"></i>
+					<p>日历</p>
+				</li>
+				<li @click="toDownload">
+					<i class="icon icon_download"></i>
+					<p>下载</p>
+				</li>
+				<li @click="toAccount">
+					<i class="icon icon_account"></i>
+					<p>我的</p>
 				</li>
 			</ul>
 		</div>
-		<div id="container_buttom">
-			<span>国际原油<label></label></span>
-			<span>美黄金<label></label></span>
-			<span>恒指期货<label></label></span>
+		<div class="container_top">
+			<div class="fl box"></div>
+			<div class="fl">
+				<i class="ifont zoom">&#xe62e;</i>
+				<div class="customer_service fl">
+					<i class="ifont">&#xe68f;</i>
+					<span>在线客服</span>
+				</div>
+				<div class="tel fl">
+					<i class="ifont">&#xe611;</i>
+					<span>客服热线：</span>
+					<em>400-852-8008</em>
+				</div>
+			</div>
+			<div class="fr">
+				<a href="javascript: void(0);">登录</a>
+				<a href="javascript: void(0);">注册</a>
+			</div>
 		</div>
-		<div class="main">
+		<div class="container_bottom">
+			<p>
+				<span>国际原油</span>
+				<span class="green">3360.81 -2.82 -0.08%</span>
+				<i class="ifont green">&#xe76a;</i>
+			</p>
+			<p>
+				<span>美黄金</span>
+				<span class="red">3360.81 -2.82 -0.08%</span>
+				<i class="ifont red">&#xe76a;</i>
+			</p>
+			<p>
+				<span>恒指期货</span>
+				<span class="green">3360.81 -2.82 -0.08%</span>
+				<i class="ifont green">&#xe76a;</i>
+			</p>
+			<p class="net net_yes">
+				<i class="icon icon_yes"></i>
+				<span>已连接</span>
+			</p>
+			<!--<p class="net net_no">
+				<i class="icon icon_no"></i>
+				<span>已断开</span>
+			</p>-->
+		</div>
+		<div class="container">
 			<router-view></router-view>
-		</div>
-		<!--登录弹窗-->
-		<div id="login" style="display: none;">
-			<input type="text"  id=""  placeholder="请输入手机号码"/>
-			<input type="password"  id=""  placeholder="请输入密码"/>
-			<p>忘记密码</p>
-			<button>登录</button>
-			<p>还没有期货大赛账号？<span>立即注册</span></p>
-		</div>
-		<!--注册弹窗-->
-		<div id="register" style="display: none;">
-			<input type="text"  id=""  placeholder="请输入手机号码"/>
-			<input type="password"  id=""  placeholder="验证码"/>
-			<input type="password" id="" placeholder="请输入密码（6-16位密码）" />
-			<p>注册即表示同意并已阅读<span>《用户注册协议》</span></p>
-			<button>注册</button>
-			<p>已有期货大赛账号？<span>立即登录</span></p>
-		</div>
-		<!--忘记密码弹窗-->
-		<div id="forgetPassword" style="display: none;">
-			<input type="text"  id="" placeholder="请输入手机号码" />
-			<input type="password" id="" placeholder="验证码" />
-			<label>60s</label>
-			<button>下一步</button>
-			<p>没有期货大赛账号？<span>立即注册</span></p>
 		</div>
 	</div>
 </template>
@@ -95,31 +88,28 @@
 <script>
 	export default {
 		name: 'app',
-		methods : {
-			toRegister : function(){
-				console.log('1111111111111')
-//				layer.open({
-//					  title: '注册',
-//					  content: '这里是注册'
-//					}); 
+		methods: {
+			toIndex: function(){
+				this.$router.push({path: '/index'});
 			},
-			toLogin : function(){
-				console.log('22222222222222222')
-//				layer.open({  
-//                   type : 1,  
-//                   title : "登录",  
-//                   area : ["300px", "230px"], 
-//                   content : $("#login"),  
-//                   btn : ["确认"],  
-//                           yes: function (index) {  
-//
-//                               alert("确认");  
-//
-//                           },  
-//                           cancel: function () { //点击关闭按钮  
-//                   }  
-//               });  
-			}
+			toTrade: function(){
+				this.$router.push({path: '/trade'});
+			},
+			toOpenAccount: function(){
+				this.$router.push({path: '/openAccount'});
+			},
+			toLiveStream: function(){
+				this.$router.push({path: '/liveStream'});
+			},
+			toCalendar: function(){
+				this.$router.push({path: '/calendar'});
+			},
+			toDownload: function(){
+				this.$router.push({path: '/download'});
+			},
+			toAccount: function(){
+				this.$router.push({path: '/account'});
+			},
 		}
 	}
 </script>
@@ -131,89 +121,198 @@
 	    width: 100%;
 	    min-width: 1280px;
 	}
+	.icon{
+		width: 20px;
+		height: 20px;
+		margin: 10px 0 4px 0;
+	}
 	/*左部导航*/
-	#container_left {
+	.container_left {
 		position: fixed;
 		top: 0;
 		left: 0;
+		z-index: 2;
 	    width: 60px;
-	    background-color: $blue;
-	    float: left;
 	    height: 100%;
-	    font-size: $fs12;
-	    color: $yellow;
-	    ul {
-	        li {
-	            display: block;
+	    background: $blue;
+	    ul{
+	        li{
+	        	width: 60px;
 	            height: 60px;
+	            overflow: hidden;
 	            text-align: center;
+	            cursor: pointer;
+	            &:hover, &.current{
+	            	background: $deepblue;
+	            	.icon_quote{
+	            		background-image: url(assets/images/icon_quote1.png);
+	            	}
+	            	.icon_trade{
+	            		background-image: url(assets/images/icon_trade1.png);
+	            	}
+	            	.icon_open{
+	            		background-image: url(assets/images/icon_open1.png);
+	            	}
+	            	.icon_live{
+	            		background-image: url(assets/images/icon_live1.png);
+	            	}
+	            	.icon_calendar{
+	            		background-image: url(assets/images/icon_calendar1.png);
+	            	}
+	            	.icon_download{
+	            		background-image: url(assets/images/icon_download1.png);
+	            	}
+	            	.icon_account{
+	            		background-image: url(assets/images/icon_account1.png);
+	            	}
+	            	p{
+	            		color: $yellow;
+	            	}
+	            }
+	            .icon_quote{
+	            	background: url(assets/images/icon_quote.png) no-repeat center center;
+	            }
+	            .icon_trade{
+	            	background: url(assets/images/icon_trade.png) no-repeat center center;
+	            }
+	            .icon_open{
+	            	background: url(assets/images/icon_open.png) no-repeat center center;
+	            }
+	            .icon_live{
+	            	background: url(assets/images/icon_live.png) no-repeat center center;
+	            }
+	            .icon_calendar{
+	            	background: url(assets/images/icon_calendar.png) no-repeat center center;
+	            }
+	            .icon_download{
+	            	background: url(assets/images/icon_download.png) no-repeat center center;
+	            }
+	            .icon_account{
+	            	background: url(assets/images/icon_account.png) no-repeat center center;
+	            }
+	            p{
+	            	font-size: $fs12;
+	            	color: $lightblue;
+	            }
 	        }
 	    }
 	}
 	/*顶部栏*/
-	#container_top {
-		position: absolute;
+	.container_top {
+		position: fixed;
 		top: 0;
-		left: 60px;
-	    width: 95%;
-	    float: left;
-	    background-color: $blue;
+		left: 0;
+		z-index: 1;
+	    width: 100%;
 	    height: 40px;
 	    line-height: 40px;
-	    margin: 5px 10px;
+	    background: $blue;
+	    margin: 5px 0;
 	    font-size: $fs12;
-	    ul {
-	    	li {
-	    		float: left;
-	    		margin: 0 20px;
-	    		span {
-	    			font-size: $fs12;
-	    		}
-	    		&:nth-child(1){
-	    			i {
-		    			color: $lightblue;
-		    		}
-	    		}
-	    		&:nth-child(2){
-	    			i {
-		    			color: $yellow;
-		    		}
-		    		span {
-		    			color: $yellow;
-		    		}
-	    		}
-	    		&:nth-child(3){
-	    			i {
-		    			color: $lightblue;
-		    		}
-	    		}
-	    		&:nth-child(4){
-	    			float: right;
-	    		}
-	    		&:nth-child(5){
-	    			float: right;
-	    		}
-	    		
-		    }
+	    .box{
+	    	width: 70px;
+	    	height: 40px;
+	    	overflow: hidden;
+	    	background: $black;
 	    }
-	    #register {
-	    	border: 1px solid $yellow;
-	    	border-radius: 10px;
-	    	padding: 5px 8px;	
-	    }
+		.ifont{
+			float: left;
+			color: $lightblue;
+			&.zoom{
+				font-size: $fs20;
+				margin: 0 40px 0 20px;
+				cursor: pointer;
+			}
+		}
+		span, em{
+			float: left;
+		}
+		.customer_service, .tel{
+			margin-right: 48px;
+			.ifont{
+				font-size: $fs16;
+				margin-right: 10px;
+			}
+		}
+		.customer_service{
+			cursor: pointer;
+			&:hover{
+				color: $yellow;
+				.ifont{
+					color: $yellow;
+				}
+			}
+		}
+		em{
+			color: $white;
+		}
+		a{
+			float: left;
+			display: inline-block;
+			height: 30px;
+			line-height: 30px;
+			padding: 0 20px;
+			margin: 5px 0;
+			font-size: $fs12;
+			color: $lightblue;
+			&:last-child{
+				border: 1px solid $lightblue;
+				border-radius: 15px;
+				margin-right: 10px;
+			}
+			&:hover{
+				color: $yellow;
+				border-color: $yellow;
+			}
+		}
 	}
-	
 	/*底部栏*/
-	#container_buttom {
+	.container_bottom{
 	    position: fixed;
 	    bottom: 0;
-	    background-color: $bottom_color;
+	    left: 0;
+	    z-index: 3;
 	    width: 100%;
 	    height: 30px;
 	    line-height: 30px;
-	    font-size: $fs12;
+	    background: $bottom_color;
+	    p{
+	    	float: left;
+	    	font-size: $fs12;
+	    	margin-left: 20px;
+	    	.ifont{
+	    		font-size: 10px;
+	    	}
+	    	.green{
+	    		color: $green;
+	    	}
+	    	.red{
+	    		color: $red;
+	    	}
+	    	&.net{
+	    		float: right;
+	    		margin-right: 20px;
+	    		.icon{
+	    			margin: 0;
+	    			float: left;
+	    			width: 16px;
+	    			height: 16px;
+	    			margin: 7px 5px 0 0;
+	    		}
+	    		.icon_yes{
+	    			background: url(assets/images/net_yes.png) no-repeat center center;
+	    		}
+	    		.icon_no{
+	    			background: url(assets/images/net_no.png) no-repeat center center;
+	    		}
+	    		span{
+	    			color: $white;
+	    		}
+	    	}
+	    }
 	}
-	.main{
+	/*容器*/
+	.container{
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -221,6 +320,6 @@
 		min-width: 1210px;
 		overflow: hidden;
 		overflow-x: auto;
-		margin: 50px 0 0 70px;
+		padding: 50px 0 0 70px;
 	}
 </style>
