@@ -129,11 +129,13 @@
 	/*容器框架*/
 	#app {
 	    width: 100%;
-	    height: 980px;
 	    min-width: 1280px;
 	}
 	/*左部导航*/
 	#container_left {
+		position: fixed;
+		top: 0;
+		left: 0;
 	    width: 60px;
 	    background-color: $blue;
 	    float: left;
@@ -150,6 +152,9 @@
 	}
 	/*顶部栏*/
 	#container_top {
+		position: absolute;
+		top: 0;
+		left: 60px;
 	    width: 95%;
 	    float: left;
 	    background-color: $blue;
@@ -200,8 +205,8 @@
 	
 	/*底部栏*/
 	#container_buttom {
-	    position: absolute;
-	    top: 100%;
+	    position: fixed;
+	    bottom: 0;
 	    background-color: $bottom_color;
 	    width: 100%;
 	    height: 30px;
