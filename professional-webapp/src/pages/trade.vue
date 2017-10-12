@@ -84,8 +84,185 @@
 		<div class="echarts_box">
 			
 		</div>
-		<div class="details">
-			
+		<div class="info">
+			<div class="order_details">
+				<div class="title">
+					<span class="fl">美黄金</span>
+					<span class="fl">CG1708</span>
+					<div class="add fr">
+						<i class="ifont fl">&#xe600;</i>
+						<span class="fl">添加自选</span>
+					</div>
+				</div>
+				<p>
+					<b>25288</b>
+					<span>+152/+052%</span>
+				</p>
+				<ul>
+					<li>
+						<div class="col">
+							<b>现手：</b>
+							<span>10</span>
+						</div>
+						<div class="col">
+							<b>成交量：</b>
+							<span>37319</span>
+						</div>
+						<div class="col">
+							<b>持仓量：</b>
+							<span>10086</span>
+						</div>
+					</li>
+					<li>
+						<div class="col">
+							<b>开盘：</b>
+							<span class="green">24.90</span>
+						</div>
+						<div class="col">
+							<b>最高：</b>
+							<span class="red">25.06</span>
+						</div>
+						<div class="col">
+							<b>最低：</b>
+							<span class="green">24.04</span>
+						</div>
+					</li>
+					<li>
+						<div class="col">
+							<b>昨结：</b>
+							<span>25.11</span>
+						</div>
+						<div class="col">
+							<b>涨停：</b>
+							<span>- -</span>
+						</div>
+						<div class="col">
+							<b>跌停：</b>
+							<span>- -</span>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="trade_details">
+				<div class="quote_five fl">
+					<h3>五档行情</h3>
+					<ul>
+						<li>
+							<span>卖五</span>
+							<span class="green">12112.12</span>
+							<span>20</span>
+						</li>
+						<li>
+							<span>卖四</span>
+							<span class="red">12112.12</span>
+							<span>20</span>
+						</li>
+						<li>
+							<span>卖三</span>
+							<span class="green">12112.12</span>
+							<span>20</span>
+						</li>
+						<li>
+							<span>卖二</span>
+							<span class="red">12112.12</span>
+							<span>20</span>
+						</li>
+						<li>
+							<span>卖一</span>
+							<span class="green">12112.12</span>
+							<span>20</span>
+						</li>
+						<li>
+							<span>买一</span>
+							<span class="red">12112.12</span>
+							<span>20</span>
+						</li>
+						<li>
+							<span>买二</span>
+							<span class="green">12112.12</span>
+							<span>20</span>
+						</li>
+						<li>
+							<span>买三</span>
+							<span class="red">12112.12</span>
+							<span>20</span>
+						</li>
+						<li>
+							<span>买四</span>
+							<span class="green">12112.12</span>
+							<span>20</span>
+						</li>
+						<li>
+							<span>买五</span>
+							<span class="red">12112.12</span>
+							<span>20</span>
+						</li>
+					</ul>
+				</div>
+				<div class="deal_details fr">
+					<div class="title">
+						<span>时间</span>
+						<span>价格</span>
+						<span>现手</span>
+					</div>
+					<ul>
+						<li>
+							<span>15:59:41</span>
+							<span class="red">25289</span>
+							<span>15</span>
+						</li>
+						<li>
+							<span>15:59:41</span>
+							<span class="green">25289</span>
+							<span>15</span>
+						</li>
+						<li>
+							<span>15:59:41</span>
+							<span class="red">25289</span>
+							<span>15</span>
+						</li>
+						<li>
+							<span>15:59:41</span>
+							<span class="green">25289</span>
+							<span>15</span>
+						</li>
+						<li>
+							<span>15:59:41</span>
+							<span class="red">25289</span>
+							<span>15</span>
+						</li>
+						<li>
+							<span>15:59:41</span>
+							<span class="green">25289</span>
+							<span>15</span>
+						</li>
+						<li>
+							<span>15:59:41</span>
+							<span class="red">25289</span>
+							<span>15</span>
+						</li>
+						<li>
+							<span>15:59:41</span>
+							<span class="green">25289</span>
+							<span>15</span>
+						</li>
+						<li>
+							<span>15:59:41</span>
+							<span class="red">25289</span>
+							<span>15</span>
+						</li>
+						<li>
+							<span>15:59:41</span>
+							<span class="green">25289</span>
+							<span>15</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="trade_operate">
+				<button class="btn yellow">我要开户</button>
+				<button class="btn blue">交易登录</button>
+			</div>
 		</div>
 	</div>
 </template>
@@ -162,6 +339,141 @@
 						}
 						.ifont{
 							margin: 12px 0 0 5px;
+						}
+					}
+				}
+			}
+		}
+	}
+	.info{
+		float: right;
+		width: 400px;
+		overflow: hidden;
+		.order_details{
+			.title{
+				height: 40px;
+				line-height: 40px;
+				padding: 0 10px;
+				background: $bottom_color;
+				span{
+					font-size: $fs16;
+					color: $white;
+					&:nth-child(2){
+						margin-left: 10px;
+					}
+				}
+				.add{
+					.ifont{
+						color: $yellow;
+						font-size: $fs16;
+					}
+					span{
+						font-size: $fs12;
+						color: $yellow;
+						margin-left: 5px;
+					}
+				}
+			}
+			p{
+				height: 40px;
+				line-height: 40px;
+				background: $deepblue;
+				padding: 0 10px;
+				color: $red;
+				b{
+					font-size: $fs20;
+					margin-right: 30px;
+				}
+			}
+			ul li{
+				width: 400px;
+				height: 40px;
+				line-height: 40px;
+				border-top: 1px solid $bottom_color;
+				.col{
+					width: 30%;
+					float: left;
+					margin-left: 10px;
+					b, span{
+						float: left;
+					}
+					span{
+						&.green{
+							color: $green;
+						}
+						&.red{
+							color: $red;
+						}
+					}
+				}
+			}
+		}
+		.trade_details{
+			width: 100%;
+			overflow: hidden;
+			background: $bottom_color;
+			.quote_five, .deal_details{
+				width: 190px;
+				overflow: hidden;
+				h3, .title{
+					height: 30px;
+					line-height: 30px;
+					font-size: $fs12;
+				}
+				ul{
+					height: 301px;
+					background: $deepblue;
+					li span{
+						&.green{
+							color: $green;
+						}
+						&.red{
+							color: $red;
+						}
+					}
+				}
+			}
+			.quote_five{
+				h3{
+					text-align: center;
+				}
+				li{
+					height: 28px;
+					line-height: 28px;
+					padding: 0 10px;
+					span{
+						display: inline-block;
+						margin-right: 20px;
+						&:last-child{
+							margin: 0;
+						}
+					}
+				}
+			}
+			.deal_details{
+				.title, li{
+					padding: 0 20px 0 10px;
+					span{
+						display: inline-block; 
+						&:nth-child(1){
+							width: 70px;
+						}
+						&:nth-child(2){
+							width: 50px;
+						}
+						&:nth-child(3){
+							float: right;
+						}
+					}
+				}
+				ul{
+					overflow-y: auto;
+					li{
+						height: 30px;
+						line-height: 30px;
+						border-top: 1px solid $bottom_color;
+						&:first-child{
+							border: none;
 						}
 					}
 				}
