@@ -62,7 +62,7 @@
 			font-size: 30px;
 			position: relative;
 			top: 20px;
-			right: 40px;
+			right: 35px;
 			
 		}
 		.span_right {
