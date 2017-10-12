@@ -223,6 +223,25 @@
 		em{
 			color: $white;
 		}
+		a{
+			float: left;
+			display: inline-block;
+			height: 30px;
+			line-height: 30px;
+			padding: 0 20px;
+			margin: 5px 0;
+			font-size: $fs12;
+			color: $lightblue;
+			&:last-child{
+				border: 1px solid $lightblue;
+				border-radius: 15px;
+				margin-right: 10px;
+			}
+			&:hover{
+				color: $yellow;
+				border-color: $yellow;
+			}
+		}
 	}
 	/*底部栏*/
 	.container_bottom{
