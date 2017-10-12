@@ -79,9 +79,6 @@
 				
 			</div>
 		</div>
-		
-		
-		
 	</div>
 </template>
 
@@ -91,11 +88,17 @@
 	}
 </script>
 
-<style scoped lang="scss">
-@import url("../assets/css/common.scss");
-#index{
-	
-}
+<style lang="scss" scoped>
+	@import "../assets/css/common.scss";
+	#index{
+		width: 100%;
+	}
+	.order{
+		width: 100%;
+		.title{
+			color: $yellow;
+		}
+	}
 
 
 </style>

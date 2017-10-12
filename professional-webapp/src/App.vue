@@ -59,7 +59,51 @@
 	}
 </script>
 
-<style scoped lang="scss">
-	@import "/assets/css/common.scss"
-	
+<style lang="scss" scoped type="text/css">
+	@import "./assets/css/common.scss";
+	/*容器框架*/
+	#app {
+	    width: 100%;
+	    height: 980px;
+	    min-width: 1280px;
+	}
+	/*左部导航*/
+	#container_left {
+	    width: 60px;
+	    background-color: $depLight;
+	    float: left;
+	    height: 100%;
+	    font-size: $fs12;
+	    color: $yellow;
+	    ul {
+	        li {
+	            display: block;
+	            height: 60px;
+	            text-align: center;
+	        }
+	    }
+	}
+	/*顶部栏*/
+	#container_top {
+	    width: 95%;
+	    float: left;
+	    background-color: $depLight;
+	    height: 40px;
+	    line-height: 40px;
+	    margin: 5px 10px;
+	    font-size: $fs12;
+	}
+	#container_top li {
+	    float: left;
+	}
+	/*底部栏*/
+	#container_buttom {
+	    position: absolute;
+	    top: 100%;
+	    background-color: $bottom_color;
+	    width: 100%;
+	    height: 30px;
+	    line-height: 30px;
+	    font-size: $fs12;
+	}
 </style>
