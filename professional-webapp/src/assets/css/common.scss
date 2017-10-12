@@ -73,6 +73,7 @@ table{
     display: inline-block;
     border-radius: 4px;
     color: $black;
+    border: none;
     font-size: $fs16;
     &.yellow{
         background: $yellow;
@@ -90,7 +91,7 @@ table{
     margin-top: 30px;
 }
 .input_2 {
-    border:1px solid $yellow;  
+    border:1px solid $highLight;  
     border-radius: 10px;
     background-color: $blue;
     text-align: center;
