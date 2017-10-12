@@ -1,6 +1,6 @@
 <template>
 	<div id="forgetPassword">
-		<p><span><</span>忘记密码<span>x</span></p>
+		<p><i class="ifont ifont_left">&#xe625;</i>忘记密码<i class="ifont ifont_right">&#xe624;</i></p>
 		<input type="text" class="input_1"  placeholder="请输入手机号"/>
 		<input type="text" class="input_2"  placeholder="验证码"/>
 		<label >60s</label>
@@ -21,8 +21,11 @@
 	#forgetPassword {
 		width: 400px;
 		height: 300px;
+		text-align : center;
+		color :$lightblue ;
 		background-color: $blue;
 		p {
+			line-height : 40px;
 			color:$white;
 			&:nth-child(1) {
 				height: 40px;
@@ -33,13 +36,16 @@
 			width: 320px;
 			height: 40px;
 		}
-		button {
-			width: 400px;
-			height: 40px;
-			color: $black;
-			background-color: $yellow;
-			outline: none;
-			border-radius: 5px;
+		.ifont {
+			color: $lightblue;
+		}
+		.ifont_left {
+			float: left;
+			margin-left: 10px;
+		}
+		.ifont_right {
+			float: right;
+			margin-right: 10px;
 		}
 	}
 </style>
