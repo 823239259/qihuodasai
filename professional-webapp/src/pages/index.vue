@@ -59,7 +59,7 @@
 							<td>46.90</td>
 						</tr>
 						<tr>
-							<td><i class="ifont green">&#xe761;</i></td>
+							<td><i class="ifont green">&#xe76a;</i></td>
 							<td>富时A50</td>
 							<td>CL1705</td>
 							<td class="green">46.81</td>
@@ -97,7 +97,7 @@
 							<td>46.90</td>
 						</tr>
 						<tr>
-							<td><i class="ifont green">&#xe761;</i></td>
+							<td><i class="ifont green">&#xe76a;</i></td>
 							<td>富时A50</td>
 							<td>CL1705</td>
 							<td class="green">46.81</td>
