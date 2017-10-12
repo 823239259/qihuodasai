@@ -44,8 +44,12 @@ table{
     width: 100%;
     tr{
         background: $blue;
+        cursor: pointer;
         &:nth-child(even){
             background: $deepblue;
+        }
+        &:hover{
+            background: $highLight;
         }
     }
     td{
