@@ -90,10 +90,9 @@
 <script>
 	import LOGIN from "./pages/account/login.vue"
 	import REGISTER from "./pages/account/register.vue"
-	import FORGETPASSWORD from "./pages/account/forgetPassword.vue"
 	export default {
 		name: 'app',
-		components : {LOGIN,REGISTER,FORGETPASSWORD},
+		components : {LOGIN,REGISTER},
 		data(){
 			return {
 				isshow_login : false,

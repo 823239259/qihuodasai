@@ -3,14 +3,26 @@
 		<p>登录<i class="ifont">&#xe624;</i></p>
 		<input type="text"  class="input_1" placeholder="请输入手机号码" />
 		<input type="password"  class="input_2" placeholder="请输入密码" />
-		<p class="span_right">忘记密码?</p>
+		<p class="span_right" v-on:click="toForgetPassword">忘记密码?</p>
 		<button class="btn yellow">登录</button>
 		<p class="color_light">还没有期货大赛账号？<span class="span_white">立即注册</span></p>
+		
 	</div>
 </template>
 <script>
+	import FORGETPASSWORD from "./pages/account/forgetPassword.vue"
 	export default {
-		name : "LOGIN"
+		name : "LOGIN",
+		data(){
+			return {
+				isshow_forgetPassword : false
+			}
+		},
+		methods : {
+			toForgetPassword : function(){
+				
+			}
+		}
 	}
 </script>
 <style lang="scss" scoped type="text/css">
