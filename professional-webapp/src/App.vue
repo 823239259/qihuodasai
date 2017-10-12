@@ -50,8 +50,8 @@
 				</div>
 			</div>
 			<div class="fr">
-				<a href="javascript: void(0);">登录</a>
-				<a href="javascript: void(0);">注册</a>
+				<a href="javascript: void(0);" v-on:click="toLogin">登录</a>
+				<a href="javascript: void(0);" v-on:click="toRegister">注册</a>
 			</div>
 		</div>
 		<div class="container_bottom">
@@ -82,12 +82,24 @@
 		<div class="container">
 			<router-view></router-view>
 		</div>
+		<LOGIN class="loginShow" v-if="isshow_login"/>
+		<REGISTER class="resgisterShow" v-if="isshow_register"/>
 	</div>
 </template>
 
 <script>
+	import LOGIN from "./pages/account/login.vue"
+	import REGISTER from "./pages/account/register.vue"
+	import FORGETPASSWORD from "./pages/account/forgetPassword.vue"
 	export default {
 		name: 'app',
+		components : {LOGIN,REGISTER,FORGETPASSWORD},
+		data(){
+			return {
+				isshow_login : false,
+				isshow_register : false
+			}
+		},
 		methods: {
 			toIndex: function(){
 				this.$router.push({path: '/index'});
@@ -110,6 +122,12 @@
 			toAccount: function(){
 				this.$router.push({path: '/account'});
 			},
+			toRegister : function(){
+				 this.isshow_register=!this.isshow_register;
+			},
+			toLogin : function(){
+                this.isshow_login=!this.isshow_login;
+			}
 		}
 	}
 </script>
@@ -321,5 +339,16 @@
 		overflow: hidden;
 		overflow-x: auto;
 		padding: 50px 0 0 70px;
+	}
+	/*注册登录弹窗*/
+	.loginShow {
+		position: fixed;
+		top: 40%;
+		left: 40%;
+	}
+	.resgisterShow {
+		position: fixed;
+		top: 40%;
+		left: 40%;
 	}
 </style>

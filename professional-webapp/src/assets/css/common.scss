@@ -77,3 +77,18 @@ table{
         background: $lightblue;
     }
 }
+/*注册登录input框1为黄色2为蓝色*/
+.input_1 {
+    border:1px solid $yellow;  
+    background-color: $blue;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 30px;
+}
+.input_2 {
+    border:1px solid $yellow;  
+    border-radius: 10px;
+    background-color: $blue;
+    text-align: center;
+    margin-top: 20px;
+}
