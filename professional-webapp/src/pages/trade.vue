@@ -536,24 +536,24 @@
 								<tbody>
 									<tr>
 										<td>富时A50</td>
-										<td>多</td>
+										<td class="red">多</td>
 										<td>1</td>
 										<td>25289</td>
-										<td>+100.00：USD</td>
+										<td class="red">+100.00：USD</td>
 									</tr>
 									<tr>
 										<td>富时A50</td>
-										<td>多</td>
+										<td class="green">空</td>
 										<td>1</td>
 										<td>25289</td>
-										<td>+100.00：USD</td>
+										<td class="green">-100.00：USD</td>
 									</tr>
 									<tr>
 										<td>富时A50</td>
-										<td>多</td>
+										<td class="red">多</td>
 										<td>1</td>
 										<td>25289</td>
-										<td>+100.00：USD</td>
+										<td class="red">+100.00：USD</td>
 									</tr>
 								</tbody>
 							</table>
