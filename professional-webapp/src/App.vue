@@ -84,19 +84,22 @@
 		</div>
 		<login class="loginShow" v-if="isshow_login"/>
 		<register class="resgisterShow" v-if="isshow_register"/>
+		<warning v-if="warningShow"></warning>
 	</div>
 </template>
 
 <script>
 	import login from "./pages/account/login.vue"
 	import register from "./pages/account/register.vue"
+	import warning from "./pages/trade/warning.vue"
 	export default {
 		name: 'app',
-		components : {login,register},
+		components : {login,register, warning},
 		data(){
 			return {
 				isshow_login : false,
-				isshow_register : false
+				isshow_register : false,
+				warningShow: false
 			}
 		},
 		methods: {
