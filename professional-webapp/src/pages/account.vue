@@ -116,6 +116,16 @@
 							</tr>
 						</tbody>
 					</table>
+					<div class="page_next">
+						<span>上一页</span>
+						<span>1</span>
+						<span>2</span>
+						<span>3</span>
+						<span>4</span>
+						<span>5</span>
+						<span>下一页</span>
+					</div>
+					<p class="p_center">投资有风险，入市需谨慎</p>
 				</div>
 			</div>
 			<div id="account_openDetail">
@@ -186,6 +196,7 @@
 
 <style lang="scss" scoped type="text/css">
 @import "../assets/css/common.scss";
+	
 	#account {
 		margin-left: 120px;
 		width : 1000px;
@@ -213,7 +224,7 @@
 			background-color: $blue;
 			width: 100%;
 			float: left;
-			display: none;
+			
 			p {
 				height: 40px;
 				line-height: 40px;
@@ -222,11 +233,23 @@
 				background-color: $bottom_color;
 				text-indent: 5px;
 			}
+			.p_center {
+				text-align: center;
+				margin-top: 5px;
+			}
 			.ifont {
 				font-size: 20px;
 				color: $black;
 				background-color: $highLight;
 				width: 150px;
+			}
+		}
+		.page_next {
+			text-align: right;
+			height: 60px;
+			line-height: 60px;
+			span {
+				margin:0 5px;
 			}
 		}
 		.account_money {
@@ -301,11 +324,17 @@
 			color: $white;
 			margin: 0 5px;
 		}
-		/*table {
-			margin-left: 5px;
-		}*/
+		table {
+			text-indent: 5px;
+			td {
+				height: 40px;
+				border-bottom: 1px solid $bottom_color;
+				background-color: $blue;
+			}
+		}
 		/*安全设置tab*/
 		.account_safe {
+			display: none;
 			width: 100%;
 			height: 540px;
 			background-color: #242633;
