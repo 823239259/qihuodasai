@@ -1,5 +1,7 @@
 <template>
 	<div id="trade">
+		<tradeLogin ref="tradeLogin" v-if="tradeLoginShow"></tradeLogin>
+		<tradeLoginSpe ref="tradeLoginSpe" v-if="tradeLoginSpeShow"></tradeLoginSpe>
 		<div class="quote">
 			<div class="title">
 				<ul>
@@ -429,13 +431,13 @@
 							</ul>
 						</div>
 					</div>
-					<!--<div class="trade_login">
+					<div class="trade_login">
 						<button class="btn yellow">我要开户</button>
-						<button class="btn blue">交易登录</button>
-					</div>-->
+						<button class="btn blue" @click="toTradeLogin">交易登录</button>
+					</div>
 				</div>
 			</div>
-			<div class="trade_box">
+			<!--<div class="trade_box">
 				<div class="operate">
 					<div class="head">
 						<span class="fl">交易账号：158******36</span>
@@ -566,15 +568,30 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div>-->
 		</div>
 	</div>
 </template>
 
 <script>
 	import pro from '../assets/js/common.js'
+	import tradeLogin from './trade/tradeLogin.vue'
+	import tradeLoginSpe from './trade/tradeLoginSpe.vue'
 	export default{
 		name:'trade',
+		components: {tradeLogin, tradeLoginSpe},
+		data(){
+			return{
+				tradeLoginShow: false,
+				tradeLoginSpeShow: false
+			}
+		},
+		methods: {
+			toTradeLogin: function(){
+//				this.tradeLoginShow = true;
+				this.tradeLoginSpeShow = true;
+			}
+		},
 		mounted: function(){
 			//调用下拉框
 			$(".slt-box").each(function(i, o){
@@ -664,7 +681,7 @@
 		padding-left: 260px;
 	}
 	.trade_right_top{
-		height: 536px;
+		/*height: 536px;*/
 		overflow: hidden;
 		background: $black;
 		.echarts_box{
