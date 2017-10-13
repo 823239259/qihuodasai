@@ -75,6 +75,7 @@ table{
     color: $black;
     border: none;
     font-size: $fs16;
+    cursor: pointer;
     &.yellow{
         background: $yellow;
     }
