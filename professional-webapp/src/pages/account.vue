@@ -121,8 +121,59 @@
 			<div id="account_openDetail">
 				
 			</div>
-			<div id="account_safe">
-				
+			<div class="account_safe">
+				<div class="account_safe_top">
+					<div class="safe_left">
+						<img src="../assets/images/icon_accountsafe.png" alt="safelogo" />
+					</div>
+					<div class="safe_right">
+						<p>*威力&nbsp;<span>158****8888</span></p>
+						<p>平台实时保护您的账户和资金安全</p>
+					</div>
+				</div>
+				<div class="acount_safe_btm">
+					<p>您设置了<span>3</span>个保护，还有<span>2</span>保护项可设置</p>
+					<table>
+						<tbody>
+							<tr>
+								<td><img src="../assets/images/icon_acc1.png" alt="" /></td>
+								<td>实名认证</td>
+								<td>已认证</td>
+								<td>认证信息：*小四，51116*************2222</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td><img src="../assets/images/icon_password1.png" alt="" /></td>
+								<td>体现密码</td>
+								<td>未设置	</td>
+								<td>认证信息：*小四，51116*************2222</td>
+								<td>设置</td>
+							</tr>
+							<tr>
+								<td><img src="../assets/images/icon_bindcard.png" alt="" /></td>
+								<td>绑定银行卡</td>
+								<td>未绑定</td>
+								<td>认证信息：*小四，51116*************2222</td>
+								<td>绑定</td>
+							</tr>
+							<tr>
+								<td><img src="../assets/images/icon_loginpassword.png" alt="" /></td>
+								<td>登录密码</td>
+								<td>已设置</td>
+								<td>认证信息：*小四，51116*************2222</td>
+								<td>修改</td>
+							</tr>
+								<tr>
+								<td><img src="../assets/images/icon_bindtel.png" alt="" /></td>
+								<td>绑定手机</td>
+								<td>已绑定</td>
+								<td>认证信息：*小四，51116*************2222</td>
+								<td>修改</td>
+							</tr>
+						</tbody>
+					</table>
+					<p class="p_center">投资有风险，入市需谨慎</p>
+				</div>
 			</div>
 	</div>
 </template>
@@ -146,7 +197,7 @@
 			float : left;	
 			width : 120px;
 			height : 30px;
-			margin: 5px 0 5px 0;
+			margin: 5px 10px 5px 0;
 			line-height : 30px;
 			&:nth-child(1){
 				color: $yellow;
@@ -162,6 +213,7 @@
 			background-color: $blue;
 			width: 100%;
 			float: left;
+			display: none;
 			p {
 				height: 40px;
 				line-height: 40px;
@@ -249,8 +301,76 @@
 			color: $white;
 			margin: 0 5px;
 		}
-		table {
+		/*table {
 			margin-left: 5px;
+		}*/
+		/*安全设置tab*/
+		.account_safe {
+			width: 100%;
+			height: 540px;
+			background-color: #242633;
+			float: left;
+			.account_safe_top {
+				height: 150px;
+				width:100%;
+				.safe_left {
+					float: left;
+					width: 150px;
+					height:100%;
+					background-color: $blue;
+					img {
+						padding-left: 50px;
+						padding-top: 30px;
+					}
+				}
+				.safe_right {
+					float: left;
+					width: 850px;
+					height: 100%;
+					background-color: $blue;
+					p {
+						width: 100%;
+						font-size: $fs16;
+						color: $white;
+						padding-top: 60px;
+						&:nth-child(2){
+							color: $lightblue;
+							padding-top: 5px;
+							font-size: $fs14;
+						}
+					}
+				}
+				
+			}
+			.acount_safe_btm {
+				width: 100%;
+				p {
+					font-size: $fs14;
+					text-indent: 5px;
+					width: 100%;
+					height: 40px;
+					background-color: $bottom_color;
+					line-height: 40px;
+					span {
+						color: $white;
+						margin: 0 3px;
+					}
+				}
+				.p_center {
+					text-align: center;
+					margin-top: 5px;
+				}
+				table {
+					margin-top: 5px;
+				}
+				td {
+					height: 60px;
+					text-indent: 5px;
+					background-color: $blue;
+					border-bottom: 1px solid $bottom_color;
+				}
+				
+			}
 		}
 	}
 </style>
