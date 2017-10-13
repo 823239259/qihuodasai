@@ -709,11 +709,13 @@
 			},
 			scrollEvent: function(){
 				if(this.show == true){
-					var h = document.getElementById('margin_trade_static').scrollTop - document.body.scrollTop + $('#margin_trade_static').height();
-					if(h < 0){
-						this.bondShow = true;
-					}else{
-						this.bondShow = false;
+					if(document.getElementById('margin_trade_static') != null){
+						var h = document.getElementById('margin_trade_static').scrollTop - document.body.scrollTop + $('#margin_trade_static').height();
+						if(h < 0){
+							this.bondShow = true;
+						}else{
+							this.bondShow = false;
+						}
 					}
 				}
 			}
