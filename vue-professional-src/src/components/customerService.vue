@@ -45,6 +45,9 @@
 		right: 0;
 		z-index: 1000;
 		&.left{
+			width: 75px;
+			padding: 0;
+			text-align: center;
 			left: 0;
 		}
     }
