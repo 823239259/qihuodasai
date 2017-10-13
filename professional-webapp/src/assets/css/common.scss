@@ -84,6 +84,11 @@ table{
     }
 }
 /*注册登录input框1为黄色2为蓝色*/
+input{
+    border: none;
+    background: none;
+    outline: none;
+}
 .input_1 {
     border:1px solid $yellow;  
     background-color: $blue;
