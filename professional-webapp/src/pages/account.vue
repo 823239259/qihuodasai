@@ -2,7 +2,7 @@
 	<div id="account">
 			<ul>
 				<li>
-					<span>账户概括</span>
+					<span v-on:click="show_accountSurvey">账户概括</span>
 				</li>
 				<li>
 					<span>开户明细</span>
@@ -11,7 +11,7 @@
 					<span>安全设置</span>
 				</li>
 			</ul>
-			<div class="account_survey">
+			<div class="account_survey" v-if="isshow_accountSurey">
 				<p>账户资金</p>
 				<div class="account_info">
 					<div class="info_left">
@@ -23,8 +23,8 @@
 								<img src="../assets/images/icon_password1.png" alt="体现密码" />
 							</li>
 							<li>
-								<button class="btn yellow">充值</button>
-								<button class="btn blue">体现</button>
+								<button class="btn yellow" >充值</button>
+								<button class="btn blue" v-on:click="toWithDraw">提现</button>
 							</li>
 						</ul>
 					</div> 
@@ -185,12 +185,32 @@
 					<p class="p_center">投资有风险，入市需谨慎</p>
 				</div>
 			</div>
+			<account_withDraw class="show_account_withDraw" v-if="isshow_withDraw" />
 	</div>
 </template>
 
 <script>
+	import account_withDraw from "./account/account_withDraw.vue"
 	export default{
 		name:'account',
+		data(){
+			return {
+				isshow_withDraw : false,
+				isshow_accountSurey : true
+			}
+		},
+		components:{account_withDraw},
+		methods : {
+			toWithDraw : function (){
+				this.isshow_withDraw=!this.isshow_withDraw,
+				this.isshow_accountSurey=!this.isshow_accountSurey
+			},
+			show_accountSurvey : function(){
+				this.isshow_withDraw = false,
+				this.isshow_accountSurey = true
+			}
+		}
+		
 	}
 </script>
 
