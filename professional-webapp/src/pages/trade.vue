@@ -459,7 +459,19 @@
 							<ul>
 								<li>
 									<label>合约代码</label>
-									<p>市价</p>
+									<div class="slt-box">
+										<input type="text" class="slt" disabled="disabled" selectVal="0" value="富时A50"/>
+										<span class="tal-box"><span class="tal"></span></span>
+										<div class="slt-list">
+											<ul>
+												<li selectVal="1">富时A50</li>
+												<li selectVal="1">富时A50</li>
+												<li selectVal="1">富时A50</li>
+												<li selectVal="1">富时A50</li>
+												<li selectVal="1">富时A50</li>
+											</ul>
+										</div>
+									</div>
 								</li>
 								<li>
 									<label>订单类型</label>
@@ -560,8 +572,15 @@
 </template>
 
 <script>
+	import pro from '../assets/js/common.js'
 	export default{
 		name:'trade',
+		mounted: function(){
+			//调用下拉框
+			$(".slt-box").each(function(i, o){
+				pro.selectEvent(o);
+			});
+		}
 	}
 </script>
 
