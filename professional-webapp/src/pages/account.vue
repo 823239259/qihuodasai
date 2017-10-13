@@ -8,7 +8,7 @@
 					<span>开户明细</span>
 				</li>
 				<li>
-					<span>安全设置</span>
+					<span v-on:click="show_accountSafe">安全设置</span>
 				</li>
 			</ul>
 			<div class="account_survey" v-if="isshow_accountSurey">
@@ -131,7 +131,7 @@
 			<div id="account_openDetail">
 				
 			</div>
-			<div class="account_safe">
+			<div class="account_safe" v-if="isshow_safe">
 				<div class="account_safe_top">
 					<div class="safe_left">
 						<img src="../assets/images/icon_accountsafe.png" alt="safelogo" />
@@ -148,9 +148,9 @@
 							<tr>
 								<td><img src="../assets/images/icon_acc1.png" alt="" /></td>
 								<td>实名认证</td>
-								<td>已认证</td>
+								<td>未认证</td>
 								<td>认证信息：*小四，51116*************2222</td>
-								<td></td>
+								<td v-on:click="toCertification">去认证</td>
 							</tr>
 							<tr>
 								<td><img src="../assets/images/icon_password1.png" alt="" /></td>
@@ -186,20 +186,24 @@
 				</div>
 			</div>
 			<account_withDraw class="show_account_withDraw" v-if="isshow_withDraw" />
+			<account_certification class="show_account_certification" v-if="isshow_certification"/> 
 	</div>
 </template>
 
 <script>
 	import account_withDraw from "./account/account_withDraw.vue"
+	import account_certification from "./account/account_certification.vue"
 	export default{
 		name:'account',
 		data(){
 			return {
 				isshow_withDraw : false,
-				isshow_accountSurey : true
+				isshow_accountSurey : true,
+				isshow_certification : false,
+				isshow_safe : true
 			}
 		},
-		components:{account_withDraw},
+		components:{account_withDraw,account_certification},
 		methods : {
 			toWithDraw : function (){
 				this.isshow_withDraw=!this.isshow_withDraw,
@@ -208,6 +212,14 @@
 			show_accountSurvey : function(){
 				this.isshow_withDraw = false,
 				this.isshow_accountSurey = true
+			},
+			toCertification : function(){
+				this.isshow_certification=!this.isshow_certification,
+				this.isshow_safe = false
+			},
+			show_accountSafe : function(){
+				this.isshow_certification = false,
+				this.isshow_safe = true
 			}
 		}
 		
@@ -244,7 +256,7 @@
 			background-color: $blue;
 			width: 100%;
 			float: left;
-			
+			display: none;
 			p {
 				height: 40px;
 				line-height: 40px;
@@ -301,9 +313,7 @@
 				}
 				&:nth-child(2) {
 					width: 20px;
-					height: 14px;
-					border: 1px solid $yellow;
-					padding: 3px 1px 0 1px;
+					height: 20px;	
 					position:relative;
 					top: -40px;
 					left: 10px;
@@ -354,7 +364,6 @@
 		}
 		/*安全设置tab*/
 		.account_safe {
-			display: none;
 			width: 100%;
 			height: 540px;
 			background-color: #242633;
