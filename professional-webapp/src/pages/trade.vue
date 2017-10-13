@@ -437,11 +437,121 @@
 			</div>
 			<div class="trade_box">
 				<div class="operate">
-					<div class="title">
-						<span>交易账号：158********</span>
-						<i></i>
-						<a href="javascript:void(0);">退出</a>
-						<button></button>
+					<div class="head">
+						<span class="fl">交易账号：158******36</span>
+						<i class="sanjiao fl"></i>
+						<a href="javascript:void(0);" class="fl">退出</a>
+						<button class="btn yellow fl">追加保证金</button>
+						<button class="btn blue fl">终结方案</button>
+					</div>
+					<div class="down_order">
+						<div class="title">
+							<ul>
+								<li class="current">
+									<span>普通单</span>
+								</li>
+								<li>
+									<span>条件单</span>
+								</li>
+							</ul>
+						</div>
+						<div class="cont">
+							<ul>
+								<li>
+									<label>合约代码</label>
+									<p>市价</p>
+								</li>
+								<li>
+									<label>订单类型</label>
+									<div class="col">
+										<span class="current">市价</span>
+										<span>限价</span>
+									</div>
+								</li>
+								<li>
+									<p>市价</p>
+								</li>
+								<li>
+									<label>委托数量</label>
+									<div class="col">
+										<i class="ifont fl">&#xe6f2;</i>
+										<input type="text" class="fl" value="10" />
+										<i class="ifont fr">&#xe601;</i>
+									</div>
+								</li>
+							</ul>
+							<div class="btn_box">
+								<button class="red">买入/市价</button>
+								<button class="green">卖出/市价</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="trade_list">
+					<div class="head">
+						<p><span>总资产：</span><em>0.00</em></p>
+						<p><span>余额：</span><em>0.00</em></p>
+						<p><span>持仓盈亏：</span><em>0.00</em></p>
+						<p><span>交易盈亏：</span><em>0.00</em></p>
+						<p><span>平仓线：</span><em>0.00</em></p>
+						<p><span>风险度%：</span><em>0.00%</em></p>
+					</div>
+					<div class="list">
+						<div class="title">
+							<ul>
+								<template></template>
+								<li class="current"><span>持仓</span></li>
+								<li><span>挂单</span></li>
+								<li><span>委托</span></li>
+								<li><span>止损单</span></li>
+								<li><span>条件单</span></li>
+								<li><span>当日成交</span></li>
+								<li><span>历史成交</span></li>
+								<li><span>资金明细</span></li>
+							</ul>
+						</div>
+						<div class="cont">
+							<table>
+								<thead>
+									<tr>
+										<td>合约名称</td>
+										<td>多空</td>
+										<td>手数</td>
+										<td>持仓均价</td>
+										<td>浮动盈利</td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>富时A50</td>
+										<td>多</td>
+										<td>1</td>
+										<td>25289</td>
+										<td>+100.00：USD</td>
+									</tr>
+									<tr>
+										<td>富时A50</td>
+										<td>多</td>
+										<td>1</td>
+										<td>25289</td>
+										<td>+100.00：USD</td>
+									</tr>
+									<tr>
+										<td>富时A50</td>
+										<td>多</td>
+										<td>1</td>
+										<td>25289</td>
+										<td>+100.00：USD</td>
+									</tr>
+								</tbody>
+							</table>
+							<div class="tools">
+								<button class="btn blue">全部平仓</button>
+								<button class="btn blue">平仓</button>
+								<button class="btn blue">反手</button>
+								<button class="btn blue">止损止盈</button>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -535,7 +645,7 @@
 		padding-left: 260px;
 	}
 	.trade_right_top{
-		height: 532px;
+		height: 536px;
 		overflow: hidden;
 		background: $black;
 		.echarts_box{
@@ -700,8 +810,229 @@
 	}
 	.trade_box{
 		width: 100%;
-		height: 350px;
+		height: 280px;
 		overflow: hidden;
 		margin-top: 10px;
+		.operate{
+			float: left;
+			width: 390px;
+			height: 280px;
+			overflow: hidden;
+			margin-right: 10px;
+			.head{
+				height: 30px;
+				line-height: 30px;
+				overflow: hidden;
+				background: $bottom_color;
+				padding: 0 0 0 10px;
+				font-size: $fs12;
+				.sanjiao{
+					display: inline-block;
+				    width: 0;
+					height: 0;
+				    overflow: hidden;
+				    margin: 10px 0 0 7px;
+				    font-size: 0;
+				    line-height: 0;
+				    border-color: #7a7f99 transparent transparent transparent;
+				    border-style: solid dashed dashed dashed;
+				    border-width: 7px;
+				    cursor: pointer;
+				}
+				a{
+					color: $lightblue;
+					margin: 0 20px;
+				}
+				.btn{
+					height: 20px;
+					line-height: 20px;
+					font-size: $fs12;
+					padding: 0 10px;
+					margin: 5px 10px 5px 0;
+				}
+			}
+			.down_order{
+				margin-top: 5px;
+				.title{
+					height: 35px;
+					li{
+						float: left;
+						width: 190px;
+						height: 35px;
+						line-height: 35px;
+						text-align: center;
+						overflow: hidden;
+						background: $blue;
+						border-bottom: 5px solid $black;
+						margin-right: 10px;
+						cursor: pointer;
+						&:hover, &.current{
+							border-color: $blue;
+							span{
+								color: $yellow;
+							}
+						}
+						&:last-child{
+							margin: 0;
+						}
+					}
+				}
+				.cont{
+					overflow: hidden;
+					background: $blue;
+					li{
+						width: 100%;
+						height: 30px;
+						padding: 0 10px;
+						margin-top: 5px;
+						label, span, p{
+							display: inline-block;
+							float: left;
+							height: 30px;
+							line-height: 30px;
+							color: #7a8199;
+						}
+						label{
+							width: 70px;
+						}
+						p{
+							float: right;
+							width: 300px;
+							height: 30px;
+							line-height: 30px;
+							text-align: center;
+							overflow: hidden;
+							border: 1px solid #474c66;
+							border-radius: 5px;
+							color: $white;
+						}
+						.col{
+							float: left;
+							width: 300px;
+							height: 30px;
+							border: 1px solid #474c66;
+							border-radius: 5px;
+							span{
+								width: 148px;
+								text-align: center;
+								border-radius: 5px;
+								cursor: pointer;
+								&.current{
+									background: #474c66;
+								}
+							}
+							.ifont{
+								width: 30px;
+								height: 30px;
+								line-height: 30px;
+								text-align: center;
+								color: $black;
+								background: #474c66;
+								cursor: pointer;
+							}
+							input{
+								width: 238px;
+								height: 30px;
+								line-height: 30px;
+								color: $white;
+								padding: 0 10px;
+								box-sizing: border-box;
+								text-align: center;
+								font-size: $fs14;
+							}
+						}
+					}
+					.btn_box{
+						width: 100%;
+						height: 30px;
+						margin-top: 40px;
+						button{
+							float: left;
+							width: 50%;
+							height: 30px;
+							line-height: 30px;
+							color: $white;
+							border: none;
+							background: none;
+							&.red{
+								background: $red;
+							}
+							&.green{
+								background: $green;
+							}
+						}
+					}
+				}
+			}	
+		}
+		.trade_list{
+			float: left;
+			width: 1188px;
+			height: 280px;
+			.head{
+				height: 30px;
+				line-height: 30px;
+				background: $bottom_color;
+				padding: 0 10px;
+				font-size: $fs12;
+				p{
+					float: left;
+					margin-right: 30px;
+				}
+			}
+			.list{
+				.title{
+					height: 35px;
+					margin-top: 5px;
+					ul{
+						li{
+							float: left;
+							width: 80px;
+							height: 35px;
+							line-height: 35px;
+							text-align: center;
+							overflow: hidden;
+							background: $deepblue;
+							border-bottom: 5px solid $black;
+							margin-right: 5px;
+							cursor: pointer;
+							&:hover, &.current{
+								border-color: $deepblue;
+								span{
+									color: $yellow;
+								}
+							}
+							
+						}
+					}
+				}
+				.cont{
+					height: 210px;
+					overflow: hidden;
+					background: $blue;
+					table{
+						thead tr{
+							height: 30px;
+							background: $bottom_color;
+						}
+						td{
+							padding: 0 10px;
+						}
+						tbody tr{
+							height: 40px;
+							border-bottom: 1px solid $bottom_color;
+						}
+					}
+					.tools{
+						margin: 15px 0 0 10px;
+						.btn{
+							width: 90px;
+							height: 30px;
+							line-height: 30px;
+						}
+					}
+				}
+			}
+		}
 	}
 </style>
