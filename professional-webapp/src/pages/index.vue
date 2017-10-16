@@ -89,9 +89,9 @@
 	export default{
 		name:'index',
 		computed: {
-			quoteInitStatus(){
-				return this.$store.state.market.quoteInitStatus;
-			},
+//			quoteInitStatus(){
+//				return this.$store.state.market.quoteInitStatus;
+//			},
 			parameters(){
 				return this.$store.state.market.Parameters;
 			},
@@ -108,16 +108,10 @@
 			}
 		},
 		methods: {
-			...mapActions([
-				'initQuoteClient'
-			]),
+			
 		},
 		mounted: function(){
-			//初始化行情
-			if(this.quoteInitStatus == false){
-				this.initQuoteClient();
-				this.$store.state.market.quoteInitStatus = true;
-			}
+			
 		}
 	}
 </script>

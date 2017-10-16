@@ -49,7 +49,7 @@ var account = {
 //控制行情数据
 var market = {
 	state: {
-		quoteInitStatus: false,    //行情是否已经初始化
+//		quoteInitStatus: false,    //行情是否已经初始化
 		//存持仓列表
 		positionListCont:[],
 		//心跳信息

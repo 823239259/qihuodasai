@@ -38,11 +38,12 @@
 		<div class="container_top">
 			<div class="fl box"></div>
 			<div class="fl">
-				<i class="ifont zoom">&#xe62e;</i>
-				<div class="customer_service fl">
+				<i class="ifont zoom" @click="fullScreen">&#xe62e;</i>
+				<div class="customer_service fl" :class="{current: csAddressCurrent}" @click="customerService">
 					<i class="ifont">&#xe68f;</i>
 					<span>在线客服</span>
 				</div>
+				<iframe :src="csAddress"></iframe>
 				<div class="tel fl">
 					<i class="ifont">&#xe611;</i>
 					<span>客服热线：</span>
@@ -55,20 +56,29 @@
 			</div>
 		</div>
 		<div class="container_bottom">
-			<p>
+			<p v-if="parameters[0]">
 				<span>国际原油</span>
-				<span class="green">3360.81 -2.82 -0.08%</span>
-				<i class="ifont green">&#xe76a;</i>
+				<span :class="{red: parameters[0].LastQuotation.LastPrice > parameters[0].LastQuotation.PreSettlePrice, green: parameters[0].LastQuotation.LastPrice < parameters[0].LastQuotation.PreSettlePrice}">{{parameters[0].LastQuotation.LastPrice}}</span>
+				<span :class="{green: parameters[0].LastQuotation.ChangeRate < 0, red: parameters[0].LastQuotation.ChangeRate > 0}">{{parameters[0].LastQuotation.ChangeValue | fixNum(parameters[0].DotSize)}}</span>
+				<span :class="{green: parameters[0].LastQuotation.ChangeRate < 0, red: parameters[0].LastQuotation.ChangeRate > 0}">{{parameters[0].LastQuotation.ChangeRate | fixNumTwo}}%</span>
+				<i class="ifont" v-show="parameters[0].LastQuotation.LastPrice < parameters[0].LastQuotation.PreSettlePrice" :class="{red: parameters[0].LastQuotation.LastPrice > parameters[0].LastQuotation.PreSettlePrice, green: parameters[0].LastQuotation.LastPrice < parameters[0].LastQuotation.PreSettlePrice}">&#xe76a;</i>
+				<i class="ifont" v-show="parameters[0].LastQuotation.LastPrice >= parameters[0].LastQuotation.PreSettlePrice" :class="{red: parameters[0].LastQuotation.LastPrice > parameters[0].LastQuotation.PreSettlePrice, green: parameters[0].LastQuotation.LastPrice < parameters[0].LastQuotation.PreSettlePrice}">&#xe761;</i>
 			</p>
-			<p>
+			<p v-if="parameters[2]">
 				<span>美黄金</span>
-				<span class="red">3360.81 -2.82 -0.08%</span>
-				<i class="ifont red">&#xe76a;</i>
+				<span :class="{red: parameters[2].LastQuotation.LastPrice > parameters[2].LastQuotation.PreSettlePrice, green: parameters[2].LastQuotation.LastPrice < parameters[2].LastQuotation.PreSettlePrice}">{{parameters[2].LastQuotation.LastPrice}}</span>
+				<span :class="{green: parameters[2].LastQuotation.ChangeRate < 0, red: parameters[2].LastQuotation.ChangeRate > 0}">{{parameters[2].LastQuotation.ChangeValue | fixNum(parameters[2].DotSize)}}</span>
+				<span :class="{green: parameters[2].LastQuotation.ChangeRate < 0, red: parameters[2].LastQuotation.ChangeRate > 0}">{{parameters[2].LastQuotation.ChangeRate | fixNumTwo}}%</span>
+				<i class="ifont" v-show="parameters[2].LastQuotation.LastPrice < parameters[2].LastQuotation.PreSettlePrice" :class="{red: parameters[2].LastQuotation.LastPrice > parameters[2].LastQuotation.PreSettlePrice, green: parameters[2].LastQuotation.LastPrice < parameters[2].LastQuotation.PreSettlePrice}">&#xe76a;</i>
+				<i class="ifont" v-show="parameters[2].LastQuotation.LastPrice >= parameters[2].LastQuotation.PreSettlePrice" :class="{red: parameters[2].LastQuotation.LastPrice > parameters[2].LastQuotation.PreSettlePrice, green: parameters[2].LastQuotation.LastPrice < parameters[2].LastQuotation.PreSettlePrice}">&#xe761;</i>
 			</p>
-			<p>
+			<p v-if="parameters[1]">
 				<span>恒指期货</span>
-				<span class="green">3360.81 -2.82 -0.08%</span>
-				<i class="ifont green">&#xe76a;</i>
+				<span :class="{red: parameters[1].LastQuotation.LastPrice > parameters[1].LastQuotation.PreSettlePrice, green: parameters[1].LastQuotation.LastPrice < parameters[1].LastQuotation.PreSettlePrice}">{{parameters[1].LastQuotation.LastPrice}}</span>
+				<span :class="{green: parameters[1].LastQuotation.ChangeRate < 0, red: parameters[1].LastQuotation.ChangeRate > 0}">{{parameters[1].LastQuotation.ChangeValue | fixNum(parameters[1].DotSize)}}</span>
+				<span :class="{green: parameters[1].LastQuotation.ChangeRate < 0, red: parameters[1].LastQuotation.ChangeRate > 0}">{{parameters[1].LastQuotation.ChangeRate | fixNumTwo}}%</span>
+				<i class="ifont" v-show="parameters[1].LastQuotation.LastPrice < parameters[1].LastQuotation.PreSettlePrice" :class="{red: parameters[1].LastQuotation.LastPrice > parameters[1].LastQuotation.PreSettlePrice, green: parameters[1].LastQuotation.LastPrice < parameters[1].LastQuotation.PreSettlePrice}">&#xe76a;</i>
+				<i class="ifont" v-show="parameters[1].LastQuotation.LastPrice >= parameters[1].LastQuotation.PreSettlePrice" :class="{red: parameters[1].LastQuotation.LastPrice > parameters[1].LastQuotation.PreSettlePrice, green: parameters[1].LastQuotation.LastPrice < parameters[1].LastQuotation.PreSettlePrice}">&#xe761;</i>
 			</p>
 			<p class="net net_yes">
 				<i class="icon icon_yes"></i>
@@ -92,6 +102,7 @@
 	import login from "./pages/account/login.vue"
 	import register from "./pages/account/register.vue"
 	import warning from "./pages/trade/warning.vue"
+	import { mapMutations,mapActions } from 'vuex'
 	export default {
 		name: 'app',
 		components : {login,register, warning},
@@ -99,10 +110,66 @@
 			return {
 				isshow_login : false,
 				isshow_register : false,
-				warningShow: false
+				warningShow: false,
+				fullScreenCurrent: false,
+				csAddress: '',
+				csAddressCurrent: false,
+				parametersRecommend: [],
+			}
+		},
+		computed: {
+			parameters(){
+				return this.$store.state.market.Parameters;
+			},
+		},
+		filters:{
+			fixNumTwo: function(num){
+				return num.toFixed(2);
+			},
+			fixNum: function(num, dotsize){
+				return num.toFixed(dotsize);
 			}
 		},
 		methods: {
+			customerService: function(){
+				if(this.csAddressCurrent == false){
+					this.csAddressCurrent = true;
+					this.csAddress = 'http://test.www.vs.com/topic/consistentBeauty/consistentbeauty.html?phone=15928423292&userName=wxf';
+				}else{
+					this.csAddressCurrent = false;
+					this.csAddress = '';
+				}
+				
+			},
+			fullScreen: function(){
+				if(this.fullScreenCurrent == false){
+					this.fullScreenCurrent = true;
+					var docElm = document.documentElement;
+					if (docElm.requestFullscreen) {  //W3C  
+					    docElm.requestFullscreen();  
+					}else if (docElm.mozRequestFullScreen) {  //FireFox 
+					    docElm.mozRequestFullScreen();  
+					}else if (docElm.webkitRequestFullScreen) {  //Chrome等  
+					    docElm.webkitRequestFullScreen();  
+					}else if (elem.msRequestFullscreen) {  //IE11
+					  elem.msRequestFullscreen();
+					}
+				}else{
+					this.fullScreenCurrent = false;
+					if (document.exitFullscreen) {  
+					    document.exitFullscreen();  
+					}  
+					else if (document.mozCancelFullScreen) {  
+					    document.mozCancelFullScreen();  
+					}  
+					else if (document.webkitCancelFullScreen) {  
+					    document.webkitCancelFullScreen();  
+					}
+					else if (document.msExitFullscreen) {
+					      document.msExitFullscreen();
+					}
+				}
+			},
 			clickEvent: function(e){
 				var index = $(e.currentTarget).index();
 				if(index == 0){
@@ -141,7 +208,14 @@
 			},
 			toLogin : function(){
                 this.isshow_login=!this.isshow_login;
-			}
+			},
+			...mapActions([
+				'initQuoteClient'
+			])
+		},
+		mounted: function(){
+			//初始化行情
+			this.initQuoteClient();
 		}
 	}
 </script>
@@ -268,7 +342,7 @@
 		}
 		.customer_service{
 			cursor: pointer;
-			&:hover{
+			&:hover, &.current{
 				color: $yellow;
 				.ifont{
 					color: $yellow;
@@ -321,6 +395,10 @@
 	    	.red{
 	    		color: $red;
 	    	}
+	    	span{
+	    		float: left;
+	    		margin-right: 10px;
+	    	}
 	    	&.net{
 	    		float: right;
 	    		margin-right: 20px;
@@ -364,5 +442,13 @@
 		position: fixed;
 		top: 40%;
 		left: 40%;
+	}
+	iframe {
+		width: 400px; 
+		height: 800px; 
+		position: fixed; 
+		bottom: 0;
+		right: 0;
+		border: none;
 	}
 </style>
