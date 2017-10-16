@@ -256,7 +256,7 @@
 			background-color: $blue;
 			width: 100%;
 			float: left;
-			display: none;
+			
 			p {
 				height: 40px;
 				line-height: 40px;
@@ -364,6 +364,7 @@
 		}
 		/*安全设置tab*/
 		.account_safe {
+			display: none;
 			width: 100%;
 			height: 540px;
 			background-color: #242633;
