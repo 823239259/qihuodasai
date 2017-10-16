@@ -39,82 +39,28 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td><i class="ifont red">&#xe761;</i></td>
-							<td>富时A50</td>
-							<td>CL1705</td>
-							<td class="red">46.81</td>
-							<td>5</td>
-							<td class="red">46.71</td>
-							<td class="red">47.36</td>
-							<td>15</td>
-							<td>20</td>
-							<td>65211</td>
-							<td class="red">+0.24</td>
-							<td class="red">+0.51%</td>
-							<td class="red">430110</td>
-							<td class="red">49.02</td>
-							<td class="red">49.25</td>
-							<td class="red">48.56</td>
-							<td>46.90</td>
-						</tr>
-						<tr>
-							<td><i class="ifont green">&#xe76a;</i></td>
-							<td>富时A50</td>
-							<td>CL1705</td>
-							<td class="green">46.81</td>
-							<td>5</td>
-							<td class="green">46.71</td>
-							<td class="green">47.36</td>
-							<td>15</td>
-							<td>20</td>
-							<td>65211</td>
-							<td class="green">+0.24</td>
-							<td class="green">+0.51%</td>
-							<td class="green">430110</td>
-							<td class="green">49.02</td>
-							<td class="green">49.25</td>
-							<td class="green">48.56</td>
-							<td>46.90</td>
-						</tr>
-						<tr>
-							<td><i class="ifont red">&#xe761;</i></td>
-							<td>富时A50</td>
-							<td>CL1705</td>
-							<td class="red">46.81</td>
-							<td>5</td>
-							<td class="red">46.71</td>
-							<td class="red">47.36</td>
-							<td>15</td>
-							<td>20</td>
-							<td>65211</td>
-							<td class="red">+0.24</td>
-							<td class="red">+0.51%</td>
-							<td class="red">430110</td>
-							<td class="red">49.02</td>
-							<td class="red">49.25</td>
-							<td class="red">48.56</td>
-							<td>46.90</td>
-						</tr>
-						<tr>
-							<td><i class="ifont green">&#xe76a;</i></td>
-							<td>富时A50</td>
-							<td>CL1705</td>
-							<td class="green">46.81</td>
-							<td>5</td>
-							<td class="green">46.71</td>
-							<td class="green">47.36</td>
-							<td>15</td>
-							<td>20</td>
-							<td>65211</td>
-							<td class="green">+0.24</td>
-							<td class="green">+0.51%</td>
-							<td class="green">430110</td>
-							<td class="green">49.02</td>
-							<td class="green">49.25</td>
-							<td class="green">48.56</td>
-							<td>46.90</td>
-						</tr>
+						<template v-for="v in parameters">
+							<tr>
+								<td class="ifont_arrow" v-show="v.LastQuotation.LastPrice >= v.LastQuotation.PreSettlePrice"><i class="ifont" :class="{red: v.LastQuotation.LastPrice > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice}">&#xe761;</i></td>
+								<td class="ifont_arrow" v-show="v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice"><i class="ifont" :class="{red: v.LastQuotation.LastPrice > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice}">&#xe76a;</i></td>
+								<td>{{v.CommodityName}}</td>
+								<td>{{v.CommodityNo + v.MainContract}}</td>
+								<td :class="{red: v.LastQuotation.LastPrice > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice}">{{v.LastQuotation.LastPrice}}</td>
+								<td>{{v.LastQuotation.LastVolume}}</td>
+								<td :class="{red: v.LastQuotation.BidPrice1 > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.BidPrice1 < v.LastQuotation.PreSettlePrice}">{{v.LastQuotation.BidPrice1}}</td>
+								<td :class="{red: v.LastQuotation.AskPrice1 > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.AskPrice1 < v.LastQuotation.PreSettlePrice}">{{v.LastQuotation.AskPrice1}}</td>
+								<td>{{v.LastQuotation.BidQty1}}</td>
+								<td>{{v.LastQuotation.AskQty1}}</td>
+								<td>{{v.LastQuotation.TotalVolume}}</td>
+								<td :class="{green: v.LastQuotation.ChangeRate < 0, red: v.LastQuotation.ChangeRate > 0}">{{v.LastQuotation.ChangeValue | fixNum(v.DotSize)}}</td>
+								<td :class="{green: v.LastQuotation.ChangeRate < 0, red: v.LastQuotation.ChangeRate > 0}">{{v.LastQuotation.ChangeRate | fixNumTwo}}%</td>
+								<td>{{v.LastQuotation.Position}}</td>
+								<td :class="{red: v.LastQuotation.OpenPrice > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.OpenPrice < v.LastQuotation.PreSettlePrice}">{{v.LastQuotation.OpenPrice}}</td>
+								<td :class="{red: v.LastQuotation.HighPrice > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.HighPrice < v.LastQuotation.PreSettlePrice}">{{v.LastQuotation.HighPrice}}</td>
+								<td :class="{red: v.LastQuotation.LowPrice > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.LowPrice < v.LastQuotation.PreSettlePrice}">{{v.LastQuotation.LowPrice}}</td>
+								<td>{{v.LastQuotation.PreSettlePrice}}</td>
+							</tr>
+						</template>
 					</tbody>
 				</table>
 			</div>
@@ -139,8 +85,40 @@
 </template>
 
 <script>
+	import { mapMutations,mapActions } from 'vuex'
 	export default{
 		name:'index',
+		computed: {
+			quoteInitStatus(){
+				return this.$store.state.market.quoteInitStatus;
+			},
+			parameters(){
+				return this.$store.state.market.Parameters;
+			},
+			tradeLoginSuccessMsg(){
+				return this.$store.state.market.tradeLoginSuccessMsg;
+			}
+		},
+		filters:{
+			fixNumTwo: function(num){
+				return num.toFixed(2);
+			},
+			fixNum: function(num, dotsize){
+				return num.toFixed(dotsize);
+			}
+		},
+		methods: {
+			...mapActions([
+				'initQuoteClient'
+			]),
+		},
+		mounted: function(){
+			//初始化行情
+			if(this.quoteInitStatus == false){
+				this.initQuoteClient();
+				this.$store.state.market.quoteInitStatus = true;
+			}
+		}
 	}
 </script>
 
@@ -214,7 +192,7 @@
 		}
 		.cont{
 			table{
-				td:first-child{
+				td.ifont_arrow{
 					width: 32px;
 					text-align: center;
 					.ifont{

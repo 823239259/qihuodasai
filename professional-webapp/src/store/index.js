@@ -1,19 +1,333 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+
 Vue.use(Vuex)
 
 //控制显示与否的模块
 var isshow = {
 	state: {
-		navBarShow: false,
+		navBarShow: true,
 		isconnected: false,
+		bottomshow: false,
+		pshow: false,
+		sshow: false,
+		fshow: true,
+		kshow: false,
+		guideshow: false,
+		helpshow: false,
+		//是否进入过分时
+		isfensshow: false,
+		//判断是否是直接画图
+		isfenssec: false,
+		islightshow: false,
+		isklineshow: false
 	}
 };
 
+//控制个人数据
+var account = {
+	state: {
+		islogin: false, //是否登录
+		phone: '', //账户
+		password: '', //密码 
+		token: '',
+		secret: '',
+		isCertification: false, //是否实名认证
+		username: '', //实名
+		balance: 0.00, //余额
+		operateMoney: 0.00, //免提现手续费额度
+		bankList: [], //已绑定银行卡信息
+		//存不知道有用没的数据
+		tempList: [],
+		//存合约列表
+		programList: [],
+		operateOrderLength: 0   //操盘中方案的条数
+	}
+}
+
+//控制行情数据
+var market = {
+	state: {
+		quoteInitStatus: false,    //行情是否已经初始化
+		//存持仓列表
+		positionListCont:[],
+		//心跳信息
+		HeartBeat:{
+			lastHeartBeatTimestamp : 1,	// 最后心跳时间
+			oldHeartBeatTimestamp : 0,	// 上一次心跳时间
+			intervalCheckTime : 8000  // 间隔检查时间：8秒
+		},
+		HeartBeat00:{
+			lastHeartBeatTimestamp : 1,	// 最后心跳时间
+			oldHeartBeatTimestamp : 0,	// 上一次心跳时间
+			intervalCheckTime : 8000  // 间隔检查时间：8秒
+		},
+		quoteConfig:{
+			url_real: "ws://192.168.0.232:9002",  //测试地址
+//			url_real: "ws://quote.vs.com:9002",   //正式地址
+			userName:"13677622344",
+			passWord:"a123456"
+		},
+		tradeConfig:{
+			version : "3.3",	// 版本
+			url_real : "ws://192.168.0.232:6102",   //测试地址
+//			url_real : "ws://139.196.215.169:6101",  //正式地址
+			model : "1", // 实盘：0；	模拟盘：1
+			client_source : "N_WEB",	// 客户端渠道
+//			username : "000031",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)
+//			password : "YTEyMzQ1Ng==" 	// 密码：base64密文(明文：a123456——YTEyMzQ1Ng==     888888——ODg4ODg4	 74552102——NzQ1NTIxMDI=		123456=MTIzNDU2)
+//			username:JSON.parse(localStorage.getItem('tradeUser')).username,
+//			password:JSON.parse(localStorage.getItem('tradeUser')).password
+			username:'',
+			password:''
+		},
+		ifUpdateHoldProfit:false, //是否使用最新行情更新持仓盈亏
+		ifUpdateAccountProfit:false,//// 是否可以更新账户盈亏标志：资金信息显示完毕就可以更新盈亏
+		qryHoldTotalArr:[],//持仓合计回复数组
+		qryHoldTotalKV:{},
+		quoteIndex: '',
+		quoteColor: '',
+		/**
+		 * 缓存账户信息
+		 */
+		CacheAccount:{
+			moneyDetail:[],
+			jCacheAccount : {},	// key 为CurrencyNo
+			jCacheTotalAccount:{
+				TodayBalance : 0.0,	// 今权益
+				TodayCanUse : 0.0,	// 今可用
+				FloatingProfit : 0.0,	// 浮动盈亏
+				CloseProfit : 0.0,	// 平仓盈亏
+				FrozenMoney : 0.0,	// 冻结资金
+				Deposit : 0.0,	// 保证金
+				CounterFee : 0.0,	// 手续费
+				RiskRate : 0.0	// 风险率
+			}
+		},
+		//切换后合约的名字
+		selectId: '',
+		//订阅推送次数统计
+		subscribeIndex:1,
+		
+		//持仓合约浮盈处理
+		CacheHoldFloatingProfit:{
+			jHoldFloatingProfit : {},	// 持仓合约对应浮盈
+			jCurrencyNoFloatingProfit : {}	// 币种对应浮盈
+		},
+		
+		jContractFloatingProfitVO:{
+			currencyNo:'',
+			floatingProfit:0.0
+		},
+		
+		//委托列表页面数据
+		entrustCont:[],
+		OnRspOrderInsertEntrustCont:[],
+		
+		//挂单页面列表
+		orderListCont:[],
+		OnRspOrderInsertOrderListCont:[],
+		
+		//成交记录列表
+		dealListCont:[],
+		OnRspQryTradeDealListCont:[],
+		
+		// 订单状态
+		OrderType:{
+			0: "订单已提交",
+			1: "排队中",
+			2: "部分成交",
+			3: "完全成交",
+			4: "已撤单",
+			5: "下单失败",
+			6: "未知"
+		},
+		
+		openChangealertCurrentObj:null,
+		
+		layer:null,
+		
+		queryHisList:[],
+		
+		forceLine:0.00,
+		
+		toast:'',
+		
+		quoteConnectedMsg:'',
+		
+		tradeConnectedMsg:'',
+		
+		tradeLoginSuccessMsg:'',
+		
+		tradeLoginfailMsg:'',
+		
+		layerOnRtnOrder: '',     //买入成功提示
+		
+//		appendOrderMsg: '',     //委托提示
+		
+		
+		//止损止盈---------------------------------
+		stopLossList:[],
+		hasNostopLossList:[],
+		
+		stopLossTriggeredList:[],//已触发列表
+		hasYesstopLossList:[],
+		
+		stopLossListSelectOneObj:{},
+		
+		//条件单--------------------------------
+		conditionList:[],//条件单未触发列表
+		conditionTriggeredList:[],//条件单已触发列表
+		noObj:'',
+		noListCont:[],
+		
+		triggerConditionList:[],
+		yesListCont:[],
+		
+		
+		//选择K线时候的值
+		selectTime: 1,
+		//存进入详情页的No
+		currentNo: '',
+		//订阅成功后查询品种列表
+		orderTemplist:{},
+		//存订阅成功后的行情信息
+		templateList:{},
+		//缓存数组，用于存最新行情的数据
+		tempArr: [],
+		jsonDatatemp: {},
+		currentdetail: {},
+		markettemp: [],
+		Parameters: [],
+		//		时间差
+		charttime: 0,
+		charttimetime: 0,
+		charttimems: 0,
+		charttimetime2: 0,
+		charttimems2: 0,
+		CacheLastQuote:[],
+		volume:0,
+		
+		jsonDataKline: {
+			"Method": "OnRspQryHistory",
+			"Parameters": {
+				"ColumNames": ["DateTimeStamp", "LastPrice", "OpenPrice", "LowPrice", "HighPrice", "Position", "Volume"],
+				"CommodityNo": "CL",
+				"ContractNo": "1708",
+				"Count": 102,
+				"Data": [
+					["2017-06-26 09:31:00", 43.38, 43.35, 43.34, 43.39, 548303, 634,0],
+					
+				],
+				"ExchangeNo": "NYMEX",
+				"HisQuoteType": 0
+			}
+		},
+
+		//用于存放从后台抓取的历史合约数据
+		jsonData: {
+			"Method": "OnRspQryHistory",
+			"Parameters": {
+				"ColumNames": ["DateTimeStamp", "LastPrice", "OpenPrice", "LowPrice", "HighPrice", "Position", "Volume"],
+				"CommodityNo": "CL",
+				"ContractNo": "1708",
+				"Count": 102,
+				"Data": [
+					["2017-06-26 09:31:00", 43.38, 43.35, 43.34, 43.39, 548303, 634,0],
+					
+				],
+				"ExchangeNo": "NYMEX",
+				"HisQuoteType": 0
+			}
+		},
+		
+		//用于存放从后台抓取的合约数据
+		jsonTow: {
+			"Method": "OnRtnQuote",
+			"Parameters": {
+				"AskPrice1": 44.92,
+				"AskPrice2": 44.93,
+				"AskPrice3": 44.94,
+				"AskPrice4": 44.95,
+				"AskPrice5": 44.96,
+				"AskQty1": 15,
+				"AskQty2": 37,
+				"AskQty3": 35,
+				"AskQty4": 33,
+				"AskQty5": 61,
+				"AveragePrice": 0,
+				"BidPrice1": 44.91,
+				"BidPrice2": 44.9,
+				"BidPrice3": 44.89,
+				"BidPrice4": 44.88,
+				"BidPrice5": 44.87,
+				"BidQty1": 28,
+				"BidQty2": 47,
+				"BidQty3": 38,
+				"BidQty4": 90,
+				"BidQty5": 33,
+				"ChangeRate": 0.402324541797049,
+				"ChangeValue": 0.1799999999999997,
+				"ClosingPrice": 0,
+				"CommodityNo": "CL",
+				"ContractNo": "1708",
+				"DateTimeStamp": "2017-06-29 11:40:36",
+				"ExchangeNo": "NYMEX",
+				"HighPrice": 45.03,
+				"LastPrice": 44.92,
+				"LastVolume": 1,
+				"LimitDownPrice": 0,
+				"LimitUpPrice": 0,
+				"LowPrice": 44.75,
+				"OpenPrice": 44.89,
+				"Position": 541143,
+				"PreClosingPrice": 0,
+				"PrePosition": 0,
+				"PreSettlePrice": 44.74,
+				"SettlePrice": 0,
+				"TotalAskQty": 0,
+				"TotalBidQty": 0,
+				"TotalTurnover": 0,
+				"TotalVolume": 26287
+			}
+		},
+		//绘制分时的设置
+		option1: {
+
+		},
+		//绘制分时的设置
+		option2: {
+
+		},
+		//绘制K线的设置
+		option3: {
+
+		},
+		//绘制K线的设置
+		option4: {
+
+		},
+		//绘制闪电图的设置
+		option5: {
+
+		},
+		//K线用到的数据
+		rawData: [],
+		//K线用到的数据
+		chartDataC: null,
+		lightChartTime: {
+			"time": [],
+			"price": []
+		}
+	}
+}
+
 export default new Vuex.Store({
 	modules: {
-		isshow
+		isshow,
+		market,
+		account
 	},
 	state: {
 		//test 测试环境，online 正式环境
@@ -2086,12 +2400,10 @@ export default new Vuex.Store({
 			};
 			context.state.tradeSocket.onclose = function(evt) {
 //				console.log('tradeClose:');
-//				console.log(evt);
 				context.state.tradeSocket=null;
 			};
 			context.state.tradeSocket.onerror = function(evt) {
 //				console.log('tradeError:');
-//				console.log(evt);
 			};
 			context.state.tradeSocket.onmessage = function(evt) {
 				context.dispatch('handleTradeMessage',evt);
