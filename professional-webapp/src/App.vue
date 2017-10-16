@@ -2,34 +2,34 @@
 	<div id="app">
 		<div id="nav" class="container_left">
 			<ul>
-				<li @click="toIndex">
+				<li @click="clickEvent">
 					<img src="./assets/images/logo.png" alt="logo" />
 				</li>
-				<li class="current" @click="toIndex">
+				<li class="current" @click="clickEvent">
 					<i class="icon icon_quote"></i>
 					<p>行情</p>
 				</li>
-				<li @click="toTrade">
+				<li @click="clickEvent">
 					<i class="icon icon_trade"></i>
 					<p>交易</p>
 				</li>
-				<li @click="toOpenAccount">
+				<li @click="clickEvent">
 					<i class="icon icon_open"></i>
 					<p>开户</p>
 				</li>
-				<li @click="toLiveStream">
+				<li @click="clickEvent">
 					<i class="icon icon_live"></i>
 					<p>直播</p>
 				</li>
-				<li @click="toCalendar">
+				<li @click="clickEvent">
 					<i class="icon icon_calendar"></i>
 					<p>日历</p>
 				</li>
-				<li @click="toDownload">
+				<li @click="clickEvent">
 					<i class="icon icon_download"></i>
 					<p>下载</p>
 				</li>
-				<li @click="toAccount">
+				<li @click="clickEvent">
 					<i class="icon icon_account"></i>
 					<p>我的</p>
 				</li>
@@ -103,26 +103,38 @@
 			}
 		},
 		methods: {
-			toIndex: function(){
-				this.$router.push({path: '/index'});
-			},
-			toTrade: function(){
-				this.$router.push({path: '/trade'});
-			},
-			toOpenAccount: function(){
-				this.$router.push({path: '/openAccount'});
-			},
-			toLiveStream: function(){
-				this.$router.push({path: '/liveStream'});
-			},
-			toCalendar: function(){
-				this.$router.push({path: '/calendar'});
-			},
-			toDownload: function(){
-				this.$router.push({path: '/download'});
-			},
-			toAccount: function(){
-				this.$router.push({path: '/account'});
+			clickEvent: function(e){
+				var index = $(e.currentTarget).index();
+				if(index == 0){
+					this.$router.push({path: '/index'});
+				}else{
+					$(e.currentTarget).addClass("current").siblings().removeClass("current");
+					switch (index){
+						case 1:
+							this.$router.push({path: '/index'});
+							break;
+						case 2:
+							this.$router.push({path: '/trade'});
+							break;
+						case 3:
+							this.$router.push({path: '/openAccount'});
+							break;
+						case 4:
+							this.$router.push({path: '/liveStream'});
+							break;
+						case 5:
+							this.$router.push({path: '/calendar'});
+							break;
+						case 6:
+							this.$router.push({path: '/download'});
+							break;
+						case 7:
+							this.$router.push({path: '/account'});
+							break;
+						default:
+							break;
+					}
+				}
 			},
 			toRegister : function(){
 				 this.isshow_register=!this.isshow_register;
