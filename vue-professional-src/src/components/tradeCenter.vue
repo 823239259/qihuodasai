@@ -61,7 +61,7 @@
 				<div class="limit_cont_col">
 					<span>价格：</span>
 					<input type="text" class="ipt fl" v-model="tradePrices" />
-					<span class="white">(元)</span>
+					<!--<span class="white">(元)</span>-->
 				</div>
 			</div>
 			<div class="order_price fr" @tap="showPrice">
