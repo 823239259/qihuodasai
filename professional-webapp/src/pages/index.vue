@@ -39,8 +39,8 @@
 						</tr>
 					</thead>
 					<tbody>
-						<template v-for="v in parameters">
-							<tr>
+						<template v-for="(v,index) in Parameters">
+							<tr :class="{current: current == index}" @click="toggle(index, v.CommodityName, v.CommodityNo, v.MainContract, v.ExchangeNo)">
 								<td class="ifont_arrow" v-show="v.LastQuotation.LastPrice >= v.LastQuotation.PreSettlePrice"><i class="ifont" :class="{red: v.LastQuotation.LastPrice > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice}">&#xe761;</i></td>
 								<td class="ifont_arrow" v-show="v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice"><i class="ifont" :class="{red: v.LastQuotation.LastPrice > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice}">&#xe76a;</i></td>
 								<td>{{v.CommodityName}}</td>
@@ -67,18 +67,18 @@
 		</div>
 		<div class="echarts_box">
 			<div class="title">
-				<span class="fl">美黄金</span>
-				<span class="fl">CG1708</span>
+				<span class="fl">{{orderName}}</span>
+				<span class="fl">{{orderNum}}</span>
 				<div class="add fr">
 					<i class="ifont fl">&#xe600;</i>
 					<span class="fl">添加自选</span>
 				</div>
 			</div>
-			<div id="chart_fens">
+			<div id="chart_fens" v-if="showFens">
 				<div id="fens" style="width: 100%; height: 300px; margin: 0 auto;">
 					
 				</div>
-				<div id="fens_volume" style="width: 100%; height: 200px; margin: 0 auto;">
+				<div id="volume" style="width: 100%; height: 200px; margin: 0 auto;">
 					
 				</div>
 			</div>
@@ -95,23 +95,26 @@
 		name:'index',
 		data(){
 			return{
+				current: 0,
+				showFens: false,
 				obj: {
 					id1: 'fens',
 					id2: 'volume',
 					
 				},
-				ExchangeNo: 'NYMEX',
-				CommodityNo: 'CL',
-				ContractNo: '1708'
-				
+				orderName: '',
+				orderNum: ''
 			}
 		},
 		computed: {
-//			quoteInitStatus(){
-//				return this.$store.state.market.quoteInitStatus;
-//			},
-			parameters(){
+			quoteInitStatus(){
+				return this.$store.state.market.quoteInitStatus;
+			},
+			Parameters(){
 				return this.$store.state.market.Parameters;
+			},
+			quoteInitStep(){
+				return this.$store.state.market.quoteInitStep;
 			},
 			tradeLoginSuccessMsg(){
 				return this.$store.state.market.tradeLoginSuccessMsg;
@@ -128,30 +131,59 @@
 				return num.toFixed(dotsize);
 			}
 		},
+		watch: {
+			quoteInitStep: function(n, o){
+				if(n && n == true){
+					this.$store.state.market.currentdetail = this.Parameters[0];
+					this.showFens = true;
+					this.orderName = this.Parameters[0].CommodityName;
+					this.orderNum = this.Parameters[0].CommodityNo + this.Parameters[0].MainContract;
+					var b = {
+						Method: "QryHistory",
+						Parameters:{
+							ExchangeNo: this.Parameters[0].ExchangeNo,
+							CommodityNo: this.Parameters[0].CommodityNo,
+							ContractNo: this.Parameters[0].MainContract,
+							HisQuoteType: 0,
+							BeginTime: "",
+							EndTime: "",
+							Count: 0
+						}
+					};
+					this.quoteSocket.send(JSON.stringify(b));
+					this.$store.state.market.currentNo = this.Parameters[0].CommodityNo;
+				}
+			}
+		},
 		methods: {
-			...mapMutations([
-				'drawfens',
-				'setfensoption',
-				'setfensoptionsecond',
+			...mapActions([
+				'initQuoteClient'
 			]),
+			toggle: function(i, name, commodityNo, mainContract, exchangeNo){
+				this.current = i;
+				this.orderName = name;
+				this.orderNum = commodityNo + mainContract;
+				var b = {
+					Method: "QryHistory",
+					Parameters:{
+						ExchangeNo: exchangeNo,
+						CommodityNo: commodityNo,
+						ContractNo: mainContract,
+						HisQuoteType: 0,
+						BeginTime: "",
+						EndTime: "",
+						Count: 0
+					}
+				};
+				this.quoteSocket.send(JSON.stringify(b));
+			}
 		},
 		mounted: function(){
-			var b = {
-				Method: "QryHistory",
-				Parameters:{
-					ExchangeNo: this.ExchangeNo,
-					CommodityNo: this.CommodityNo,
-					ContractNo: this.ContractNo,
-					HisQuoteType: 0,
-					BeginTime: "",
-					EndTime: "",
-					Count: 0
-				}
-			};
-			console.log('123' + this.quoteSocket);
-			this.quoteSocket.send(JSON.stringify(b));
-//			this.CommodityNo = this.$parent.detail.CommodityNo;
-//			this.$store.state.market.currentNo = this.$parent.detail.CommodityNo;
+			//初始化行情
+			if(this.quoteInitStatus == false){
+				this.initQuoteClient();
+				this.$store.state.market.quoteInitStatus = true;
+			}
 		}
 	}
 </script>
@@ -247,7 +279,7 @@
 					}
 				}
 				.price{
-					width: 80px;
+					min-width: 50px;
 				}
 			}
 		}

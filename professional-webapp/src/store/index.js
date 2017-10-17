@@ -49,7 +49,8 @@ var account = {
 //控制行情数据
 var market = {
 	state: {
-//		quoteInitStatus: false,    //行情是否已经初始化
+		quoteInitStatus: false,    //行情是否已经初始化
+		quoteInitStep: '',      //判断行情Parameters是否已经初始化完
 		//存持仓列表
 		positionListCont:[],
 		//心跳信息
@@ -75,7 +76,7 @@ var market = {
 //			url_real : "ws://139.196.215.169:6101",  //正式地址
 			model : "1", // 实盘：0；	模拟盘：1
 			client_source : "N_WEB",	// 客户端渠道
-//			username : "000031",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)
+//			username : "00004",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)
 //			password : "YTEyMzQ1Ng==" 	// 密码：base64密文(明文：a123456——YTEyMzQ1Ng==     888888——ODg4ODg4	 74552102——NzQ1NTIxMDI=		123456=MTIzNDU2)
 //			username:JSON.parse(localStorage.getItem('tradeUser')).username,
 //			password:JSON.parse(localStorage.getItem('tradeUser')).password
@@ -1070,13 +1071,13 @@ export default new Vuex.Store({
 			                    show: false,
 			                    position: 'top'
 			                }
-			          },
-//			          markLine:{
-//			          	data:[
-//			                	{ value: 48.2, xAxis: -1, yAxis: 48.2},     
-//      						{ xAxis:500 , yAxis: 48.2},
-//				            ]
-//			          }
+			          	},
+			            markLine:{
+			          		data:[
+			                	{ value: 48.2, xAxis: -1, yAxis: 48.2},     
+      							{ xAxis:500 , yAxis: 48.2},
+				            ]
+			            }
 					}
 				]
 			};
@@ -1088,7 +1089,7 @@ export default new Vuex.Store({
 				price = [],
 				time = [];
 //				averagePrices = [];
-			var dosizeL = state.market.currentdetail.DotSize;	
+			var dosizeL = state.market.currentdetail.DotSize;
 			state.market.jsonData.Parameters.Data.forEach(function(e) {
 				vol.push(e[6]);
 				time.push(e[0].split(' ')[1].split(':')[0] + ':' + e[0].split(' ')[1].split(':')[1]);
@@ -2413,9 +2414,8 @@ export default new Vuex.Store({
 		initQuoteClient: function(context) {
 			context.state.quoteSocket = new WebSocket(context.state.market.quoteConfig.url_real);
 			context.state.quoteSocket.onopen = function(evt) {
-//				console.log('open');
+				console.log('open');
 				context.state.quoteSocket.send('{"Method":"Login","Parameters":{"UserName":"'+context.state.market.quoteConfig.userName+'","PassWord":"'+context.state.market.quoteConfig.passWord+'"}}');
-
 			};
 			context.state.quoteSocket.onclose = function(evt) {
 //				console.log('close');
@@ -2424,6 +2424,7 @@ export default new Vuex.Store({
 //				console.log('error');
 			};
 			context.state.quoteSocket.onmessage = function(evt) {
+				console.log('message');
 				context.state.wsjsondata = JSON.parse(evt.data);
 				if(context.state.wsjsondata.Method == "OnRspLogin") { // 登录行情服务器
 					context.state.market.quoteConnectedMsg='行情服务器连接成功' + Math.floor(Math.random()*10);
@@ -2449,9 +2450,9 @@ export default new Vuex.Store({
 						if(e.CommodityNo == JSON.parse(evt.data).Parameters.CommodityNo) {
 							e.LastQuotation = JSON.parse(evt.data).Parameters.LastQuotation;
 							context.state.market.Parameters.push(e);
-							
 						}
 					});
+					context.state.market.quoteInitStep = true;
 					if(context.state.market.subscribeIndex==1){
 						//初始化交易
 						context.dispatch('initTrade');

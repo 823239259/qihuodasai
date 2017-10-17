@@ -48,7 +48,7 @@ table{
         &:nth-child(even){
             background: $deepblue;
         }
-        &:hover{
+        &:hover, &.current{
             background: $highLight;
         }
     }

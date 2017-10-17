@@ -90,7 +90,10 @@
 			</p>-->
 		</div>
 		<div class="container">
-			<router-view></router-view>
+			<keep-alive>
+				<router-view v-if="!$route.meta.notKeepAlive"></router-view>
+			</keep-alive>
+			<router-view v-if="$route.meta.notKeepAlive"></router-view>
 		</div>
 		<login class="loginShow" v-if="isshow_login"/>
 		<register class="resgisterShow" v-if="isshow_register"/>
@@ -209,13 +212,9 @@
 			toLogin : function(){
                 this.isshow_login=!this.isshow_login;
 			},
-			...mapActions([
-				'initQuoteClient'
-			])
 		},
 		mounted: function(){
-			//初始化行情
-			this.initQuoteClient();
+			
 		}
 	}
 </script>
@@ -449,11 +448,12 @@
 		left: 40%;
 	}
 	iframe {
-		width: 400px; 
-		height: 800px; 
+		width: auto; 
+		height: auto; 
 		position: fixed; 
 		bottom: 0;
 		right: 0;
+		z-index: -1;
 		border: none;
 	}
 </style>
