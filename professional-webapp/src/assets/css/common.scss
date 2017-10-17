@@ -55,11 +55,11 @@ table{
     td{
         text-align: left;
     }
-    .red{
-        color: $red;
+    .red, .ifont.red{
+        color: $red !important;
     }
-    .green{
-        color: $green;
+    .green, .ifont.green{
+        color: $green !important;
     }
 }
 

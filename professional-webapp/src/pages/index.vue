@@ -45,10 +45,10 @@
 								<td class="ifont_arrow" v-show="v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice"><i class="ifont" :class="{red: v.LastQuotation.LastPrice > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice}">&#xe76a;</i></td>
 								<td>{{v.CommodityName}}</td>
 								<td>{{v.CommodityNo + v.MainContract}}</td>
-								<td :class="{red: v.LastQuotation.LastPrice > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice}">{{v.LastQuotation.LastPrice}}</td>
+								<td class="price" :class="{red: v.LastQuotation.LastPrice > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice}">{{v.LastQuotation.LastPrice}}</td>
 								<td>{{v.LastQuotation.LastVolume}}</td>
-								<td :class="{red: v.LastQuotation.BidPrice1 > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.BidPrice1 < v.LastQuotation.PreSettlePrice}">{{v.LastQuotation.BidPrice1}}</td>
-								<td :class="{red: v.LastQuotation.AskPrice1 > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.AskPrice1 < v.LastQuotation.PreSettlePrice}">{{v.LastQuotation.AskPrice1}}</td>
+								<td class="price" :class="{red: v.LastQuotation.BidPrice1 > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.BidPrice1 < v.LastQuotation.PreSettlePrice}">{{v.LastQuotation.BidPrice1}}</td>
+								<td class="price" :class="{red: v.LastQuotation.AskPrice1 > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.AskPrice1 < v.LastQuotation.PreSettlePrice}">{{v.LastQuotation.AskPrice1}}</td>
 								<td>{{v.LastQuotation.BidQty1}}</td>
 								<td>{{v.LastQuotation.AskQty1}}</td>
 								<td>{{v.LastQuotation.TotalVolume}}</td>
@@ -74,8 +74,13 @@
 					<span class="fl">添加自选</span>
 				</div>
 			</div>
-			<div id="echarts_f">
-				
+			<div id="chart_fens">
+				<div id="fens" style="width: 100%; height: 300px; margin: 0 auto;">
+					
+				</div>
+				<div id="fens_volume" style="width: 100%; height: 200px; margin: 0 auto;">
+					
+				</div>
 			</div>
 			<div id="echarts_k">
 				
@@ -88,6 +93,19 @@
 	import { mapMutations,mapActions } from 'vuex'
 	export default{
 		name:'index',
+		data(){
+			return{
+				obj: {
+					id1: 'fens',
+					id2: 'volume',
+					
+				},
+				ExchangeNo: 'NYMEX',
+				CommodityNo: 'CL',
+				ContractNo: '1708'
+				
+			}
+		},
 		computed: {
 //			quoteInitStatus(){
 //				return this.$store.state.market.quoteInitStatus;
@@ -97,6 +115,9 @@
 			},
 			tradeLoginSuccessMsg(){
 				return this.$store.state.market.tradeLoginSuccessMsg;
+			},
+			quoteSocket(){
+				return this.$store.state.quoteSocket;
 			}
 		},
 		filters:{
@@ -108,10 +129,29 @@
 			}
 		},
 		methods: {
-			
+			...mapMutations([
+				'drawfens',
+				'setfensoption',
+				'setfensoptionsecond',
+			]),
 		},
 		mounted: function(){
-			
+			var b = {
+				Method: "QryHistory",
+				Parameters:{
+					ExchangeNo: this.ExchangeNo,
+					CommodityNo: this.CommodityNo,
+					ContractNo: this.ContractNo,
+					HisQuoteType: 0,
+					BeginTime: "",
+					EndTime: "",
+					Count: 0
+				}
+			};
+			console.log('123' + this.quoteSocket);
+			this.quoteSocket.send(JSON.stringify(b));
+//			this.CommodityNo = this.$parent.detail.CommodityNo;
+//			this.$store.state.market.currentNo = this.$parent.detail.CommodityNo;
 		}
 	}
 </script>
@@ -191,6 +231,7 @@
 					text-align: center;
 					.ifont{
 						font-size: $fs12;
+						color: $lightblue;
 					}
 				}
 				thead{
@@ -205,7 +246,9 @@
 						height: 40px;
 					}
 				}
-				
+				.price{
+					width: 80px;
+				}
 			}
 		}
 	}
