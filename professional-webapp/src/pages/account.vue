@@ -1,26 +1,19 @@
 <template>
 	<div id="account">
-			<ul>
-				<li>
 					<span v-on:click="show_accountSurvey">账户概括</span>
-				</li>
-				<li>
 					<span>开户明细</span>
-				</li>
-				<li>
 					<span v-on:click="show_accountSafe">安全设置</span>
-				</li>
 			</ul>
-			<div class="account_survey" v-if="isshow_accountSurey">
+			<div id="account_survey" v-if="isshow_accountSurey">
 				<p>账户资金</p>
 				<div class="account_info">
 					<div class="info_left">
 						<ul>
 							<li>
 								<img src="../assets/images/icon_smileFace.png" alt="笑脸" />
-								1555****888
+								<span>1555****888</span>
 								<img src="../assets/images/icon_acc1.png" alt="账户" />
-								<img src="../assets/images/icon_password1.png" alt="体现密码" />
+								<img src="../assets/images/icon_password1.png" alt="提现密码" />
 							</li>
 							<li>
 								<button class="btn yellow" >充值</button>
@@ -129,9 +122,95 @@
 				</div>
 			</div>
 			<div id="account_openDetail">
-				
+				<div class="account_openDetail_top">
+					<ul>
+						<li>
+							<span>今天</span>
+							<span>一个月</span>
+							<span>三个月</span>
+							<span>一年</span>
+							<span>起始时间</span>
+							<span>2017-07-15</span>
+							<span>></span>
+							<span>2017-07-16</span>
+						</li>
+						<li>
+							<span>全部</span>
+							<span>开户中</span>
+							<span>操盘中</span>
+							<span>已结算</span>
+						</li>
+					</ul>
+				</div>
+				<div class="account_openDetail_center">
+					<table>
+						<thead>
+							<tr>
+								<td>交易品种</td>
+								<td>状态</td>
+								<td>初始保证金</td>
+								<td>追加保证金</td>
+								<td>总操盘资金</td>
+								<td>亏损平仓线</td>
+								<td>申请时间</td>
+								<td>结算时间</td>
+								<td>结算金额</td>
+								<td>操作</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>国际综合</td>
+								<td>开户中</td>
+								<td>3000元</td>
+								<td>-</td>
+								<td>3000元</td>
+								<td>5270美元</td>
+								<td>2017-07-06</br>16:29:55</td>
+								<td>-</td>
+								<td>-</td>
+								<td>追加保证金</td>
+							</tr>
+							<tr>
+								<td>国际综合</td>
+								<td>开户中</td>
+								<td>3000元</td>
+								<td>-</td>
+								<td>3000元</td>
+								<td>5270美元</td>
+								<td>2017-07-06</br>16:29:55</td>
+								<td>-</td>
+								<td>-</td>
+								<td>查看账号</td>
+							</tr>
+							<tr>
+								<td>国际综合</td>
+								<td>开户中</td>
+								<td>3000元</td>
+								<td>-</td>
+								<td>3000元</td>
+								<td>5270美元</td>
+								<td>2017-07-06</br>16:29:55</td>
+								<td>-</td>
+								<td>-</td>
+								<td>结算明细</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="account_openDetail_notice">
+					<p>注意：</p>
+					<ul>
+						<li>1.交易手续费=合约手续费x手数</li>
+						<li>2.买卖各算一手</li>
+						<li>3.结算金额=操盘保证金+补充保证金+交易盈亏-交易手续费</li>
+					</ul>
+				</div>
+				<div class="account_openDetail_btm">
+					<p>投资有风险，入市需谨慎</p>
+				</div>
 			</div>
-			<div class="account_safe" v-if="isshow_safe">
+			<div id="account_safe" v-if="isshow_safe">
 				<div class="account_safe_top">
 					<div class="safe_left">
 						<img src="../assets/images/icon_accountsafe.png" alt="safelogo" />
@@ -154,56 +233,72 @@
 							</tr>
 							<tr>
 								<td><img src="../assets/images/icon_password1.png" alt="" /></td>
-								<td>体现密码</td>
+								<td>提现密码</td>
 								<td>未设置	</td>
 								<td>认证信息：*小四，51116*************2222</td>
-								<td>设置</td>
+								<td v-on:click="toaWithdrawalPassword">设置</td>
 							</tr>
 							<tr>
 								<td><img src="../assets/images/icon_bindcard.png" alt="" /></td>
 								<td>绑定银行卡</td>
 								<td>未绑定</td>
 								<td>认证信息：*小四，51116*************2222</td>
-								<td>绑定</td>
+								<td v-on:click="toBindBankCard">绑定</td>
 							</tr>
 							<tr>
 								<td><img src="../assets/images/icon_loginpassword.png" alt="" /></td>
 								<td>登录密码</td>
 								<td>已设置</td>
 								<td>认证信息：*小四，51116*************2222</td>
-								<td>修改</td>
+								<td v-on:click="toResetLoginPassword">修改</td>
 							</tr>
 								<tr>
 								<td><img src="../assets/images/icon_bindtel.png" alt="" /></td>
 								<td>绑定手机</td>
 								<td>已绑定</td>
 								<td>认证信息：*小四，51116*************2222</td>
-								<td>修改</td>
+								<td v-on:click="toResetCellPassword">修改</td>
 							</tr>
 						</tbody>
 					</table>
 					<p class="p_center">投资有风险，入市需谨慎</p>
 				</div>
 			</div>
-			<account_withDraw class="show_account_withDraw" v-if="isshow_withDraw" />
-			<account_certification class="show_account_certification" v-if="isshow_certification"/> 
+			<account_withDraw  v-if="isshow_withDraw" />
+			<account_certification  v-if="isshow_certification"/> 
+			<account_withdrawalPassword v-if="isshow_withdrawalPassword"/>
+			<account_bindBankCard v-if="isshow_bindBankCard"/>
+			<account_addBankCard v-if="isshow_addBankCard" />
+			<account_resetCellPhone v-if="isshow_resetCellPhone" />
+			<account_resetLoginPassword v-if="isshow_resetLoginPassword" />
 	</div>
 </template>
 
 <script>
 	import account_withDraw from "./account/account_withDraw.vue"
 	import account_certification from "./account/account_certification.vue"
-	export default{
+	import account_withdrawalPassword from "./account/account_withdrawalPassword.vue"
+	import account_bindBankCard from "./account/account_bindBankCard.vue"
+	import account_addBankCard from "./account/account_addBankCard.vue"
+	import account_resetLoginPassword from "./account/account_resetLoginPassword.vue"
+	import account_resetCellPhone from "./account/account_resetCellPhone.vue"
+ 	export default{
 		name:'account',
 		data(){
 			return {
 				isshow_withDraw : false,
 				isshow_accountSurey : true,
 				isshow_certification : false,
-				isshow_safe : true
+				isshow_safe : true,
+				isshow_withdrawalPassword :　false,
+				isshow_bindBankCard :false,
+				isshow_addBankCard : false,
+				isshow_resetLoginPassword : false,
+				isshow_resetCellPhone :false
 			}
 		},
-		components:{account_withDraw,account_certification},
+		components:{account_withDraw,account_certification,account_withdrawalPassword,
+					account_bindBankCard,account_addBankCard,account_resetLoginPassword,account_resetCellPhone},
 		methods : {
 			toWithDraw : function (){
 				this.isshow_withDraw=!this.isshow_withDraw,
@@ -219,7 +314,30 @@
 			},
 			show_accountSafe : function(){
 				this.isshow_certification = false,
-				this.isshow_safe = true
+				this.isshow_safe = true,
+				this.isshow_withdrawalPassword = false,
+				this.isshow_addBankCard = false,
+				this.isshow_bindBankCard = false,
+				this.isshow_resetLoginPassword = false,
+				this.isshow_resetCellPhone =false
+			},
+			toaWithdrawalPassword : function(){
+				this.isshow_withdrawalPassword=!this.isshow_withdrawalPassword,
+				this.isshow_safe = false
+			},
+			toBindBankCard : function(){
+				this.isshow_bindBankCard=!this.isshow_bindBankCard,
+				this.isshow_safe = false,
+				this.isshow_addBankCard = false
+			},
+			toResetLoginPassword : function(){
+				this.isshow_resetLoginPassword=!this.isshow_resetLoginPassword,
+				this.isshow_safe = false
+				
+			},
+			toResetCellPassword : function(){
+				this.isshow_resetCellPhone=!this.isshow_resetCellPhone,
+				this.isshow_safe = false
 			}
 		}
 		
@@ -230,33 +348,28 @@
 @import "../assets/css/common.scss";
 	
 	#account {
-		margin-left: 120px;
+		left: 120px;
+		position : relative;
 		width : 1000px;
-		li {
+		span {
 			&:hover {
-				color: $yellow;
+				color: yellow;
 			}
-			text-align: center;
-			float : left;	
-			width : 120px;
-			height : 30px;
-			margin: 5px 10px 5px 0;
+			background-color : $blue;
+			width: 120px;
+			height: 30px;
 			line-height : 30px;
-			&:nth-child(1){
-				color: $yellow;
-			}
-			span {
-				background-color : $blue;
-				display: block;
-				width: 120px;
-				height: 30px;
-			}
+			padding : 5px 20px 5px 20px;
 		}
-		.account_survey {
+	}
+		#account_survey {
+			display: none;
 			background-color: $blue;
 			width: 100%;
 			float: left;
-			
+			li {
+				width: 60px;
+			}
 			p {
 				height: 40px;
 				line-height: 40px;
@@ -275,6 +388,68 @@
 				background-color: $highLight;
 				width: 150px;
 			}
+			.account_info {
+			width: 100%;
+			height: 240px;			
+			.info_left {
+				width: 50%;
+				float: left;
+				li {
+					width: 100%;
+					height: 90px;
+					padding-top: 30px;
+				}
+				img {
+					&:nth-child(1) {
+						width: 90px;
+						height: 90px;
+						position: relative;
+					}
+					&:nth-child(3) {
+						width: 20px;
+						height: 20px;
+						position: relative;
+						bottom: 35px;	
+					}
+					&:nth-child(4) {
+						width: 20px;
+						height: 20px;
+						position: relative;
+						bottom : 35px;
+					}
+				}
+				.btn {
+					width: 120px;
+					height: 30px;
+					margin-top: 30px;
+					color: $black;	
+				}
+				span {
+					width: 80px;
+					display: inline-block;
+					position: relative;
+					bottom: 40px;
+				}
+			}
+			.info_right {
+				width: 50%;
+				float: left;
+				li {
+					display: flex;
+					justify-content:center;
+					width: 100%;
+					margin-top: 30px;
+					height: 40px;
+				}
+				p {
+					background-color: $blue;
+				}
+				img {
+					position: relative;
+					top: 20px;
+				}
+			}
+		}
 		}
 		.page_next {
 			text-align: right;
@@ -287,56 +462,8 @@
 		.account_money {
 			width: 100%;
 		}
-		.account_info {
-			width: 100%;
-			height: 240px;
-		}
-		.info_left {
-			width: 50%;
-			float: left;
-			li {
-				width: 100%;
-				height: 90px;
-				padding-top: 30px;
-			}
-			img {
-				&:nth-child(1) {
-					width: 90px;
-					height: 90px;
-				}
-				&:nth-child(3) {
-					width: 20px;
-					height: 20px;
-					position:relative;
-					top: -40px;
-					left: 10px;
-				}
-				&:nth-child(2) {
-					width: 20px;
-					height: 20px;	
-					position:relative;
-					top: -40px;
-					left: 10px;
-				}
-			}
-			.btn {
-				width: 120px;
-				height: 30px;
-				margin-top: 30px;
-				color: $black;	
-			}
-		}
-		.info_right {
-			width: 50%;
-			float: left;
-			li {
-				display: flex;
-				justify-content:center;
-				width: 100%;
-				margin-top: 30px;
-				height: 40px;
-			}
-		}
+		
+		
 		#color_blue {
 					color: $lightblue;
 					background-color: $blue;
@@ -362,8 +489,7 @@
 				background-color: $blue;
 			}
 		}
-		/*安全设置tab*/
-		.account_safe {
+		#account_safe {
 			display: none;
 			width: 100%;
 			height: 540px;
@@ -431,5 +557,61 @@
 				
 			}
 		}
-	}
+		#account_openDetail{
+			width: 100%;
+			margin-top: 5px;
+			
+			.account_openDetail_top {
+				height: 110px;
+				background-color: $blue;
+				li {
+					&:nth-child(1){
+						height: 70px;
+						border-bottom: 1px solid $bottom_color;
+						line-height: 70px;
+						span {
+							&:nth-child(1) {
+								color: $yellow;
+							}
+						}
+					}
+					&:nth-child(2){
+						height: 40px;
+						line-height: 40px;
+						span {
+							&:nth-child(1) {
+								color: $yellow;
+							}
+						}
+					}
+				}
+			}
+			.account_openDetail_center{
+				background-color: $blue;
+			}
+			.account_openDetail_notice {
+				height: 120px;
+				background-color: $blue;
+				p {
+					color: $yellow;
+					font-size: $fs14;
+					padding-top: 20px;
+				}
+				li {
+					margin-top: 10px;
+					font-size: $fs12;
+				}
+			}
+			.account_openDetail_btm{
+				p {
+					width: 100%;
+					height: 40px;
+					line-height: 40px;
+					margin-top: 10px;
+					background-color: $blue;
+					text-align: center;
+					font-size: $fs12;
+				}
+			}
+		}
 </style>

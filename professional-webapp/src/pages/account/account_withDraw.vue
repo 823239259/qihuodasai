@@ -1,15 +1,17 @@
 <template>
 	<div id="account_withDraw">
-		<ul>
-			<li><p>提取余额到银行卡   <span>余额：<i>10.00元</i>（累计免费提现金额：1000元）</span></p></li>
-			<li>添加银行卡</li>
-			<li>提现记录</li>
-		</ul>
-		<div class="withDraw_unboundBankCard">
+		<div class="show_title">
+			<ul>
+				<li><p>提取余额到银行卡   <span>余额：<i>10.00元</i>（累计免费提现金额：1000元）</span></p></li>
+				<li>添加银行卡</li>
+				<li>提现记录</li>
+			</ul>
+		</div>
+		<div id="withDraw_unboundBankCard">
 			<button class="btn yellow">绑定银行卡</button>
 			<p>（您还为绑定银行卡，暂不能进行提现操作）</p>	
 		</div>
-		<div class="withDraw_bankcard">
+		<div id="withDraw_bankcard">
 			<div class="account_withDraw_top">
 				<ul>
 					<li>
@@ -48,7 +50,7 @@
 				<p>投资有风险，入市需谨慎</p>
 			</div>
 		</div>
-		<div class="withDraw_sure">
+		<div id="withDraw_sure">
 			<div class="withDraw_sure_top">
 				<ul>
 					<li>银行卡信息：<span>*雯</span><i>招商银行（**** **** **** 0803）</i></li>
@@ -84,93 +86,42 @@
 <style lang="scss" scoped type="text/css">
 	@import "../../assets/css/common.scss";
 	#account_withDraw {
-		width: 1000px;
-		background-color: $black;
-		.withDraw_unboundBankCard {
-			display : none;
-			width : 100%;
-			height : 200px;
-			background-color : $blue;	
-			text-align: center;
-			.btn {
-				width: 120px;
-				height: 30px;
-				margin-top: 85px;
-			}
-			p {
-				margin-top: 10px;
-				font-size: $fs12;
-			}
-		}
-		.withDraw_bankcard {
-			display: none;
-		}
-		.withDraw_sure {
-			width: 100%;
-			height: 530px;
-			
+		width : 1000px;
+		.show_title {
+			position : fixed;
+			width:1000px;
 			li {
-					margin-top:25px;
+				&:nth-child(1){
+					float: left;
 				}
-			.withDraw_sure_top {
-				height: 210px;
-				width: 100%;
-				border-bottom: 1px solid $blue;
-				text-align: center;
-				i {
-					font-size: $fs12;
-					margin-left: 5px;
+				&:nth-child(2){
+					float: right;
 				}
-				span {
-					color: $white;
-				}
-				.color_yellow {
-					color: $yellow;
-					font-weight: 800;
+				&:nth-child(3){
+					float: right;
 				}
 				
 			}
-			.withDraw_sure_center {
-				height: 150px;
-				width: 100%;
-				text-align: center;
-				input {
-					width: 120px;
-					height: 30px;
-					border: 1px solid $bottom_color;
-					border-radius: 5px;
-				}
-				.btn {
-					width: 120px;
-					height: 30px;
-					margin-left: 70px;
-				}
-				 span {
-				 	font-size: $fs12;
-				 	margin-left: 10px;
-				 }
-			}
-			.withDraw_sure_btm {
-				height: 180px;
-				text-align: center;
-				p {
-					&:nth-child(1) {
-						text-align: left;
-						background-color: $bottom_color;
-						height: 40px;
-						color: $white;
-						line-height: 40px;
-					}
-					&:nth-child(2) {
-						color: $white;
-						height: 40px;
-						line-height: 40px;
-						margin-top: 10px;
-						font-size: $fs12;
-					}
-				}
-			}
 		}
+	}
+	#withDraw_unboundBankCard {
+		display : none;
+		width : 100%;
+		height : 200px;
+		background-color : $blue;	
+		.btn {
+			width: 120px;
+			height: 30px;
+			margin-top: 20px;
+		}
+		p {
+			margin-top: 10px;
+			font-size: $fs12;
+			text-align: center;
+		}
+	}
+	#withDraw_bankcard {
+		display: none;
 		.account_withDraw_top {
 			text-align: center;
 			input {
@@ -254,4 +205,71 @@
 			font-size: $fs12;
 		}
 	}
+	#withDraw_sure {
+		display: none;
+			width: 100%;
+			height: 530px;
+			li {
+					margin-top:25px;
+				}
+			.withDraw_sure_top {
+				margin-top: 20px;
+				height: 210px;
+				width: 100%;
+				border-bottom: 1px solid $blue;
+				text-align: center;
+				i {
+					font-size: $fs12;
+					margin-left: 5px;
+				}
+				span {
+					color: $white;
+				}
+				.color_yellow {
+					color: $yellow;
+					font-weight: 800;
+				}
+				
+			}
+			.withDraw_sure_center {
+				height: 150px;
+				width: 100%;
+				text-align: center;
+				input {
+					width: 120px;
+					height: 30px;
+					border: 1px solid $bottom_color;
+					border-radius: 5px;
+				}
+				.btn {
+					width: 120px;
+					height: 30px;
+					margin-left: 70px;
+				}
+				 span {
+				 	font-size: $fs12;
+				 	margin-left: 10px;
+				 }
+			}
+			#withDraw_sure_btm {
+				height: 180px;
+				text-align: center;
+				p {
+					&:nth-child(1) {
+						text-align: left;
+						background-color: $bottom_color;
+						height: 40px;
+						color: $white;
+						line-height: 40px;
+					}
+					&:nth-child(2) {
+						color: $white;
+						height: 40px;
+						line-height: 40px;
+						margin-top: 10px;
+						font-size: $fs12;
+					}
+				}
+			}
+		}
 </style>
