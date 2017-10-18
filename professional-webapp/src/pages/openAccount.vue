@@ -3,7 +3,7 @@
 		<div class="openAccount_top">
 			<img src="../assets/images/icon_openaccount_01.png" alt="" />
 		</div>
-		<div class="openAccount_center">
+		<div class="openAccount_center" v-if="isshow_openAccount_1">
 			<div class="title">
 				<span>开户入金</span>
 				<span>操盘保证金越多，可持仓手数越多</span>
@@ -24,7 +24,7 @@
 						<button class="btn1">￥200000</button>
 					</li>
 					<li>
-						<button class="btn yellow">下一步</button>
+						<button class="btn yellow" v-on:click="to_openAccount_2">下一步</button>
 					</li>
 					<li>
 						<p>提交申请即代表你已阅读并同意<span>《国际期货综合操盘合作协议》</span></p>
@@ -42,7 +42,7 @@
 				</ul>
 			</div>
 		</div>
-		<div class="openAccount_center_step2">
+		<div class="openAccount_center_step2" v-if="isshow_openAccount_2">
 			<div class="title">
 				<span>确认方案信息</span>
 			</div>
@@ -70,7 +70,7 @@
 			</div>
 			<div class="to_openAccount">
 				<span>支付金额：<i>3000</i>元</span>
-				<button class="btn yellow">立即开户</button>
+				<button class="btn yellow" v-on:click="to_comfirmPayment">立即开户</button>
 				<label>返回修改</label>
 			</div>
 		</div>
@@ -152,12 +152,30 @@
 				<span>投资有风险，入市需谨慎</span>
 			</div>
 		</div>
+		<openAccount_confirmPayment v-if="isshow_comfirmPayment" />
 	</div>
 </template>
-
 <script>
+	import openAccount_confirmPayment from "./openAccount/openAccount_confirmPayment.vue"
 	export default{
 		name:'openAccount',
+		components : {openAccount_confirmPayment},
+		data(){
+			return {
+				isshow_comfirmPayment : false,
+				isshow_openAccount_1 : true,
+				isshow_openAccount_2 :false
+			}
+		},
+		methods : {
+			to_comfirmPayment : function(){
+				this.isshow_comfirmPayment=!this.isshow_comfirmPayment
+			},
+			to_openAccount_2 :function(){
+				this.isshow_openAccount_2 = true,
+				this.isshow_openAccount_1 = false
+			}
+		}
 	}
 </script>
 
@@ -181,7 +199,6 @@
 		width: 100%;
 		margin-top: 10px;
 		height: 280px;
-		display: none;
 	}
 	.openAccount_center_left {
 			width: 50%;
@@ -272,6 +289,7 @@
 		margin-top: 10px;
 		height: 300px;
 		background-color: $bottom_color;
+		display: none;
 	}
 	.openAccount_btm_top {
 		height: 40px;
