@@ -3,66 +3,21 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-//控制显示与否的模块
+//控制显示与否
 var isshow = {
 	state: {
-//		navBarShow: true,
 		isconnected: false,
-//		bottomshow: false,
-//		pshow: false,
-//		sshow: false,
-//		fshow: true,
-//		kshow: false,
-//		guideshow: false,
-//		helpshow: false,
-		//是否进入过分时
-		isfensshow: false,
 		//判断是否是直接画图
-		isfenssec: false,
+		isfensshow: false,
 		islightshow: false,
 		isklineshow: false
+//		isfenssec: false,
 	}
 };
 
-//控制个人数据
-var account = {
-	state: {
-//		islogin: false, //是否登录
-//		phone: '', //账户
-//		password: '', //密码 
-//		token: '',
-//		secret: '',
-//		isCertification: false, //是否实名认证
-//		username: '', //实名
-//		balance: 0.00, //余额
-//		operateMoney: 0.00, //免提现手续费额度
-//		bankList: [], //已绑定银行卡信息
-//		//存不知道有用没的数据
-//		tempList: [],
-//		//存合约列表
-//		programList: [],
-//		operateOrderLength: 0   //操盘中方案的条数
-	}
-}
-
-//控制行情数据
+//行情交易数据
 var market = {
 	state: {
-		quoteInitStatus: false,    //行情是否已经初始化
-		quoteInitStep: '',      //判断行情Parameters是否已经初始化完
-		//存持仓列表
-		positionListCont:[],
-		//心跳信息
-		HeartBeat:{
-			lastHeartBeatTimestamp : 1,	// 最后心跳时间
-			oldHeartBeatTimestamp : 0,	// 上一次心跳时间
-			intervalCheckTime : 8000  // 间隔检查时间：8秒
-		},
-		HeartBeat00:{
-			lastHeartBeatTimestamp : 1,	// 最后心跳时间
-			oldHeartBeatTimestamp : 0,	// 上一次心跳时间
-			intervalCheckTime : 8000  // 间隔检查时间：8秒
-		},
 		quoteConfig:{
 			url_real: "ws://192.168.0.232:9002",  //测试地址
 //			url_real: "ws://quote.vs.com:9002",   //正式地址
@@ -77,11 +32,150 @@ var market = {
 			client_source : "N_WEB",	// 客户端渠道
 //			username : "00004",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)
 //			password : "YTEyMzQ1Ng==" 	// 密码：base64密文(明文：a123456——YTEyMzQ1Ng==     888888——ODg4ODg4	 74552102——NzQ1NTIxMDI=		123456=MTIzNDU2)
-//			username:JSON.parse(localStorage.getItem('tradeUser')).username,
-//			password:JSON.parse(localStorage.getItem('tradeUser')).password
 			username:'',
 			password:''
 		},
+		//心跳信息
+		HeartBeat:{
+			lastHeartBeatTimestamp : 1,	// 行情最后心跳时间
+			oldHeartBeatTimestamp : 0,	// 上一次心跳时间
+			intervalCheckTime : 8000  // 间隔检查时间：8秒
+		},
+		HeartBeat00:{
+			lastHeartBeatTimestamp : 1,	// 交易最后心跳时间
+			oldHeartBeatTimestamp : 0,	// 上一次心跳时间
+			intervalCheckTime : 8000  // 间隔检查时间：8秒
+		},
+		quoteInitStatus: false,    //行情是否已经初始化
+		quoteInitStep: '',      //判断行情Parameters是否已经初始化完
+		CacheLastQuote: [],    //缓存最新一条行情数据
+		volume: 0,           //缓存最新成交量
+		
+		//行情历史合约数据（分时）
+		jsonData: {},
+		//行情历史合约数据（K线）
+		jsonDataKline: {
+			"Method": "OnRspQryHistory",
+			"Parameters": {
+				"ColumNames": ["DateTimeStamp", "LastPrice", "OpenPrice", "LowPrice", "HighPrice", "Position", "Volume"],
+				"CommodityNo": "CL",
+				"ContractNo": "1708",
+				"Count": 102,
+				"Data": [
+					["2017-06-26 09:31:00", 43.38, 43.35, 43.34, 43.39, 548303, 634,0],
+					
+				],
+				"ExchangeNo": "NYMEX",
+				"HisQuoteType": 0
+			}
+		},
+		//行情数据格式
+		jsonTow: {
+			"Method": "OnRtnQuote",
+			"Parameters": {
+				"AskPrice1": 44.92,
+				"AskPrice2": 44.93,
+				"AskPrice3": 44.94,
+				"AskPrice4": 44.95,
+				"AskPrice5": 44.96,
+				"AskQty1": 15,
+				"AskQty2": 37,
+				"AskQty3": 35,
+				"AskQty4": 33,
+				"AskQty5": 61,
+				"AveragePrice": 0,
+				"BidPrice1": 44.91,
+				"BidPrice2": 44.9,
+				"BidPrice3": 44.89,
+				"BidPrice4": 44.88,
+				"BidPrice5": 44.87,
+				"BidQty1": 28,
+				"BidQty2": 47,
+				"BidQty3": 38,
+				"BidQty4": 90,
+				"BidQty5": 33,
+				"ChangeRate": 0.402324541797049,
+				"ChangeValue": 0.1799999999999997,
+				"ClosingPrice": 0,
+				"CommodityNo": "CL",
+				"ContractNo": "1708",
+				"DateTimeStamp": "2017-06-29 11:40:36",
+				"ExchangeNo": "NYMEX",
+				"HighPrice": 45.03,
+				"LastPrice": 44.92,
+				"LastVolume": 1,
+				"LimitDownPrice": 0,
+				"LimitUpPrice": 0,
+				"LowPrice": 44.75,
+				"OpenPrice": 44.89,
+				"Position": 541143,
+				"PreClosingPrice": 0,
+				"PrePosition": 0,
+				"PreSettlePrice": 44.74,
+				"SettlePrice": 0,
+				"TotalAskQty": 0,
+				"TotalBidQty": 0,
+				"TotalTurnover": 0,
+				"TotalVolume": 26287
+			}
+		},
+		//绘制分时的设置
+		option1: {},   //成交量
+		option2: {},   //价格
+		//绘制K线的设置
+		option3: {},   //价格
+		option4: {},   //成交量
+		//绘制闪电图的设置
+		option5: {},   //价格
+		//K线图（蜡烛图）数据
+		tempArr: [], 
+//		rawData: [],
+		//K线用到的数据
+//		chartDataC: null,
+		//闪电图用到的数据
+		lightChartTime: {
+			"time": [],
+			"price": []
+		},
+		//时间差（行情数据更新 画图）
+		charttime: 0,
+		charttimetime: 0,
+		charttimems: 0,
+		charttimetime2: 0,
+		charttimems2: 0,
+		
+		//选择K线的类型
+		selectTime: 1,
+		//当前合约代码（CL）
+		currentNo: '',
+		//第一次所有合约列表
+		markettemp: [],
+		//订阅成功后查询品种列表
+		orderTemplist:{},
+		//存订阅成功后的行情信息
+		templateList:{},
+		//当前所有有效合约列表
+		Parameters: [],
+		//当前选中合约
+		currentdetail: {},
+//		jsonDatatemp: {},
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		//存持仓列表
+		positionListCont:[],
 		ifUpdateHoldProfit:false, //是否使用最新行情更新持仓盈亏
 		ifUpdateAccountProfit:false,//// 是否可以更新账户盈亏标志：资金信息显示完毕就可以更新盈亏
 		qryHoldTotalArr:[],//持仓合计回复数组
@@ -186,140 +280,6 @@ var market = {
 		yesListCont:[],
 		
 		
-		//选择K线时候的值
-		selectTime: 1,
-		//存进入详情页的No
-		currentNo: '',
-		//订阅成功后查询品种列表
-		orderTemplist:{},
-		//存订阅成功后的行情信息
-		templateList:{},
-		//缓存数组，用于存最新行情的数据
-		tempArr: [],
-		jsonDatatemp: {},
-		currentdetail: {},
-		markettemp: [],
-		Parameters: [],
-		//		时间差
-		charttime: 0,
-		charttimetime: 0,
-		charttimems: 0,
-		charttimetime2: 0,
-		charttimems2: 0,
-		CacheLastQuote:[],
-		volume:0,
-		
-		jsonDataKline: {
-			"Method": "OnRspQryHistory",
-			"Parameters": {
-				"ColumNames": ["DateTimeStamp", "LastPrice", "OpenPrice", "LowPrice", "HighPrice", "Position", "Volume"],
-				"CommodityNo": "CL",
-				"ContractNo": "1708",
-				"Count": 102,
-				"Data": [
-					["2017-06-26 09:31:00", 43.38, 43.35, 43.34, 43.39, 548303, 634,0],
-					
-				],
-				"ExchangeNo": "NYMEX",
-				"HisQuoteType": 0
-			}
-		},
-
-		//用于存放从后台抓取的历史合约数据
-		jsonData: {
-			"Method": "OnRspQryHistory",
-			"Parameters": {
-				"ColumNames": ["DateTimeStamp", "LastPrice", "OpenPrice", "LowPrice", "HighPrice", "Position", "Volume"],
-				"CommodityNo": "CL",
-				"ContractNo": "1708",
-				"Count": 102,
-				"Data": [
-					["2017-06-26 09:31:00", 43.38, 43.35, 43.34, 43.39, 548303, 634,0],
-					
-				],
-				"ExchangeNo": "NYMEX",
-				"HisQuoteType": 0
-			}
-		},
-		
-		//用于存放从后台抓取的合约数据
-		jsonTow: {
-			"Method": "OnRtnQuote",
-			"Parameters": {
-				"AskPrice1": 44.92,
-				"AskPrice2": 44.93,
-				"AskPrice3": 44.94,
-				"AskPrice4": 44.95,
-				"AskPrice5": 44.96,
-				"AskQty1": 15,
-				"AskQty2": 37,
-				"AskQty3": 35,
-				"AskQty4": 33,
-				"AskQty5": 61,
-				"AveragePrice": 0,
-				"BidPrice1": 44.91,
-				"BidPrice2": 44.9,
-				"BidPrice3": 44.89,
-				"BidPrice4": 44.88,
-				"BidPrice5": 44.87,
-				"BidQty1": 28,
-				"BidQty2": 47,
-				"BidQty3": 38,
-				"BidQty4": 90,
-				"BidQty5": 33,
-				"ChangeRate": 0.402324541797049,
-				"ChangeValue": 0.1799999999999997,
-				"ClosingPrice": 0,
-				"CommodityNo": "CL",
-				"ContractNo": "1708",
-				"DateTimeStamp": "2017-06-29 11:40:36",
-				"ExchangeNo": "NYMEX",
-				"HighPrice": 45.03,
-				"LastPrice": 44.92,
-				"LastVolume": 1,
-				"LimitDownPrice": 0,
-				"LimitUpPrice": 0,
-				"LowPrice": 44.75,
-				"OpenPrice": 44.89,
-				"Position": 541143,
-				"PreClosingPrice": 0,
-				"PrePosition": 0,
-				"PreSettlePrice": 44.74,
-				"SettlePrice": 0,
-				"TotalAskQty": 0,
-				"TotalBidQty": 0,
-				"TotalTurnover": 0,
-				"TotalVolume": 26287
-			}
-		},
-		//绘制分时的设置
-		option1: {
-
-		},
-		//绘制分时的设置
-		option2: {
-
-		},
-		//绘制K线的设置
-		option3: {
-
-		},
-		//绘制K线的设置
-		option4: {
-
-		},
-		//绘制闪电图的设置
-		option5: {
-
-		},
-		//K线用到的数据
-		rawData: [],
-		//K线用到的数据
-		chartDataC: null,
-		lightChartTime: {
-			"time": [],
-			"price": []
-		}
 	}
 }
 
@@ -327,44 +287,17 @@ export default new Vuex.Store({
 	modules: {
 		isshow,
 		market,
-		account
 	},
 	state: {
-		//test 测试环境，online 正式环境
-		environment: 'test',
-		//打包的时候，值为 build ，开发的时候，值为 dev
-		setting: 'dev',
-		//请求的操盘参数数据
-		tempTradeapply: {},
-		quoteSocket: {},
-		tradeSocket: null,
-		webuser: {
-			username: '13677622344',
-			password: 'a123456'
-		},
 		wsjsondata: {},
-		//连接提示语
-		wsmsg: '',
-		version: {}
-		
-	},
-	getters: {
-		PATH: function(state) {
-			if(state.setting == 'dev') {
-				return '/api';
-			} else if(state.setting == 'build') {
-				if(state.environment == 'test'){
-					return 'http://test.api.duokongtai.cn';
-				}else{
-					return 'http://api.duokongtai.cn';
-				}
-			} else if(state.setting == 'nat') {
-				return '/nat/vs-api';
-			}
-		}
+		//行情websocket
+		quoteSocket: {},
+		//交易websocket
+		tradeSocket: {},
+//		tempTradeapply: {}, //请求的操盘参数数据
 	},
 	mutations: {
-	
+		//画闪电图
 		drawlight: function(state, e) {
 			// 引入 ECharts 主模块
 			var echarts = require('echarts/lib/echarts');
@@ -382,6 +315,7 @@ export default new Vuex.Store({
 			}
 			lightChart.setOption(state.market.option5);
 		},
+		//设置闪电图数据
 		setlightDate: function(state) {
 			var TimeLength = state.market.lightChartTime.time.length;
 			state.market.lightChartTime.price.push(state.market.jsonTow.Parameters.LastPrice.toFixed(state.market.currentdetail.DotSize));
@@ -459,7 +393,7 @@ export default new Vuex.Store({
 				}]
 			}
 		},
-
+		//设置K线图数据
 		setklineoption: function(state) {
 			// 引入 ECharts 主模块
 			var echarts = require('echarts/lib/echarts');
@@ -492,7 +426,6 @@ export default new Vuex.Store({
 					var sgData = [str2, openPrice, closePrice, parseFloat(parameters[i][3]).toFixed(dosizeL),parseFloat(parameters[i][4]).toFixed(dosizeL), parameters[i][0]];
 					rawData[lent + i] = sgData;
 				};
-
 			}
 			var categoryData = [];
 			var values = [];
@@ -502,13 +435,11 @@ export default new Vuex.Store({
 				values.push([rawData.slice(-40)[i][1], rawData.slice(-40)[i][2], rawData.slice(-40)[i][3], rawData.slice(-40)[i][4]]);
 				time.push(rawData.slice(-40)[i][5])
 			}
-
 			var chartDataC = {
 				categoryData: categoryData,
 				values: values,
 				time: time
 			};
-
 			/*MA5 10 20 30*/
 			function calculateMA(dayCount) {
 				var result = [];
@@ -525,7 +456,6 @@ export default new Vuex.Store({
 				}
 				return result;
 			}
-
 			state.market.option3 = {
 				backgroundColor: 'transparent',
 				tooltip: {
@@ -794,6 +724,7 @@ export default new Vuex.Store({
 				}]
 			};
 		},
+		//画K线图
 		drawkline: function(state, x) {
 			// 引入 ECharts 主模块
 			var echarts = require('echarts/lib/echarts');
@@ -822,6 +753,7 @@ export default new Vuex.Store({
 			kline.setOption(state.market.option3);
 			volume.setOption(state.market.option4);
 		},
+		//画分时图
 		drawfens: function(state, x) {
 			// 引入 ECharts 主模块
 			var echarts = require('echarts/lib/echarts');
@@ -849,20 +781,17 @@ export default new Vuex.Store({
 			fens.setOption(state.market.option1);
 			volume.setOption(state.market.option2);
 		},
+		//更新分时图数据
 		setfensoptionsecond: function(state) {
 			var echarts = require('echarts/lib/echarts');
 			var vol = [],
 				price = [],
 				time = [];
 //				averagePrices = [];
-				
 			state.market.jsonData.Parameters.Data.forEach(function(e) {
 				vol.push(e[6]);
 				time.push(e[0].split(' ')[1].split(':')[0] + ':' + e[0].split(' ')[1].split(':')[1]);
 				price.push(e[1]);
-//				if(state.market.qryHoldTotalKV[state.market.currentdetail.CommodityNo]!=undefined){
-//					averagePrices.push(state.market.qryHoldTotalKV[state.market.currentdetail.CommodityNo].HoldAvgPrice);
-//				}
 			});
 			var dosizeL = state.market.currentdetail.DotSize;
 			state.market.option1 = {
@@ -1074,7 +1003,7 @@ export default new Vuex.Store({
 				]
 			};
 		},
-
+		//根据历史数据设置分时图数据
 		setfensoption: function(state) {
 			var echarts = require('echarts/lib/echarts');
 			var vol = [],
@@ -1287,7 +1216,8 @@ export default new Vuex.Store({
 				}
 			};
 		},
-		updateTempdata: function(state, obj) {
+		//动态更新K线图（蜡烛图）数据
+		updateTempdata: function(state, obj) {  
 			state.market.markettemp.forEach(function(e) {
 				if(e.CommodityNo == obj) {
 					state.market.tempArr[0] = e.LastQuotation.DateTimeStamp;
@@ -1324,20 +1254,18 @@ export default new Vuex.Store({
 		}
 	},
 	actions: {
-		handleTradeMessage:function(context,evt){
+		//处理交易数据
+		handleTradeMessage: function(context,evt){
 			var data = JSON.parse(evt.data);
 			var parameters = data.Parameters;
-			
 			switch (data.Method){
 				case 'OnRtnHeartBeat':
 					context.state.market.HeartBeat.lastHeartBeatTimestamp = parameters.Ref; // 更新心跳最新时间戳
-//					console.log('lastHeartBeatTimestamp:'+context.state.market.HeartBeat.lastHeartBeatTimestamp);
 					break;
 				case 'OnRspLogin'://登录回复
 					if(parameters.Code==0){
-						
 //						console.log('交易服务器连接成功');
-						context.state.market.tradeLoginSuccessMsg='交易服务器连接成功';
+						context.state.market.tradeLoginSuccessMsg = '交易服务器连接成功';
 						
 						context.state.market.forceLine = parameters.ForceLine;
 						
@@ -1355,11 +1283,8 @@ export default new Vuex.Store({
 						context.state.tradeSocket.send('{"Method":"QryCondition","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
 						// 查询历史成交
 						context.dispatch('qryHisTrade');
-						
 						//启动交易心跳定时检查
 						context.dispatch('HeartBeatTimingCheck');
-						
-						
 					}else{
 //						console.log('登录失败');
 						context.state.market.tradeLoginSuccessMsg=parameters.Message;
@@ -1540,6 +1465,7 @@ export default new Vuex.Store({
 					break;
 			}
 		},
+		//条件单处理
 		dealWithOnRtnConditionState:function(context,parameters){
 			context.state.market.conditionList.forEach(function(e,i){
 						if(parameters.ConditionNo==e.ConditionNo){
@@ -2116,19 +2042,12 @@ export default new Vuex.Store({
 															.toFixed(context.state.market.orderTemplist[parameters.CommodityNo].DotSize);
 															
 						context.state.market.positionListCont.splice(positionListContCurrentIndex,1,positionListContCurrent);
-						
-//						context.state.market.qryHoldTotalArr[context.state.market.qryHoldTotalArr.length-1-positionListContCurrentIndex].HoldNum = parameters.HoldNum;
-//						context.state.market.qryHoldTotalArr[context.state.market.qryHoldTotalArr.length-1-positionListContCurrentIndex].Drection = parameters.Drection;
-//						context.state.market.qryHoldTotalArr[context.state.market.qryHoldTotalArr.length-1-positionListContCurrentIndex].OpenAvgPrice = parameters.OpenAvgPrice;
 						context.state.market.qryHoldTotalArr[context.state.market.qryHoldTotalArr.length-1-positionListContCurrentIndex] = parameters;
-					
 					}else{
 						context.state.market.positionListCont.splice(positionListContCurrentIndex,1);
 						context.state.market.qryHoldTotalArr.splice(context.state.market.qryHoldTotalArr.length-1-positionListContCurrentIndex,1);
 					}
 			}
-			
-					
 		},
 		updateAccountFloatingProfit:function(context,parameters){
 			if(context.state.market.ifUpdateAccountProfit){
@@ -2188,12 +2107,9 @@ export default new Vuex.Store({
 				context.state.market.CacheHoldFloatingProfit.jCurrencyNoFloatingProfit = {};
 				//更新账户盈亏
 				context.dispatch('updateTotalAccount');
-				
 			}
 		},
 		updateCacheAccount:function(context,parameters){
-			
-			
 			// 入金
 			context.state.market.CacheAccount.jCacheAccount[parameters.CurrencyNo].InMoney = parameters.InMoney;
 			// 出金
@@ -2355,9 +2271,7 @@ export default new Vuex.Store({
 			
 			
 		},
-		
 		HeartBeatTimingCheck:function(context){
-			
 			setInterval(
 //				heartBeatUpdate,context.state.market.HeartBeat.intervalCheckTime
 				heartBeatUpdate,15000
@@ -2368,13 +2282,12 @@ export default new Vuex.Store({
 					context.state.market.tradeConnectedMsg='交易服务器断开，正在重连'+Math.ceil(Math.random()*10);
 				}else{
 					context.state.market.HeartBeat.oldHeartBeatTimestamp = context.state.market.HeartBeat.lastHeartBeatTimestamp; // 更新上次心跳时间
-//					console.log(context.state.market.HeartBeat.oldHeartBeatTimestamp);
 				}
 			}
 			heartBeatUpdate();
 		},
-		initTrade:function(context){
-			
+		//初始化交易
+		initTrade: function(context){
 //			if(context.state.tradeSocket==null){
 				context.state.tradeSocket = new WebSocket(context.state.market.tradeConfig.url_real);
 //			}
@@ -2403,6 +2316,7 @@ export default new Vuex.Store({
 			};
 			
 		},
+		//初始化行情
 		initQuoteClient: function(context) {
 			context.state.quoteSocket = new WebSocket(context.state.market.quoteConfig.url_real);
 			context.state.quoteSocket.onopen = function(evt) {
@@ -2424,12 +2338,12 @@ export default new Vuex.Store({
 					context.state.quoteSocket.send('{"Method":"QryCommodity","Parameters":{' + null + '}}');
 				} else if(context.state.wsjsondata.Method == "OnRspQryCommodity") { // 行情服务器支持的品种
 					// 行情服务器支持的品种
+					console.log(JSON.parse(evt.data));
 					context.state.market.markettemp = JSON.parse(evt.data).Parameters;
 					
 					context.state.market.markettemp.forEach(function(e) {
-						var key=e.CommodityNo;
-						context.state.market.orderTemplist[key]=e;
-						
+						var key = e.CommodityNo;
+						context.state.market.orderTemplist[key] = e;
 						if(e.IsUsed != 0) {
 							context.state.quoteSocket.send('{"Method":"Subscribe","Parameters":{"ExchangeNo":"' + e.ExchangeNo + '","CommodityNo":"' + e.CommodityNo + '","ContractNo":"' + e.MainContract + '"}}');
 						}
@@ -2437,7 +2351,6 @@ export default new Vuex.Store({
 				} else if(context.state.wsjsondata.Method == "OnRspSubscribe") { // 订阅成功信息
 					var key=JSON.parse(evt.data).Parameters.CommodityNo;
 					context.state.market.templateList[key]=JSON.parse(evt.data).Parameters;
-//					console.log(context.state.market.templateList);
 					context.state.market.markettemp.forEach(function(e) {
 						if(e.CommodityNo == JSON.parse(evt.data).Parameters.CommodityNo) {
 							e.LastQuotation = JSON.parse(evt.data).Parameters.LastQuotation;
@@ -2449,7 +2362,6 @@ export default new Vuex.Store({
 						//初始化交易
 						context.dispatch('initTrade');
 					}
-					
 					context.state.market.subscribeIndex++;
 				} else if(context.state.wsjsondata.Method == "OnRtnQuote") { // 最新行情
 					var val = JSON.parse(evt.data).Parameters;
@@ -2465,7 +2377,8 @@ export default new Vuex.Store({
 							}
 						}
 					});
-					context.state.market.templateList[key]=JSON.parse(evt.data).Parameters;
+					context.state.market.templateList[key] = JSON.parse(evt.data).Parameters;
+					//更新缓存
 					context.state.market.markettemp.forEach(function(e, i) {
 						//如果拿到的数据的CommodityNo与缓存的数据的CommodityNo相等
 						if(JSON.parse(evt.data).Parameters.CommodityNo == e.CommodityNo) {
