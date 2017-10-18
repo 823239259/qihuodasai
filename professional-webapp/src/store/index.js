@@ -2713,7 +2713,7 @@ export default new Vuex.Store({
 									context.commit('setklineoption');
 									context.commit('drawkline', {
 										id1: 'kliness',
-										id2: 'volume'
+										id2: 'kliness_volume'
 									});
 								}
 							}
