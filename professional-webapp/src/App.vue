@@ -95,8 +95,8 @@
 			</keep-alive>
 			<router-view v-if="$route.meta.notKeepAlive"></router-view>
 		</div>
-		<login class="loginShow" v-if="isshow_login"/>
-		<register class="resgisterShow" v-if="isshow_register"/>
+		<login v-if="isshow_login"/>
+		<register v-if="isshow_register"/>
 		<warning v-if="warningShow"></warning>
 	</div>
 </template>
@@ -436,17 +436,6 @@
 		overflow: hidden;
 		overflow-x: auto;
 		padding: 50px 0 0 70px;
-	}
-	/*注册登录弹窗*/
-	.loginShow {
-		position: fixed;
-		top: 40%;
-		left: 40%;
-	}
-	.resgisterShow {
-		position: fixed;
-		top: 40%;
-		left: 40%;
 	}
 	iframe {
 		width: auto; 

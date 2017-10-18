@@ -39,7 +39,7 @@
 	@import "../../assets/css/common.scss";
 	.login {
 		position: absolute;
-		top: 40%;
+		top: 30%;
 		left: 40%;
 		width: 400px;
 		height: 330px;

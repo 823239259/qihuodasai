@@ -22,7 +22,7 @@
 	@import "../../assets/css/common.scss";
 	.register {
 		position: absolute;
-		top: 40%;
+		top: 30%;
 		left: 40%;
 		width: 400px;
 		height: 390px;
