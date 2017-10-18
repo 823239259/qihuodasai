@@ -316,7 +316,6 @@
 				}).then(function(e){
 					var data = e.body;
 					if(data.success == true){
-						console.log(data);
 						if(data.data.length > 0){
 							data.data.forEach(function(o, i){
 								this.bindBankList.push(o);
