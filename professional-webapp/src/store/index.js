@@ -737,10 +737,10 @@ export default new Vuex.Store({
 			if(state.isshow.isklineshow == false) {
 				kline = echarts.init(document.getElementById(x.id1));
 				volume = echarts.init(document.getElementById(x.id2));
-				volume.group = 'group1';
-				kline.group = 'group1';
+				volume.group = 'group2';
+				kline.group = 'group2';
 				// 基于准备好的dom，初始化echarts实例
-				echarts.connect("group1");
+				echarts.connect("group2");
 				state.isshow.isklineshow = true;
 			} else {
 				if(document.getElementById(x.id1) != null){
@@ -2377,7 +2377,6 @@ export default new Vuex.Store({
 								}
 								//更新K线图
 								if(context.state.isshow.isklineshow == true) {
-									console.log(111111);
 									if(context.state.market.CacheLastQuote[1].TotalVolume <= context.state.market.CacheLastQuote[0].TotalVolume){
 										return;
 									}

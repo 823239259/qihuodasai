@@ -149,13 +149,14 @@
 						}
 					};
 					this.quoteSocket.send(JSON.stringify(data));
+					this.$store.state.market.selectTime = 1440;
 					var datas = {
 						Method: "QryHistory",
 						Parameters:{
 							ExchangeNo: this.Parameters[0].ExchangeNo,
 							CommodityNo: this.Parameters[0].CommodityNo,
 							ContractNo: this.Parameters[0].MainContract,
-							HisQuoteType: 1,
+							HisQuoteType: 1440,
 							BeginTime: "",
 							EndTime: "",
 							Count: 0
@@ -188,19 +189,21 @@
 					}
 				};
 				this.quoteSocket.send(JSON.stringify(data));
+				this.$store.state.market.selectTime = 1440;
 				var datas = {
 					Method: "QryHistory",
 					Parameters:{
 						ExchangeNo: exchangeNo,
 						CommodityNo: commodityNo,
 						ContractNo: mainContract,
-						HisQuoteType: 1,
+						HisQuoteType: 1440,
 						BeginTime: "",
 						EndTime: "",
 						Count: 0
 					}
 				};
 				this.quoteSocket.send(JSON.stringify(datas));
+				
 			}
 		},
 		mounted: function(){
