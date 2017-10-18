@@ -40,7 +40,7 @@
 					</thead>
 					<tbody>
 						<template v-for="(v,index) in Parameters">
-							<tr :class="{current: current == index}" @click="toggle(index, v.CommodityName, v.CommodityNo, v.MainContract, v.ExchangeNo)">
+							<tr :class="{current: current == index}" @click="toggle(index, v.CommodityName, v.CommodityNo, v.MainContract, v.ExchangeNo)" @dblclick="dblclickEvent">
 								<td class="ifont_arrow" v-show="v.LastQuotation.LastPrice >= v.LastQuotation.PreSettlePrice"><i class="ifont" :class="{red: v.LastQuotation.LastPrice > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice}">&#xe761;</i></td>
 								<td class="ifont_arrow" v-show="v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice"><i class="ifont" :class="{red: v.LastQuotation.LastPrice > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice}">&#xe76a;</i></td>
 								<td>{{v.CommodityName}}</td>
@@ -95,10 +95,6 @@
 				current: 0,
 				showFens: false,
 				showKline: false,
-//				obj: {
-//					id1: 'fens',
-//					id2: 'volume',
-//				},
 				orderName: '',
 				orderNum: ''
 			}
@@ -113,11 +109,17 @@
 			quoteInitStep(){
 				return this.$store.state.market.quoteInitStep;
 			},
-			tradeLoginSuccessMsg(){
-				return this.$store.state.market.tradeLoginSuccessMsg;
-			},
+//			tradeLoginSuccessMsg(){
+//				return this.$store.state.market.tradeLoginSuccessMsg;
+//			},
 			quoteSocket(){
 				return this.$store.state.quoteSocket;
+			},
+			quoteIndex(){
+				return this.$store.state.market.quoteIndex;
+			},
+			quoteColor(){
+				return this.$store.state.market.quoteColor;
 			}
 		},
 		filters:{
@@ -165,13 +167,31 @@
 					this.quoteSocket.send(JSON.stringify(datas));
 					this.$store.state.market.currentNo = this.Parameters[0].CommodityNo;
 				}
-			}
+			},
+			quoteIndex: function(n, o){
+				if(this.quoteColor == 'red'){
+					$("tbody tr").eq(n).addClass("red_bg");
+					setTimeout(function(){
+						$("tbody tr").eq(n).removeClass("red_bg");
+					}, 500);
+				}else{
+					$("tbody tr").eq(n).addClass("green_bg");
+					setTimeout(function(){
+						$("tbody tr").eq(n).removeClass("green_bg");
+					}, 500);
+				}
+			},
 		},
 		methods: {
 			...mapActions([
 				'initQuoteClient'
 			]),
 			toggle: function(i, name, commodityNo, mainContract, exchangeNo){
+				this.Parameters.forEach(function(o, i){
+					if(commodityNo == o.CommodityNo){
+						this.$store.state.market.currentdetail = o;
+					}
+				}.bind(this));
 				this.$store.state.market.currentNo = commodityNo;
 				this.current = i;
 				this.orderName = name;
@@ -203,7 +223,10 @@
 					}
 				};
 				this.quoteSocket.send(JSON.stringify(datas));
-				
+			},
+			dblclickEvent: function(){
+				this.$router.push({path: '/trade'});
+				$("#nav li").eq(2).addClass("current").siblings().removeClass("current");
 			}
 		},
 		mounted: function(){
@@ -310,6 +333,12 @@
 				tbody{
 					tr{
 						height: 40px;
+						&.red_bg{
+							background: #ff9f9f;
+						}
+						&.green_bg{
+							background: #9ee5c2;
+						}
 					}
 				}
 				.price{

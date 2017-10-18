@@ -177,6 +177,7 @@
 				var index = $(e.currentTarget).index();
 				if(index == 0){
 					this.$router.push({path: '/index'});
+					$("#nav li").eq(1).addClass("current").siblings().removeClass("current");
 				}else{
 					$(e.currentTarget).addClass("current").siblings().removeClass("current");
 					switch (index){
