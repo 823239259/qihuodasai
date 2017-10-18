@@ -6,7 +6,7 @@
 			<p>账户余额：<span>0.08</span>元</p>
 			<p>支付金额：<span>300</span>元</p>
 			<p>您的账户余额<i>0.88</i>元，本次支付还差<i>4000</i>元</p>
-			<button class="btn yellow">去充值</button>
+			<button class="btn yellow" v-on:click="to_openAccount_3">去充值</button>
 			<button class="btn green">取消</button>
 		</div>
 	</div>
@@ -14,7 +14,17 @@
 
 <script>
 	export default {
-		name : "openAccount_confirmPayment"
+		name : "openAccount_confirmPayment",
+		data(){
+			return{
+				
+			}
+		},
+		methods : {
+			to_openAccount_3 :function(){
+				console.log('111111111111111')
+			}
+		}
 	}
 </script>
 

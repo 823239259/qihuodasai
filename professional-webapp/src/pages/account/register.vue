@@ -1,29 +1,35 @@
 <template>
 	<div id="register">
-		<p>注册<i class="ifont">&#xe624;</i></p>
-		<input type="text"  class="input_1" placeholder="请输入手机号" />
-		<input type="password" name="input_2" class="input_2 input_4" placeholder="验证码" /><i class="span_code">获取验证码</i>
-		<input type="password" name="input_3" class="input_2 input_5" placeholder="请输入密码（6-16位密码）" /><i class="ifont ifont_eyes">&#xe61c;</i>
-		<p class="color_light">注册即表示	同意并已阅读<span class="span_white">《用户注册协议》</span></p>
-		<button class="btn yellow">注册</button>
-		<p class="color_light">已有期货大赛账号？<span class="span_white">立即登录</span></p>
+		<div class="bg"></div>
+		<div class="register">
+			<p>注册<i class="ifont">&#xe624;</i></p>
+			<input type="text"  class="input_1" placeholder="请输入手机号" />
+			<input type="password" name="input_2" class="input_2 input_4" placeholder="验证码" /><i class="span_code">获取验证码</i>
+			<input type="password" name="input_3" class="input_2 input_5" placeholder="请输入密码（6-16位密码）" /><i class="ifont ifont_eyes">&#xe61c;</i>
+			<p class="color_light">注册即表示	同意并已阅读<span class="span_white">《用户注册协议》</span></p>
+			<button class="btn yellow">注册</button>
+			<p class="color_light">已有期货大赛账号？<span class="span_white">立即登录</span></p>
+		</div>
+		
 	</div>
 </template>
-
 <script>
 	export default {
 		name : "register"
 	}
 </script>
-
 <style lang="scss" scoped type="text/css">
 	@import "../../assets/css/common.scss";
-	#register {
+	.register {
+		position: absolute;
+		top: 40%;
+		left: 40%;
 		width: 400px;
 		height: 390px;
 		background-color: $blue;
 		text-align : center;
 		color :$lightblue ;
+		z-index : 100;
 		p {
 			line-height : 40px;
 			color:$white;
