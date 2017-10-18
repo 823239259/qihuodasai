@@ -28,6 +28,11 @@
 					this.$router.push({path: '/orderdetail'});
 				}
 			}
+		},
+		mounted: function(){
+			document.getElementById("novice").addEventListener('touchmove', function(e){
+				e.preventDefault();
+			});
 		}
 	}
 </script>

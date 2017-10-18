@@ -21,6 +21,11 @@
 					this.$router.push({path: 'tradeLogin'});
 				}
 			}
+		},
+		mounted: function(){
+			document.getElementById("novice").addEventListener('touchmove', function(e){
+				e.preventDefault();
+			});
 		}
 	}
 </script>
