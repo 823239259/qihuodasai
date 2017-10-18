@@ -1,7 +1,7 @@
 <template>
 	<div id="account">
 					<span v-on:click="show_accountSurvey">账户概括</span>
-					<span>开户明细</span>
+					<span v-on:click="show_accountOpenDetail">开户明细</span>
 					<span v-on:click="show_accountSafe">安全设置</span>
 			</ul>
 			<div id="account_survey" v-if="isshow_accountSurey">
@@ -121,7 +121,7 @@
 					<p class="p_center">投资有风险，入市需谨慎</p>
 				</div>
 			</div>
-			<div id="account_openDetail">
+			<div id="account_openDetail" v-if="isshow_accountOpenDetail">
 				<div class="account_openDetail_top">
 					<ul>
 						<li>
@@ -169,7 +169,7 @@
 								<td>2017-07-06</br>16:29:55</td>
 								<td>-</td>
 								<td>-</td>
-								<td>追加保证金</td>
+								<td v-on:click="toOpenDetailTrade">追加保证金</td>
 							</tr>
 							<tr>
 								<td>国际综合</td>
@@ -181,7 +181,7 @@
 								<td>2017-07-06</br>16:29:55</td>
 								<td>-</td>
 								<td>-</td>
-								<td>查看账号</td>
+								<td v-on:click="toAdditionlMargin">查看账号</td>
 							</tr>
 							<tr>
 								<td>国际综合</td>
@@ -193,7 +193,7 @@
 								<td>2017-07-06</br>16:29:55</td>
 								<td>-</td>
 								<td>-</td>
-								<td>结算明细</td>
+								<td v-on:click="toParticulars">结算明细</td>
 							</tr>
 						</tbody>
 					</table>
@@ -271,6 +271,9 @@
 			<account_addBankCard v-if="isshow_addBankCard" />
 			<account_resetCellPhone v-if="isshow_resetCellPhone" />
 			<account_resetLoginPassword v-if="isshow_resetLoginPassword" />
+			<account_additionlMargin v-if="isshow_additionlMargin" />
+			<account_openDetail_particulars  v-if="isshow_particulars"/>
+			<account_openDetail_trade v-if="isshow_openDetail_trade"/>
 	</div>
 </template>
 
@@ -282,6 +285,9 @@
 	import account_addBankCard from "./account/account_addBankCard.vue"
 	import account_resetLoginPassword from "./account/account_resetLoginPassword.vue"
 	import account_resetCellPhone from "./account/account_resetCellPhone.vue"
+	import account_additionlMargin from "./account/account_additionlMargin.vue"
+	import account_openDetail_particulars from "./account/account_openDetail_particulars.vue"
+	import account_openDetail_trade from "./account/account_openDetail_trade.vue"
  	export default{
 		name:'account',
 		data(){
@@ -294,11 +300,16 @@
 				isshow_bindBankCard :false,
 				isshow_addBankCard : false,
 				isshow_resetLoginPassword : false,
-				isshow_resetCellPhone :false
+				isshow_resetCellPhone :false,
+				isshow_additionlMargin : false,
+				isshow_particulars : false,
+				isshow_openDetail_trade : false,
+				isshow_accountOpenDetail : true
 			}
 		},
 		components:{account_withDraw,account_certification,account_withdrawalPassword,
-					account_bindBankCard,account_addBankCard,account_resetLoginPassword,account_resetCellPhone},
+					account_bindBankCard,account_addBankCard,account_resetLoginPassword,account_resetCellPhone,
+					account_additionlMargin,account_openDetail_particulars,account_openDetail_trade},
 		methods : {
 			toWithDraw : function (){
 				this.isshow_withDraw=!this.isshow_withDraw,
@@ -338,6 +349,21 @@
 			toResetCellPassword : function(){
 				this.isshow_resetCellPhone=!this.isshow_resetCellPhone,
 				this.isshow_safe = false
+			},
+			toAdditionlMargin : function(){
+				this.isshow_additionlMargin=!this.isshow_additionlMargin,
+				this.isshow_accountOpenDetail = false
+			},
+			toOpenDetailTrade : function(){
+				this.isshow_openDetail_trade=!this.isshow_openDetail_trade,
+				this.isshow_accountOpenDetail = false
+			},
+			toParticulars : function(){
+				this.isshow_particulars=!this.isshow_particulars,
+				this.isshow_accountOpenDetail = false
+			},
+			show_accountOpenDetail : function(){
+				this.isshow_accountOpenDetail = true
 			}
 		}
 		

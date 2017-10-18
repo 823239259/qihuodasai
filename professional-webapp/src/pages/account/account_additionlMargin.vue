@@ -1,42 +1,37 @@
 <template>
-	<div id="openDetail_trade">
+	<div id="additionlMargin">
 		<div class="bg"></div>
-		<div class="openDetail_trade">
+		<div class="additionlMargin">
 			<div class="title">
-				<span>追加保证金</span>
+				<span>交易账号登录</span>
 				<i class="ifont">&#xe624;</i>
 			</div>
 			<div class="center">
-				<p>账户资金：<span>111111111</span>元</p>
-				<p>追加保证金：<input type="text" />元</p>
-				<p>换算美元：<span>0.00</span>美元</p>
-				<ul>
-					<li>注意：</li>
-					<li>1.系统将在下个交易日前为您的期货账户追加保证金；</li>
-					<li>2.添加成功将短信通知您，最低追加金额为500元</li>
-					<li>3.保证金采用固定汇率：7.1元=1美元</li>
-				</ul>
-				<button class="btn yellow">确定</button>
+				<p>交易账号：<span>1008611</span></p>
+				<p>交易密码：<span>a123456</span>（请妥善保管您的密码）</p>
+				<p>交易细则：<span>操盘细则</span></p>
+				<button class="btn yellow">立即操盘</button>
 				<button class="btn green">取消	</button>
 			</div>
 		</div>
 	</div>
 </template>
+
 <script>
 	export default {
-		name : "account_openDetail_trade"
+		name : "account_additionlMargin"
 	}
 </script>
 
 <style lang="scss" scoped type="text/css">
 @import "../../assets/css/common.scss";
-	.openDetail_trade {
+	.additionlMargin {
 		position: relative;
 		/*top: 200px;*/
 		left: 50%;
 		z-index: 100;
 		width: 400px;
-		height: 330px;
+		height: 240px;
 		background-color: $blue;
 		overflow:visible;
 		border-radius: 10px;
@@ -61,7 +56,7 @@
 			font-size: $fs14;
 			margin-left: 30px;
 			span {
-				color: $yellow;
+				color: $white;
 			}
 		}
 		.btn {
@@ -69,22 +64,6 @@
 			width: 90px;
 			height: 30px;
 			margin-left: 20%;
-		}
-		li {
-			margin-left:30px;
-			font-size: $fs12;
-			margin-top:10px;
-			&:nth-child(1){
-				color: $yellow;
-				margin-top: 20px;
-			}
-		}
-		input {
-			width: 120px;
-			height: 30px;
-			border: 1px solid $lightblue;
-			border-radius: 5px;
-			margin: 0 5px;
 		}
 	}
 </style>
