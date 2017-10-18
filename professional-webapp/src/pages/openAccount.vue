@@ -152,6 +152,17 @@
 				<span>投资有风险，入市需谨慎</span>
 			</div>
 		</div>
+		<div class="openAccount_step3" v-if="isshow_openAccount_3">
+			<div class="openAccount_step3_top">
+					<p>开户成功！账户将以短信形式通知您</p>
+					<p>系统将在30分钟内下发操盘账户，超时请联系客服处理。</p>
+					<button class="btn blue">立即操盘</button>
+					<button class="btn blue">查看行情</button>
+			</div>
+			<div class="openAccount_step3_btm">
+				<p>投资有风险，入市需谨慎</p>				
+			</div>
+		</div>
 		<openAccount_confirmPayment v-if="isshow_comfirmPayment" />
 	</div>
 </template>
@@ -164,7 +175,8 @@
 			return {
 				isshow_comfirmPayment : false,
 				isshow_openAccount_1 : true,
-				isshow_openAccount_2 :false
+				isshow_openAccount_2 : false,
+				isshow_openAccount_3 : false
 			}
 		},
 		methods : {
@@ -289,7 +301,6 @@
 		margin-top: 10px;
 		height: 300px;
 		background-color: $bottom_color;
-		display: none;
 	}
 	.openAccount_btm_top {
 		height: 40px;
@@ -352,6 +363,7 @@
 	 	height: 30px;
 	 }
 	 .openAccount_center_step2 {
+	 	margin-top: 10px;
 	 	width: 100%;
 	 	height: 210px;
 	 	background-color: $blue;
@@ -375,6 +387,38 @@
 	 		color: $yellow;
 	 		font-size: $fs16;
 	 		font-weight: 600;
+	 	}
+	 }
+	 .openAccount_step3_top {
+	 	width: 100%;
+	 	height: 400px;
+	 	background-color: $blue;
+	 	text-align: center;
+	 	.btn {
+	 		width: 120px;
+	 		height: 30px;
+	 		margin-top: 30px;
+	 	}
+	 	p {
+	 		&:nth-child(1){
+	 			padding-top: 100px;
+	 			color: $white;
+	 			font-size: $fs16;
+	 			font-weight: 600;
+	 		}
+	 		&:nth-child(2){
+	 			margin-top: 20px;
+	 		}
+	 	}
+	 }
+	 .openAccount_step3_btm {
+	 	p{
+	 		height: 40px;
+	 		background-color: $bottom_color;
+	 		line-height: 40px;
+	 		margin-bottom: 50px;
+	 		text-align: center;
+	 		font-size: $fs12;
 	 	}
 	 }
 </style>

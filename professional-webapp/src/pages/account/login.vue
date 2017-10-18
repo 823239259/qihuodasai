@@ -1,13 +1,16 @@
 <template>
 	<div id="login">
-		<p>登录<i class="ifont ifont_x">&#xe624;</i></p>
-		<input type="text"  class="input_1" placeholder="请输入手机号码" />
-		<input type="password"  class="input_2" placeholder="请输入密码" /><i class=" ifont ifont_eye">&#xe64f;</i>
-		<p class="span_right" v-on:click="toForgetPassword">忘记密码?</p>
-		<button class="btn yellow" v-on:click="toReset">登录</button>
-		<p class="color_light">还没有期货大赛账号？<span class="span_white">立即注册</span></p>
-		<forgetPassword class="forgetPassword_show" v-if="isshow_forgetpassword" />
-		<resetPassword class="resetPassword_show" v-if="isshow_resetPassword" />
+		<div class="bg"></div>
+		<div class="login">
+			<p>登录<i class="ifont ifont_x">&#xe624;</i></p>
+			<input type="text"  class="input_1" placeholder="请输入手机号码" />
+			<input type="password"  class="input_2" placeholder="请输入密码" /><i class=" ifont ifont_eye">&#xe64f;</i>
+			<p class="span_right" v-on:click="toForgetPassword">忘记密码?</p>
+			<button class="btn yellow" v-on:click="toReset">登录</button>
+			<p class="color_light">还没有期货大赛账号？<span class="span_white">立即注册</span></p>
+			<forgetPassword class="forgetPassword_show" v-if="isshow_forgetpassword" />
+			<resetPassword class="resetPassword_show" v-if="isshow_resetPassword" />
+		</div>
 	</div>
 </template>
 <script>
@@ -34,11 +37,15 @@
 </script>
 <style lang="scss" scoped type="text/css">
 	@import "../../assets/css/common.scss";
-	#login {
+	.login {
+		position: absolute;
+		top: 40%;
+		left: 40%;
 		width: 400px;
 		height: 330px;
 		background-color: $blue;
 		text-align : center;
+		z-index : 100;
 		p {
 			line-height : 40px;
 			color:$white;
