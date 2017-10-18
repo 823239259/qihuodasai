@@ -1,21 +1,20 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-
 Vue.use(Vuex)
 
 //控制显示与否的模块
 var isshow = {
 	state: {
-		navBarShow: true,
+//		navBarShow: true,
 		isconnected: false,
-		bottomshow: false,
-		pshow: false,
-		sshow: false,
-		fshow: true,
-		kshow: false,
-		guideshow: false,
-		helpshow: false,
+//		bottomshow: false,
+//		pshow: false,
+//		sshow: false,
+//		fshow: true,
+//		kshow: false,
+//		guideshow: false,
+//		helpshow: false,
 		//是否进入过分时
 		isfensshow: false,
 		//判断是否是直接画图
@@ -28,21 +27,21 @@ var isshow = {
 //控制个人数据
 var account = {
 	state: {
-		islogin: false, //是否登录
-		phone: '', //账户
-		password: '', //密码 
-		token: '',
-		secret: '',
-		isCertification: false, //是否实名认证
-		username: '', //实名
-		balance: 0.00, //余额
-		operateMoney: 0.00, //免提现手续费额度
-		bankList: [], //已绑定银行卡信息
-		//存不知道有用没的数据
-		tempList: [],
-		//存合约列表
-		programList: [],
-		operateOrderLength: 0   //操盘中方案的条数
+//		islogin: false, //是否登录
+//		phone: '', //账户
+//		password: '', //密码 
+//		token: '',
+//		secret: '',
+//		isCertification: false, //是否实名认证
+//		username: '', //实名
+//		balance: 0.00, //余额
+//		operateMoney: 0.00, //免提现手续费额度
+//		bankList: [], //已绑定银行卡信息
+//		//存不知道有用没的数据
+//		tempList: [],
+//		//存合约列表
+//		programList: [],
+//		operateOrderLength: 0   //操盘中方案的条数
 	}
 }
 
@@ -462,7 +461,6 @@ export default new Vuex.Store({
 		},
 
 		setklineoption: function(state) {
-			//			console.time('e');
 			// 引入 ECharts 主模块
 			var echarts = require('echarts/lib/echarts');
 			// 引入柱状图
@@ -763,9 +761,7 @@ export default new Vuex.Store({
 					axisLabel: {
 						formatter: function(a) {
 							a = +a;
-							return isFinite(a) ?
-								echarts.format.addCommas(+a / 10000) :
-								'';
+							return isFinite(a) ? echarts.format.addCommas(+a / 10000) : '';
 						},
 						textStyle: {
 							fontSize: 10
@@ -853,24 +849,20 @@ export default new Vuex.Store({
 			fens.setOption(state.market.option1);
 			volume.setOption(state.market.option2);
 		},
-		//		drawfenssecond: function(state, x) {
-		//			fens.setOption(state.market.option1);
-		//			volume.setOption(state.market.option2);
-		//		},
 		setfensoptionsecond: function(state) {
 			var echarts = require('echarts/lib/echarts');
 			var vol = [],
 				price = [],
-				time = [],
-				averagePrices = [];
+				time = [];
+//				averagePrices = [];
 				
 			state.market.jsonData.Parameters.Data.forEach(function(e) {
 				vol.push(e[6]);
 				time.push(e[0].split(' ')[1].split(':')[0] + ':' + e[0].split(' ')[1].split(':')[1]);
 				price.push(e[1]);
-				if(state.market.qryHoldTotalKV[state.market.currentdetail.CommodityNo]!=undefined){
-					averagePrices.push(state.market.qryHoldTotalKV[state.market.currentdetail.CommodityNo].HoldAvgPrice);
-				}
+//				if(state.market.qryHoldTotalKV[state.market.currentdetail.CommodityNo]!=undefined){
+//					averagePrices.push(state.market.qryHoldTotalKV[state.market.currentdetail.CommodityNo].HoldAvgPrice);
+//				}
 			});
 			var dosizeL = state.market.currentdetail.DotSize;
 			state.market.option1 = {
@@ -1065,7 +1057,7 @@ export default new Vuex.Store({
 							}
 						},
 						symbolSize: 0,
-						data: averagePrices,
+//						data: averagePrices,
 						label: {
 			                normal: {
 			                    show: false,
@@ -2414,7 +2406,7 @@ export default new Vuex.Store({
 		initQuoteClient: function(context) {
 			context.state.quoteSocket = new WebSocket(context.state.market.quoteConfig.url_real);
 			context.state.quoteSocket.onopen = function(evt) {
-				console.log('open');
+//				console.log('open');
 				context.state.quoteSocket.send('{"Method":"Login","Parameters":{"UserName":"'+context.state.market.quoteConfig.userName+'","PassWord":"'+context.state.market.quoteConfig.passWord+'"}}');
 			};
 			context.state.quoteSocket.onclose = function(evt) {
@@ -2424,7 +2416,7 @@ export default new Vuex.Store({
 //				console.log('error');
 			};
 			context.state.quoteSocket.onmessage = function(evt) {
-				console.log('message');
+//				console.log('message');
 				context.state.wsjsondata = JSON.parse(evt.data);
 				if(context.state.wsjsondata.Method == "OnRspLogin") { // 登录行情服务器
 					context.state.market.quoteConnectedMsg='行情服务器连接成功' + Math.floor(Math.random()*10);
@@ -2456,7 +2448,6 @@ export default new Vuex.Store({
 					if(context.state.market.subscribeIndex==1){
 						//初始化交易
 						context.dispatch('initTrade');
-						
 					}
 					
 					context.state.market.subscribeIndex++;
@@ -2487,21 +2478,20 @@ export default new Vuex.Store({
 								}
 							});
 							if(context.state.market.currentNo == e.CommodityNo) {
+//								console.log(1111);
 								context.state.market.CacheLastQuote.push(JSON.parse(evt.data).Parameters);
-								if(context.state.market.CacheLastQuote.length>2){
+								if(context.state.market.CacheLastQuote.length > 2){
 									context.state.market.CacheLastQuote.shift();
-								}else if(context.state.market.CacheLastQuote.length<=1){
-									return ;
+								}else if(context.state.market.CacheLastQuote.length <= 1){
+									return;
 								}
-//								context.commit('updateTempdata', context.state.market.currentNo);
-								context.commit('setfensoptionsecond');
-								context.state.market.jsonTow = JSON.parse(evt.data);
-								context.commit('setlightDate');
+								//更新分时图
 								if(context.state.isshow.isfensshow == true) {
 									context.state.market.charttimetime = new Date();
 									context.state.market.charttimems = context.state.market.charttimetime.getTime();
 									context.state.market.charttime = context.state.market.charttimems - context.state.market.charttimems2;
 									if(context.state.market.charttime >= 1000 || context.state.market.charttimetemp >= 1000) {
+										context.commit('setfensoptionsecond');
 										context.commit('drawfens', {
 											id1: 'fens',
 											id2: 'volume'
@@ -2513,16 +2503,18 @@ export default new Vuex.Store({
 									context.state.market.charttimetime2 = new Date();
 									context.state.market.charttimems2 = context.state.market.charttimetime2.getTime();
 								}
+								//更新闪电图
 								if(context.state.isshow.islightshow == true) {
+									context.state.market.jsonTow = JSON.parse(evt.data);
+									context.commit('setlightDate');
 									context.commit('drawlight', 'lightcharts');
 								}
+								//更新K线图
 								if(context.state.isshow.isklineshow == true) {
-									
-									if(context.state.market.CacheLastQuote[1].TotalVolume 
-												<= context.state.market.CacheLastQuote[0].TotalVolume){
-												return;
+									console.log(111111);
+									if(context.state.market.CacheLastQuote[1].TotalVolume <= context.state.market.CacheLastQuote[0].TotalVolume){
+										return;
 									}
-									
 									var arr = [];
 									arr[0] = JSON.parse(evt.data).Parameters.DateTimeStamp;
 									arr[1] = JSON.parse(evt.data).Parameters.LastPrice;
@@ -2732,20 +2724,20 @@ export default new Vuex.Store({
 					 */
 					context.dispatch('UpdateHoldProfit',JSON.parse(evt.data).Parameters);
 				} else if(context.state.wsjsondata.Method == "OnRspQryHistory") { // 历史行情
-					context.state.market.jsonData = JSON.parse(evt.data);
-					if(context.state.isshow.fshow == true) {
+					let data = JSON.parse(evt.data);
+					if(data.Parameters.HisQuoteType == 0){
+						context.state.market.jsonData = data;
 						context.commit('setfensoption');
 						context.commit('drawfens', {
 							id1: 'fens',
 							id2: 'volume'
 						});
-					} else if(context.state.isshow.kshow == true) {
-						
-						context.state.market.jsonDataKline = JSON.parse(evt.data);
+					}else{
+						context.state.market.jsonDataKline = data;
 						context.commit('setklineoption');
 						context.commit('drawkline', {
 							id1: 'kliness',
-							id2: 'volume'
+							id2: 'kliness_volume'
 						});
 					}
 				}

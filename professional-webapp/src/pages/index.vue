@@ -74,16 +74,13 @@
 					<span class="fl">添加自选</span>
 				</div>
 			</div>
-			<div id="chart_fens" v-if="showFens">
-				<div id="fens" style="width: 100%; height: 300px; margin: 0 auto;">
-					
-				</div>
-				<div id="volume" style="width: 100%; height: 200px; margin: 0 auto;">
-					
-				</div>
+			<div id="echarts_f" v-if="showFens">
+				<div id="fens" class="chart" style="height: 240px;"></div>
+				<div id="volume" class="chart" style="height: 160px;"></div>
 			</div>
-			<div id="echarts_k">
-				
+			<div id="echarts_k" v-if="showKline">
+				<div id="kliness" class="char" style="height: 240px;"></div>
+				<div id="kliness_volume" class="chart" style="height: 160px;"></div>
 			</div>
 		</div>
 	</div>
@@ -97,11 +94,11 @@
 			return{
 				current: 0,
 				showFens: false,
-				obj: {
-					id1: 'fens',
-					id2: 'volume',
-					
-				},
+				showKline: false,
+//				obj: {
+//					id1: 'fens',
+//					id2: 'volume',
+//				},
 				orderName: '',
 				orderNum: ''
 			}
@@ -136,9 +133,10 @@
 				if(n && n == true){
 					this.$store.state.market.currentdetail = this.Parameters[0];
 					this.showFens = true;
+					this.showKline = true;
 					this.orderName = this.Parameters[0].CommodityName;
 					this.orderNum = this.Parameters[0].CommodityNo + this.Parameters[0].MainContract;
-					var b = {
+					var data = {
 						Method: "QryHistory",
 						Parameters:{
 							ExchangeNo: this.Parameters[0].ExchangeNo,
@@ -150,7 +148,20 @@
 							Count: 0
 						}
 					};
-					this.quoteSocket.send(JSON.stringify(b));
+					this.quoteSocket.send(JSON.stringify(data));
+					var datas = {
+						Method: "QryHistory",
+						Parameters:{
+							ExchangeNo: this.Parameters[0].ExchangeNo,
+							CommodityNo: this.Parameters[0].CommodityNo,
+							ContractNo: this.Parameters[0].MainContract,
+							HisQuoteType: 1,
+							BeginTime: "",
+							EndTime: "",
+							Count: 0
+						}
+					};
+					this.quoteSocket.send(JSON.stringify(datas));
 					this.$store.state.market.currentNo = this.Parameters[0].CommodityNo;
 				}
 			}
@@ -160,10 +171,11 @@
 				'initQuoteClient'
 			]),
 			toggle: function(i, name, commodityNo, mainContract, exchangeNo){
+				this.$store.state.market.currentNo = commodityNo;
 				this.current = i;
 				this.orderName = name;
 				this.orderNum = commodityNo + mainContract;
-				var b = {
+				var data = {
 					Method: "QryHistory",
 					Parameters:{
 						ExchangeNo: exchangeNo,
@@ -175,7 +187,20 @@
 						Count: 0
 					}
 				};
-				this.quoteSocket.send(JSON.stringify(b));
+				this.quoteSocket.send(JSON.stringify(data));
+				var datas = {
+					Method: "QryHistory",
+					Parameters:{
+						ExchangeNo: exchangeNo,
+						CommodityNo: commodityNo,
+						ContractNo: mainContract,
+						HisQuoteType: 1,
+						BeginTime: "",
+						EndTime: "",
+						Count: 0
+					}
+				};
+				this.quoteSocket.send(JSON.stringify(datas));
 			}
 		},
 		mounted: function(){
@@ -184,6 +209,9 @@
 				this.initQuoteClient();
 				this.$store.state.market.quoteInitStatus = true;
 			}
+			//初始化页面高度
+			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+			$(".order").height(h - 50 - 30);
 		}
 	}
 </script>
@@ -225,6 +253,9 @@
 		}
 		#echarts_f, #echarts_k{
 			width: 400px;
+		}
+		#echarts_k{
+			margin-top: 10px;
 		}
 	}
 	.order{
@@ -283,6 +314,10 @@
 				}
 			}
 		}
+	}
+	.chart{
+		width: 100%;
+		margin: 0 auto;
 	}
 
 
