@@ -1,6 +1,157 @@
 <template>
 	<div id="openAccount">
-		openAccount
+		<div class="openAccount_top">
+			<img src="../assets/images/icon_openaccount_01.png" alt="" />
+		</div>
+		<div class="openAccount_center">
+			<div class="title">
+				<span>开户入金</span>
+				<span>操盘保证金越多，可持仓手数越多</span>
+				<span>国际操盘规则</span>
+			</div>
+			<div class="openAccount_center_left">
+				<ul>
+					<li>
+						<button class="btn1">￥3000</button>
+					<button class="btn1">￥6000</button>
+					<button class="btn1">￥10000</button>
+					<button class="btn1">￥12000</button>
+					</li>
+					<li>
+						<button class="btn1">￥15000</button>
+						<button class="btn1">￥50000</button>
+						<button class="btn1">￥100000</button>
+						<button class="btn1">￥200000</button>
+					</li>
+					<li>
+						<button class="btn yellow">下一步</button>
+					</li>
+					<li>
+						<p>提交申请即代表你已阅读并同意<span>《国际期货综合操盘合作协议》</span></p>
+					</li>
+				</ul>
+			</div>
+			<div class="openAccount_center_right">
+				<ul>
+					<li>您的投资本金：<label>3000元</label><i>(固定汇率6.8，1美元=6.8元人民币)</i></li>
+					<li>总操盘资金<i>（盈利全归你）</i></li>
+					<li>17680元=1360元<i>（本金）</i>+1620元<i>（获得资金）</i></li>
+					<li>亏损平仓线：<span>16728元（2460美元）</span><i>（平仓线=总操盘资金-风险保证金x0.6）</i></li>
+					<li>管理费：<span>免费</span></li>
+					<li>交易时间：<span>请参照交易规则</span></li>
+				</ul>
+			</div>
+		</div>
+		<div class="openAccount_center_step2">
+			<div class="title">
+				<span>确认方案信息</span>
+			</div>
+			<div>
+				<table>
+					<thead>
+						<tr>
+							<td>总操盘资金</td>
+							<td>亏损平仓线</td>
+							<td>投资本金</td>
+							<td>账户管理费</td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>5000美元</td>
+							<td>4800美元</td>
+							<td>3000元</td>
+							<td>免费</td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="to_openAccount">
+				<span>支付金额：<i>3000</i>元</span>
+				<button class="btn yellow">立即开户</button>
+				<label>返回修改</label>
+			</div>
+		</div>
+		<div class="openAccount_btm">
+			<div class="openAccount_btm_top">
+				<span>交易规则</span>
+				<span>（一个账号可同时交易多种期货产品）</span>
+			</div>
+			<div class="openAccount_btm_center">
+				<div class="btm_left">
+					<table>
+						<thead>
+							<tr class="color_deepblue">
+								<td>期货产品</td>
+								<td>交易时间段</td>
+								<td>初始持仓手数</td>
+								<td>单边手续费</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>富时A50</br><i>cn1607</i></td>
+								<td>09:05-11:55</br><i>16:45-16:55</i></td>
+								<td>10</td>
+								<td>58.00元/手</td>
+							</tr>
+							<tr>
+								<td>富时A50</br><i>cn1607</i></td>
+								<td>09:05-11:55</br><i>16:45-16:55</i></td>
+								<td>10</td>
+								<td>58.00元/手</td>
+							</tr>
+							<tr>
+								<td>富时A50</br><i>cn1607</i></td>
+								<td>09:05-11:55</br><i>16:45-16:55</i></td>
+								<td>10</td>
+								<td>58.00元/手</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="btm_right">
+					<table>
+						<thead>
+							<tr class="color_deepblue">
+								<td>期货产品</td>
+								<td>交易时间段</td>
+								<td>初始持仓手数</td>
+								<td>单边手续费</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>富时A50</br><i>cn1607</i></td>
+								<td>09:05-11:55</br><i>16:45-16:55</i></td>
+								<td>10</td>
+								<td>58.00元/手</td>
+							</tr>
+							<tr>
+								<td>富时A50</br><i>cn1607</i></td>
+								<td>09:05-11:55</br><i>16:45-16:55</i></td>
+								<td>10</td>
+								<td>58.00元/手</td>
+							</tr>
+							<tr>
+								<td>富时A50</br><i>cn1607</i></td>
+								<td>09:05-11:55</br><i>16:45-16:55</i></td>
+								<td>10</td>
+								<td>58.00元/手</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="btm_btm">
+					<span>展开</span>
+				</div>
+			</div>
+			<div class="openAccount_btm_btm">
+				<span>投资有风险，入市需谨慎</span>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -11,6 +162,201 @@
 </script>
 
 <style scoped lang="scss">
-@import url("../assets/css/common.scss");
-
+@import "../assets/css/common.scss";
+	#openAccount {
+		width: 80%;
+		margin: auto;
+	}
+	.openAccount_top {
+		text-align: center;
+		height: 140px;
+		background-color: $blue;
+		img {
+			width: 720px;
+			height: 60px;
+			margin-top: 40px;
+		}
+	}
+	.openAccount_center {
+		width: 100%;
+		margin-top: 10px;
+		height: 280px;
+		display: none;
+	}
+	.openAccount_center_left {
+			width: 50%;
+			background-color: $blue;
+			height: 240px;
+			float: left;
+			text-align: center;
+			span {
+				color: $white;
+			}
+			li {
+				&:nth-child(1){
+					padding-top: 30px;
+				}
+				&:nth-child(2){
+					margin-top: 20px;
+				}
+				&:nth-child(3){
+					margin-top: 25px;
+				}
+				&:nth-child(4){
+					margin-top: 20px;
+				}
+			}
+		}
+	.title {
+		height: 40px;
+		width: 100%;
+		line-height: 40px;
+		background-color: $bottom_color;
+		span {
+			&:nth-child(1){
+				color : $white;
+			}
+			&:nth-child(2){
+				font-size: $fs12;
+			}
+			&:nth-child(3){
+				font-size: $fs14;
+				float: right;
+			}
+		}
+	}
+	.openAccount_center_left .btn1 {
+		background-color: $blue;
+		width: 80px;
+		height: 40px;
+		border: 1px solid #7a7f99;
+		color: $white;	
+		font-weight: 600;
+		border-radius: 5px;
+	}
+	.yellow {
+		width: 120px;
+		height: 30px;
+	}
+	.openAccount_center_right {
+		border-left: 1px solid $bottom_color;
+		width: 50%;
+		background-color: $blue;
+		height: 240px;
+		float: left;
+		li {
+			text-indent: 5px;
+			height:40px; 
+			line-height: 40px;
+			&:nth-child(4){
+				border-bottom: 1px solid $bottom_color;
+				border-top: 1px solid $bottom_color;
+			}
+			&:nth-child(6){
+				border-bottom: 1px solid $bottom_color;
+				border-top: 1px solid $bottom_color;
+			}
+			span {
+				color : $white;
+			}
+			i {
+				font-size: $fs12;
+			}
+			label {
+				color: $yellow;
+			}
+		}
+	}
+	.openAccount_btm {
+		width: 100%;
+		margin-top: 10px;
+		height: 300px;
+		background-color: $bottom_color;
+	}
+	.openAccount_btm_top {
+		height: 40px;
+		width: 100%;
+		line-height: 40px;
+		background-color: $bottom_color;
+		span {
+			&:first-child {
+				font-size: $fs16;
+				color: $white;
+			}
+			&:last-child {
+				font-size: $fs12;
+			}
+		}
+	}
+	.openAccount_btm_center {
+		background-color: $bottom_color;
+		width: 100%;
+	}
+	.btm_btm {
+		width: 100%;
+		height: 60px;
+		float: left;
+		line-height: 60px;
+		text-align: center;
+		background-color: $blue;
+		border-top: 1px solid $bottom_color;
+	}
+	.btm_left {
+		width: 49.5%;
+		float: left;
+		height: 200px;
+		background-color: $blue;
+	}
+	.btm_right {
+		width: 49.5%;
+		float: right;
+		height: 200px;
+		background-color: $blue;
+	}
+	table{
+	 	tr{
+	 		background-color: $blue;
+	 		height: 50px;
+	 		border-bottom: 1px solid $bottom_color;
+	 	}
+	 }
+	 .openAccount_btm_btm {
+	 	/*margin-top: 10x;*/
+	 	float: left;
+	 	width: 100%;
+	 	height: 40px;
+	 	text-align: center;
+	 	line-height: 40px;
+	 	background-color: $bottom_color;
+	 }
+	 .color_deepblue {
+	 	background-color: $deepblue;
+	 	height: 30px;
+	 }
+	 .openAccount_center_step2 {
+	 	width: 100%;
+	 	height: 210px;
+	 	background-color: $blue;
+	 }
+	 .to_openAccount {
+	 	height: 90px;
+	 	line-height: 90px;
+	 	text-align: center;
+	 	span{
+	 			color: $white;
+	 			font-size: $fs14;
+	 	}
+	 	label{
+	 		font-size: $fs12;
+	 	}
+	 	.btn {
+	 		width: 120px;
+	 		height: 30px;
+	 	}
+	 	i{
+	 		color: $yellow;
+	 		font-size: $fs16;
+	 		font-weight: 600;
+	 	}
+	 }
 </style>
