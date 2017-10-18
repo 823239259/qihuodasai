@@ -1868,11 +1868,9 @@ export default new Vuex.Store({
     		var year00 = date00.getFullYear();
     		var day00 = date00.getDate() > 9 ? date00.getDate() : "0" + date00.getDate();
     		var month00 = (date00.getMonth() + 1) > 9 ? (date00.getMonth() + 1) : "0"+ (date00.getMonth() + 1);
-    		
     		var endTime= year00 + '/' + month00 + '/' + day00+' 00:00:00';
 //			context.state.tradeSocket.send('{"Method":"QryHisTrade","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'"}}');
 			context.state.tradeSocket.send('{"Method":"QryHisTrade","Parameters":{"ClientNo":"'+ JSON.parse(localStorage.tradeUser).username +'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'"}}');
-		
 		},
 		layerOnRtnOrderTraded:function(context,parameters){
 			if(parameters!=null){
@@ -1896,7 +1894,6 @@ export default new Vuex.Store({
 					context.state.market.layer = parameters.StatusMsg+Math.floor(Math.random()*10);
 					return;
 				}
-				
 				var CommodityName =context.state.market.orderTemplist[parameters.CommodityNo].CommodityName;
 				var DirectionStr;
 				if(parameters.Drection==0){
@@ -1920,7 +1917,6 @@ export default new Vuex.Store({
 				}else{
 					context.state.market.layer='委托失败（'+CommodityName+','+price+','+DirectionStr+OrderNum+'手,失败原因:'+parameters.StatusMsg+'）'+Math.floor(Math.random()*10);
 				}
-				
 			}
 		},
 		updateApply:function(context,parameters){
@@ -1943,13 +1939,11 @@ export default new Vuex.Store({
 					currentObj.delegateNum = parameters.OrderNum;
 					currentObj.ApplyOrderNum = parameters.OrderNum- parameters.TradeNum;
 					context.state.market.orderListCont.splice(index,1,currentObj);
-					
 					context.state.market.OnRspOrderInsertOrderListCont[context.state.market.OnRspOrderInsertOrderListCont.length-index-1].OrderPrice
-						=parameters.OrderPrice;
+						= parameters.OrderPrice;
 					context.state.market.OnRspOrderInsertOrderListCont[context.state.market.OnRspOrderInsertOrderListCont.length-index-1].OrderNum
-						=parameters.OrderNum;
+						= parameters.OrderNum;
 					context.state.market.layer = parameters.StatusMsg + ':合约【'+ parameters.ContractCode +'】,订单号:【'+ parameters.OrderID +'】' + Math.floor(Math.random()*10);
-					
 				}
 			}else if(parameters.OrderStatus == 6){
 				return true;
@@ -2016,37 +2010,30 @@ export default new Vuex.Store({
 				}();
 				obj.total_color='green';
 				obj.commodityNocontractNo = context.state.market.orderTemplist[parameters.CommodityNo].LastQuotation.CommodityNo
-											+context.state.market.orderTemplist[parameters.CommodityNo].LastQuotation.ContractNo;
-				
+											+ context.state.market.orderTemplist[parameters.CommodityNo].LastQuotation.ContractNo;
 				if(parameters.HoldNum!=0){
 					context.state.market.positionListCont.unshift(obj);	
 					context.state.market.qryHoldTotalArr.push(parameters);
 				}
-				
 			}
-			
 			if(isExist==true){
-					if(parameters.HoldNum!=0){
-						
-						positionListContCurrent.num=parameters.HoldNum;
-						if(parameters.Drection==0){
-							 positionListContCurrent.type ='多';
-							 positionListContCurrent.type_color='red';
-						}
-						if(parameters.Drection==1){
-							 positionListContCurrent.type='空';
-							  positionListContCurrent.type_color='green';
-						}
-						
-						positionListContCurrent.price = parseFloat(parameters.OpenAvgPrice)
-															.toFixed(context.state.market.orderTemplist[parameters.CommodityNo].DotSize);
-															
-						context.state.market.positionListCont.splice(positionListContCurrentIndex,1,positionListContCurrent);
-						context.state.market.qryHoldTotalArr[context.state.market.qryHoldTotalArr.length-1-positionListContCurrentIndex] = parameters;
-					}else{
-						context.state.market.positionListCont.splice(positionListContCurrentIndex,1);
-						context.state.market.qryHoldTotalArr.splice(context.state.market.qryHoldTotalArr.length-1-positionListContCurrentIndex,1);
+				if(parameters.HoldNum!=0){
+					positionListContCurrent.num=parameters.HoldNum;
+					if(parameters.Drection==0){
+						 positionListContCurrent.type ='多';
+						 positionListContCurrent.type_color='red';
 					}
+					if(parameters.Drection==1){
+						 positionListContCurrent.type='空';
+						  positionListContCurrent.type_color='green';
+					}
+					positionListContCurrent.price = parseFloat(parameters.OpenAvgPrice).toFixed(context.state.market.orderTemplist[parameters.CommodityNo].DotSize);
+					context.state.market.positionListCont.splice(positionListContCurrentIndex,1,positionListContCurrent);
+					context.state.market.qryHoldTotalArr[context.state.market.qryHoldTotalArr.length-1-positionListContCurrentIndex] = parameters;
+				}else{
+					context.state.market.positionListCont.splice(positionListContCurrentIndex,1);
+					context.state.market.qryHoldTotalArr.splice(context.state.market.qryHoldTotalArr.length-1-positionListContCurrentIndex,1);
+				}
 			}
 		},
 		updateAccountFloatingProfit:function(context,parameters){
@@ -2072,14 +2059,12 @@ export default new Vuex.Store({
 							context.state.market.CacheHoldFloatingProfit.jCurrencyNoFloatingProfit[contractFloatingProfit.currencyNo]=0.0;
 						}else{
 							context.state.market.CacheHoldFloatingProfit.jCurrencyNoFloatingProfit[contractFloatingProfit.currencyNo] 
-								=parseFloat(tmp1+tmp2).toFixed(2);
-						
+								= parseFloat(tmp1+tmp2).toFixed(2);
 						}
 					}
 				}
 				// 根据币种更新资金账户：逐笔浮盈、逐笔浮盈率、当前权益、可用资金
 				for (var currencyNo in context.state.market.CacheHoldFloatingProfit.jCurrencyNoFloatingProfit){
-					
 					var floatingProfit = parseFloat(context.state.market.CacheHoldFloatingProfit.jCurrencyNoFloatingProfit[currencyNo]);
 					var todayAmount = parseFloat(context.state.market.CacheAccount.jCacheAccount[currencyNo].TodayAmount);
 					// 当前权益 = 当前结存 + 逐笔浮盈
@@ -2091,17 +2076,14 @@ export default new Vuex.Store({
 					context.state.market.CacheAccount.jCacheAccount[currencyNo].FloatingProfit=floatingProfit;
 					context.state.market.CacheAccount.jCacheAccount[currencyNo].TodayBalance=todayBalance;
 					context.state.market.CacheAccount.jCacheAccount[currencyNo].TodayCanUse=todayCanUse;
-					
 					context.state.market.CacheAccount.moneyDetail.forEach(function(e,i){
 						if(e.AccountNo == currencyNo){
 							e.FloatingProfit = floatingProfit;
 							e.TodayBalance = todayBalance;
 							e.TodayCanUse = todayCanUse;
-							
 							context.state.market.CacheAccount.moneyDetail.splice(i,1,e);
 						}
 					});
-					
 				}
 				// 清空币种盈亏
 				context.state.market.CacheHoldFloatingProfit.jCurrencyNoFloatingProfit = {};
@@ -2124,7 +2106,6 @@ export default new Vuex.Store({
 			context.state.market.CacheAccount.jCacheAccount[parameters.CurrencyNo].Deposit = parameters.Deposit;
 			// 挂单保证金
 			context.state.market.CacheAccount.jCacheAccount[parameters.CurrencyNo].FrozenMoney = parameters.FrozenMoney;
-			
 		},
 		updateTotalAccount:function(context,parameters){
 			var obj = context.state.market.CacheAccount.jCacheAccount;
@@ -2144,11 +2125,9 @@ export default new Vuex.Store({
 				// 逐笔浮盈：直接从当前资金账户获取
 				var floatingProfit = jCacheAccount[e].FloatingProfit;
 				context.state.market.CacheAccount.jCacheTotalAccount.FloatingProfit  += floatingProfit * jCacheAccount[e].CurrencyRate;
-				
 				// 今权益 = 今结存 + 浮盈
 				var tmpTodayBalance = jCacheAccount[e].TodayAmount + floatingProfit;
 				context.state.market.CacheAccount.jCacheTotalAccount.TodayBalance += tmpTodayBalance * jCacheAccount[e].CurrencyRate;
-				
 				// 今可用=今权益-冻结资金-保证金
 				context.state.market.CacheAccount.jCacheTotalAccount.TodayCanUse += (tmpTodayBalance - jCacheAccount[e].FrozenMoney - jCacheAccount[e].Deposit) * jCacheAccount[e].CurrencyRate;
 				// 平仓盈亏
@@ -2162,16 +2141,13 @@ export default new Vuex.Store({
 			}
 			// 风险率 = 保证金 / 今权益 * 100%
 			context.state.market.CacheAccount.jCacheTotalAccount.RiskRate 
-			= context.state.market.CacheAccount.jCacheTotalAccount.Deposit / context.state.market.CacheAccount.jCacheTotalAccount.TodayBalance / 100;
-			
+				= context.state.market.CacheAccount.jCacheTotalAccount.Deposit / context.state.market.CacheAccount.jCacheTotalAccount.TodayBalance / 100;
 		},
-		
 		initCacheAccount:function(context,parameters){
 			if(parameters!=null){
 				context.state.market.CacheAccount.jCacheAccount[parameters.CurrencyNo] = parameters;
 			}
 		},
-		
 		UpdateHoldProfit:function(context,parameters){
 			if(context.state.market.ifUpdateHoldProfit){
 				if(parameters!=null){
@@ -2204,20 +2180,14 @@ export default new Vuex.Store({
 						
 						context.state.market.CacheHoldFloatingProfit.jHoldFloatingProfit[parameters.CommodityNo+parameters.ContractNo] 
 							= {"currencyNo" : context.state.market.orderTemplist[parameters.CommodityNo].CurrencyNo, "floatingProfit" : tmpFloatingProfit};
-						
 						//更新账户资金盈亏
 						context.dispatch('updateAccountFloatingProfit',parameters);
-						
 					}
-					
 				}
-				
 			}
-			
 		},
 		updateHoldFloatingProfit:function(context,parameters){
 //			console.log('根据订阅行情初始化持仓盈亏');
-//			console.log(context.state.market.orderTemplist[parameters.CommodityNo]);
 			var lastPrice = context.state.market.orderTemplist[parameters.CommodityNo].LastQuotation.LastPrice;
 			var contract=parameters.ContractCode;
 			var CommodityNo = context.state.market.orderTemplist[parameters.CommodityNo]
@@ -2231,7 +2201,6 @@ export default new Vuex.Store({
 					currentObjIndex=i;
 				}
 			});
-			
 			// 价差 = 最新价-开仓价
 			var diff = lastPrice - currentObj.OpenAvgPrice;
 			// 合约乘数 = 最小变动价格 / 最小变动点数
@@ -2241,15 +2210,11 @@ export default new Vuex.Store({
 			if(currentObj.Drection === 1) { // 空反向
 				tmpFloatingProfit = -tmpFloatingProfit;
 			}
-			
 			var floatingProfit=tmpFloatingProfit+':'+context.state.market.orderTemplist[parameters.CommodityNo].CurrencyNo;
-			
 			var CommodityName = context.state.market.orderTemplist[parameters.CommodityNo].CommodityName;
-			
-			var currentPositionListContObj=null;
-			var currentPositionListContObjIndex=0;
+			var currentPositionListContObj = null;
+			var currentPositionListContObjIndex = 0;
 			var isExist00 = false;
-			
 			context.state.market.positionListCont.forEach(function(e,i){
 				if(e.name==CommodityName){
 					isExist00 = true;
@@ -2257,25 +2222,18 @@ export default new Vuex.Store({
 					currentPositionListContObjIndex=i;
 				}
 			});
-			if(isExist00==true){
+			if(isExist00 == true){
 				currentPositionListContObj.total = floatingProfit;
-				if(tmpFloatingProfit>=0){
+				if(tmpFloatingProfit >= 0){
 					currentPositionListContObj.total_color = 'red';
 				}else{
 					currentPositionListContObj.total_color = 'green';
 				}
-				
 				context.state.market.positionListCont.splice(currentPositionListContObjIndex,1,currentPositionListContObj);
-				
 			}
-			
-			
 		},
-		HeartBeatTimingCheck:function(context){
-			setInterval(
-//				heartBeatUpdate,context.state.market.HeartBeat.intervalCheckTime
-				heartBeatUpdate,15000
-			);	
+		HeartBeatTimingCheck: function(context){
+			setInterval(heartBeatUpdate,15000);	
 			function heartBeatUpdate(){
 				if(context.state.market.HeartBeat.lastHeartBeatTimestamp == context.state.market.HeartBeat.oldHeartBeatTimestamp){
 					console.log('交易服务器断开，正在重连');
@@ -2338,9 +2296,7 @@ export default new Vuex.Store({
 					context.state.quoteSocket.send('{"Method":"QryCommodity","Parameters":{' + null + '}}');
 				} else if(context.state.wsjsondata.Method == "OnRspQryCommodity") { // 行情服务器支持的品种
 					// 行情服务器支持的品种
-					console.log(JSON.parse(evt.data));
 					context.state.market.markettemp = JSON.parse(evt.data).Parameters;
-					
 					context.state.market.markettemp.forEach(function(e) {
 						var key = e.CommodityNo;
 						context.state.market.orderTemplist[key] = e;
@@ -2358,7 +2314,7 @@ export default new Vuex.Store({
 						}
 					});
 					context.state.market.quoteInitStep = true;
-					if(context.state.market.subscribeIndex==1){
+					if(context.state.market.subscribeIndex == 1){
 						//初始化交易
 						context.dispatch('initTrade');
 					}
@@ -2378,7 +2334,7 @@ export default new Vuex.Store({
 						}
 					});
 					context.state.market.templateList[key] = JSON.parse(evt.data).Parameters;
-					//更新缓存
+					//更新数据
 					context.state.market.markettemp.forEach(function(e, i) {
 						//如果拿到的数据的CommodityNo与缓存的数据的CommodityNo相等
 						if(JSON.parse(evt.data).Parameters.CommodityNo == e.CommodityNo) {
@@ -2391,12 +2347,9 @@ export default new Vuex.Store({
 								}
 							});
 							if(context.state.market.currentNo == e.CommodityNo) {
-//								console.log(1111);
 								context.state.market.CacheLastQuote.push(JSON.parse(evt.data).Parameters);
 								if(context.state.market.CacheLastQuote.length > 2){
 									context.state.market.CacheLastQuote.shift();
-								}else if(context.state.market.CacheLastQuote.length <= 1){
-									return;
 								}
 								//更新分时图
 								if(context.state.isshow.isfensshow == true) {
@@ -2438,7 +2391,6 @@ export default new Vuex.Store({
 									context.state.market.volume+=JSON.parse(evt.data).Parameters.LastVolume;
 									arr[6] = context.state.market.volume;
 									
-									
 									var arr1 = JSON.parse(evt.data).Parameters.DateTimeStamp.split(' '); //得到的时间
 									//["20", "47", "38"]
 									var arr2 = arr1[1].split(':'); //得到的数据
@@ -2447,14 +2399,12 @@ export default new Vuex.Store({
 									var arr4 = arr3[1].split(':'); //历史
 									if(context.state.market.selectTime == 1) {
 										if(arr2[1] == arr4[1]) {
-											
 											arr[0] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][0];
 											if(arr[1] < context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][3]) {
 												arr[3] = arr[1];
 											} else {
 												arr[3] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][3]
 											}
-											
 											if(arr[1] > context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][4]) {
 												arr[4] = arr[1];
 											} else {
@@ -2463,7 +2413,6 @@ export default new Vuex.Store({
 											arr[1] = arr[1];
 											arr[2] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][2];
 											arr[5] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][5];
-											
 											arr[6] = context.state.market.volume;
 											var length = context.state.market.jsonDataKline.Parameters.Data.length;
 											context.state.market.jsonDataKline.Parameters.Data.splice(length-1,1,arr);
@@ -2503,7 +2452,6 @@ export default new Vuex.Store({
 											context.state.market.jsonDataKline.Parameters.Data.splice(length-1,1,arr);
 											//context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1] = arr;
 										} else if(arr2[1]%5 == 0 && arr2[2]=='00'){
-											
 											var arrTemp = [];
 											context.state.market.jsonDataKline.Parameters.Data.shift();
 											context.state.market.volume=0;
@@ -2632,9 +2580,7 @@ export default new Vuex.Store({
 							}
 						}
 					});
-					/**
-					 * 更新持仓盈亏
-					 */
+					//更新持仓盈亏
 					context.dispatch('UpdateHoldProfit',JSON.parse(evt.data).Parameters);
 				} else if(context.state.wsjsondata.Method == "OnRspQryHistory") { // 历史行情
 					let data = JSON.parse(evt.data);
