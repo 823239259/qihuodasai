@@ -271,10 +271,10 @@
 						this.msg = '服务器连接失败';
 					});
 				}else{    //资金不足的时候
-					$(e.currentTarget).parent().attr("href","tel:4008528008");
-//					this.$router.replace({
-//						path: '/recharge'
-//					});
+//					$(e.currentTarget).parent().attr("href","tel:4008528008");
+					this.$router.replace({
+						path: '/recharge'
+					});
 //					pro.callService();
 				}
 			}
