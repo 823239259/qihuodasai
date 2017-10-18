@@ -69,9 +69,10 @@
 			<div class="title">
 				<span class="fl">{{orderName}}</span>
 				<span class="fl">{{orderNum}}</span>
-				<div class="add fr">
-					<i class="ifont fl">&#xe600;</i>
-					<span class="fl">添加自选</span>
+				<div class="add fr" :class="{current: !addStar}" @click="addOptional">
+					<i class="ifont fl" v-show="addStar">&#xe754;</i>
+					<i class="ifont fl" v-show="!addStar">&#xe602;</i>
+					<span class="fl">{{optional}}</span>
 				</div>
 			</div>
 			<div id="echarts_f" v-if="showFens">
@@ -96,7 +97,9 @@
 				showFens: false,
 				showKline: false,
 				orderName: '',
-				orderNum: ''
+				orderNum: '',
+				optional: '添加自选',
+				addStar: true,
 			}
 		},
 		computed: {
@@ -227,6 +230,14 @@
 			dblclickEvent: function(){
 				this.$router.push({path: '/trade'});
 				$("#nav li").eq(2).addClass("current").siblings().removeClass("current");
+			},
+			addOptional: function(e){
+				if(this.addStar == true){
+					this.addStar = false;
+				}else{
+					this.addStar = true;
+				}
+				
 			}
 		},
 		mounted: function(){
@@ -266,14 +277,25 @@
 				}
 			}
 			.add{
+				cursor: pointer;
 				.ifont{
 					color: $yellow;
 					font-size: $fs16;
+					margin-top: -2px;
 				}
 				span{
 					font-size: $fs12;
 					color: $yellow;
 					margin-left: 5px;
+				}
+				&.current{
+					span{
+						color: #7a8199;
+					}
+					.ifont{
+						font-size: 14px;
+						margin-top: 0;
+					}
 				}
 			}
 		}
