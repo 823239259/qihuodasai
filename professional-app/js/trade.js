@@ -3196,7 +3196,7 @@ function doGetInsertLossLoss() {
 		var exchangeNo = localQuote.ExchangeNo;
 		var commodityNo = localQuote.CommodityNo;
 		var contractNo = localQuote.ContractNo;
-		var tradeparam = createInsertStopLossParam(exchangeNo, commodityNo, contractNo, stopNumber, stopLossType, parseFloat(Math.abs(stopLossDiff)).toFixed(2), $holdAvgPrice.text(), drection, 1, parseFloat(lossChoicePrices2).toFixed(2));
+		var tradeparam = createInsertStopLossParam(exchangeNo, commodityNo, contractNo, stopNumber, stopLossType, parseFloat(Math.abs(stopLossDiff)).toFixed(4), $holdAvgPrice.text(), drection, 1, parseFloat(lossChoicePrices2).toFixed(CacheQuoteBase.getCacheContractAttribute(contractCode.substring(0,2), "DotSize")));
 		if(tradeparam == undefined) {
 			tip("交易错误,请重试");
 		}
