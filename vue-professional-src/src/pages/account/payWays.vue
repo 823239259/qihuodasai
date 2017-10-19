@@ -1,7 +1,7 @@
 <template>
 	<div id="payWays">
 		<topbar title="支付"></topbar>
-		<back></back>
+		<back @tap.native="backEvent"></back>
 		<cs title="客服"></cs>
 		<div class="page_cont">
 			<iframe :src="iframe"></iframe>
@@ -24,7 +24,11 @@
 				return 'http://pay.duokongtai.cn/app/appPayinfo?mobile='+ this.$route.query.username +'&money='+ this.$route.query.money;
 			}
 		},
-		methods: {},
+		methods: {
+			backEvent: function(){
+				this.$router.replace({path: '/recharge'});
+			}
+		},
 		mounted: function(){}
 	}
 </script>
