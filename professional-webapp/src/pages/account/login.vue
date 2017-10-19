@@ -2,9 +2,9 @@
 	<div id="login">
 		<div class="bg"></div>
 		<div class="login">
-			<p>登录<i class="ifont ifont_x">&#xe624;</i></p>
+			<p>登录<i class="ifont ifont_x" v-on:click="chose_login">&#xe624;</i></p>
 			<input type="text"  class="input_1" placeholder="请输入手机号码" />
-			<input type="password"  class="input_2" placeholder="请输入密码" /><i class=" ifont ifont_eye">&#xe64f;</i>
+			<input type="password"  class="input_1" placeholder="请输入密码" /><i class=" ifont ifont_eye">&#xe64f;</i>
 			<p class="span_right" v-on:click="toForgetPassword">忘记密码?</p>
 			<button class="btn yellow" v-on:click="toReset">登录</button>
 			<p class="color_light">还没有期货大赛账号？<span class="span_white">立即注册</span></p>
@@ -22,7 +22,8 @@
 		data(){
 			return {
 				isshow_forgetpassword : false,
-				isshow_resetPassword : false
+				isshow_resetPassword : false,
+				isshow_login :  true
 			}
 		},
 		methods : {
@@ -31,6 +32,9 @@
 			},
 			toReset : function (){
 				this.isshow_resetPassword=!this.isshow_resetPassword;
+			},
+			chose_login : function(){
+				console.log(111111)
 			}
 		}
 	}
@@ -60,9 +64,15 @@
 		input {
 			width: 320px;
 			height: 40px;
+			border: 1px solid $bottom_color;
+			&:hover {
+				border: 1px solid $yellow;
+			}
 		}
-		.input_2 {
-			margin-left: 25px;
+		.input_1 {
+			&:nth-child(3){
+				margin-left: 25px;
+			}
 		}
 		.ifont_x {
 			float: right;
