@@ -134,6 +134,9 @@
 			}
 		},
 		methods: {
+			...mapActions([
+				'initQuoteClient'
+			]),
 			customerService: function(){
 				if(this.csAddressCurrent == false){
 					this.csAddressCurrent = true;
@@ -219,7 +222,8 @@
 			},
 		},
 		mounted: function(){
-			
+			//初始化行情
+			this.initQuoteClient();
 		}
 	}
 </script>

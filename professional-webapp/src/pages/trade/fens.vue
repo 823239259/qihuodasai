@@ -6,31 +6,55 @@
 </template>
 
 <script>
+	import { mapMutations,mapActions } from 'vuex'
 	export default{
 		name: 'echarts',
 		computed: {
 			currentdetail(){
 				return this.$store.state.market.currentdetail;
 			},
+			quoteInitStep(){
+				return this.$store.state.market.quoteInitStep;
+			},
 			quoteSocket(){
 				return this.$store.state.quoteSocket;
 			},
 		},
+		watch: {
+			quoteInitStep: function(n, o){
+				this.$store.state.isshow.isfens = true;
+				var data = {
+					Method: "QryHistory",
+					Parameters:{
+						ExchangeNo: this.currentdetail.ExchangeNo,
+						CommodityNo: this.currentdetail.CommodityNo,
+						ContractNo: this.currentdetail.MainContract,
+						HisQuoteType: 0,
+						BeginTime: "",
+						EndTime: "",
+						Count: 0
+					}
+				};
+				this.quoteSocket.send(JSON.stringify(data));
+			}
+		},	
 		mounted: function(){
-			this.$store.state.isshow.isfens = true;
-			var data = {
-				Method: "QryHistory",
-				Parameters:{
-					ExchangeNo: this.currentdetail.ExchangeNo,
-					CommodityNo: this.currentdetail.CommodityNo,
-					ContractNo: this.currentdetail.MainContract,
-					HisQuoteType: 0,
-					BeginTime: "",
-					EndTime: "",
-					Count: 0
-				}
-			};
-			this.quoteSocket.send(JSON.stringify(data));
+			if(this.quoteInitStep != ''){
+				this.$store.state.isshow.isfens = true;
+				var data = {
+					Method: "QryHistory",
+					Parameters:{
+						ExchangeNo: this.currentdetail.ExchangeNo,
+						CommodityNo: this.currentdetail.CommodityNo,
+						ContractNo: this.currentdetail.MainContract,
+						HisQuoteType: 0,
+						BeginTime: "",
+						EndTime: "",
+						Count: 0
+					}
+				};
+				this.quoteSocket.send(JSON.stringify(data));
+			}
 		}
 	}
 </script>

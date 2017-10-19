@@ -414,6 +414,22 @@
 					{name: '30分'},
 					{name: '日线'}
 				],
+				
+			}
+		},
+		computed: {
+			quoteInitStep(){
+				return this.$store.state.market.quoteInitStep;
+			},
+			Parameters(){
+				return this.$store.state.market.Parameters;
+			},
+		},
+		watch: {
+			quoteInitStep: function(n, o){
+				if(n && n == true){
+					this.$store.state.market.currentdetail = this.Parameters[0];
+				}
 			}
 		},
 		methods: {

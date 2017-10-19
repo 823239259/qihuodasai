@@ -88,7 +88,6 @@
 </template>
 
 <script>
-	import { mapMutations,mapActions } from 'vuex'
 	export default{
 		name:'index',
 		data(){
@@ -188,9 +187,6 @@
 			},
 		},
 		methods: {
-			...mapActions([
-				'initQuoteClient'
-			]),
 			toggle: function(i, name, commodityNo, mainContract, exchangeNo){
 				this.Parameters.forEach(function(o, i){
 					if(commodityNo == o.CommodityNo){
@@ -243,11 +239,6 @@
 			}
 		},
 		mounted: function(){
-			//初始化行情
-			if(this.quoteInitStatus == false){
-				this.initQuoteClient();
-				this.$store.state.market.quoteInitStatus = true;
-			}
 			//初始化页面高度
 			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 			$(".order").height(h - 50 - 30);
