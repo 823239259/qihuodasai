@@ -94,7 +94,6 @@
 				selectPrice:'',
 				commodityNo:'',
 				contractNo:'',
-				selectPrice:'',
 				selectAdditionalPrice:'',
 				inputPrice:'',
 				inputAdditionalPrice:'',
@@ -206,7 +205,9 @@
 				}
 			},
 			inputPrice: function(n, o){
-				if(n != undefined && this.moneyReg.test(n) == false){
+				if(n == ''){
+					return;
+				}else if(n != undefined && this.moneyReg.test(n) == false){
 					this.inputPrice = parseFloat(this.templateList[this.objstrParms.CommodityNo].LastPrice).toFixed(this.orderTemplist[this.objstrParms.CommodityNo].DotSize);
 				}
 			},

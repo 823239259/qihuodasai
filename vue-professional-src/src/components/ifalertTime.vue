@@ -210,7 +210,7 @@
 				}
 			},
 			time: function(n, o){
-				console.log(1346);
+//				console.log(1346);
 			}
 		},
 		methods:{
