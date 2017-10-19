@@ -7,10 +7,14 @@ Vue.use(Vuex)
 var isshow = {
 	state: {
 		isconnected: false,
-		//判断是否是直接画图
+		//判断是第一次画图还是第二次
 		isfensshow: false,
 		islightshow: false,
-		isklineshow: false
+		isklineshow: false,
+		//判断是否画图
+		isfens: false,
+		iskline: false,
+		islight: false,
 //		isfenssec: false,
 	}
 };
@@ -309,6 +313,7 @@ export default new Vuex.Store({
 				lightChart = echarts.init(document.getElementById(e));
 				state.isshow.islightshow = true;
 			} else {
+				
 				if(document.getElementById(e) != null){
 					lightChart = echarts.getInstanceByDom(document.getElementById(e));
 				}
@@ -1772,10 +1777,8 @@ export default new Vuex.Store({
 							}else{
 								return s[1];
 							}
-							
 						}
 					}
-					
 				})();	
 			b.order = (function(){
 				if(e0.Drection == 0){ //买
@@ -2352,7 +2355,7 @@ export default new Vuex.Store({
 									context.state.market.CacheLastQuote.shift();
 								}
 								//更新分时图
-								if(context.state.isshow.isfensshow == true) {
+								if(context.state.isshow.isfensshow == true && context.state.isshow.isfens == true) {
 									context.state.market.charttimetime = new Date();
 									context.state.market.charttimems = context.state.market.charttimetime.getTime();
 									context.state.market.charttime = context.state.market.charttimems - context.state.market.charttimems2;
@@ -2370,13 +2373,13 @@ export default new Vuex.Store({
 									context.state.market.charttimems2 = context.state.market.charttimetime2.getTime();
 								}
 								//更新闪电图
-								if(context.state.isshow.islightshow == true) {
+								if(context.state.isshow.islightshow == true && context.state.isshow.islight == true) {
 									context.state.market.jsonTow = JSON.parse(evt.data);
 									context.commit('setlightDate');
-									context.commit('drawlight', 'lightcharts');
+									context.commit('drawlight', 'light');
 								}
 								//更新K线图
-								if(context.state.isshow.isklineshow == true) {
+								if(context.state.isshow.isklineshow == true && context.state.isshow.iskline == true) {
 									if(context.state.market.CacheLastQuote[1].TotalVolume <= context.state.market.CacheLastQuote[0].TotalVolume){
 										return;
 									}
@@ -2397,6 +2400,7 @@ export default new Vuex.Store({
 									//["20", "48", "00"]
 									var arr4 = arr3[1].split(':'); //历史
 									if(context.state.market.selectTime == 1) {
+										console.log(11111);
 										if(arr2[1] == arr4[1]) {
 											arr[0] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][0];
 											if(arr[1] < context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][3]) {
@@ -2585,18 +2589,22 @@ export default new Vuex.Store({
 					let data = JSON.parse(evt.data);
 					if(data.Parameters.HisQuoteType == 0){
 						context.state.market.jsonData = data;
-						context.commit('setfensoption');
-						context.commit('drawfens', {
-							id1: 'fens',
-							id2: 'volume'
-						});
+						if(context.state.isshow.isfens == true){
+							context.commit('setfensoption');
+							context.commit('drawfens', {
+								id1: 'fens',
+								id2: 'volume'
+							});
+						}
 					}else{
 						context.state.market.jsonDataKline = data;
-						context.commit('setklineoption');
-						context.commit('drawkline', {
-							id1: 'kliness',
-							id2: 'kliness_volume'
-						});
+						if(context.state.isshow.iskline == true){
+							context.commit('setklineoption');
+							context.commit('drawkline', {
+								id1: 'kliness',
+								id2: 'kliness_volume'
+							});
+						}
 					}
 				}
 			}

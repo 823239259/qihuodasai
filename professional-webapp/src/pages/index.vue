@@ -139,6 +139,8 @@
 					this.$store.state.market.currentdetail = this.Parameters[0];
 					this.showFens = true;
 					this.showKline = true;
+					this.$store.state.isshow.isfens = true;
+					this.$store.state.isshow.iskline = true;
 					this.orderName = this.Parameters[0].CommodityName;
 					this.orderNum = this.Parameters[0].CommodityNo + this.Parameters[0].MainContract;
 					var data = {

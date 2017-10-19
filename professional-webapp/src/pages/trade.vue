@@ -51,202 +51,6 @@
 							</td>
 							<td>10086</td>
 						</tr>
-						<tr>
-							<td>
-								<b>国际原油</b>
-								<span>CL1705</span>
-							</td>
-							<td>
-								<div class="fl">
-									<span>46.94</span>
-									<span>+0.24%</span>
-								</div>
-								<i class="ifont red fl">&#xe761;</i>
-							</td>
-							<td>10086</td>
-						</tr>
-						<tr>
-							<td>
-								<b>国际原油</b>
-								<span>CL1705</span>
-							</td>
-							<td>
-								<div class="fl">
-									<span>46.94</span>
-									<span>+0.24%</span>
-								</div>
-								<i class="ifont red fl">&#xe761;</i>
-							</td>
-							<td>10086</td>
-						</tr>
-						<tr>
-							<td>
-								<b>国际原油</b>
-								<span>CL1705</span>
-							</td>
-							<td>
-								<div class="fl">
-									<span>46.94</span>
-									<span>+0.24%</span>
-								</div>
-								<i class="ifont red fl">&#xe761;</i>
-							</td>
-							<td>10086</td>
-						</tr>
-						<tr>
-							<td>
-								<b>国际原油</b>
-								<span>CL1705</span>
-							</td>
-							<td>
-								<div class="fl">
-									<span>46.94</span>
-									<span>+0.24%</span>
-								</div>
-								<i class="ifont red fl">&#xe761;</i>
-							</td>
-							<td>10086</td>
-						</tr>
-						<tr>
-							<td>
-								<b>国际原油</b>
-								<span>CL1705</span>
-							</td>
-							<td>
-								<div class="fl">
-									<span>46.94</span>
-									<span>+0.24%</span>
-								</div>
-								<i class="ifont red fl">&#xe761;</i>
-							</td>
-							<td>10086</td>
-						</tr>
-						<tr>
-							<td>
-								<b>国际原油</b>
-								<span>CL1705</span>
-							</td>
-							<td>
-								<div class="fl">
-									<span>46.94</span>
-									<span>+0.24%</span>
-								</div>
-								<i class="ifont red fl">&#xe761;</i>
-							</td>
-							<td>10086</td>
-						</tr>
-						<tr>
-							<td>
-								<b>国际原油</b>
-								<span>CL1705</span>
-							</td>
-							<td>
-								<div class="fl">
-									<span>46.94</span>
-									<span>+0.24%</span>
-								</div>
-								<i class="ifont red fl">&#xe761;</i>
-							</td>
-							<td>10086</td>
-						</tr>
-						<tr>
-							<td>
-								<b>国际原油</b>
-								<span>CL1705</span>
-							</td>
-							<td>
-								<div class="fl">
-									<span>46.94</span>
-									<span>+0.24%</span>
-								</div>
-								<i class="ifont red fl">&#xe761;</i>
-							</td>
-							<td>10086</td>
-						</tr>
-						<tr>
-							<td>
-								<b>国际原油</b>
-								<span>CL1705</span>
-							</td>
-							<td>
-								<div class="fl">
-									<span>46.94</span>
-									<span>+0.24%</span>
-								</div>
-								<i class="ifont red fl">&#xe761;</i>
-							</td>
-							<td>10086</td>
-						</tr>
-						<tr>
-							<td>
-								<b>国际原油</b>
-								<span>CL1705</span>
-							</td>
-							<td>
-								<div class="fl">
-									<span>46.94</span>
-									<span>+0.24%</span>
-								</div>
-								<i class="ifont red fl">&#xe761;</i>
-							</td>
-							<td>10086</td>
-						</tr>
-						<tr>
-							<td>
-								<b>国际原油</b>
-								<span>CL1705</span>
-							</td>
-							<td>
-								<div class="fl">
-									<span>46.94</span>
-									<span>+0.24%</span>
-								</div>
-								<i class="ifont red fl">&#xe761;</i>
-							</td>
-							<td>10086</td>
-						</tr>
-						<tr>
-							<td>
-								<b>国际原油</b>
-								<span>CL1705</span>
-							</td>
-							<td>
-								<div class="fl">
-									<span>46.94</span>
-									<span>+0.24%</span>
-								</div>
-								<i class="ifont red fl">&#xe761;</i>
-							</td>
-							<td>10086</td>
-						</tr>
-						<tr>
-							<td>
-								<b>国际原油</b>
-								<span>CL1705</span>
-							</td>
-							<td>
-								<div class="fl">
-									<span>46.94</span>
-									<span>+0.24%</span>
-								</div>
-								<i class="ifont red fl">&#xe761;</i>
-							</td>
-							<td>10086</td>
-						</tr>
-						<tr>
-							<td>
-								<b>国际原油</b>
-								<span>CL1705</span>
-							</td>
-							<td>
-								<div class="fl">
-									<span>46.94</span>
-									<span>+0.24%</span>
-								</div>
-								<i class="ifont red fl">&#xe761;</i>
-							</td>
-							<td>10086</td>
-						</tr>
 					</tbody>
 				</table>
 			</div>
@@ -254,7 +58,14 @@
 		<div class="trade_right">
 			<div class="trade_right_top">
 				<div class="echarts_box">
-			
+					<div class="title">
+						<template v-for="(key, index) in echartList">
+							<span :class="{current: selected == index}" @click="tabEvent(index)">{{key.name}}</span>
+						</template>
+					</div>
+					<div class="cont">
+						<component :is="selectView"></component>
+					</div>
 				</div>
 				<div class="info">
 					<div class="order_details">
@@ -262,7 +73,8 @@
 							<span class="fl">美黄金</span>
 							<span class="fl">CG1708</span>
 							<div class="add fr">
-								<i class="ifont fl">&#xe600;</i>
+								<i class="ifont fl">&#xe754;</i>
+								<!--<i class="ifont fl" v-show="!addStar">&#xe602;</i>-->
 								<span class="fl">添加自选</span>
 							</div>
 						</div>
@@ -577,16 +389,55 @@
 	import pro from '../assets/js/common.js'
 	import tradeLogin from './trade/tradeLogin.vue'
 	import tradeLoginSpe from './trade/tradeLoginSpe.vue'
+	import fens from './trade/fens.vue'
+	import light from './trade/light.vue'
+	import klineOne from './trade/klineOne.vue'
+	import klineFive from './trade/klineFive.vue'
+	import klineFifteen from './trade/klineFifteen.vue'
+	import klineThirty from './trade/klineThirty.vue'
+	import klineDay from './trade/klineDay.vue'
 	export default{
 		name:'trade',
-		components: {tradeLogin, tradeLoginSpe},
+		components: {tradeLogin, tradeLoginSpe, fens, light, klineOne, klineFive, klineFifteen, klineThirty, klineDay},
 		data(){
 			return{
 				tradeLoginShow: false,
-				tradeLoginSpeShow: false
+				tradeLoginSpeShow: false,
+				selected: 1,
+				selectView: 'fens',
+				echartList: [
+					{name: '闪电'},
+					{name: '分时'},
+					{name: '1分'},
+					{name: '5分'},
+					{name: '15分'},
+					{name: '30分'},
+					{name: '日线'}
+				],
 			}
 		},
 		methods: {
+			tabEvent: function(index){
+				this.selected = index;
+				if(index == 0){
+					this.selectView = 'light';
+				}else if(index == 1){
+					this.selectView = 'fens';
+				}else if(index == 2){
+					this.selectView = 'klineOne';
+				}else if(index == 3){
+					this.selectView = 'klineFive';
+				}else if(index == 4){
+					this.selectView = 'klineFifteen';
+				}else if(index == 5){
+					this.selectView = 'klineThirty';
+				}else if(index == 6){
+					this.selectView = 'klineDay';
+				}
+				this.$store.state.isshow.isfensshow = false;
+				this.$store.state.isshow.isklineshow = false;
+				this.$store.state.isshow.islightshow = false;
+			},
 			toTradeLogin: function(){
 //				this.tradeLoginShow = true;
 				this.tradeLoginSpeShow = true;
@@ -597,7 +448,10 @@
 			$(".slt-box").each(function(i, o){
 				pro.selectEvent(o);
 			});
-		}
+			//初始化高度
+			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+			$(".trade_right_top").height(h - 50 - 30);
+		},
 	}
 </script>
 
@@ -684,14 +538,32 @@
 		/*height: 536px;*/
 		overflow: hidden;
 		background: $black;
+		position: relative;
 		.echarts_box{
 			float: left;
+			width: 100%;
+			padding-right: 410px;
 			overflow: hidden;
-			background: $blue;
-			margin: 0 10px;
+			.title{
+				height: 30px;
+				line-height: 30px;
+				background: $blue;
+				text-align: center;
+				span{
+					display: inline-block;
+					margin: 0 5px;
+					font-size: $fs12;
+					cursor: pointer;
+					&:hover, &.current{
+						color: $yellow;
+					}
+				}
+			}
 		}
 		.info{
-			float: right;
+			position: absolute;
+			top: 0;
+			right: 0;
 			width: 400px;
 			overflow: hidden;
 			.order_details{

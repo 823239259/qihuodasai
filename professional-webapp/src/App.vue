@@ -174,6 +174,10 @@
 				}
 			},
 			clickEvent: function(e){
+				this.$store.state.isshow.isfens = false;
+				this.$store.state.isshow.iskline = false;
+				this.$store.state.isshow.isfensshow = false;
+				this.$store.state.isshow.isklineshow = false;
 				var index = $(e.currentTarget).index();
 				if(index == 0){
 					this.$router.push({path: '/index'});
