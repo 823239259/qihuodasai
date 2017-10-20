@@ -55,40 +55,29 @@
 				<table>
 					<thead>
 						<tr>
-							<td>111合约代码</td>
+							<td>合约代码</td>
 							<td>最新/涨幅%</td>
 							<td>成交量</td>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>
-								<b>国际原油</b>
-								<span>CL1705</span>
-							</td>
-							<td>
-								<div class="fl">
-									<span>46.94</span>
-									<span>+0.24%</span>
-								</div>
-								<i class="ifont red fl">&#xe761;</i>
-							</td>
-							<td>10086</td>
-						</tr>
-						<tr>
-							<td>
-								<b>国际原油</b>
-								<span>CL1705</span>
-							</td>
-							<td>
-								<div class="fl">
-									<span>46.94</span>
-									<span>+0.24%</span>
-								</div>
-								<i class="ifont red fl">&#xe761;</i>
-							</td>
-							<td>10086</td>
-						</tr>
+						<template v-for="(v, index) in Parameters">
+							<tr :class="{current: currentQuote == index}">
+								<td>
+									<b>{{v.CommodityName}}</b>
+									<span>{{v.CommodityNo + v.MainContract}}</span>
+								</td>
+								<td>
+									<div class="fl">
+										<span :class="{red: v.LastQuotation.LastPrice > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice}">{{v.LastQuotation.LastPrice}}</span>
+										<span :class="{green: v.LastQuotation.ChangeRate < 0, red: v.LastQuotation.ChangeRate > 0}">{{v.LastQuotation.ChangeRate | fixNumTwo}}%</span>
+									</div>
+									<i class="ifont" v-show="v.LastQuotation.LastPrice >= v.LastQuotation.PreSettlePrice" :class="{red: v.LastQuotation.LastPrice > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice}">&#xe761;</i>
+									<i class="ifont" v-show="v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice" :class="{red: v.LastQuotation.LastPrice > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice}">&#xe76a;</i>
+								</td>
+								<td>{{v.LastQuotation.TotalVolume}}</td>
+							</tr>
+						</template>
 					</tbody>
 				</table>
 			</div>
@@ -108,59 +97,59 @@
 				<div class="info">
 					<div class="order_details">
 						<div class="title">
-							<span class="fl">美黄金</span>
-							<span class="fl">CG1708</span>
-							<div class="add fr">
-								<i class="ifont fl">&#xe754;</i>
-								<!--<i class="ifont fl" v-show="!addStar">&#xe602;</i>-->
-								<span class="fl">添加自选</span>
+							<span class="fl">{{currentdetail.CommodityName}}</span>
+							<span class="fl">{{currentdetail.CommodityNo + currentdetail.MainContract}}</span>
+							<div class="add fr" :class="{current: !addStar}" @click="addOptional">
+								<i class="ifont fl" v-show="addStar">&#xe754;</i>
+								<i class="ifont fl" v-show="!addStar">&#xe602;</i>
+								<span class="fl">{{optional}}</span>
 							</div>
 						</div>
 						<p>
-							<b>25288</b>
-							<span>+152/+052%</span>
+							<span :class="{red: currentdetail.LastQuotation.LastPrice > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.LastPrice < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.LastPrice}}</span>
+							<span :class="{green: currentdetail.LastQuotation.ChangeRate < 0, red: currentdetail.LastQuotation.ChangeRate > 0}">{{currentdetail.LastQuotation.ChangeValue | fixNum(currentdetail.DotSize)}}/{{currentdetail.LastQuotation.ChangeRate | fixNumTwo}}%</span>
 						</p>
 						<ul>
 							<li>
 								<div class="col">
 									<b>现手：</b>
-									<span>10</span>
+									<span>{{currentdetail.LastQuotation.LastVolume}}</span>
 								</div>
 								<div class="col">
 									<b>成交量：</b>
-									<span>37319</span>
+									<span>{{currentdetail.LastQuotation.TotalVolume}}</span>
 								</div>
 								<div class="col">
 									<b>持仓量：</b>
-									<span>10086</span>
+									<span>{{currentdetail.LastQuotation.Position}}</span>
 								</div>
 							</li>
 							<li>
 								<div class="col">
 									<b>开盘：</b>
-									<span class="green">24.90</span>
+									<span :class="{red: currentdetail.LastQuotation.OpenPrice > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.OpenPrice < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.OpenPrice}}</span>
 								</div>
 								<div class="col">
 									<b>最高：</b>
-									<span class="red">25.06</span>
+									<span :class="{red: currentdetail.LastQuotation.HighPrice > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.HighPrice < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.HighPrice}}</span>
 								</div>
 								<div class="col">
 									<b>最低：</b>
-									<span class="green">24.04</span>
+									<span :class="{red: currentdetail.LastQuotation.LowPrice > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.LowPrice < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.LowPrice}}</span>
 								</div>
 							</li>
 							<li>
 								<div class="col">
 									<b>昨结：</b>
-									<span>25.11</span>
+									<span>{{currentdetail.LastQuotation.PreSettlePrice}}</span>
 								</div>
 								<div class="col">
 									<b>涨停：</b>
-									<span>- -</span>
+									<span>{{currentdetail.LastQuotation.LimitUpPrice}}</span>
 								</div>
 								<div class="col">
 									<b>跌停：</b>
-									<span>- -</span>
+									<span>{{currentdetail.LastQuotation.LimitDownPrice}}</span>
 								</div>
 							</li>
 						</ul>
@@ -171,53 +160,53 @@
 							<ul>
 								<li>
 									<span>卖五</span>
-									<span class="green">12112.12</span>
-									<span>20</span>
+									<span :class="{red: currentdetail.LastQuotation.AskPrice5 > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.AskPrice5 < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.AskPrice5}}</span>
+									<span>{{currentdetail.LastQuotation.AskQty5}}</span>
 								</li>
 								<li>
 									<span>卖四</span>
-									<span class="red">12112.12</span>
-									<span>20</span>
+									<span :class="{red: currentdetail.LastQuotation.AskPrice4 > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.AskPrice4 < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.AskPrice4}}</span>
+									<span>{{currentdetail.LastQuotation.AskQty4}}</span>
 								</li>
 								<li>
 									<span>卖三</span>
-									<span class="green">12112.12</span>
-									<span>20</span>
+									<span :class="{red: currentdetail.LastQuotation.AskPrice3 > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.AskPrice3 < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.AskPrice3}}</span>
+									<span>{{currentdetail.LastQuotation.AskQty3}}</span>
 								</li>
 								<li>
 									<span>卖二</span>
-									<span class="red">12112.12</span>
-									<span>20</span>
+									<span :class="{red: currentdetail.LastQuotation.AskPrice2 > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.AskPrice2 < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.AskPrice2}}</span>
+									<span>{{currentdetail.LastQuotation.AskQty2}}</span>
 								</li>
 								<li>
 									<span>卖一</span>
-									<span class="green">12112.12</span>
-									<span>20</span>
+									<span :class="{red: currentdetail.LastQuotation.AskPrice1 > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.AskPrice1 < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.AskPrice1}}</span>
+									<span>{{currentdetail.LastQuotation.AskQty1}}</span>
 								</li>
 								<li>
 									<span>买一</span>
-									<span class="red">12112.12</span>
-									<span>20</span>
+									<span :class="{red: currentdetail.LastQuotation.BidPrice1 > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.BidPrice1 < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.BidPrice1}}</span>
+									<span>{{currentdetail.LastQuotation.BidQty1}}</span>
 								</li>
 								<li>
 									<span>买二</span>
-									<span class="green">12112.12</span>
-									<span>20</span>
+									<span :class="{red: currentdetail.LastQuotation.BidPrice2 > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.BidPrice2 < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.BidPrice2}}</span>
+									<span>{{currentdetail.LastQuotation.BidQty2}}</span>
 								</li>
 								<li>
 									<span>买三</span>
-									<span class="red">12112.12</span>
-									<span>20</span>
+									<span :class="{red: currentdetail.LastQuotation.BidPrice3 > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.BidPrice3 < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.BidPrice3}}</span>
+									<span>{{currentdetail.LastQuotation.BidQty3}}</span>
 								</li>
 								<li>
 									<span>买四</span>
-									<span class="green">12112.12</span>
-									<span>20</span>
+									<span :class="{red: currentdetail.LastQuotation.BidPrice4 > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.BidPrice4 < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.BidPrice4}}</span>
+									<span>{{currentdetail.LastQuotation.BidQty4}}</span>
 								</li>
 								<li>
 									<span>买五</span>
-									<span class="red">12112.12</span>
-									<span>20</span>
+									<span :class="{red: currentdetail.LastQuotation.BidPrice5 > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.BidPrice5 < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.BidPrice5}}</span>
+									<span>{{currentdetail.LastQuotation.BidQty5}}</span>
 								</li>
 							</ul>
 						</div>
@@ -455,6 +444,9 @@
 				quoteTab: ['自选','行情'],
 				quoteDefault: 0,
 				quoteShow: true,
+				currentQuote: 0,
+				optional: '添加自选',
+				addStar: true,
 			}
 		},
 		computed: {
@@ -464,6 +456,17 @@
 			Parameters(){
 				return this.$store.state.market.Parameters;
 			},
+			currentdetail(){
+				return this.$store.state.market.currentdetail;
+			}
+		},
+		filters:{
+			fixNumTwo: function(num){
+				return num.toFixed(2);
+			},
+			fixNum: function(num, dotsize){
+				return num.toFixed(dotsize);
+			}
 		},
 		watch: {
 			quoteInitStep: function(n, o){
@@ -483,6 +486,13 @@
 			quoteTabEvent: function(index){
 				this.quoteDefault = index;
 				if(index == 1) this.quoteShow = false;
+			},
+			addOptional: function(e){
+				if(this.addStar == true){
+					this.addStar = false;
+				}else{
+					this.addStar = true;
+				}
 			},
 			tabEvent: function(index){
 				this.selected = index;
@@ -518,6 +528,7 @@
 			//初始化高度
 			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 			$(".trade_right_top").height(h - 50 - 30);
+			$(".quote .cont").height(h - 50 - 30 - 45);
 		},
 	}
 </script>
@@ -558,6 +569,7 @@
 		}
 		.cont{
 			width: 100%;
+			overflow-y: auto;
 			table{
 				td:first-child{
 					padding-left: 10px;
@@ -574,7 +586,7 @@
 				}
 				tbody{
 					tr{
-						height: 50px;
+						height: 48px;
 						td{
 							&:first-child{
 								span{
@@ -584,13 +596,16 @@
 						}
 						b, span{
 							display: block;
-							margin-top: 5px;
+							margin-top: 4px;
 						}
 						b{
+							font-size: $fs12;
 							color: $white;
 						}
 						.ifont{
-							margin: 12px 0 0 5px;
+							float: left;
+							margin: 11px 0 0 5px;
+							color: $lightblue;
 						}
 					}
 				}
@@ -647,14 +662,25 @@
 						}
 					}
 					.add{
+						cursor: pointer;
 						.ifont{
 							color: $yellow;
 							font-size: $fs16;
+							margin-top: -2px;
 						}
 						span{
 							font-size: $fs12;
 							color: $yellow;
 							margin-left: 5px;
+						}
+						&.current{
+							span{
+								color: #7a8199;
+							}
+							.ifont{
+								font-size: 14px;
+								margin-top: 0;
+							}
 						}
 					}
 				}
@@ -663,10 +689,18 @@
 					line-height: 40px;
 					background: $deepblue;
 					padding: 0 10px;
-					color: $red;
-					b{
-						font-size: $fs20;
-						margin-right: 30px;
+					color: $lightblue;
+					span{
+						&:first-child{
+							font-size: $fs20;
+							margin-right: 30px;
+						}
+						&.red{
+							color: $red;
+						}
+						&.green{
+							color: $green;
+						}
 					}
 				}
 				ul li{
@@ -682,6 +716,7 @@
 							float: left;
 						}
 						span{
+							color: $white;
 							&.green{
 								color: $green;
 							}

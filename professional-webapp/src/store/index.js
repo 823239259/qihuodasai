@@ -15,7 +15,6 @@ var isshow = {
 		isfens: false,
 		iskline: false,
 		islight: false,
-//		isfenssec: false,
 	}
 };
 
@@ -162,6 +161,8 @@ var market = {
 		Parameters: [],
 		//当前选中合约
 		currentdetail: {},
+		//当前选中合约的成交明细
+		currentTradeDetails: [],
 //		jsonDatatemp: {},
 		
 		
@@ -299,6 +300,25 @@ export default new Vuex.Store({
 		//交易websocket
 		tradeSocket: {},
 //		tempTradeapply: {}, //请求的操盘参数数据
+		//test 测试环境，online 正式环境
+		environment: 'test',
+		//打包的时候，值为 build ，开发的时候，值为 dev
+		setting: 'dev',
+	},
+	getters: {
+		PATH: function(state) {
+			if(state.setting == 'dev') {
+				return '/api';
+			} else if(state.setting == 'build') {
+				if(state.environment == 'test'){
+					return 'http://test.api.duokongtai.cn';
+				}else{
+					return 'http://api.duokongtai.cn';
+				}
+			} else if(state.setting == 'nat') {
+//				return '/nat/vs-api';
+			}
+		}
 	},
 	mutations: {
 		//画闪电图
@@ -2310,12 +2330,22 @@ export default new Vuex.Store({
 				} else if(context.state.wsjsondata.Method == "OnRspSubscribe") { // 订阅成功信息
 					var key=JSON.parse(evt.data).Parameters.CommodityNo;
 					context.state.market.templateList[key]=JSON.parse(evt.data).Parameters;
+					
+					var dealDetails = {}, _dealDetails = [];
 					context.state.market.markettemp.forEach(function(e) {
 						if(e.CommodityNo == JSON.parse(evt.data).Parameters.CommodityNo) {
 							e.LastQuotation = JSON.parse(evt.data).Parameters.LastQuotation;
+							dealDetails['time'] = JSON.parse(evt.data).Parameters.LastQuotation.DateTimeStamp.split(' ')[1];
+							dealDetails['price'] = JSON.parse(evt.data).Parameters.LastQuotation.LastPrice;
+							dealDetails['volume'] = JSON.parse(evt.data).Parameters.LastQuotation.LastVolume;
+							dealDetails['CommodityNo'] = JSON.parse(evt.data).Parameters.CommodityNo;
 							context.state.market.Parameters.push(e);
+							_dealDetails.push(dealDetails);
+							context.state.market.currentTradeDetails[e.CommodityNo] = _dealDetails; 
+//							context.state.market.currentTradeDetails[e.CommodityNo].push(dealDetails);
 						}
 					});
+					console.log(context.state.market.currentTradeDetails);
 					context.state.market.quoteInitStep = true;
 					if(context.state.market.subscribeIndex == 1){
 						//初始化交易
@@ -2335,6 +2365,14 @@ export default new Vuex.Store({
 								context.state.market.quoteColor = 'green';
 							}
 						}
+						//合约成交明细
+						
+//						currentTradeDetails
+					});
+					context.state.market.currentTradeDetails.forEach(function(o, i){
+						if(key == o.CommodityNo){
+							
+						}
 					});
 					context.state.market.templateList[key] = JSON.parse(evt.data).Parameters;
 					//更新数据
@@ -2349,6 +2387,9 @@ export default new Vuex.Store({
 									context.state.market.Parameters.splice(r, 1, e);
 								}
 							});
+							
+							
+							
 							if(context.state.market.currentNo == e.CommodityNo) {
 								context.state.market.CacheLastQuote.push(JSON.parse(evt.data).Parameters);
 								if(context.state.market.CacheLastQuote.length > 2){

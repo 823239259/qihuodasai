@@ -111,9 +111,6 @@
 			quoteInitStep(){
 				return this.$store.state.market.quoteInitStep;
 			},
-//			tradeLoginSuccessMsg(){
-//				return this.$store.state.market.tradeLoginSuccessMsg;
-//			},
 			quoteSocket(){
 				return this.$store.state.quoteSocket;
 			},
