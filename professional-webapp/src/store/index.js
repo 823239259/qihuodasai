@@ -2341,11 +2341,11 @@ export default new Vuex.Store({
 							dealDetails['CommodityNo'] = JSON.parse(evt.data).Parameters.CommodityNo;
 							context.state.market.Parameters.push(e);
 							_dealDetails.push(dealDetails);
-							context.state.market.currentTradeDetails[e.CommodityNo] = _dealDetails; 
+							context.state.market.currentTradeDetails.push(_dealDetails); 
 //							context.state.market.currentTradeDetails[e.CommodityNo].push(dealDetails);
 						}
 					});
-					console.log(context.state.market.currentTradeDetails);
+//					console.log(context.state.market.currentTradeDetails);
 					context.state.market.quoteInitStep = true;
 					if(context.state.market.subscribeIndex == 1){
 						//初始化交易
