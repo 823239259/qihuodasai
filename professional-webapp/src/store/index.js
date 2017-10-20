@@ -159,6 +159,8 @@ var market = {
 		templateList:{},
 		//当前所有有效合约列表
 		Parameters: [],
+		//当前所有有效合约成交明细
+		tradeParameters: [],
 		//当前选中合约
 		currentdetail: {},
 		//当前选中合约的成交明细
@@ -2331,21 +2333,21 @@ export default new Vuex.Store({
 					var key=JSON.parse(evt.data).Parameters.CommodityNo;
 					context.state.market.templateList[key]=JSON.parse(evt.data).Parameters;
 					
-					var dealDetails = {}, _dealDetails = [];
+					var dealDetails = {CommodityNo: '', data: []}, _dealDetails = {};
 					context.state.market.markettemp.forEach(function(e) {
 						if(e.CommodityNo == JSON.parse(evt.data).Parameters.CommodityNo) {
 							e.LastQuotation = JSON.parse(evt.data).Parameters.LastQuotation;
-							dealDetails['time'] = JSON.parse(evt.data).Parameters.LastQuotation.DateTimeStamp.split(' ')[1];
-							dealDetails['price'] = JSON.parse(evt.data).Parameters.LastQuotation.LastPrice;
-							dealDetails['volume'] = JSON.parse(evt.data).Parameters.LastQuotation.LastVolume;
-							dealDetails['CommodityNo'] = JSON.parse(evt.data).Parameters.CommodityNo;
 							context.state.market.Parameters.push(e);
-							_dealDetails.push(dealDetails);
-							context.state.market.currentTradeDetails.push(_dealDetails); 
-//							context.state.market.currentTradeDetails[e.CommodityNo].push(dealDetails);
+							//订阅成功  成交信息
+							_dealDetails['time'] = JSON.parse(evt.data).Parameters.LastQuotation.DateTimeStamp.split(' ')[1];
+							_dealDetails['price'] = JSON.parse(evt.data).Parameters.LastQuotation.LastPrice;
+							_dealDetails['volume'] = JSON.parse(evt.data).Parameters.LastQuotation.LastVolume;
+							_dealDetails['_price'] = JSON.parse(evt.data).Parameters.LastQuotation.PreSettlePrice;
+							dealDetails.CommodityNo = e.CommodityNo;
+							dealDetails.data.push(_dealDetails);
+							context.state.market.tradeParameters.push(dealDetails); 
 						}
 					});
-//					console.log(context.state.market.currentTradeDetails);
 					context.state.market.quoteInitStep = true;
 					if(context.state.market.subscribeIndex == 1){
 						//初始化交易
@@ -2365,17 +2367,23 @@ export default new Vuex.Store({
 								context.state.market.quoteColor = 'green';
 							}
 						}
-						//合约成交明细
-						
-//						currentTradeDetails
 					});
-					context.state.market.currentTradeDetails.forEach(function(o, i){
+					//合约成交明细
+					var _dealDetails00 = {};
+					context.state.market.tradeParameters.forEach(function(o, i){
 						if(key == o.CommodityNo){
-							
+							_dealDetails00['time'] = val.DateTimeStamp.split(' ')[1];
+							_dealDetails00['price'] = val.LastPrice;
+							_dealDetails00['volume'] = val.LastVolume;
+							_dealDetails00['_price'] = val.PreSettlePrice;
+							if(o.data.length >= 10){
+								o.data.shift();
+							}
+							o.data.push(_dealDetails00);
 						}
 					});
-					context.state.market.templateList[key] = JSON.parse(evt.data).Parameters;
 					//更新数据
+					context.state.market.templateList[key] = JSON.parse(evt.data).Parameters;
 					context.state.market.markettemp.forEach(function(e, i) {
 						//如果拿到的数据的CommodityNo与缓存的数据的CommodityNo相等
 						if(JSON.parse(evt.data).Parameters.CommodityNo == e.CommodityNo) {

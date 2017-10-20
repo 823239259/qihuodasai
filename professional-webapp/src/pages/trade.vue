@@ -217,56 +217,13 @@
 								<span>现手</span>
 							</div>
 							<ul>
-								<li>
-									<span>15:59:41</span>
-									<span class="red">25289</span>
-									<span>15</span>
-								</li>
-								<li>
-									<span>15:59:41</span>
-									<span class="green">25289</span>
-									<span>15</span>
-								</li>
-								<li>
-									<span>15:59:41</span>
-									<span class="red">25289</span>
-									<span>15</span>
-								</li>
-								<li>
-									<span>15:59:41</span>
-									<span class="green">25289</span>
-									<span>15</span>
-								</li>
-								<li>
-									<span>15:59:41</span>
-									<span class="red">25289</span>
-									<span>15</span>
-								</li>
-								<li>
-									<span>15:59:41</span>
-									<span class="green">25289</span>
-									<span>15</span>
-								</li>
-								<li>
-									<span>15:59:41</span>
-									<span class="red">25289</span>
-									<span>15</span>
-								</li>
-								<li>
-									<span>15:59:41</span>
-									<span class="green">25289</span>
-									<span>15</span>
-								</li>
-								<li>
-									<span>15:59:41</span>
-									<span class="red">25289</span>
-									<span>15</span>
-								</li>
-								<li>
-									<span>15:59:41</span>
-									<span class="green">25289</span>
-									<span>15</span>
-								</li>
+								<template v-for="v in currentTradeDetails.data">
+									<li>
+										<span>{{v.time}}</span>
+										<span :class="{red: v.price > v._price, green: v.price < v._price}">{{v.price}}</span>
+										<span>{{v.volume}}</span>
+									</li>
+								</template>
 							</ul>
 						</div>
 					</div>
@@ -458,7 +415,10 @@
 			},
 			currentdetail(){
 				return this.$store.state.market.currentdetail;
-			}
+			},
+			currentTradeDetails(){
+				return this.$store.state.market.currentTradeDetails;
+			},
 		},
 		filters:{
 			fixNumTwo: function(num){

@@ -108,6 +108,9 @@
 			Parameters(){
 				return this.$store.state.market.Parameters;
 			},
+			tradeParameters(){
+				return this.$store.state.market.tradeParameters;
+			},
 			quoteInitStep(){
 				return this.$store.state.market.quoteInitStep;
 			},
@@ -133,6 +136,7 @@
 			quoteInitStep: function(n, o){
 				if(n && n == true){
 					this.$store.state.market.currentdetail = this.Parameters[0];
+					this.$store.state.market.currentTradeDetails = this.tradeParameters[0];
 					this.showFens = true;
 					this.showKline = true;
 					this.$store.state.isshow.isfens = true;
@@ -188,6 +192,11 @@
 				this.Parameters.forEach(function(o, i){
 					if(commodityNo == o.CommodityNo){
 						this.$store.state.market.currentdetail = o;
+					}
+				}.bind(this));
+				this.tradeParameters.forEach(function(o, i){
+					if(commodityNo == o.CommodityNo){
+						this.$store.state.market.currentTradeDetails = o;
 					}
 				}.bind(this));
 				this.$store.state.market.currentNo = commodityNo;
