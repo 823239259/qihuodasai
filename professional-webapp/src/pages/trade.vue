@@ -5,19 +5,57 @@
 		<div class="quote">
 			<div class="title">
 				<ul>
-					<li class="current">
-						<span>自选</span>
-					</li>
-					<li>
-						<span>行情</span>
-					</li>
+					<template v-for="(key, index) in quoteTab">
+						<li :class="{current: quoteDefault == index}" @click="quoteTabEvent(index)"><span>{{key}}</span></li>
+					</template>
 				</ul>
 			</div>
-			<div class="cont">
+			<div class="cont" v-if="quoteShow">
 				<table>
 					<thead>
 						<tr>
 							<td>合约代码</td>
+							<td>最新/涨幅%</td>
+							<td>成交量</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<b>国际原油</b>
+								<span>CL1705</span>
+							</td>
+							<td>
+								<div class="fl">
+									<span>46.94</span>
+									<span>+0.24%</span>
+								</div>
+								<i class="ifont red fl">&#xe761;</i>
+							</td>
+							<td>10086</td>
+						</tr>
+						<tr>
+							<td>
+								<b>国际原油</b>
+								<span>CL1705</span>
+							</td>
+							<td>
+								<div class="fl">
+									<span>46.94</span>
+									<span>+0.24%</span>
+								</div>
+								<i class="ifont red fl">&#xe761;</i>
+							</td>
+							<td>10086</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="cont" v-if="!quoteShow">
+				<table>
+					<thead>
+						<tr>
+							<td>111合约代码</td>
 							<td>最新/涨幅%</td>
 							<td>成交量</td>
 						</tr>
@@ -414,7 +452,9 @@
 					{name: '30分'},
 					{name: '日线'}
 				],
-				
+				quoteTab: ['自选','行情'],
+				quoteDefault: 0,
+				quoteShow: true,
 			}
 		},
 		computed: {
@@ -428,11 +468,22 @@
 		watch: {
 			quoteInitStep: function(n, o){
 				if(n && n == true){
+//					if(localStorage.currentOrder){
+//						this.Parameters.forEach(function(o, i){
+//							if(localStorage.currentOrder == o.CommodityNo){
+//								this.$store.state.market.currentdetail = o;
+//							}
+//						}.bind(this));
+//					}
 					this.$store.state.market.currentdetail = this.Parameters[0];
 				}
 			}
 		},
 		methods: {
+			quoteTabEvent: function(index){
+				this.quoteDefault = index;
+				if(index == 1) this.quoteShow = false;
+			},
 			tabEvent: function(index){
 				this.selected = index;
 				if(index == 0){

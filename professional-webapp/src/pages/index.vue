@@ -40,7 +40,7 @@
 					</thead>
 					<tbody>
 						<template v-for="(v,index) in Parameters">
-							<tr :class="{current: current == index}" @click="toggle(index, v.CommodityName, v.CommodityNo, v.MainContract, v.ExchangeNo)" @dblclick="dblclickEvent">
+							<tr :class="{current: current == index}" @click="toggle(index, v.CommodityName, v.CommodityNo, v.MainContract, v.ExchangeNo)" @dblclick="dblclickEvent(v.CommodityNo)">
 								<td class="ifont_arrow" v-show="v.LastQuotation.LastPrice >= v.LastQuotation.PreSettlePrice"><i class="ifont" :class="{red: v.LastQuotation.LastPrice > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice}">&#xe761;</i></td>
 								<td class="ifont_arrow" v-show="v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice"><i class="ifont" :class="{red: v.LastQuotation.LastPrice > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice}">&#xe76a;</i></td>
 								<td>{{v.CommodityName}}</td>
@@ -225,9 +225,17 @@
 				};
 				this.quoteSocket.send(JSON.stringify(datas));
 			},
-			dblclickEvent: function(){
+			dblclickEvent: function(commodityNo){
 				this.$router.push({path: '/trade'});
 				$("#nav li").eq(2).addClass("current").siblings().removeClass("current");
+				this.Parameters.forEach(function(o, i){
+					if(commodityNo == o.CommodityNo){
+						this.$store.state.market.currentdetail = o;
+					}
+				}.bind(this));
+				this.$store.state.isshow.isfensshow = false;
+				this.$store.state.isshow.iskline = false;
+				localStorage.currentOrder = commodityNo;
 			},
 			addOptional: function(e){
 				if(this.addStar == true){
@@ -242,6 +250,8 @@
 			//初始化页面高度
 			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 			$(".order").height(h - 50 - 30);
+		},
+		activated: function(){
 		}
 	}
 </script>
