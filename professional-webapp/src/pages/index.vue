@@ -246,10 +246,11 @@
 			addOptional: function(e){
 				if(this.addStar == true){
 					this.addStar = false;
+					this.optional = '取消自选';
 				}else{
 					this.addStar = true;
+					this.optional = '添加自选';
 				}
-				
 			}
 		},
 		mounted: function(){
