@@ -2,8 +2,8 @@
 	<div id="forgetPassword">
 		<div class="forgetPassword">
 			<p><i class="ifont ifont_left">&#xe625;</i>忘记密码<i class="ifont ifont_right">&#xe624;</i></p>
-			<input type="number" id="phone" class="input_1"  placeholder="请输入手机号" v-model="phone"/>
-			<input type="number"id="pwd" class="input_2 input_4"  placeholder="验证码" v-model="code"/>
+			<input type="text" id="phone" class="input_1"  placeholder="请输入手机号" v-model="phone"/>
+			<input type="text"id="pwd" class="input_2 input_4"  placeholder="验证码" v-model="code"/>
 			<i class="span_code" v-on:click="getcode">{{volid ? info : (time+'秒')}}</i>
 			<button class="btn blue" v-on:click="toResetPassword" >下一步</button>
 			<p class="color_light">还没有期货大赛账号？<span class="span_yellow">立即注册</span></p>

@@ -4,7 +4,7 @@
 		<div class="register">
 			<p>注册<i class="ifont" v-on:click="close">&#xe624;</i></p>
 			<input type="text" id="phone"  class="input_1" placeholder="请输入手机号" maxlength="11" v-model.trim="phone" />
-			<input type="number" id="code" class="input_1 input_4" placeholder="验证码" v-model.trim="code" />
+			<input type="text" id="code" class="input_1 input_4" placeholder="验证码" v-model.trim="code" />
 			<i class="span_code" v-on:click="getCode">{{volid ? info : (time + '秒')}}</i>
 			<input type="password"  class="input_1 input_5" placeholder="请输入密码（6-16位密码）" id="pwd" v-model.trim="pwd"/>
 			<i class="ifont ifont_eyes" v-on:click="eyeEvent">&#xe61c;</i>

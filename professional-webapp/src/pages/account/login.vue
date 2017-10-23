@@ -3,7 +3,7 @@
 		<div class="bg"></div>
 		<div class="login">
 			<p>登录<i class="ifont ifont_x" v-on:click="close">&#xe624;</i></p>
-			<input type="number" id="phone" class="input_1" placeholder="请输入手机号码" v-model.trim="phone" />
+			<input type="text" id="phone" class="input_1" placeholder="请输入手机号码" v-model.trim="phone" />
 			<input type="password" id="pwd" class="input_1" placeholder="请输入密码" v-model.trim="pwd"/><i class=" ifont ifont_eye" v-on:click="eyeEvent">&#xe64f;</i>
 			<p class="span_right" v-on:click="toForgetPassword">忘记密码?</p>
 			<button class="btn yellow" v-on:click="login">登录</button>
@@ -98,7 +98,7 @@
 								this.secret = data.data.secret;
 								var userData = {'username':this.phone,'password':this.pwd,'token':data.data.token,'secret':data.data.secret};
 								localStorage.setItem("user", JSON.stringify(userData));
-								this.show=!this.show
+								this.$router.push({path: '/index'});
 							}
 						}
 						else {
