@@ -197,8 +197,10 @@
 				}
 			},
 			isRefresh: function(n, o){
-				if(n && n == 1){
+				if(n == 1){
 					window.location.reload();
+				}else if(n == ''){
+					this.$store.state.account.isRefresh = '';
 				}
 			}
 		},

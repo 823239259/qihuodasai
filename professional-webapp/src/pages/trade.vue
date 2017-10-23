@@ -236,11 +236,11 @@
 			<div class="trade_box" v-if="tradeDetailsShow">
 				<div class="operate">
 					<div class="head">
-						<span class="fl">交易账号：158******36</span>
+						<span class="fl">交易账号：{{tradeUser}}</span>
 						<i class="sanjiao fl"></i>
-						<a href="javascript:void(0);" class="fl">退出</a>
-						<button class="btn yellow fl">追加保证金</button>
+						<a href="javascript:void(0);" class="fl" @click="exitEvent">退出</a>
 						<button class="btn blue fl">终结方案</button>
+						<button class="btn yellow fl">追加保证金</button>
 					</div>
 					<div class="down_order">
 						<div class="title">
@@ -407,6 +407,7 @@
 				tradeDetailsShow: false,
 				chartShow: false,
 				chartHeight: '',
+				tradeUser: '',
 			}
 		},
 		computed: {
@@ -427,9 +428,6 @@
 			},
 			dotSize(){
 				return this.$store.state.market.currentdetail.DotSize;
-			},
-			tradeUserStore(){
-				return this.$store.state.account.username;
 			}
 		},
 		filters:{
@@ -446,14 +444,6 @@
 					this.$store.state.market.currentdetail = this.Parameters[0];
 					this.$store.state.market.currentTradeDetails = this.tradeParameters[0];
 					this.$store.state.market.currentNo = this.Parameters[0].CommodityNo;
-				}
-			},
-			tradeUserStore: function(n, o){
-				if(n != undefined){
-					this.tradeLoginShow = false;
-					this.tradeDetailsShow = true;
-					var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-					this.chartHeight = h - 50 -30 - 40 - 280;
 				}
 			}
 		},
@@ -507,6 +497,17 @@
 			toTradeLogin: function(){
 				this.$refs.tradeLogin.show = true;
 //				this.tradeLoginSpeShow = true;
+			},
+			exitEvent: function(){
+				this.$router.push({path: '/index'});
+				this.$store.state.account.isRefresh = 1;
+				this.tradeDetailsShow = false;
+				this.tradeLoginShow = true;
+				localStorage.tradeUser =  '';
+				this.$store.state.account.username = '';
+				this.$store.state.account.password = '';
+				var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+				this.chartHeight = h - 50 -30 - 40;
 			}
 		},
 		mounted: function(){
@@ -528,6 +529,7 @@
 				this.tradeLoginShow = false;
 				this.tradeDetailsShow = true;
 				this.chartHeight = h - 50 -30 - 40 - 280;
+				this.tradeUser = user.username;
 			}
 		}
 	}
@@ -735,12 +737,12 @@
 					width: 190px;
 					overflow: hidden;
 					h3, .title{
-						height: 30px;
-						line-height: 30px;
+						height: 40px;
+						line-height: 40px;
 						font-size: $fs12;
 					}
 					ul{
-						height: 301px;
+						height: 352px;
 						background: $deepblue;
 						li span{
 							&.green{
@@ -757,8 +759,8 @@
 						text-align: center;
 					}
 					li{
-						height: 28px;
-						line-height: 28px;
+						height: 35px;
+						line-height: 35px;
 						padding: 0 10px;
 						span{
 							display: inline-block;
@@ -791,8 +793,8 @@
 					ul{
 						overflow-y: auto;
 						li{
-							height: 30px;
-							line-height: 30px;
+							height: 35px;
+							line-height: 35px;
 							border-top: 1px solid $bottom_color;
 							&:first-child{
 								border: none;
@@ -857,6 +859,7 @@
 					margin: 0 20px;
 				}
 				.btn{
+					float: right;
 					height: 20px;
 					line-height: 20px;
 					font-size: $fs12;
