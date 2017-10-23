@@ -226,6 +226,7 @@
 				this.current = i;
 				this.orderName = name;
 				this.orderNum = commodityNo + mainContract;
+				this.orderNo = commodityNo;
 				var data = {
 					Method: "QryHistory",
 					Parameters:{
@@ -278,10 +279,16 @@
 						token:  this.userInfo.token,
 						secret: this.userInfo.secret
 					};
-					pro.fetch('/contract/saveOptional', data, headers).then(function(res){
-						console.log(res);
+					pro.fetch('post', '/contract/saveOptional', data, headers).then(function(res){
+						if(res.success == true){
+							if(res.code == 1){
+								layer.msg('添加成功', {time: 1000});
+							}else{
+								layer.msg(res.message, {time: 1000});
+							}
+						}
 					}).catch(function(error){
-						
+						layer.msg('网络不给力，请稍后再试', {time: 1000});
 					});
 				}else{
 					this.addStar = true;

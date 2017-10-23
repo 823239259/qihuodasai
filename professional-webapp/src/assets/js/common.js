@@ -75,10 +75,11 @@ pro.selectEvent = function(e,fun){
  */
 import axios from 'axios'
 import qs from 'qs'
+import store from '../../store'
 // axios 配置
 axios.defaults.timeout = 5000;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
-axios.defaults.baseURL = 'http://test.api.duokongtai.cn/';
+axios.defaults.baseURL = store.getters.PATH;
 //POST传参序列化
 axios.interceptors.request.use((config) => {
     if(config.method  === 'post'){
@@ -97,14 +98,15 @@ axios.interceptors.response.use((res) =>{
 }, (error) => {
     return Promise.reject(error);
 });
-pro.fetch = function(url, params, head){
+pro.fetch = function(type, url, params, header){
 	return new Promise((resolve, reject) => {
         axios({
-        	method: 'post',
+        	method: type,
 			url: url,
 			headers: {
-				'token':  head ? head.token : '',
-				'secret': head ? head.secret : ''
+				token:  header ? header.token : '',
+				secret: header ? header.secret : '',
+				version: header ? header.version : ''
 			},
 			data: params
         }).then(response => {
