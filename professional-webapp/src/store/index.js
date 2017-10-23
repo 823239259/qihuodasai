@@ -310,7 +310,7 @@ export default new Vuex.Store({
 	getters: {
 		PATH: function(state) {
 			if(state.setting == 'dev') {
-				return '/api';
+				return 'http://test.api.duokongtai.cn';
 			} else if(state.setting == 'build') {
 				if(state.environment == 'test'){
 					return 'http://test.api.duokongtai.cn';

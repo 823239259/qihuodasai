@@ -2,29 +2,45 @@
 	<div id="login">
 		<div class="bg"></div>
 		<div class="login">
-			<p>登录<i class="ifont ifont_x" v-on:click="chose_login">&#xe624;</i></p>
+			<p>登录<i class="ifont ifont_x">&#xe624;</i></p>
 			<input type="text"  class="input_1" placeholder="请输入手机号码" />
-			<input type="password"  class="input_1" placeholder="请输入密码" /><i class=" ifont ifont_eye">&#xe64f;</i>
+			<input type="password"  class="input_1" placeholder="请输入密码" /><i class=" ifont ifont_eye" v-on:click="eyeEvent">&#xe64f;</i>
 			<p class="span_right" v-on:click="toForgetPassword">忘记密码?</p>
 			<button class="btn yellow" v-on:click="toReset">登录</button>
-			<p class="color_light">还没有期货大赛账号？<span class="span_white">立即注册</span></p>
+			<p class="color_light">还没有期货大赛账号？<span class="span_white" v-on:click="tORegister">立即注册</span></p>
 			<forgetPassword class="forgetPassword_show" v-if="isshow_forgetpassword" />
 			<resetPassword class="resetPassword_show" v-if="isshow_resetPassword" />
 		</div>
+		<tipsDialog :msg="msgTips" time="2000" ref="dialog"></tipsDialog>
+		<codeDialog ref="codeDialog" :objstr="sendMsg" type="login"></codeDialog>
 	</div>
 </template>
 <script>
 	import forgetPassword from "./forgetPassword.vue"
 	import resetPassword from "./resetPassword.vue"
+	import tipsDialog from "../../components/tipsDialog.vue"
+	import codeDialog from "../../components/codeDialog.vue"
 	export default {
 		name : "login",
-		components : {forgetPassword,resetPassword},
+		components : {forgetPassword,resetPassword,tipsDialog,codeDialog},
 		data(){
 			return {
 				isshow_forgetpassword : false,
 				isshow_resetPassword : false,
-				isshow_login :  true
+				isJump: '',
+				eyeShow: false,
+				msg: '',
+				phone: '',
+				pwd: '',
+				token: '',
+				secret: '',
+				path: '',
+				str: '',
+				num: ''
 			}
+		},
+		compyted : {
+			
 		},
 		methods : {
 			toForgetPassword : function(){
@@ -33,8 +49,17 @@
 			toReset : function (){
 				this.isshow_resetPassword=!this.isshow_resetPassword;
 			},
-			chose_login : function(){
-				console.log(111111)
+			tORegister : function(){
+				console.log(111)
+			},
+			eyeEvent : function(e){
+				if(this.eyeShow == false){
+					this.eyeShow = true;
+					$(e.target).addClass("current").siblings("#pwd").attr("type",'text');
+				}else{
+					this.eyeShow = false;
+					$(e.target).removeClass("current").siblings("#pwd").attr("type",'password');
+				}
 			}
 		}
 	}

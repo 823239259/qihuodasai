@@ -69,7 +69,7 @@
 					this.msg = '手机号格式错误';
 				}else{
 					this.$refs.codeDialog.isshow = true;
-					this.$refs.codeDialog.path = this.PATH + "/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
+					this.$refs.codeDialog.path =  "http://test.api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
 					this.$refs.codeDialog.phone = this.phone;
 					//页面效果
 					$(e.target).addClass('current');

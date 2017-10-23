@@ -21,6 +21,7 @@
 
 <script>
 	import axios from "axios";
+	import qs from "qs";
 	import tipsDialog from './tipsDialog.vue'
 	export default{
 		name: 'codeDialog',
@@ -67,12 +68,14 @@
 				this.isshow = false;
 			},
 			confirm: function(){
+				console.log(this.code);
+				console.log(this.phone);
 				if(this.code == ''){
 					this.$refs.dialog.isShow = true;
 					this.msg = '请输入验证码';
 				}else{
 					if(this.type == 'login'){
-						this.$http.post(this.PATH + '/login', {emulateJSON: true}, {
+						axios.post(this.PATH + '/login', {emulateJSON: true}, {
 								promise: {
 									loginName: this.info.loginName,
 									password: this.info.password,
@@ -118,39 +121,43 @@
 						if(this.code == ''){
 							this.$refs.dialog.isShow = true;
 							this.msg = '请输入验证码';
-							console.log(this.msg);
 						}else{
 							//请求发送验证码
-							this.$http.post(this.PATH + '/sms',{emulateJSON: true},{
-								headers: {'version': this.version},
-								promise:{
-									mobile: this.phone,
-									type: 1,
-									yzm: this.code
-								},
-								timeout: 5000,
-								emulateJSON: true
-							}).then(function(e){
-								var data = e.body;
-								if(data.success == true){
-									if(data.code == 1){
+							console.log(this.PATH);
+							axios({
+								    method:"POST",
+								    url:'http://test.api.duokongtai.cn/sms',
+//								    emulateJSON: true,
+								    headers: {'version': this.version},
+//								    timeout: 5000,
+								    data:{
+								        mobile: this.phone,
+										type: 1,
+										yzm: this.code
+								    }
+								}).then((res)=>{
+									var data = res.data;
+									if(data.success == true){
+										if(data.code == 1){
+											this.$refs.dialog.isShow = true;
+											this.msg = '发送成功';
+											setTimeout(function(){
+													this.isshow = false;
+												}.bind(this),1000);
+											}
+										}else{
+	//										this.code = '';
+	//										this.path = this.path + '&' + Math.random()*10;
+	//										this.$refs.dialog.isShow = true;
+											console.log(data)
+	//										this.msg = data.message;
+										}
+									}).catch((err)=>{
 										this.$refs.dialog.isShow = true;
-										this.msg = '发送成功';
-										setTimeout(function(){
-											this.isshow = false;
-										}.bind(this),1000);
-									}
-								}else{
-									this.code = '';
-									this.path = this.path + '&' + Math.random()*10;
-									this.$refs.dialog.isShow = true;
-									this.msg = data.message;
-								}
-							}.bind(this), function(){
-								this.$refs.dialog.isShow = true;
-								this.msg = '网络不给力，请稍后再试！'
-							});
-						}
+										this.msg = '网络不给力，请稍后再试！'
+										console.log(err.data)
+									})
+							}
 					}else if(this.type = 'findpwd'){
 						//请求发送验证码
 						this.$http.post(this.PATH + '/sms',{emulateJSON: true},{
@@ -211,19 +218,30 @@
 		background-color: $bottom_color;
 		color: $white;
 		border-radius: 10px;
+		line-height: 40px;
 	}
 	.fl {
-		width: 320px;
+		width: 330px;
 		height: 40px;
 		border: 1px solid $bottom_color;
 		border-radius: 5px;
 		float: left;
+		margin-top: 20px;
+		text-align: center;
+		color: $white;
 	}
 	.btn {
 		width: 120px;
 		height: 30px;
+		margin-top: 40px;
 	}
 	.fr {
 		float: right;
+		img {
+			display: block;
+			width: 68px;
+			height: 40px;
+			margin-top: 20px;
+		}
 	}
 </style>
