@@ -21,6 +21,7 @@
 	import codeDialog from "../../components/codeDialog.vue"
 	import axios from "axios";
 	import qs from "qs";
+	import pro from '../../assets/js/common.js'
 	export default {
 		name : "register",
 		components : {tipsDialog,codeDialog},
@@ -118,12 +119,14 @@
 						password: this.pwd,
 						code: this.code
 					};
-					axios({
+					var headers = {
+						version: this.version
+					};
+					pro.fetch({
 						method : "post",
-						url:this.PATH+'/regist',
-						headers : {'version':this.version},
-						timeout : 5000,
-						data : qs.stringify(data)
+						url: '/regist',
+						headers : headers,
+						data : data
 					}).then((res)=>{
 						var data = res.data;
 						if(data.success == true){
