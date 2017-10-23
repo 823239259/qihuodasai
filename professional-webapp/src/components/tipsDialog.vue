@@ -1,5 +1,5 @@
 <template>
-	<div id="tipsDialog" v-if="isShow">{{msg}}</div>
+	<div id="tipsDialog" v-show="isShow">{{msg}}</div>
 </template>
 
 <script>
