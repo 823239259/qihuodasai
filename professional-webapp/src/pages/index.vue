@@ -88,6 +88,9 @@
 </template>
 
 <script>
+	import pro from '../assets/js/common.js'
+	import axios from 'axios'
+	import qs from 'qs'
 	export default{
 		name:'index',
 		data(){
@@ -97,9 +100,11 @@
 				showKline: false,
 				orderName: '',
 				orderNum: '',
+				orderNo: '',
 				optional: '添加自选',
 				addStar: true,
-				isJump: ''
+				isJump: '',
+				userInfo: '',
 			}
 		},
 		computed: {
@@ -153,6 +158,7 @@
 					this.$store.state.isshow.iskline = true;
 					this.orderName = this.Parameters[0].CommodityName;
 					this.orderNum = this.Parameters[0].CommodityNo + this.Parameters[0].MainContract;
+					this.orderNo = this.Parameters[0].CommodityNo;
 					var data = {
 						Method: "QryHistory",
 						Parameters:{
@@ -264,6 +270,19 @@
 				if(this.addStar == true){
 					this.addStar = false;
 					this.optional = '取消自选';
+					var data = {
+						commodityCode: this.orderNo,
+						commodityName: this.orderName,
+					};
+					var headers = {
+						token:  this.userInfo.token,
+						secret: this.userInfo.secret
+					};
+					pro.fetch('/contract/saveOptional', data, headers).then(function(res){
+						console.log(res);
+					}).catch(function(error){
+						
+					});
 				}else{
 					this.addStar = true;
 					this.optional = '添加自选';
@@ -274,6 +293,8 @@
 			//初始化页面高度
 			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 			$(".order").height(h - 50 - 30);
+			//获取平台账户登录信息
+			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
 		}
 	}
 </script>
