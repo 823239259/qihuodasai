@@ -3,10 +3,10 @@
 		<div class="bg"></div>
 		<div class="login">
 			<p>登录<i class="ifont ifont_x">&#xe624;</i></p>
-			<input type="text"  class="input_1" placeholder="请输入手机号码" />
-			<input type="password"  class="input_1" placeholder="请输入密码" /><i class=" ifont ifont_eye" v-on:click="eyeEvent">&#xe64f;</i>
+			<input type="number" id="phone" class="input_1" placeholder="请输入手机号码" v-model.trim="phone" />
+			<input type="password" id="pwd" class="input_1" placeholder="请输入密码" v-model.trim="pwd"/><i class=" ifont ifont_eye" v-on:click="eyeEvent">&#xe64f;</i>
 			<p class="span_right" v-on:click="toForgetPassword">忘记密码?</p>
-			<button class="btn yellow" v-on:click="toReset">登录</button>
+			<button class="btn yellow" v-on:click="login">登录</button>
 			<p class="color_light">还没有期货大赛账号？<span class="span_white" v-on:click="tORegister">立即注册</span></p>
 			<forgetPassword class="forgetPassword_show" v-if="isshow_forgetpassword" />
 			<resetPassword class="resetPassword_show" v-if="isshow_resetPassword" />
@@ -39,15 +39,89 @@
 				num: ''
 			}
 		},
-		compyted : {
-			
+		computed : {
+			msgTips: function(){
+				return this.msg;
+			},
+			sendMsg(){
+				if(this.str) return JSON.stringify(this.str);
+			},
+			PATH: function(){
+				return this.$store.getters.PATH;
+			},
+			environment(){
+				return this.$store.state.environment;
+			},
 		},
 		methods : {
 			toForgetPassword : function(){
 				this.isshow_forgetpassword=!this.isshow_forgetpassword;
 			},
-			toReset : function (){
-				this.isshow_resetPassword=!this.isshow_resetPassword;
+			login : function (){
+				var phoneReg = /^(((13[0-9])|(14[5-7])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/;
+				var pwdReg = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,18}$/;
+				if(this.phone == ''){
+					this.$refs.dialog.isShow = true;
+					this.msg = '请输入手机号';
+				}else if(phoneReg.test(this.phone) == false){
+					this.$refs.dialog.isShow = true;
+					this.msg = '手机号格式错误';
+				}else if(this.pwd == ''){
+					this.$refs.dialog.isShow = true;
+					this.msg = '请输入密码';
+				}else if(pwdReg.test(this.pwd) == false){
+					this.$refs.dialog.isShow = true;
+					this.msg = '密码由6到18位字母和数字组成';
+				}else{
+					this.$refs.codeDialog.path = this.path + '&' + Math.random();
+					//登录请求
+					axios({
+						method : 
+					})
+//					this.$http.post(this.PATH + '/login', {emulateJSON: true}, {
+//						params: {
+//							loginName: this.phone,
+//							password: this.pwd
+//						},
+//						timeout: 5000
+//					}).then(function(e) {
+//						var data = e.body;
+//						if(data.success == true ){
+//							if(data.code == 1){
+//								this.$refs.dialog.isShow = true;
+//								this.msg = '登录成功';
+//								this.token = data.data.token;
+//								this.secret = data.data.secret;
+//								var userData = {'username': this.phone, 'password': this.pwd, 'token': data.data.token, 'secret': data.data.secret};  
+//								localStorage.setItem("user", JSON.stringify(userData));
+//								this.$router.push({path: '/account'});
+//							}
+//						}else{
+//							this.num = data.data.num;
+//							if(this.num > 2){
+//								this.$refs.codeDialog.isshow = true;
+//								this.$refs.codeDialog.path = this.PATH + "/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
+//								this.str = {
+//									loginName: this.phone,
+//									password: this.pwd
+//								}
+//							}else{
+//								this.$refs.dialog.isShow = true;
+//								if(data.data.date != undefined){
+//									var h = (data.data.date/3600).toString();
+//									var hour = h.split('.')[0];
+//									var minute = parseInt((h - hour) * 60);
+//									this.msg = data.message + '，距解冻时间还有' + hour + '小时' + minute + '分';
+//								}else{
+//									this.msg = data.message;
+//								}
+//							}
+//						}
+//					}.bind(this), function() {
+//						this.$refs.dialog.isShow = true;
+//						this.msg = '网络不给力，请稍后再试！';
+//					});
+				}
 			},
 			tORegister : function(){
 				console.log(111)
@@ -87,6 +161,7 @@
 			}
 		}
 		input {
+			color: $white;
 			width: 320px;
 			height: 40px;
 			border: 1px solid $bottom_color;

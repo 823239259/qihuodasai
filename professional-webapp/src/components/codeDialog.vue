@@ -68,25 +68,26 @@
 				this.isshow = false;
 			},
 			confirm: function(){
-				console.log(this.code);
-				console.log(this.phone);
 				if(this.code == ''){
 					this.$refs.dialog.isShow = true;
 					this.msg = '请输入验证码';
 				}else{
 					if(this.type == 'login'){
-						axios.post(this.PATH + '/login', {emulateJSON: true}, {
-								promise: {
-									loginName: this.info.loginName,
-									password: this.info.password,
-									code: this.code
-								},
-								timeout: 5000,
-								emulateJSON: true
-						}).then(function(e) {
-							var data = e.body;
-							if(data.success == true ){
-								if(data.code == 1){
+//						请求认证
+						var data = {
+								loginName: this.info.loginName,
+								password: this.info.password,
+								code: this.code
+							}
+						axios({
+							method:"POST",
+							url:this.PATH+"/login",
+							timeout:5000,
+							data : qs.stringify(data)
+						}).then((res)=>{
+							var data = res.data;
+							if(data.success = true){
+								if(data.code = 1){
 									this.$refs.dialog.isShow = true;
 									this.msg = '登录成功';
 									this.token = data.data.token;
@@ -96,10 +97,10 @@
 									this.code = '';
 									setTimeout(function(){
 										this.isshow = false;
-										this.$router.push({path: '/account'});
-									}.bind(this),1000);
+										console.log(1111111111111111111)
+									},1000)
 								}
-							}else{
+							}else {
 								this.code = '';
 								this.path = this.path + '&' + Math.random()*10;
 								if(data.code == 4){
@@ -112,29 +113,31 @@
 										this.isshow = false;
 									}.bind(this),1000);
 								}
+								
 							}
-						}.bind(this), function() {
+							
+						}).catch((err)=>{
+							var data = err.data;
 							this.$refs.dialog.isShow = true;
 							this.msg = '网络不给力，请稍后再试！'
-						});
+						})
 					}else if(this.type == 'register'){
 						if(this.code == ''){
 							this.$refs.dialog.isShow = true;
 							this.msg = '请输入验证码';
 						}else{
 							//请求发送验证码
-							console.log(this.PATH);
+							var data ={
+								 	mobile: this.phone,
+									type: 1,
+									yzm: this.code
+								}
 							axios({
-								    method:"POST",
-								    url:'http://test.api.duokongtai.cn/sms',
-//								    emulateJSON: true,
+								    method:"post",
+								    url:this.PATH+"/sms",
 								    headers: {'version': this.version},
-//								    timeout: 5000,
-								    data:{
-								        mobile: this.phone,
-										type: 1,
-										yzm: this.code
-								    }
+								    timeout: 5000,
+								    data:qs.stringify(data)
 								}).then((res)=>{
 									var data = res.data;
 									if(data.success == true){
@@ -146,32 +149,32 @@
 												}.bind(this),1000);
 											}
 										}else{
-	//										this.code = '';
-	//										this.path = this.path + '&' + Math.random()*10;
-	//										this.$refs.dialog.isShow = true;
-											console.log(data)
-	//										this.msg = data.message;
+											this.code = '';
+											this.path = this.path + '&' + Math.random()*10;
+											this.$refs.dialog.isShow = true;
+											this.msg = data.message;
 										}
 									}).catch((err)=>{
+										var data = err.data;
 										this.$refs.dialog.isShow = true;
 										this.msg = '网络不给力，请稍后再试！'
-										console.log(err.data)
 									})
 							}
 					}else if(this.type = 'findpwd'){
 						//请求发送验证码
-						this.$http.post(this.PATH + '/sms',{emulateJSON: true},{
-							headers: {'version': this.version},
-							promise: {
+						var data={
 								mobile: this.phone,
 								type: 2,
 								yzm: this.code
-							},
-							timeout: 5000,
-							emulateJSON: true
-						}).then(function(e){
-							var data = e.body;
-							cosnole.log(data);
+							}
+						axios({
+							method : "POST",
+							url : this.PATH+'/sms',
+							header : {'version' : this.version},
+							timeout : 5000,
+							data:qs.stringify(data)
+						}).then((res)=>{
+							var data = res.data;
 							this.$refs.dialog.isShow = true;
 							if(data.success == true){
 								if(data.code == 1){
@@ -183,10 +186,11 @@
 							}else{
 								this.msg = data.message;
 							}
-						}.bind(this), function(){
+						}).catch((err)=>{
+							var data = err.data;
 							this.$refs.dialog.isShow = true;
 							this.msg = '网络不给力，请稍后再试！'
-						});
+						})
 					}
 				}
 			}

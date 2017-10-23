@@ -1,15 +1,15 @@
 <template>
-	<div id="register">
+	<div id="register" v-if="show">
 		<div class="bg"></div>
 		<div class="register">
-			<p>注册<i class="ifont">&#xe624;</i></p>
+			<p>注册<i class="ifont" v-on:click="close">&#xe624;</i></p>
 			<input type="text" id="phone"  class="input_1" placeholder="请输入手机号" maxlength="11" v-model.trim="phone" />
 			<input type="number" id="code" class="input_1 input_4" placeholder="验证码" v-model.trim="code" />
 			<i class="span_code" v-on:click="getCode">{{volid ? info : (time + '秒')}}</i>
 			<input type="password"  class="input_1 input_5" placeholder="请输入密码（6-16位密码）" id="pwd" v-model.trim="pwd"/>
 			<i class="ifont ifont_eyes" v-on:click="eyeEvent">&#xe61c;</i>
 			<p class="color_light">注册即表示	同意并已阅读<span class="span_white">《用户注册协议》</span></p>
-			<button class="btn yellow" v-on:click.native="register">注册</button>
+			<button class="btn yellow" v-on:click="register">注册</button>
 			<p class="color_light">已有期货大赛账号？<span class="span_white" v-on:click="toLogin">立即登录</span></p>
 		</div>
 		<codeDialog ref="codeDialog" type="register"></codeDialog>
@@ -19,6 +19,8 @@
 <script>
 	import tipsDialog from "../../components/tipsDialog.vue"
 	import codeDialog from "../../components/codeDialog.vue"
+	import axios from "axios";
+	import qs from "qs";
 	export default {
 		name : "register",
 		components : {tipsDialog,codeDialog},
@@ -35,6 +37,7 @@
 				phoneReg: /^(((13[0-9])|(14[5-7])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/,
 				pwdReg: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,18}$/,
 				path: '',
+				show : true,
 			}
 		},
 		computed: {
@@ -110,42 +113,48 @@
 					this.msg = '密码由6到18位字母和数字组成';
 				}else{
 					//注册请求
-					this.$http.post(this.PATH + '/regist', {emulateJSON: true}, {
-						headers: {'version': this.version},
-						params: {
-							mobile: this.phone,
-							password: this.pwd,
-							code: this.code
-						},
-						timeout: 5000,
-						emulateJSON: true
-					}).then(function(e) {
-						var data = e.body;
-						if(data.success == true ){
+					var data = {
+						mobile: this.phone,
+						password: this.pwd,
+						code: this.code
+					};
+					axios({
+						method : "post",
+						url:this.PATH+'/regist',
+						headers : {'version':this.version},
+						timeout : 5000,
+						data : qs.stringify(data)
+					}).then((res)=>{
+						var data = res.data;
+						if(data.success == true){
 							if(data.code == 1){
-								this.$refs.dialog.isShow = true;
-								this.msg = '注册成功';
+								this.data.$refs.dialog.isShow = true;
+								this.msg = "注册成功";
 								this.phone = '';
-								this.pwd = '';
+								this.pws = '';
 								this.code = '';
 								this.time = 0;
 								setTimeout(function(){
 									this.isShow = false;
-									this.$router.replace({path: '/login'});
-								}.bind(this), 1000);
+								},1000)
 							}
 						}else{
-							this.$refs.dialog.isShow = true;
-							this.msg = data.message;
-						}
-					}.bind(this), function() {
+								console.log(data)
+								this.$refs.dialog.isShow = true;
+								this.msg = data.message;
+							}
+					}).catch((err)=>{
+						var data = err.data;
 						this.$refs.dialog.isShow = true;
 						this.msg = '网络不给力，请稍后再试！'
-					});
+					})
 				}
 			},
+			close : function(){
+				this.show=!this.show
+			},
 			toLogin : function(){
-				
+				this.show = false;
 			}
 		}
 		
