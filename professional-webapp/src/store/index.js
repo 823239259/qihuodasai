@@ -18,6 +18,15 @@ var isshow = {
 	}
 };
 
+//账户信息
+var account = {
+	state: {
+		username: '',
+		password: '',
+		isRefresh: false
+	}
+}
+
 //行情交易数据
 var market = {
 	state: {
@@ -293,6 +302,7 @@ var market = {
 export default new Vuex.Store({
 	modules: {
 		isshow,
+		account,
 		market,
 	},
 	state: {

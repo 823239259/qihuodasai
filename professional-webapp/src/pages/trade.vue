@@ -90,7 +90,7 @@
 							<span :class="{current: selected == index}" @click="tabEvent(index)">{{key.name}}</span>
 						</template>
 					</div>
-					<div class="cont">
+					<div class="cont" v-if="chartShow">
 						<component :is="selectView"></component>
 					</div>
 				</div>
@@ -227,13 +227,13 @@
 							</ul>
 						</div>
 					</div>
-					<div class="trade_login">
+					<div class="trade_login" v-if="tradeLoginShow">
 						<button class="btn yellow" @click="toOpenAccount">我要开户</button>
 						<button class="btn blue" @click="toTradeLogin">交易登录</button>
 					</div>
 				</div>
 			</div>
-			<!--<div class="trade_box">
+			<div class="trade_box" v-if="tradeDetailsShow">
 				<div class="operate">
 					<div class="head">
 						<span class="fl">交易账号：158******36</span>
@@ -364,7 +364,7 @@
 						</div>
 					</div>
 				</div>
-			</div>-->
+			</div>
 		</div>
 	</div>
 </template>
@@ -403,12 +403,13 @@
 				currentQuote: 0,
 				optional: '添加自选',
 				addStar: true,
+				tradeLoginShow: true,
+				tradeDetailsShow: false,
+				chartShow: false,
+				chartHeight: '',
 			}
 		},
 		computed: {
-			quoteInitStatus(){
-				return this.$store.state.market.quoteInitStatus;
-			},
 			quoteInitStep(){
 				return this.$store.state.market.quoteInitStep;
 			},
@@ -426,6 +427,9 @@
 			},
 			dotSize(){
 				return this.$store.state.market.currentdetail.DotSize;
+			},
+			tradeUserStore(){
+				return this.$store.state.account.username;
 			}
 		},
 		filters:{
@@ -442,6 +446,14 @@
 					this.$store.state.market.currentdetail = this.Parameters[0];
 					this.$store.state.market.currentTradeDetails = this.tradeParameters[0];
 					this.$store.state.market.currentNo = this.Parameters[0].CommodityNo;
+				}
+			},
+			tradeUserStore: function(n, o){
+				if(n != undefined){
+					this.tradeLoginShow = false;
+					this.tradeDetailsShow = true;
+					var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+					this.chartHeight = h - 50 -30 - 40 - 280;
 				}
 			}
 		},
@@ -498,15 +510,26 @@
 			}
 		},
 		mounted: function(){
+			console.log(2222);
+			//初始化高度
+			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+//			$(".trade_right_top").height(h - 50 - 30);
+			$(".quote .cont").height(h - 50 - 30 - 45);
+			this.chartHeight = h - 50 -30 - 40;
+			//开始画科
+			this.chartShow = true;
 			//调用下拉框
 			$(".slt-box").each(function(i, o){
 				pro.selectEvent(o);
 			});
-			//初始化高度
-			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-			$(".trade_right_top").height(h - 50 - 30);
-			$(".quote .cont").height(h - 50 - 30 - 45);
-		},
+			//判断是否登录账户
+			var user = localStorage.tradeUser ? JSON.parse(localStorage.tradeUser) : '';
+			if(user){
+				this.tradeLoginShow = false;
+				this.tradeDetailsShow = true;
+				this.chartHeight = h - 50 -30 - 40 - 280;
+			}
+		}
 	}
 </script>
 

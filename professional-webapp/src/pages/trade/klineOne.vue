@@ -17,6 +17,9 @@
 			},
 		},
 		mounted: function(){
+			var h = this.$parent.chartHeight;
+			$("#kliness").height(h/10*6.8);
+			$("#kliness_volume").height(h/10*3);
 			this.$store.state.isshow.iskline = true;
 			this.$store.state.market.selectTime = 1;
 			var data = {
@@ -38,14 +41,8 @@
 
 <style lang="scss" scoped>
 	@import "../../assets/css/common.scss";
-	#kliness{
+	#kliness, #kliness_volume{
 		width: 100%;
-		height: 324px;
-		margin: 0 auto;
-	}
-	#kliness_volume{
-		width: 100%;
-		height: 216px;
 		margin: 0 auto;
 	}
 </style>

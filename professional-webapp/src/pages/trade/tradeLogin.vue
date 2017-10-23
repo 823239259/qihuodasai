@@ -57,10 +57,15 @@
 							case 'OnRspLogin'://登录回复
 								if(parameters.Code==0){
 									layer.msg('登录成功', {time: 1000});
+									this.$store.state.account.username = this.username;
+									this.$store.state.account.password = Base64.encode(this.pwd);
 									var userData = {'username': this.username, 'password': Base64.encode(this.pwd)};  
 									localStorage.setItem("tradeUser", JSON.stringify(userData));
+									
 									setTimeout(function(){
 										this.show = false;
+										this.$router.push({path: '/index'});
+										this.$store.state.account.isRefresh = 1;
 									}.bind(this),1000);
 								}else{
 									layer.msg(parameters.Message, {time: 1000});

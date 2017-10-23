@@ -20,6 +20,8 @@
 			])
 		},
 		mounted:function(){
+			var h = this.$parent.chartHeight;
+			$("#light").height(h*0.98);
 			this.$store.state.isshow.islightshow = false;
 			this.$store.state.isshow.islight = true;
 			this.$store.state.market.lightChartTime.time = [],
@@ -34,7 +36,6 @@
 	@import "../../assets/css/common.scss";
 	#light{
 		width: 100%;
-		height: 540px;
 		margin: 0 auto;
 	}
 </style>

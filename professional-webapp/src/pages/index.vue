@@ -75,13 +75,13 @@
 					<span class="fl">{{optional}}</span>
 				</div>
 			</div>
-			<div id="echarts_f" v-if="showFens">
-				<div id="fens" class="chart" style="height: 240px;"></div>
-				<div id="volume" class="chart" style="height: 160px;"></div>
+			<div id="echarts_f" v-show="showFens">
+				<div id="fens" class="chart"></div>
+				<div id="volume" class="chart"></div>
 			</div>
-			<div id="echarts_k" v-if="showKline">
-				<div id="kliness" class="char" style="height: 240px;"></div>
-				<div id="kliness_volume" class="chart" style="height: 160px;"></div>
+			<div id="echarts_k" v-show="showKline">
+				<div id="kliness" class="char"></div>
+				<div id="kliness_volume" class="chart"></div>
 			</div>
 		</div>
 	</div>
@@ -99,6 +99,7 @@
 				orderNum: '',
 				optional: '添加自选',
 				addStar: true,
+				isJump: ''
 			}
 		},
 		computed: {
@@ -122,6 +123,9 @@
 			},
 			quoteColor(){
 				return this.$store.state.market.quoteColor;
+			},
+			isRefresh(){
+				return this.$store.state.account.isRefresh;
 			}
 		},
 		filters:{
@@ -139,6 +143,12 @@
 					this.$store.state.market.currentTradeDetails = this.tradeParameters[0];
 					this.showFens = true;
 					this.showKline = true;
+					//分时、k线容器赋高度
+					var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+					h = h - 50 - 30 - 40;
+					$("#volume, #kliness_volume").height(h/2/10*3.7);
+					$("#fens, #kliness").height(h/2/10*6);
+					//开始画图
 					this.$store.state.isshow.isfens = true;
 					this.$store.state.isshow.iskline = true;
 					this.orderName = this.Parameters[0].CommodityName;
@@ -186,6 +196,11 @@
 					}, 500);
 				}
 			},
+			isRefresh: function(n, o){
+				if(n && n == 1){
+					window.location.reload();
+				}
+			}
 		},
 		methods: {
 			toggle: function(i, name, commodityNo, mainContract, exchangeNo){
@@ -257,8 +272,6 @@
 			//初始化页面高度
 			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 			$(".order").height(h - 50 - 30);
-		},
-		activated: function(){
 		}
 	}
 </script>
@@ -309,11 +322,12 @@
 				}
 			}
 		}
-		#echarts_f, #echarts_k{
-			width: 400px;
-		}
 		#echarts_k{
 			margin-top: 10px;
+		}
+		#fens, #volume, #kliness, #kliness_volume{
+			width: 100%;
+			margin: 0 auto;
 		}
 	}
 	.order{
