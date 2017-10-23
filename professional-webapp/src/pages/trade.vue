@@ -1,7 +1,7 @@
 <template>
 	<div id="trade">
-		<tradeLogin ref="tradeLogin" v-if="tradeLoginShow"></tradeLogin>
-		<tradeLoginSpe ref="tradeLoginSpe" v-if="tradeLoginSpeShow"></tradeLoginSpe>
+		<tradeLogin ref="tradeLogin"></tradeLogin>
+		<tradeLoginSpe ref="tradeLoginSpe"></tradeLoginSpe>
 		<div class="quote">
 			<div class="title">
 				<ul>
@@ -160,52 +160,52 @@
 							<ul>
 								<li>
 									<span>卖五</span>
-									<span :class="{red: currentdetail.LastQuotation.AskPrice5 > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.AskPrice5 < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.AskPrice5}}</span>
+									<span :class="{red: currentdetail.LastQuotation.AskPrice5 > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.AskPrice5 < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.AskPrice5 | fixNum(dotSize)}}</span>
 									<span>{{currentdetail.LastQuotation.AskQty5}}</span>
 								</li>
 								<li>
 									<span>卖四</span>
-									<span :class="{red: currentdetail.LastQuotation.AskPrice4 > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.AskPrice4 < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.AskPrice4}}</span>
+									<span :class="{red: currentdetail.LastQuotation.AskPrice4 > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.AskPrice4 < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.AskPrice4 | fixNum(dotSize)}}</span>
 									<span>{{currentdetail.LastQuotation.AskQty4}}</span>
 								</li>
 								<li>
 									<span>卖三</span>
-									<span :class="{red: currentdetail.LastQuotation.AskPrice3 > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.AskPrice3 < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.AskPrice3}}</span>
+									<span :class="{red: currentdetail.LastQuotation.AskPrice3 > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.AskPrice3 < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.AskPrice3 | fixNum(dotSize)}}</span>
 									<span>{{currentdetail.LastQuotation.AskQty3}}</span>
 								</li>
 								<li>
 									<span>卖二</span>
-									<span :class="{red: currentdetail.LastQuotation.AskPrice2 > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.AskPrice2 < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.AskPrice2}}</span>
+									<span :class="{red: currentdetail.LastQuotation.AskPrice2 > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.AskPrice2 < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.AskPrice2 | fixNum(dotSize)}}</span>
 									<span>{{currentdetail.LastQuotation.AskQty2}}</span>
 								</li>
 								<li>
 									<span>卖一</span>
-									<span :class="{red: currentdetail.LastQuotation.AskPrice1 > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.AskPrice1 < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.AskPrice1}}</span>
+									<span :class="{red: currentdetail.LastQuotation.AskPrice1 > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.AskPrice1 < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.AskPrice1 | fixNum(dotSize)}}</span>
 									<span>{{currentdetail.LastQuotation.AskQty1}}</span>
 								</li>
 								<li>
 									<span>买一</span>
-									<span :class="{red: currentdetail.LastQuotation.BidPrice1 > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.BidPrice1 < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.BidPrice1}}</span>
+									<span :class="{red: currentdetail.LastQuotation.BidPrice1 > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.BidPrice1 < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.BidPrice1 | fixNum(dotSize)}}</span>
 									<span>{{currentdetail.LastQuotation.BidQty1}}</span>
 								</li>
 								<li>
 									<span>买二</span>
-									<span :class="{red: currentdetail.LastQuotation.BidPrice2 > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.BidPrice2 < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.BidPrice2}}</span>
+									<span :class="{red: currentdetail.LastQuotation.BidPrice2 > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.BidPrice2 < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.BidPrice2 | fixNum(dotSize)}}</span>
 									<span>{{currentdetail.LastQuotation.BidQty2}}</span>
 								</li>
 								<li>
 									<span>买三</span>
-									<span :class="{red: currentdetail.LastQuotation.BidPrice3 > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.BidPrice3 < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.BidPrice3}}</span>
+									<span :class="{red: currentdetail.LastQuotation.BidPrice3 > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.BidPrice3 < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.BidPrice3 | fixNum(dotSize)}}</span>
 									<span>{{currentdetail.LastQuotation.BidQty3}}</span>
 								</li>
 								<li>
 									<span>买四</span>
-									<span :class="{red: currentdetail.LastQuotation.BidPrice4 > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.BidPrice4 < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.BidPrice4}}</span>
+									<span :class="{red: currentdetail.LastQuotation.BidPrice4 > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.BidPrice4 < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.BidPrice4 | fixNum(dotSize)}}</span>
 									<span>{{currentdetail.LastQuotation.BidQty4}}</span>
 								</li>
 								<li>
 									<span>买五</span>
-									<span :class="{red: currentdetail.LastQuotation.BidPrice5 > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.BidPrice5 < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.BidPrice5}}</span>
+									<span :class="{red: currentdetail.LastQuotation.BidPrice5 > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.BidPrice5 < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.BidPrice5 | fixNum(dotSize)}}</span>
 									<span>{{currentdetail.LastQuotation.BidQty5}}</span>
 								</li>
 							</ul>
@@ -228,7 +228,7 @@
 						</div>
 					</div>
 					<div class="trade_login">
-						<button class="btn yellow">我要开户</button>
+						<button class="btn yellow" @click="toOpenAccount">我要开户</button>
 						<button class="btn blue" @click="toTradeLogin">交易登录</button>
 					</div>
 				</div>
@@ -370,6 +370,7 @@
 </template>
 
 <script>
+	import { mapMutations,mapActions } from 'vuex'
 	import pro from '../assets/js/common.js'
 	import tradeLogin from './trade/tradeLogin.vue'
 	import tradeLoginSpe from './trade/tradeLoginSpe.vue'
@@ -385,8 +386,6 @@
 		components: {tradeLogin, tradeLoginSpe, fens, light, klineOne, klineFive, klineFifteen, klineThirty, klineDay},
 		data(){
 			return{
-				tradeLoginShow: false,
-				tradeLoginSpeShow: false,
 				selected: 1,
 				selectView: 'fens',
 				echartList: [
@@ -407,11 +406,17 @@
 			}
 		},
 		computed: {
+			quoteInitStatus(){
+				return this.$store.state.market.quoteInitStatus;
+			},
 			quoteInitStep(){
 				return this.$store.state.market.quoteInitStep;
 			},
 			Parameters(){
 				return this.$store.state.market.Parameters;
+			},
+			tradeParameters(){
+				return this.$store.state.market.tradeParameters;
 			},
 			currentdetail(){
 				return this.$store.state.market.currentdetail;
@@ -419,6 +424,9 @@
 			currentTradeDetails(){
 				return this.$store.state.market.currentTradeDetails;
 			},
+			dotSize(){
+				return this.$store.state.market.currentdetail.DotSize;
+			}
 		},
 		filters:{
 			fixNumTwo: function(num){
@@ -431,21 +439,23 @@
 		watch: {
 			quoteInitStep: function(n, o){
 				if(n && n == true){
-//					if(localStorage.currentOrder){
-//						this.Parameters.forEach(function(o, i){
-//							if(localStorage.currentOrder == o.CommodityNo){
-//								this.$store.state.market.currentdetail = o;
-//							}
-//						}.bind(this));
-//					}
 					this.$store.state.market.currentdetail = this.Parameters[0];
+					this.$store.state.market.currentTradeDetails = this.tradeParameters[0];
+					this.$store.state.market.currentNo = this.Parameters[0].CommodityNo;
 				}
 			}
 		},
 		methods: {
+			...mapActions([
+				'initQuoteClient'
+			]),
 			quoteTabEvent: function(index){
 				this.quoteDefault = index;
-				if(index == 1) this.quoteShow = false;
+				if(index == 1){
+					this.quoteShow = false;
+				}else{
+					this.quoteShow = true;
+				}
 			},
 			addOptional: function(e){
 				if(this.addStar == true){
@@ -477,9 +487,14 @@
 				this.$store.state.isshow.isklineshow = false;
 				this.$store.state.isshow.islightshow = false;
 			},
+			toOpenAccount: function(){
+				this.$router.push({path: '/openAccount'});
+				this.$store.state.isshow.isfensshow = false;
+				this.$store.state.isshow.isklineshow = false;
+			},
 			toTradeLogin: function(){
-//				this.tradeLoginShow = true;
-				this.tradeLoginSpeShow = true;
+				this.$refs.tradeLogin.show = true;
+//				this.tradeLoginSpeShow = true;
 			}
 		},
 		mounted: function(){
@@ -725,6 +740,9 @@
 						span{
 							display: inline-block;
 							margin-right: 20px;
+							&:nth-child(2){
+								width: 45px;
+							}
 							&:last-child{
 								margin: 0;
 							}

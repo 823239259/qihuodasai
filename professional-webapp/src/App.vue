@@ -124,6 +124,9 @@
 			parameters(){
 				return this.$store.state.market.Parameters;
 			},
+			quoteInitStatus(){
+				return this.$store.state.market.quoteInitStatus;
+			},
 		},
 		filters:{
 			fixNumTwo: function(num){
@@ -223,7 +226,10 @@
 		},
 		mounted: function(){
 			//初始化行情
-			this.initQuoteClient();
+			if(this.quoteInitStatus == false){
+				this.initQuoteClient();
+				this.$store.state.market.quoteInitStatus == true;
+			}
 		}
 	}
 </script>

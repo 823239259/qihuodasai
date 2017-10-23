@@ -10,6 +10,9 @@
 	export default{
 		name: 'echarts',
 		computed: {
+			quoteInitStatus(){
+				return this.$store.state.market.quoteInitStatus;
+			},
 			currentdetail(){
 				return this.$store.state.market.currentdetail;
 			},
@@ -38,6 +41,11 @@
 				this.quoteSocket.send(JSON.stringify(data));
 			}
 		},	
+		methods: {
+			...mapActions([
+				'initQuoteClient'
+			]),
+		},
 		mounted: function(){
 			if(this.quoteInitStep != ''){
 				this.$store.state.isshow.isfens = true;
@@ -55,6 +63,24 @@
 				};
 				this.quoteSocket.send(JSON.stringify(data));
 			}
+		},
+		activated: function(){
+//			if(this.quoteInitStep != ''){
+//				this.$store.state.isshow.isfens = true;
+//				var data = {
+//					Method: "QryHistory",
+//					Parameters:{
+//						ExchangeNo: this.currentdetail.ExchangeNo,
+//						CommodityNo: this.currentdetail.CommodityNo,
+//						ContractNo: this.currentdetail.MainContract,
+//						HisQuoteType: 0,
+//						BeginTime: "",
+//						EndTime: "",
+//						Count: 0
+//					}
+//				};
+//				this.quoteSocket.send(JSON.stringify(data));
+//			}
 		}
 	}
 </script>

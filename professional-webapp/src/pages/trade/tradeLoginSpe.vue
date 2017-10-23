@@ -1,5 +1,5 @@
 <template>
-	<div id="trade_login">
+	<div id="trade_login" v-if="show">
 		<div class="bg"></div>
 		<div class="trade_login">
 			<div class="title">
@@ -39,6 +39,11 @@
 <script>
 	export default{
 		name: 'trade_login',
+		data(){
+			return{
+				show: false
+			}
+		}
 	}
 </script>
 
