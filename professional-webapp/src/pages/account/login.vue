@@ -1,8 +1,8 @@
 <template>
-	<div id="login">
+	<div id="login" v-if="show">
 		<div class="bg"></div>
 		<div class="login">
-			<p>登录<i class="ifont ifont_x">&#xe624;</i></p>
+			<p>登录<i class="ifont ifont_x" v-on:click="close">&#xe624;</i></p>
 			<input type="number" id="phone" class="input_1" placeholder="请输入手机号码" v-model.trim="phone" />
 			<input type="password" id="pwd" class="input_1" placeholder="请输入密码" v-model.trim="pwd"/><i class=" ifont ifont_eye" v-on:click="eyeEvent">&#xe64f;</i>
 			<p class="span_right" v-on:click="toForgetPassword">忘记密码?</p>
@@ -38,7 +38,8 @@
 				secret: '',
 				path: '',
 				str: '',
-				num: ''
+				num: '',
+				show : true
 			}
 		},
 		computed : {
@@ -75,12 +76,13 @@
 					this.$refs.dialog.isShow = true;
 					this.msg = '密码由6到18位字母和数字组成';
 				}else{
-//					this.$refs.codeDialog.path = this.path + '&' + Math.random();
+					this.$refs.codeDialog.path = this.path + '&' + Math.random();
 					//登录请求
 					var data = {
-						looginName:this.phone,
+						loginName:this.phone,
 						password : this.pwd
 					}
+					console.log()
 					axios({
 						method : "post",
 						timeout : 5000,
@@ -88,6 +90,7 @@
 						data : qs.stringify(data)
 					}).then((res)=>{
 						var data = res.data;
+						console.log(data);
 						if(data.success == true){
 							if(data.code ==1 ){
 								this.$refs.dialog.isShow = true;
@@ -95,7 +98,7 @@
 								this.token = data.data.token;
 								this.secret = data.data.secret;
 								var userData = {'username':this.phone,'password':this.pwd,'token':data.data.token,'secret':data.data.secret};
-								console.log(1111111111111111)
+								this.show=!this.show
 							}
 						}
 						else {
@@ -121,7 +124,6 @@
 							}
 						}
 					}).catch((err)=>{
-						console.log(err)
 						var data =err.data;
 						this.$refs.dialog.isShow = true;
 						this.msg = '网络不给力，请稍后再试！';
@@ -139,6 +141,9 @@
 					this.eyeShow = false;
 					$(e.target).removeClass("current").siblings("#pwd").attr("type",'password');
 				}
+			},
+			close :function(){
+				this.show =!this.show
 			}
 		}
 	}
