@@ -2330,23 +2330,24 @@ export default new Vuex.Store({
 						}
 					});
 				} else if(context.state.wsjsondata.Method == "OnRspSubscribe") { // 订阅成功信息
-					var key=JSON.parse(evt.data).Parameters.CommodityNo;
+					var key = JSON.parse(evt.data).Parameters.CommodityNo;
 					context.state.market.templateList[key]=JSON.parse(evt.data).Parameters;
-					
 					var dealDetails = {CommodityNo: '', data: []}, _dealDetails = {};
 					context.state.market.markettemp.forEach(function(e) {
-						if(e.CommodityNo == JSON.parse(evt.data).Parameters.CommodityNo) {
-							e.LastQuotation = JSON.parse(evt.data).Parameters.LastQuotation;
-							context.state.market.Parameters.push(e);
-							//订阅成功  成交信息
-							_dealDetails['time'] = JSON.parse(evt.data).Parameters.LastQuotation.DateTimeStamp.split(' ')[1];
-							_dealDetails['price'] = JSON.parse(evt.data).Parameters.LastQuotation.LastPrice;
-							_dealDetails['volume'] = JSON.parse(evt.data).Parameters.LastQuotation.LastVolume;
-							_dealDetails['_price'] = JSON.parse(evt.data).Parameters.LastQuotation.PreSettlePrice;
-							dealDetails.CommodityNo = e.CommodityNo;
-							dealDetails.data.push(_dealDetails);
-							context.state.market.tradeParameters.push(dealDetails); 
-						}
+//						if(e.IsUsed != 0){
+							if(e.CommodityNo == key) {
+								e.LastQuotation = JSON.parse(evt.data).Parameters.LastQuotation;
+								context.state.market.Parameters.push(e);
+								//订阅成功  成交信息
+								_dealDetails['time'] = e.LastQuotation.DateTimeStamp.split(' ')[1];
+								_dealDetails['price'] = e.LastQuotation.LastPrice;
+								_dealDetails['volume'] = e.LastQuotation.LastVolume;
+								_dealDetails['_price'] = e.LastQuotation.PreSettlePrice;
+								dealDetails.CommodityNo = e.CommodityNo;
+								dealDetails.data.push(_dealDetails);
+								context.state.market.tradeParameters.push(dealDetails); 
+							}
+//						}
 					});
 					context.state.market.quoteInitStep = true;
 					if(context.state.market.subscribeIndex == 1){
