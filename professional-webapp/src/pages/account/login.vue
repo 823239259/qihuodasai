@@ -20,6 +20,8 @@
 	import resetPassword from "./resetPassword.vue"
 	import tipsDialog from "../../components/tipsDialog.vue"
 	import codeDialog from "../../components/codeDialog.vue"
+	import qs from "qs"
+	import axios from "axios"
 	export default {
 		name : "login",
 		components : {forgetPassword,resetPassword,tipsDialog,codeDialog},
@@ -73,54 +75,57 @@
 					this.$refs.dialog.isShow = true;
 					this.msg = '密码由6到18位字母和数字组成';
 				}else{
-					this.$refs.codeDialog.path = this.path + '&' + Math.random();
+//					this.$refs.codeDialog.path = this.path + '&' + Math.random();
 					//登录请求
+					var data = {
+						looginName:this.phone,
+						password : this.pwd
+					}
 					axios({
-						method : 
+						method : "post",
+						timeout : 5000,
+						url : this.PATH+'/login',
+						data : qs.stringify(data)
+					}).then((res)=>{
+						var data = res.data;
+						if(data.success == true){
+							if(data.code ==1 ){
+								this.$refs.dialog.isShow = true;
+								this.msg = "登录成功";
+								this.token = data.data.token;
+								this.secret = data.data.secret;
+								var userData = {'username':this.phone,'password':this.pwd,'token':data.data.token,'secret':data.data.secret};
+								console.log(1111111111111111)
+							}
+						}
+						else {
+							this.num = data.data.num;
+							if(this.num>2){
+								this.$refs.codeDialog.isshow = true;
+								this.$refs.codeDialog.path = this.PATH + "/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
+								this.str = {
+									loginName : this.phone,
+									password :this.pwd
+								}
+							}
+							else {
+								this.$refs.dialog.isShow = true;
+								if(data.data.date != undefined){
+									var h = (data.data.date/3600).toString();
+									var hour = h.split('.')[0];
+									var minute = parseInt((h - hour) * 60);
+									this.msg = data.message + '，距解冻时间还有' + hour + '小时' + minute + '分';
+								}else{
+									this.msg = data.message;
+								}
+							}
+						}
+					}).catch((err)=>{
+						console.log(err)
+						var data =err.data;
+						this.$refs.dialog.isShow = true;
+						this.msg = '网络不给力，请稍后再试！';
 					})
-//					this.$http.post(this.PATH + '/login', {emulateJSON: true}, {
-//						params: {
-//							loginName: this.phone,
-//							password: this.pwd
-//						},
-//						timeout: 5000
-//					}).then(function(e) {
-//						var data = e.body;
-//						if(data.success == true ){
-//							if(data.code == 1){
-//								this.$refs.dialog.isShow = true;
-//								this.msg = '登录成功';
-//								this.token = data.data.token;
-//								this.secret = data.data.secret;
-//								var userData = {'username': this.phone, 'password': this.pwd, 'token': data.data.token, 'secret': data.data.secret};  
-//								localStorage.setItem("user", JSON.stringify(userData));
-//								this.$router.push({path: '/account'});
-//							}
-//						}else{
-//							this.num = data.data.num;
-//							if(this.num > 2){
-//								this.$refs.codeDialog.isshow = true;
-//								this.$refs.codeDialog.path = this.PATH + "/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
-//								this.str = {
-//									loginName: this.phone,
-//									password: this.pwd
-//								}
-//							}else{
-//								this.$refs.dialog.isShow = true;
-//								if(data.data.date != undefined){
-//									var h = (data.data.date/3600).toString();
-//									var hour = h.split('.')[0];
-//									var minute = parseInt((h - hour) * 60);
-//									this.msg = data.message + '，距解冻时间还有' + hour + '小时' + minute + '分';
-//								}else{
-//									this.msg = data.message;
-//								}
-//							}
-//						}
-//					}.bind(this), function() {
-//						this.$refs.dialog.isShow = true;
-//						this.msg = '网络不给力，请稍后再试！';
-//					});
 				}
 			},
 			tORegister : function(){
