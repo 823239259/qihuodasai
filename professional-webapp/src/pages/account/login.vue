@@ -8,9 +8,8 @@
 			<p class="span_right" v-on:click="toForgetPassword">忘记密码?</p>
 			<button class="btn yellow" v-on:click="login">登录</button>
 			<p class="color_light">还没有期货大赛账号？<span class="span_white" v-on:click="tORegister">立即注册</span></p>
-			<forgetPassword class="forgetPassword_show" v-if="isshow_forgetpassword" />
-			<resetPassword class="resetPassword_show" v-if="isshow_resetPassword" />
 		</div>
+		<forgetPassword class="forgetPassword_show" v-if="isshow_forgetpassword" />
 		<tipsDialog :msg="msgTips" time="2000" ref="dialog"></tipsDialog>
 		<codeDialog ref="codeDialog" :objstr="sendMsg" type="login"></codeDialog>
 	</div>
@@ -24,11 +23,10 @@
 	import axios from "axios"
 	export default {
 		name : "login",
-		components : {forgetPassword,resetPassword,tipsDialog,codeDialog},
+		components : {forgetPassword,tipsDialog,codeDialog},
 		data(){
 			return {
 				isshow_forgetpassword : false,
-				isshow_resetPassword : false,
 				isJump: '',
 				eyeShow: false,
 				msg: '',
@@ -58,7 +56,8 @@
 		},
 		methods : {
 			toForgetPassword : function(){
-				this.isshow_forgetpassword=!this.isshow_forgetpassword;
+				this.isshow_forgetpassword=true;
+				$(".login").css('display','none')
 			},
 			login : function (){
 				var phoneReg = /^(((13[0-9])|(14[5-7])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/;
@@ -98,6 +97,7 @@
 								this.token = data.data.token;
 								this.secret = data.data.secret;
 								var userData = {'username':this.phone,'password':this.pwd,'token':data.data.token,'secret':data.data.secret};
+								localStorage.setItem("user", JSON.stringify(userData));
 								this.show=!this.show
 							}
 						}
