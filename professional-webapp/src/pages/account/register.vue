@@ -107,10 +107,9 @@
 					var headers = {
 						version: this.version
 					};
-					pro.fetch("post",'/register',data,headers).then(function(res){
-						var data = res.data;
-						if(data.success == true){
-							if(data.code == 1){
+					pro.fetch("post",'/regist',data,headers).then(function(res){
+						if(res.success == true){
+							if(res.code == 1){
 								layer.msg('注册成功', {time: 1000});
 								this.phone = '';
 								this.pws = '';
@@ -120,13 +119,12 @@
 									this.$router.push({path:'/login'})
 								},1000)
 							}
-						}else{
-								layer.msg(data.message, {time: 1000});
-							}
+						}
 					}.bind(this)).catch(function(err){
+						console.log(err);
 						var data = err.data;
-						layer.msg('网络不给力，请稍后再试', {time: 1000});
-					}.bind(this))
+						layer.msg(data.message, {time: 1000});
+					})
 				}
 			},
 			close : function(){

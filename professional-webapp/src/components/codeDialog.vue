@@ -70,8 +70,7 @@
 							code: this.code
 						};
 						var headers = {version:this.version}
-						pro.fetch("post", '/login', data,headers).
-						then((res)=>{
+						pro.fetch("post", '/login', data,headers).then((res)=>{
 							var data = res.data;
 							if(data.success = true){
 								if(data.code = 1){
@@ -102,35 +101,31 @@
 							layer.msg('网络不给你，请稍后再试', {time: 1000});
 						})
 					}else if(this.type == 'register'){
-						if(this.code == ''){
-							layer.msg('请输入验证码', {time: 1000});
-						}else{
-							//请求发送验证码
-							var data ={
-								 	mobile: this.phone,
-									type: 1,
-									yzm: this.code
-							};
-							var headers = {version:this.version}
-							pro.fetch("post",'/sms',data,headers).then(function(res){
-								var data = res.data;
-								if(data.success == true){
-									if(data.code == 1){
-										layer.msg('发送成功', {time: 1000});
-										setTimeout(function(){
-												this.isshow = false;
-											}.bind(this),1000);
-										}
-									}else{
-										this.code = '';
-										this.path = this.path + '&' + Math.random()*10;
-										layer.msg(data.message, {time: 1000});
-									}
-							}.bind(this)).catch(function(err){
-								var data = err.data;
-								layer.msg('网络不给力，请稍后重试', {time: 1000});
-							}.bind(this))
-						}
+						//请求发送验证码
+						var data ={
+						 	mobile: this.phone,
+							type: 1,
+							yzm: this.code
+						};
+						var headers = {
+							version: this.version
+						};
+						pro.fetch('post', '/sms', data, headers).then(function(res){
+							console.log(res);
+							if(res.success == true){
+								if(res.code == 1){
+									layer.msg('发送成功', {time: 1000});
+									console.log(this.isshow);
+									this.isshow = false;
+								}
+							}else{
+								layer.msg(res.message, {time: 1000});
+							}
+						}.bind(this)).catch(function(err){
+							console.log(err);
+							var data = err;
+							layer.msg(data.message, {time: 1000});
+						});
 					}else if(this.type = 'findpwd'){
 						//请求发送验证码
 						var data={
