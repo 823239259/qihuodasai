@@ -51,7 +51,7 @@
 					</thead>
 					<tbody>
 						<template v-for="(v, index) in Parameters">
-							<tr :class="{current: currentQuote == index}" @click="listClickEvent(index, v.CommodityNo, v.MainContract, v.ExchangeNo)">
+							<tr :class="{current: currentQuoteAll == index}" @click="listClickEvent(index, v.CommodityNo, v.MainContract, v.ExchangeNo)">
 								<td>
 									<b>{{v.CommodityName}}</b>
 									<span>{{v.CommodityNo + v.MainContract}}</span>
@@ -390,6 +390,7 @@
 				quoteDefault: 0,
 				quoteShow: true,
 				currentQuote: 0,
+				currentQuoteAll: '',
 				optional: '添加自选',
 				addStar: true,
 				tradeLoginShow: true,
@@ -495,7 +496,13 @@
 					}
 				}.bind(this));
 				this.$store.state.market.currentNo = commodityNo;
-				this.currentQuote = i;
+				if(this.quoteShow == true){
+					this.currentQuote = i;
+					this.currentQuoteAll = -1;
+				}else{
+					this.currentQuoteAll = i;
+					this.currentQuote = -1;
+				}
 				var data = {
 					Method: "QryHistory",
 					Parameters:{
@@ -582,7 +589,6 @@
 		mounted: function(){
 			//初始化高度
 			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-//			$(".trade_right_top").height(h - 50 - 30);
 			$(".quote .cont").height(h - 50 - 30 - 45);
 			this.chartHeight = h - 50 -30 - 40;
 			//开始画图
