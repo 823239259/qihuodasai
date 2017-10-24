@@ -37,9 +37,6 @@
 			}
 		},
 		computed: {
-			msgTips: function(){
-				return this.msg;
-			},
 			PATH: function(){
 				return this.$store.getters.PATH;
 			},
@@ -126,10 +123,10 @@
 						}else{
 								layer.msg(data.message, {time: 1000});
 							}
-					}).bind(this).catch(function(err){
+					}.bind(this)).catch(function(err){
 						var data = err.data;
 						layer.msg('网络不给力，请稍后再试', {time: 1000});
-					}).bind(this)
+					}.bind(this))
 				}
 			},
 			close : function(){

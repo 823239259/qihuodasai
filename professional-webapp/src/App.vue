@@ -50,12 +50,12 @@
 					<em>400-852-8008</em>
 				</div>
 			</div>
-			<div class="fr">
+			<div class="fr" v-show="show_tologin">
 				<a href="javascript: void(0);" v-on:click="toLogin">登录</a>
 				<a href="javascript: void(0);" v-on:click="toRegister">注册</a>
 			</div>
 			<!--登陆后显示样式-->
-			<div class="fr fr_login">
+			<div class="fr_login" v-if="show_login">
 				<a href="javascript: void(0);">欢迎，<span class="userPhone"></span></a>
 				<a href="javascript: void(0);" v-on:click="exit">退出</a>
 			</div>
@@ -130,7 +130,9 @@
 				csAddressCurrent: false,
 				parametersRecommend: [],
 				userInfo : '',
-				isShow_exit : false
+				isShow_exit : false,
+				show_tologin : true,
+				show_login : false
 			}
 		},
 		computed: {
@@ -255,8 +257,18 @@
 			if(this.quoteInitStatus == false){
 				this.initQuoteClient();
 				this.$store.state.market.quoteInitStatus == true;
-			}
+			};
+			
 		},
+//		activated : {
+//			if(localStorage == ''){
+//				console.log(2222222222222)
+//			}else{
+//				console.log(333333333)
+//				this.show_tologin=false;
+//				this.show_login=true
+//			}
+//		}	
 	}
 </script>
 
@@ -413,7 +425,11 @@
 		}
 	}
 	.fr_login {
+		float: right;
 		display: none;
+		.userPhone{
+			$color: $yellow;
+		}
 	}
 	/*底部栏*/
 	.container_bottom{
@@ -488,5 +504,37 @@
 		right: 0;
 		z-index: -1;
 		border: none;
+	}
+	/*退出框*/
+	#isExit{
+		position: absolute;
+		top: 30%;
+		left: 40%;
+		width: 300px;
+		height: 120px;
+		text-align: center;
+		background-color: $blue;
+	}
+	.isExit {
+		z-index: 100;
+		.btn {
+			width: 120px;
+			height: 30px;
+		}
+		p {
+			&:nth-child(1){
+				height: 40px;
+				background: $bottom_color;
+				color: $white;
+				font-size: $fs16;
+				line-height: 40px;
+			}
+			&:nth-child(2){
+				height: 40px;
+				color: $white;
+				font-size: $fs16;
+				line-height: 40px;
+			}
+		}
 	}
 </style>

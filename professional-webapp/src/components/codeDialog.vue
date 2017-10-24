@@ -112,26 +112,25 @@
 									yzm: this.code
 							};
 							var headers = {version:this.version}
-							pro.fetch("post","/sms",data,headers).
-							then((res)=>{
-									var data = res.data;
-									if(data.success == true){
-										if(data.code == 1){
-											layer.msg('发送成功', {time: 1000});
-											setTimeout(function(){
-													this.isshow = false;
-												}.bind(this),1000);
-											}
-										}else{
-											this.code = '';
-											this.path = this.path + '&' + Math.random()*10;
-											layer.msg(data.message, {time: 1000});
+							pro.fetch("post",'/sms',data,headers).then(function(res){
+								var data = res.data;
+								if(data.success == true){
+									if(data.code == 1){
+										layer.msg('发送成功', {time: 1000});
+										setTimeout(function(){
+												this.isshow = false;
+											}.bind(this),1000);
 										}
-									}).catch((err)=>{
-										var data = err.data;
-										layer.msg('网络不给力，请稍后重试', {time: 1000});
-									})
-							}
+									}else{
+										this.code = '';
+										this.path = this.path + '&' + Math.random()*10;
+										layer.msg(data.message, {time: 1000});
+									}
+							}.bind(this)).catch(function(err){
+								var data = err.data;
+								layer.msg('网络不给力，请稍后重试', {time: 1000});
+							}.bind(this))
+						}
 					}else if(this.type = 'findpwd'){
 						//请求发送验证码
 						var data={
