@@ -128,10 +128,8 @@
 						code: this.code
 					};
 					var headers = {version:this.version}
-					pro.fetch('post', '/reset_password', headers, data
-					).then((res)=>{
+					pro.fetch("post",'reset_password',data,headers).then(function(res){
 						var data =res.data;
-						console.log(data);
 						if(data.success == true){
 							if(data.code == 1){
 								layer.msg('密码重置成功', {time: 1000});
@@ -146,8 +144,7 @@
 							this.num = data.data;
 							layer.msg(data.message, {time: 1000});
 						}
-					}).catch((err)=>{
-						var data =err.data;
+					}).bind(this).catch(function(err){
 						layer.msg('网络不给力，请稍后再试！', {time: 1000});
 					})
 				}
