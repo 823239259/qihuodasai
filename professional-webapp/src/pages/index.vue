@@ -89,8 +89,6 @@
 
 <script>
 	import pro from '../assets/js/common.js'
-	import axios from 'axios'
-	import qs from 'qs'
 	export default{
 		name:'index',
 		data(){
@@ -101,6 +99,7 @@
 				orderName: '',
 				orderNum: '',
 				orderNo: '',
+				orderId: '',
 				optional: '添加自选',
 				addStar: true,
 				isJump: '',
@@ -187,6 +186,8 @@
 					};
 					this.quoteSocket.send(JSON.stringify(datas));
 					this.$store.state.market.currentNo = this.Parameters[0].CommodityNo;
+					//是否是自选合约
+					this.isSelectedOrder();
 				}
 			},
 			quoteIndex: function(n, o){
@@ -254,6 +255,8 @@
 					}
 				};
 				this.quoteSocket.send(JSON.stringify(datas));
+				//是否自选
+				this.isSelectedOrder();
 			},
 			dblclickEvent: function(commodityNo){
 				this.$router.push({path: '/trade'});
@@ -269,8 +272,6 @@
 			},
 			addOptional: function(e){
 				if(this.addStar == true){
-					this.addStar = false;
-					this.optional = '取消自选';
 					var data = {
 						commodityCode: this.orderNo,
 						commodityName: this.orderName,
@@ -283,17 +284,65 @@
 						if(res.success == true){
 							if(res.code == 1){
 								layer.msg('添加成功', {time: 1000});
+								this.addStar = false;
+								this.optional = '取消自选';
 							}else{
 								layer.msg(res.message, {time: 1000});
 							}
 						}
-					}).catch(function(error){
-						layer.msg('网络不给力，请稍后再试', {time: 1000});
+					}.bind(this)).catch(function(error){
+						var data = err.data;
+						layer.msg(data.message, {time: 1000});
 					});
 				}else{
-					this.addStar = true;
-					this.optional = '添加自选';
+					var data = {
+						id: this.orderId
+					};
+					var headers = {
+						token:  this.userInfo.token,
+						secret: this.userInfo.secret
+					};
+					pro.fetch('post', 'contract/delOptional', data, headers).then(function(res){
+						if(res.success == true){
+							if(res.code == 1){
+								layer.msg('删除成功', {time: 1000});
+								this.addStar = true;
+								this.optional = '添加自选';
+							}else{
+								layer.msg(res.message, {time: 1000});
+							}
+						}
+					}.bind(this)).catch(function(err){
+						var data = err.data;
+						layer.msg(data.message, {time: 1000});
+					});
 				}
+			},
+			isSelectedOrder: function(){
+				if(!this.userInfo) return false;
+				this.addStar = true;
+				this.optional = '添加自选';
+				var headers = {
+					token:  this.userInfo.token,
+					secret: this.userInfo.secret,
+					version: ''
+				};
+				pro.fetch('post', 'contract/optional/list', '', headers).then(function(res){
+					if(res.success == true){
+						if(res.code == 1){
+							res.data.forEach(function(o, i){
+								if(o.commodityCode === this.orderNo){
+									this.addStar = false;
+									this.optional = '取消自选';
+									this.orderId = o.commodityCode;
+								}
+							}.bind(this));
+						}
+					}
+				}.bind(this)).catch(function(err){
+					var data = err.data;
+					layer.msg(data.message, {time: 1000});
+				});
 			}
 		},
 		mounted: function(){
