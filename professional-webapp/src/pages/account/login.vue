@@ -1,5 +1,5 @@
 <template>
-	<div id="login" v-if="show">
+	<div id="login">
 		<div class="bg"></div>
 		<div class="login">
 			<p>登录<i class="ifont ifont_x" v-on:click="close">&#xe624;</i></p>
@@ -9,24 +9,20 @@
 			<button class="btn yellow" v-on:click="login">登录</button>
 			<p class="color_light">还没有期货大赛账号？<span class="span_white" v-on:click="tORegister">立即注册</span></p>
 		</div>
-		<forgetPassword class="forgetPassword_show" v-if="isshow_forgetpassword" />
 		<tipsDialog :msg="msgTips" time="2000" ref="dialog"></tipsDialog>
 		<codeDialog ref="codeDialog" :objstr="sendMsg" type="login"></codeDialog>
 	</div>
 </template>
 <script>
-	import forgetPassword from "./forgetPassword.vue"
-	import resetPassword from "./resetPassword.vue"
 	import tipsDialog from "../../components/tipsDialog.vue"
 	import codeDialog from "../../components/codeDialog.vue"
 	import qs from "qs"
-	import axios from "axios"
+	import axios from "axios"	
 	export default {
 		name : "login",
-		components : {forgetPassword,tipsDialog,codeDialog},
+		components : {tipsDialog,codeDialog},
 		data(){
 			return {
-				isshow_forgetpassword : false,
 				isJump: '',
 				eyeShow: false,
 				msg: '',
@@ -37,7 +33,6 @@
 				path: '',
 				str: '',
 				num: '',
-				show : true
 			}
 		},
 		computed : {
@@ -56,8 +51,7 @@
 		},
 		methods : {
 			toForgetPassword : function(){
-				this.isshow_forgetpassword=true;
-				$(".login").css('display','none')
+				this.$router.push({path: 'forgetPassword'})
 			},
 			login : function (){
 				var phoneReg = /^(((13[0-9])|(14[5-7])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/;
@@ -131,7 +125,7 @@
 				}
 			},
 			tORegister : function(){
-				console.log(111)
+				this.$router.push({path:'register'})
 			},
 			eyeEvent : function(e){
 				if(this.eyeShow == false){
@@ -143,7 +137,7 @@
 				}
 			},
 			close :function(){
-				this.show =!this.show
+				this.$router.push({path:'index'})
 			}
 		}
 	}
@@ -151,8 +145,8 @@
 <style lang="scss" scoped type="text/css">
 	@import "../../assets/css/common.scss";
 	.login {
-		position: absolute;
-		top: 30%;
+		position: relative;
+		/*top: 30%;*/
 		left: 40%;
 		width: 400px;
 		height: 330px;
@@ -213,15 +207,5 @@
 		.span_white {
 			color: $white;
 		}
-	}
-	.forgetPassword_show {
-		position: fixed;
-		top: 300px;
-		left: 200px;
-	}
-	.resetPassword_show {
-		position: fixed;
-		top: 300px;
-		right: 200px;
 	}
 </style>

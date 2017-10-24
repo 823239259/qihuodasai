@@ -95,24 +95,20 @@
 			</keep-alive>
 			<router-view v-if="$route.meta.notKeepAlive"></router-view>
 		</div>
-		<login v-if="isshow_login"/>
-		<register v-if="isshow_register"/>
+		<!--<login v-if="isshow_login"/>-->
+		<!--<register v-if="isshow_register"/>-->
 		<warning v-if="warningShow"></warning>
 	</div>
 </template>
 
 <script>
-	import login from "./pages/account/login.vue"
-	import register from "./pages/account/register.vue"
 	import warning from "./pages/trade/warning.vue"
 	import { mapMutations,mapActions } from 'vuex'
 	export default {
 		name: 'app',
-		components : {login,register, warning},
+		components : { warning},
 		data(){
 			return {
-				isshow_login : false,
-				isshow_register : false,
 				warningShow: false,
 				fullScreenCurrent: false,
 				csAddress: '',
@@ -218,10 +214,10 @@
 				}
 			},
 			toRegister : function(){
-				 this.isshow_register=!this.isshow_register;
+				this.$router.push({path: '/register'});
 			},
 			toLogin : function(){
-                this.isshow_login=!this.isshow_login;
+				this.$router.push({path:'/login'});
 			},
 		},
 		mounted: function(){

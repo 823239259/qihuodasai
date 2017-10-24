@@ -8,6 +8,9 @@ import calendar from '../pages/calendar.vue'
 import download from '../pages/download.vue'
 import liveStream from '../pages/liveStream.vue'
 import openAccount from '../pages/openAccount.vue'
+import login from "../pages/account/login.vue"
+import register from "../pages/account/register.vue"
+import forgetPassword from "../pages/account/forgetPassword.vue"
 
 Vue.use(Router)
 
@@ -49,6 +52,18 @@ export default new Router({
 		{
 			path: '/test',
 			component: test
+		},
+		{
+			path: '/login',
+			component: login
+		},
+		{
+			path : '/register',
+			component: register
+		},
+		{
+			path : '/forgetPassword',
+			component : forgetPassword
 		}
 	]
 })

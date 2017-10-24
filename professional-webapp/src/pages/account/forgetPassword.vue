@@ -1,28 +1,34 @@
 <template>
 	<div id="forgetPassword">
-		<div class="forgetPassword">
-			<p><i class="ifont ifont_left">&#xe625;</i>忘记密码<i class="ifont ifont_right">&#xe624;</i></p>
+		<div class="bg"></div>
+		<div class="forgetPassword" >
+			<p><i class="ifont ifont_left" v-on:click="back">&#xe625;</i>忘记密码<i class="ifont ifont_right" v-on:click="close">&#xe624;</i></p>
 			<input type="text" id="phone" class="input_1"  placeholder="请输入手机号" v-model="phone"/>
 			<input type="text"id="pwd" class="input_2 input_4"  placeholder="验证码" v-model="code"/>
 			<i class="span_code" v-on:click="getcode">{{volid ? info : (time+'秒')}}</i>
 			<button class="btn blue" v-on:click="toResetPassword" >下一步</button>
 			<p class="color_light">还没有期货大赛账号？<span class="span_yellow">立即注册</span></p>
 		</div>
+		<div class="resetPassword">
+			<p><i class="ifont ifont_left" v-on:click="back_forget">&#xe625;</i>设置密码<i class="ifont ifont_right" v-on:click="close">&#xe624;</i></p>
+			<input type="password" id="pwd" class="input_1" placeholder="请输入新密码"v-model="pwd"  />
+			<input type="password" id="newPwd" class="input_2"  placeholder="确认新密码"v-model="newPwd"  />
+			<button class="btn yellow" v-on:click="toLogin">确认</button>
+			<p class="color_light">还没有期货大赛账号？<span class="span_white">立即注册</span></p>
+		</div>
 		<tipsDialog :msg="msgTips" ref="dialog"></tipsDialog>
 		<codeDialog ref="codeDialog" type="findpwd"></codeDialog>
-		<resetPassword v-if="isshow_resetPassword" class="show_reset"></resetPassword>
 	</div>
 </template>
 
 <script>
-	import resetPassword from "./resetPassword.vue"
 	import tipsDialog from "../../components/tipsDialog.vue"
 	import codeDialog from "../../components/codeDialog.vue"
 	import axios from "axios";
 	import qs from "qs";
 	export default {
 		name : "forgetPassword",
-		components : {tipsDialog,codeDialog,resetPassword},
+		components : {tipsDialog,codeDialog},
 		data(){
 			return{
 				msg: '',
@@ -32,7 +38,8 @@
 				info: '获取验证码',
 				phoneReg: /^(((13[0-9])|(14[5-7])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/,
 				num: 0,
-				isshow_resetPassword : false
+				pwd : '',
+				newPwd:'',
 			}
 		},
 		computed : {
@@ -110,23 +117,89 @@
 				}
 			}
 		},
-		toResetPassword : function(){
-			if(this.phone!=''&&this.code !=''){
-				this.isshow_resetPassword= true;
-				$(".forgetPassword").css('display','none')
-			}else{
-				this.$refs.dialog.isShow = true;
-				this.msg = "请填写完整信息"
+			toResetPassword : function(){
+				if(this.phone!=''&&this.code !=''){
+					$(".forgetPassword").css('display','none');
+					$(".resetPassword").css('display','block')
+				}else{
+					this.$refs.dialog.isShow = true;
+					this.msg = "请填写完整信息"
+				}
+			},
+			toLogin : function(){
+				if(this.pwd == ''){
+					this.$refs.dialog.isShow = true;
+					this.msg = '请输入新密码';
+				}else if(this.newPwd == ''){
+					this.$refs.dialog.isShow = true;
+					this.msg = '请确认新密码';
+				}else if(this.pwdReg.test(this.pwd) == false || this.pwdReg.test(this.newPwd) == false){
+					this.$refs.dialog.isShow = true;
+					this.msg = '密码格式错误';
+				}else if(this.pwd != this.newPwd){
+					this.$refs.dialog.isShow = true;
+					this.msg = '两次密码输入不一致';
+				}else{
+					//请求设置新密码
+					var data = {
+						mobile: this.phone,
+						password: this.pwd,
+						code: this.code
+					}
+					axios({
+						method : 'post',
+						url : this.PATH+'/reset_password',
+						timeout : 5000,
+						headers:{'version':this.version},
+						data : qs.stringify(data)
+					}).then((res)=>{
+						var data =res.data;
+						console.log(data);
+						this.$refs.dialog.isShow = true;
+						if(data.success == true){
+							if(data.code == 1){
+								this.msg = '密码重置成功';
+								setTimeout(function(){
+									this.$router.push({path: '/login', query: {isJump: 1}});
+									console.log("whisha")
+								}.bind(this), 1000);
+								this.pwd = '';
+								this.newPwd = '';
+							}
+						}else{
+							cosnole.log(6666666666)
+							this.code = '';
+							this.num = data.data;
+							this.msg = data.message;
+						}
+					}).catch((err)=>{
+						console.log(2222222222222);
+						var data =err.data;
+						this.$refs.dialog.isShow = true;
+						this.msg = '网络不给力，请稍后再试！'
+					})
+				}
+			},
+			back : function(){
+				this.$router.push({path:'login'});
+			},
+			back_forget : function(){
+				$(".forgetPassword").css("display","block");
+				$(".resetPassword").css("display","none");
+				this.phone = '',
+				this.code = ''
+			},
+			close : function(){
+				this.$router.push({path: 'index'})
 			}
-		}
 	}
 }
 </script>
 
 <style lang="scss" scoped type="text/css">
 	@import "../../assets/css/common.scss";
-	#forgetPassword {
-		position : absolute;
+	.forgetPassword {
+		position : relative;
 		left : 40%;
 		top:30%;
 		width: 400px;
@@ -135,7 +208,9 @@
 		color :$lightblue ;
 		background-color: $blue;
 		z-index:100;
-		p {
+		
+	}
+	p {
 			line-height : 40px;
 			color:$white;
 			&:nth-child(1) {
@@ -149,6 +224,9 @@
 			color: $white;
 			text-align: center;
 			border: 1px solid $bottom_color;
+			&:hover{
+				border: 1px solid $yellow;
+			}
 		}
 		
 		.ifont {
@@ -199,5 +277,16 @@
 		.span_yellow {
 			color: $yellow;
 		}
+	.resetPassword {
+		display: none;
+		position : relative;
+		left : 40%;
+		top:30%;
+		width: 400px;
+		height: 300px;
+		text-align : center;
+		color :$lightblue ;
+		background-color: $blue;
+		z-index:100;
 	}
 </style>

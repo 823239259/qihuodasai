@@ -1,5 +1,5 @@
 <template>
-	<div id="register" v-if="show">
+	<div id="register">
 		<div class="bg"></div>
 		<div class="register">
 			<p>注册<i class="ifont" v-on:click="close">&#xe624;</i></p>
@@ -37,8 +37,7 @@
 				info:'获取短信验证码',
 				phoneReg: /^(((13[0-9])|(14[5-7])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/,
 				pwdReg: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,18}$/,
-				path: '',
-				show : true,
+				path: ''
 			}
 		},
 		computed: {
@@ -154,10 +153,10 @@
 				}
 			},
 			close : function(){
-				this.show=!this.show
+				this.$router.push({path:'/index'})
 			},
 			toLogin : function(){
-				this.show = false;
+				this.$router.push({path:'/login'})
 			}
 		}
 		
@@ -166,7 +165,7 @@
 <style lang="scss" scoped type="text/css">
 	@import "../../assets/css/common.scss";
 	.register {
-		position: absolute;
+		position: relative;
 		top: 30%;
 		left: 40%;
 		width: 400px;
