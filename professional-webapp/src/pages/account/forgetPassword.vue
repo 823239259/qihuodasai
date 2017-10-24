@@ -16,18 +16,16 @@
 			<button class="btn yellow" v-on:click="toLogin">确认</button>
 			<p class="color_light">还没有期货大赛账号？<span class="span_white" v-on:click="toRegister">立即注册</span></p>
 		</div>
-		<tipsDialog :msg="msgTips" ref="dialog"></tipsDialog>
 		<codeDialog ref="codeDialog" type="findpwd"></codeDialog>
 	</div>
 </template>
 
 <script>
-	import tipsDialog from "../../components/tipsDialog.vue"
 	import codeDialog from "../../components/codeDialog.vue"
 	import pro from '../../assets/js/common.js'
 	export default {
 		name : "forgetPassword",
-		components : {tipsDialog,codeDialog},
+		components : {codeDialog},
 		data(){
 			return{
 				msg: '',
@@ -43,9 +41,6 @@
 			}
 		},
 		computed : {
-			msgTips: function(){
-				return this.msg;
-			},
 			PATH: function(){
 				return this.$store.getters.PATH;
 			},
@@ -67,11 +62,9 @@
 			getcode : function(e){
 				if($(e.target).hasClass('current')) return false;
 				if(this.phone == ''){
-					this.$refs.dialog.isShow = true;
-					this.msg = '请输入手机号';
+					layer.msg('请输入手机号', {time: 1000});
 				}else if(this.phoneReg.test(this.phone) == false){
-					this.$refs.dialog.isShow = true;
-					this.msg = '手机号格式错误';
+					layer.msg('手机格式错误', {time: 1000});
 				}else{
 					if(this.num && this.num > 2){
 						this.$refs.codeDialog.isshow = true;
@@ -88,17 +81,14 @@
 							var data = res.data;
 							if(data.success == true){
 								if(data.code == 1){
-									this.$refs.dialog.isShow = true;
-									this.msg = '发送成功';
+									layer.msg('发送成功', {time: 1000});
 								}
 							}else{
-								this.$refs.dialog.isShow = true;
-								this.msg = data.message;
+								layer.msg(data.message, {time: 1000});
 							}
 						}).catch((err)=>{
 							var data = err.data;
-							this.$refs.dialog.isShow = true;
-							this.msg = data.message;
+							layer.msg(data.message, {time: 1000});
 						})
 					//页面效果
 					$(e.target).addClass('current');
@@ -118,23 +108,18 @@
 					$(".forgetPassword").css('display','none');
 					$(".resetPassword").css('display','block')
 				}else{
-					this.$refs.dialog.isShow = true;
-					this.msg = "请填写完整信息"
+					layer.msg('请填写完整信息', {time: 1000});
 				}
 			},
 			toLogin : function(){
 				if(this.pwd == ''){
-					this.$refs.dialog.isShow = true;
-					this.msg = '请输入新密码';
+					layer.msg('请输入新密码', {time: 1000});
 				}else if(this.newPwd == ''){
-					this.$refs.dialog.isShow = true;
-					this.msg = '请确认新密码';
+					layer.msg('请确认新密码', {time: 1000});
 				}else if(this.pwdReg.test(this.pwd) == false || this.pwdReg.test(this.newPwd) == false){
-					this.$refs.dialog.isShow = true;
-					this.msg = '密码格式错误';
+					layer.msg('密码格式错误', {time: 1000});
 				}else if(this.pwd != this.newPwd){
-					this.$refs.dialog.isShow = true;
-					this.msg = '两次密码输入不一致';
+					layer.msg('两次密码输入不一致', {time: 1000});
 				}else{
 					//请求设置新密码
 					var data = {
@@ -147,10 +132,9 @@
 					).then((res)=>{
 						var data =res.data;
 						console.log(data);
-						this.$refs.dialog.isShow = true;
 						if(data.success == true){
 							if(data.code == 1){
-								this.msg = '密码重置成功';
+								layer.msg('密码重置成功', {time: 1000});
 								setTimeout(function(){
 									this.$router.push({path: '/login', query: {isJump: 1}});
 								}.bind(this), 1000);s
@@ -160,12 +144,11 @@
 						}else{
 							this.code = '';
 							this.num = data.data;
-							this.msg = data.message;
+							layer.msg(data.message, {time: 1000});
 						}
 					}).catch((err)=>{
 						var data =err.data;
-						this.$refs.dialog.isShow = true;
-						this.msg = '网络不给力，请稍后再试！'
+						layer.msg('网络不给力，请稍后再试！', {time: 1000});
 					})
 				}
 			},

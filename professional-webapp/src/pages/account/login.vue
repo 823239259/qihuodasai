@@ -9,17 +9,15 @@
 			<button class="btn yellow" v-on:click="login">登录</button>
 			<p class="color_light">还没有期货大赛账号？<span class="span_white" v-on:click="tORegister">立即注册</span></p>
 		</div>
-		<tipsDialog :msg="msgTips" time="2000" ref="dialog"></tipsDialog>
 		<codeDialog ref="codeDialog" :objstr="sendMsg" type="login"></codeDialog>
 	</div>
 </template>
 <script>
-	import tipsDialog from "../../components/tipsDialog.vue"
 	import codeDialog from "../../components/codeDialog.vue"
 	import pro from '../../assets/js/common.js'
 	export default {
 		name : "login",
-		components : {tipsDialog,codeDialog},
+		components : {codeDialog},
 		data(){
 			return {
 				isJump: '',
@@ -35,9 +33,6 @@
 			}
 		},
 		computed : {
-			msgTips: function(){
-				return this.msg;
-			},
 			sendMsg(){
 				if(this.str) return JSON.stringify(this.str);
 			},
@@ -56,17 +51,13 @@
 				var phoneReg = /^(((13[0-9])|(14[5-7])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/;
 				var pwdReg = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,18}$/;
 				if(this.phone == ''){
-					this.$refs.dialog.isShow = true;
-					this.msg = '请输入手机号';
+					layer.msg('请输入手机号', {time: 1000});
 				}else if(phoneReg.test(this.phone) == false){
-					this.$refs.dialog.isShow = true;
-					this.msg = '手机号格式错误';
+					layer.msg('手机格式错误', {time: 1000});
 				}else if(this.pwd == ''){
-					this.$refs.dialog.isShow = true;
-					this.msg = '请输入密码';
+					layer.msg('请输入密码', {time: 1000});
 				}else if(pwdReg.test(this.pwd) == false){
-					this.$refs.dialog.isShow = true;
-					this.msg = '密码由6到18位字母和数字组成';
+					layer.msg('密码由6到18位字母和数字组成', {time: 1000});
 				}else{
 //					this.$refs.codeDialog.path = this.PATH + '&' + Math.random();
 					//登录请求
@@ -111,46 +102,6 @@
 							}
 						}
 					}.bind(this));
-//					pro.fetch("post", '/login', info, headers).then((res)=>{
-//						var data = res.data;
-//						if(data.success == true){
-//							if(data.code ==1 ){
-//								console.log(2222);
-//								this.$refs.dialog.isShow = true;
-//								this.msg = "登录成功";
-//								this.token = data.data.token;
-//								this.secret = data.data.secret;
-//								var userData = {'username':this.phone,'password':this.pwd,'token':data.data.token,'secret':data.data.secret};
-//								localStorage.setItem("user", JSON.stringify(userData));
-//								this.$router.push({path: '/index'});
-//							}
-//						}else {
-//							this.num = data.data.num;
-//							if(this.num>2){
-//								this.$refs.codeDialog.isshow = true;
-//								this.$refs.codeDialog.path = this.PATH + "/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
-//								this.str = {
-//									loginName : this.phone,
-//									password :this.pwd
-//								}
-//							}else {
-//								this.$refs.dialog.isShow = true;
-//								if(data.data.date != undefined){
-//									var h = (data.data.date/3600).toString();
-//									var hour = h.split('.')[0];
-//									var minute = parseInt((h - hour) * 60);
-//									this.msg = data.message + '，距解冻时间还有' + hour + '小时' + minute + '分';
-//								}else{
-//									this.msg = data.message;
-//								}
-//							}
-//						}
-//					}).catch((err)=>{
-//						console.log(111111111111111111)
-//						var data = err.data;
-//						this.$refs.dialog.isShow = true;
-//						this.msg = '网络不给力，请稍后再试！';
-//					})
 				}
 			},
 			tORegister : function(){

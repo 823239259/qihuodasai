@@ -15,16 +15,13 @@
 				</div>
 			</div>
 		</div>
-		<tipsDialog :msg="msgTips" ref="dialog"></tipsDialog>
 	</div>
 </template>
 
 <script>
 	import pro from '../assets/js/common.js'
-	import tipsDialog from './tipsDialog.vue'
 	export default{
 		name: 'codeDialog',
-		components : {tipsDialog},
 		data(){
 			return{
 				isshow: false,
@@ -38,7 +35,6 @@
 			}
 		},
 		props: ['objstr','type'],
-		components: {tipsDialog},
 		computed: {
 			info: function(){
 				if(this.objstr){
@@ -51,11 +47,7 @@
 			PATH: function(){
 				return this.$store.getters.PATH;
 			},
-			msgTips: function(){
-				return this.msg;
-			},
 			version: function(){
-//				return JSON.parse(localStorage.version).ios;
 				return '1.1';
 			},
 		},
@@ -68,8 +60,7 @@
 			},
 			confirm: function(){
 				if(this.code == ''){
-					this.$refs.dialog.isShow = true;
-					this.msg = '请输入验证码';
+					layer.msg('请输入验证码', {time: 1000});
 				}else{
 					if(this.type == 'login'){
 //						请求认证
@@ -78,13 +69,13 @@
 							password: this.info.password,
 							code: this.code
 						};
-						pro.fetch("post", '/login', data).
+						var headers = {version:this.version}
+						pro.fetch("post", '/login', data,headers).
 						then((res)=>{
 							var data = res.data;
 							if(data.success = true){
 								if(data.code = 1){
-									this.$refs.dialog.isShow = true;
-									this.msg = '登录成功';
+									layer.msg('登录成功', {time: 1000});
 									this.token = data.data.token;
 									this.secret = data.data.secret;
 									var userData = {'username': this.info.loginName, 'password': this.info.password, 'token': data.data.token, 'secret': data.data.secret};  
@@ -98,11 +89,9 @@
 								this.code = '';
 								this.path = this.path + '&' + Math.random()*10;
 								if(data.code == 4){
-									this.$refs.dialog.isShow = true;
-									this.msg = data.message;
+									layer.msg(data.message, {time: 1000});
 								}else{
-									this.$refs.dialog.isShow = true;
-									this.msg = data.message;
+									layer.msg('data.message', {time: 1000});
 									setTimeout(function(){
 										this.isshow = false;
 									}.bind(this),1000);
@@ -110,13 +99,11 @@
 							}
 						}).catch((err)=>{
 							var data = err.data;
-							this.$refs.dialog.isShow = true;
-							this.msg = '网络不给力，请稍后再试！'
+							layer.msg('网络不给你，请稍后再试', {time: 1000});
 						})
 					}else if(this.type == 'register'){
 						if(this.code == ''){
-							this.$refs.dialog.isShow = true;
-							this.msg = '请输入验证码';
+							layer.msg('请输入验证码', {time: 1000});
 						}else{
 							//请求发送验证码
 							var data ={
@@ -125,13 +112,12 @@
 									yzm: this.code
 							};
 							var headers = {version:this.version}
-							pro.fetch("post","/sms",headers,data).
+							pro.fetch("post","/sms",data,headers).
 							then((res)=>{
 									var data = res.data;
 									if(data.success == true){
 										if(data.code == 1){
-											this.$refs.dialog.isShow = true;
-											this.msg = '发送成功';
+											layer.msg('发送成功', {time: 1000});
 											setTimeout(function(){
 													this.isshow = false;
 												}.bind(this),1000);
@@ -139,13 +125,11 @@
 										}else{
 											this.code = '';
 											this.path = this.path + '&' + Math.random()*10;
-											this.$refs.dialog.isShow = true;
-											this.msg = data.message;
+											layer.msg(data.message, {time: 1000});
 										}
 									}).catch((err)=>{
 										var data = err.data;
-										this.$refs.dialog.isShow = true;
-										this.msg = '网络不给力，请稍后再试！'
+										layer.msg('网络不给力，请稍后重试', {time: 1000});
 									})
 							}
 					}else if(this.type = 'findpwd'){
@@ -156,23 +140,21 @@
 								yzm: this.code
 						};
 						var headers = {version:this.version}
-						pro.fetch("post", '/sms', headers, data).then((res)=>{
+						pro.fetch("post", '/sms', data,headers).then((res)=>{
 							var data = res.data;
-							this.$refs.dialog.isShow = true;
 							if(data.success == true){
 								if(data.code == 1){
-									this.msg = '发送成功';
+									layer.msg('发送成功', {time: 1000});
 									setTimeout(function(){
 										this.isshow = false;
 									}.bind(this),1000);
 								}
 							}else{
-								this.msg = data.message;
+								layer.msg(data.message, {time: 1000});
 							}
 						}).catch((err)=>{
 							var data = err.data;
-							this.$refs.dialog.isShow = true;
-							this.msg = '网络不给力，请稍后再试！'
+							layer.msg('网络不给力，请稍后重试', {time: 1000});
 						})
 					}
 				}

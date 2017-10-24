@@ -13,16 +13,14 @@
 			<p class="color_light">已有期货大赛账号？<span class="span_white" v-on:click="toLogin">立即登录</span></p>
 		</div>
 		<codeDialog ref="codeDialog" type="register"></codeDialog>
-		<tipsDialog :msg="msgTips" ref="dialog"></tipsDialog>
 	</div>
 </template>
 <script>
-	import tipsDialog from "../../components/tipsDialog.vue"
 	import codeDialog from "../../components/codeDialog.vue"
 	import pro from '../../assets/js/common.js'
 	export default {
 		name : "register",
-		components : {tipsDialog,codeDialog},
+		components : {codeDialog},
 		data(){
 			return {
 				eyeShow: false,
@@ -63,11 +61,9 @@
 			getCode :function(e){
 				if($(e.target).hasClass('current')) return false;
 				if(this.phone == ''){
-					this.$refs.dialog.isShow = true;
-					this.msg = '请输入手机号';
+					layer.msg('请输入手机号', {time: 1000});
 				}else if(this.phoneReg.test(this.phone) == false){
-					this.$refs.dialog.isShow = true;
-					this.msg = '手机号格式错误';
+					layer.msg('手机格式错误', {time: 1000});
 				}else{
 					this.$refs.codeDialog.isshow = true;
 					this.$refs.codeDialog.path =  "http://test.api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
@@ -95,20 +91,15 @@
 			},
 			register : function(){
 				if(this.phone == ''){
-					this.$refs.dialog.isShow = true;
-					this.msg = '请输入手机号';
+					layer.msg('请输入手机号', {time: 1000});
 				}else if(this.phoneReg.test(this.phone) == false){
-					this.$refs.dialog.isShow = true;
-					this.msg = '手机号格式错误';
+					layer.msg('手机格式错误', {time: 1000});
 				}else if(this.code == ''){
-					this.$refs.dialog.isShow = true;
-					this.msg = '请输入手机验证码';
+					layer.msg('请输入手机验证码', {time: 1000});
 				}else if(this.pwd == ''){
-					this.$refs.dialog.isShow = true;
-					this.msg = '请输入密码';
+					layer.msg('请输入密码', {time: 1000});
 				}else if(this.pwdReg.test(this.pwd) == false){
-					this.$refs.dialog.isShow = true;
-					this.msg = '密码由6到18位字母和数字组成';
+					layer.msg('密码由6到18位字母和数字组成', {time: 1000});
 				}else{
 					//注册请求
 					var data = {
@@ -119,32 +110,26 @@
 					var headers = {
 						version: this.version
 					};
-					pro.fetch("post",'/regist',headers,data
-					).then((res)=>{
+					pro.fetch("post",'/register',data,headers).then(function(res){
 						var data = res.data;
 						if(data.success == true){
 							if(data.code == 1){
-								this.data.$refs.dialog.isShow = true;
-								this.msg = "注册成功";
+								layer.msg('注册成功', {time: 1000});
 								this.phone = '';
 								this.pws = '';
 								this.code = '';
 								this.time = 0;
 								setTimeout(function(){
-									this.$router.push({path:'login'})
+									this.$router.push({path:'/login'})
 								},1000)
 							}
 						}else{
-								console.log(data)
-								this.$refs.dialog.isShow = true;
-								this.msg = data.message;
+								layer.msg(data.message, {time: 1000});
 							}
-					}).catch((err)=>{
-						console.log(err.data)
+					}).bind(this).catch(function(err){
 						var data = err.data;
-						this.$refs.dialog.isShow = true;
-						this.msg = '网络不给力，请稍后再试！'
-					})
+						layer.msg('网络不给力，请稍后再试', {time: 1000});
+					}).bind(this)
 				}
 			},
 			close : function(){
