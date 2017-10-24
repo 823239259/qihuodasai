@@ -83,11 +83,8 @@
 							mobile:this.phone,
 							type : 2
 						};
-						pro.fetch({
-							method : "post",
-							url :'/sms',
-							data :data
-						}).then((res)=>{
+						pro.fetch("post",'/sms',data
+						).then((res)=>{
 							var data = res.data;
 							if(data.success == true){
 								if(data.code == 1){
@@ -146,12 +143,8 @@
 						code: this.code
 					};
 					var headers = {version:this.version}
-					axios({
-						method : 'post',
-						url :'/reset_password',
-						headers:headers,
-						data : qs.stringify(data)
-					}).then((res)=>{
+					pro.fetch('post', '/reset_password', headers, data
+					).then((res)=>{
 						var data =res.data;
 						console.log(data);
 						this.$refs.dialog.isShow = true;
@@ -160,7 +153,7 @@
 								this.msg = '密码重置成功';
 								setTimeout(function(){
 									this.$router.push({path: '/login', query: {isJump: 1}});
-								}.bind(this), 1000);
+								}.bind(this), 1000);s
 								this.pwd = '';
 								this.newPwd = '';
 							}
