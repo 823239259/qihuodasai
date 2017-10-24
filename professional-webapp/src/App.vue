@@ -54,8 +54,9 @@
 				<a href="javascript: void(0);" v-on:click="toLogin">登录</a>
 				<a href="javascript: void(0);" v-on:click="toRegister">注册</a>
 			</div>
+			<!--登陆后显示样式-->
 			<div class="fr fr_login">
-				<a href="javascript: void(0);">欢迎，<span></span></a>
+				<a href="javascript: void(0);">欢迎，<span class="userPhone"></span></a>
 				<a href="javascript: void(0);" v-on:click="exit">退出</a>
 			</div>
 		</div>
@@ -103,7 +104,7 @@
 		<!--<register v-if="isshow_register"/>-->
 		<warning v-if="warningShow"></warning>
 		<!--退出弹窗-->
-		<div id="isExit" v-show="">
+		<div id="isExit" v-show="isShow_exit">
 			<div class="bg"></div>
 			<div class="isExit">
 				<p>退回登录</p>
@@ -128,7 +129,8 @@
 				csAddress: '',
 				csAddressCurrent: false,
 				parametersRecommend: [],
-				userInfo : ''
+				userInfo : '',
+				isShow_exit : false
 			}
 		},
 		computed: {
@@ -238,6 +240,15 @@
 				this.$store.state.isshow.isfensshow = false;
 				this.$store.state.isshow.isklineshow = false;
 			},
+			exit : function(){
+				
+			},
+			confirm : function(){
+				
+			},
+			canal :function(){
+				
+			}
 		},
 		mounted: function(){
 			//初始化行情
@@ -400,6 +411,9 @@
 				border-color: $yellow;
 			}
 		}
+	}
+	.fr_login {
+		display: none;
 	}
 	/*底部栏*/
 	.container_bottom{
