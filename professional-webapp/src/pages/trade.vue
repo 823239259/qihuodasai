@@ -21,7 +21,7 @@
 					</thead>
 					<tbody>
 						<template v-for="(v, index) in selectedList">
-							<tr :class="{current: currentQuote == index}">
+							<tr :class="{current: currentQuote == index}" @click="listClickEvent(index, v.CommodityNo, v.MainContract, v.ExchangeNo)">
 								<td>
 									<b>{{v.CommodityName}}</b>
 									<span>{{v.CommodityNo + v.MainContract}}</span>
@@ -51,7 +51,7 @@
 					</thead>
 					<tbody>
 						<template v-for="(v, index) in Parameters">
-							<tr :class="{current: currentQuote == index}">
+							<tr :class="{current: currentQuote == index}" @click="listClickEvent(index, v.CommodityNo, v.MainContract, v.ExchangeNo)">
 								<td>
 									<b>{{v.CommodityName}}</b>
 									<span>{{v.CommodityNo + v.MainContract}}</span>
@@ -398,6 +398,7 @@
 				chartHeight: '',
 				tradeUser: '',
 				selectedList: [],
+				selectedData: '',
 			}
 		},
 		computed: {
@@ -415,6 +416,9 @@
 			},
 			currentTradeDetails(){
 				return this.$store.state.market.currentTradeDetails;
+			},
+			quoteSocket(){
+				return this.$store.state.quoteSocket;
 			},
 			dotSize(){
 				return this.$store.state.market.currentdetail.DotSize;
@@ -479,8 +483,51 @@
 				this.$store.state.isshow.isklineshow = false;
 				this.$store.state.isshow.islightshow = false;
 			},
+			listClickEvent: function(i, commodityNo, mainContract, exchangeNo){
+				this.Parameters.forEach(function(o, i){
+					if(commodityNo == o.CommodityNo){
+						this.$store.state.market.currentdetail = o;
+					}
+				}.bind(this));
+				this.tradeParameters.forEach(function(o, i){
+					if(commodityNo == o.CommodityNo){
+						this.$store.state.market.currentTradeDetails = o;
+					}
+				}.bind(this));
+				this.$store.state.market.currentNo = commodityNo;
+				this.currentQuote = i;
+				var data = {
+					Method: "QryHistory",
+					Parameters:{
+						ExchangeNo: exchangeNo,
+						CommodityNo: commodityNo,
+						ContractNo: mainContract,
+						HisQuoteType: 0,
+						BeginTime: "",
+						EndTime: "",
+						Count: 0
+					}
+				};
+				this.quoteSocket.send(JSON.stringify(data));
+				this.$store.state.market.selectTime = 1440;
+				var datas = {
+					Method: "QryHistory",
+					Parameters:{
+						ExchangeNo: exchangeNo,
+						CommodityNo: commodityNo,
+						ContractNo: mainContract,
+						HisQuoteType: 1440,
+						BeginTime: "",
+						EndTime: "",
+						Count: 0
+					}
+				};
+				this.quoteSocket.send(JSON.stringify(datas));
+			},
 			isSelectedOrder: function(){
 				if(!this.userInfo) return false;
+				this.addStar = true;
+				this.optional = '添加自选';
 				var headers = {
 					token:  this.userInfo.token,
 					secret: this.userInfo.secret,
@@ -489,14 +536,21 @@
 				pro.fetch('post', 'contract/optional/list', '', headers).then(function(res){
 					if(res.success == true){
 						if(res.code == 1){
+							this.selectedData = res.data;
+							this.selectedList = [];
 							res.data.forEach(function(o, i){
+								if(o.commodityCode === this.currentdetail.CommodityNo){
+									this.addStar = false;
+									this.optional = '取消自选';
+									this.orderId = o.commodityCode;
+									this.currentQuote = i;
+								}
 								this.Parameters.forEach(function(v, k){
 									if(o.commodityCode == v.CommodityNo){
 										this.selectedList.push(v);
 									}
 								}.bind(this));
 							}.bind(this));
-							console.log(this.selectedList);
 						}
 					}
 				}.bind(this)).catch(function(err){
@@ -547,6 +601,10 @@
 			}
 			//获取平台账户登录信息
 			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
+			//获取自选合约列表
+			this.isSelectedOrder();
+		},
+		activated: function(){
 			//获取自选合约列表
 			this.isSelectedOrder();
 		}

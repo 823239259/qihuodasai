@@ -286,8 +286,6 @@
 								layer.msg('添加成功', {time: 1000});
 								this.addStar = false;
 								this.optional = '取消自选';
-							}else{
-								layer.msg(res.message, {time: 1000});
 							}
 						}
 					}.bind(this)).catch(function(error){
@@ -296,7 +294,7 @@
 					});
 				}else{
 					var data = {
-						id: this.orderId
+						commodityCode: this.orderId
 					};
 					var headers = {
 						token:  this.userInfo.token,
@@ -319,6 +317,7 @@
 				}
 			},
 			isSelectedOrder: function(){
+				console.log(this.userInfo);
 				if(!this.userInfo) return false;
 				this.addStar = true;
 				this.optional = '添加自选';
@@ -328,6 +327,7 @@
 					version: ''
 				};
 				pro.fetch('post', 'contract/optional/list', '', headers).then(function(res){
+					console.log(res);
 					if(res.success == true){
 						if(res.code == 1){
 							res.data.forEach(function(o, i){
