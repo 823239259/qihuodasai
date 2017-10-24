@@ -70,54 +70,87 @@
 				}else{
 //					this.$refs.codeDialog.path = this.PATH + '&' + Math.random();
 					//登录请求
-					console.log(11111);
-					var data = {
+					var info = {
 						loginName: this.phone,
 						password : this.pwd
 					};
 					var headers = {
 						version: 1.1
-					}
-					pro.fetch("post", '/login', data, headers).then((res)=>{
-						var data = res.data;
-						if(data.success == true){
-							if(data.code ==1 ){
-								this.$refs.dialog.isShow = true;
-								this.msg = "登录成功";
-								this.token = data.data.token;
-								this.secret = data.data.secret;
-								var userData = {'username':this.phone,'password':this.pwd,'token':data.data.token,'secret':data.data.secret};
+					};
+					pro.fetch('post', '/login', info, headers).then(function(res){
+						if(res.success == true){
+							if(res.code == 1){
+								layer.msg('登录成功', {time: 1000});
+								this.token = res.data.token;
+								this.secret = res.data.secret;
+								var userData = {'username':this.phone,'password':this.pwd,'token':res.data.token,'secret':res.data.secret};
 								localStorage.setItem("user", JSON.stringify(userData));
 								this.$router.push({path: '/index'});
 							}
-						}else {
+						}
+					}.bind(this)).catch(function(err){
+						var data = err.data;
+						if(data.success == false){
 							this.num = data.data.num;
-							if(this.num>2){
+							if(this.num > 2){
 								this.$refs.codeDialog.isshow = true;
 								this.$refs.codeDialog.path = this.PATH + "/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
 								this.str = {
 									loginName : this.phone,
 									password :this.pwd
 								}
-							}
-							else {
-								this.$refs.dialog.isShow = true;
+							}else {
 								if(data.data.date != undefined){
 									var h = (data.data.date/3600).toString();
 									var hour = h.split('.')[0];
 									var minute = parseInt((h - hour) * 60);
-									this.msg = data.message + '，距解冻时间还有' + hour + '小时' + minute + '分';
+									layer.msg(data.message + '，距解冻时间还有' + hour + '小时' + minute + '分', {time: 1000});
 								}else{
-									this.msg = data.message;
+									layer.msg(data.message, {time: 1000});
 								}
 							}
 						}
-					}).catch((err)=>{
-						console.log(111111111111111111)
-						var data =err.data;
-						this.$refs.dialog.isShow = true;
-						this.msg = '网络不给力，请稍后再试！';
-					})
+					}.bind(this));
+//					pro.fetch("post", '/login', info, headers).then((res)=>{
+//						var data = res.data;
+//						if(data.success == true){
+//							if(data.code ==1 ){
+//								console.log(2222);
+//								this.$refs.dialog.isShow = true;
+//								this.msg = "登录成功";
+//								this.token = data.data.token;
+//								this.secret = data.data.secret;
+//								var userData = {'username':this.phone,'password':this.pwd,'token':data.data.token,'secret':data.data.secret};
+//								localStorage.setItem("user", JSON.stringify(userData));
+//								this.$router.push({path: '/index'});
+//							}
+//						}else {
+//							this.num = data.data.num;
+//							if(this.num>2){
+//								this.$refs.codeDialog.isshow = true;
+//								this.$refs.codeDialog.path = this.PATH + "/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
+//								this.str = {
+//									loginName : this.phone,
+//									password :this.pwd
+//								}
+//							}else {
+//								this.$refs.dialog.isShow = true;
+//								if(data.data.date != undefined){
+//									var h = (data.data.date/3600).toString();
+//									var hour = h.split('.')[0];
+//									var minute = parseInt((h - hour) * 60);
+//									this.msg = data.message + '，距解冻时间还有' + hour + '小时' + minute + '分';
+//								}else{
+//									this.msg = data.message;
+//								}
+//							}
+//						}
+//					}).catch((err)=>{
+//						console.log(111111111111111111)
+//						var data = err.data;
+//						this.$refs.dialog.isShow = true;
+//						this.msg = '网络不给力，请稍后再试！';
+//					})
 				}
 			},
 			tORegister : function(){
