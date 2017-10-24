@@ -19,8 +19,6 @@
 <script>
 	import tipsDialog from "../../components/tipsDialog.vue"
 	import codeDialog from "../../components/codeDialog.vue"
-	import axios from "axios";
-	import qs from "qs";
 	import pro from '../../assets/js/common.js'
 	export default {
 		name : "register",
@@ -137,7 +135,7 @@
 								this.code = '';
 								this.time = 0;
 								setTimeout(function(){
-									this.isShow = false;
+									this.$router.push({path:'login'})
 								},1000)
 							}
 						}else{

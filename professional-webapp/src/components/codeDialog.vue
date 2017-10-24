@@ -20,8 +20,7 @@
 </template>
 
 <script>
-	import axios from "axios";
-	import qs from "qs";
+	import pro from '../assets/js/common.js'
 	import tipsDialog from './tipsDialog.vue'
 	export default{
 		name: 'codeDialog',
@@ -75,15 +74,14 @@
 					if(this.type == 'login'){
 //						请求认证
 						var data = {
-								loginName: this.info.loginName,
-								password: this.info.password,
-								code: this.code
-							}
-						axios({
-							method:"POST",
-							url:this.PATH+"/login",
-							timeout:5000,
-							data : qs.stringify(data)
+							loginName: this.info.loginName,
+							password: this.info.password,
+							code: this.code
+						};
+						pro.fetch({
+							method:"post",
+							url:"/login",
+							data : data
 						}).then((res)=>{
 							var data = res.data;
 							if(data.success = true){
@@ -97,7 +95,6 @@
 									this.code = '';
 									setTimeout(function(){
 										this.isshow = false;
-										console.log(1111111111111111111)
 									},1000)
 								}
 							}else {
@@ -113,9 +110,7 @@
 										this.isshow = false;
 									}.bind(this),1000);
 								}
-								
 							}
-							
 						}).catch((err)=>{
 							var data = err.data;
 							this.$refs.dialog.isShow = true;
@@ -131,13 +126,13 @@
 								 	mobile: this.phone,
 									type: 1,
 									yzm: this.code
-								}
-							axios({
+							};
+							var headers = {version:this.version}
+							pro.fetch({
 								    method:"post",
-								    url:this.PATH+"/sms",
-								    headers: {'version': this.version},
-								    timeout: 5000,
-								    data:qs.stringify(data)
+								    url:"/sms",
+								    headers: headers,
+								    data:data
 								}).then((res)=>{
 									var data = res.data;
 									if(data.success == true){
@@ -166,13 +161,13 @@
 								mobile: this.phone,
 								type: 2,
 								yzm: this.code
-							}
-						axios({
+						};
+						var headers = {version:this.version}
+						pro.fetch({
 							method : "POST",
-							url : this.PATH+'/sms',
-							header : {'version' : this.version},
-							timeout : 5000,
-							data:qs.stringify(data)
+							url : '/sms',
+							header : headers,
+							data:data
 						}).then((res)=>{
 							var data = res.data;
 							this.$refs.dialog.isShow = true;

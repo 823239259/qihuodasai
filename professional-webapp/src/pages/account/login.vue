@@ -16,8 +16,7 @@
 <script>
 	import tipsDialog from "../../components/tipsDialog.vue"
 	import codeDialog from "../../components/codeDialog.vue"
-	import qs from "qs"
-	import axios from "axios"	
+	import pro from '../../assets/js/common.js'
 	export default {
 		name : "login",
 		components : {tipsDialog,codeDialog},
@@ -74,16 +73,13 @@
 					var data = {
 						loginName:this.phone,
 						password : this.pwd
-					}
-					console.log()
-					axios({
+					};
+					pro.fetch({
 						method : "post",
-						timeout : 5000,
-						url : this.PATH+'/login',
-						data : qs.stringify(data)
+						url :'/login',
+						data :data
 					}).then((res)=>{
 						var data = res.data;
-						console.log(data);
 						if(data.success == true){
 							if(data.code ==1 ){
 								this.$refs.dialog.isShow = true;

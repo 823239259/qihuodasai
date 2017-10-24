@@ -7,14 +7,14 @@
 			<input type="text"id="pwd" class="input_2 input_4"  placeholder="验证码" v-model="code"/>
 			<i class="span_code" v-on:click="getcode">{{volid ? info : (time+'秒')}}</i>
 			<button class="btn blue" v-on:click="toResetPassword" >下一步</button>
-			<p class="color_light">还没有期货大赛账号？<span class="span_yellow">立即注册</span></p>
+			<p class="color_light">还没有期货大赛账号？<span class="span_yellow" v-on:click="toRegister">立即注册</span></p>
 		</div>
 		<div class="resetPassword">
 			<p><i class="ifont ifont_left" v-on:click="back_forget">&#xe625;</i>设置密码<i class="ifont ifont_right" v-on:click="close">&#xe624;</i></p>
 			<input type="password" id="pwd" class="input_1" placeholder="请输入新密码"v-model="pwd"  />
 			<input type="password" id="newPwd" class="input_2"  placeholder="确认新密码"v-model="newPwd"  />
 			<button class="btn yellow" v-on:click="toLogin">确认</button>
-			<p class="color_light">还没有期货大赛账号？<span class="span_white">立即注册</span></p>
+			<p class="color_light">还没有期货大赛账号？<span class="span_white" v-on:click="toRegister">立即注册</span></p>
 		</div>
 		<tipsDialog :msg="msgTips" ref="dialog"></tipsDialog>
 		<codeDialog ref="codeDialog" type="findpwd"></codeDialog>
@@ -24,8 +24,7 @@
 <script>
 	import tipsDialog from "../../components/tipsDialog.vue"
 	import codeDialog from "../../components/codeDialog.vue"
-	import axios from "axios";
-	import qs from "qs";
+	import pro from '../../assets/js/common.js'
 	export default {
 		name : "forgetPassword",
 		components : {tipsDialog,codeDialog},
@@ -38,6 +37,7 @@
 				info: '获取验证码',
 				phoneReg: /^(((13[0-9])|(14[5-7])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/,
 				num: 0,
+				phoneReg: /^(((13[0-9])|(14[5-7])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/,
 				pwd : '',
 				newPwd:'',
 			}
@@ -82,12 +82,11 @@
 						var data = {
 							mobile:this.phone,
 							type : 2
-						}
-						axios({
+						};
+						pro.fetch({
 							method : "post",
-							url : this.PATH+'/sms',
-							timeout : 5000,
-							data : qs.stringify(data)
+							url :'/sms',
+							data :data
 						}).then((res)=>{
 							var data = res.data;
 							if(data.success == true){
@@ -145,12 +144,12 @@
 						mobile: this.phone,
 						password: this.pwd,
 						code: this.code
-					}
+					};
+					var headers = {version:this.version}
 					axios({
 						method : 'post',
-						url : this.PATH+'/reset_password',
-						timeout : 5000,
-						headers:{'version':this.version},
+						url :'/reset_password',
+						headers:headers,
 						data : qs.stringify(data)
 					}).then((res)=>{
 						var data =res.data;
@@ -161,19 +160,16 @@
 								this.msg = '密码重置成功';
 								setTimeout(function(){
 									this.$router.push({path: '/login', query: {isJump: 1}});
-									console.log("whisha")
 								}.bind(this), 1000);
 								this.pwd = '';
 								this.newPwd = '';
 							}
 						}else{
-							cosnole.log(6666666666)
 							this.code = '';
 							this.num = data.data;
 							this.msg = data.message;
 						}
 					}).catch((err)=>{
-						console.log(2222222222222);
 						var data =err.data;
 						this.$refs.dialog.isShow = true;
 						this.msg = '网络不给力，请稍后再试！'
@@ -191,7 +187,10 @@
 			},
 			close : function(){
 				this.$router.push({path: 'index'})
-			}
+			},
+			toRegister: function(){
+			this.$router.push({path:'register'})
+		}
 	}
 }
 </script>
@@ -276,6 +275,9 @@
 		}
 		.span_yellow {
 			color: $yellow;
+		}
+		.span_white {
+			color: $white;
 		}
 	.resetPassword {
 		display: none;
