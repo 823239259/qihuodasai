@@ -34,7 +34,7 @@
 				secret: '',
 				phone: '',
 				pwd: '',
-//				path: ''
+				path: ''
 			}
 		},
 		props: ['objstr','type'],
