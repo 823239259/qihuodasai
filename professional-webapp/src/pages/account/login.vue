@@ -29,7 +29,7 @@
 				pwd: '',
 				token: '',
 				secret: '',
-				path: '',
+//				path: '',
 				str: '',
 				num: '',
 			}
@@ -50,7 +50,7 @@
 		},
 		methods : {
 			toForgetPassword : function(){
-				this.$router.push({path: 'forgetPassword'})
+				this.$router.push({path: '/forgetPassword'})
 			},
 			login : function (){
 				var phoneReg = /^(((13[0-9])|(14[5-7])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/;
@@ -68,17 +68,13 @@
 					this.$refs.dialog.isShow = true;
 					this.msg = '密码由6到18位字母和数字组成';
 				}else{
-					this.$refs.codeDialog.path = this.path + '&' + Math.random();
+//					this.$refs.codeDialog.path = this.PATH + '&' + Math.random();
 					//登录请求
 					var data = {
-						loginName:this.phone,
+						loginName: this.phone,
 						password : this.pwd
 					};
-					pro.fetch({
-						method : "post",
-						url :'/login',
-						data :data
-					}).then((res)=>{
+					pro.fetch("post", '/login', data).then((res)=>{
 						var data = res.data;
 						if(data.success == true){
 							if(data.code ==1 ){
