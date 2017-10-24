@@ -35,7 +35,7 @@
 				info:'获取短信验证码',
 				phoneReg: /^(((13[0-9])|(14[5-7])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/,
 				pwdReg: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,18}$/,
-				path: ''
+//				path: ''
 			}
 		},
 		computed: {
@@ -119,12 +119,8 @@
 					var headers = {
 						version: this.version
 					};
-					pro.fetch({
-						method : "post",
-						url: '/regist',
-						headers : headers,
-						data : data
-					}).then((res)=>{
+					pro.fetch("post",'/regist',headers,data
+					).then((res)=>{
 						var data = res.data;
 						if(data.success == true){
 							if(data.code == 1){

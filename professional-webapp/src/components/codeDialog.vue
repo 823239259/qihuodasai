@@ -34,7 +34,7 @@
 				secret: '',
 				phone: '',
 				pwd: '',
-				path: ''
+//				path: ''
 			}
 		},
 		props: ['objstr','type'],
@@ -78,11 +78,8 @@
 							password: this.info.password,
 							code: this.code
 						};
-						pro.fetch({
-							method:"post",
-							url:"/login",
-							data : data
-						}).then((res)=>{
+						pro.fetch("post", '/login', data).
+						then((res)=>{
 							var data = res.data;
 							if(data.success = true){
 								if(data.code = 1){
@@ -128,12 +125,8 @@
 									yzm: this.code
 							};
 							var headers = {version:this.version}
-							pro.fetch({
-								    method:"post",
-								    url:"/sms",
-								    headers: headers,
-								    data:data
-								}).then((res)=>{
+							pro.fetch("post","/sms",headers,data).
+							then((res)=>{
 									var data = res.data;
 									if(data.success == true){
 										if(data.code == 1){
@@ -163,12 +156,7 @@
 								yzm: this.code
 						};
 						var headers = {version:this.version}
-						pro.fetch({
-							method : "POST",
-							url : '/sms',
-							header : headers,
-							data:data
-						}).then((res)=>{
+						pro.fetch("post", '/sms', headers, data).then((res)=>{
 							var data = res.data;
 							this.$refs.dialog.isShow = true;
 							if(data.success == true){

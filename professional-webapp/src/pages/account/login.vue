@@ -70,7 +70,6 @@
 				}else{
 //					this.$refs.codeDialog.path = this.PATH + '&' + Math.random();
 					//登录请求
-					console.log(11111);
 					var data = {
 						loginName: this.phone,
 						password : this.pwd
@@ -82,7 +81,7 @@
 						var data = res.data;
 						if(data.success == true){
 							if(data.code ==1 ){
-								this.$refs.dialog.isShow = true;
+//								this.$refs.dialog.isShow = true;
 								this.msg = "登录成功";
 								this.token = data.data.token;
 								this.secret = data.data.secret;
@@ -101,7 +100,7 @@
 								}
 							}
 							else {
-								this.$refs.dialog.isShow = true;
+//								this.$refs.dialog.isShow = true;
 								if(data.data.date != undefined){
 									var h = (data.data.date/3600).toString();
 									var hour = h.split('.')[0];
