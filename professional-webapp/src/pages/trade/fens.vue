@@ -40,7 +40,6 @@
 			}
 		},	
 		mounted: function(){
-			console.log(1111);
 			var h = this.$parent.chartHeight;
 			$("#fens").height(h/10*6.8);
 			$("#volume").height(h/10*3);

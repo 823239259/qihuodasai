@@ -20,34 +20,23 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>
-								<b>国际原油</b>
-								<span>CL1705</span>
-							</td>
-							<td>
-								<div class="fl">
-									<span>46.94</span>
-									<span>+0.24%</span>
-								</div>
-								<i class="ifont red fl">&#xe761;</i>
-							</td>
-							<td>10086</td>
-						</tr>
-						<tr>
-							<td>
-								<b>国际原油</b>
-								<span>CL1705</span>
-							</td>
-							<td>
-								<div class="fl">
-									<span>46.94</span>
-									<span>+0.24%</span>
-								</div>
-								<i class="ifont red fl">&#xe761;</i>
-							</td>
-							<td>10086</td>
-						</tr>
+						<template v-for="(v, index) in selectedList">
+							<tr :class="{current: currentQuote == index}">
+								<td>
+									<b>{{v.CommodityName}}</b>
+									<span>{{v.CommodityNo + v.MainContract}}</span>
+								</td>
+								<td>
+									<div class="fl">
+										<span :class="{red: v.LastQuotation.LastPrice > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice}">{{v.LastQuotation.LastPrice}}</span>
+										<span :class="{green: v.LastQuotation.ChangeRate < 0, red: v.LastQuotation.ChangeRate > 0}">{{v.LastQuotation.ChangeRate | fixNumTwo}}%</span>
+									</div>
+									<i class="ifont" v-show="v.LastQuotation.LastPrice >= v.LastQuotation.PreSettlePrice" :class="{red: v.LastQuotation.LastPrice > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice}">&#xe761;</i>
+									<i class="ifont" v-show="v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice" :class="{red: v.LastQuotation.LastPrice > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice}">&#xe76a;</i>
+								</td>
+								<td>{{v.LastQuotation.TotalVolume}}</td>
+							</tr>
+						</template>
 					</tbody>
 				</table>
 			</div>
@@ -408,6 +397,7 @@
 				chartShow: false,
 				chartHeight: '',
 				tradeUser: '',
+				selectedList: [],
 			}
 		},
 		computed: {
@@ -489,6 +479,31 @@
 				this.$store.state.isshow.isklineshow = false;
 				this.$store.state.isshow.islightshow = false;
 			},
+			isSelectedOrder: function(){
+				if(!this.userInfo) return false;
+				var headers = {
+					token:  this.userInfo.token,
+					secret: this.userInfo.secret,
+					version: ''
+				};
+				pro.fetch('post', 'contract/optional/list', '', headers).then(function(res){
+					if(res.success == true){
+						if(res.code == 1){
+							res.data.forEach(function(o, i){
+								this.Parameters.forEach(function(v, k){
+									if(o.commodityCode == v.CommodityNo){
+										this.selectedList.push(v);
+									}
+								}.bind(this));
+							}.bind(this));
+							console.log(this.selectedList);
+						}
+					}
+				}.bind(this)).catch(function(err){
+					var data = err.data;
+					layer.msg(data.message, {time: 1000});
+				});
+			},
 			toOpenAccount: function(){
 				this.$router.push({path: '/openAccount'});
 				this.$store.state.isshow.isfensshow = false;
@@ -511,13 +526,12 @@
 			}
 		},
 		mounted: function(){
-			console.log(2222);
 			//初始化高度
 			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 //			$(".trade_right_top").height(h - 50 - 30);
 			$(".quote .cont").height(h - 50 - 30 - 45);
 			this.chartHeight = h - 50 -30 - 40;
-			//开始画科
+			//开始画图
 			this.chartShow = true;
 			//调用下拉框
 			$(".slt-box").each(function(i, o){
@@ -531,6 +545,10 @@
 				this.chartHeight = h - 50 -30 - 40 - 280;
 				this.tradeUser = user.username;
 			}
+			//获取平台账户登录信息
+			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
+			//获取自选合约列表
+			this.isSelectedOrder();
 		}
 	}
 </script>
