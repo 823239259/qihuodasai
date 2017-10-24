@@ -144,6 +144,7 @@
 								this.msg = data.message;
 							}
 					}).catch((err)=>{
+						console.log(err.data)
 						var data = err.data;
 						this.$refs.dialog.isShow = true;
 						this.msg = '网络不给力，请稍后再试！'

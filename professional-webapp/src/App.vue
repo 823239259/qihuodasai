@@ -215,9 +215,13 @@
 			},
 			toRegister : function(){
 				this.$router.push({path: '/register'});
+				this.$store.state.isshow.isfensshow = false;
+				this.$store.state.isshow.isklineshow = false;
 			},
 			toLogin : function(){
 				this.$router.push({path:'/login'});
+				this.$store.state.isshow.isfensshow = false;
+				this.$store.state.isshow.isklineshow = false;
 			},
 		},
 		mounted: function(){
