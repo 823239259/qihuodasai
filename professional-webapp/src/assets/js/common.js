@@ -104,9 +104,9 @@ pro.fetch = function(type, url, params, header){
         	method: type,
 			url: url,
 			headers: {
-				token:  header ? header.token : '',
-				secret: header ? header.secret : '',
-				version: header ? header.version : ''
+				token:  header.token ? header.token : '',
+				secret: header.secret ? header.secret : '',
+				version: header.version ? header.version : ''
 			},
 			data: params
         }).then(response => {

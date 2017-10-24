@@ -70,11 +70,15 @@
 				}else{
 //					this.$refs.codeDialog.path = this.PATH + '&' + Math.random();
 					//登录请求
+					console.log(11111);
 					var data = {
 						loginName: this.phone,
 						password : this.pwd
 					};
-					pro.fetch("post", '/login', data).then((res)=>{
+					var headers = {
+						version: 1.1
+					}
+					pro.fetch("post", '/login', data, headers).then((res)=>{
 						var data = res.data;
 						if(data.success == true){
 							if(data.code ==1 ){
@@ -86,8 +90,7 @@
 								localStorage.setItem("user", JSON.stringify(userData));
 								this.$router.push({path: '/index'});
 							}
-						}
-						else {
+						}else {
 							this.num = data.data.num;
 							if(this.num>2){
 								this.$refs.codeDialog.isshow = true;
