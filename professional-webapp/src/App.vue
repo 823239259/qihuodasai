@@ -54,6 +54,10 @@
 				<a href="javascript: void(0);" v-on:click="toLogin">登录</a>
 				<a href="javascript: void(0);" v-on:click="toRegister">注册</a>
 			</div>
+			<div class="fr fr_login">
+				<a href="javascript: void(0);">欢迎，<span></span></a>
+				<a href="javascript: void(0);" v-on:click="exit">退出</a>
+			</div>
 		</div>
 		<div class="container_bottom">
 			<p v-if="parameters[0]">
@@ -98,6 +102,16 @@
 		<!--<login v-if="isshow_login"/>-->
 		<!--<register v-if="isshow_register"/>-->
 		<warning v-if="warningShow"></warning>
+		<!--退出弹窗-->
+		<div id="isExit" v-show="">
+			<div class="bg"></div>
+			<div class="isExit">
+				<p>退回登录</p>
+				<p>是否退出登录状态？</p>
+				<button class="yellow btn" v-on:click="confirm">确认</button>
+				<button class="green btn" v-on:click="canal">取消</button>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -114,6 +128,7 @@
 				csAddress: '',
 				csAddressCurrent: false,
 				parametersRecommend: [],
+				userInfo : ''
 			}
 		},
 		computed: {
@@ -230,7 +245,7 @@
 				this.initQuoteClient();
 				this.$store.state.market.quoteInitStatus == true;
 			}
-		}
+		},
 	}
 </script>
 
