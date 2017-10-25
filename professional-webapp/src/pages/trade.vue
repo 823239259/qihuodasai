@@ -330,10 +330,17 @@
 	import klineThirty from './trade/klineThirty.vue'
 	import klineDay from './trade/klineDay.vue'
 	import position from './trade/position.vue'
+	import order from './trade/order.vue'
+	import entrust from './trade/entrust.vue'
+	import stopOrder from './trade/stopOrder.vue'
+	import condition from './trade/condition.vue'
+	import todayDeal from './trade/todayDeal.vue'
+	import hidtroyDeal from './trade/hidtroyDeal.vue'
+	import moneyDetail from './trade/moneyDetail.vue'
 	export default{
 		name:'trade',
 		components: {tradeLogin, tradeLoginSpe, fens, light, klineOne, klineFive, klineFifteen, klineThirty, klineDay,
-			position,
+			position, order, entrust, stopOrder, condition, todayDeal, hidtroyDeal, moneyDetail
 		},
 		data(){
 			return{
@@ -468,6 +475,20 @@
 				this.selectedNum = index;
 				if(index == 0){
 					this.selectedTradeDetails = 'position';
+				}else if(index == 1){
+					this.selectedTradeDetails = 'order';
+				}else if(index == 2){
+					this.selectedTradeDetails = 'entrust';
+				}else if(index == 3){
+					this.selectedTradeDetails = 'stopOrder';
+				}else if(index == 4){
+					this.selectedTradeDetails = 'condition';
+				}else if(index == 5){
+					this.selectedTradeDetails = 'todayDeal';
+				}else if(index == 6){
+					this.selectedTradeDetails = 'hidtroyDeal';
+				}else if(index == 7){
+					this.selectedTradeDetails = 'moneyDetail';
 				}
 			},
 			listClickEvent: function(i, commodityNo, mainContract, exchangeNo){
