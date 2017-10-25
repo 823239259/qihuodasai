@@ -247,7 +247,7 @@
 								<li>
 									<label>合约代码</label>
 									<div class="slt-box">
-										<input type="text" class="slt" disabled="disabled" selectVal="0" value="富时A50"/>
+										<input type="text" class="slt" disabled="disabled" :selectVal="currentdetail.CommodityNo" :value="currentdetail.CommodityName"/>
 										<span class="tal-box"><span class="tal"></span></span>
 										<div class="slt-list">
 											<ul>
@@ -261,24 +261,25 @@
 								<li>
 									<label>订单类型</label>
 									<div class="col">
-										<span class="current">市价</span>
-										<span>限价</span>
+										<span :class="{current: priceShow == true}" @click="priceClick">市价</span>
+										<span :class="{current: !priceShow == true}" @click="priceClick">限价</span>
 									</div>
 								</li>
 								<li>
-									<p>市价</p>
+									<p v-show="priceShow">市价</p>
+									<input type="text" class="ipt" v-show="!priceShow" v-model="fixedPrice" />
 								</li>
 								<li>
 									<label>委托数量</label>
 									<div class="col">
-										<i class="ifont fl">&#xe6f2;</i>
-										<input type="text" class="fl" value="10" />
-										<i class="ifont fr">&#xe601;</i>
+										<i class="ifont fl" @click="reduce">&#xe6f2;</i>
+										<input type="text" class="fl" v-model="defaultNum" />
+										<i class="ifont fr" @click="add">&#xe601;</i>
 									</div>
 								</li>
 							</ul>
 							<div class="btn_box">
-								<button class="red">买入/市价</button>
+								<button class="red" @click="buy">买入/市价</button>
 								<button class="green">卖出/市价</button>
 							</div>
 						</div>
@@ -296,58 +297,18 @@
 					<div class="list">
 						<div class="title">
 							<ul>
-								<template></template>
-								<li class="current"><span>持仓</span></li>
-								<li><span>挂单</span></li>
-								<li><span>委托</span></li>
-								<li><span>止损单</span></li>
-								<li><span>条件单</span></li>
-								<li><span>当日成交</span></li>
-								<li><span>历史成交</span></li>
-								<li><span>资金明细</span></li>
+								<!--<template v-for="(key, index) in echartList">
+							<span :class="{current: selected == index}" @click="tabEvent(index)">{{key.name}}</span>
+						</template>-->
+								
+								
+								<template v-for="(v, index) in tradeDetailsList">
+									<li :class="{current: selectedNum == index}" @click="tradeDetailsTab(index)"><span>{{v}}</span></li>
+								</template>
 							</ul>
 						</div>
 						<div class="cont">
-							<table>
-								<thead>
-									<tr>
-										<td>合约名称</td>
-										<td>多空</td>
-										<td>手数</td>
-										<td>持仓均价</td>
-										<td>浮动盈利</td>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>富时A50</td>
-										<td class="red">多</td>
-										<td>1</td>
-										<td>25289</td>
-										<td class="red">+100.00：USD</td>
-									</tr>
-									<tr>
-										<td>富时A50</td>
-										<td class="green">空</td>
-										<td>1</td>
-										<td>25289</td>
-										<td class="green">-100.00：USD</td>
-									</tr>
-									<tr>
-										<td>富时A50</td>
-										<td class="red">多</td>
-										<td>1</td>
-										<td>25289</td>
-										<td class="red">+100.00：USD</td>
-									</tr>
-								</tbody>
-							</table>
-							<div class="tools">
-								<button class="btn blue">全部平仓</button>
-								<button class="btn blue">平仓</button>
-								<button class="btn blue">反手</button>
-								<button class="btn blue">止损止盈</button>
-							</div>
+							<component :is="selectedTradeDetails"></component>
 						</div>
 					</div>
 				</div>
@@ -368,9 +329,12 @@
 	import klineFifteen from './trade/klineFifteen.vue'
 	import klineThirty from './trade/klineThirty.vue'
 	import klineDay from './trade/klineDay.vue'
+	import position from './trade/position.vue'
 	export default{
 		name:'trade',
-		components: {tradeLogin, tradeLoginSpe, fens, light, klineOne, klineFive, klineFifteen, klineThirty, klineDay},
+		components: {tradeLogin, tradeLoginSpe, fens, light, klineOne, klineFive, klineFifteen, klineThirty, klineDay,
+			position,
+		},
 		data(){
 			return{
 				selected: 1,
@@ -389,6 +353,7 @@
 				quoteShow: true,
 				currentQuote: 0,
 				currentQuoteAll: '',
+				currentCommodityName: '',
 				optional: '添加自选',
 				addStar: true,
 				tradeLoginShow: true,
@@ -398,11 +363,22 @@
 				tradeUser: '',
 				selectedList: [],
 				selectedData: '',
+				priceShow: true,
+				defaultNum: 1,
+				tradeDetailsList: ['持仓','挂单','委托','止损单','条件单','当日成交','历史成交','资金明细'],
+				selectedTradeDetails: 'position',
+				selectedNum: 0,
 			}
 		},
 		computed: {
 			quoteInitStep(){
 				return this.$store.state.market.quoteInitStep;
+			},
+			quoteSocket(){
+				return this.$store.state.quoteSocket;
+			},
+			tradeSocket(){
+				return this.$store.state.tradeSocket;
 			},
 			Parameters(){
 				return this.$store.state.market.Parameters;
@@ -416,11 +392,11 @@
 			currentTradeDetails(){
 				return this.$store.state.market.currentTradeDetails;
 			},
-			quoteSocket(){
-				return this.$store.state.quoteSocket;
-			},
 			dotSize(){
 				return this.$store.state.market.currentdetail.DotSize;
+			},
+			fixedPrice(){
+				return this.currentdetail.LastQuotation.LastPrice;
 			}
 		},
 		filters:{
@@ -437,6 +413,12 @@
 					this.$store.state.market.currentdetail = this.Parameters[0];
 					this.$store.state.market.currentTradeDetails = this.tradeParameters[0];
 					this.$store.state.market.currentNo = this.Parameters[0].CommodityNo;
+				}
+			},
+			defaultNum: function(n,o){
+				this.defaultNum = parseInt(n);
+				if(n < 1 || n == ''){
+					this.defaultNum = 0;
 				}
 			}
 		},
@@ -481,6 +463,12 @@
 				this.$store.state.isshow.isfensshow = false;
 				this.$store.state.isshow.isklineshow = false;
 				this.$store.state.isshow.islightshow = false;
+			},
+			tradeDetailsTab: function(index){
+				this.selectedNum = index;
+				if(index == 0){
+					this.selectedTradeDetails = 'position';
+				}
 			},
 			listClickEvent: function(i, commodityNo, mainContract, exchangeNo){
 				this.Parameters.forEach(function(o, i){
@@ -528,6 +516,44 @@
 					}
 				};
 				this.quoteSocket.send(JSON.stringify(datas));
+			},
+			priceClick: function(e){
+				console.log($(e.currentTarget));
+				var index = $(e.currentTarget).index();
+				if(index == 0){
+					this.priceShow = true;
+				}else{
+					this.priceShow = false;
+				}
+			},
+			add: function(){
+				return this.defaultNum++;
+			},
+			reduce: function(){
+				return this.defaultNum--;
+			},
+			buy: function(){
+				if(this.priceShow == true){   //市价下单
+					var buildIndex = 0;
+					if(buildIndex > 100) buildIndex = 0;
+					var b = {
+						"Method":'InsertOrder',
+						"Parameters":{
+							"ExchangeNo": this.currentdetail.ExchangeNo,
+							"CommodityNo": this.currentdetail.CommodityNo,
+							"ContractNo": this.currentdetail.LastQuotation.ContractNo,
+							"OrderNum": this.defaultNum,
+							"Drection": 0,
+							"PriceType": 1,
+							"LimitPrice": 0.00,
+							"TriggerPrice": 0,
+							"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+						}
+					};
+					this.tradeSocket.send(JSON.stringify(b));
+				}else{
+					
+				}
 			},
 			isSelectedOrder: function(){
 				if(!this.userInfo) return false;
@@ -592,11 +618,49 @@
 			//开始画图
 			this.chartShow = true;
 			//调用下拉框
-			console.log($(".slt-box"));
 			$(".slt-box").each(function(i, o){
-				console.log(1122);
-				pro.selectEvent(o);
-			});
+				pro.selectEvent(o, function(data){
+					var commodityNo = data;
+					this.Parameters.forEach(function(o, i){
+						if(commodityNo == o.CommodityNo){
+							this.$store.state.market.currentdetail = o;
+							this.$store.state.market.currentNo = o.CommodityNo;
+							var data = {
+								Method: "QryHistory",
+								Parameters:{
+									ExchangeNo: o.ExchangeNo,
+									CommodityNo: o.CommodityNo,
+									ContractNo: o.MainContract,
+									HisQuoteType: 0,
+									BeginTime: "",
+									EndTime: "",
+									Count: 0
+								}
+							};
+							this.quoteSocket.send(JSON.stringify(data));
+							this.$store.state.market.selectTime = 1440;
+							var datas = {
+								Method: "QryHistory",
+								Parameters:{
+									ExchangeNo: o.ExchangeNo,
+									CommodityNo: o.CommodityNo,
+									ContractNo: o.MainContract,
+									HisQuoteType: 1440,
+									BeginTime: "",
+									EndTime: "",
+									Count: 0
+								}
+							};
+							this.quoteSocket.send(JSON.stringify(datas));
+						}
+					}.bind(this));
+					this.tradeParameters.forEach(function(o, i){
+						if(commodityNo == o.CommodityNo){
+							this.$store.state.market.currentTradeDetails = o;
+						}
+					}.bind(this));
+				}.bind(this));
+			}.bind(this));
 			//判断是否登录账户
 			var user = localStorage.tradeUser ? JSON.parse(localStorage.tradeUser) : '';
 			if(user){
@@ -1004,6 +1068,16 @@
 							border-radius: 5px;
 							color: $white;
 						}
+						.ipt{
+							float: right;
+							width: 298px;
+							height: 26px;
+							line-height: 26px;
+							text-align: center;
+							border: 1px solid #474c66;
+							border-radius: 5px;
+							color: $white;
+						}
 						.col{
 							float: left;
 							width: 300px;
@@ -1011,7 +1085,7 @@
 							border: 1px solid #474c66;
 							border-radius: 5px;
 							span{
-								width: 148px;
+								width: 149px;
 								text-align: center;
 								border-radius: 5px;
 								cursor: pointer;
@@ -1052,11 +1126,18 @@
 							color: $white;
 							border: none;
 							background: none;
+							cursor: pointer;
 							&.red{
-								background: $red;
+								background: #e63939;
+								&:hover{
+									background: $red;
+								}
 							}
 							&.green{
-								background: $green;
+								background: #36b374;
+								&:hover{
+									background: $green;
+								}
 							}
 						}
 					}
@@ -1108,27 +1189,6 @@
 					height: 210px;
 					overflow: hidden;
 					background: $blue;
-					table{
-						thead tr{
-							height: 30px;
-							background: $bottom_color;
-						}
-						td{
-							padding: 0 10px;
-						}
-						tbody tr{
-							height: 40px;
-							border-bottom: 1px solid $bottom_color;
-						}
-					}
-					.tools{
-						margin: 15px 0 0 10px;
-						.btn{
-							width: 90px;
-							height: 30px;
-							line-height: 30px;
-						}
-					}
 				}
 			}
 		}

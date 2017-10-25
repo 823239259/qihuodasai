@@ -1321,7 +1321,7 @@ export default new Vuex.Store({
 						// 查询历史成交
 						context.dispatch('qryHisTrade');
 						//启动交易心跳定时检查
-						context.dispatch('HeartBeatTimingCheck');
+//						context.dispatch('HeartBeatTimingCheck');
 					}else{
 //						console.log('登录失败');
 						context.state.market.tradeLoginSuccessMsg=parameters.Message;
@@ -2270,6 +2270,8 @@ export default new Vuex.Store({
 		HeartBeatTimingCheck: function(context){
 			setInterval(heartBeatUpdate,15000);	
 			function heartBeatUpdate(){
+				console.log(context.state.market.HeartBeat.lastHeartBeatTimestamp);
+				console.log(context.state.market.HeartBeat.oldHeartBeatTimestamp);
 				if(context.state.market.HeartBeat.lastHeartBeatTimestamp == context.state.market.HeartBeat.oldHeartBeatTimestamp){
 					console.log('交易服务器断开，正在重连');
 					context.state.market.tradeConnectedMsg='交易服务器断开，正在重连'+Math.ceil(Math.random()*10);
