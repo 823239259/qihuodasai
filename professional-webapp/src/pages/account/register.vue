@@ -142,7 +142,7 @@
 												console.log('自选合约添加成功');
 											}
 										}
-									}.bind(this)).catch(function(error){
+									}.bind(this)).catch(function(err){
 										var data = err.data;
 										layer.msg(data.message, {time: 1000});
 									});
@@ -150,8 +150,8 @@
 							}
 						}
 					}).catch(function(err){
-						console.log(err);
 						var data = err.data;
+						console.log(data);
 						layer.msg(data.message, {time: 1000});
 					})
 				}
@@ -168,82 +168,80 @@
 </script>
 <style lang="scss" scoped type="text/css">
 	@import "../../assets/css/common.scss";
-	#register{
-		height: 800px;
-	}
 	.register {
-		position: relative;
-		top: 30%;
-		left: 40%;
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		z-index : 100;
 		width: 400px;
+		height: 420px;
+		margin: -210px 0 0 -200px;
 		border-radius : 10px;
 		background-color: $blue;
 		text-align : center;
 		color :$lightblue ;
-		z-index : 100;
-		
 	}
 	p {
-			border-radius : 10px;
-			line-height : 40px;
-			color:$white;
-			&:nth-child(1) {
-				height: 40px;
-				background-color: $bottom_color;
-			}
-			&:nth-child(3) {
-				color: $lightblue;
-			}
-		}
-		input {
-			color: $white;
-			width: 320px;
+		border-radius : 10px;
+		line-height : 40px;
+		color:$white;
+		&:nth-child(1) {
 			height: 40px;
-			border: 1px solid $bottom_color;
-			&:hover {
-				border: 1px solid $yellow;
-			}
+			background-color: $bottom_color;
 		}
-		.input_4 {
-			position: relative;
-			left: 30px;
-			/*top: 10px;*/
-		}
-		.span_code {
-			position: relative;
-			right: 40px;
-			top: 16px;
-			color: $white;
-			font-size: $fs12;
-			display: inline-block;
-			width: 60px;
-			height: 20px;
-		}
-		.btn {
-			width : 320px;
-			height :40px;
-		}
-		.ifont {
-			float: right;
-			margin-right: 10px;
+		&:nth-child(3) {
 			color: $lightblue;
 		}
-		.ifont_eyes {
-			font-size: $fs20;
-			position: relative;
-			top: 40px;
-			right: 40px;
-			color: $lightblue;
+	}
+	input {
+		color: $white;
+		width: 320px;
+		height: 40px;
+		border: 1px solid $bottom_color;
+		&:hover {
+			border: 1px solid $yellow;
 		}
-		.input_5 {
-			margin-left: 26px;
-		}
-		.color_light {
-			color: $lightblue;
-			margin-top: 10px;
-			margin-bottom: 10px;
-		}
-		.span_white {
-			color: $white;
-		}
+	}
+	.input_4 {
+		position: relative;
+		left: 30px;
+		/*top: 10px;*/
+	}
+	.span_code {
+		position: relative;
+		right: 40px;
+		top: 16px;
+		color: $white;
+		font-size: $fs12;
+		display: inline-block;
+		width: 60px;
+		height: 20px;
+	}
+	.btn {
+		width : 320px;
+		height :40px;
+	}
+	.ifont {
+		float: right;
+		margin-right: 10px;
+		color: $lightblue;
+	}
+	.ifont_eyes {
+		font-size: $fs20;
+		position: relative;
+		top: 40px;
+		right: 40px;
+		color: $lightblue;
+	}
+	.input_5 {
+		margin-left: 26px;
+	}
+	.color_light {
+		color: $lightblue;
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+	.span_white {
+		color: $white;
+	}
 </style>
