@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/yhqh.css" />
+		<link rel="stylesheet" href="../css/own.css" />
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/common.js"></script>
+
+		<body style="background: #f6f6f6;">
+
+			<!--头部-->
+			<header class="mui-bar mui-bar-nav">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="font-size: 18px;margin-top: 6px;"></a>
+				<h1 class="mui-title " >交易记录</h1>
+			</header>
+			<div class="mui-content" style="text-align: center;">
+				<p style="margin-top: 60px;">空空如也，您还没有进行过交易</p>
+				<img src="../images/jyjl.png" style="width: 30%;margin-top: 20px;" />
+				<button type="button" class="mui-btn mui-btn-danger" style="width: 60%;margin: 20px;height: 40px;" id="to_kaihu">开户</button>
+				<button type="button" class="mui-btn mui-btn-primary" style="width: 60%;margin: 20px;height: 40px;" id="to_xq">看行情</button>
+			</div>	
+		</body>
+		<script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+			mui.plusReady(function(){			
+	//			去行情
+				document.getElementById("to_xq").addEventListener("tap",function(){
+					mui.openWindow({
+						url : "hangqing.html",
+						id  : "hangqing.html"
+					})
+				});
+				document.getElementById("to_kaihu").addEventListener("tap",function(){
+					mui.openWindow({
+						url : "caopanjl.html",
+						id  : "caopanjl"
+					})
+				});
+			})
+
+		</script>
+		<style type="text/css">
+			.price_show {
+				float: left;
+				text-align: center;
+				width: 40%;
+				height: 80px;
+				border: 1px solid gainsboro;
+				margin: 10px 5%;
+				box-shadow: 2px 2px 2px #e8e8e8;
+			}
+			.price_show > span {
+				color:#db3026 ;
+			}
+			.price_show > p {
+			margin-top: 10px;
+			}
+
+		</style>
+</html>

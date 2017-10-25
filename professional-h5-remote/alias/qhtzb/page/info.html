@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body style="background-color: #eaeaea;">
+		<header class="mui-bar mui-bar-nav myHeader_color">
+			<h1 class="mui-title myTitle_color">消息中心</h1>
+			<span style="font-size: 20px;line-height: 40px;" id="back_home"><</span>
+		</header>
+		<div class="mui-content"style="text-align: center;" >
+			<img src="../images/icon_info.png" alt="无消息" style="margin-top: 50px;"/>
+			<p style="font-size: 20px;margin-top: 20px;">当前还没有任何消息</p>
+		</div>
+		<script src="../../../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			mui.plusReady(function(){
+				document.getElementById("back_home").addEventListener("tap",function(){
+					mui.openWindow({
+						url : "../home.html",
+						id  : "home.html"
+					})
+				})
+			})
+		</script>
+	</body>
+
+</html>

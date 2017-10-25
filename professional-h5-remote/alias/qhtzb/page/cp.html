@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>操盘申请</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/yhqh.css" />
+		<link rel="stylesheet" href="../css/own.css" />
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/common.js"></script>
+		<script src="../js/jquery-1.11.3.js"></script>
+	</head>
+
+	<body style="background: white;">
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav" style="background-color: #262e38;">
+			<h1 class="mui-title" style="color:white;">操盘</h1>
+		</header>
+		<nav class="navlist">
+			<a href="javascript:void(0);" id="toHome">
+				<span class="mui-icon"><img class="mymenu-icon" id="mymenu-icon" src="../images/home_02.png"/></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a href="javascript:void(0);" id="tocp">
+				<span class="mui-icon"><img class="mymenu-icon" src="../images/cp_01.png"/></span>
+				<span class="mui-tab-label" style="color: #3285ea;">操盘</span>
+			</a>
+			<a class="yh_active" href="javascript:void(0);" id="tozixun">
+				<span class="mui-icon"><img class="mymenu-icon" src="../images/zx_02.png"/></span>
+				<span class="mui-tab-label" style="color: black;">资讯</span>
+			</a>
+			<a class="yh_active" href="javascript:void(0);" id="tofaxian">
+				<span class="mui-icon"><img class="mymenu-icon" src="../images/fx_02.png"/></span>
+				<span class="mui-tab-label" style="color: black;">发现</span>
+			</a>
+		</nav>
+		<div class="mui-content"style="background-color: #ffffff;" >
+			<button class="mui-btn "id="tocaopansq" style="background-color: #3285ea;width: 100%;height: 60px;color: white;line-height: 60px;font-size: 20px;">期货操盘申请</button>
+			<ul class="mui-table-view" >
+			    <li class="mui-table-view-cell">申请一个综合账号，可交易黄金、原油等所有产品</li>
+			</ul>
+			<ul class="mui-table-view">
+			    <li class="mui-table-view-cell">操盘保证金：<span style="color: gray;">3500元起</span></li>
+			</ul>
+			<ul class="mui-table-view">
+			    <li class="mui-table-view-cell">交易手续费：<span style="color: gray;">24.5元/单边起</span></li>
+			</ul>
+		</div>
+
+	</body>
+	<script type="text/javascript" charset="utf-8">
+		mui.init();
+		mui.plusReady(function(){
+			var dataUrl = {
+					home: "../home.html",
+					cp: "cp.html",
+					zixun:"zixun.html",
+					faxian:"faxian.html"
+				}
+			initBottom(dataUrl);
+			document.getElementById("tocaopansq").addEventListener("tap",function(){
+				mui.openWindow({
+					url : "caopansq.html",
+					id  : "caopansq.html"
+				})
+			})
+		});
+	</script>
+	<style type="text/css">
+	</style>
+
+</html>

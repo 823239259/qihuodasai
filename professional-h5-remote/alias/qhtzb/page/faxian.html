@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title> 我的</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/yhqh.css" />
+		<link rel="stylesheet" href="../css/own.css" />
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/mui.js"></script>
+		<script src="../js/common.js"></script>
+		<script src="../js/jquery-1.11.3.js"></script>
+	</head>
+	<body style="background:white;">		
+		<header class="mui-bar mui-bar-nav"style="background-color: #262e38;">
+			<h1 class="mui-title"  style="color: white;">发现</h1>
+		</header>
+		<!--菜单-->
+		<nav class="navlist">
+			<a href="javascript:void(0);" id="toHome">
+				<span class="mui-icon"><img class="mymenu-icon" id="mymenu-icon" src="../images/home_02.png"/></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a href="javascript:void(0);" id="tocp">
+				<span class="mui-icon"><img class="mymenu-icon" src="../images/cp_02.png"/></span>
+				<span class="mui-tab-label">操盘</span>
+			</a>
+			<a class="yh_active" href="javascript:void(0);" id="tozixun">
+				<span class="mui-icon"><img class="mymenu-icon" src="../images/zx_02.png"/></span>
+				<span class="mui-tab-label" style="color: black;">资讯</span>
+			</a>
+			<a class="yh_active" href="javascript:void(0);" id="tofaxian">
+				<span class="mui-icon"><img class="mymenu-icon" src="../images/fx_01.png"/></span>
+				<span class="mui-tab-label" style="color: #3285ea;">发现</span>
+			</a>
+		</nav>
+		<div class="mui-content">
+			<ul class="mui-table-view " style="margin-top:0px;"id="to_zixun">
+			    <li class="mui-table-view-cell">
+			        <a class="mui-navigate-right">资讯</a>
+			    </li>
+			</ul>
+			<ul class="mui-table-view" id="to_cp" id="to_cp">
+			    <li class="mui-table-view-cell">
+			        <a class="mui-navigate-right">操盘</a>
+			    </li>
+			</ul>
+			<ul class="mui-table-view" id="to_newpeople">
+			    <li class="mui-table-view-cell">
+			        <a class="mui-navigate-right">最新活动</a>
+			    </li>
+			</ul>
+			<ul class="mui-table-view" id="to_toast">
+			    <li class="mui-table-view-cell">
+			        <a class="mui-navigate-right">圈子</a>
+			    </li>
+			</ul>
+			<ul class="mui-table-view" id="to_toast1">
+			    <li class="mui-table-view-cell">
+			        <a class="mui-navigate-right">交易动态</a>
+			    </li>
+			</ul>
+			
+		</div>
+	</body>
+	<script type="text/javascript" charset="utf-8">
+		mui.init();	
+		mui.plusReady(function(){
+			var dataUrl = {
+				home: "../home.html",
+				cp: "cp.html",
+				zixun:"zixun.html",
+				faxian:"faxian.html"
+			}
+			initBottom(dataUrl);
+//			到敬请期待
+			document.getElementById("to_toast").addEventListener("tap",function(){
+				mui.toast("敬请期待")
+			})
+			document.getElementById("to_toast1").addEventListener("tap",function(){
+				mui.toast("敬请期待")
+			})
+			document.getElementById("to_zixun").addEventListener("tap",function(){
+				mui.openWindow({
+					url : "zixun.html",
+					id : "zixun.html"
+				})
+			})
+			document.getElementById("to_cp").addEventListener("tap",function(){
+				mui.openWindow({
+					url : "cp.html",
+					id : "cp.html"
+				})
+			})
+			document.getElementById("to_newpeople").addEventListener("tap",function(){
+				mui.openWindow({
+					url : "newpeople.html",
+					id : "newpeople.html"
+				})
+			})
+		})
+	</script>
+</html>
+
+
+		
+		

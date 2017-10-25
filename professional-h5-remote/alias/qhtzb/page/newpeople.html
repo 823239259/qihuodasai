@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body style="background-color: #eaeaea;">
+		<header class="mui-bar mui-bar-nav " style="background-color: #262e38;">
+			<h1 class="mui-title" style="color: white;">新手福利</h1>
+			<span style="font-size: 20px;line-height: 40px;color: white;" id="back_home"><</span>
+		</header>
+		<div class="mui-content"style="text-align: center;" >
+			<img src="../images/icon_newpeople.png" alt="新手福利" style="width: 100%;"/>
+		</div>
+		<script src="../../../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			mui.plusReady(function(){
+				document.getElementById("back_home").addEventListener("tap",function(){
+					mui.openWindow({
+						url : "faxian.html",
+						id  : "faxian.html"
+					})
+				})
+			})
+		</script>
+	</body>
+
+</html>

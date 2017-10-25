@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>操盘申请</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/yhqh.css" />
+		<link rel="stylesheet" href="../css/own.css" />
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/common.js"></script>
+		<script src="../js/jquery-1.11.3.js"></script>
+	</head>
+
+	<body style="background: #ffffff;">
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav myHeader_color">
+			<h1 class="mui-title myTitle_color">操盘申请</h1>
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"></a>
+			<a  id="tocpru">操盘细则</a>
+			
+		</header>
+		<div class="mui-content"style="background-color: #ffffff;" >
+			<div id="btn_list">
+			    <span  id="btn_price1" class="show_now">￥3500</span>
+			    <span  id="btn_price2">￥7,000</span>
+			    <span  id="btn_price3">￥12,000</span>
+			</div>
+			<ul class="mui-table-view">
+			    <li class="mui-table-view-cell"><p style="color: black;">操盘保证金(￥)：<span id="show_price1">3,500</span></p></li>
+			</ul>
+			<ul class="mui-table-view">
+			    <li class="mui-table-view-cell"><p style="color: black;">总操盘资金($)：<span id="show_price2">5,500美元</span></p></li>
+			</ul>
+			<ul class="mui-table-view">
+			    <li class="mui-table-view-cell"><p style="color: black;">亏损平仓线($)：<span  id="show_price3">5,270美元</span></p></li>
+			</ul>
+			<ul class="mui-table-view">
+			    <li class="mui-table-view-cell"><p style="color: black;">可交易品种:<span>一个账号可同时交易17种期货合约哦</span></p></li>
+			</ul>
+			<div id="btn_btm">
+				<button class="mui-btn mui-btn-warning" id="show_price4">总计（￥）：3,500元</button>
+				<button class="mui-btn mui-btn-primary">提交方案申请</button>
+				
+			</div>
+		</div>
+
+	</body>
+	<script type="text/javascript" charset="utf-8">
+		mui.init();
+		mui.plusReady(function(){
+			document.getElementById("back").addEventListener("tap",function(){
+				mui.openWindow({
+					url : "home.html",
+					id  : "home.html"
+				})
+			});			
+//				去操盘细则
+				document.getElementById("tocpru").addEventListener("tap",function(){
+					mui.openWindow({
+						url : "cpru.html",
+						id  : "cpru.html"
+					})
+				});
+//					改变价格
+					mui("#btn_list").on("tap","span",function(){
+						var show_price1 = document.getElementById("show_price1");
+						var show_price2 = document.getElementById("show_price2");
+						var show_price3 = document.getElementById("show_price3");
+						var show_price3 = document.getElementById("show_price4");
+						console.log(this.id)
+						switch(this.id) {
+							case "btn_price1":
+								show_price1.innerHTML = "￥3,500";
+								show_price2.innerHTML = "$5,500美元";
+								show_price3.innerHTML = "$5,270美元";
+								show_price4.innerHTML = "总计(￥):3,500元";
+								$("#btn_list > span").removeClass("show_now");
+								document.getElementById("btn_price1").setAttribute("class","show_now");
+							break;
+							case "btn_price2":
+								show_price1.innerHTML = "￥6,000";
+								show_price2.innerHTML = "$13,020美元";
+								show_price3.innerHTML = "$12,800美元";
+								show_price4.innerHTML = "总计(￥):6,000元";
+								$("#btn_list > span").removeClass("show_now");
+								document.getElementById("btn_price2").setAttribute("class","show_now");
+							break;
+							case "btn_price3":
+								show_price1.innerHTML = "￥10,000";
+								show_price2.innerHTML = "$22,160美元";
+								show_price3.innerHTML = "$21,060美元";
+								show_price4.innerHTML = "总计(￥):12,000元";
+								$("#btn_list > span").removeClass("show_now");
+								document.getElementById("btn_price3").setAttribute("class","show_now");
+							break;
+						}
+					});
+			});
+	</script>
+	<style type="text/css">
+		#tocpru {
+			color: black;
+			font-size: 16px;
+			margin-top: 10px;float: right;
+		}
+		#btn_btm {
+			position: absolute;
+			bottom:0px;
+			width: 100%;
+			text-align: center;
+		}
+		#btn_btm>button{
+			width: 48%;
+			height: 50px;
+		}
+		#btn_list {
+			width: 100%;
+			height: 100px;
+			text-align: center;
+		}
+		#btn_list .show_now {
+			color: white;
+			background-color: #3285ea;
+		}
+		#btn_list span {
+			line-height: 100px;
+			padding: 5%;
+			background-color: white;
+			color: #3285ea;
+			border: 1px solid #3285ea;
+			border-radius: 10px;
+		}
+	</style>
+
+</html>

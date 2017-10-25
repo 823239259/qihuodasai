@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav myHeader_color">
+			<h1 class="mui-title myTitle_color">帮助中心</h1>
+			<span style="font-size: 20px;line-height: 40px;" id="back_home"><</span>
+		</header>
+		<div class="mui-content"style="background-color: #ffffff;" >
+			<ul class="mui-table-view" id="to_kefu">
+			    <li class="mui-table-view-cell">
+			        <a class="mui-navigate-right">联系客服</a>
+			    </li>
+			</ul>
+		</div>
+		<script src="../../../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			mui.plusReady(function(){
+				document.getElementById("to_kefu").addEventListener("tap",function(){
+					var btnArray = ['确定', '取消']; 
+	                var Phone = "4001801860"; 
+	                mui.confirm('是否拨打客服热线 ' + Phone, '请联系客服申请账号', btnArray, function(e) { 
+	                    if (e.index == 0) { 
+	                        plus.device.dial(Phone, false); 
+	                    }  
+	                }); 
+				});
+				document.getElementById("back_home").addEventListener("tap",function(){
+					mui.openWindow({
+						url : "../home.html",
+						id  : "home.html"
+					})
+				})
+			})
+		</script>
+	</body>
+
+</html>
