@@ -14,29 +14,95 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>委托</td>
-					<td class="red">多</td>
-					<td>1</td>
-					<td>25289</td>
-					<td class="red">+100.00：USD</td>
-				</tr>
-				
+				<template v-for="v in entrustList">
+					<tr>
+						<td>{{v.commodityName}}</td>
+						<td>{{v.commodityStatus}}</td>
+						<td>{{v.buyOrSell}}</td>
+						<td>{{v.delegatePrice}}</td>
+						<td>{{v.delegateNum}}</td>
+						<td>{{v.TradeNum}}</td>
+						<td>{{v.RevokeNum}}</td>
+						<td>{{v.InsertDateTime}}</td>
+					</tr>
+				</template>
 			</tbody>
 		</table>
-		<div class="tools">
-			<button class="btn blue">全部平仓</button>
-			<button class="btn blue">平仓</button>
-			<button class="btn blue">反手</button>
-			<button class="btn blue">止损止盈</button>
-		</div>
 	</div>
 </template>
 
 <script>
-	import { mapMutations,mapActions } from 'vuex'
 	export default{
 		name: 'trade_details',
+		data(){
+			return{
+				entrustList: [],    //渲染委托列表数据
+			}
+		},
+		computed: {
+			orderTemplist(){
+				return this.$store.state.market.orderTemplist;
+			},
+			OrderType(){
+				return this.$store.state.market.OrderType;
+			},
+			OnRspOrderInsertEntrustCont(){
+				return this.$store.state.market.OnRspOrderInsertEntrustCont;
+			},
+		},
+		watch: {
+			OnRspOrderInsertEntrustCont: function(n, o){
+				if(n){
+					//更新委托列表数据
+					this.operateData(n);
+				}
+			}
+		},
+		methods: {
+			operateData: function(obj){
+				this.entrustList = [];
+				if(obj){
+					var data = {};
+					obj.forEach(function(o, i){
+						if(o.CommodityNo != ''){
+							data.commodityName = this.orderTemplist[o.CommodityNo].CommodityName;
+							data.commodityStatus = this.OrderType[o.OrderStatus];
+							data.buyOrSell = function(){
+								if(o.Drection==0){
+									return '买';
+								}else{
+									return '卖';
+								}
+							}();
+							data.delegatePrice = function(){
+								if(o.OrderPriceType==1){
+									return '市价';
+								}else{
+									return parseFloat(o.OrderPrice).toFixed(orderTemplist[o.CommodityNo].DotSize);
+								}
+							}();
+							data.delegateNum = o.OrderNum;
+							data.TradeNum = o.TradeNum;
+							data.RevokeNum = function(){
+								if(o.OrderStatus == 4){
+									return o.OrderNum - o.TradeNum;
+								}else{
+									return 0;
+								}
+							}();
+							data.InsertDateTime = o.InsertDateTime;
+							data.ContractCode = o.ContractCode;
+							data.OrderID = o.OrderID;
+							this.entrustList.unshift(data);
+						}
+					}.bind(this));
+				}
+			}
+		},
+		mounted: function(){
+			//获取委托列表数据
+			this.operateData(this.OnRspOrderInsertEntrustCont);
+		}
 	}
 </script>
 
@@ -53,14 +119,6 @@
 		tbody tr{
 			height: 40px;
 			border-bottom: 1px solid $bottom_color;
-		}
-	}
-	.tools{
-		margin: 15px 0 0 10px;
-		.btn{
-			width: 90px;
-			height: 30px;
-			line-height: 30px;
 		}
 	}
 </style>

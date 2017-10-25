@@ -38,6 +38,10 @@
 
 <style lang="scss" scoped>
 	@import "../../assets/css/common.scss";
+	#trade_details{
+		height: 210px;
+		position: relative;
+	}
 	table{
 		thead tr{
 			height: 30px;
@@ -52,6 +56,9 @@
 		}
 	}
 	.tools{
+		position: absolute;
+		bottom: 10px;
+		left: 0;
 		margin: 15px 0 0 10px;
 		.btn{
 			width: 90px;

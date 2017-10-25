@@ -404,7 +404,7 @@
 			},
 			fixedPrice(){
 				return this.currentdetail.LastQuotation.LastPrice;
-			}
+			},
 		},
 		filters:{
 			fixNumTwo: function(num){

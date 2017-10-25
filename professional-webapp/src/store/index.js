@@ -62,6 +62,7 @@ var market = {
 		quoteInitStep: '',      //判断行情Parameters是否已经初始化完
 		CacheLastQuote: [],    //缓存最新一条行情数据
 		volume: 0,           //缓存最新成交量
+		subscribeIndex: 1,   //订阅推送次数统计
 		
 		//行情历史合约数据（分时）
 		jsonData: {},
@@ -141,9 +142,6 @@ var market = {
 		option5: {},   //价格
 		//K线图（蜡烛图）数据
 		tempArr: [], 
-//		rawData: [],
-		//K线用到的数据
-//		chartDataC: null,
 		//闪电图用到的数据
 		lightChartTime: {
 			"time": [],
@@ -174,33 +172,8 @@ var market = {
 		currentdetail: {},
 		//当前选中合约的成交明细
 		currentTradeDetails: [],
-//		jsonDatatemp: {},
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		//存持仓列表
-		positionListCont:[],
-		ifUpdateHoldProfit:false, //是否使用最新行情更新持仓盈亏
-		ifUpdateAccountProfit:false,//// 是否可以更新账户盈亏标志：资金信息显示完毕就可以更新盈亏
-		qryHoldTotalArr:[],//持仓合计回复数组
-		qryHoldTotalKV:{},
-		quoteIndex: '',
-		quoteColor: '',
-		/**
-		 * 缓存账户信息
-		 */
+		//缓存账户信息
 		CacheAccount:{
 			moneyDetail:[],
 			jCacheAccount : {},	// key 为CurrencyNo
@@ -215,35 +188,7 @@ var market = {
 				RiskRate : 0.0	// 风险率
 			}
 		},
-		//切换后合约的名字
-		selectId: '',
-		//订阅推送次数统计
-		subscribeIndex:1,
-		
-		//持仓合约浮盈处理
-		CacheHoldFloatingProfit:{
-			jHoldFloatingProfit : {},	// 持仓合约对应浮盈
-			jCurrencyNoFloatingProfit : {}	// 币种对应浮盈
-		},
-		
-		jContractFloatingProfitVO:{
-			currencyNo:'',
-			floatingProfit:0.0
-		},
-		
-		//委托列表页面数据
-		entrustCont:[],
-		OnRspOrderInsertEntrustCont:[],
-		
-		//挂单页面列表
-		orderListCont:[],
-		OnRspOrderInsertOrderListCont:[],
-		
-		//成交记录列表
-		dealListCont:[],
-		OnRspQryTradeDealListCont:[],
-		
-		// 订单状态
+		//订单状态
 		OrderType:{
 			0: "订单已提交",
 			1: "排队中",
@@ -253,47 +198,63 @@ var market = {
 			5: "下单失败",
 			6: "未知"
 		},
+		forceLine: 0.00,    //强平线
+		//存持仓列表
+		positionListCont: [],
+		//委托列表页面数据
+		OnRspOrderInsertEntrustCont: [],
+		//挂单页面列表
+		OnRspOrderInsertOrderListCont: [],
+		//成交记录列表
+		OnRspQryTradeDealListCont: [],
+		//持仓合约浮盈处理
+		CacheHoldFloatingProfit: {
+			jHoldFloatingProfit: {},	// 持仓合约对应浮盈
+			jCurrencyNoFloatingProfit: {}	// 币种对应浮盈
+		},
+		ifUpdateHoldProfit: false,       //是否使用最新行情更新持仓盈亏
+		ifUpdateAccountProfit: false,   //是否可以更新账户盈亏标志：资金信息显示完毕就可以更新盈亏
+		qryHoldTotalArr: [],      //持仓合计回复数组
+		qryHoldTotalKV: {},
+		queryHisList: [], 
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		//切换后合约的名字
+		selectId: '',
+		jContractFloatingProfitVO:{
+			currencyNo:'',
+			floatingProfit:0.0
+		},
 		openChangealertCurrentObj:null,
-		
 		layer:null,
 		
-		queryHisList:[],
-		
-		forceLine:0.00,
-		
 		toast:'',
-		
-		quoteConnectedMsg:'',
-		
-		tradeConnectedMsg:'',
-		
-		tradeLoginSuccessMsg:'',
-		
 		tradeLoginfailMsg:'',
-		
 		layerOnRtnOrder: '',     //买入成功提示
-		
 //		appendOrderMsg: '',     //委托提示
 		
 		
-		//止损止盈---------------------------------
-		stopLossList:[],
-		hasNostopLossList:[],
+		//止损止盈
+		stopLossList: [],
+		hasNostopLossList: [],
+		stopLossTriggeredList: [],    //已触发列表
+		hasYesstopLossList: [],
+		stopLossListSelectOneObj: {},
 		
-		stopLossTriggeredList:[],//已触发列表
-		hasYesstopLossList:[],
-		
-		stopLossListSelectOneObj:{},
-		
-		//条件单--------------------------------
-		conditionList:[],//条件单未触发列表
-		conditionTriggeredList:[],//条件单已触发列表
-		noObj:'',
-		noListCont:[],
-		
-		triggerConditionList:[],
-		yesListCont:[],
+		//条件单
+		conditionList: [],   //条件单未触发列表
+//		conditionTriggeredList: [],  //条件单已触发列表
+//		noObj: '',
+		noListCont: [],
+		triggerConditionList: [],
+		yesListCont: [],
 		
 		
 	}
@@ -311,7 +272,6 @@ export default new Vuex.Store({
 		quoteSocket: {},
 		//交易websocket
 		tradeSocket: {},
-//		tempTradeapply: {}, //请求的操盘参数数据
 		//test 测试环境，online 正式环境
 		environment: 'test',
 		//打包的时候，值为 build ，开发的时候，值为 dev
@@ -328,7 +288,7 @@ export default new Vuex.Store({
 					return 'http://api.duokongtai.cn';
 				}
 			} else if(state.setting == 'nat') {
-//				return '/nat/vs-api';
+				return '/nat/vs-api';
 			}
 		}
 	},
@@ -615,7 +575,6 @@ export default new Vuex.Store({
 							normal: {
 								color: '#3689B3',
 								width: 1,
-								//	                    	opacity: 0.5
 							}
 						}
 					},
@@ -629,7 +588,6 @@ export default new Vuex.Store({
 							normal: {
 								color: '#B236B3',
 								width: 1,
-								//	                    	opacity: 0.5
 							}
 						}
 					},
@@ -643,7 +601,6 @@ export default new Vuex.Store({
 							normal: {
 								color: '#B37436',
 								width: 1,
-								//	                    	opacity: 0.5
 							}
 						}
 					},
@@ -657,15 +614,12 @@ export default new Vuex.Store({
 							normal: {
 								color: '#B2B336',
 								width: 1,
-								//	                    	opacity: 0.5
 							}
 						}
 					}
 
 				]
 			}
-			//			console.timeEnd('e');
-
 			var vol = [],
 				price = [],
 				time = [];
@@ -1300,56 +1254,50 @@ export default new Vuex.Store({
 					context.state.market.HeartBeat.lastHeartBeatTimestamp = parameters.Ref; // 更新心跳最新时间戳
 					break;
 				case 'OnRspLogin'://登录回复
-					if(parameters.Code==0){
-//						console.log('交易服务器连接成功');
-						context.state.market.tradeLoginSuccessMsg = '交易服务器连接成功';
-						
+					if(parameters.Code == 0){
+						layer.msg('交易服务器连接成功',{time: 1000});
+						//设置强平线
 						context.state.market.forceLine = parameters.ForceLine;
-						
-						// 查询持仓合计 QryHoldTotal
-						context.state.tradeSocket.send('{"Method":"QryHoldTotal","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
-						// 查询订单 QryOrder
+						//查询持仓合计 
+//						context.state.tradeSocket.send('{"Method":"QryHoldTotal","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
+						//查询订单 
 						context.state.tradeSocket.send('{"Method":"QryOrder","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
-						// 查询成交记录
-						context.state.tradeSocket.send('{"Method":"QryTrade","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
-						// 查询账户信息 QryAccount
-						context.state.tradeSocket.send('{"Method":"QryAccount","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
+						//查询成交记录
+//						context.state.tradeSocket.send('{"Method":"QryTrade","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
+						//查询账户信息 
+//						context.state.tradeSocket.send('{"Method":"QryAccount","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
 						//查询止损单
-						context.state.tradeSocket.send('{"Method":"QryStopLoss","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
+//						context.state.tradeSocket.send('{"Method":"QryStopLoss","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
 						//查询条件单
-						context.state.tradeSocket.send('{"Method":"QryCondition","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
-						// 查询历史成交
-						context.dispatch('qryHisTrade');
+//						context.state.tradeSocket.send('{"Method":"QryCondition","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
+						//查询历史成交
+//						context.dispatch('qryHisTrade');
 						//启动交易心跳定时检查
-//						context.dispatch('HeartBeatTimingCheck');
+						context.dispatch('HeartBeatTimingCheck');
 					}else{
-//						console.log('登录失败');
-						context.state.market.tradeLoginSuccessMsg=parameters.Message;
+						layer.msg('交易服务器连接失败',{time: 1000});
 						context.state.tradeSocket.close();
 						//清空本地交易登录信息
 						localStorage.tradeUser = null;
 					}
 					break;
 				case 'OnRspLogout': //登出回复
-					if(parameters.Code==0){
+					if(parameters.Code == 0){
 //						console.log('登出成功');
-						context.state.market.layer='登出成功'+Math.floor(Math.random()*10);
 					}else{
 //						console.log('登出失败');
-						context.state.market.layer=parameters.Message+Math.floor(Math.random()*10);
 					}
 					break;
 				case 'OnRspQryHoldTotal': //查询持仓合计回复
 //					console.log('查询持仓合计回复');		
 					if (parameters == null || typeof(parameters) == "undefined" || parameters.length == 0){
-						context.state.market.ifUpdateHoldProfit=true;//可以使用最新行情更新持仓盈亏
+						context.state.market.ifUpdateHoldProfit = true;//可以使用最新行情更新持仓盈亏
 					}else{
 						//数据加载到页面
 						context.state.market.qryHoldTotalArr.push(parameters);
 						context.state.market.qryHoldTotalKV[parameters.CommodityNo] = parameters;
 						//初始化持仓列表中的浮动盈亏
 						context.dispatch('updateHoldFloatingProfit',parameters);
-						
 						var obj={};
 						obj.name=context.state.market.orderTemplist[parameters.CommodityNo].CommodityName;
 						obj.type=function(){
@@ -1377,7 +1325,6 @@ export default new Vuex.Store({
 						context.state.market.positionListCont.unshift(obj);
 						
 					}
-					
 					break;
 				case 'OnRspQryOrder': //查询订单信息回复
 //					console.log('查询订单信息回复');
@@ -1991,7 +1938,7 @@ export default new Vuex.Store({
 			}
 		},
 		appendApply:function(context,parameters){
-			if( parameters.OrderStatus < 3 ) { // 订单已提交、排队中、部分成交 显示到挂单列表
+			if(parameters.OrderStatus < 3 ) { // 订单已提交、排队中、部分成交 显示到挂单列表
 				context.state.market.OnRspOrderInsertOrderListCont.push(parameters);
 			}
 		},
@@ -2000,6 +1947,7 @@ export default new Vuex.Store({
 		},
 		appendOrder:function(context,parameters){
 			context.state.market.OnRspOrderInsertEntrustCont.push(parameters);
+			
 		},
 		updateOrder:function(context,parameters){
 			context.state.market.OnRspOrderInsertEntrustCont.forEach(function(e,i){
@@ -2270,11 +2218,8 @@ export default new Vuex.Store({
 		HeartBeatTimingCheck: function(context){
 			setInterval(heartBeatUpdate,15000);	
 			function heartBeatUpdate(){
-				console.log(context.state.market.HeartBeat.lastHeartBeatTimestamp);
-				console.log(context.state.market.HeartBeat.oldHeartBeatTimestamp);
 				if(context.state.market.HeartBeat.lastHeartBeatTimestamp == context.state.market.HeartBeat.oldHeartBeatTimestamp){
 					console.log('交易服务器断开，正在重连');
-					context.state.market.tradeConnectedMsg='交易服务器断开，正在重连'+Math.ceil(Math.random()*10);
 				}else{
 					context.state.market.HeartBeat.oldHeartBeatTimestamp = context.state.market.HeartBeat.lastHeartBeatTimestamp; // 更新上次心跳时间
 				}
@@ -2283,16 +2228,13 @@ export default new Vuex.Store({
 		},
 		//初始化交易
 		initTrade: function(context){
-//			if(context.state.tradeSocket==null){
-				context.state.tradeSocket = new WebSocket(context.state.market.tradeConfig.url_real);
-//			}
+			context.state.tradeSocket = new WebSocket(context.state.market.tradeConfig.url_real);
 			context.state.tradeSocket.onopen = function(evt){
 				//登录
-				if(context.state.tradeSocket.readyState==1){ //连接已建立，可以进行通信。
+				if(context.state.tradeSocket.readyState == 1){ //连接已建立，可以进行通信。
 					if(JSON.parse(localStorage.getItem('tradeUser'))){
 						context.state.tradeSocket.send('{"Method":"Login","Parameters":{"ClientNo":"'+JSON.parse(localStorage.getItem('tradeUser')).username+'","PassWord":"'+JSON.parse(localStorage.getItem('tradeUser')).password+'","IsMock":'+context.state.market.tradeConfig.model+',"Version":"'+context.state.market.tradeConfig.version+'","Source":"'+context.state.market.tradeConfig.client_source+'"}}');
 					}else{
-						
 						if(context.state.market.tradeConfig.username!=''){
 							context.state.tradeSocket.send('{"Method":"Login","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'","PassWord":"'+context.state.market.tradeConfig.password+'","IsMock":'+context.state.market.tradeConfig.model+',"Version":"'+context.state.market.tradeConfig.version+'","Source":"'+context.state.market.tradeConfig.client_source+'"}}');
 						}	
@@ -2301,7 +2243,7 @@ export default new Vuex.Store({
 			};
 			context.state.tradeSocket.onclose = function(evt) {
 //				console.log('tradeClose:');
-				context.state.tradeSocket=null;
+//				context.state.tradeSocket=null;
 			};
 			context.state.tradeSocket.onerror = function(evt) {
 //				console.log('tradeError:');
@@ -2328,7 +2270,7 @@ export default new Vuex.Store({
 //				console.log('message');
 				context.state.wsjsondata = JSON.parse(evt.data);
 				if(context.state.wsjsondata.Method == "OnRspLogin") { // 登录行情服务器
-					context.state.market.quoteConnectedMsg='行情服务器连接成功' + Math.floor(Math.random()*10);
+					layer.msg('行情服务器连接成功',{time: 1000});
 					// 查询服务器支持品种用于订阅
 					context.state.quoteSocket.send('{"Method":"QryCommodity","Parameters":{' + null + '}}');
 				} else if(context.state.wsjsondata.Method == "OnRspQryCommodity") { // 行情服务器支持的品种
