@@ -141,7 +141,7 @@ a {
 	z-index: 999;
 	width: 300px;
 	height: 150px;
-	overflow: hidden;
+	overflow-y: auto;
 	background: #596080;
 	border-radius: 5px;
 }

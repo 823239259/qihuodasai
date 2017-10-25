@@ -33,6 +33,13 @@
 				info:'获取短信验证码',
 				phoneReg: /^(((13[0-9])|(14[5-7])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/,
 				pwdReg: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,18}$/,
+				defaultOrder: [
+					{commodityCode: 'CL', commodityName: '国际原油'},
+					{commodityCode: 'HSI', commodityName: '恒指期货'},
+					{commodityCode: 'GC', commodityName: '美黄金'},
+					{commodityCode: 'FDAX', commodityName: '德园DAX指数'},
+					{commodityCode: 'SI', commodityName: '美白银'},
+				],
 //				path: ''
 			}
 		},
@@ -118,6 +125,27 @@
 								setTimeout(function(){
 									this.$router.push({path:'/login'})
 								},1000)
+								//设置默认自选列表
+								var headers = {
+									token:  res.data.token,
+									secret: res.data.secret
+								};
+								this.defaultOrder.forEach(function(o, i){
+									var data = {
+										commodityCode: o.commodityCode,
+										commodityName: o.commodityName,
+									};
+									pro.fetch('post', '/contract/saveOptional', data, headers).then(function(res){
+										if(res.success == true){
+											if(res.code == 1){
+												console.log('自选合约添加成功');
+											}
+										}
+									}.bind(this)).catch(function(error){
+										var data = err.data;
+										layer.msg(data.message, {time: 1000});
+									});
+								}.bind(this));
 							}
 						}
 					}.bind(this)).catch(function(err){

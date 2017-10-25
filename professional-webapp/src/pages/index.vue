@@ -317,7 +317,6 @@
 				}
 			},
 			isSelectedOrder: function(){
-				console.log(this.userInfo);
 				if(!this.userInfo) return false;
 				this.addStar = true;
 				this.optional = '添加自选';
@@ -327,7 +326,6 @@
 					version: ''
 				};
 				pro.fetch('post', 'contract/optional/list', '', headers).then(function(res){
-					console.log(res);
 					if(res.success == true){
 						if(res.code == 1){
 							res.data.forEach(function(o, i){

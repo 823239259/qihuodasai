@@ -222,7 +222,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="trade_box" v-if="tradeDetailsShow">
+			<div class="trade_box" v-show="tradeDetailsShow">
 				<div class="operate">
 					<div class="head">
 						<span class="fl">交易账号：{{tradeUser}}</span>
@@ -251,11 +251,9 @@
 										<span class="tal-box"><span class="tal"></span></span>
 										<div class="slt-list">
 											<ul>
-												<li selectVal="1">富时A50</li>
-												<li selectVal="1">富时A50</li>
-												<li selectVal="1">富时A50</li>
-												<li selectVal="1">富时A50</li>
-												<li selectVal="1">富时A50</li>
+												<template v-for="v in Parameters">
+													<li :selectVal="v.CommodityNo">{{v.CommodityName}}</li>
+												</template>
 											</ul>
 										</div>
 									</div>
@@ -594,7 +592,9 @@
 			//开始画图
 			this.chartShow = true;
 			//调用下拉框
+			console.log($(".slt-box"));
 			$(".slt-box").each(function(i, o){
+				console.log(1122);
 				pro.selectEvent(o);
 			});
 			//判断是否登录账户
