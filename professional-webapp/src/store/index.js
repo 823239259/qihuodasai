@@ -200,11 +200,13 @@ var market = {
 		},
 		forceLine: 0.00,    //强平线
 		//存持仓列表
+		qryHoldTotalArr: [],
 		positionListCont: [],
 		//委托列表页面数据
 		OnRspOrderInsertEntrustCont: [],
 		//挂单页面列表
 		OnRspOrderInsertOrderListCont: [],
+		orderListCont: [],
 		//成交记录列表
 		OnRspQryTradeDealListCont: [],
 		//持仓合约浮盈处理
@@ -214,8 +216,8 @@ var market = {
 		},
 		ifUpdateHoldProfit: false,       //是否使用最新行情更新持仓盈亏
 		ifUpdateAccountProfit: false,   //是否可以更新账户盈亏标志：资金信息显示完毕就可以更新盈亏
-		qryHoldTotalArr: [],      //持仓合计回复数组
-		qryHoldTotalKV: {},
+		
+//		qryHoldTotalKV: {},
 		queryHisList: [], 
 		
 		
@@ -1259,7 +1261,7 @@ export default new Vuex.Store({
 						//设置强平线
 						context.state.market.forceLine = parameters.ForceLine;
 						//查询持仓合计 
-//						context.state.tradeSocket.send('{"Method":"QryHoldTotal","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
+						context.state.tradeSocket.send('{"Method":"QryHoldTotal","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
 						//查询订单 
 						context.state.tradeSocket.send('{"Method":"QryOrder","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
 						//查询成交记录
@@ -1275,6 +1277,7 @@ export default new Vuex.Store({
 						//启动交易心跳定时检查
 						context.dispatch('HeartBeatTimingCheck');
 					}else{
+						console.log('交易服务器连接失败');
 						layer.msg('交易服务器连接失败',{time: 1000});
 						context.state.tradeSocket.close();
 						//清空本地交易登录信息
@@ -1295,35 +1298,9 @@ export default new Vuex.Store({
 					}else{
 						//数据加载到页面
 						context.state.market.qryHoldTotalArr.push(parameters);
-						context.state.market.qryHoldTotalKV[parameters.CommodityNo] = parameters;
+//						context.state.market.qryHoldTotalKV[parameters.CommodityNo] = parameters;
 						//初始化持仓列表中的浮动盈亏
-						context.dispatch('updateHoldFloatingProfit',parameters);
-						var obj={};
-						obj.name=context.state.market.orderTemplist[parameters.CommodityNo].CommodityName;
-						obj.type=function(){
-							if(parameters.Drection==0){
-								return '多'
-							}else{
-								return '空'
-							}
-						}();
-						obj.num=parameters.HoldNum;
-						obj.price=parameters.HoldAvgPrice.toFixed(context.state.market.orderTemplist[parameters.CommodityNo].DotSize);
-						obj.total=0;
-						obj.showbar=false;
-						obj.type_color=function(){
-							if(parameters.Drection==0){
-								return 'red'
-							}else{
-								return 'green'
-							}
-						}();
-						obj.total_color='green';
-						obj.commodityNocontractNo = context.state.market.orderTemplist[parameters.CommodityNo].LastQuotation.CommodityNo
-													+context.state.market.orderTemplist[parameters.CommodityNo].LastQuotation.ContractNo;
-						
-						context.state.market.positionListCont.unshift(obj);
-						
+//						context.dispatch('updateHoldFloatingProfit',parameters);
 					}
 					break;
 				case 'OnRspQryOrder': //查询订单信息回复
@@ -1357,9 +1334,9 @@ export default new Vuex.Store({
 				case 'OnRtnMoney':
 //					console.log('资金变化通知');
 					// 更新资金账户信息
-					context.dispatch('updateCacheAccount',parameters);
+//					context.dispatch('updateCacheAccount',parameters);
 					// 更新资金汇总信息
-					context.dispatch('updateTotalAccount',parameters);
+//					context.dispatch('updateTotalAccount',parameters);
 					break;	
 				case 'OnRtnOrderState'://订单状态改变通知
 //					console.log('订单状态改变通知');
@@ -1373,7 +1350,7 @@ export default new Vuex.Store({
 					context.dispatch('layerMessage',parameters);
 					//添加到委托表
 					context.dispatch('appendOrder00',parameters);
-					// 排队中委托单放入挂单列表
+					//排队中委托单放入挂单列表
 					context.dispatch('appendApply',parameters);
 					break;
 				case 'OnRtnHoldTotal':
@@ -1972,7 +1949,7 @@ export default new Vuex.Store({
 			});
 			if(isExist==false){
 				var obj={};
-				obj.name=context.state.market.orderTemplist[parameters.CommodityNo].CommodityName;
+				obj.CommodityName=context.state.market.orderTemplist[parameters.CommodityNo].CommodityName;
 				obj.type=function(){
 					if(parameters.Drection==0){
 						return '多'
@@ -1980,10 +1957,10 @@ export default new Vuex.Store({
 						return '空'
 					}
 				}();
-				obj.num=parameters.HoldNum;
-				obj.price=parameters.HoldAvgPrice.toFixed(context.state.market.orderTemplist[parameters.CommodityNo].DotSize);
-				obj.total=0;
-				obj.showbar=false;
+				obj.HoldNum = parameters.HoldNum;
+				obj.price = parameters.HoldAvgPrice.toFixed(context.state.market.orderTemplist[parameters.CommodityNo].DotSize);
+				obj.total = 0;
+				obj.showbar = false;
 				obj.type_color=function(){
 					if(parameters.Drection==0){
 						return 'red'
@@ -2001,7 +1978,7 @@ export default new Vuex.Store({
 			}
 			if(isExist==true){
 				if(parameters.HoldNum!=0){
-					positionListContCurrent.num=parameters.HoldNum;
+					positionListContCurrent.HoldNum=parameters.HoldNum;
 					if(parameters.Drection==0){
 						 positionListContCurrent.type ='多';
 						 positionListContCurrent.type_color='red';
@@ -2164,7 +2141,7 @@ export default new Vuex.Store({
 						context.state.market.CacheHoldFloatingProfit.jHoldFloatingProfit[parameters.CommodityNo+parameters.ContractNo] 
 							= {"currencyNo" : context.state.market.orderTemplist[parameters.CommodityNo].CurrencyNo, "floatingProfit" : tmpFloatingProfit};
 						//更新账户资金盈亏
-						context.dispatch('updateAccountFloatingProfit',parameters);
+//						context.dispatch('updateAccountFloatingProfit',parameters);
 					}
 				}
 			}
@@ -2588,7 +2565,7 @@ export default new Vuex.Store({
 						}
 					});
 					//更新持仓盈亏
-					context.dispatch('UpdateHoldProfit',JSON.parse(evt.data).Parameters);
+//					context.dispatch('UpdateHoldProfit',JSON.parse(evt.data).Parameters);
 				} else if(context.state.wsjsondata.Method == "OnRspQryHistory") { // 历史行情
 					let data = JSON.parse(evt.data);
 					if(data.Parameters.HisQuoteType == 0){

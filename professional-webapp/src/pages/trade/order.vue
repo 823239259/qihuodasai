@@ -12,7 +12,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<template v-for="v in orderList">
+				<template v-for="v in orderListCont">
 					<tr>
 						<td>{{v.commodityName}}</td>
 						<td>{{v.buyOrSell}}</td>
@@ -37,7 +37,7 @@
 		name: 'trade_details',
 		data(){
 			return{
-				orderList: [],	
+//				orderList: [],	
 			}
 		},
 		computed: {
@@ -46,6 +46,9 @@
 			},
 			OnRspOrderInsertOrderListCont(){
 				return this.$store.state.market.OnRspOrderInsertOrderListCont;
+			},
+			orderListCont(){
+				return this.$store.state.market.orderListCont;
 			}
 		},
 		watch: {
@@ -58,10 +61,10 @@
 		},
 		methods: {
 			operateData: function(obj){
-				this.orderList = [];
+				this.$store.state.market.orderListCont = [];
 				if(obj){
-					var data = {};
 					obj.forEach(function(o, i){
+						var data = {};
 						data.commodityName = this.orderTemplist[o.CommodityNo].CommodityName;
 						data.buyOrSell = function(){
 							if(o.Drection==0){
@@ -78,11 +81,11 @@
 							}
 						}();
 						data.delegateNum = o.OrderNum;
-						data.ApplyOrderNum = o.OrderNum-e.TradeNum;
+						data.ApplyOrderNum = o.OrderNum-o.TradeNum;
 						data.InsertDateTime = o.InsertDateTime;
 						data.ContractCode = o.ContractCode;
 						data.OrderID = o.OrderID;
-						this.orderList.unshift(data);
+						this.$store.state.market.orderList.unshift(data);
 					}.bind(this));
 				}
 			}
@@ -97,8 +100,8 @@
 <style lang="scss" scoped>
 	@import "../../assets/css/common.scss";
 	#trade_details{
-		height: 210px;
-		position: relative;
+		height: 151px;
+		overflow-y: auto;
 	}
 	table{
 		thead tr{
@@ -114,9 +117,9 @@
 		}
 	}
 	.tools{
-		position: absolute;
-		bottom: 10px;
-		left: 0;
+		position: fixed;
+		bottom: 55px;
+		left: 730px;
 		margin: 15px 0 0 10px;
 		.btn{
 			width: 90px;

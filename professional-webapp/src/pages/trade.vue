@@ -267,7 +267,7 @@
 								</li>
 								<li>
 									<p v-show="priceShow">市价</p>
-									<input type="text" class="ipt" v-show="!priceShow" v-model="fixedPrice" />
+									<input type="text" class="ipt" v-show="!priceShow" v-model="tradePrices" />
 								</li>
 								<li>
 									<label>委托数量</label>
@@ -280,7 +280,7 @@
 							</ul>
 							<div class="btn_box">
 								<button class="red" @click="buy">买入/市价</button>
-								<button class="green">卖出/市价</button>
+								<button class="green" @click="sell">卖出/市价</button>
 							</div>
 						</div>
 					</div>
@@ -344,6 +344,7 @@
 		},
 		data(){
 			return{
+				orderId: '',
 				selected: 1,
 				selectView: 'fens',
 				echartList: [
@@ -372,6 +373,7 @@
 				selectedData: '',
 				priceShow: true,
 				defaultNum: 1,
+				tradePrices: 0,
 				tradeDetailsList: ['持仓','挂单','委托','止损单','条件单','当日成交','历史成交','资金明细'],
 				selectedTradeDetails: 'position',
 				selectedNum: 0,
@@ -401,9 +403,6 @@
 			},
 			dotSize(){
 				return this.$store.state.market.currentdetail.DotSize;
-			},
-			fixedPrice(){
-				return this.currentdetail.LastQuotation.LastPrice;
 			},
 		},
 		filters:{
@@ -439,15 +438,54 @@
 					this.quoteShow = false;
 				}else{
 					this.quoteShow = true;
+					//是否自选
+					this.isSelectedOrder();
 				}
 			},
 			addOptional: function(e){
 				if(this.addStar == true){
-					this.addStar = false;
-					this.optional = '取消自选';
+					var data = {
+						commodityCode: this.currentdetail.CommodityNo,
+						commodityName: this.currentdetail.CommodityName,
+					};
+					var headers = {
+						token:  this.userInfo.token,
+						secret: this.userInfo.secret
+					};
+					pro.fetch('post', '/contract/saveOptional', data, headers).then(function(res){
+						if(res.success == true){
+							if(res.code == 1){
+								layer.msg('添加成功', {time: 1000});
+								this.addStar = false;
+								this.optional = '取消自选';
+							}
+						}
+					}.bind(this)).catch(function(error){
+						var data = err.data;
+						layer.msg(data.message, {time: 1000});
+					});
 				}else{
-					this.addStar = true;
-					this.optional = '添加自选';
+					var data = {
+						commodityCode: this.orderId
+					};
+					var headers = {
+						token:  this.userInfo.token,
+						secret: this.userInfo.secret
+					};
+					pro.fetch('post', 'contract/delOptional', data, headers).then(function(res){
+						if(res.success == true){
+							if(res.code == 1){
+								layer.msg('删除成功', {time: 1000});
+								this.addStar = true;
+								this.optional = '添加自选';
+							}else{
+								layer.msg(res.message, {time: 1000});
+							}
+						}
+					}.bind(this)).catch(function(err){
+						var data = err.data;
+						layer.msg(data.message, {time: 1000});
+					});
 				}
 			},
 			tabEvent: function(index){
@@ -495,6 +533,7 @@
 				this.Parameters.forEach(function(o, i){
 					if(commodityNo == o.CommodityNo){
 						this.$store.state.market.currentdetail = o;
+						this.tradePrices = o.LastQuotation.LastPrice;
 					}
 				}.bind(this));
 				this.tradeParameters.forEach(function(o, i){
@@ -537,9 +576,10 @@
 					}
 				};
 				this.quoteSocket.send(JSON.stringify(datas));
+				//是否自选
+				this.isSelectedOrder();
 			},
 			priceClick: function(e){
-				console.log($(e.currentTarget));
 				var index = $(e.currentTarget).index();
 				if(index == 0){
 					this.priceShow = true;
@@ -554,9 +594,9 @@
 				return this.defaultNum--;
 			},
 			buy: function(){
+				var buildIndex = 0;
+				if(buildIndex > 100) buildIndex = 0;
 				if(this.priceShow == true){   //市价下单
-					var buildIndex = 0;
-					if(buildIndex > 100) buildIndex = 0;
 					var b = {
 						"Method":'InsertOrder',
 						"Parameters":{
@@ -573,7 +613,58 @@
 					};
 					this.tradeSocket.send(JSON.stringify(b));
 				}else{
-					
+					var b = {
+						"Method": 'InsertOrder',
+						"Parameters":{
+							"ExchangeNo": this.currentdetail.ExchangeNo,
+							"CommodityNo": this.currentdetail.CommodityNo,
+							"ContractNo": this.currentdetail.LastQuotation.ContractNo,
+							"OrderNum": this.defaultNum,
+							"Drection": 1,
+							"PriceType": 0,
+							"LimitPrice": parseFloat(this.tradePrices),
+							"TriggerPrice": 0,
+							"OrderRef": this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+						}
+					};
+					this.tradeSocket.send(JSON.stringify(b));
+				}
+			},
+			sell: function(){
+				var buildIndex = 0;
+				if(buildIndex > 100) buildIndex = 0;
+				if(this.priceShow == true){   //市价下单
+					var b = {
+						"Method": 'InsertOrder',
+						"Parameters":{
+							"ExchangeNo": this.currentdetail.ExchangeNo,
+							"CommodityNo": this.currentdetail.CommodityNo,
+							"ContractNo": this.currentdetail.LastQuotation.ContractNo,
+							"OrderNum": this.defaultNum,
+							"Drection": 1,
+							"PriceType": 1,
+							"LimitPrice": 0.00,
+							"TriggerPrice": 0,
+							"OrderRef": this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+						}
+					};
+					this.tradeSocket.send(JSON.stringify(b));
+				}else{
+					var b = {
+						"Method": 'InsertOrder',
+						"Parameters":{
+							"ExchangeNo": this.currentdetail.ExchangeNo,
+							"CommodityNo": this.currentdetail.CommodityNo,
+							"ContractNo": this.currentdetail.LastQuotation.ContractNo,
+							"OrderNum": this.defaultNum,
+							"Drection": 1,
+							"PriceType": 0,
+							"LimitPrice": parseFloat(this.tradePrices),
+							"TriggerPrice": 0,
+							"OrderRef": this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+						}
+					};
+					this.tradeSocket.send(JSON.stringify(b));
 				}
 			},
 			isSelectedOrder: function(){
@@ -646,6 +737,7 @@
 						if(commodityNo == o.CommodityNo){
 							this.$store.state.market.currentdetail = o;
 							this.$store.state.market.currentNo = o.CommodityNo;
+							this.tradePrices = o.LastQuotation.LastPrice;
 							var data = {
 								Method: "QryHistory",
 								Parameters:{
@@ -694,6 +786,8 @@
 			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
 			//获取自选合约列表
 			this.isSelectedOrder();
+			//设置当前合约的限价
+			this.tradePrices = this.currentdetail.LastQuotation.LastPrice;
 		},
 		activated: function(){
 			//获取自选合约列表
@@ -1202,7 +1296,6 @@
 									color: $yellow;
 								}
 							}
-							
 						}
 					}
 				}

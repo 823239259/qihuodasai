@@ -62,8 +62,8 @@
 			operateData: function(obj){
 				this.entrustList = [];
 				if(obj){
-					var data = {};
 					obj.forEach(function(o, i){
+						var data = {};
 						if(o.CommodityNo != ''){
 							data.commodityName = this.orderTemplist[o.CommodityNo].CommodityName;
 							data.commodityStatus = this.OrderType[o.OrderStatus];
@@ -78,7 +78,7 @@
 								if(o.OrderPriceType==1){
 									return '市价';
 								}else{
-									return parseFloat(o.OrderPrice).toFixed(orderTemplist[o.CommodityNo].DotSize);
+									return parseFloat(o.OrderPrice).toFixed(this.orderTemplist[o.CommodityNo].DotSize);
 								}
 							}();
 							data.delegateNum = o.OrderNum;
@@ -108,6 +108,10 @@
 
 <style lang="scss" scoped>
 	@import "../../assets/css/common.scss";
+	#trade_details{
+		height: 210px;
+		overflow-y: auto;
+	}
 	table{
 		thead tr{
 			height: 30px;
