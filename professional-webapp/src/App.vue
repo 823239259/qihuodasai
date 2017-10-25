@@ -55,9 +55,9 @@
 				<a href="javascript: void(0);" v-on:click="toRegister">注册</a>
 			</div>
 			<!--登陆后显示样式-->
-			<div class="fr_login" v-if="show_login">
-				<a href="javascript: void(0);">欢迎，<span class="userPhone"></span></a>
-				<a href="javascript: void(0);" v-on:click="exit">退出</a>
+			<div class="fr_login" v-show="show_login">
+				<i>欢迎，</i><span class="userPhone"></span>
+				<i v-on:click="exit">退出</i>
 			</div>
 		</div>
 		<div class="container_bottom">
@@ -111,9 +111,6 @@
 				<button class="green btn" v-on:click="canal">取消</button>
 			</div>
 		</div>
-		<!--<keep-alive>
-			 <router-view @userSignIn="userSignIn"></router-view>
-		</keep-alive>-->
 	</div>
 </template>
 
@@ -132,9 +129,8 @@
 				parametersRecommend: [],
 				userInfo : '',
 				isShow_exit : false,
-				show_tologin : true,
+				show_tologin : false,
 				show_login : false,
-				userData : sessionStorage.userData
 			}
 		},
 		computed: {
@@ -244,20 +240,17 @@
 				this.$store.state.isshow.isfensshow = false;
 				this.$store.state.isshow.isklineshow = false;
 			},
+			//退出登录,清空localstorge
 			exit : function(){
-				
+				this.isShow_exit=true
 			},
 			confirm : function(){
-				
+				localStorage.user = '';
+				location.replace(location.href)
 			},
 			canal :function(){
-				
-			},
-//			 userSignIn(userData){
-//		      sessionStorage.userData = userData;
-//		      this.userData = sessionStorage.userData;
-//		      console.log(this.userData);
-//		    }
+				this.isShow_exit=false
+			}
 		},
 		mounted: function(){
 			//初始化行情
@@ -265,17 +258,17 @@
 				this.initQuoteClient();
 				this.$store.state.market.quoteInitStatus == true;
 			};
-			
-		},
-//		activated : {
-//			if(localStorage == ''){
-//				console.log(2222222222222)
-//			}else{
-//				console.log(333333333)
-//				this.show_tologin=false;
-//				this.show_login=true
-//			}
-//		}	
+			//判断是否登录
+			if(localStorage.user ==''){
+				this.show_tologin=true;
+				this.show_login=false;
+			}else{
+				this.show_tologin=false;
+				this.show_login=true;
+				var username = JSON.parse(localStorage.user).username;
+				$(".userPhone").html(username);
+			}
+		}
 	}
 </script>
 
@@ -433,9 +426,15 @@
 	}
 	.fr_login {
 		float: right;
-		display: none;
+		margin-right: 10px;
+		i {
+			color: #ccd5ff;
+			font-size: $fs12;
+			float: left;
+		}
 		.userPhone{
-			$color: $yellow;
+			color: $yellow;
+			margin-right: 10px;
 		}
 	}
 	/*底部栏*/
@@ -513,23 +512,24 @@
 		border: none;
 	}
 	/*退出框*/
-	#isExit{
-		position: absolute;
-		top: 30%;
-		left: 40%;
+	.isExit {
+		position: fixed;
+		top: 50%;
+		left: 50%;
 		width: 300px;
 		height: 120px;
+		margin: -60px 0 0 -150px;
 		text-align: center;
 		background-color: $blue;
-	}
-	.isExit {
 		z-index: 100;
+		border-radius: 10px;
 		.btn {
 			width: 120px;
 			height: 30px;
 		}
 		p {
 			&:nth-child(1){
+				border-radius: 10px;
 				height: 40px;
 				background: $bottom_color;
 				color: $white;

@@ -76,33 +76,32 @@
 								this.secret = res.data.secret;
 								var userData = {'username':this.phone,'password':this.pwd,'token':res.data.token,'secret':res.data.secret};
 								localStorage.setItem("user", JSON.stringify(userData));
-//								 that.$emit('userSignIn', that.userName);
-//								 that.$emit('userSignIn', userData);
 								this.$router.push({path: '/index'});
 							}
 						}
 					}.bind(this)).catch(function(err){
-						var data = err.data;
-						if(data.success == false){
-							this.num = data.data.num;
-							if(this.num > 2){
-								this.$refs.codeDialog.isshow = true;
-								this.$refs.codeDialog.path = this.PATH + "/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
-								this.str = {
-									loginName : this.phone,
-									password :this.pwd
-								}
-							}else {
-								if(data.data.date != undefined){
-									var h = (data.data.date/3600).toString();
-									var hour = h.split('.')[0];
-									var minute = parseInt((h - hour) * 60);
-									layer.msg(data.message + '，距解冻时间还有' + hour + '小时' + minute + '分', {time: 1000});
-								}else{
-									layer.msg(data.message, {time: 1000});
-								}
-							}
-						}
+						console.log(err)
+//						var data = err.data;
+//						if(data.success == false){
+//							this.num = data.num;
+//							if(this.num > 2){
+//								this.$refs.codeDialog.isshow = true;
+//								this.$refs.codeDialog.path = this.PATH + "/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
+//								this.str = {
+//									loginName : this.phone,
+//									password :this.pwd
+//								}
+//							}else {
+//								if(data.data.date != undefined){
+//									var h = (data.data.date/3600).toString();
+//									var hour = h.split('.')[0];
+//									var minute = parseInt((h - hour) * 60);
+//									layer.msg(data.message + '，距解冻时间还有' + hour + '小时' + minute + '分', {time: 1000});
+//								}else{
+//									layer.msg(data.message, {time: 1000});
+//								}
+//							}
+//						}
 					}.bind(this));
 				}
 			},
