@@ -41,7 +41,7 @@
 				}else if(this.pwd == ''){
 					layer.msg('请输入您的密码', {time: 1000});
 				}else{
-					var tradeSocket = new WebSocket(this.tradeConfig.url_real);
+					this.$store.state.market.tradeSocket = new WebSocket(this.tradeConfig.url_real);
 					tradeSocket.onopen = function(evt){
 						//登录
 						if(tradeSocket.readyState==1){ //连接已建立，可以进行通信。
