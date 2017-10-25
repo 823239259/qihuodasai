@@ -4,20 +4,24 @@
 			<thead>
 				<tr>
 					<td>合约名称</td>
-					<td>多空</td>
-					<td>手数</td>
-					<td>持仓均价</td>
-					<td>浮动盈利</td>
+					<td>状态</td>
+					<td>买卖</td>
+					<td>委托价</td>
+					<td>委托量</td>
+					<td>已成交</td>
+					<td>已撤单</td>
+					<td>下单时间</td>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td>持仓</td>
+					<td>委托</td>
 					<td class="red">多</td>
 					<td>1</td>
 					<td>25289</td>
 					<td class="red">+100.00：USD</td>
 				</tr>
+				
 			</tbody>
 		</table>
 		<div class="tools">

@@ -3,16 +3,20 @@
 		<table>
 			<thead>
 				<tr>
-					<td>合约名称</td>
-					<td>多空</td>
-					<td>手数</td>
-					<td>持仓均价</td>
-					<td>浮动盈利</td>
+					<td>序号</td>
+					<td>合约代码</td>
+					<td>交易所</td>
+					<td>币种</td>
+					<td>买卖</td>
+					<td>成交价</td>
+					<td>成交量</td>
+					<td>手续费</td>
+					<td>成交时间</td>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td>持仓</td>
+					<td>历史成交</td>
 					<td class="red">多</td>
 					<td>1</td>
 					<td>25289</td>
