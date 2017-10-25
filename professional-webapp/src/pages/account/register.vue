@@ -33,7 +33,7 @@
 				info:'获取短信验证码',
 				phoneReg: /^(((13[0-9])|(14[5-7])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/,
 				pwdReg: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,18}$/,
-//				path: ''
+				path: ''
 			}
 		},
 		computed: {
@@ -120,7 +120,7 @@
 								},1000)
 							}
 						}
-					}.bind(this)).catch(function(err){
+					}).catch(function(err){
 						console.log(err);
 						var data = err.data;
 						layer.msg(data.message, {time: 1000});
@@ -139,6 +139,9 @@
 </script>
 <style lang="scss" scoped type="text/css">
 	@import "../../assets/css/common.scss";
+	#register{
+		height: 800px;
+	}
 	.register {
 		position: relative;
 		top: 30%;
@@ -149,7 +152,9 @@
 		text-align : center;
 		color :$lightblue ;
 		z-index : 100;
-		p {
+		
+	}
+	p {
 			border-radius : 10px;
 			line-height : 40px;
 			color:$white;
@@ -212,5 +217,4 @@
 		.span_white {
 			color: $white;
 		}
-	}
 </style>
