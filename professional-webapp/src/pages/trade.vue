@@ -377,6 +377,7 @@
 				tradeDetailsList: ['持仓','挂单','委托','止损单','条件单','当日成交','历史成交','资金明细'],
 				selectedTradeDetails: 'position',
 				selectedNum: 0,
+				confirmText: '',
 			}
 		},
 		computed: {
@@ -594,10 +595,10 @@
 				return this.defaultNum--;
 			},
 			buy: function(){
-				var buildIndex = 0;
+				var buildIndex = 0, b;
 				if(buildIndex > 100) buildIndex = 0;
 				if(this.priceShow == true){   //市价下单
-					var b = {
+					b = {
 						"Method":'InsertOrder',
 						"Parameters":{
 							"ExchangeNo": this.currentdetail.ExchangeNo,
@@ -613,7 +614,7 @@
 					};
 					this.tradeSocket.send(JSON.stringify(b));
 				}else{
-					var b = {
+					b = {
 						"Method": 'InsertOrder',
 						"Parameters":{
 							"ExchangeNo": this.currentdetail.ExchangeNo,
@@ -629,6 +630,29 @@
 					};
 					this.tradeSocket.send(JSON.stringify(b));
 				}
+				//确定文案
+				var contract = b.Parameters.CommodityNo + b.Parameters.ContractNo;
+				var LimitPrice;
+				if(b.Parameters.PriceType == 1){
+					LimitPrice='市价';
+				}else{
+					LimitPrice = this.tradePrices;
+				}
+				var orderNum = b.Parameters.OrderNum;
+				var drection;
+				if(b.Parameters.Drection==0){
+					drection = '买';
+				}else{
+					drection = '卖';
+				}
+				this.confirmText = '确认提交订单:【'+contract+'】,价格【'+LimitPrice +'】,手数【'+orderNum+'】,方向【'+drection+'】？';
+				layer.confirm(this.confirmText, {
+					btn: ['确定','取消'] //按钮
+				}, function(){
+					
+				}, function(){
+					
+				});
 			},
 			sell: function(){
 				var buildIndex = 0;
