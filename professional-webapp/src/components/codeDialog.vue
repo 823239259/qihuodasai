@@ -163,11 +163,12 @@
 		z-index: 101;
 	}
 	.codeDialog {
+		top: 50%;
+		left: 50%;
 		width: 400px;
 		height: 200px;
-		position: absolute;
-		top: 32%;
-		left: 40%;
+		position: fixed;
+		margin: -100px 0 0 -200px;
 		border-radius: 10px;
 		text-align: center;
 		background-color: $blue;

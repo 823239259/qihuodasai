@@ -125,7 +125,7 @@
 								this.time = 0;
 								setTimeout(function(){
 									this.$router.push({path:'/login'})
-								},1000)
+								}.bind(this),1000)
 								//设置默认自选列表
 								var headers = {
 									token:  res.data.token,
@@ -149,7 +149,7 @@
 								}.bind(this));
 							}
 						}
-					}).catch(function(err){
+					}.bind(this)).catch(function(err){
 						var data = err.data;
 						console.log(data);
 						layer.msg(data.message, {time: 1000});
