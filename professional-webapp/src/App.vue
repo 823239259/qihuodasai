@@ -100,8 +100,6 @@
 			</keep-alive>
 			<router-view v-if="$route.meta.notKeepAlive"></router-view>
 		</div>
-		<!--<login v-if="isshow_login"/>-->
-		<!--<register v-if="isshow_register"/>-->
 		<warning v-if="warningShow"></warning>
 		<!--退出弹窗-->
 		<div id="isExit" v-show="isShow_exit">
@@ -113,6 +111,9 @@
 				<button class="green btn" v-on:click="canal">取消</button>
 			</div>
 		</div>
+		<!--<keep-alive>
+			 <router-view @userSignIn="userSignIn"></router-view>
+		</keep-alive>-->
 	</div>
 </template>
 
@@ -132,7 +133,8 @@
 				userInfo : '',
 				isShow_exit : false,
 				show_tologin : true,
-				show_login : false
+				show_login : false,
+				userData : sessionStorage.userData
 			}
 		},
 		computed: {
@@ -250,7 +252,12 @@
 			},
 			canal :function(){
 				
-			}
+			},
+//			 userSignIn(userData){
+//		      sessionStorage.userData = userData;
+//		      this.userData = sessionStorage.userData;
+//		      console.log(this.userData);
+//		    }
 		},
 		mounted: function(){
 			//初始化行情

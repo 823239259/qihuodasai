@@ -11,7 +11,9 @@ import openAccount from '../pages/openAccount.vue'
 import login from "../pages/account/login.vue"
 import register from "../pages/account/register.vue"
 import forgetPassword from "../pages/account/forgetPassword.vue"
-
+import account_openDetail from "../pages/account/account_openDetail/account_openDetail.vue"
+import account_survey from "../pages/account/account_survey/account_survey.vue"
+import account_safe from "../pages/account/account_safe/account_safe.vue"
 Vue.use(Router)
 
 export default new Router({
@@ -31,7 +33,23 @@ export default new Router({
 		},
 		{
 			path: '/account',
-			component: account
+			component: account,
+			children:[{
+				path : '/',
+				component : account_survey
+			},
+			{
+				path : '/account_survey',
+				component : account_survey
+			},
+			{
+				path : '/account_openDetail',
+				component : account_openDetail
+			},
+			{
+				path : '/account_safe',
+				component : account_safe
+			}]
 		},
 		{
 			path: '/calendar',

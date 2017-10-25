@@ -76,17 +76,15 @@
 							mobile:this.phone,
 							type : 2
 						};
-						pro.fetch("post",'/sms',data
-						).then((res)=>{
-							var data = res.data;
-							if(data.success == true){
-								if(data.code == 1){
+						pro.fetch("post",'/sms',data).then(function(res){
+							if(res.success == true){
+								if(res.code == 1){
 									layer.msg('发送成功', {time: 1000});
 								}
 							}else{
-								layer.msg(data.message, {time: 1000});
+								layer.msg(res.message, {time: 1000});
 							}
-						}).catch((err)=>{
+						}.bind(this)).catch(function(err){
 							var data = err.data;
 							layer.msg(data.message, {time: 1000});
 						})
@@ -129,28 +127,27 @@
 					};
 					var headers = {version:this.version}
 					pro.fetch("post",'reset_password',data,headers).then(function(res){
-						var data =res.data;
-						if(data.success == true){
-							if(data.code == 1){
+						if(res.success == true){
+							if(res.code == 1){
 								layer.msg('密码重置成功', {time: 1000});
 								setTimeout(function(){
-									this.$router.push({path: '/login', query: {isJump: 1}});
-								}.bind(this), 1000);s
+									this.$router.push({path: '/login'})
+								}.bind(this), 1000);
 								this.pwd = '';
 								this.newPwd = '';
 							}
 						}else{
 							this.code = '';
-							this.num = data.data;
-							layer.msg(data.message, {time: 1000});
+							this.num = res.num;
+							layer.msg(res.message, {time: 1000});
 						}
-					}).bind(this).catch(function(err){
+					}.bind(this)).catch(function(err){
 						layer.msg('网络不给力，请稍后再试！', {time: 1000});
 					})
 				}
 			},
 			back : function(){
-				this.$router.push({path:'login'});
+				this.$router.push({path:'/login'});
 			},
 			back_forget : function(){
 				$(".forgetPassword").css("display","block");
@@ -159,10 +156,10 @@
 				this.code = ''
 			},
 			close : function(){
-				this.$router.push({path: 'index'})
+				this.$router.push({path: '/index'})
 			},
 			toRegister: function(){
-			this.$router.push({path:'register'})
+			this.$router.push({path:'/register'})
 		}
 	}
 }
@@ -170,6 +167,9 @@
 
 <style lang="scss" scoped type="text/css">
 	@import "../../assets/css/common.scss";
+	#forgetPassword {
+		height: 800px;
+	}
 	.forgetPassword {
 		position : relative;
 		left : 40%;
@@ -180,7 +180,7 @@
 		color :$lightblue ;
 		background-color: $blue;
 		z-index:100;
-		
+		border-radius: 10px;
 	}
 	p {
 			line-height : 40px;
@@ -188,6 +188,7 @@
 			&:nth-child(1) {
 				height: 40px;
 				background-color: $bottom_color;
+				border-radius: 10px;
 			}
 		}
 		input {
@@ -263,5 +264,6 @@
 		color :$lightblue ;
 		background-color: $blue;
 		z-index:100;
+		border-radius: 10px;
 	}
 </style>

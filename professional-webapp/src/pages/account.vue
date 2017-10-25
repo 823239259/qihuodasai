@@ -3,7 +3,6 @@
 					<span v-on:click="show_accountSurvey">账户概括</span>
 					<span v-on:click="show_accountOpenDetail">开户明细</span>
 					<span v-on:click="show_accountSafe">安全设置</span>
-			</ul>
 			<div id="account_survey" v-if="isshow_accountSurey">
 				<p class="p_left">账户资金</p>
 				<div class="account_info">

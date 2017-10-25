@@ -76,6 +76,8 @@
 								this.secret = res.data.secret;
 								var userData = {'username':this.phone,'password':this.pwd,'token':res.data.token,'secret':res.data.secret};
 								localStorage.setItem("user", JSON.stringify(userData));
+//								 that.$emit('userSignIn', that.userName);
+//								 that.$emit('userSignIn', userData);
 								this.$router.push({path: '/index'});
 							}
 						}
@@ -105,7 +107,7 @@
 				}
 			},
 			tORegister : function(){
-				this.$router.push({path:'register'})
+				this.$router.push({path:'/register'})
 			},
 			eyeEvent : function(e){
 				if(this.eyeShow == false){
@@ -117,28 +119,34 @@
 				}
 			},
 			close :function(){
-				this.$router.push({path:'index'})
+				this.$router.push({path:'/index'})
 			}
 		}
 	}
 </script>
 <style lang="scss" scoped type="text/css">
 	@import "../../assets/css/common.scss";
+	#login{
+		height: 800px;
+	}
 	.login {
-		position: relative;
-		/*top: 30%;*/
+		position: absolute;
+		top: 30%;	
 		left: 40%;
 		width: 400px;
 		height: 330px;
 		background-color: $blue;
 		text-align : center;
 		z-index : 100;
-		p {
+		border-radius:10px;
+	}
+	p {
 			line-height : 40px;
 			color:$white;
 			&:nth-child(1) {
 				height: 40px;
 				background-color: $bottom_color;
+				border-radius: 10px;
 			}
 			&:nth-child(3) {
 				color: $lightblue;
@@ -168,13 +176,13 @@
 			color: $lightblue;
 			font-size: 30px;
 			position: relative;
-			top: 20px;
+			top: 22px;
 			right: 35px;
 			
 		}
 		.span_right {
 			text-align : right;
-			margin-right : 34px;
+			margin-right : 40px;
 		}
 		.btn {
 			width : 320px;
@@ -187,5 +195,4 @@
 		.span_white {
 			color: $white;
 		}
-	}
 </style>

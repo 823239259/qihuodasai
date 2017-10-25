@@ -70,14 +70,13 @@
 							code: this.code
 						};
 						var headers = {version:this.version}
-						pro.fetch("post", '/login', data,headers).then((res)=>{
-							var data = res.data;
-							if(data.success = true){
-								if(data.code = 1){
+						pro.fetch("post",'/login',data,headers).then(function(){
+							if(res.success = true){
+								if(res.code = 1){
 									layer.msg('登录成功', {time: 1000});
-									this.token = data.data.token;
-									this.secret = data.data.secret;
-									var userData = {'username': this.info.loginName, 'password': this.info.password, 'token': data.data.token, 'secret': data.data.secret};  
+									this.token = res.data.token;
+									this.secret = res.data.secret;
+									var userData = {'username': this.info.loginName, 'password': this.info.password, 'token': res.data.token, 'secret': res.data.secret};  
 									localStorage.setItem("user", JSON.stringify(userData));
 									this.code = '';
 									setTimeout(function(){
@@ -88,15 +87,15 @@
 								this.code = '';
 								this.path = this.path + '&' + Math.random()*10;
 								if(data.code == 4){
-									layer.msg(data.message, {time: 1000});
+									layer.msg(res.message, {time: 1000});
 								}else{
-									layer.msg('data.message', {time: 1000});
+									layer.msg(res.message, {time: 1000});
 									setTimeout(function(){
 										this.isshow = false;
 									}.bind(this),1000);
 								}
 							}
-						}).catch((err)=>{
+						}.bind(this)).catch(function(err){
 							var data = err.data;
 							layer.msg('网络不给你，请稍后再试', {time: 1000});
 						})
@@ -134,19 +133,18 @@
 								yzm: this.code
 						};
 						var headers = {version:this.version}
-						pro.fetch("post", '/sms', data,headers).then((res)=>{
-							var data = res.data;
-							if(data.success == true){
-								if(data.code == 1){
+						pro.fetch("post",'/sms',data,headers).then(function(res){
+							if(res.success == true){
+								if(res.code == 1){
 									layer.msg('发送成功', {time: 1000});
 									setTimeout(function(){
 										this.isshow = false;
 									}.bind(this),1000);
 								}
 							}else{
-								layer.msg(data.message, {time: 1000});
+								layer.msg(res.message, {time: 1000});
 							}
-						}).catch((err)=>{
+						}.bind(this)).catch(function(err){
 							var data = err.data;
 							layer.msg('网络不给力，请稍后重试', {time: 1000});
 						})
