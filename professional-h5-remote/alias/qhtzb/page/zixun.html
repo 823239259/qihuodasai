@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>资讯直播</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/common.css" rel="stylesheet" />
+		<link href="../css/own.css" rel="stylesheet" />
+		<link href="../css/mui.picker.min.css" rel="stylesheet" />
+		<link href="../css/information.css" rel="stylesheet" />
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav " style="background-color: #262e38;">
+			<h1 class="mui-title " style="color: white;">资讯</h1>
+		</header>
+		<nav class="navlist">
+			<a href="javascript:void(0);" id="toHome">
+				<span class="mui-icon"><img class="mymenu-icon" id="mymenu-icon" src="../images/home_02.png"style="width: 20px;height: 20px;"/></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a href="javascript:void(0);" id="tocp">
+				<span class="mui-icon"><img class="mymenu-icon" src="../images/cp_02.png"style="width: 20px;height: 20px;"/></span>
+				<span class="mui-tab-label">操盘</span>
+			</a>
+			<a class="yh_active" href="javascript:void(0);" id="tozixun">
+				<span class="mui-icon"><img class="mymenu-icon" src="../images/zx_01.png"style="width: 20px;height: 20px;"/></span>
+				<span class="mui-tab-label" style="color: #3285ea;">资讯</span>
+			</a>
+			<a class="yh_active" href="javascript:void(0);" id="tofaxian">
+				<span class="mui-icon"><img class="mymenu-icon" src="../images/fx_02.png" style="width: 20px;height: 20px;"/></span>
+				<span class="mui-tab-label" style="color: black;">发现</span>
+			</a>
+		</nav>
+		<div class="mui-content">
+			<div class="mui-slider-group">
+				<!--财经日历-->
+				<div class="mui-slider-item mui-control-content" id="directSeedCalendar" style="height: 500px;">
+					<div class="directSeed-calendar-all">
+						<p class="finance-time" id="result">0000年0月00号</p>
+						<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" id="weekLis">
+							<a class="mui-control-item" href="javascript:void(0);">周一</br><span class="monday" data-time>00</span></a>
+							<a class="mui-control-item" href="javascript:void(0);">周二</br><span class="tuesday" data-time>00</span></a>
+							<a class="mui-control-item" href="javascript:void(0);">周三</br><span class="wednesday" data-time>00</span></a>
+							<a class="mui-control-item" href="javascript:void(0);">周四</br><span class="thursday" data-time>00</span></a>
+							<a class="mui-control-item" href="javascript:void(0);">周五</br><span class="friday" data-time>00</span></a>
+							<a class="mui-control-item" href="javascript:void(0);">周六</br><span class="saturday" data-time>00</span></a>
+							<a class="mui-control-item" href="javascript:void(0);">周日</br><span class="sunday" data-time>00</span></a>
+						</div>
+					</div>
+					<div class="mui-scroll-wrapper" id="chartContainerContentOne" style="padding-bottom: 10px;">
+						<div class="mui-scroll" id="mui-scroll-one">
+							<!--数据列表-->
+							<ul class="mui-table-view" id="finance">
+							</ul>
+						</div>
+					</div>
+					<div class="mui-backdrop" id="chioce">
+					</div>
+					<!--财经日历弹出层DIV-->
+					<div class="alertContent" id="chioceProfit">
+						<div class="alert-content-inside">
+
+							<div class="buttonListLi">
+								<p>按国家<span class="mui-icon mui-icon-closeempty popupButton mui-pull-right" id="popupButton" data-id="chioceProfit"></span></p>
+								<ul class="country" style="padding-bottom: 0;">
+									<li class="mui-col-xs-4 mui-col-sm-4 on"><span class="" data-city="China">中国</span></li>
+									<li class="mui-col-xs-4 mui-col-sm-4"><span class="" data-city="USA">美国</span></li>
+									<li class="mui-col-xs-4 mui-col-sm-4"><span class="" data-city="Britain">英国</span></li>
+									<li class="mui-col-xs-4 mui-col-sm-4"><span class="" data-city="France">法国</span></li>
+									<li class="mui-col-xs-4 mui-col-sm-4"><span class="" data-city="Russia">俄罗斯</span></li>
+									<li class="mui-col-xs-4 mui-col-sm-4"><span class="" data-city="Canada">加拿大</span></li>
+									<li class="mui-col-xs-4 mui-col-sm-4"><span class="" data-city="Italy">意大利</span></li>
+									<li class="mui-col-xs-4 mui-col-sm-4"><span class="" data-city="Germany">德国</span></li>
+									<li class="mui-col-xs-4 mui-col-sm-4"><span class="" data-city="Japan">日本</span></li>
+									<li class="mui-col-xs-4 mui-col-sm-4"><span class="" data-city="">全部</span></li>
+								</ul>
+								<p>按重要性</p>
+								<ul class="important" style="display: block; padding-top: 0; height: 40px;">
+									<li class="mui-col-xs-4 mui-col-sm-4 on"><span class="span-selected" >全部</span></li>
+									<li class="mui-col-xs-4 mui-col-sm-4"><span class="" >重要</span></li>
+								</ul>
+							</div>
+							<a class="mui-col-xs-6 mui-col-sm-6 mui-pull-left"><button class="confirmBottonProfit" id="confirmBottonProfit" data-id="chioceProfit">确认</button></a>
+							<a class="mui-col-xs-6 mui-col-sm-6 mui-pull-left"><button class="cancelBottonProfit" data-id="chioceProfit">取消</button></a>
+						</div>
+					</div>
+				</div>
+				<!--7*24小时直播-->
+				<div class="mui-slider-item mui-control-content mui-active" id="directSeedNews">
+					<div id="chartContainerContent">
+						<div class="mui-scroll-wrapper" id="chartContainerContent1">
+							<div class="mui-scroll">
+								<!--数据列表-->
+								<ul class="mui-table-view">
+									
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--<img src="/templets/style/img/information_b.png" alt="" style="width: 100%; float: left;"/>-->
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../js/jquery-1.11.3.js"></script>
+	<script type="text/javascript" src="../js/common.js"></script>
+	<script type="text/javascript" src="../js/mui.picker.min.js"></script>
+	<script type="text/javascript" src="../js/mui.pullToRefresh.js"></script>
+	<script type="text/javascript" src="../js/mui.pullToRefresh.material.js"></script>
+	<script type="text/javascript" src="../js/information.js"></script>
+	<script type="text/javascript" src="../js/common2.js"></script>
+	<script type="text/javascript">
+		mui.init();
+
+		mui.plusReady(function(){
+			var myDate = new Date();   
+			var myMonth = 1+myDate.getMonth();
+// 			document.getElementById("result1").innerHTML = myDate.getFullYear()+"-"+myMonth+"-"+myDate.getDate();
+// 			document.getElementById("result2").innerHTML = myDate.getFullYear()+"-"+myMonth+"-"+myDate.getDate();
+		})
+		var dataUrl={
+			home: "../home.html",
+			cp: "cp.html",
+			zixun:"zixun.html",
+			faxian : "faxian.html"
+		}
+		initBottom(dataUrl);
+		/*打开搜索页*/
+		/*document.getElementById("directSeedSearch").addEventListener("tap", function() {
+			mui.openWindow("search.html", "search");
+		});*/
+		mui("#directSeedTitle").on("tap", "a", function() {
+			var _this = $(this);
+			$(".cz a").hide().eq(_this.index()).show();
+		});
+		
+		/*弹出层*/
+		$(".click-alert").on("tap", function() {
+			var _this = $(this);
+			var id = _this.attr("data-id");
+			$("#" + id).css("display", "block");
+			$("#chioce").css("display", "block");
+			var height = $(".alert-content-inside").height();
+			$("#" + id).css({ "margin-top": -(height + 40) / 2 + "px" });
+		});
+		$(".popupButton").on("tap", function() {
+			var _this = $(this);
+			var id = _this.attr("data-id");
+			$("#" + id).css("display", "none");
+			$("#chioce").css("display", "none");
+		});
+		$(".cancelBottonProfit").on("tap", function() {
+			var _this = $(this);
+			var id = _this.attr("data-id");
+			$("#" + id).css("display", "none");
+			$("#chioce").css("display", "none");
+		});
+	</script>
+	
+
+</html>

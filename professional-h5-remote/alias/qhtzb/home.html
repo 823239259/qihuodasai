@@ -1,0 +1,231 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title> 我的</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/yhqh.css" />
+		<link rel="stylesheet" href="css/own.css" />
+		<script src="js/mui.min.js"></script>
+		<script src="js/mui.js"></script>
+		<script src="js/common.js"></script>
+		<script src="js/jquery-1.11.3.js"></script>
+	</head>
+	<body style="background:white;">		
+		<!--菜单-->
+		<nav class="navlist">
+			<a href="javascript:void(0);" id="toHome">
+				<span class="mui-icon"><img class="mymenu-icon" id="mymenu-icon" src="images/home_01.png"/></span>
+				<span class="mui-tab-label" style="color: #3285ea;">首页</span>
+			</a>
+			<a href="javascript:void(0);" id="tocp">
+				<span class="mui-icon"><img class="mymenu-icon" src="images/cp_02.png"/></span>
+				<span class="mui-tab-label">操盘</span>
+			</a>
+			<a class="yh_active" href="javascript:void(0);" id="tozixun">
+				<span class="mui-icon"><img class="mymenu-icon" src="images/zx_02.png"/></span>
+				<span class="mui-tab-label" style="color: black;">资讯</span>
+			</a>
+			<a class="yh_active" href="javascript:void(0);" id="tofaxian">
+				<span class="mui-icon"><img class="mymenu-icon" src="images/fx_02.png"/></span>
+				<span class="mui-tab-label" style="color: black;">发现</span>
+			</a>
+		</nav>
+		<div class="mui-content">
+			<!--轮播-->
+			<div class="mui-slider">
+			  <div class="mui-slider-group mui-slider-loop">
+			    <!--支持循环，需要重复图片节点-->
+			    <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="images/solider_01.png" /></a></div>
+			    <div class="mui-slider-item"><a href="#"><img src="images/solider_01.png" /></a></div>
+			    <div class="mui-slider-item"><a href="#"><img src="images/solider_02.png" /></a></div>    
+			    <!--支持循环，需要重复图片节点-->
+			    <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="images/solider_02.png" /></a></div>
+			  </div>
+			</div>
+			<div style="height: 100px;text-align: center;"  id="info_list">
+				<span id="to_xinshou" style="font-size: 22px;line-height: 100px;"><img src="images/newpeople.png" alt="新手福利" style="width: 25px;height: 25px;" />新手福利</span>
+				<span id="to_info" style="font-size: 22px;line-height: 100px;"><img src="images/info.png" alt="消息中心" style="width: 25px;height: 25px;"/>消息中心</span>
+				<span id="to_help" style="font-size: 22px;line-height: 100px;"><img src="images/help.png" alt="帮助中心"style="width: 25px;height: 25px;" />帮助中心</span>
+			</div>
+			<div>
+				<ul class="mui-table-view">
+				    <li class="mui-table-view-cell">国际期货</li>
+				</ul>
+				<ul class="mui-table-view">
+				    <li class="mui-table-view-cell mui-media">
+				        <a href="javascript:;">
+				        	<span class="span_white">CL</span>
+				            <img class="mui-media-object mui-pull-left" src="images/cl.png" class="img_left">
+				            <div class="mui-media-body">
+				               	 美原油 <img src="images/fire.png" alt="" />
+				                <p class='mui-ellipsis' class="p_fixed">1500元炒正宗美原油</p>
+				               <div class="div_right">
+				               		<p class="red">51.05 <i class="red_cl">0.26%</i></p>
+				               		<p>06:00-次日05:00</p>
+				               </div>
+				            </div>
+				        </a>
+				    </li>
+				   <li class="mui-table-view-cell mui-media">
+				        <a href="javascript:;">
+				        	<span class="span_white">GC</span>
+				            <img class="mui-media-object mui-pull-left" src="images/gc.png" class="img_left">
+				            <div class="mui-media-body">
+				               	 美黄金 <img src="images/fire.png" alt="" />
+				                <p class='mui-ellipsis' class="p_fixed">国际黄金，全球热门</p>
+				                 <div class="div_right">
+				               		<p class="red">1272.9 <i class="red_gc">0.26%</i></p>
+				               		<p>06:00-次日05:00</p>
+				               </div>
+				            </div>
+				        </a>
+				    </li>
+				    <li class="mui-table-view-cell mui-media">
+				        <a href="javascript:;">
+				        	<span class="span_white">NQ</span>
+				            <img class="mui-media-object mui-pull-left" src="images/nq.png" class="img_left">
+				            <div class="mui-media-body">
+				               	 小纳值 <img src="images/fire.png" alt="" />
+				                <p class='mui-ellipsis' class="p_fixed">低门槛，收益高</p>
+				                 <div class="div_right">
+				               		<p class="green">6071.25 <i class="green_nq">0.06%</i></p>
+				               		<p>06:00-次日05:00</p>
+				               </div>
+				            </div>
+				        </a>
+				    </li>
+				    <li class="mui-table-view-cell mui-media">
+				        <a href="javascript:;">
+				        	<span class="span_white">HSI</span>
+				            <img class="mui-media-object mui-pull-left" src="images/cl.png" class="img_left">
+				            <div class="mui-media-body">
+				               	 恒值 <img src="images/fire.png" alt="" />
+				                <p class='mui-ellipsis' class="p_fixed">紧跟股市，波动大够刺激</p>
+				                 <div class="div_right">
+				               		<p class="green">28284 <i class="green_hsi">0.06%</i></p>
+				               		<p>06:00-次日05:00</p>
+				               </div>
+				            </div>
+				        </a>
+				    </li>
+				    <li class="mui-table-view-cell mui-media">
+				        <a href="javascript:;">
+				        	<span class="span_white">MHI</span>
+				            <img class="mui-media-object mui-pull-left" src="images/mhi.png" class="img_left">
+				            <div class="mui-media-body">
+				               	 小恒指 <img src="images/fire.png" alt="" />
+				                <p class='mui-ellipsis' class="p_fixed">低门槛，收益高</p>
+				                 <div class="div_right">
+				               		<p>28283 <i>0.06%</i></p>
+				               		<p>06:00-次日05:00</p>
+				               </div>
+				            </div>
+				        </a>
+				    </li>
+				    <li class="mui-table-view-cell mui-media">
+				        <a href="javascript:;">
+				        	<span class="span_white">DAX</span>
+				            <img class="mui-media-object mui-pull-left" src="images/dax.png" class="img_left">
+				            <div class="mui-media-body">
+				               	 德值 <img src="images/fire.png" alt="" />
+				                <p class='mui-ellipsis' class="p_fixed">火爆德值，波幅巨大</p>
+				                 <div class="div_right">
+				               		<p class="green green_dax1">13068.3 <i id="green_dax">0.16%</i></p>
+				               		<p>06:00-次日05:00</p>
+				               </div>
+				            </div>
+				        </a>
+				    </li>
+				    <li class="mui-table-view-cell mui-media">
+				        <a href="javascript:;">
+				        	<span class="span_white">SL</span>
+				            <img class="mui-media-object mui-pull-left" src="images/sl.png" class="img_left">
+				            <div class="mui-media-body">
+				               	 美白银 <img src="images/fire.png" alt="" />
+				                <p class='mui-ellipsis' class="p_fixed">国际白银都在玩</p>
+				                 <div class="div_right">
+				               		<p class="red">16.855 <i class="red_sl">-0.26%</i></p>
+				               		<p>06:00-次日05:00</p>
+				               </div>
+				            </div>
+				        </a>
+				    </li>
+				</ul>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" charset="utf-8">
+		mui.init();	
+		mui.plusReady(function(){
+			var dataUrl = {
+				home: "home.html",
+				cp: "page/cp.html",
+				zixun:"page/zixun.html",
+				faxian:"page/faxian.html"
+			}
+			initBottom(dataUrl);
+			var gallery = mui('.mui-slider');
+				gallery.slider({
+				  interval:3000//自动轮播周期，若为0则不自动播放，默认为0；
+				});
+//			去消息新手帮助
+			document.getElementById("to_xinshou").addEventListener("tap",function(){
+				mui.openWindow({
+					url:"page/newpeople.html",
+					id : 'newpeople.html'
+				})
+			})
+			document.getElementById("to_info").addEventListener("tap",function(){
+				mui.openWindow({
+					url:"page/info.html",
+					id : 'info.html'
+				})
+			})
+			document.getElementById("to_help").addEventListener("tap",function(){
+				mui.openWindow({
+					url:"page/help.html",
+					id : 'help.html'
+				})
+			})
+//			setInterval(function(){
+//				var va = document.getElementById("green_dax").val()
+//				console.log(va)
+////				console.log(11111111111111111111)
+//			},2000)
+		})
+	</script>
+	<style>
+		.img_left {
+			position: relative;
+		}
+		.span_white {
+			position: absolute;
+			color: white;
+			top: 20px;
+			left: 25px;
+			font-size: 14px;
+		}
+		.div_right {
+			position: absolute;
+			top: 20px;
+			right: 0px;
+			margin-right: 10px;
+		}
+		.p_fixed{
+			position: relative;
+		}
+		.red {
+			color: red;
+		}
+		.green {
+			color: green;
+		}
+	</style>
+</html>
+
+
+		
+		

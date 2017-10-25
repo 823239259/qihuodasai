@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>开始页</title>
+		<script src="js/mui.min.js"></script>
+		<script src="js/common.js"></script>
+		<script src="js/jquery-1.11.3.js"></script>
+	</head>
+	<body style="background-color: #ffffff;">
+		<script type="text/javascript">
+			//// 制作完成马甲包:key = [引导页, 主页]
+			// 期货投资宝马甲包
+			var qhtzb = ["alias/qhtzb/guide.html","alias/qhtzb/home.html"];
+			//// 渠道代码与马甲包关系：渠道 = 对应马甲包
+			var alias = new Array();
+		    // ios——期货投资宝
+			alias["59e0794fc895767746000b4c"] = qhtzb;
+		</script>
+		<script>
+			mui.plusReady(function() {
+				mui.getJSON("manifest.json",null,function(data){
+					var appVersion = data.version.name;
+					var appChannelID = "59e0794fc895767746000b4c";
+					display(appVersion, appChannelID);
+				});
+
+				//Android双击home键退出应用
+				var first = null;
+				mui.back = function() {
+					if(!first) {
+						first = new Date().getTime();
+						mui.toast('再按一次退出');
+						setTimeout(function() {
+							first = null;
+						}, 1000);
+					} else {
+						if(new Date().getTime() - first < 1000) {
+							plus.runtime.quit();
+						}
+					}
+				};
+			});
+			
+			// 显示
+			function display(appVersion, appChannelID) {
+				//判断是否显示马甲包
+					mui.app_request('/judgeShow', {
+						"appVersion": appVersion,
+						"parms": appChannelID
+					}, function(result) {
+						console.log(result.message)
+						plus.storage.setItem("apk", appChannelID);					
+						if(result.message == "开启") { // 显示马甲包
+							if(plus.storage.getItem("showAliasGuide") != false) { // 显示马甲引导页
+								plus.storage.setItem("showAliasGuide", false);
+								setTimeout(function() {
+									mui.openWindow({
+										url: alias[appChannelID][0],
+										id: 'aliasGuide'
+									});
+								}, 1500);
+							} else {
+								setTimeout(function() {
+									mui.openWindow({
+										url: alias[appChannelID][1],
+										id: 'aliasHome'
+									});
+								}, 1500)
+							};
+						} else if(result.message == "屏蔽") { // 显示主包
+								setTimeout(function() { //显示主包主页
+									mui.openWindow({
+										url: "index.html",
+										id: "index"
+									});
+								}, 1500);
+						}
+					});
+			}
+		</script>
+	</body>
+
+</html>
