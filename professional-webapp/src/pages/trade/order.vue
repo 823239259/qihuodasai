@@ -67,14 +67,14 @@
 						var data = {};
 						data.commodityName = this.orderTemplist[o.CommodityNo].CommodityName;
 						data.buyOrSell = function(){
-							if(o.Drection==0){
+							if(o.Drection == 0){
 								return '买';
 							}else{
 								return '卖';
 							}
 						}();
 						data.delegatePrice = function(){
-							if(o.OrderPriceType==1){
+							if(o.OrderPriceType == 1){
 								return '市价';
 							}else{
 								return o.OrderPrice;
@@ -85,7 +85,7 @@
 						data.InsertDateTime = o.InsertDateTime;
 						data.ContractCode = o.ContractCode;
 						data.OrderID = o.OrderID;
-						this.$store.state.market.orderList.unshift(data);
+						this.$store.state.market.orderListCont.unshift(data);
 					}.bind(this));
 				}
 			}

@@ -76,7 +76,6 @@
 		mounted: function(){
 			//获取成交列表数据
 			this.operateData(this.OnRspQryTradeDealListCont);
-			console.log(this.dealList);
 		}
 	}
 </script>

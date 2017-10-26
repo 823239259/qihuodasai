@@ -63,6 +63,8 @@ var market = {
 		CacheLastQuote: [],    //缓存最新一条行情数据
 		volume: 0,           //缓存最新成交量
 		subscribeIndex: 1,   //订阅推送次数统计
+		quoteIndex: '',      //行情变化索引
+		quoteColor: '',      //行情变化颜色
 		
 		//行情历史合约数据（分时）
 		jsonData: {},
@@ -1264,13 +1266,13 @@ export default new Vuex.Store({
 						//查询成交记录
 						context.state.tradeSocket.send('{"Method":"QryTrade","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
 						//查询账户信息 
-//						context.state.tradeSocket.send('{"Method":"QryAccount","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
+						context.state.tradeSocket.send('{"Method":"QryAccount","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
 						//查询止损单
 //						context.state.tradeSocket.send('{"Method":"QryStopLoss","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
 						//查询条件单
 //						context.state.tradeSocket.send('{"Method":"QryCondition","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
 						//查询历史成交
-//						context.dispatch('qryHisTrade');
+						context.dispatch('qryHisTrade');
 						//启动交易心跳定时检查
 						context.dispatch('HeartBeatTimingCheck');
 					}else{
@@ -1331,9 +1333,9 @@ export default new Vuex.Store({
 				case 'OnRtnMoney':
 //					console.log('资金变化通知');
 					// 更新资金账户信息
-//					context.dispatch('updateCacheAccount',parameters);
+					context.dispatch('updateCacheAccount',parameters);
 					// 更新资金汇总信息
-//					context.dispatch('updateTotalAccount',parameters);
+					context.dispatch('updateTotalAccount',parameters);
 					break;	
 				case 'OnRtnOrderState'://订单状态改变通知
 //					console.log('订单状态改变通知');
