@@ -63,7 +63,7 @@
 				               	 美原油 <img src="images/fire.png" alt="" />
 				                <p class='mui-ellipsis' class="p_fixed">1500元炒正宗美原油</p>
 				               <div class="div_right">
-				               		<p class="red">51.05 <i class="red_cl">0.26%</i></p>
+				               		<p class="red ">51<i id="ee">92</i>  -0.<i id="ee1">83</i>%</p>
 				               		<p>06:00-次日05:00</p>
 				               </div>
 				            </div>
@@ -77,7 +77,7 @@
 				               	 美黄金 <img src="images/fire.png" alt="" />
 				                <p class='mui-ellipsis' class="p_fixed">国际黄金，全球热门</p>
 				                 <div class="div_right">
-				               		<p class="red">1272.9 <i class="red_gc">0.26%</i></p>
+				               		<p class="red ">12<i id="dd">72</i>.05  -0.0<i id="dd1">89</i>%</p>
 				               		<p>06:00-次日05:00</p>
 				               </div>
 				            </div>
@@ -91,7 +91,7 @@
 				               	 小纳值 <img src="images/fire.png" alt="" />
 				                <p class='mui-ellipsis' class="p_fixed">低门槛，收益高</p>
 				                 <div class="div_right">
-				               		<p class="green">6071.25 <i class="green_nq">0.06%</i></p>
+				               		<p class="green ">60<i id="bb">11</i>.05  0.0<i id="bb1">3</i>%</p>
 				               		<p>06:00-次日05:00</p>
 				               </div>
 				            </div>
@@ -105,7 +105,7 @@
 				               	 恒值 <img src="images/fire.png" alt="" />
 				                <p class='mui-ellipsis' class="p_fixed">紧跟股市，波动大够刺激</p>
 				                 <div class="div_right">
-				               		<p class="green">28284 <i class="green_hsi">0.06%</i></p>
+				               		<p class="green ">282<i id="cc">26</i>  0.0<i id="cc1">11</i>%</p>
 				               		<p>06:00-次日05:00</p>
 				               </div>
 				            </div>
@@ -133,7 +133,7 @@
 				               	 德值 <img src="images/fire.png" alt="" />
 				                <p class='mui-ellipsis' class="p_fixed">火爆德值，波幅巨大</p>
 				                 <div class="div_right">
-				               		<p class="green green_dax1">13068.3 <i id="green_dax">0.16%</i></p>
+				               		<p class="green ">130<i id="green_dax1">21</i>.3  0.0<i id="green_dax">16</i>%</p>
 				               		<p>06:00-次日05:00</p>
 				               </div>
 				            </div>
@@ -147,7 +147,7 @@
 				               	 美白银 <img src="images/fire.png" alt="" />
 				                <p class='mui-ellipsis' class="p_fixed">国际白银都在玩</p>
 				                 <div class="div_right">
-				               		<p class="red">16.855 <i class="red_sl">-0.26%</i></p>
+				               		<p class="red ">16.<i id="ff">855</i>  -0.0<i id="ff1">64</i>%</p>
 				               		<p>06:00-次日05:00</p>
 				               </div>
 				            </div>
@@ -190,11 +190,44 @@
 					id : 'help.html'
 				})
 			})
-//			setInterval(function(){
-//				var va = document.getElementById("green_dax").val()
-//				console.log(va)
-////				console.log(11111111111111111111)
-//			},2000)
+			var va=Number(document.getElementById("green_dax").innerText);
+			var vaa=Number(document.getElementById("green_dax1").innerText);
+			var bb=Number(document.getElementById("bb").innerText)
+			var bbb=Number(document.getElementById("bb1").innerText)
+			var cc=Number(document.getElementById("cc").innerText)
+			var ccc=Number(document.getElementById("cc1").innerText)
+			var dd=Number(document.getElementById("dd").innerText)
+			var ddd=Number(document.getElementById("dd1").innerText)
+			var ee=Number(document.getElementById("ee").innerText)
+			var eee=Number(document.getElementById("ee1").innerText)
+			var ff=Number(document.getElementById("ff").innerText)
+			var fff=Number(document.getElementById("ff1").innerText)
+			setInterval(function(){
+				vaa+=3;
+				va+=1;
+				bb+=1;
+				bbb+=2;
+				cc+=2;
+				ccc+=5;
+				dd-=2;
+				ddd-=2;
+				ee-=1;
+				eee-=3;
+				ff-=2;
+				fff-=4;
+				document.getElementById("ff").innerHTML=ff;
+				document.getElementById("ff").innerHTML=fff;
+				document.getElementById("ee").innerHTML=ee;
+				document.getElementById("ee").innerHTML=eee;
+				document.getElementById("dd").innerHTML=dd;
+				document.getElementById("dd").innerHTML=ddd;
+				document.getElementById("cc").innerHTML=cc;
+				document.getElementById("cc1").innerHTML=ccc;
+				document.getElementById("bb").innerHTML=bb;
+				document.getElementById("bb1").innerHTML=bbb;
+				document.getElementById("green_dax1").innerHTML=vaa
+				document.getElementById("green_dax").innerHTML=va
+			},1000)
 		})
 	</script>
 	<style>

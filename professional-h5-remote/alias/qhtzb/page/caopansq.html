@@ -41,7 +41,7 @@
 			</ul>
 			<div id="btn_btm">
 				<button class="mui-btn mui-btn-warning" id="show_price4">总计（￥）：3,500元</button>
-				<button class="mui-btn mui-btn-primary">提交方案申请</button>
+				<button class="mui-btn mui-btn-primary" id="to_kefu">提交方案申请</button>
 				
 			</div>
 		</div>
@@ -69,7 +69,6 @@
 						var show_price2 = document.getElementById("show_price2");
 						var show_price3 = document.getElementById("show_price3");
 						var show_price3 = document.getElementById("show_price4");
-						console.log(this.id)
 						switch(this.id) {
 							case "btn_price1":
 								show_price1.innerHTML = "￥3,500";
@@ -97,6 +96,9 @@
 							break;
 						}
 					});
+					document.getElementById("to_kefu").addEventListener("tap",function(){
+						mui.alert("请联系客服为您办理","方案申请","确定","",false)
+					})
 			});
 	</script>
 	<style type="text/css">

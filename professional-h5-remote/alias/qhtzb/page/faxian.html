@@ -8,7 +8,7 @@
 		<link href="../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../css/yhqh.css" />
 		<link rel="stylesheet" href="../css/own.css" />
-		<script src="../js/mui.min.js"></script>
+		<!--<script src="../js/mui.min.js"></script>-->
 		<script src="../js/mui.js"></script>
 		<script src="../js/common.js"></script>
 		<script src="../js/jquery-1.11.3.js"></script>
@@ -77,10 +77,10 @@
 			initBottom(dataUrl);
 //			到敬请期待
 			document.getElementById("to_toast").addEventListener("tap",function(){
-				mui.toast("敬请期待")
+				mui.alert("敬请期待","圈子","确定","",false)
 			})
 			document.getElementById("to_toast1").addEventListener("tap",function(){
-				mui.toast("敬请期待")
+				mui.alert("敬请期待","交易动态","确定","",false)
 			})
 			document.getElementById("to_zixun").addEventListener("tap",function(){
 				mui.openWindow({
