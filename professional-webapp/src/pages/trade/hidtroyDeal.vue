@@ -1,5 +1,16 @@
 <template>
 	<div id="trade_details">
+		<div class="condition">
+			<span>今天</span>
+			<span>7天</span>
+			<span>30天</span>
+			<span>起始时间</span>
+			<div class="time">
+				<input type="text" class="fl" />
+				<i class="ifont fl" ></i>
+				<input type="text" class="fr" />
+			</div>
+		</div>
 		<table>
 			<thead>
 				<tr>
@@ -42,6 +53,31 @@
 
 <style lang="scss" scoped>
 	@import "../../assets/css/common.scss";
+	.condition{
+		height: 60px;
+		span{
+			float: left;
+			display: inline-block;
+			height: 60px;
+			line-height: 60px;
+			margin: 0 10px;
+		}
+		.time{
+			float: left;
+			width: 270px;
+			height: 30px;
+			overflow: hidden;
+			border: 1px solid $lightblue;
+			margin: 15px 0;
+			border-radius: 4px;
+			input{
+				width: 120px;
+				height: 27px;
+				line-height: 27px;
+				background: red;
+			}
+		}
+	}
 	table{
 		thead tr{
 			height: 30px;
