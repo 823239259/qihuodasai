@@ -9,7 +9,6 @@
 			<p>银行卡卡号：<input type="text" /></p>
 			<p>确认卡号：<input type="text" /><span>(不支持存折)</span></p>
 			<button class="btn yellow">确认</button>
-			
 		</div>
 		<div class="account_addBankCard_btm">
 			<p>新增/修改银行卡遇到问题</p>
@@ -23,12 +22,12 @@
 
 <script>
 	export default {
-		name : "account_addBankCard"
+		name : "safe_addBankCard"
 	}
 </script>
 
 <style lang="scss" scoped type="text/css">
-	@import "../../assets/css/common.scss";
+	@import "../../../assets/css/common.scss";
 	#account_addBankCard {
 		width: 100%;
 		.account_addBankCard_top {

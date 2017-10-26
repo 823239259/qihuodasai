@@ -119,7 +119,7 @@
 	import { mapMutations,mapActions } from 'vuex'
 	export default {
 		name: 'app',
-		components : { warning},
+		components : {warning},
 		data(){
 			return {
 				warningShow: false,

@@ -3,7 +3,7 @@
 		<div class="account_bindBankCard_top">
 			<ul>
 				<li>
-					<img src="../../assets/images/icon_accountsafe.png" alt="logo_safe" />
+					<img src="../../../assets/images/icon_accountsafe.png" alt="logo_safe" />
 				</li>
 				<li>
 					<p>您已绑定银行卡，可提现到银行卡中。</p>
@@ -36,12 +36,12 @@
 
 <script>
 	export default {
-		name : "account_bindBankCard"
+		name : "safe_bindBankCard"
 	}
 </script>
 
 <style lang="scss" scoped type="text/css">
-	@import "../../assets/css/common.scss";
+	@import "../../../assets/css/common.scss";
 	#account_bindBankCard {
 		width: 100%;
 		.account_bindBankCard_top {

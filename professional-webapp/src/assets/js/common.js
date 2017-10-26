@@ -118,6 +118,15 @@ pro.fetch = function(type, url, params, header){
         });
     });
 }
-
+//时间搓转化成2017-07-07 02:05:06
+pro.formatDate=function(now) { 
+	var year=now.getYear(); 
+	var month=now.getMonth()+1; 
+	var date=now.getDate(); 
+	var hour=now.getHours(); 
+	var minute=now.getMinutes(); 
+	var second=now.getSeconds(); 
+	return "20"+year+"-"+month+"-"+date+" "+hour+":"+minute+":"+second; 
+	} 
 
 export default pro

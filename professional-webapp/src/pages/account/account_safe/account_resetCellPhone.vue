@@ -23,13 +23,13 @@
 
 <script>
 	export default {
-		name : "account_resetCellPhone"
+		name : "safe_resetCellPhone"
 	}
 </script>
 
 
 <style lang="scss" scoped type="text/css">
-	@import "../../assets/css/common.scss";
+	@import "../../../assets/css/common.scss";
 	#account_resetCellPassword {
 		width: 100%;
 		.account_resetCellPassword_top{

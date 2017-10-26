@@ -19,12 +19,12 @@
 
 <script>
 	export default {
-		name : "account_additionlMargin"
+		name : "safe_additionlMargin"
 	}
 </script>
 
 <style lang="scss" scoped type="text/css">
-@import "../../assets/css/common.scss";
+@import "../../../assets/css/common.scss";
 	.additionlMargin {
 		position: relative;
 		/*top: 200px;*/

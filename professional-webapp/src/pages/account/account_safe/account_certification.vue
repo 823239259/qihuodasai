@@ -22,12 +22,12 @@
 
 <script>
 	export default {
-		name : "account_certification"
+		name : "safe_certification"
 	}
 </script>
 
 <style lang="scss" scoped type="text/css">
-	@import "../../assets/css/common.scss";
+	@import "../../../assets/css/common.scss";
 	
 	#account_certification {
 		width: 1000px;
