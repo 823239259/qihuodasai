@@ -457,10 +457,10 @@
 					tr{
 						height: 40px;
 						&.red_bg{
-							background: #ff9f9f;
+							background: #54323e;
 						}
 						&.green_bg{
-							background: #9ee5c2;
+							background: #2c4c4a;
 						}
 					}
 				}

@@ -218,9 +218,11 @@ var market = {
 		},
 		ifUpdateHoldProfit: false,       //是否使用最新行情更新持仓盈亏
 		ifUpdateAccountProfit: false,   //是否可以更新账户盈亏标志：资金信息显示完毕就可以更新盈亏
+		//成交历史列表
+		queryHisList: [], 
 		
 //		qryHoldTotalKV: {},
-		queryHisList: [], 
+		
 		
 		
 		
@@ -231,16 +233,11 @@ var market = {
 		
 		
 		//切换后合约的名字
-		selectId: '',
 		jContractFloatingProfitVO:{
 			currencyNo:'',
 			floatingProfit:0.0
 		},
-		openChangealertCurrentObj:null,
 		layer:null,
-		
-		toast:'',
-		
 		
 		//止损止盈
 		stopLossList: [],
@@ -1900,7 +1897,7 @@ export default new Vuex.Store({
 						= parameters.OrderPrice;
 					context.state.market.OnRspOrderInsertOrderListCont[context.state.market.OnRspOrderInsertOrderListCont.length-index-1].OrderNum
 						= parameters.OrderNum;
-					context.state.market.layer = parameters.StatusMsg + ':合约【'+ parameters.ContractCode +'】,订单号:【'+ parameters.OrderID +'】' + Math.floor(Math.random()*10);
+					layer.msg(parameters.StatusMsg + ':合约【'+ parameters.ContractCode +'】,订单号:【'+ parameters.OrderID +'】', {time: 1000});
 				}
 			}else if(parameters.OrderStatus == 6){
 				return true;
@@ -1908,7 +1905,7 @@ export default new Vuex.Store({
 				if(isExist==true){
 					context.state.market.orderListCont.splice(index,1);
 					context.state.market.OnRspOrderInsertOrderListCont.splice(context.state.market.OnRspOrderInsertOrderListCont.length-index-1,1);
-					context.state.market.layer = parameters.StatusMsg + ':合约【'+ parameters.ContractCode +'】,订单号:【'+ parameters.OrderID +'】' + + Math.floor(Math.random()*10);
+					layer.msg(parameters.StatusMsg + ':合约【'+ parameters.ContractCode +'】,订单号:【'+ parameters.OrderID +'】', {time: 1000});
 				}
 			}
 		},
