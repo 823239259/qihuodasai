@@ -145,7 +145,7 @@
 	function fundList(list,i){
 		
 	  	var $fundList=document.body.querySelector("#directSeedNews .mui-table-view"); 
-	  	var time = tzdr.dateUtil.getFormatDataByLong(list[i].createdAt/1000,"hh:mm");
+	  	var time = tzdr.dateUtil.getFormatDataByLong(list[i].createdAt,"hh:mm");
 	  	var li=document.createElement("li");
 	  	li.innerHTML = "<div class='content-left'>"+time+"</div>"+
 	  					"<div class='content-circular'></div>"+
