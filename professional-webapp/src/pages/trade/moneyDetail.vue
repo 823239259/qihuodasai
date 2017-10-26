@@ -1,6 +1,35 @@
 <template>
 	<div id="trade_details">
-		资金详情
+		<table>
+			<thead>
+				<tr>
+					<td>币种</td>
+					<td>昨结存</td>
+					<td>今权益</td>
+					<td>今可用</td>
+					<td>保证金</td>
+					<td>冻结资金</td>
+					<td>逐笔浮盈</td>
+					<td>平仓盈亏</td>
+					<td>入金</td>
+					<td>出金</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>美元</td>
+					<td>昨结存</td>
+					<td>今权益</td>
+					<td>今可用</td>
+					<td>保证金</td>
+					<td>冻结资金</td>
+					<td>逐笔浮盈</td>
+					<td>平仓盈亏</td>
+					<td>入金</td>
+					<td>出金</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </template>
 

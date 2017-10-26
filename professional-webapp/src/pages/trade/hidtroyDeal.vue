@@ -1,13 +1,13 @@
 <template>
 	<div id="trade_details">
 		<div class="condition">
-			<span>今天</span>
+			<span class="current">今天</span>
 			<span>7天</span>
 			<span>30天</span>
-			<span>起始时间</span>
+			<em>起始时间</em>
 			<div class="time">
 				<input type="text" class="fl" />
-				<i class="ifont fl" ></i>
+				<i class="ifont fl">&#xe690;</i>
 				<input type="text" class="fr" />
 			</div>
 		</div>
@@ -35,12 +35,6 @@
 				</tr>
 			</tbody>
 		</table>
-		<div class="tools">
-			<button class="btn blue">全部平仓</button>
-			<button class="btn blue">平仓</button>
-			<button class="btn blue">反手</button>
-			<button class="btn blue">止损止盈</button>
-		</div>
 	</div>
 </template>
 
@@ -55,12 +49,18 @@
 	@import "../../assets/css/common.scss";
 	.condition{
 		height: 60px;
-		span{
+		span, em{
 			float: left;
 			display: inline-block;
 			height: 60px;
 			line-height: 60px;
 			margin: 0 10px;
+		}
+		span{
+			cursor: pointer;
+			&:hover, &.current{
+				color: $yellow;
+			}
 		}
 		.time{
 			float: left;
@@ -71,10 +71,20 @@
 			margin: 15px 0;
 			border-radius: 4px;
 			input{
-				width: 120px;
-				height: 27px;
-				line-height: 27px;
-				background: red;
+				width: 109px;
+				height: 26px;
+				line-height: 26px;
+				padding: 0 5px;
+				color: $white;
+			}
+			.ifont{
+				width: 30px;
+				height: 28px;
+				line-height: 28px;
+				text-align: center;
+				background: $lightblue;
+				font-size: $fs18;
+				color: $blue;
 			}
 		}
 	}
@@ -89,14 +99,6 @@
 		tbody tr{
 			height: 40px;
 			border-bottom: 1px solid $bottom_color;
-		}
-	}
-	.tools{
-		margin: 15px 0 0 10px;
-		.btn{
-			width: 90px;
-			height: 30px;
-			line-height: 30px;
 		}
 	}
 </style>

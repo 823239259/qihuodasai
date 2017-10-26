@@ -23,9 +23,9 @@
 			</tbody>
 		</table>
 		<div class="tools">
-			<button class="btn blue">全部平仓</button>
-			<button class="btn blue">平仓</button>
-			<button class="btn blue">反手</button>
+			<button class="btn blue" @click="closePositionAll">全部平仓</button>
+			<button class="btn blue" @click="closePosition">平仓</button>
+			<button class="btn blue" @click="backTrade">反手</button>
 			<button class="btn blue">止损止盈</button>
 		</div>
 	</div>
@@ -52,6 +52,41 @@
 			}
 		},
 		methods: {
+			closePositionAll: function(){
+				if(this.positionListCont.length > 0){
+					layer.confirm('此次操作会平掉您持仓列表中所有的合约，请您慎重选择。确认平仓全部合约？', {
+						btn: ['确定','取消']
+					}, function(index){
+						this.positionListCont.forEach(function(o,i){
+							var Contract = o.ContractCode.substring(0, o.ContractCode.length-4);
+							var b = {
+								"Method": 'InsertOrder',
+								"Parameters":{
+									"ExchangeNo": this.qryHoldTotalArr[i].ExchangeNo,
+									"CommodityNo": this.qryHoldTotalArr[i].CommodityNo,
+									"ContractNo": this.qryHoldTotalArr[i].ContractNo,
+									"OrderNum": this.qryHoldTotalArr[i].HoldNum,
+									"Drection": drection,
+									"PriceType": 1,
+									"LimitPrice": 0.00,
+									"TriggerPrice": 0,
+									"OrderRef": this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+								}
+							};
+							this.tradeSocket.send(JSON.stringify(b));
+						}.bind(this));
+						layer.close(index);
+					}.bind(this));
+				}else{
+					layer.msg('暂无合约需要平仓', {time: 1000});
+				}
+			},
+			closePosition: function(){
+				
+			},
+			backTrade: function(){
+				
+			},
 			operateData: function(obj){
 				this.$store.state.market.positionListCont = [];
 				if(obj){
