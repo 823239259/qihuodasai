@@ -238,9 +238,6 @@ var market = {
 		layer:null,
 		
 		toast:'',
-		tradeLoginfailMsg:'',
-		layerOnRtnOrder: '',     //买入成功提示
-//		appendOrderMsg: '',     //委托提示
 		
 		
 		//止损止盈
@@ -1265,7 +1262,7 @@ export default new Vuex.Store({
 						//查询订单 
 						context.state.tradeSocket.send('{"Method":"QryOrder","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
 						//查询成交记录
-//						context.state.tradeSocket.send('{"Method":"QryTrade","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
+						context.state.tradeSocket.send('{"Method":"QryTrade","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
 						//查询账户信息 
 //						context.state.tradeSocket.send('{"Method":"QryAccount","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
 						//查询止损单
@@ -1360,7 +1357,6 @@ export default new Vuex.Store({
 				case 'OnRtnOrderTraded':
 //					console.log('成交单通知');
 					if(parameters!=null){
-//						context.state.market.OnRspQryTradeDealListCont.push(parameters);
 						context.state.market.OnRspQryTradeDealListCont.unshift(parameters);
 					}
 					context.dispatch('layerOnRtnOrderTraded',parameters);
@@ -1844,7 +1840,7 @@ export default new Vuex.Store({
 				var TradeNum = parameters.TradeNum;
 				var TradeNo = parameters.TradeNo;
 				var TradePrice = parseFloat(parameters.TradePrice).toFixed(context.state.market.orderTemplist[parameters.CommodityNo].DotSize);
-				context.state.market.layerOnRtnOrder = "成交（"+CommodityName+",价格:"+TradePrice+","+DirectionStr+TradeNum+"手）" + Math.floor(Math.random()*10);
+				layer.msg("成交（"+CommodityName+",价格:"+TradePrice+","+DirectionStr+TradeNum+"手）", {time: 1000});
 			}
 		},
 		layerMessage:function(context,parameters){

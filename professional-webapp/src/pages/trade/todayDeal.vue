@@ -11,33 +11,82 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>当日成交</td>
-					<td class="red">多</td>
-					<td>1</td>
-					<td>25289</td>
-					<td class="red">+100.00：USD</td>
-				</tr>
+				<template v-for="v in dealList">
+					<tr>
+						<td>{{v.commodityName}}</td>
+						<td>{{v.buyOrSell}}</td>
+						<td>{{v.tradePrice}}</td>
+						<td>{{v.tradeNum}}</td>
+						<td>{{v.tradeDateTime}}</td>
+					</tr>
+				</template>
 			</tbody>
 		</table>
-		<div class="tools">
-			<button class="btn blue">全部平仓</button>
-			<button class="btn blue">平仓</button>
-			<button class="btn blue">反手</button>
-			<button class="btn blue">止损止盈</button>
-		</div>
 	</div>
 </template>
 
 <script>
-	import { mapMutations,mapActions } from 'vuex'
 	export default{
 		name: 'trade_details',
+		data(){
+			return{
+				dealList: [],
+			}
+		},
+		computed: {
+			orderTemplist(){
+				return this.$store.state.market.orderTemplist;
+			},
+			OnRspQryTradeDealListCont(){
+				return this.$store.state.market.OnRspQryTradeDealListCont;
+			}
+		},
+		watch: {
+			OnRspQryTradeDealListCont: function(n, o){
+				if(n){
+					//获取成交列表数据
+					this.operateData(this.OnRspQryTradeDealListCont);
+				}
+			}
+		},
+		methods: {
+			operateData: function(obj){
+				this.dealList = [];
+				if(obj){
+					this.OnRspQryTradeDealListCont.forEach(function(o, i){
+						var data = {};
+						data.commodityName = this.orderTemplist[o.CommodityNo].CommodityName;
+						data.buyOrSell = function(){
+							if(o.Drection == 0){
+								return '买';
+							}else{
+								return '卖';
+							}
+						}();
+						data.tradePrice = o.TradePrice;
+						data.tradeNum = o.TradeNum;
+						data.tradeDateTime = o.TradeDateTime;
+						data.ContractCode = o.ContractCode;
+						data.OrderID = o.OrderID;
+						this.dealList.unshift(data);
+					}.bind(this));
+				}
+			}
+		},
+		mounted: function(){
+			//获取成交列表数据
+			this.operateData(this.OnRspQryTradeDealListCont);
+			console.log(this.dealList);
+		}
 	}
 </script>
 
 <style lang="scss" scoped>
 	@import "../../assets/css/common.scss";
+	#trade_details{
+		height: 210px;
+		overflow-y: auto;
+	}
 	table{
 		thead tr{
 			height: 30px;
@@ -49,14 +98,6 @@
 		tbody tr{
 			height: 40px;
 			border-bottom: 1px solid $bottom_color;
-		}
-	}
-	.tools{
-		margin: 15px 0 0 10px;
-		.btn{
-			width: 90px;
-			height: 30px;
-			line-height: 30px;
 		}
 	}
 </style>
