@@ -612,7 +612,6 @@
 							"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
 						}
 					};
-					this.tradeSocket.send(JSON.stringify(b));
 				}else{
 					b = {
 						"Method": 'InsertOrder',
@@ -628,31 +627,21 @@
 							"OrderRef": this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
 						}
 					};
-					this.tradeSocket.send(JSON.stringify(b));
 				}
 				//确定文案
 				var contract = b.Parameters.CommodityNo + b.Parameters.ContractNo;
 				var LimitPrice;
-				if(b.Parameters.PriceType == 1){
-					LimitPrice='市价';
-				}else{
-					LimitPrice = this.tradePrices;
-				}
+				b.Parameters.PriceType == 1 ? LimitPrice = '市价' : LimitPrice = this.tradePrices;
 				var orderNum = b.Parameters.OrderNum;
 				var drection;
-				if(b.Parameters.Drection==0){
-					drection = '买';
-				}else{
-					drection = '卖';
-				}
+				b.Parameters.Drection == 0 ? drection = '买' : drection = '卖';
 				this.confirmText = '确认提交订单:【'+contract+'】,价格【'+LimitPrice +'】,手数【'+orderNum+'】,方向【'+drection+'】？';
 				layer.confirm(this.confirmText, {
-					btn: ['确定','取消'] //按钮
-				}, function(){
-					
-				}, function(){
-					
-				});
+					btn: ['确定','取消']
+				}, function(index){
+					this.tradeSocket.send(JSON.stringify(b));
+					layer.close(index);
+				}.bind(this));
 			},
 			sell: function(){
 				var buildIndex = 0;
