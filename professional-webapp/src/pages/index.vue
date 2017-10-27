@@ -455,7 +455,7 @@
 				}
 				tbody{
 					tr{
-						height: 40px;
+						height: 48px;
 						&.red_bg{
 							background: #54323e;
 						}

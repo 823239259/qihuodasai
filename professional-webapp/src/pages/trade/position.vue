@@ -11,8 +11,8 @@
 				</tr>
 			</thead>
 			<tbody>
-				<template v-for="v in positionListCont">
-					<tr>
+				<template v-for="(v, index) in positionListCont">
+					<tr :class="{current: selectedNum == index}" @click="clickEvent(index, v.commodityNocontractNo)">
 						<td>{{v.CommodityName}}</td>
 						<td :class="v.type_color">{{v.type}}</td>
 						<td>{{v.HoldNum}}</td>
@@ -37,6 +37,8 @@
 		name: 'trade_details',
 		data(){
 			return{
+				selectedNum: -1,
+				currentOrderID: '',
 //				positionList: [],
 			}
 		},
@@ -44,28 +46,42 @@
 			orderTemplist(){
 				return this.$store.state.market.orderTemplist;
 			},
+			templateList(){
+				return this.$store.state.market.templateList;
+			},
 			qryHoldTotalArr(){
 				return this.$store.state.market.qryHoldTotalArr;
 			},
 			positionListCont(){
 				return this.$store.state.market.positionListCont;
-			}
+			},
+			tradeSocket(){
+				return this.$store.state.tradeSocket;
+			},
 		},
 		methods: {
+			clickEvent: function(i, id){
+				this.selectedNum = i;
+				this.currentOrderID = id;
+			},
 			closePositionAll: function(){
 				if(this.positionListCont.length > 0){
 					layer.confirm('此次操作会平掉您持仓列表中所有的合约，请您慎重选择。确认平仓全部合约？', {
 						btn: ['确定','取消']
 					}, function(index){
 						this.positionListCont.forEach(function(o,i){
-							var Contract = o.ContractCode.substring(0, o.ContractCode.length-4);
+							var buildIndex = 0;
+							if(buildIndex > 100) buildIndex = 0;
+							var Contract = o.commodityNocontractNo.substring(0, o.commodityNocontractNo.length-4);
+							var drection;
+							o.type == '多' ? drection = 1 : drection = 0;
 							var b = {
 								"Method": 'InsertOrder',
 								"Parameters":{
-									"ExchangeNo": this.qryHoldTotalArr[i].ExchangeNo,
-									"CommodityNo": this.qryHoldTotalArr[i].CommodityNo,
-									"ContractNo": this.qryHoldTotalArr[i].ContractNo,
-									"OrderNum": this.qryHoldTotalArr[i].HoldNum,
+									"ExchangeNo": this.orderTemplist[Contract].ExchangeNo,
+									"CommodityNo": this.templateList[Contract].CommodityNo,
+									"ContractNo": this.templateList[Contract].ContractNo,
+									"OrderNum": o.HoldNum,
 									"Drection": drection,
 									"PriceType": 1,
 									"LimitPrice": 0.00,
@@ -82,7 +98,42 @@
 				}
 			},
 			closePosition: function(){
-				
+				var confirmText;
+				if(this.currentOrderID != ''){
+					this.positionListCont.forEach(function(o,i){
+						if(this.currentOrderID == o.commodityNocontractNo){
+							var buildIndex = 0;
+							if(buildIndex > 100) buildIndex = 0;
+							console.log(o.commodityNocontractNo);
+							var Contract = o.commodityNocontractNo.substring(0, o.commodityNocontractNo.length-4);
+							var drection;
+							o.type == '多' ? drection = 1 : drection = 0;
+							var b = {
+								"Method": 'InsertOrder',
+								"Parameters":{
+									"ExchangeNo": this.orderTemplist[Contract].ExchangeNo,
+									"CommodityNo": this.templateList[Contract].CommodityNo,
+									"ContractNo": this.templateList[Contract].ContractNo,
+									"OrderNum": o.HoldNum,
+									"Drection": drection,
+									"PriceType": 1,
+									"LimitPrice": 0.00,
+									"TriggerPrice": 0,
+									"OrderRef": this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+								}
+							};
+							confirmText = '提交订单:【'+ o.commodityNocontractNo +'】,价格【市价】,手数【'+ o.HoldNum +'】？';
+							layer.confirm(confirmText, {
+								btn: ['确定','取消']
+							}, function(index){
+								this.tradeSocket.send(JSON.stringify(b));
+								layer.close(index);
+							}.bind(this));
+						}
+					}.bind(this));
+				}else{
+					layer.msg('请选择一条数据', {time: 1000});
+				}
 			},
 			backTrade: function(){
 				

@@ -6,9 +6,9 @@
 			<span>30天</span>
 			<em>起始时间</em>
 			<div class="time">
-				<input type="text" class="fl" />
+				<input type="text" class="fl date" />
 				<i class="ifont fl">&#xe690;</i>
-				<input type="text" class="fr" />
+				<input type="text" class="fr date" />
 			</div>
 		</div>
 		<table>
@@ -26,6 +26,7 @@
 				</tr>
 			</thead>
 			<tbody>
+				<template ></template>
 				<tr>
 					<td>历史成交</td>
 					<td class="red">多</td>
@@ -42,6 +43,13 @@
 	import { mapMutations,mapActions } from 'vuex'
 	export default{
 		name: 'trade_details',
+		mounted: function(){
+			//调用日历插件
+			$(".date").click(function(){
+				console.log(1111);
+				WdatePicker();
+			});
+		}
 	}
 </script>
 
