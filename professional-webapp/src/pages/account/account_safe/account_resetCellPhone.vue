@@ -74,7 +74,9 @@
 				}else if(this.newCode == ''){
 					layer.msg('请输入新手机验证码',{time:1000});
 				}else if(phoneReg.test(this.newMobile) == false){
-					layer.msg('请输入正确的手机号码',{time:1000});
+					layer.msg('手机格式错误',{time:1000});
+				}else {
+					
 				}
 			},
 			getOldCode :function(e){
