@@ -620,7 +620,7 @@
 							"CommodityNo": this.currentdetail.CommodityNo,
 							"ContractNo": this.currentdetail.LastQuotation.ContractNo,
 							"OrderNum": this.defaultNum,
-							"Drection": 1,
+							"Drection": 0,
 							"PriceType": 0,
 							"LimitPrice": parseFloat(this.tradePrices),
 							"TriggerPrice": 0,

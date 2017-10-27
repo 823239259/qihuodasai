@@ -1924,7 +1924,7 @@ export default new Vuex.Store({
 		updateHold:function(context,parameters){
 			var isExist = false;
 			var positionListContCurrent = null;
-			var positionListContCurrentIndex=0;
+			var positionListContCurrentIndex = 0;
 			context.state.market.positionListCont.forEach(function(e,i){
 				if(e.commodityNocontractNo==parameters.ContractCode){
 					positionListContCurrent = e;
@@ -1962,7 +1962,7 @@ export default new Vuex.Store({
 				}
 			}
 			if(isExist==true){
-				if(parameters.HoldNum!=0){
+				if(parameters.HoldNum != 0){
 					positionListContCurrent.HoldNum=parameters.HoldNum;
 					if(parameters.Drection==0){
 						 positionListContCurrent.type ='多';
