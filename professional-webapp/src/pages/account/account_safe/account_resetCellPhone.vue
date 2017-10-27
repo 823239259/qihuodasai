@@ -76,7 +76,27 @@
 				}else if(phoneReg.test(this.newMobile) == false){
 					layer.msg('手机格式错误',{time:1000});
 				}else {
-					
+					var headers = {
+						token:JSON.parse(localStorage.user).token,
+						secret : JSON.parse(localStorage.user).secret
+					}
+					var data = {
+						newMobile:this.newCode ,
+						oldCode:this.newMobile,
+						newCode:this.newCode
+					}
+					pro.fetch("post",'/user/security/upphone',data,headers).then((res)=>{
+						if(res.success == true){
+							if(res.code == 1){
+								layer.msg('设置成功',{time:1000})
+								this.$router.path({path:'/account_safe'})
+							}else {
+								layer.msg(res.code,{time:1000})
+							}
+						}
+					}).catch((err)=>{
+						layer.msg('网络不给力，请稍后再试',{time:1000})
+					})
 				}
 			},
 			getOldCode :function(e){
@@ -96,7 +116,7 @@
 				}.bind(this), 1000);
 				
 			},
-			getNewCode:function(){
+			getNewCode:function(e){
 				if($(e.target).hasClass('current')) return false;
 				this.$refs.codeDialog.path =  "http://test.api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.newMobile;
 				this.$refs.codeDialog.phone = this.newMobile;

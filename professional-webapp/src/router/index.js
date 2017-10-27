@@ -21,6 +21,7 @@ import safe_bindBankCard from "../pages/account/account_safe/account_bindBankCar
 import safe_certification from "../pages/account/account_safe/account_certification.vue"
 import safe_resetCellPhone from "../pages/account/account_safe/account_resetCellPhone.vue"
 import safe_resetLoginPassword from "../pages/account/account_safe/account_resetLoginPassword.vue"
+import safe_withdrawalPassword from "../pages/account/account_safe/account_withdrawalPassword.vue"
 Vue.use(Router)
 
 export default new Router({
@@ -79,6 +80,9 @@ export default new Router({
 			},{
 				path :'/safe_resetLoginPassword',
 				component : safe_resetLoginPassword
+			},{
+				path : '/safe_withdrawalPassword',
+				component:safe_withdrawalPassword
 			}]
 		},
 		{
