@@ -1834,32 +1834,32 @@ export default new Vuex.Store({
 		},
 		layerMessage:function(context,parameters){
 			if(parameters!=null){
-				if(parameters.OrderStatus==5){
-					context.state.market.layer = parameters.StatusMsg+Math.floor(Math.random()*10);
+				if(parameters.OrderStatus == 5){
+					layer.msg(parameters.StatusMsg, {time: 1000});
 					return;
 				}
-				var CommodityName =context.state.market.orderTemplist[parameters.CommodityNo].CommodityName;
+				var CommodityName = context.state.market.orderTemplist[parameters.CommodityNo].CommodityName;
 				var DirectionStr;
-				if(parameters.Drection==0){
+				if(parameters.Drection == 0){
 					DirectionStr='买';
 				}
-				if(parameters.Drection==1){
+				if(parameters.Drection == 1){
 					DirectionStr='卖';
 				}
 				var price;
-				if(parameters.OrderPriceType==1){
+				if(parameters.OrderPriceType == 1){
 					price = '市价';
 				}
-				if(parameters.OrderPriceType==0){
+				if(parameters.OrderPriceType == 0){
 					price = parseFloat(parameters.OrderPrice).toFixed(context.state.market.orderTemplist[parameters.CommodityNo].DotSize);
 				}
 				var OrderNum = parameters.OrderNum;
 				var OrderID = parameters.OrderID;
 				
-				if(parameters.OrderStatus<4){
-					context.state.market.layer='委托成功（'+CommodityName+','+price+','+DirectionStr+OrderNum+'手,委托号:'+OrderID+'）'+Math.floor(Math.random()*10);
+				if(parameters.OrderStatus < 4){
+					layer.msg('委托成功（'+CommodityName+','+price+','+DirectionStr+OrderNum+'手,委托号:'+OrderID+'）', {time: 1000});
 				}else{
-					context.state.market.layer='委托失败（'+CommodityName+','+price+','+DirectionStr+OrderNum+'手,失败原因:'+parameters.StatusMsg+'）'+Math.floor(Math.random()*10);
+					layer.msg('委托失败（'+CommodityName+','+price+','+DirectionStr+OrderNum+'手,失败原因:'+parameters.StatusMsg+'）', {time: 1000});
 				}
 			}
 		},
@@ -2194,7 +2194,7 @@ export default new Vuex.Store({
 			context.state.tradeSocket.onopen = function(evt){
 				//登录
 				if(context.state.tradeSocket.readyState == 1){ //连接已建立，可以进行通信。
-					if(JSON.parse(localStorage.getItem('tradeUser'))){
+					if(localStorage.getItem('tradeUser')){
 						context.state.tradeSocket.send('{"Method":"Login","Parameters":{"ClientNo":"'+JSON.parse(localStorage.getItem('tradeUser')).username+'","PassWord":"'+JSON.parse(localStorage.getItem('tradeUser')).password+'","IsMock":'+context.state.market.tradeConfig.model+',"Version":"'+context.state.market.tradeConfig.version+'","Source":"'+context.state.market.tradeConfig.client_source+'"}}');
 					}else{
 						if(context.state.market.tradeConfig.username!=''){

@@ -9,7 +9,7 @@
 			<div class="cont">
 				<input type="text" class="ipt" value="" placeholder="请输入账户名" v-model="username" />
 				<input type="password" class="ipt" value="" placeholder="请输入账户密码" v-model="pwd" @keyup.enter="loginEvent" />
-				<p @>忘记密码？</p>
+				<p @click="forgetPwd">忘记密码？</p>
 				<button class="btn yellow" @click="loginEvent">立即登录</button>
 			</div>
 		</div>
@@ -42,13 +42,13 @@
 					layer.msg('请输入您的密码', {time: 1000});
 				}else{
 					this.$store.state.market.tradeSocket = new WebSocket(this.tradeConfig.url_real);
-					tradeSocket.onopen = function(evt){
+					this.$store.state.market.tradeSocket.onopen = function(evt){
 						//登录
-						if(tradeSocket.readyState==1){ //连接已建立，可以进行通信。
-							tradeSocket.send('{"Method":"Login","Parameters":{"ClientNo":"'+ this.username +'","PassWord":"'+ Base64.encode(this.pwd) +'","IsMock":'+this.tradeConfig.model+',"Version":"'+this.tradeConfig.version+'","Source":"'+this.tradeConfig.client_source+'"}}');
+						if(this.$store.state.market.tradeSocket.readyState==1){ //连接已建立，可以进行通信。
+							this.$store.state.market.tradeSocket.send('{"Method":"Login","Parameters":{"ClientNo":"'+ this.username +'","PassWord":"'+ Base64.encode(this.pwd) +'","IsMock":'+this.tradeConfig.model+',"Version":"'+this.tradeConfig.version+'","Source":"'+this.tradeConfig.client_source+'"}}');
 						}
 					}.bind(this);
-					tradeSocket.onmessage = function(evt) {
+					this.$store.state.market.tradeSocket.onmessage = function(evt) {
 						var data = JSON.parse(evt.data);
 						var parameters = data.Parameters;
 						switch (data.Method){
@@ -76,6 +76,13 @@
 						}
 					}.bind(this);
 				}
+			},
+			forgetPwd: function(){
+				layer.confirm('如果您忘记密码请及时与我们取得联系；联系电话：400-852-8008',{
+					btn: ['关闭']
+				}, function(index){
+					layer.close(index);
+				});
 			}
 		}
 	}
@@ -93,7 +100,7 @@
 		top: 50%;
 		left: 50%;
 		z-index: 100;
-		margin: -160px 0 0 -200px;
+		margin: -160px 0 0 -235px;
 	}
 	.title{
 		height: 40px;
@@ -136,6 +143,7 @@
 		p{
 			text-align: right;
 			margin-bottom: 20px;
+			cursor: pointer;
 		}
 	}
 </style>
