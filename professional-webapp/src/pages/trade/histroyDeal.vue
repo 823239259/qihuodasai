@@ -182,7 +182,6 @@
 			}
 		},
 		mounted: function(){
-			console.log(12333);
 			//调用日历插件
 			dateEvent('.startTime');
 			dateEvent('.endTime');
