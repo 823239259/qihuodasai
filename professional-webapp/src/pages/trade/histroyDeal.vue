@@ -6,9 +6,9 @@
 			</template>
 			<em>起始时间</em>
 			<div class="time">
-				<input type="text" readonly="readonly" class="fl startTime" v-model="startTime" />
+				<input type="text" readonly="readonly" class="fl startTime" :value="startTime" />
 				<i class="ifont fl">&#xe690;</i>
-				<input type="text" readonly="readonly" class="fr endTime" v-model="endTime" />
+				<input type="text" readonly="readonly" class="fr endTime" :value="endTime" />
 			</div>
 			<button class="btn blue" @click="serchEvent">搜索</button>
 		</div>
@@ -76,10 +76,11 @@
 		methods: {
 			serchEvent: function(){
 				this.selectedNum = -1;
-				var beginTime = this.startTime + ' 00:00:00';
-				var endTime = this.endTime + ' 00:00:00';
-				console.log(beginTime);
-				
+				this.startTime = $(".startTime").val();
+				this.endTime = $(".endTime").val();
+				var beginTime = $(".startTime").val() + ' 00:00:00';
+				var endTime = $(".endTime").val() + ' 00:00:00';
+				this.histroyDealList = [];
 				this.$store.state.market.queryHisList = [];
 				this.tradeSocket.send('{"Method":"QryHisTrade","Parameters":{"ClientNo":"'+JSON.parse(localStorage.tradeUser).username	+'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'"}}');
 				setTimeout(function(){
@@ -108,6 +109,10 @@
 				}.bind(this));
 			},
 			conditionSearch: function(index){
+				var date = new Date();
+				var time = pro.formatDate(date).split(' ')[0];
+				this.startTime = time;
+				this.endTime = time;
 				this.selectedNum = index;
 				if(index == 0){ //今天
 					this.histroyDealList = [];
@@ -177,12 +182,12 @@
 			}
 		},
 		mounted: function(){
+			console.log(12333);
 			//调用日历插件
 			dateEvent('.startTime');
 			dateEvent('.endTime');
 			var date = new Date();
-			var time = pro.formatDate(date);
-			console.log(time)
+			var time = pro.formatDate(date).split(' ')[0];
 			this.startTime = time;
 			this.endTime = time;
 			//默认查询当天数据
