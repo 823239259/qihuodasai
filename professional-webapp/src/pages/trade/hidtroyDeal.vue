@@ -6,9 +6,9 @@
 			<span>30天</span>
 			<em>起始时间</em>
 			<div class="time">
-				<input type="text" class="fl date" />
+				<input type="text" readonly="readonly" class="fl startTime" v-model="startTime" />
 				<i class="ifont fl">&#xe690;</i>
-				<input type="text" class="fr date" />
+				<input type="text" readonly="readonly" class="fr endTime" v-model="endTime" />
 			</div>
 		</div>
 		<table>
@@ -40,15 +40,30 @@
 </template>
 
 <script>
-	import { mapMutations,mapActions } from 'vuex'
+	import pro from '../../assets/js/common.js'
 	export default{
 		name: 'trade_details',
+		data(){
+			return{
+				startTime: '',
+				endTime: ''
+			}
+		},
+		computed: {
+			
+		},
+		methods: {
+			
+		},
 		mounted: function(){
 			//调用日历插件
-			$(".date").click(function(){
-				console.log(1111);
-				WdatePicker();
-			});
+			dateEvent('.startTime');
+			dateEvent('.endTime');
+			var date = new Date();
+			var time = pro.formatDate(date).split(' ')[0];
+			this.startTime = time;
+			this.endTime = time;
+			
 		}
 	}
 </script>
@@ -80,10 +95,11 @@
 			border-radius: 4px;
 			input{
 				width: 109px;
-				height: 26px;
-				line-height: 26px;
+				height: 28px;
+				line-height: 28px;
 				padding: 0 5px;
 				color: $white;
+				cursor: pointer;
 			}
 			.ifont{
 				width: 30px;
