@@ -16,23 +16,29 @@
 							<tr>
 								<td><img src="../../../assets/images/icon_acc1.png" alt="" /></td>
 								<td>实名认证</td>
-								<td>未认证</td>
+								<td v-if="realName == null">未认证</td>
+								<td v-if="realName != null">已认证</td>
 								<td>认证信息：*小四，51116*************2222</td>
-								<td v-on:click="toCertification">去认证</td>
+								<td v-on:click="toCertification" v-if="realName == null">去认证</td>
+								<td v-if="realName != null"></td>
 							</tr>
 							<tr>
 								<td><img src="../../../assets/images/icon_password1.png" alt="" /></td>
 								<td>提现密码</td>
-								<td>未设置	</td>
+								<td v-if="isWithdrawPwd==false">未设置</td>
+								<td v-if="isWithdrawPwd==true">已设置</td>
 								<td>认证信息：*小四，51116*************2222</td>
-								<td v-on:click="toaWithdrawalPassword">设置</td>
+								<td v-on:click="toaWithdrawalPassword" v-if="isWithdrawPwd==false">去设置</td>
+								<td v-on:click="toaWithdrawalPassword" v-if="isWithdrawPwd==true">去修改</td>
 							</tr>
 							<tr>
 								<td><img src="../../../assets/images/icon_bindcard.png" alt="" /></td>
 								<td>绑定银行卡</td>
-								<td>未绑定</td>
+								<td v-if="isBoundBankCard==false">未绑定</td>
+								<td v-if="isBoundBankCard==true">已绑定</td>
 								<td>认证信息：*小四，51116*************2222</td>
-								<td v-on:click="toBindBankCard">绑定</td>
+								<td v-on:click="toBindBankCard" v-if="isBoundBankCard==false">去绑定</td>
+								<td v-on:click="toAddBankCard" v-if="isBoundBankCard==true"></td>
 							</tr>
 							<tr>
 								<td><img src="../../../assets/images/icon_loginpassword.png" alt="" /></td>
@@ -46,7 +52,7 @@
 								<td>绑定手机</td>
 								<td>已绑定</td>
 								<td>认证信息：*小四，51116*************2222</td>
-								<td v-on:click="toResetCellPassword">修改</td>
+								<td v-on:click="toResetCellPassword" >修改</td>
 							</tr>
 						</tbody>
 					</table>
@@ -62,22 +68,41 @@
 		data(){
 			return{
 				username : '',
-				phone : ''
+				phone : '',
+				realName :'',
+				isBoundBankCard:'',
+				isWithdrawPwd:'',
 			}
 		},
 		methods:{
+			//实名认证
 			toCertification : function(){
+				this.$router.push({path:'/safe_certification'})
 			},
+			//设置提现密码
 			toaWithdrawalPassword:function(){
+				this.$router.push({path:'/safe_bindBankCard'})
 			},
+			//绑定银行卡
 			toBindBankCard:function(){
+				this.$router.push({path:'/safe_bindBankCard'})
 			},
+			//修改登录密码
 			toResetLoginPassword:function(){
+				this.$router.push({path:'/safe_resetLoginPassword'})
 			},
+			//修改绑定手机号
 			toResetCellPassword:function(){
+				this.$router.push({path:'/safe_resetCellPhone'})
+			},
+			toAddBankCard :function(){
+				this.$router.push({path:'/safe_addBankCard'})
 			}
 		},
 		mounted:function(){
+			
+		},
+		beforeCreate(){
 			var headers = {
 				token : JSON.parse(localStorage.user).token,
 				secret : JSON.parse(localStorage.user).secret
@@ -88,17 +113,20 @@
 					if(res.code == 1){
 						this.username = res.data.realName;
 						this.phone = res.data.mobile;
-						if(res.data.realName == ''){
-							
-						}else if(res.data.isWithdrawPwd == true){
-							
-						}else if(res.data.isBoundBankCard == true){
-							
+						this.realName = res.data.realName;
+						this.isWithdrawPwd = res.data.isWithdrawPwd;
+						this.isBoundBankCard = res.data.isBoundBankCard;
+						this.phone = res.data.mobile;
+						this.username = res.data.realName;
+						if(res.data.realName == null){
+							this.username = "我曹";
+						}else{
+							this.username = res.data.realName;
 						}
 					}
 				}
 			}).catch((err)=>{
-				
+				console.log(2222222222222)
 			})
 		}
 	}
@@ -107,7 +135,6 @@
 <style lang="scss" scoped type="text/css">
 @import "../../../assets/css/common.scss";
 #account_safe {
-			display: none;
 			width: 100%;
 			height: 540px;
 			background-color: #242633;
@@ -117,7 +144,7 @@
 				width:100%;
 				.safe_left {
 					float: left;
-					width: 150px;
+					width: 15%;
 					height:100%;
 					background-color: $blue;
 					img {
@@ -127,7 +154,7 @@
 				}
 				.safe_right {
 					float: left;
-					width: 850px;
+					width: 85%;
 					height: 100%;
 					background-color: $blue;
 					p {
@@ -168,6 +195,11 @@
 					border-bottom: 1px solid $bottom_color;
 				}
 				
+			}
+			.p_center{
+				height: 40px;
+				line-height: 40px;
+				text-align: center;
 			}
 		}
 </style>

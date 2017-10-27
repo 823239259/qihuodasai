@@ -22,7 +22,7 @@
 						<img src="../../../assets/images/icon_moneyuse.png" alt="可用资金" />
 						<div>
 							<p>可用资金<i class="ifont question">&#xe66d;</i></p>
-							<span>￥{{balance}}</span>
+							<span style="padding-left: 20px;">￥{{balance}}</span>
 						</div>
 					</li>
 					<li>
@@ -327,8 +327,8 @@
 				top: 6px;
 			}
 			span {
-				font-size: 20px;
-				font-weight: 700;
+				font-size: 18px;
+				font-weight: 500;
 				color: $white;
 			}
 		}

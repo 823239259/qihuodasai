@@ -17,10 +17,10 @@ import account_safe from "../pages/account/account_safe/account_safe.vue"
 import sure_withDraw from "../pages/account/account_survey/sure_withDraw.vue"
 import withDraw_bankcard from "../pages/account/account_survey/withDraw_bankcard.vue"
 import safe_addBankCard from "../pages/account/account_safe/account_addBankCard.vue"
-import safe_additionlMargin from "../pages/account/account_safe/account_additionlMargin.vue"
 import safe_bindBankCard from "../pages/account/account_safe/account_bindBankCard.vue"
 import safe_certification from "../pages/account/account_safe/account_certification.vue"
 import safe_resetCellPhone from "../pages/account/account_safe/account_resetCellPhone.vue"
+import safe_resetLoginPassword from "../pages/account/account_safe/account_resetLoginPassword.vue"
 Vue.use(Router)
 
 export default new Router({
@@ -68,9 +68,6 @@ export default new Router({
 				path:'/safe_addBankCard',
 				component : safe_addBankCard
 			},{
-				path:'/safe_additionlMargin',
-				component : safe_additionlMargin
-			},{
 				path : '/safe_bindBankCard',
 				component :safe_bindBankCard
 			},{
@@ -79,6 +76,9 @@ export default new Router({
 			},{
 				path : '/safe_resetCellPhone',
 				component :safe_resetCellPhone
+			},{
+				path :'/safe_resetLoginPassword',
+				component : safe_resetLoginPassword
 			}]
 		},
 		{
