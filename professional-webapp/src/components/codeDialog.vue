@@ -125,7 +125,7 @@
 							var data = err;
 							layer.msg(data.message, {time: 1000});
 						});
-					}else if(this.type = 'findpwd'){
+					}else if(this.type == 'findpwd'){
 						//请求发送验证码
 						var data={
 								mobile: this.phone,
@@ -148,6 +148,8 @@
 							var data = err.data;
 							layer.msg('网络不给力，请稍后重试', {time: 1000});
 						})
+					}else if(this.type == "resetMobile"){
+						
 					}
 				}
 			}

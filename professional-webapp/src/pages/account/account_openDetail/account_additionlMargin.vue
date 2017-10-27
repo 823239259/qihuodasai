@@ -19,7 +19,7 @@
 
 <script>
 	export default {
-		name : "safe_additionlMargin"
+		name : "account_additionlMargin"
 	}
 </script>
 
