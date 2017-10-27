@@ -335,12 +335,12 @@
 	import stopOrder from './trade/stopOrder.vue'
 	import condition from './trade/condition.vue'
 	import todayDeal from './trade/todayDeal.vue'
-	import hidtroyDeal from './trade/hidtroyDeal.vue'
+	import histroyDeal from './trade/histroyDeal.vue'
 	import moneyDetail from './trade/moneyDetail.vue'
 	export default{
 		name:'trade',
 		components: {tradeLogin, tradeLoginSpe, fens, light, klineOne, klineFive, klineFifteen, klineThirty, klineDay,
-			position, order, entrust, stopOrder, condition, todayDeal, hidtroyDeal, moneyDetail
+			position, order, entrust, stopOrder, condition, todayDeal, histroyDeal, moneyDetail
 		},
 		data(){
 			return{
@@ -525,7 +525,7 @@
 				}else if(index == 5){
 					this.selectedTradeDetails = 'todayDeal';
 				}else if(index == 6){
-					this.selectedTradeDetails = 'hidtroyDeal';
+					this.selectedTradeDetails = 'histroyDeal';
 				}else if(index == 7){
 					this.selectedTradeDetails = 'moneyDetail';
 				}

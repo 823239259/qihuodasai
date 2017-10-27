@@ -221,12 +221,6 @@ var market = {
 		//成交历史列表
 		queryHisList: [], 
 		
-//		qryHoldTotalKV: {},
-		
-		
-		
-		
-		
 		
 		
 		
@@ -245,11 +239,8 @@ var market = {
 		stopLossTriggeredList: [],    //已触发列表
 		hasYesstopLossList: [],
 		stopLossListSelectOneObj: {},
-		
 		//条件单
 		conditionList: [],   //条件单未触发列表
-//		conditionTriggeredList: [],  //条件单已触发列表
-//		noObj: '',
 		noListCont: [],
 		triggerConditionList: [],
 		yesListCont: [],
@@ -1294,7 +1285,6 @@ export default new Vuex.Store({
 					}else{
 						//数据加载到页面
 						context.state.market.qryHoldTotalArr.push(parameters);
-//						context.state.market.qryHoldTotalKV[parameters.CommodityNo] = parameters;
 						//初始化持仓列表中的浮动盈亏
 //						context.dispatch('updateHoldFloatingProfit',parameters);
 					}
