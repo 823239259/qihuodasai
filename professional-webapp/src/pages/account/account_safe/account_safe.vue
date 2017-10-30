@@ -17,7 +17,7 @@
 								<td><img src="../../../assets/images/icon_acc1.png" alt="" /></td>
 								<td>实名认证</td>
 								<td v-if="realName == null">未认证</td>
-								<td v-else="realName != null">已认证</td>
+								<td v-else="realName != null" class="yellow_status">已认证</td>
 								<td>认证信息：*小四，51116*************2222</td>
 								<td v-on:click="toCertification" v-if="realName == null">去认证</td>
 								<td v-else="realName != null"></td>
@@ -26,7 +26,7 @@
 								<td><img src="../../../assets/images/icon_password1.png" alt="" /></td>
 								<td>提现密码</td>
 								<td v-if="isWithdrawPwd==false">未设置</td>
-								<td v-else="isWithdrawPwd==true">已设置</td>
+								<td v-else="isWithdrawPwd==true" class="yellow_status">已设置</td>
 								<td>认证信息：*小四，51116*************2222</td>
 								<td v-on:click="toaWithdrawalPassword" v-if="isWithdrawPwd==false">去设置</td>
 								<td v-on:click="toaWithdrawalPassword" v-else="isWithdrawPwd==true">去修改</td>
@@ -35,22 +35,22 @@
 								<td><img src="../../../assets/images/icon_bindcard.png" alt="" /></td>
 								<td>绑定银行卡</td>
 								<td v-if="isBoundBankCard==false">未绑定</td>
-								<td v-else="isBoundBankCard==true">已绑定</td>
+								<td v-else="isBoundBankCard==true" class="yellow_status">已绑定</td>
 								<td>认证信息：*小四，51116*************2222</td>
-								<td v-on:click="toBindBankCard" v-if="isBoundBankCard==false">去绑定</td>
-								<td v-on:click="toAddBankCard" v-else="isBoundBankCard==true"></td>
+								<td v-on:click="toAddBankCard" v-if="isBoundBankCard==false">去绑定</td>
+								<td v-on:click="toBindBankCard" v-else="isBoundBankCard==true">去修改</td>
 							</tr>
 							<tr>
 								<td><img src="../../../assets/images/icon_loginpassword.png" alt="" /></td>
 								<td>登录密码</td>
-								<td>已设置</td>
+								<td class="yellow_status">已设置</td>
 								<td>认证信息：*小四，51116*************2222</td>
 								<td v-on:click="toResetLoginPassword">修改</td>
 							</tr>
 							<tr>
 								<td><img src="../../../assets/images/icon_bindtel.png" alt="" /></td>
 								<td>绑定手机</td>
-								<td>已绑定</td>
+								<td class="yellow_status">已绑定</td>
 								<td>认证信息：*小四，51116*************2222</td>
 								<td v-on:click="toResetCellPassword" >修改</td>
 							</tr>
@@ -126,7 +126,7 @@
 					}
 				}
 			}).catch((err)=>{
-				console.log(2222222222222)
+				layer.msg('网络不给力，请稍后再试',{time:1000});
 			})
 		}
 	}
@@ -200,6 +200,9 @@
 				height: 40px;
 				line-height: 40px;
 				text-align: center;
+			}
+			.yellow_status {
+				color: $yellow;
 			}
 		}
 </style>
