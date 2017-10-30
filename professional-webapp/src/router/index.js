@@ -22,6 +22,7 @@ import safe_certification from "../pages/account/account_safe/account_certificat
 import safe_resetCellPhone from "../pages/account/account_safe/account_resetCellPhone.vue"
 import safe_resetLoginPassword from "../pages/account/account_safe/account_resetLoginPassword.vue"
 import safe_withdrawalPassword from "../pages/account/account_safe/account_withdrawalPassword.vue"
+import openDetail_additionlMargin from "../pages/account/account_openDetail/account_additionlMargin.vue"
 Vue.use(Router)
 
 export default new Router({
@@ -83,6 +84,9 @@ export default new Router({
 			},{
 				path : '/safe_withdrawalPassword',
 				component:safe_withdrawalPassword
+			},{
+				path: '/openDetail_additionlMargin',
+				component : openDetail_additionlMargin
 			}]
 		},
 		{

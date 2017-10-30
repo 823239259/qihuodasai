@@ -1,5 +1,5 @@
 <template>
-	<div id="codeDialog" v-show="isshow">
+	<div id="codeDialog" v-if="isshow">
 		<div class="bg"></div>
 		<div class="codeDialog">
 			<div class="page_cont">

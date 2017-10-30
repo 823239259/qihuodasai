@@ -22,14 +22,14 @@
 						<img src="../../../assets/images/icon_moneyuse.png" alt="可用资金" />
 						<div>
 							<p>可用资金<i class="ifont question">&#xe66d;</i></p>
-							<span style="padding-left: 20px;">￥{{balance}}</span>
+							<span class="surveyMoney">￥{{balance}}</span>
 						</div>
 					</li>
 					<li>
 						<img src="../../../assets/images/icon_money.png" alt="冻结资金" />
 						<div>
 							<p>冻结资金<i class="ifont question">&#xe66d;</i></p>
-							<span>￥{{frzBal}}</span>
+							<span class="surveyMoney">￥{{frzBal}}</span>
 						</div>
 					</li>
 					<li>
@@ -83,7 +83,7 @@
 					<tr v-for="item in item">
 						<td>{{item.subTime}}</td>
 						<td v-if="item.money >0" class="color_yellow">收入</td>
-						<td v-if="item.money <0">支出</td>	
+						<td v-else="item.money <0">支出</td>	
 						<td>{{item.money}}元</td>
 						<!--<td>{{item.balance}}元</td>-->
 						<td>{{item.remark}}</td>
@@ -382,5 +382,8 @@
 		.color_yellow{
 			color: $yellow;
 			font-weight: 500;
+		}
+		.surveyMoney {
+			padding-left: 20px;
 		}
 </style>

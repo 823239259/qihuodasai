@@ -23,7 +23,7 @@
 					<input type="radio" name="radiobutton" value="radiobutton" checked>  
 				</li>
 				<li>
-					<button class="btn yellow">添加银行卡</button>
+					<button class="btn yellow" v-on:click="toAddBankCard">添加银行卡</button>
 				</li>
 			</ul>
 			
@@ -35,8 +35,63 @@
 </template>
 
 <script>
+	import pro from "../../../assets/js/common.js"
 	export default {
-		name : "safe_bindBankCard"
+		name : "safe_bindBankCard",
+		data(){
+			return{
+				bankList : ''
+			}
+		},
+		methods:{
+			//添加银行卡
+			toAddBankCard:function(){
+				this.$router.push({path:'/safe_addBankCard'})
+			},
+			//删除银行卡
+//			delBankCard:function(){
+//				pro.fetch("post",'/user/withdraw/del_bank',data,headers).then((res)=>{
+//					if(res.success == true){
+//						if(res.code == 1){
+//							layer.msg('删除成功',{time:1000});
+//						}else if(res.code == 5){
+//							layer.msg("该银行卡正在提现处理中，不能删除",{time:1000})
+//						}
+//					}
+//				}).catch((err)=>{
+//					layer.msg("网络不给力，请稍后再试",{time:1000})
+//				})
+//			},
+			//设置默认
+//			setDeaultBank:function(){
+//				pro.fetch("post",'/user/withdraw/set_default_bank',data,headers).then((res)=>{
+//					if(res.success == true){
+//						if(res.code == 1){
+//							layer.msg('设置默认成功',{time:1000})
+//						}else if(res.code == 3){
+//							layer.msg('银行卡不存在',{time:1000})
+//						}
+//					}
+//				}).catch((err)=>{
+//					layer.msg('网络不给力，请稍后再试',{time:1000})
+//				})
+//			}
+		},
+		mounted : function(){
+			//获取绑定银行卡
+			pro.fetch('post','/user/withdraw/ bank_list','',{
+				token : JSON.parse(localStorage.user).token,
+				secret : JSON.parse(localStorage.user).secret
+			}).then((res)=>{
+				if(res.success == true){
+					if(res.code == 1){
+						this.bankList = res.data;
+					}
+				}
+			}).catch((err)=>{
+				layer.msg('网络不给力，请稍后再试',{time:1000})
+			})
+		}
 	}
 </script>
 
@@ -53,7 +108,6 @@
 				&:nth-child(1){
 					margin-left: 30px;
 					margin-top: 30px;
-					
 				}
 				&:nth-child(2) {
 					margin-top: 60px;
