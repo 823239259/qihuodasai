@@ -116,11 +116,11 @@
 		methods:{
 			//查看账号
 			toOpenDetailTrade:function(){
-				this.$router.push({path:'/openDetail_additionlMargin'})
+				this.$router.push({path:'/openDetail_viewAccount'})
 			},
 			//追加保证金
 			toAdditionlMargin:function(){
-				
+				this.$router.push({path:'/openDetail_additionalMargin'})
 			},
 			//结算明细
 			toParticulars:function(){
