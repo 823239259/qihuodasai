@@ -37,14 +37,14 @@
 						<span>{{detail.LastQuotation.TotalVolume}}</span>
 					</li>
 					<li>
-						<span>买</span>
-						<span :class="{red: detail.LastQuotation.BidPrice1 - detail.LastQuotation.PreSettlePrice >=0, green: detail.LastQuotation.BidPrice1 - detail.LastQuotation.PreSettlePrice < 0}">{{detail.LastQuotation.BidPrice1 | fixNum2(orderTemplist[detail.LastQuotation.CommodityNo].DotSize)}}</span>
-						<span>{{detail.LastQuotation.BidQty1}}</span>
-					</li>
-					<li>
 						<span>卖</span>
 						<span :class="{red: detail.LastQuotation.AskPrice1 - detail.LastQuotation.PreSettlePrice >=0, green: detail.LastQuotation.AskPrice1 - detail.LastQuotation.PreSettlePrice < 0}">{{detail.LastQuotation.AskPrice1 | fixNum2(orderTemplist[detail.LastQuotation.CommodityNo].DotSize)}}</span>
 						<span>{{detail.LastQuotation.AskQty1}}</span>
+					</li>
+					<li>
+						<span>买</span>
+						<span :class="{red: detail.LastQuotation.BidPrice1 - detail.LastQuotation.PreSettlePrice >=0, green: detail.LastQuotation.BidPrice1 - detail.LastQuotation.PreSettlePrice < 0}">{{detail.LastQuotation.BidPrice1 | fixNum2(orderTemplist[detail.LastQuotation.CommodityNo].DotSize)}}</span>
+						<span>{{detail.LastQuotation.BidQty1}}</span>
 					</li>
 				</ul>
 			</div>
