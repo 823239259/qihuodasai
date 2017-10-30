@@ -287,12 +287,12 @@
 				</div>
 				<div class="trade_list">
 					<div class="head">
-						<p><span>总资产：</span><em>0.00</em></p>
-						<p><span>余额：</span><em>0.00</em></p>
-						<p><span>持仓盈亏：</span><em>0.00</em></p>
+						<p><span>总资产：</span><em>{{jCacheTotalAccount.TodayBalance | fixNumTwo}}</em></p>
+						<p><span>余额：</span><em>{{jCacheTotalAccount.TodayCanUse | fixNumTwo}}</em></p>
+						<p><span>持仓盈亏：</span><em>{{jCacheTotalAccount.FloatingProfit | fixNumTwo}}</em></p>
 						<p><span>交易盈亏：</span><em>0.00</em></p>
-						<p><span>平仓线：</span><em>0.00</em></p>
-						<p><span>风险度%：</span><em>0.00%</em></p>
+						<p><span>平仓线：</span><em>{{forceLine}}</em></p>
+						<p><span>风险度%：</span><em>{{jCacheTotalAccount.RiskRate | fixNum(4)}}%</em></p>
 					</div>
 					<div class="list">
 						<div class="title">
@@ -404,6 +404,15 @@
 			},
 			dotSize(){
 				return this.$store.state.market.currentdetail.DotSize;
+			},
+			jCacheTotalAccount(){
+				return this.$store.state.market.CacheAccount.jCacheTotalAccount;
+			},
+//			positionListCont(){
+//				return this.$store.state.market.positionListCont;
+//			},
+			forceLine(){
+				return this.$store.state.market.forceLine;
 			},
 		},
 		filters:{
@@ -723,7 +732,9 @@
 					}
 				}.bind(this)).catch(function(err){
 					var data = err.data;
-					layer.msg(data.message, {time: 1000});
+					if(data){
+						layer.msg(data.message, {time: 1000});
+					}
 				});
 			},
 			toOpenAccount: function(){

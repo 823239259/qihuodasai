@@ -244,8 +244,6 @@ var market = {
 		noListCont: [],
 		triggerConditionList: [],
 		yesListCont: [],
-		
-		
 	}
 }
 
@@ -1286,7 +1284,7 @@ export default new Vuex.Store({
 						//数据加载到页面
 						context.state.market.qryHoldTotalArr.push(parameters);
 						//初始化持仓列表中的浮动盈亏
-//						context.dispatch('updateHoldFloatingProfit',parameters);
+						context.dispatch('updateHoldFloatingProfit',parameters);
 					}
 					break;
 				case 'OnRspQryOrder': //查询订单信息回复
@@ -2110,7 +2108,7 @@ export default new Vuex.Store({
 						// 合约乘数 = 最小变动价格 / 最小变动点数
 						var mult = context.state.market.orderTemplist[parameters.CommodityNo].ContractSize/context.state.market.orderTemplist[parameters.CommodityNo].MiniTikeSize;
 						// 浮动盈亏 = (价差/最小变动) * (合约乘数 * 最小变动) * 手数 = 价差 * 合约乘数(最小变动价格 / 最小变动点数) * 手数
-						var tmpFloatingProfit = parseFloat(diff * mult * currentPositionListContObj.num).toFixed(2);
+						var tmpFloatingProfit = parseFloat(diff * mult * currentPositionListContObj.HoldNum).toFixed(2);
 						if(currentPositionListContObj.type == '空') { // 空反向
 									tmpFloatingProfit = -tmpFloatingProfit;
 						}	
@@ -2126,7 +2124,7 @@ export default new Vuex.Store({
 						context.state.market.CacheHoldFloatingProfit.jHoldFloatingProfit[parameters.CommodityNo+parameters.ContractNo] 
 							= {"currencyNo" : context.state.market.orderTemplist[parameters.CommodityNo].CurrencyNo, "floatingProfit" : tmpFloatingProfit};
 						//更新账户资金盈亏
-//						context.dispatch('updateAccountFloatingProfit',parameters);
+						context.dispatch('updateAccountFloatingProfit',parameters);
 					}
 				}
 			}
@@ -2550,7 +2548,7 @@ export default new Vuex.Store({
 						}
 					});
 					//更新持仓盈亏
-//					context.dispatch('UpdateHoldProfit',JSON.parse(evt.data).Parameters);
+					context.dispatch('UpdateHoldProfit',JSON.parse(evt.data).Parameters);
 				} else if(context.state.wsjsondata.Method == "OnRspQryHistory") { // 历史行情
 					let data = JSON.parse(evt.data);
 					if(data.Parameters.HisQuoteType == 0){

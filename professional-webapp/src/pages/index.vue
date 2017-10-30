@@ -339,7 +339,9 @@
 					}
 				}.bind(this)).catch(function(err){
 					var data = err.data;
-					layer.msg(data.message, {time: 1000});
+					if(data){
+						layer.msg(data.message, {time: 1000});
+					}
 				});
 			}
 		},
