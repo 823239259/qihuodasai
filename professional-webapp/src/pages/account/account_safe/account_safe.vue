@@ -17,28 +17,28 @@
 								<td><img src="../../../assets/images/icon_acc1.png" alt="" /></td>
 								<td>实名认证</td>
 								<td v-if="realName == null">未认证</td>
-								<td v-if="realName != null">已认证</td>
+								<td v-else="realName != null">已认证</td>
 								<td>认证信息：*小四，51116*************2222</td>
 								<td v-on:click="toCertification" v-if="realName == null">去认证</td>
-								<td v-if="realName != null"></td>
+								<td v-else="realName != null"></td>
 							</tr>
 							<tr>
 								<td><img src="../../../assets/images/icon_password1.png" alt="" /></td>
 								<td>提现密码</td>
 								<td v-if="isWithdrawPwd==false">未设置</td>
-								<td v-if="isWithdrawPwd==true">已设置</td>
+								<td v-else="isWithdrawPwd==true">已设置</td>
 								<td>认证信息：*小四，51116*************2222</td>
 								<td v-on:click="toaWithdrawalPassword" v-if="isWithdrawPwd==false">去设置</td>
-								<td v-on:click="toaWithdrawalPassword" v-if="isWithdrawPwd==true">去修改</td>
+								<td v-on:click="toaWithdrawalPassword" v-else="isWithdrawPwd==true">去修改</td>
 							</tr>
 							<tr>
 								<td><img src="../../../assets/images/icon_bindcard.png" alt="" /></td>
 								<td>绑定银行卡</td>
 								<td v-if="isBoundBankCard==false">未绑定</td>
-								<td v-if="isBoundBankCard==true">已绑定</td>
+								<td v-else="isBoundBankCard==true">已绑定</td>
 								<td>认证信息：*小四，51116*************2222</td>
 								<td v-on:click="toBindBankCard" v-if="isBoundBankCard==false">去绑定</td>
-								<td v-on:click="toAddBankCard" v-if="isBoundBankCard==true"></td>
+								<td v-on:click="toAddBankCard" v-else="isBoundBankCard==true"></td>
 							</tr>
 							<tr>
 								<td><img src="../../../assets/images/icon_loginpassword.png" alt="" /></td>
@@ -81,7 +81,7 @@
 			},
 			//设置提现密码
 			toaWithdrawalPassword:function(){
-				this.$router.push({path:'/safe_bindBankCard'})
+				this.$router.push({path:'/safe_withdrawalPassword'})
 			},
 			//绑定银行卡
 			toBindBankCard:function(){

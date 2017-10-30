@@ -4,41 +4,69 @@
 			<p>您正在为账户<span>{{phone}}</span>重置手机密码</p>
 		</div>
 		<div class="account_resetLoginPassword_center">
-			<p>旧登录密码：<input type="text" v-model="oldLoginPassword"/></p>
+			<p>手机号码:{{username}}</p>
+			<p>获取验证码：<input type="text" v-model="code"/><i class="getcode" v-on:click="getCode">{{volid ? info : (time + '秒')}}</i></p>
 			<p>新登录密码：<input type="text" v-model="newLoginPassword" /></p>
 			<p>确认新密码：<input type="text" v-model="sureLoginPassword"/></p>
 			<button class="btn yellow" v-on:click="toResetLoginPassword">确认</button>
 		</div>
 		<div class="account_resetLoginPassword_btm">
 			<p>设置资金密码遇到问题</p>
-			<ul>
+			<ul>	
 				<li>重置新密码规则？</li>
 				<li>新密码与旧密码不能相同，如果有疑问请拨打客服热线</li>
 			</ul>
 			<p>投资有风险，入市需谨慎</p>
 		</div>
+		<codeDialog ref="codeDialog" type="resetMobile"></codeDialog>
 	</div>
 </template>
-
 <script>
 	import pro from "../../../assets/js/common.js"
+	import codeDialog from "../../../components/codeDialog.vue"
 	export default {
 		name : "safe_resetLoginPassword",
+		components: {codeDialog},
 		data(){
 			return{
 				phone:'',
-				oldLoginPassword:'',
 				newLoginPassword:'',
-				sureLoginPassword:''
+				sureLoginPassword:'',
+				username : '',
+				info:'点击获取',
+				time : 0,
+				path:'',
+				code :''
+			}
+		},
+		computed : {
+			PATH: function(){
+				return this.$store.getters.PATH;
+			},
+			environment(){
+				return this.$store.state.environment;
+			},
+			volid: function(){
+				if(this.time <= 0){
+					return true
+				}else{
+					return false
+				}
 			}
 		},
 		methods:{
 			toResetLoginPassword : function(){
+				var data = {
+					password : this.newLoginPassword,
+					code : this.code
+				}
+				var headers = {
+						token:JSON.parse(localStorage.user).token,
+						secret : JSON.parse(localStorage.user).secret
+					}
 				var pwdReg = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,18}$/;
-				if(this.oldLoginPassword == ''){
-					layer.msg('请输入旧登录密码',{time:1000})
-				}else if(pwdReg.test(this.oldLoginPassword)==false){
-					layer.msg('请输入正确的旧登录密码',{time:1000})
+				if(this.code == ''){
+					layer.msg('请输入验证码',{time:1000})
 				}else if(this.newLoginPassword == ''){
 					layer.msg('请输入新登录密码',{time:1000})
 				}else if(pwdReg.test(this.newLoginPassword ==false)){
@@ -52,13 +80,40 @@
 				}else if(this.oldLoginPassword == this.newLoginPassword){
 					layer.msg('新密码和旧密码一致 ',{time:1000})
 				}else {
-					
+					pro.fetch("post",'/user/security/update_loginPwd',data,headers).then((res)=>{
+						if(res.success == true){
+							if(res.code == 1){
+								layer.msg('设置成功',{time:1000});
+								this.$router.push({path:'/account_safe'})
+							}else {
+								layer.msg(res.code,{time:1000});
+							}
+						}
+					}).catch((err)=>{
+						layer.msg('网络不给力，请稍后重试',{time:1000});
+					})
 				}
-				
-			}
+			},
+			getCode :function(e){
+				if($(e.target).hasClass('current')) return false;
+				this.phone = JSON.parse(localStorage.user).username;
+				this.$refs.codeDialog.path =  "http://test.api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
+				this.$refs.codeDialog.phone = this.phone;
+				//页面效果
+				$(e.target).addClass('current');
+				this.time = 60;
+				var timing = setInterval(function(){
+					this.time--;
+					if(this.time <= 0){
+						clearInterval(timing);
+						$(e.target).removeClass('current');
+					}
+				}.bind(this), 1000);
+			},
 		},
-		beforeCreate(){
-			this.phone =JSON.parse(localStorage.user).username
+		created(){
+			this.phone =JSON.parse(localStorage.user).username;
+			this.username = JSON.parse(localStorage.user).username;
 		}
 	}
 </script>
@@ -82,11 +137,17 @@
 		}
 		.account_resetLoginPassword_center {
 			width: 100%;
-			height: 240px;
+			height: 260px;
 			background-color: $blue;
 			text-align : center;
 			p {
 				padding-top : 20px;
+				&:nth-child(2){
+					margin-left: 72px;
+				}
+				&:nth-child(1){
+					margin-right: 72px;
+				}
 			}
 			input {
 				color:$white;
@@ -94,9 +155,9 @@
 				height: 30px;
 				border: 1px solid $bottom_color;
 				border-radius: 5px;
-				&:hover{
+				/*&:hover{
 					border: 1px solid $yellow;
-				}
+				}*/
 			}
 			.btn {
 				width: 160px;
@@ -137,8 +198,13 @@
 				}
 			}
 		}
-		
-		
 	}
-
+	.getcode {
+		position: relative;
+		left: -70px;
+		background-color: $highLight;
+		color: $white;
+		padding: 9px 8px;
+		top: 2px;
+	}
 </style>
