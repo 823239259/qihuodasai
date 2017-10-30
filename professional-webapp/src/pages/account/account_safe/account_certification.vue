@@ -41,7 +41,6 @@
 					name:this.realName,
 					card:this.IDcard
 				}
-				console.log(data)
 				if(this.realName == ''){
 					layer.msg('请输入姓名', {time: 1000});
 				}
@@ -55,7 +54,6 @@
 				}
 				else {
 					pro.fetch("post",'/user/security/validatecard',data,headers).then(function(res){
-						console.log(res)
 						if(res.success == true){
 							if(res.code == 1){
 								layer.msg('认证成功',{time:1000});
@@ -63,6 +61,8 @@
 							}else{
 								layer.msg(res.code,{time:1000});
 							}
+						}else {
+							
 						}
 					}.bind(this)).catch(function(err){
 						layer.msg('网络超时，请稍后再试',{time:1000});
