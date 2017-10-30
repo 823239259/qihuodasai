@@ -246,7 +246,7 @@
 		}
 	}
 	.table_box{
-		height: 120px;
+		height: 100px;
 		overflow-y: auto;
 	}
 	table{
@@ -260,6 +260,14 @@
 		tbody tr{
 			height: 40px;
 			border-bottom: 1px solid $bottom_color;
+		}
+	}
+	@media only screen and (min-width: 1280px) and (max-width: 1366px) {
+		#trade_details{
+			width: 635px;
+			td{
+				font-size: $fs12;
+			}
 		}
 	}
 </style>

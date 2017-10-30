@@ -815,8 +815,28 @@
 			if(user){
 				this.tradeLoginShow = false;
 				this.tradeDetailsShow = true;
-				this.chartHeight = h - 50 -30 - 40 - 280;
+				this.chartHeight = h - 50 -30 - 40 - $(".trade_box").height();
 				this.tradeUser = user.username;
+				//高度计算
+//				$(".trade_right_top .info .order_details ul li, .trade_right_top .info .order_details p").css({
+//					'height': '30px',
+//					'line-height': '30px',
+//					'font-size': '12px'
+//				});
+//				$(".trade_right_top .info .trade_details .quote_five h3, .trade_right_top .info .trade_details .deal_details .title").css({
+//					'26px': '26px',
+//					'line-height': '26px'
+//				});
+//				$(".trade_right_top .info .trade_details .quote_five li, .trade_right_top .info .trade_details .deal_details ul li").css({
+//					'height': '26px',
+//					'line-height': '26px',
+//					'font-size': '12px'
+//				});
+//				$(".trade_right_top .info .trade_details .quote_five ul, .trade_right_top .info .trade_details .deal_details ul").css({
+//					'height': '120px'
+//				});
+				
+				
 			}
 			//获取平台账户登录信息
 			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
@@ -1299,7 +1319,7 @@
 			}	
 		}
 		.trade_list{
-			width: 100%;
+			width: 1588px;
 			padding-left: 400px;
 			height: 280px;
 			.head{
@@ -1344,6 +1364,56 @@
 					background: $blue;
 				}
 			}
+		}
+	}
+	@media only screen and (min-width: 1400px) and (max-width: 1600px) {
+		.trade_right_top .info .trade_details .quote_five ul, 
+		.trade_right_top .info .trade_details .deal_details ul{
+			height: 290px;
+			overflow-y: auto;
+		}
+	}
+	@media only screen and (min-width: 1280px) and (max-width: 1366px) {
+		.trade_right_top .info .trade_details .quote_five ul, 
+		.trade_right_top .info .trade_details .deal_details ul{
+			height: 180px;
+			overflow-y: auto;
+		}
+		.trade_right_top .info .trade_login{
+			padding-top: 20px;
+		}
+		.trade_box, .trade_box .trade_list{
+			height: 260px;
+		}
+		.trade_box .operate .down_order .cont .btn_box{
+			margin-top: 20px;
+		}
+		/*.trade_right_top .info .order_details ul li, .trade_right_top .info .order_details p{
+			height: 30px;
+			line-height: 30px;
+			font-size: $fs12;
+		}
+		.trade_right_top .info .trade_details .quote_five h3, 
+		.trade_right_top .info .trade_details .deal_details .title{
+			height: 26px;
+			line-height: 26px;
+		}
+		.trade_right_top .info .trade_details .quote_five li,
+		.trade_right_top .info .trade_details .deal_details ul li{
+			height: 26px;
+			line-height: 26px;
+			font-size: $fs12;
+		}*/
+		.trade_right_top .info .trade_details .quote_five ul, 
+		.trade_right_top .info .trade_details .deal_details ul{
+			height: 68px;
+		}
+		.trade_box .trade_list .head p{
+			margin-right: 10px;
+		}
+		.trade_box .trade_list .list .title ul li{
+			width: auto;
+			padding: 0 15px;
 		}
 	}
 </style>

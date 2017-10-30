@@ -280,7 +280,7 @@
 	}
 	.tools{
 		position: fixed;
-		bottom: 55px;
+		bottom: 45px;
 		left: 730px;
 		margin: 15px 0 0 10px;
 		.btn{
@@ -309,6 +309,11 @@
 				color: $white;
 				padding: 0 5px;
 			}
+		}
+	}
+	@media only screen and (min-width: 1280px) and (max-width: 1366px) {
+		#trade_details{
+			width: 635px;
 		}
 	}
 </style>

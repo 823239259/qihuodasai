@@ -109,7 +109,7 @@
 <style lang="scss" scoped>
 	@import "../../assets/css/common.scss";
 	#trade_details{
-		height: 210px;
+		height: 190px;
 		overflow-y: auto;
 	}
 	table{
@@ -123,6 +123,11 @@
 		tbody tr{
 			height: 40px;
 			border-bottom: 1px solid $bottom_color;
+		}
+	}
+	@media only screen and (min-width: 1280px) and (max-width: 1366px) {
+		#trade_details{
+			width: 635px;
 		}
 	}
 </style>

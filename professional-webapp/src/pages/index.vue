@@ -476,6 +476,18 @@
 		width: 100%;
 		margin: 0 auto;
 	}
-
+	@media only screen and (min-width: 1400px) and (max-width: 1600px) {
+		.order .cont table tbody tr{
+			height: 37px;
+		}
+	}
+	@media only screen and (min-width: 1280px) and (max-width: 1366px) {
+		.order .cont table tbody tr{
+			height: 30px;
+			td{
+				font-size: $fs12;
+			}
+		}
+	}
 
 </style>

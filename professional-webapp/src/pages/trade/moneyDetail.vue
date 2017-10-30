@@ -63,7 +63,7 @@
 		overflow-y: auto;
 	}*/
 	#trade_details{
-		height: 210px;
+		height: 190px;
 		overflow-y: auto;
 	}
 	table{
@@ -98,6 +98,14 @@
 			width: 90px;
 			height: 30px;
 			line-height: 30px;
+		}
+	}
+	@media only screen and (min-width: 1280px) and (max-width: 1366px) {
+		#trade_details{
+			width: 635px;
+			td{
+				font-size: $fs12;
+			}
 		}
 	}
 </style>

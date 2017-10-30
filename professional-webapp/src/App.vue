@@ -503,10 +503,10 @@
 		padding: 50px 0 0 70px;
 	}
 	iframe {
-		width: auto; 
-		height: auto; 
+		/*width: auto; 
+		height: auto; */
 		position: fixed; 
-		bottom: 0;
+		bottom: -180px;
 		right: 0;
 		z-index: -1;
 		border: none;
