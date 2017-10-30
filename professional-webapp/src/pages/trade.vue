@@ -290,7 +290,7 @@
 						<p><span>总资产：</span><em>{{jCacheTotalAccount.TodayBalance | fixNumTwo}}</em></p>
 						<p><span>余额：</span><em>{{jCacheTotalAccount.TodayCanUse | fixNumTwo}}</em></p>
 						<p><span>持仓盈亏：</span><em>{{jCacheTotalAccount.FloatingProfit | fixNumTwo}}</em></p>
-						<p><span>交易盈亏：</span><em>0.00</em></p>
+						<p><span>交易盈亏：</span><em>{{jCacheTotalAccount.CloseProfit | fixNumTwo}}</em></p>
 						<p><span>平仓线：</span><em>{{forceLine}}</em></p>
 						<p><span>风险度%：</span><em>{{jCacheTotalAccount.RiskRate | fixNum(4)}}%</em></p>
 					</div>
@@ -1125,8 +1125,11 @@
 		height: 280px;
 		overflow: hidden;
 		margin-top: 10px;
+		position: relative;
 		.operate{
-			float: left;
+			position: absolute;
+			top: 0;
+			left: 0;
 			width: 390px;
 			height: 280px;
 			overflow: hidden;
@@ -1296,8 +1299,8 @@
 			}	
 		}
 		.trade_list{
-			float: left;
-			width: 1188px;
+			width: 100%;
+			padding-left: 400px;
 			height: 280px;
 			.head{
 				height: 30px;
