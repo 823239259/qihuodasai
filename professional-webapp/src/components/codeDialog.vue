@@ -6,7 +6,7 @@
 				<i @tap="close"></i>
 				<h3 class="title">请先输入图形 验证码</h3>
 				<div class="code_box">
-					<input type="number" class="fl" placeholder="图形验证码" v-model="code" />
+					<input type="text" class="fl" placeholder="图形验证码" v-model="code" />
 					<a href="javascript:void(0);" class="fr"><img :src="imgPath" v-on:click="refreshCode" /></a>
 				</div>
 				<div class="btn_box">
@@ -240,7 +240,7 @@
 		line-height: 40px;
 	}
 	.fl {
-		width: 330px;
+		width: 320px;
 		height: 40px;
 		border: 1px solid $bottom_color;
 		border-radius: 5px;

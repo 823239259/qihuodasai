@@ -224,7 +224,10 @@
 							break;
 						case 7:
 							if(JSON.parse(localStorage.user == '')){
-								this.$router.push({path:'/login'})
+								layer.msg("请先登录账户",{time:500});
+								setTimeout(function(){
+									this.$router.push({path:'/login'})
+								}.bind(this),1500)
 							}else{
 								this.$router.push({path: '/account'});
 							}
