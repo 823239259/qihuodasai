@@ -76,17 +76,21 @@
 							mobile:this.phone,
 							type : 2
 						};
-						pro.fetch("post",'/sms',data).then(function(res){
+						var headers = {
+							version: this.version
+						};
+						pro.fetch("post",'/sms',data,headers).then(function(res){
+							console.log(res)
 							if(res.success == true){
 								if(res.code == 1){
 									layer.msg('发送成功', {time: 1000});
 								}
-							}else{
+							}else if(res.success == false){
 								layer.msg(res.message, {time: 1000});
 							}
 						}.bind(this)).catch(function(err){
 							var data = err.data;
-							layer.msg(data.message, {time: 1000});
+							layer.msg('网络不给力，请稍后再试', {time: 1000});
 						})
 					//页面效果
 					$(e.target).addClass('current');
@@ -136,14 +140,17 @@
 								this.pwd = '';
 								this.newPwd = '';
 							}
-						}else{
-							this.code = '';
-							this.num = res.num;
-							layer.msg(res.message, {time: 1000});
 						}
 					}.bind(this)).catch(function(err){
-						layer.msg('网络不给力，请稍后再试！', {time: 1000});
-					})
+						var data = err.data;
+						if(data.success == false){
+							this.code = '';
+							this.num = res.num;
+							layer.msg(data.message, {time: 1000});
+						}else {
+							layer.msg('网络不给力，请稍后重试',{time:5000})
+						}
+					}.bind(this))
 				}
 			},
 			back : function(){

@@ -2,21 +2,21 @@
 	<div id="account_openDetail">
 				<div class="account_openDetail_top">
 					<ul>
-						<li>
-							<span>今天</span>
-							<span>一个月</span>
-							<span>三个月</span>
-							<span>一年</span>
+						<li >
+							<span @click="timeQUuery" class="current">今天</span>
+							<span @click="timeQUuery">一个月</span>
+							<span @click="timeQUuery">三个月</span>
+							<span @click="timeQUuery">一年</span>
 							<span>起始时间</span>
 							<span>2017-07-15</span>
 							<span>></span>
 							<span>2017-07-16</span>
 						</li>
-						<li>
-							<span>全部</span>
-							<span>开户中</span>
-							<span>操盘中</span>
-							<span>已结算</span>
+						<li id="conditionQuery">
+							<span @click="conditionQuery" class="current">全部</span>
+							<span @click="conditionQuery">开户中</span>
+							<span @click="conditionQuery">操盘中</span>
+							<span @click="conditionQuery">已结算</span>
 						</li>
 					</ul>
 				</div>
@@ -110,7 +110,10 @@
 			return{
 				item : [],
 				show_detail : false,
-				show_button : false
+				show_button : false,
+				items : [
+					1,2,3
+				]
 			}
 		},
 		methods:{
@@ -133,6 +136,44 @@
 			//去开户
 			toOpenAccount :function(){
 				this.$router.push({path:'/openAccount'})
+			},
+			//时间查询
+			timeQUuery :function(e){
+				var index = $(e.currentTarget).index();
+				$(e.currentTarget).addClass("current").siblings().removeClass("current");
+				switch (index){
+					case 0:
+					console.log(1)
+					break;
+					case 1:
+					console.log(2)
+					break;
+					case 2:
+					console.log(3)
+					break;
+					case 3:
+					console.log(4)
+					break;
+				}
+			},
+			//条件查询
+			conditionQuery : function(e){
+				var index = $(e.currentTarget).index();
+				$(e.currentTarget).addClass("current").siblings().removeClass("current");
+				switch (index){
+					case 0:
+					console.log(1)
+					break;
+					case 1:
+					console.log(2)
+					break;
+					case 2:
+					console.log(3)
+					break;
+					case 3:
+					console.log(4)
+					break;
+				}
 			}
 		},
 		mounted :function(){
@@ -149,7 +190,7 @@
 				secret : JSON.parse(localStorage.user).secret
 			}
 			pro.fetch("post",'/user/ftrade/list',data,headers).then(function(res){
-				console.log(res);
+//				console.log(res);
 				if(res.success == true){
 					if(res.code == 1){
 						if(res.data.tradeList == ''){
@@ -174,27 +215,17 @@
 			width: 100%;
 			margin-top: 5px;
 			.account_openDetail_top {
-				height: 110px;
+				/*height: 110px;*/
 				background-color: $blue;
 				li {
 					&:nth-child(1){
 						height: 70px;
 						border-bottom: 1px solid $bottom_color;
 						line-height: 70px;
-						span {
-							&:nth-child(1) {
-								color: $yellow;
-							}
-						}
 					}
 					&:nth-child(2){
 						height: 40px;
 						line-height: 40px;
-						span {
-							&:nth-child(1) {
-								color: $yellow;
-							}
-						}
 					}
 				}
 			}
@@ -238,5 +269,8 @@
 			p{
 				font-size: $fs12;
 			}
+		}
+		.current {
+			color: $yellow
 		}
 </style>

@@ -1,5 +1,5 @@
 <template>
-	<div id="codeDialog" v-if="isshow">
+	<div id="codeDialog" v-show="isshow">
 		<div class="bg"></div>
 		<div class="codeDialog">
 			<div class="page_cont">
@@ -83,22 +83,25 @@
 										this.isshow = false;
 									},1000)
 								}
-							}else {
+							}
+						}.bind(this)).catch(function(err){
+							var data = err.data;
+							if(data.success == false){
 								this.code = '';
 								this.path = this.path + '&' + Math.random()*10;
+								layer.msg(data.message,{time:1000})
 								if(data.code == 4){
-									layer.msg(res.message, {time: 1000});
+									layer.msg(data.message, {time: 1000});
 								}else{
 									layer.msg(res.message, {time: 1000});
 									setTimeout(function(){
 										this.isshow = false;
 									}.bind(this),1000);
 								}
+							}else{
+									layer.msg('网络不给力，请稍后重试', {time: 5000});
 							}
-						}.bind(this)).catch(function(err){
-							var data = err.data;
-							layer.msg('网络不给你，请稍后再试', {time: 1000});
-						})
+						}.bind(this))
 					}else if(this.type == 'register'){
 						//请求发送验证码
 						var data ={
@@ -110,21 +113,26 @@
 							version: this.version
 						};
 						pro.fetch('post', '/sms', data, headers).then(function(res){
-							console.log(res);
 							if(res.success == true){
 								if(res.code == 1){
 									layer.msg('发送成功', {time: 1000});
 									console.log(this.isshow);
 									this.isshow = false;
 								}
-							}else{
+							}
+							else{
 								layer.msg(res.message, {time: 1000});
 							}
 						}.bind(this)).catch(function(err){
-							console.log(err);
-							var data = err;
-							layer.msg(data.message, {time: 1000});
-						});
+							var data = err.data;
+							if(data.success == false){
+								this.code = '',
+								this.path = this.path + '&' + Math.random()*10;
+								layer.msg(data.message,{time:1000})
+							}else{
+								layer.msg('网络不给力，请稍后再试',{time:5000})
+							}
+						}.bind(this));
 					}else if(this.type == 'findpwd'){
 						//请求发送验证码
 						var data={
@@ -141,13 +149,16 @@
 										this.isshow = false;
 									}.bind(this),1000);
 								}
-							}else{
-								layer.msg(res.message, {time: 1000});
 							}
 						}.bind(this)).catch(function(err){
 							var data = err.data;
-							layer.msg('网络不给力，请稍后重试', {time: 1000});
-						})
+							if(data.success == false){
+								this.code = '',
+								layer.msg(data.message,{time:1000})
+							}else{
+								layer.msg('网络不给力，请稍后重试', {time: 5000});
+							}
+						}.bind(this))
 					}else if(this.type == "resetMobile"){
 						var data={
 								mobile: this.phone,
