@@ -25,8 +25,8 @@
 		<div class="tools">
 			<button class="btn blue" @click="closePositionAll">全部平仓</button>
 			<button class="btn blue" @click="closePosition">平仓</button>
-			<button class="btn blue" @click="backTrade">反手</button>
-			<button class="btn blue">止损止盈</button>
+			<!--<button class="btn blue" @click="backTrade">反手</button>
+			<button class="btn blue">止损止盈</button>-->
 		</div>
 	</div>
 </template>
