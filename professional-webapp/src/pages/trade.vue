@@ -762,7 +762,8 @@
 			//初始化高度
 			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 			$(".quote .cont").height(h - 50 - 30 - 45);
-			this.chartHeight = h - 50 -30 - 40;
+//			$(".trade_right, .echarts_box").height(h - 50 - 30 - 10);
+			this.chartHeight = h - 50 -30 - 20;
 			//开始画图
 			this.chartShow = true;
 			//调用下拉框
@@ -1122,11 +1123,11 @@
 			}
 			.trade_login{
 				width: 100%;
-				height: 160px;
+				height: 288px;
 				overflow: hidden;
 				background: $blue;
 				margin-top: 5px;
-				padding-top: 30px;
+				padding-top: 90px;
 				button{
 					display: block;
 					margin: 0 auto;
@@ -1380,7 +1381,7 @@
 			overflow-y: auto;
 		}
 		.trade_right_top .info .trade_login{
-			padding-top: 20px;
+			padding-top: 85px;
 		}
 		.trade_box, .trade_box .trade_list{
 			height: 260px;
