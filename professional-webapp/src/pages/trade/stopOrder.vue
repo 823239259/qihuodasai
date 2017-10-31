@@ -15,22 +15,22 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
+				<!--<tr>
 					<td>止损单</td>
 					<td class="red">多</td>
 					<td>1</td>
 					<td>25289</td>
 					<td class="red">+100.00：USD</td>
-				</tr>
+				</tr>-->
 				
 			</tbody>
 		</table>
-		<div class="tools">
+		<!--<div class="tools">
 			<button class="btn blue">全部平仓</button>
 			<button class="btn blue">平仓</button>
 			<button class="btn blue">反手</button>
 			<button class="btn blue">止损止盈</button>
-		</div>
+		</div>-->
 	</div>
 </template>
 
