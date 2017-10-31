@@ -308,7 +308,9 @@
 							</ul>
 						</div>
 						<div class="cont">
-							<component :is="selectedTradeDetails"></component>
+							<keep-alive>
+								<component :is="selectedTradeDetails"></component>
+							</keep-alive>
 						</div>
 					</div>
 				</div>
