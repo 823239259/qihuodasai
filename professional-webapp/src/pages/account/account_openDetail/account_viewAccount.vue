@@ -20,7 +20,7 @@
 <script>
 	import pro from "../../../assets/js/common.js"
 	export default {
-		name : "openDetail_additionlMargin",
+		name : "openDetail_viewAccount",
 		data(){
 			return{
 				item : []
