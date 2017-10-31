@@ -259,14 +259,14 @@
 				this.$store.state.market.quoteInitStatus == true;
 			};
 			//判断是否登录
-			if(localStorage.user ==''){
-				this.show_tologin=true;
-				this.show_login=false;
-			}else{
-				this.show_tologin=false;
-				this.show_login=true;
+			if(localStorage.user){
+				this.show_tologin = false;
+				this.show_login = true;
 				var username = JSON.parse(localStorage.user).username;
 				$(".userPhone").html(username);
+			}else{
+				this.show_tologin = true;
+				this.show_login = false;
 			}
 		}
 	}
