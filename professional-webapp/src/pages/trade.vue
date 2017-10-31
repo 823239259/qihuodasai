@@ -297,11 +297,6 @@
 					<div class="list">
 						<div class="title">
 							<ul>
-								<!--<template v-for="(key, index) in echartList">
-							<span :class="{current: selected == index}" @click="tabEvent(index)">{{key.name}}</span>
-						</template>-->
-								
-								
 								<template v-for="(v, index) in tradeDetailsList">
 									<li :class="{current: selectedNum == index}" @click="tradeDetailsTab(index)"><span>{{v}}</span></li>
 								</template>
