@@ -83,7 +83,7 @@
 						pro.fetch("post",'/sms',data,headers).then(function(res){
 							if(res.success == true){
 								if(res.code == 1){
-									this.telRrg = true;
+									this.telReg = true;
 									layer.msg('发送成功', {time: 1000});
 									//页面效果
 									$(e.target).addClass('current');

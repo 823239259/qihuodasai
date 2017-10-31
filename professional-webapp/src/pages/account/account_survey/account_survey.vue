@@ -181,7 +181,6 @@
 			//资金收入支出详情列表fundList
 						this.item=data.fundList;
 						var time = new Date(this.item[0].subTime)
-//						console.log(pro.formatDate(time))
 					}
 				}
 			}).catch((err)=>{
