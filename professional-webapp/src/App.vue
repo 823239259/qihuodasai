@@ -223,7 +223,11 @@
 							this.$router.push({path: '/download'});
 							break;
 						case 7:
-							this.$router.push({path: '/account'});
+							if(JSON.parse(localStorage.user == '')){
+								this.$router.push({path:'/login'})
+							}else{
+								this.$router.push({path: '/account'});
+							}
 							break;
 						default:
 							break;
