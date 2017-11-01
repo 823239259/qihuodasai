@@ -9,12 +9,12 @@
 			<div class="center">
 				<p>账户资金：<span>{{account_money}}</span>元</p>
 				<p>追加保证金：<input type="text"  v-model="additionlMoney"/>元</p>
-				<p>换算美元：<span>{{account_USdollar}}</span>美元</p>
+				<p>换算美元：&nbsp;<span>{{additionlMoney}}</span>美元</p>
 				<ul>
 					<li>注意：</li>
 					<li>1.系统将在下个交易日前为您的期货账户追加保证金；</li>
 					<li>2.添加成功将短信通知您，最低追加金额为500元</li>
-					<li>3.保证金采用固定汇率：7.1元=1美元</li>
+					<li>3.保证金采用固定汇率：<span>{{account_USdollar}}</span>元=1美元</li>
 				</ul>
 				<button class="btn yellow" @click="sure_additionlMoney">确定</button>
 				<button class="btn green" v-on:click="back">取消	</button>
@@ -30,7 +30,8 @@
 			return{
 				account_money : '',
 				account_USdollar : '',
-				additionlMoney : ''
+				additionlMoney : '',
+				changemoney : ''
 			}
 		},
 		methods:{
@@ -68,7 +69,7 @@
 		},
 		mounted:function(){
 			var data = {
-				businessType : 4,
+				businessType : 1,
 			}
 			var headers = {
 				token : JSON.parse(localStorage.user).token,
@@ -77,13 +78,12 @@
 			pro.fetch("post",'/user/getbalancerate',data,headers).then((res)=>{
 				if(res.success == true){
 					if(res.code == 1){
-						console.log(res.data);
-//						this.account_money = res.data.balance,
-//						this.account_USdollar = res.data.rate
+						this.account_money = res.data.balance,
+						this.account_USdollar = res.data.rate
 					}
 				}
 			}).catch((err)=>{
-				
+				layer.msg('网络不给力，请稍后再试',{time:1000})
 			})
 		}
 	}

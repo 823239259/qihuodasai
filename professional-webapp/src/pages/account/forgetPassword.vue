@@ -38,6 +38,7 @@
 				phoneReg: /^(((13[0-9])|(14[5-7])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/,
 				pwd : '',
 				newPwd:'',
+				telReg : false
 			}
 		},
 		computed : {
@@ -60,7 +61,7 @@
 		},
 		methods : {
 			getcode : function(e){
-				if($(e.target).hasClass('current')) return false;
+//				if($(e.target).hasClass('current')) return false;
 				if(this.phone == ''){
 					layer.msg('请输入手机号', {time: 1000});
 				}else if(this.phoneReg.test(this.phone) == false){
@@ -76,37 +77,49 @@
 							mobile:this.phone,
 							type : 2
 						};
-						pro.fetch("post",'/sms',data).then(function(res){
+						var headers = {
+							version: this.version
+						};
+						pro.fetch("post",'/sms',data,headers).then(function(res){
 							if(res.success == true){
 								if(res.code == 1){
+									this.telReg = true;
 									layer.msg('发送成功', {time: 1000});
+									//页面效果
+									$(e.target).addClass('current');
+									this.time = 60;
+									var timing = setInterval(function(){
+										this.time--;
+										if(this.time <= 0){
+											clearInterval(timing);
+											$(e.target).removeClass('current');
+										}
+									}.bind(this), 1000);
 								}
-							}else{
-								layer.msg(res.message, {time: 1000});
 							}
 						}.bind(this)).catch(function(err){
 							var data = err.data;
-							layer.msg(data.message, {time: 1000});
-						})
-					//页面效果
-					$(e.target).addClass('current');
-					this.time = 60;
-					var timing = setInterval(function(){
-						this.time--;
-						if(this.time <= 0){
-							clearInterval(timing);
-							$(e.target).removeClass('current');
-						}
-					}.bind(this), 1000);
+							if(data.success == false){
+								this.phone = '';
+								layer.msg(data.message,{time:1000})
+							}else{
+								layer.msg('网络不给力，请稍后再试', {time: 1000});
+							}
+						}.bind(this))
+					
 				}
 			}
 		},
 			toResetPassword : function(){
-				if(this.phone!=''&&this.code !=''){
+				if(this.phone==''){
+					layer.msg('请输入手机号', {time: 1000});
+				}else if(this.code == ''){
+					layer.msg('请输入验证码', {time: 1000});
+				}else if(this.telReg == false){
+					layer.msg('请输入正确手机号', {time: 1000});
+				}else{
 					$(".forgetPassword").css('display','none');
 					$(".resetPassword").css('display','block')
-				}else{
-					layer.msg('请填写完整信息', {time: 1000});
 				}
 			},
 			toLogin : function(){
@@ -136,14 +149,17 @@
 								this.pwd = '';
 								this.newPwd = '';
 							}
-						}else{
-							this.code = '';
-							this.num = res.num;
-							layer.msg(res.message, {time: 1000});
 						}
 					}.bind(this)).catch(function(err){
-						layer.msg('网络不给力，请稍后再试！', {time: 1000});
-					})
+						var data = err.data;
+						if(data.success == false){
+							this.code = '';
+							this.num = res.num;
+							layer.msg(data.message, {time: 1000});
+						}else {
+							layer.msg('网络不给力，请稍后重试',{time:5000})
+						}
+					}.bind(this))
 				}
 			},
 			back : function(){

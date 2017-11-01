@@ -150,9 +150,7 @@
 							}
 						}
 					}.bind(this)).catch(function(err){
-						var data = err.data;
-						console.log(data);
-						layer.msg(data.message, {time: 1000});
+						layer.msg('网络不给力，请稍后再试', {time: 5000});
 					})
 				}
 			},

@@ -80,28 +80,30 @@
 							}
 						}
 					}.bind(this)).catch(function(err){
-						console.log(err)
-//						var data = err.data;
-//						if(data.success == false){
-//							this.num = data.num;
-//							if(this.num > 2){
-//								this.$refs.codeDialog.isshow = true;
-//								this.$refs.codeDialog.path = this.PATH + "/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
-//								this.str = {
-//									loginName : this.phone,
-//									password :this.pwd
-//								}
-//							}else {
-//								if(data.data.date != undefined){
-//									var h = (data.data.date/3600).toString();
-//									var hour = h.split('.')[0];
-//									var minute = parseInt((h - hour) * 60);
-//									layer.msg(data.message + '，距解冻时间还有' + hour + '小时' + minute + '分', {time: 1000});
-//								}else{
-//									layer.msg(data.message, {time: 1000});
-//								}
-//							}
-//						}
+						var data = err.data;
+						console.log(data)
+						this.num = data.data.num;
+						if(data.success == false){
+							if(this.num > 2){
+								this.$refs.codeDialog.isshow = true;
+								this.$refs.codeDialog.path = this.PATH + "/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
+								this.str = {
+									loginName : this.phone,
+									password :this.pwd
+								}
+							}else {
+								if(data.date != undefined){
+									var h = (data.data.date/3600).toString();
+									var hour = h.split('.')[0];
+									var minute = parseInt((h - hour) * 60);
+									layer.msg(data.message + '，距解冻时间还有' + hour + '小时' + minute + '分', {time: 3000});
+								}else{
+									layer.msg(data.message, {time: 1000});
+								}
+							}
+						}else {
+							layer.msg('网路不给力',{time:5000})
+						}
 					}.bind(this));
 				}
 			},
