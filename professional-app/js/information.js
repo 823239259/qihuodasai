@@ -148,7 +148,6 @@ function time() {
 				   	$(".mui-control-item").removeClass("mui-active");
 				        $(".sunday").parent().addClass("mui-active");
 				    }
-				console.log(calendar);
 				picker.dispose();
 			});
 		}, false);

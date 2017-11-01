@@ -97,7 +97,11 @@
 			mui.plusReady(function() {
 //				呼叫
 				document.getElementById("telus").addEventListener("tap",function(){
-					mui.callService();
+//					mui.callService();
+					mui.openWindow({
+						url : "contactUs.html",
+						id : "contactUs.html"
+					})
 				})
 				//初始化监听头部和底部事件
 				var dataUrl = {
@@ -120,7 +124,73 @@
 						id:"login"
 						});
 				});
-				
+				//未登录点击弹出
+				document.getElementById("to_openaccount").addEventListener("tap",function(){
+					var btnArray = ['否', '是'];
+	                mui.confirm('您还未登录，请您先登录', '登录提示', btnArray, function(e) {
+	                    if (e.index == 1) {
+	                        mui.openWindow({
+	                        	url:"../login/login.html",
+	                        	id : "login.html"
+	                        })
+	                    }
+	                })
+				})
+				document.getElementById("to_withdraw").addEventListener("tap",function(){
+					var btnArray = ['否', '是'];
+	                mui.confirm('您还未登录，请您先登录', '登录提示', btnArray, function(e) {
+	                    if (e.index == 1) {
+	                        mui.openWindow({
+	                        	url:"../login/login.html",
+	                        	id : "login.html"
+	                        })
+	                    }
+	                })
+				})
+				document.getElementById("to_money").addEventListener("tap",function(){
+					var btnArray = ['否', '是'];
+	                mui.confirm('您还未登录，请您先登录', '登录提示', btnArray, function(e) {
+	                    if (e.index == 1) {
+	                        mui.openWindow({
+	                        	url:"../login/login.html",
+	                        	id : "login.html"
+	                        })
+	                    }
+	                })
+				})
+				document.getElementById("toCertification").addEventListener("tap",function(){
+					var btnArray = ['否', '是'];
+	                mui.confirm('您还未登录，请您先登录', '登录提示', btnArray, function(e) {
+	                    if (e.index == 1) {
+	                        mui.openWindow({
+	                        	url:"../login/login.html",
+	                        	id : "login.html"
+	                        })
+	                    }
+	                })
+				})
+				document.getElementById("to_bindphone").addEventListener("tap",function(){
+					var btnArray = ['否', '是'];
+	                mui.confirm('您还未登录，请您先登录', '登录提示', btnArray, function(e) {
+	                    if (e.index == 1) {
+	                        mui.openWindow({
+	                        	url:"../login/login.html",
+	                        	id : "login.html"
+	                        })
+	                    }
+	                })
+				})
+				document.getElementById("to_loginpassword").addEventListener("tap",function(){
+					var btnArray = ['否', '是'];
+	                mui.confirm('您还未登录，请您先登录', '登录提示', btnArray, function(e) {
+	                    if (e.index == 1) {
+	                        mui.openWindow({
+	                        	url:"../login/login.html",
+	                        	id : "login.html"
+	                        })
+	                    }
+	                })
+				})
 //									//获取banner图片
 //					var imgId = [];
 //					mui.app_request('banner/list', {
@@ -185,7 +255,7 @@
 	<body>
 		<header class="mui-bar mui-bar-nav own-topbg">
 			<h1 class="mui-title">我的账户</h1>
-			<a href="javascript:void(0)" class="top-tel" id="online">在线客服</a>
+			<a href="javascript:void(0)" class="top-tel" id="online"><img src="../../images/headset_1.png" style="width: 20px;height: 20px;display: inline-block;margin-top: 15px;" /></a>
 		</header>
 
 		<nav class="navlist">
@@ -239,7 +309,7 @@
 				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="charge">
 					<div class="find_tab_div">
 						<img src="../../images/ac_01.png">
-						<div>
+						<div id="to_openaccount">
 							我要充值<br/><span>申请开户，记得充值</span>
 						</div>
 					</div>
@@ -247,7 +317,7 @@
 				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="withdraw">
 					<div class="find_tab_div">
 						<img src="../../images/ac_02.png">
-						<div>
+						<div id="to_withdraw">
 							我要提现<br/><span>结算方案，别忘提款</span>
 						</div>
 					</div>
@@ -255,7 +325,7 @@
 				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="funddetail">
 					<div class="find_tab_div">
 						<img src="../../images/ac_03.png">
-						<div>
+						<div id="to_money">
 							资金明细<br/><span>资金流水，一目了然</span>
 						</div>
 					</div>
@@ -263,7 +333,7 @@
 				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="user_verified">
 					<div class="find_tab_div">
 						<img src="../../images/ac_04.png">
-						<div>
+						<div id="toCertification">
 							实名认证<br/><span id="Certification" style="color: #ff4c4c;">未认证</span>
 						</div>
 					</div>
@@ -271,7 +341,7 @@
 				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="telPhone">
 					<div class="find_tab_div">
 						<img src="../../images/ac_05.png">
-						<div>
+						<div id="to_bindphone">
 							手机绑定<br/><span style="color: #ff4c4c;">修改</span>
 						</div>
 					</div>
@@ -279,14 +349,14 @@
 				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="updatepw">
 					<div class="find_tab_div">
 						<img src="../../images/ac_06.png">
-						<div>
+						<div id="to_loginpassword">
 							登录密码<br/><span style="color: #ff4c4c;">修改</span>
 						</div>
 					</div>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="noviceGuide">
 					<div class="find_tab_div">
-						<img src="../../images/telephone.png">
+						<img src="../../images/serviceCenter.png">
 						<div id="telus">
 							联系我们<br/><span>客户专员，为您解惑</span>
 						</div>

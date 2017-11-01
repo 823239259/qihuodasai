@@ -144,7 +144,8 @@
 			<header class="mui-bar mui-bar-nav"> 
 			    <a class="mui-icon mui-icon-left-nav mui-pull-left quotationBack mui-action-back" id= "backClose"><i>返回</i></a>
 			    <h1 class="mui-title mainTitle"><p class="mainTitleFirst"></p><p id="CommodityNo"></p></h1>
-			    <span class="mui-icon mui-icon-help" style="color: white;margin-left: 50%;" id="toNoviceGuide"></span>
+			    <!--<span class="mui-icon mui-icon-help" style="color: white;margin-left: 50%;" id="toNoviceGuide"></span>-->
+			    <img src="../../images/questions.png" alt="" id="toNoviceGuide" style="display: inline-block;width: 20px;height: 20px;margin-left: 55%;margin-top: 10px;"/>
 			     <a class="mui-icon mui-icon-loop mui-pull-right" id="refresh" style="margin-right: 35px;"></a>
 			   	<a id="muneBox" href="#topPopover"></a>
 			</header>
@@ -157,7 +158,7 @@
 									<td id="lightDiagram">闪电图</td>
 									<td  id="timeChartMenu" value="0" class="mui-active">分时</td>
 									<td id="selectButon">K线</td>
-									<td id="tradeMenu" >交易中心</td>	
+									<td id="tradeMenu">交易中心</td>	
 								</tr>
 							</thead>
 						</table>
@@ -383,9 +384,11 @@
 						            <ul id="positionList" class="listStyle" style="height: 165px; width: 100%;" >
 						                <li class="PositionLi" ><a class="mui-navigate-right"><span>合约名称</span><span>多空</span><span>手数</span><span>持仓均价</span><span class="dateTimeFloat">浮动盈亏</span></a></li>
 						            </ul>
-						            <button type="button" class="mui-btn mui-col-xs-5 focusButton" id="allOpen">全部平仓</button>
-						            <button type="button" class="mui-btn mui-col-xs-5 focusButton" id="Open">平仓</button>
-						            <button type="button" class="mui-btn mui-col-xs-5 focusButton" id="stopLoss" >止损止盈</button>
+						            <div style="display: none;">
+						            	<button type="button" class="mui-btn mui-col-xs-5 focusButton" id="allOpen">全部平仓</button>
+							            <button type="button" class="mui-btn mui-col-xs-5 focusButton" id="Open">平仓</button>
+							            <button type="button" class="mui-btn mui-col-xs-5 focusButton" id="stopLoss" >止损止盈</button>
+						            </div>
 						        </div>
 						        <div id="item2" class="mui-control-content">
 						            <ul  id="postersOrder" class="listStyle" style="height: 165px; width: 100%;" >
@@ -421,11 +424,13 @@
 					</div>
 				</div>
 				<div class="BuyDiv">
+					<span id="addinput" style="color: #999999;padding: 13.5px 12px;font-size: 14px;border: 1px solid #121212;width: 40px;position: absolute;top: 10px;left: 14px;background-color: #1f1f1f;">+</span>
 					<div id="numberInput">
 						<label>手数:</label>
 						<input onkeypress="if((event.keyCode<48 || event.keyCode>57)) event.returnValue=false"  value="1" id = "orderNum" type="tel" placeholder="输入手数">
 						<label>（价格：市价）</label>
 					</div>
+					<span id="delinput" style="color: #999999;padding: 13.5px 12px;font-size: 14px;border: 1px solid #121212;width:40px;position: absolute;top: 10px;right: 14px;background-color: #1f1f1f;">-</span>
 					<div class="buttonDivList">
 						<button type="button" class="mui-btn marketBuy " id="marketBuy" data-tion-buy = "0">买入</button>
 						<button type="button" class="mui-btn  marketBuy" id="marketSell" data-tion-buy = "1">卖出</button>
@@ -991,6 +996,16 @@
 					$("#doSize").val(param[4]);
 				}
 				mui.plusReady(function(){
+					document.getElementById("addinput").addEventListener("tap",function(){
+						document.getElementById("orderNum").value++;
+					});
+					document.getElementById("delinput").addEventListener("tap",function(){
+						if(document.getElementById("orderNum").value>1){
+							document.getElementById("orderNum").value--;
+						}else{
+							mui.toast("最低手数为1");
+						}
+					})
 //					点击到交易规则
 					$("#toNoviceGuide").on("tap",function(){
 						mui.openWindow({
@@ -1040,8 +1055,7 @@
 		<script type="text/javascript" src="../../js/trade.js" ></script>
 		<script type="text/javascript">
 			mui.init();
-			mui.plusReady(function(){  
-				console.log(CacheQuoteBase)
+			mui.plusReady(function(){
 				$(function(){
 					$("#refresh").addClass("rotateClass");
 				})

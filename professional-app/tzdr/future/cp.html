@@ -68,16 +68,26 @@
 			#table_list tr td{
 				padding: 7.5px 10px;
 			}
+			#openAccount_process{
+				color: white;
+				background-color:#ff6a00 ;
+				position: fixed;
+				top: 50%;
+				right: 10px;
+				border-radius: 50%;
+				padding: 10px;
+				text-align: center;
+				width: 60px;
+				height: 60px;
+			}
 		</style>
 		<script>
 			mui.init();
 			var paramListAll = null;
 			var contractListAll = null;
 			var init_params = null;
-
 			mui.plusReady(function() {
 				loadCss();
-				
 				document.getElementById("krecordall").addEventListener("tap", function() {
 					mui.app_refresh('openingRecord');
 					mui.openWindow({
@@ -85,7 +95,6 @@
 						id: "openingRecord"
 					});
 				});
-				
 				function loadCss() {
 					var Proportion = 1;
 					var resolutionWidth = plus.display.resolutionWidth;
@@ -170,7 +179,6 @@
 					//				this.setAttribute('disabled','disabled')  //禁用按钮
 					openPays();
 				});
-
 //				document.getElementById("tran_info").addEventListener("tap", function() {
 //					mui.openWindow("../agree/cpru.html");
 //				});
@@ -178,9 +186,15 @@
 				document.getElementById("cp_info").addEventListener("tap", function() {
 					mui.openWindow("../agree/cp.html");
 				});
+				
+				document.getElementById("openAccount_process").addEventListener("tap",function(){
+					mui.openWindow({
+						url : "../account/openAccountProcess.html",
+						id : "openAccountProcess.html"
+					})
+				})
 
 			});
-
 			function setParams(ParamsList) {
 				document.getElementById("traderBond").innerHTML = "¥" + tzdr.moneyUtils.formatCurrency(ParamsList.traderBond);
 				document.getElementById("traderTotal").innerHTML = tzdr.moneyUtils.formatCurrency(ParamsList.traderTotal) + "美元";
@@ -513,6 +527,7 @@
 				<span id="Operation_Close">×</span>
 			</div>
 		</div>
+		<span id="openAccount_process">开户</br>流程</span>
 	</body>
 	<script>
 		var dataUrl = {

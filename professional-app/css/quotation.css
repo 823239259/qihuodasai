@@ -789,7 +789,8 @@ input{
 	z-index: 998;
 }
 #numberInput{
-	width: 100%;
+	width: 80%;
+	margin: auto;
 	position: relative;
 	clear: both;
 	padding:10px ;
@@ -1118,8 +1119,8 @@ input{
     vertical-align: 2px;
 }
 #headerMenu .mui-active{
-	background-color: #121212;
-	color:#fcc900;
+	background-color: #FF6A00;
+	color:white;
 }
 #Handicap table{
 	width: 100%;

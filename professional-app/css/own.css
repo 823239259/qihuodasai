@@ -764,8 +764,8 @@ a.mui-action-back.mui-icon.mui-icon-left-nav.mui-pull-left { color: #fff;}
 }
 /*快捷入口*/
 #Operation_content {background-color: rgba(0,0,0,.8);display: none;}
-#Operation_content .Operation_all {position: fixed; bottom: 9px; z-index: 999; color: red; text-align: center; display: inline-block; width: 100%; font-size: 14px; color: #1f1f1f;}
-#Operation_content .Operation_all .Operation_title span {width: 90px; display: inline-block; height: 30px; line-height: 30px; background: #ff6a00; margin: 0 5px; border-radius: 5px; color: #fff;}
+#Operation_content .Operation_all {position: fixed; bottom: 40px; z-index: 999; color: red; text-align: center; display: inline-block; width: 100%; font-size: 14px; color: #1f1f1f;}
+#Operation_content .Operation_all .Operation_title span {width: 80px; display: inline-block; height: 38px; line-height: 38px; background: #ff6a00; margin: 0 8px; border-radius: 20px; color: #fff;text-align: center;}
 #Operation_content .Operation_all .Operation_title span:active {background: #FFCC33;}
-#Operation_Close {color: #fff; font-size: 35px; width: 30px; display: inline-block; height: 30px; line-height: 30px; margin-top: 30px;}
+#Operation_Close {color: #fff; font-size: 45px; width: 30px; display: inline-block; height: 30px; line-height: 30px; margin-top: 30px;}
 #Operation_Close:active {color: #FFCC33;}
