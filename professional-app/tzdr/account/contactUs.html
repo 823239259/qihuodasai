@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			#headset{
+				color: black;
+				width: 16px;
+				height: 16px;
+				display: inline-block;
+				margin: 0 5px;
+			}
+			#back {
+				color: white;
+			}
+		</style>
+	</head>
+
+	<body>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/common.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<header class="mui-bar mui-bar-nav" style="background-color: #2b2b2b;">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"></a>
+			<h1 class="mui-title" style="color: white;">客服中心</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view">
+			    <li class="mui-table-view-cell" id="toTelPhone">
+			        <a class="mui-navigate-right"><i class="mui-icon mui-icon-phone"></i>客服热线：400-852-8008</a>
+			    </li>
+			    <li class="mui-table-view-cell" id="online">
+			        <a class="mui-navigate-right"><img src="../../images/headset.png" id="headset"/>在线客服：专业客服为您解忧</a>
+			    </li>
+			</ul>
+		</div>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function(){
+				document.getElementById("toTelPhone").addEventListener("tap",function(){
+					mui.callService();
+				})
+				tzdr.online();
+			})
+		</script>
+	</body>
+
+</html>

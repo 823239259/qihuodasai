@@ -2,7 +2,7 @@
 /*学堂*/
 .mui-bar .mui-title {height: 44px;}
 .mui-segmented-control .mui-control-item {line-height: 35px;}
-.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {color: #fcc900; border-bottom: none;}
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {color: #ff6a00; border-bottom: none;}
 #school .mui-table-view-cell:after {left: 0;}
 #school ul li img {position: absolute; height: 68px; width: 80px; max-width: 80px; right: 15px; top: 10px; border-radius: 4px;}
 #school .mui-table-view-cell>a:not(.mui-btn) {height: 90px;}
@@ -54,12 +54,12 @@
 #demo4 {height: 38px; width: 38px; display: inline-block; position: absolute; right: 0; top: 5px; color: #ffffff;}
 .directSeed-inquire img {float: right;margin-right: 12px;margin-top: 14px;width: 14px;}
 .directSeed-all {height: 40px;background: #ffffff;z-index: 3;width: 100%;position: fixed; top: 44px;}
-.chartContainer-time {font-size: 13px;color: #999999;border-left: 5px solid #fcc900;height: 20px;line-height: 20px;padding-left: 10px;position: fixed;width: 100%;background: #ffffff;z-index: 1;margin-top: 10px;}
+.chartContainer-time {font-size: 13px;color: #999999;border-left: 5px solid #ff6a00;height: 20px;line-height: 20px;padding-left: 10px;position: fixed;width: 100%;background: #ffffff;z-index: 1;margin-top: 10px;}
 #chartContainerContent li {position: relative;overflow: hidden;}
 #chartContainerContent li:last-child .content-right{border-left: 1px solid #ffffff;}
 #chartContainerContent .content-left {position: absolute;font-size: 11px;color: #999999;width: 60px;padding-left: 15px;height: 16px;line-height: 16px;}
-#chartContainerContent .content-circular {position: absolute;font-size: 11px;width: 8px;height: 8px;background: #fcc900;border-radius: 15px;left: 52px;margin-top: 3px;}
-#chartContainerContent .content-right {float: left; position: relative; font-size: 13px;color: #666666;margin-left: 56px;border-left: 1px solid #fcc900;padding-bottom: 10px;}
+#chartContainerContent .content-circular {position: absolute;font-size: 11px;width: 8px;height: 8px;background: #ff6a00;border-radius: 15px;left: 52px;margin-top: 3px;}
+#chartContainerContent .content-right {float: left; position: relative; font-size: 13px;color: #666666;margin-left: 56px;border-left: 1px solid #ff6a00;padding-bottom: 10px;}
 #chartContainerContent .content-right p {padding-left: 15px;padding-right: 15px;position: relative;top: -3px;color: #666;font-size: 13px;}
 #chartContainerContent1 {padding-top: 84px; padding-bottom: 60px;}
 #directSeedNews {position: static;}
@@ -83,7 +83,7 @@
 #information .mui-table-view-chevron .mui-table-view-cell>a:not(.mui-btn) {padding-right: 15px;}
 #information .mui-table-view-cell p {height: 50px; color: #333333; font-size: 15px;}
 #information .mui-table-view-cell span {color: #999999; font-size: 11px;} 
-.caoz {padding-left: 15px; color: #fcc900;}
+.caoz {padding-left: 15px; color: #ff6a00;}
 #chartContainerContentOne ,chartContainerContent1{background: #efeff4;}
 #chioce {
     display: none;
@@ -171,12 +171,13 @@
     border-bottom-right-radius: 5px;
 }
 #twentyFour{
-	background-color: #1f1f1f;
+	
 	color: white;
-	border-radius: 5px;
+	border-radius:0 3px 3px 0;
+	border: 1px solid #1f1f1f;
 }
 #dataList{
-	border-radius: 5px;
-	border: 1px solid #1f1f1f;
+	border-radius:3px 0 0 3px;
 	color: white;	
+	background-color: #1f1f1f;
 }

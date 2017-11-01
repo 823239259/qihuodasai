@@ -14,14 +14,15 @@
 		<header class="mui-bar mui-bar-nav own-topbg">
 			<h1 class="mui-title">
 				<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" id="directSeedTitle">
-					<a  id="twentyFour" class="mui-control-item title_school mui-active" href="#directSeedNews">7*24</a> 
 					<a 	id="dataList" class="mui-control-item title_school" href="#directSeedCalendar">日历</a>
+					<a  id="twentyFour" class="mui-control-item title_school mui-active" href="#directSeedNews">7*24</a> 
+					
 					
 				</div>
 			</h1>
 			<div class="cz">
 				<a></a>
-				<a href="javascript:void(0);" class="directSeed-inquire" style="display: none;">
+				<a href="javascript:void(0);" class="directSeed-inquire">
 					<label class="click-alert" id="click-alert" data-id="chioceProfit">
 						<img src="../../images/directSeed-country.png"/>
 					</label>
@@ -174,7 +175,7 @@
 		});*/
 		mui("#directSeedTitle").on("tap", "a", function() {
 			var _this = $(this);
-			$(".cz a").hide().eq(_this.index()).show();
+			$(".cz a").show().eq(_this.index()).hide();
 		});
 		
 		/*弹出层*/
@@ -199,14 +200,14 @@
 			$("#chioce").css("display", "none");
 		});
 		$("#dataList").on("tap",function(){
-			$("#dataList").css("background-color","#1f1f1f").css("border-radius","5px")
-			$("#twentyFour").css("background-color","#383838").css("border-radius","5px")
+			$("#dataList").css("background-color","#1f1f1f").css("border-radius","3px 0 0 3px")
+			$("#twentyFour").css("background-color","#383838").css("border-radius","0 3px 3px 0")
 			$(".mui-control-item").removeClass("mui-active");
 			time();
 		})
 		$("#twentyFour").on("tap",function(){
-			$("#dataList").css("background-color","#383838").css("border-radius","5px")
-			$("#twentyFour").css("background-color","#1f1f1f").css("border-radius","5px")
+			$("#dataList").css("background-color","#383838").css("border-radius","3px 0 0 3px")
+			$("#twentyFour").css("background-color","#1f1f1f").css("border-radius","0 3px 3px 0")
 		})	
 	</script>
 	
