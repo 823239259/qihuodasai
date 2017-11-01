@@ -11,11 +11,12 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "babel-polyfill": "^6.26.0",
     "echarts": "^3.7.2",
+    "jquery": "^1.11.3",
     "vue": "^2.4.2",
     "vue-router": "^2.7.0",
-    "vuex": "^2.4.1",
-    "jquery": "^1.11.3"
+    "vuex": "^2.4.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
