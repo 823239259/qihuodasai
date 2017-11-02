@@ -10,10 +10,10 @@
 #school .mui-table-view-cell>a:not(.mui-btn) {white-space: initial; text-overflow: initial;}
 #school .signature {font-size: 12px; color: #999999; border-left: 3px solid #00a1f2; height: 13px; line-height: 13px; padding-left: 5px; width: 100%; margin-top: 10px;}
 /*财经日历*/
-.finance-time {margin-bottom: 0; font-size: 11px;color: #ffffff;background: #c9a100;text-align: center;height: 25px;line-height: 25px;}
+.finance-time {margin-bottom: 0; font-size: 11px;color: #ffffff;background: #666666;text-align: center;height: 25px;line-height: 25px;}
 #weekLis a {font-size: 9px;color: #666666;line-height: 20px;background: #f0f5f7;}
 #weekLis a span{font-size: 15px;/*font-weight: bolder;*/}
-#weekLis.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {color: #c9a100;}
+#weekLis.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {color: #FF6A00;}
 .directSeed-calendar-all {position: fixed;background: #ffffff;z-index: 3; top: 44px;}
 #finance {padding-top: 110px;background: #ffffff;}
 #finance .finance-lis {height: 120px;}
