@@ -75,6 +75,12 @@ header{
 	border-bottom: 0.02rem solid #000;
 	position: fixed;
 	top: 0;
+	z-index: 2;
+}
+header h1{
+	line-height: 0.93rem;
+	text-align: center;
+	font-size: 0.3rem;
 }
 header .title{
 	width: 1.92rem;
@@ -218,7 +224,7 @@ header .title span.current{
 .trade .title, .circle .title{
 	width: 2.88rem;
 }
-.trade .icon_msg, .circle .icon_msg{
+.icon_msg{
 	width: 0.4rem;
 	height: 0.38rem;
 	background: url(../images/msg.png) no-repeat center center;
@@ -354,5 +360,196 @@ header .title span.current{
 .circle .box .cont{
 	color: #696969;
 	padding: 0 0.22rem;
-	/*line-height: 0.3rem;*/
+}
+.circle .box .tools{
+	width: 7.5rem;
+	height: 0.94rem;
+	overflow: hidden;
+	border-top: 0.01rem solid #bcbcbc;
+	margin-top: 0.3rem;
+}
+.circle .box .tools i{
+	float: left;
+	margin-top: 0.25rem;
+}
+.circle .box .tools i.fabulous{
+	width: 25%;
+	height: 0.45rem;
+	background-size: 100% 100%;
+	background: url(../images/circle_07.png) no-repeat center center;
+}
+.circle .box .tools i.comment{
+	width: 50%;
+	height: 0.43rem;
+	background-size: 100% 100%;
+	background: url(../images/circle_08.png) no-repeat center center;
+}
+.circle .box .tools i.forward{
+	width: 25%;
+	height: 0.42rem;
+	background-size: 100% 100%;
+	background: url(../images/circle_09.png) no-repeat center center;
+}
+/*****资讯*****/
+.news .box{
+	padding: 4.79rem 0 1rem 0;
+}
+.news .box .menu{
+	width: 7.5rem;
+	height: 0.9rem;
+	line-height: 0.9rem;
+	padding: 0 0.56rem;
+	background: #fff;
+	position: fixed;
+	top: 0.95rem;
+	z-index: 2;
+}
+.news .box .menu span{
+	color: #6b6b6b;
+	margin-right: 0.75rem;
+}
+.news .box .menu span:last-child{
+	margin-right: 0;
+}
+.news .box .menu span.current{
+	color: #510a4c;
+}
+.news .img_box{
+	position: fixed;
+	top: 1.85rem;
+	z-index: 2;
+}
+.news .img_box img{
+	width: 7.5rem;
+	height: 2.94rem;
+}
+.news .box .media{
+	margin-top: 0.34rem;
+}
+.news .box .media li{
+	height: 1.18rem;
+	overflow: hidden;
+	padding: 0 0.22rem;
+	margin-bottom: 0.22rem;
+	position: relative;
+}
+.news .box .media li img{
+	float: left;
+	width: 1.74rem;
+	height: 1.18rem;
+	margin-right: 0.2rem;
+}
+.news .box .media li p{
+	float: left;
+	width: 5.1rem;
+	line-height: 0.36rem;
+	color: #6b6b6b;
+}
+.news .box .media li span{
+	color: #bababa;
+	position: absolute;
+	bottom: 0;
+	right: 0.4rem;
+}
+/*****我的*****/
+.account .box{
+	padding: 0.95rem 0 1rem 0;
+}
+.account .login{
+	margin-top: 0.25rem;
+}
+.account .login img{
+	width: 1.12rem;
+	height: 1.12rem;
+	margin: 0 0.2rem 0 0.3rem;
+}
+.account .login button{
+	width: 1.53rem;
+	height: 0.53rem;
+	line-height: 0.52rem;
+	text-align: center;
+	background: #fff;
+	border: 0.01rem solid #c742bc;
+	color: #c742bc;
+	margin-right: 0.1rem;
+}
+.account .info{
+	width: 7.5rem;
+	height: 1.25rem;
+	overflow: hidden;
+	border-bottom: 0.01rem solid #6b6b6b;
+}
+.account .info li{
+	float: left;
+	width: 25%;
+	text-align: center;
+}
+.account .info li em{
+	display: block;
+	color: #727272;
+	margin: 0.3rem 0 0.1rem 0;
+}
+.account .info li span{
+	color: #727272;
+}
+.account .detail{
+	width: 7.5rem;
+}
+.account .detail li{
+	height: 0.82rem;
+	border-top: 0.01rem solid #dae4f1;
+	padding: 0 0.3rem;
+}
+.account .detail li:first-child{
+	border: none;
+}
+.account .detail li span{
+	float: left;
+	color: #7d7d7d;
+	font-size: 0.32rem;
+	line-height: 0.82rem;
+}
+.account .detail li .icon{
+	float: left;
+	width: 0.68rem;
+	height: 0.41rem;
+	background-size: 100% 100%;
+	text-align: left;
+	margin: 0.2rem 0 0 0;
+}
+.account .detail li .icon_recharge{
+	background: url(../images/account_02.png) no-repeat center left;
+}
+.account .detail li .icon_withdrawals{
+	background: url(../images/account_03.png) no-repeat center left;
+}
+.account .detail li .icon_money{
+	background: url(../images/account_04.png) no-repeat center left;
+}
+.account .detail li .icon_account{
+	background: url(../images/account_05.png) no-repeat center left;
+}
+.account .detail li .icon_realname{
+	background: url(../images/account_06.png) no-repeat center left;
+}
+.account .detail li .icon_bank{
+	background: url(../images/account_07.png) no-repeat center left;
+}
+.account .detail li .icon_phone{
+	background: url(../images/account_08.png) no-repeat center left;
+}
+.account .detail li .icon_pwd{
+	background: url(../images/account_09.png) no-repeat center left;
+}
+.account .detail li .icon_arrow{
+	float: right;
+	width: 0.14rem;
+	height: 0.23rem;
+	background: url(../images/arrow.png) no-repeat center center;
+	margin: 0.3rem 0 0 0;
+}
+.account .detail li .res{
+	float: right;
+	font-size: 0.3rem;
+	color: #bababa;
 }
