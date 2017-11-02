@@ -186,12 +186,22 @@
 				document.getElementById("cp_info").addEventListener("tap", function() {
 					mui.openWindow("../agree/cp.html");
 				});
-				
+				//开户流程按钮
+				isProcess();
+				function isProcess(){
+					if(localStorage.user_process == 1){
+						document.getElementById("openAccount_process").style.display="none"
+					}else{
+						document.getElementById("openAccount_process").style.display="block"
+					}
+				}
 				document.getElementById("openAccount_process").addEventListener("tap",function(){
 					mui.openWindow({
 						url : "../account/openAccountProcess.html",
 						id : "openAccountProcess.html"
 					})
+					var user_openProcess = 1;
+					localStorage.setItem("user_process",JSON.stringify(user_openProcess))
 				})
 
 			});
