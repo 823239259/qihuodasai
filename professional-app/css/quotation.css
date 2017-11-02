@@ -142,7 +142,7 @@ p{
 	background-color: #2B2B2B;
 }
 .YellowFont{
-	color:#fcc900;
+	color:#FF6A00;
 }
 .ProductInformation{
 	overflow: hidden;
@@ -1186,7 +1186,7 @@ input{
 	display: block;
 	vertical-align: middle;
 	opacity: 0;
-	color:#CCCCCC;
+	color:#FF6A00;
 }
 #buyFuture #radioDiv td span{
 		width: 20px;
