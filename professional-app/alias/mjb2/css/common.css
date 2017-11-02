@@ -482,9 +482,180 @@ header h1{
 	margin: 0.31rem 0.26rem 0 0;
 }
 .account .detail{
+	width: 7.5rem;
 	overflow: hidden;
-	padding-top: 0.75rem;
+	background: #171d27;
+	padding: 0.75rem 0.38rem 0.5rem 0.38rem;
+}
+.account .detail li{
+	float: left;
+	width: 50%;
+	height: 1.58rem;
+}
+.account .detail li span{
+	float: left;
+	color: #c3c0bc;
+	font-size: 0.26rem;
+}
+.account .detail li .icon{
+	float: left;
+	width: 0.7rem;
+	background-size: 100% 100%;
+}
+.account .detail li .icon_2{
+	height: 0.4rem;
+	background: url(../images/account_04.png) no-repeat center center;
+}
+.account .detail li .icon_3{
+	height: 0.4rem;
+	background: url(../images/account_03.png) no-repeat center center;
+}
+.account .detail li .icon_4{
+	height: 0.4rem;
+	background: url(../images/account_06.png) no-repeat center center;
+}
+.account .detail li .icon_5{
+	height: 0.47rem;
+	background: url(../images/account_05.png) no-repeat center center;
+	margin-top: -0.05rem;
+}
+.account .detail li .icon_6{
+	height: 0.44rem;
+	background: url(../images/account_08.png) no-repeat center center;
+}
+.account .detail li .icon_7{
+	height: 0.4rem;
+	background: url(../images/account_07.png) no-repeat center center;
+}
+.account .detail li .icon_8{
+	height: 0.45rem;
+	background: url(../images/account_09.png) no-repeat center center;
+}
+/*****资讯*****/
+.news .box{
+	padding: 0.95rem 0 1rem 0;
+}
+.news .box_three{
+	width: 7.5rem;
+	overflow: hidden;
+	margin-top: 0.35rem;
+}
+.news .box_three li{
+	float: left;
+	width: 33.3%;
+	text-align: center;
+}
+.news .box_three li span{
+	display: block;
+	color: #bbb9b5;
+	margin: 0.24rem 0 0.5rem 0;
+}
+.news .box_three li .icon{
+	width: 0.72rem;
+	height: 0.72rem;
+	background-size: 100% 100%;
+}
+.news .box_three li .icon_news1{
+	background: url(../images/news_02.png) no-repeat center center;
+}
+.news .box_three li .icon_news2{
+	background: url(../images/news_03.png) no-repeat center center;
+}
+.news .box_three li .icon_news3{
+	background: url(../images/news_04.png) no-repeat center center;
+}
+.news .box_three li .icon_news4{
+	background: url(../images/news_05.png) no-repeat center center;
+}
+.news .box_three li .icon_news5{
+	background: url(../images/news_06.png) no-repeat center center;
+}
+.news .box_three li .icon_news6{
+	background: url(../images/news_07.png) no-repeat center center;
+}
+.news .box .list{
+	overflow: hidden;
 	background: #171d27;
 }
-
-
+.news .box .title{
+	height: 1.4rem;
+	overflow: hidden;
+	padding: 0 0.25rem;
+	background: #171d27;
+}
+.news .box .title span{
+	float: left;
+	line-height: 1.4rem;
+	font-size: 0.3rem;
+	color: #bbb9b5;
+}
+.news .box .title i{
+	float: left;
+	display: inline-block;
+	width: 0.08rem;
+	height: 0.3rem;
+	background: #c78b42;
+	border-radius: 0.08rem;
+	margin: 0.57rem 0.2rem 0 0;
+}
+.news .hot{
+	width: 7.5rem;
+	overflow: hidden;
+	padding: 0 0.12rem;
+	margin-bottom: 0.4rem;
+}
+.news .hot li{
+	float: left;
+	width: 33.3%;
+	text-align: center;
+}
+.news .hot li span{
+	display: block;
+	font-size: 0.26rem;
+	color: #bbb9b5;
+	margin-bottom: 0.15rem;
+}
+.news .hot li em{
+	font-size: 0.26rem;
+}
+.news .hot li em.red{
+	color: #ff201d;
+}
+.news .hot li em.green{
+	color: #54a800;
+}
+.news .choose li{
+	overflow: hidden;
+	margin-bottom: 0.48rem;
+	padding: 0 0.28rem;
+}
+.news .choose li .top{
+	height: 0.48rem;
+}
+.news .choose li span{
+	display: inline-block;
+	float: left;
+	color: #bbb9b5;
+}
+.news .choose li .top .name{
+	width: 2.2rem;
+	font-size: 0.28rem;
+	color: #fff;
+	margin: 0;
+}
+.news .choose li .top span{
+	margin-right: 0.15rem;
+	line-height: 0.38rem;
+}
+.news .choose li .bottom .rate{
+	float: right;
+	color: #54a800;
+	margin-right: 0.2rem;
+}
+.news .choose li .bottom .icon_add{
+	float: right;
+	width: 0.35rem;
+	height: 0.35rem;
+	background: url(../images/add.png) no-repeat center center;
+	background-size: 100% 100%;
+}
