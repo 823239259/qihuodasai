@@ -1,0 +1,80 @@
+/*  
+ * @description: 基本css 
+ * @author: WXF
+ * @update: 2017-11-11 
+ */
+html, body, h1, h2, h3, h4, p, ul, ol, li, form, input, select, button, textarea, dl, dt, dd, div, header, footer, nav, hgroup, article, section, aside, address, figure, figcaption{ 	
+	margin: 0; 	
+	padding: 0;
+}
+html{ 
+	font-size: 625%; 
+	-webkit-tap-highlight-color: rgba(0,0,0,0); /*清除点击时出现的背景*/
+}
+body{
+	font-family: "\5FAE\8F6F\96C5\9ED1", Arial, Helvetica, sans-serif;
+	color: #fff; 
+	font-size: 0.24rem;
+}
+h1, h2, h3, h4, h5, h6{ 
+	font-weight: normal;
+}
+ul, ol, li{ 
+	list-style: none;
+}
+img{ 
+	display: inline-block; 
+	max-width: 100%; 
+	vertical-align: middle; 
+	outline: none; 
+	-webkit-appearance: none;
+}
+div, figure, figcaption, li, p, input, textarea{ 
+	box-sizing: border-box;
+}
+button, select, textarea {
+	font-size: 0.28rem;
+	font-family: "\5FAE\8F6F\96C5\9ED1", Arial, Helvetica, sans-serif; 
+	vertical-align: middle;
+	outline: none;
+	-webkit-appearance: none;
+}
+input{
+	font-size: 0.28rem;
+	font-family: "\5FAE\8F6F\96C5\9ED1", Arial, Helvetica, sans-serif;
+	vertical-align: middle;
+	outline: none;
+}
+ input:-webkit-autofill {
+	-webkit-box-shadow: 0 0 0px 1000px white inset; /*利用阴影来填充掉input自动填充色*/
+}
+em, i{ 
+	font-style: normal;
+}
+a{ 
+	color: #fff; 
+	text-decoration: none; 
+}
+a:link, a:visited{	
+	text-decoration: none;
+}
+/*****排版*****/
+.fl{ float: left;} /*左浮动*/
+.fr{ float: right;} /*右浮动*/
+.none{ display: none;} /*隐藏*/
+.clear{ clear: both;} /*清除浮动*/
+.clearfix:after{
+	clear:both;
+	content:'.';
+	display:block;
+	width: 0;
+	height: 0;
+	visibility:hidden;
+}
+
+
+
+.icon{
+	display: inline-block;
+	overflow: hidden;
+}

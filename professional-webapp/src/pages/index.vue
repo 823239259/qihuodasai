@@ -16,53 +16,51 @@
 				</ul>
 			</div>
 			<div class="cont">
-				<table>
-					<thead>
-						<tr>
-							<td></td>
-							<td>名称</td>
-							<td>合约代码</td>
-							<td>最新</td>
-							<td>现手</td>
-							<td>买价</td>
-							<td>卖价</td>
-							<td>买量</td>
-							<td>卖量</td>
-							<td>成交量</td>
-							<td>涨跌</td>
-							<td>涨幅%</td>
-							<td>持仓量</td>
-							<td>开盘</td>
-							<td>最高</td>
-							<td>最低</td>
-							<td>昨结算</td>
-						</tr>
-					</thead>
-					<tbody>
-						<template v-for="(v,index) in Parameters">
-							<tr :class="{current: current == index}" @click="toggle(index, v.CommodityName, v.CommodityNo, v.MainContract, v.ExchangeNo)" @dblclick="dblclickEvent(v.CommodityNo)">
-								<td class="ifont_arrow" v-show="v.LastQuotation.LastPrice >= v.LastQuotation.PreSettlePrice"><i class="ifont" :class="{red: v.LastQuotation.LastPrice > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice}">&#xe761;</i></td>
-								<td class="ifont_arrow" v-show="v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice"><i class="ifont" :class="{red: v.LastQuotation.LastPrice > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice}">&#xe76a;</i></td>
-								<td>{{v.CommodityName}}</td>
-								<td>{{v.CommodityNo + v.MainContract}}</td>
-								<td class="price" :class="{red: v.LastQuotation.LastPrice > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice}">{{v.LastQuotation.LastPrice}}</td>
-								<td>{{v.LastQuotation.LastVolume}}</td>
-								<td class="price" :class="{red: v.LastQuotation.BidPrice1 > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.BidPrice1 < v.LastQuotation.PreSettlePrice}">{{v.LastQuotation.BidPrice1}}</td>
-								<td class="price" :class="{red: v.LastQuotation.AskPrice1 > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.AskPrice1 < v.LastQuotation.PreSettlePrice}">{{v.LastQuotation.AskPrice1}}</td>
-								<td>{{v.LastQuotation.BidQty1}}</td>
-								<td>{{v.LastQuotation.AskQty1}}</td>
-								<td>{{v.LastQuotation.TotalVolume}}</td>
-								<td :class="{green: v.LastQuotation.ChangeRate < 0, red: v.LastQuotation.ChangeRate > 0}">{{v.LastQuotation.ChangeValue | fixNum(v.DotSize)}}</td>
-								<td :class="{green: v.LastQuotation.ChangeRate < 0, red: v.LastQuotation.ChangeRate > 0}">{{v.LastQuotation.ChangeRate | fixNumTwo}}%</td>
-								<td>{{v.LastQuotation.Position}}</td>
-								<td :class="{red: v.LastQuotation.OpenPrice > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.OpenPrice < v.LastQuotation.PreSettlePrice}">{{v.LastQuotation.OpenPrice}}</td>
-								<td :class="{red: v.LastQuotation.HighPrice > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.HighPrice < v.LastQuotation.PreSettlePrice}">{{v.LastQuotation.HighPrice}}</td>
-								<td :class="{red: v.LastQuotation.LowPrice > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.LowPrice < v.LastQuotation.PreSettlePrice}">{{v.LastQuotation.LowPrice}}</td>
-								<td>{{v.LastQuotation.PreSettlePrice}}</td>
-							</tr>
-						</template>
-					</tbody>
-				</table>
+				<ul class="head">
+					<li>
+						<span class="ifont_arrow"><i class="ifont">&#xe761;</i></span>
+						<span class="name">名称</span>
+						<span class="code">合约代码</span>
+						<span class="price">最新</span>
+						<span class="num_sm">现手</span>
+						<span class="price">买价</span>
+						<span class="price">卖价</span>
+						<span class="num_sm">买量</span>
+						<span class="num_sm">卖量</span>
+						<span class="num_bg">成交量</span>
+						<span class="num_bg">涨跌</span>
+						<span class="num_bg">涨幅%</span>
+						<span class="num_bg">持仓量</span>
+						<span class="num_bg">开盘</span>
+						<span class="num_bg">最高</span>
+						<span class="num_bg">最低</span>
+						<span class="num_bg">昨结算</span>
+					</li>
+				</ul>
+				<ul class="body">
+					<template v-for="(v,index) in Parameters">
+						<li :class="{current: current == index}" @click="toggle(index, v.CommodityName, v.CommodityNo, v.MainContract, v.ExchangeNo)" @dblclick="dblclickEvent(v.CommodityNo)">
+							<span class="ifont_arrow" v-show="v.LastQuotation.LastPrice >= v.LastQuotation.PreSettlePrice"><i class="ifont" :class="{red: v.LastQuotation.LastPrice > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice}">&#xe761;</i></span>
+							<span class="ifont_arrow" v-show="v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice"><i class="ifont" :class="{red: v.LastQuotation.LastPrice > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice}">&#xe76a;</i></span>
+							<span class="name">{{v.CommodityName}}</span>
+							<span class="code">{{v.CommodityNo + v.MainContract}}</span>
+							<span class="price" :class="{red: v.LastQuotation.LastPrice > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice}">{{v.LastQuotation.LastPrice}}</span>
+							<span class="num_sm">{{v.LastQuotation.LastVolume}}</span>
+							<span class="price" :class="{red: v.LastQuotation.BidPrice1 > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.BidPrice1 < v.LastQuotation.PreSettlePrice}">{{v.LastQuotation.BidPrice1}}</span>
+							<span class="price" :class="{red: v.LastQuotation.AskPrice1 > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.AskPrice1 < v.LastQuotation.PreSettlePrice}">{{v.LastQuotation.AskPrice1}}</span>
+							<span class="num_sm">{{v.LastQuotation.BidQty1}}</span>
+							<span class="num_sm">{{v.LastQuotation.AskQty1}}</span>
+							<span class="num_bg">{{v.LastQuotation.TotalVolume}}</span>
+							<span class="num_bg" :class="{green: v.LastQuotation.ChangeRate < 0, red: v.LastQuotation.ChangeRate > 0}">{{v.LastQuotation.ChangeValue | fixNum(v.DotSize)}}</span>
+							<span class="num_bg" :class="{green: v.LastQuotation.ChangeRate < 0, red: v.LastQuotation.ChangeRate > 0}">{{v.LastQuotation.ChangeRate | fixNumTwo}}%</span>
+							<span class="num_bg">{{v.LastQuotation.Position}}</span>
+							<span class="num_bg" :class="{red: v.LastQuotation.OpenPrice > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.OpenPrice < v.LastQuotation.PreSettlePrice}">{{v.LastQuotation.OpenPrice}}</span>
+							<span class="num_bg" :class="{red: v.LastQuotation.HighPrice > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.HighPrice < v.LastQuotation.PreSettlePrice}">{{v.LastQuotation.HighPrice}}</span>
+							<span class="num_bg" :class="{red: v.LastQuotation.LowPrice > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.LowPrice < v.LastQuotation.PreSettlePrice}">{{v.LastQuotation.LowPrice}}</span>
+							<span class="num_bg">{{v.LastQuotation.PreSettlePrice}}</span>
+						</li>
+					</template>
+				</ul>
 			</div>
 		</div>
 		<div class="echarts_box">
@@ -434,40 +432,67 @@
 							color: $yellow;
 						}
 					}
-					
 				}
 			}
 		}
 		.cont{
-			table{
-				td.ifont_arrow{
-					width: 32px;
-					text-align: center;
-					.ifont{
-						font-size: $fs12;
-						color: $lightblue;
-					}
-				}
-				thead{
-					tr{
-						height: 30px;
-						font-size: $fs12;
-						background: $bottom_color;
-					}
-				}
-				tbody{
-					tr{
-						height: 48px;
-						&.red_bg{
-							background: #54323e;
+			ul{
+				li{
+					overflow: hidden;
+					background: $blue;
+			        cursor: pointer;
+			        &:nth-child(even){
+			            background: $deepblue;
+			        }
+			        &:hover, &.current{
+			            background: $highLight;
+			        }
+			        .red, .ifont.red{
+				        color: $red !important;
+				    }
+				    .green, .ifont.green{
+				        color: $green !important;
+				    }
+				    span{
+				    	display: inline-block;
+				    	float: left;
+				    	&.ifont_arrow{
+							width: 30px;
+							text-align: center;
+							.ifont{
+								font-size: $fs12;
+								color: $lightblue;
+							}
 						}
-						&.green_bg{
-							background: #2c4c4a;
+						&.name{
+							width: 130px;
 						}
+						&.code, &.price, &.num_bg{
+							width: 80px;
+						}
+						&.num_sm{
+							width: 60px;
+						}
+				    }
+				}
+				&.head li{
+					height: 30px;
+					line-height: 30px;
+					font-size: $fs12;
+					background: $bottom_color;
+					.ifont_arrow{
+						opacity: 0;
 					}
 				}
-				.price{
-					min-width: 50px;
+				&.body li{
+					height: 44px;
+					line-height: 44px;
+					&.red_bg{
+						background: #54323e;
+					}
+					&.green_bg{
+						background: #2c4c4a;
+					}
 				}
 			}
 		}

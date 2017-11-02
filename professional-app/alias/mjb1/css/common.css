@@ -1,0 +1,358 @@
+/*  
+ * @description: 页面css 
+ * @author: WXF
+ * @update: 2017-11-11 
+ */
+
+.main{
+	max-width: 7.5rem;
+	width: 7.5rem;
+	height: auto;
+	overflow: hidden;
+	margin: auto;
+	position: relative;
+}
+nav{
+	width: 7.5rem;
+	height: 1rem;
+	overflow: hidden;
+	background: #1c2234;
+	margin: 0 auto;
+	position: fixed;
+	bottom: 0;
+}
+nav li{
+	float: left;
+	width: 20%;
+	text-align: center;
+}
+nav li.current span{
+	color: #c742bc;
+}
+nav li .icon{
+	display: block;
+	width: 0.34rem;
+	height: 0.34rem;
+	background-size: 100% 100%;
+	margin: 0.15rem auto 0.05rem auto;
+}
+nav li .icon_quote{
+	background: url(../images/quote.png) no-repeat center center;
+}
+nav li .icon_trade{
+	background: url(../images/trade.png) no-repeat center center;
+}
+nav li .icon_news{
+	background: url(../images/news.png) no-repeat center center;
+}
+nav li .icon_circle{
+	background: url(../images/circle.png) no-repeat center center;
+}
+nav li .icon_account{
+	background: url(../images/account.png) no-repeat center center;
+}
+nav li.current .icon_quote{
+	background: url(../images/quote_1.png) no-repeat center center;
+}
+nav li.current .icon_trade{
+	background: url(../images/trade_1.png) no-repeat center center;
+}
+nav li.current .icon_news{
+	background: url(../images/news_1.png) no-repeat center center;
+}
+nav li.current .icon_circle{
+	background: url(../images/circle_1.png) no-repeat center center;
+}
+nav li.current .icon_account{
+	background: url(../images/account_1.png) no-repeat center center;
+}
+/*****首页*****/
+header{
+	width: 7.5rem;
+	height: 0.93rem;
+	overflow: hidden;
+	background: #111720;
+	border-bottom: 0.02rem solid #000;
+	position: fixed;
+	top: 0;
+}
+header .title{
+	width: 1.92rem;
+	margin: 0.27rem auto 0 auto;
+}
+header .title span{
+	float: left;
+	display: inline-block;
+	width: 0.96rem;
+	height: 0.42rem;
+	line-height: 0.42rem;
+	text-align: center;
+	background: #000;
+}
+header .title span.current{
+	background: #662761;
+}
+.icon_search{
+	width: 0.4rem;
+	height: 0.4rem;
+	background: url(../images/search.png) no-repeat center center;
+	background-size: 100% 100%;
+	position: absolute;
+	top: 0.28rem;
+	right: 0.28rem;
+}
+.box{
+	width: 100%;
+	height: auto;
+}
+.home .menu{
+	position: fixed;
+	top: 0.93rem;
+	width: 7.5rem;
+	height: 0.9rem;
+	background: #111720;
+	border-bottom: 0.01rem solid #000;
+	padding: 0 0.28rem;
+}
+.home .menu li{
+	float: left;
+	width: 0.6rem;
+	height: 0.9rem;
+	line-height: 0.9rem;
+	text-align: center;
+	margin-right: 0.73rem;
+	position: relative;
+}
+.home .menu li i{
+	display: inline-block;
+	width: 0.6rem;
+	height: 0.08rem;
+	background: #662761;
+	border-radius: 0.08rem;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	display: none;
+}
+.home .menu li.current i{
+	display: block;
+}
+.home .menu li:last-child{
+	width: auto;
+	margin-right: 0;
+}
+.home .menu li .icon_nav{
+	width: 0.28rem;
+	height: 0.2rem;
+	background: url(../images/open.png) no-repeat center center;
+	background-size: 100% 100%;
+}
+.home .cont{
+	padding: 1.83rem 0 1rem 0;
+	overflow-y: auto;
+}
+.home .cont li{
+	height: 1.16rem;
+	background: #111720;
+	border-bottom: 0.01rem solid #000;
+}
+.home .cont li i{
+	display: inline-block;
+	width: 0.24rem;
+	height: 0.24rem;
+	line-height: 0.24rem;
+	text-align: center;
+	background: #8353d3;
+	color: #000;
+	font-size: 0.14rem;
+	margin: 0.3rem 0.12rem 0 0;
+}
+.home .cont li i.blue{
+	background: #0082ca;
+}
+.home .cont li i.red{
+	background: #cc465f;
+}
+.home .cont li .order_name{
+	width: 2.96rem;
+}
+.home .cont li .order_name span{
+	display: block;
+	color: #a6a5a4;
+	font-size: 0.2rem;
+}
+.home .cont li .order_name span:first-child{
+	margin-top: 0.23rem;
+	font-size: 0.26rem;
+	color: #fff;
+}
+.home .cont li .price{
+	width: 2.28rem;
+	font-size: 0.26rem;
+	line-height: 1.16rem;
+	font-weight: bold;
+}
+.home .cont li .price.green{
+	color: #30905b;
+}
+.home .cont li .price.red{
+	color: #c24545;
+}
+.home .cont li .change_rate{
+	width: 1.64rem;
+	height: 0.6rem;
+	line-height: 0.6rem;
+	overflow: hidden;
+	text-align: center;
+	color: #fff;
+	border-radius: 0.05rem;
+	margin: 0.28rem 0 0 0;
+}
+.home .cont li .change_rate.green{
+	background: #30905b;
+}
+.home .cont li .change_rate.red{
+	background: #c24545;
+}
+/*****交易*****/
+.trade .title, .circle .title{
+	width: 2.88rem;
+}
+.trade .icon_msg, .circle .icon_msg{
+	width: 0.4rem;
+	height: 0.38rem;
+	background: url(../images/msg.png) no-repeat center center;
+	background-size: 100% 100%;
+	position: absolute;
+	top: 0.28rem;
+	right: 0.28rem;
+}
+.trade .box{
+	padding: 0.95rem 0 1rem 0;
+	margin-top: 1.2rem;
+}
+.trade .box li{
+	height: 0.8rem;
+	margin-bottom: 0.75rem;
+	padding-left: 0.92rem;
+}
+.trade .box li:nth-child(2){
+	height: 0.87rem;
+}
+.trade .box li .icon{
+	float: left;
+	width: 0.8rem;
+	height: 0.8rem;
+	background-size: 100%;
+}
+.trade .box li .icon_1{
+	background: url(../images/trade_07.png) no-repeat center center;
+}
+.trade .box li .icon_2{
+	height: 0.87rem;
+	background: url(../images/trade_08.png) no-repeat center center;
+}
+.trade .box li .icon_3{
+	background: url(../images/trade_09.png) no-repeat center center;
+}
+.trade .box li .words{
+	float: left;
+	margin-left: 0.6rem;
+}
+.trade .box li .words p:first-child{
+	color: #c742bc;
+	font-size: 0.32rem;
+	margin-bottom: 0.08rem;
+}
+.trade .box li .words p:last-child{
+	color: #7b7b7b;
+}
+.trade .box button{
+	width: 5.9rem;
+	height: 0.9rem;
+	line-height: 0.9rem;
+	background: #c742bc;
+	color: #fff;
+	border: none;
+	margin: 0.8rem 0.8rem 0 0.8rem;
+}
+.trade .box .mark{
+	text-align: center;
+	color: #767676;
+	margin: 0.28rem 0 0.5rem 0;
+}
+.trade .box .go_login{
+	text-align: center;
+	color: #561151;
+	font-size: 0.3rem;
+	
+}
+/*****圈子*****/
+.circle .box{
+	padding: 0.95rem 0 1rem 0;
+}
+.circle .menu{
+	width: 7.5rem;
+	height: 0.86rem;
+	line-height: 0.86rem;
+	border-bottom: 0.01rem solid #c3c3c3;
+}
+.circle .menu li{
+	float: left;
+	width: 25%;
+	text-align: center;
+	position: relative;
+}
+.circle .menu li.current span{
+	color: #662761;
+}
+.circle .menu li span{
+	color: #696969;
+	font-size: 0.3rem;
+}
+.circle .menu li i{
+	display: inline-block;
+	width: 0.6rem;
+	height: 0.08rem;
+	background: #662761;
+	border-radius: 0.08rem;
+	margin-left: 0.65rem;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	display: none;
+}
+.circle .menu li.current i{
+	display: block;
+}
+.circle .box .title{
+	width: 7.5rem;
+	overflow: hidden;
+	margin: 0.4rem 0;
+	padding: 0 0.22rem;
+}
+.circle .box .title img{
+	margin-right: 0.2rem;
+}
+.circle .box .title b{
+	display: block;
+	color: #c742bc;
+	font-size: 0.3rem;
+	margin-top: 0.1rem;
+}
+.circle .box .title span{
+	color: #737373;
+	font-size: 0.22rem;
+}
+.circle .box h3{
+	font-size: 0.3rem;
+	font-weight: bold;
+	color: #000;
+	padding: 0 0.22rem;
+	margin-bottom: 0.1rem;
+}
+.circle .box .cont{
+	color: #696969;
+	padding: 0 0.22rem;
+	/*line-height: 0.3rem;*/
+}
