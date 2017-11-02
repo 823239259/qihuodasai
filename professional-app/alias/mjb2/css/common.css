@@ -16,7 +16,7 @@ nav{
 	width: 7.5rem;
 	height: 1rem;
 	overflow: hidden;
-	background: #1c2234;
+	background: #212121;
 	margin: 0 auto;
 	position: fixed;
 	bottom: 0;
@@ -27,7 +27,7 @@ nav li{
 	text-align: center;
 }
 nav li.current span{
-	color: #c742bc;
+	color: #c78b42;
 }
 nav li .icon{
 	display: block;
@@ -82,30 +82,23 @@ header h1{
 	text-align: center;
 	font-size: 0.3rem;
 }
-header .title{
-	width: 1.92rem;
-	margin: 0.27rem auto 0 auto;
-}
-header .title span{
-	float: left;
-	display: inline-block;
-	width: 0.96rem;
-	height: 0.42rem;
-	line-height: 0.42rem;
-	text-align: center;
-	background: #000;
-}
-header .title span.current{
-	background: #662761;
-}
 .icon_search{
 	width: 0.4rem;
 	height: 0.4rem;
 	background: url(../images/search.png) no-repeat center center;
 	background-size: 100% 100%;
-	position: absolute;
+	position: fixed;
 	top: 0.28rem;
 	right: 0.28rem;
+}
+.icon_nav{
+	width: 0.34rem;
+	height: 0.26rem;
+	background: url(../images/open.png) no-repeat center center;
+	background-size: 100% 100%;
+	position: fixed;
+	top: 0.35rem;
+	left: 0.28rem;
 }
 .box{
 	width: 100%;
@@ -117,23 +110,28 @@ header .title span.current{
 	width: 7.5rem;
 	height: 0.9rem;
 	background: #111720;
-	border-bottom: 0.01rem solid #000;
 	padding: 0 0.28rem;
 }
 .home .menu li{
 	float: left;
-	width: 0.6rem;
+	width: 0.65rem;
 	height: 0.9rem;
 	line-height: 0.9rem;
 	text-align: center;
-	margin-right: 0.73rem;
+	margin-right: 0.9rem;
 	position: relative;
+}
+.home .menu li span{
+	font-size: 0.28rem;
+}
+.home .menu li.current span{
+	color: #c78b42;
 }
 .home .menu li i{
 	display: inline-block;
-	width: 0.6rem;
+	width: 0.65rem;
 	height: 0.08rem;
-	background: #662761;
+	background: #c78b42;
 	border-radius: 0.08rem;
 	position: absolute;
 	left: 0;
@@ -147,23 +145,39 @@ header .title span.current{
 	width: auto;
 	margin-right: 0;
 }
-.home .menu li .icon_nav{
-	width: 0.28rem;
-	height: 0.2rem;
-	background: url(../images/open.png) no-repeat center center;
-	background-size: 100% 100%;
-}
 .home .cont{
 	padding: 1.83rem 0 1rem 0;
 	overflow-y: auto;
+}
+.home .cont .title{
+	height: 0.64rem;
+	line-height: 0.64rem;
+	background: #111720;
+	border-bottom: 0.01rem solid #000;
+}
+.home .cont .title span{
+	float: left;
+	display: inline-block;
+	color: #878582;
+	font-size: 0.28rem;
+}
+.home .cont .title span:first-child{
+	width: 3.2rem;
+	padding-left: 0.35rem;
+	box-sizing: border-box;
+}
+.home .cont .title span:nth-child(2){
+	width: 1.3rem;
+	text-align: center;
+}
+.home .cont .title span:nth-child(3){
+	float: right;
+	margin-right: 0.6rem;
 }
 .home .cont li{
 	height: 1.16rem;
 	background: #111720;
 	border-bottom: 0.01rem solid #000;
-}
-.home .cont li.current{
-	background: #1c2234;
 }
 .home .cont li i{
 	display: inline-block;
@@ -201,12 +215,6 @@ header .title span.current{
 	line-height: 1.16rem;
 	font-weight: bold;
 }
-.home .cont li .price.green{
-	color: #30905b;
-}
-.home .cont li .price.red{
-	color: #c24545;
-}
 .home .cont li .change_rate{
 	width: 1.64rem;
 	height: 0.6rem;
@@ -216,17 +224,16 @@ header .title span.current{
 	color: #fff;
 	border-radius: 0.05rem;
 	margin: 0.28rem 0 0 0;
+	font-size: 0.26rem;
+	font-weight: bold;
 }
 .home .cont li .change_rate.green{
-	background: #30905b;
+	color: #488c00;
 }
 .home .cont li .change_rate.red{
-	background: #c24545;
+	color: #f4201f;
 }
 /*****交易*****/
-.trade .title, .circle .title{
-	width: 2.88rem;
-}
 .icon_msg{
 	width: 0.4rem;
 	height: 0.38rem;
@@ -238,7 +245,10 @@ header .title span.current{
 }
 .trade .box{
 	padding: 0.95rem 0 1rem 0;
-	margin-top: 1.2rem;
+}
+.trade .box .step{
+	width: 6.29rem;
+	margin: 0.5rem auto 1rem auto;
 }
 .trade .box li{
 	height: 0.8rem;
@@ -269,7 +279,7 @@ header .title span.current{
 	margin-left: 0.6rem;
 }
 .trade .box li .words p:first-child{
-	color: #c742bc;
+	color: #c78b42;
 	font-size: 0.32rem;
 	margin-bottom: 0.08rem;
 }
@@ -280,31 +290,29 @@ header .title span.current{
 	width: 5.9rem;
 	height: 0.9rem;
 	line-height: 0.9rem;
-	background: #c742bc;
-	color: #fff;
+	background: #dfc052;
+	color: #121821;
 	border: none;
 	margin: 0.8rem 0.8rem 0 0.8rem;
 }
-.trade .box .mark{
-	text-align: center;
-	color: #767676;
-	margin: 0.28rem 0 0.5rem 0;
-}
 .trade .box .go_login{
 	text-align: center;
-	color: #561151;
+	color: #da9745;
 	font-size: 0.3rem;
-	
+	margin-top: 0.46rem;
 }
 /*****圈子*****/
 .circle .box{
-	padding: 0.95rem 0 1rem 0;
+	padding: 1.81rem 0 1rem 0;
 }
 .circle .menu{
 	width: 7.5rem;
 	height: 0.86rem;
 	line-height: 0.86rem;
-	border-bottom: 0.01rem solid #c3c3c3;
+	background: #111720;
+	position: fixed;
+	top: 0.95rem;
+	z-index: 2;
 }
 .circle .menu li{
 	float: left;
@@ -313,174 +321,128 @@ header .title span.current{
 	position: relative;
 }
 .circle .menu li.current span{
-	color: #662761;
+	color: #f9ab4b;
 }
 .circle .menu li span{
-	color: #696969;
+	color: #a8a6a4;
 	font-size: 0.3rem;
 }
-.circle .menu li i{
-	display: inline-block;
-	width: 0.6rem;
-	height: 0.08rem;
-	background: #662761;
-	border-radius: 0.08rem;
-	margin-left: 0.65rem;
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	display: none;
-}
-.circle .menu li.current i{
-	display: block;
+.circle .banner{
+	width: 7.5rem;
+	height: 2.92rem;
 }
 .circle .box .title{
-	width: 7.5rem;
-	overflow: hidden;
-	margin: 0.4rem 0;
-	padding: 0 0.22rem;
+	height: 0.88rem;
+	padding: 0 0.25rem;
 }
-.circle .box .title img{
-	margin-right: 0.2rem;
-}
-.circle .box .title b{
-	display: block;
-	color: #c742bc;
-	font-size: 0.3rem;
-	margin-top: 0.1rem;
-}
-.circle .box .title span{
-	color: #737373;
-	font-size: 0.22rem;
-}
-.circle .box h3{
-	font-size: 0.3rem;
-	font-weight: bold;
-	color: #000;
-	padding: 0 0.22rem;
-	margin-bottom: 0.1rem;
-}
-.circle .box .cont{
-	color: #696969;
-	padding: 0 0.22rem;
-}
-.circle .box .tools{
-	width: 7.5rem;
-	height: 0.94rem;
-	overflow: hidden;
-	border-top: 0.01rem solid #bcbcbc;
-	margin-top: 0.3rem;
-}
-.circle .box .tools i{
+.circle .box .title h3{
 	float: left;
-	margin-top: 0.25rem;
+	line-height: 0.88rem;
+	color: #b0aeab;
 }
-.circle .box .tools i.fabulous{
-	width: 25%;
-	height: 0.45rem;
+.circle .box .title i{
+	float: left;
+	display: inline-block;
+	width: 0.08rem;
+	height: 0.3rem;
+	background: #c78b42;
+	border-radius: 0.08rem;
+	margin: 0.29rem 0.2rem 0 0;
+}
+.circle .box .cont li{
+	width: 7.5rem;
+	height: auto;
+	overflow: hidden;
+	background: #171d27;
+	padding: 0 0.25rem;
+	margin-bottom: 0.15rem;
+}
+.circle .box .cont li h3{
+	height: 0.8rem;
+	line-height: 0.8rem;
+	font-size: 0.28rem;
+}
+.circle .box .cont li p{
+	color: #afada9;
+	font-size: 0.2rem;
+	line-height: 0.4rem;
+	margin-bottom: 0.3rem;
+	
+}
+.circle .box .cont li .mark{
+	height: 0.8rem;
+	float: right;
+	margin-right: 0.1rem;
+}
+.circle .box .cont li .mark .icon_fabulous{
+	width: 0.3rem;
+	height: 0.3rem;
+	background: url(../images/circle_06.png) no-repeat center center;
 	background-size: 100% 100%;
+	margin: 0.1rem 0.2rem 0 0.5rem;
+}
+.circle .box .cont li .mark .icon_comment{
+	width: 0.29rem;
+	height: 0.27rem;
 	background: url(../images/circle_07.png) no-repeat center center;
-}
-.circle .box .tools i.comment{
-	width: 50%;
-	height: 0.43rem;
 	background-size: 100% 100%;
-	background: url(../images/circle_08.png) no-repeat center center;
+	margin: 0.1rem 0.2rem 0 0.3rem;
 }
-.circle .box .tools i.forward{
-	width: 25%;
-	height: 0.42rem;
-	background-size: 100% 100%;
-	background: url(../images/circle_09.png) no-repeat center center;
-}
-/*****资讯*****/
-.news .box{
-	padding: 4.79rem 0 1rem 0;
-}
-.news .box .menu{
-	width: 7.5rem;
-	height: 0.9rem;
-	line-height: 0.9rem;
-	padding: 0 0.56rem;
-	background: #fff;
-	position: fixed;
-	top: 0.95rem;
-	z-index: 2;
-}
-.news .box .menu span{
-	color: #6b6b6b;
-	margin-right: 0.75rem;
-}
-.news .box .menu span:last-child{
-	margin-right: 0;
-}
-.news .box .menu span.current{
-	color: #510a4c;
-}
-.news .img_box{
-	position: fixed;
-	top: 1.85rem;
-	z-index: 2;
-}
-.news .img_box img{
-	width: 7.5rem;
-	height: 2.94rem;
-}
-.news .box .media{
-	margin-top: 0.34rem;
-}
-.news .box .media li{
-	height: 1.18rem;
-	overflow: hidden;
-	padding: 0 0.22rem;
-	margin-bottom: 0.22rem;
-	position: relative;
-}
-.news .box .media li img{
+.circle .box .cont li .mark span, 
+.circle .box .cont li .mark i{
 	float: left;
-	width: 1.74rem;
-	height: 1.18rem;
+	line-height: 0.5rem;
+	color: #4e4f50;
+}
+.circle .box .cont li .mark img{
+	width: 0.5rem;
+	height: 0.5rem;
 	margin-right: 0.2rem;
 }
-.news .box .media li p{
-	float: left;
-	width: 5.1rem;
-	line-height: 0.36rem;
-	color: #6b6b6b;
-}
-.news .box .media li span{
-	color: #bababa;
-	position: absolute;
-	bottom: 0;
-	right: 0.4rem;
+.circle .box .cont li .mark .name{
+	margin-right: 0.25rem;
 }
 /*****我的*****/
 .account .box{
 	padding: 0.95rem 0 1rem 0;
 }
+.icon_set{	
+	width: 0.43rem;
+	height: 0.39rem;
+	background: url(../images/set.png) no-repeat center center;
+	background-size: 100% 100%;
+	position: fixed;
+	top: 0.27rem;
+	right: 0.27rem;
+}
 .account .login{
-	margin-top: 0.25rem;
+	overflow: hidden;
+	background: #171d27;
 }
 .account .login img{
-	width: 1.12rem;
-	height: 1.12rem;
-	margin: 0 0.2rem 0 0.3rem;
+	width: 0.7rem;
+	height: 0.7rem;
+	margin: 0.45rem 0.22rem 0 0.22rem;
 }
-.account .login button{
-	width: 1.53rem;
-	height: 0.53rem;
-	line-height: 0.52rem;
-	text-align: center;
-	background: #fff;
-	border: 0.01rem solid #c742bc;
-	color: #c742bc;
-	margin-right: 0.1rem;
+.account .login span{
+	font-size: 0.3rem;
+	color: #fff;
+	margin-top: 0.6rem;
 }
+.icon_arrow{
+	width: 0.19rem;
+	height: 0.3rem;
+	background: url(../images/arrow.png)no-repeat center center;
+	background-size: 100% 100%;
+	margin: 0.65rem 0.24rem 0 0;
+}
+
 .account .info{
 	width: 7.5rem;
-	height: 1.25rem;
+	height: 1.35rem;
 	overflow: hidden;
-	border-bottom: 0.01rem solid #6b6b6b;
+	background: #171d27;
+	margin-bottom: 0.15rem;
 }
 .account .info li{
 	float: left;
@@ -489,70 +451,40 @@ header .title span.current{
 }
 .account .info li em{
 	display: block;
-	color: #727272;
-	margin: 0.3rem 0 0.1rem 0;
+	color: #b0afab;
+	margin: 0.32rem 0 0.1rem 0;
 }
 .account .info li span{
-	color: #727272;
+	color: #b0afab;
+}
+.account .money{
+	height: 1.02rem;
+	background: #171d27;
+	padding: 0 0.24rem 0 0.38rem;
+	margin-bottom: 0.15rem;
+}
+.account .money span{
+	line-height: 1.02rem;
+	font-size: 0.28rem;
+	color: #c3c0bc;
+}
+.account .money span:last-child{
+	color: #c88d42;
+}
+.account .money .icon_arrow{
+	margin: 0.34rem 0 0 0.24rem;
+}
+.account .money .icon_1{
+	width: 0.41rem;
+	height: 0.41rem;
+	background: url(../images/account_02.png) no-repeat center center;
+	background-size: 100% 100%;
+	margin: 0.31rem 0.26rem 0 0;
 }
 .account .detail{
-	width: 7.5rem;
+	overflow: hidden;
+	padding-top: 0.75rem;
+	background: #171d27;
 }
-.account .detail li{
-	height: 0.82rem;
-	border-top: 0.01rem solid #dae4f1;
-	padding: 0 0.3rem;
-}
-.account .detail li:first-child{
-	border: none;
-}
-.account .detail li span{
-	float: left;
-	color: #7d7d7d;
-	font-size: 0.32rem;
-	line-height: 0.82rem;
-}
-.account .detail li .icon{
-	float: left;
-	width: 0.68rem;
-	height: 0.41rem;
-	background-size: 100% 100%;
-	text-align: left;
-	margin: 0.2rem 0 0 0;
-}
-.account .detail li .icon_recharge{
-	background: url(../images/account_02.png) no-repeat center left;
-}
-.account .detail li .icon_withdrawals{
-	background: url(../images/account_03.png) no-repeat center left;
-}
-.account .detail li .icon_money{
-	background: url(../images/account_04.png) no-repeat center left;
-}
-.account .detail li .icon_account{
-	background: url(../images/account_05.png) no-repeat center left;
-}
-.account .detail li .icon_realname{
-	background: url(../images/account_06.png) no-repeat center left;
-}
-.account .detail li .icon_bank{
-	background: url(../images/account_07.png) no-repeat center left;
-}
-.account .detail li .icon_phone{
-	background: url(../images/account_08.png) no-repeat center left;
-}
-.account .detail li .icon_pwd{
-	background: url(../images/account_09.png) no-repeat center left;
-}
-.account .detail li .icon_arrow{
-	float: right;
-	width: 0.14rem;
-	height: 0.23rem;
-	background: url(../images/arrow.png) no-repeat center center;
-	margin: 0.3rem 0 0 0;
-}
-.account .detail li .res{
-	float: right;
-	font-size: 0.3rem;
-	color: #bababa;
-}
+
+
