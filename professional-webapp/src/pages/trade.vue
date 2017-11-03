@@ -757,10 +757,11 @@
 		},
 		mounted: function(){
 			//初始化高度
+			var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 			$(".quote .cont").height(h - 50 - 30 - 45);
-//			$(".trade_right, .echarts_box").height(h - 50 - 30 - 10);
 			this.chartHeight = h - 50 -30 - 25;
+			$(".trade_list, #trade_details").width(w - $("#nav").width() - $(".quote").width() - $(".operate").width() - 30);
 			//开始画图
 			this.chartShow = true;
 			//调用下拉框
@@ -826,6 +827,13 @@
 		activated: function(){
 			//获取自选合约列表
 			this.isSelectedOrder();
+			$(window).resize(function(){
+				var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+				var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+				$(".quote .cont").height(h - 50 - 30 - 45);
+				this.chartHeight = h - 50 -30 - 25;
+				$(".trade_list").width(w - $("#nav").width() - $(".quote").width() - $(".operate").width() - 30);
+			});
 		}
 	}
 </script>
@@ -1125,9 +1133,7 @@
 		margin-top: 5px;
 		position: relative;
 		.operate{
-			position: absolute;
-			top: 0;
-			left: 0;
+			float: left;
 			width: 390px;
 			height: 280px;
 			overflow: hidden;
@@ -1297,9 +1303,9 @@
 			}	
 		}
 		.trade_list{
-			width: 1588px;
-			padding-left: 400px;
+			float: left;
 			height: 280px;
+			overflow: hidden;
 			.head{
 				height: 30px;
 				line-height: 30px;
@@ -1354,6 +1360,9 @@
 			height: 30px;
 			line-height: 30px;
 		}
+		.trade_box .trade_list{
+			overflow-x: auto;
+		}
 	}
 	@media only screen and (min-width: 1280px) and (max-width: 1366px) {
 		.trade_right_top .info .order_details .title,
@@ -1375,6 +1384,13 @@
 			height: 24px;
 			line-height: 24px;
 			font-size: $fs12;
+		}
+		.trade_box .trade_list .head p{
+			margin-right: 10px;
+		}
+		.trade_box .trade_list .list .title ul li{
+			width: auto;
+			padding: 0 15px;
 		}
 	}
 </style>
