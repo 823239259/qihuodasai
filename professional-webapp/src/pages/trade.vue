@@ -752,7 +752,7 @@
 				this.$store.state.account.username = '';
 				this.$store.state.account.password = '';
 				var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-				this.chartHeight = h - 50 -30 - 40;
+				this.chartHeight = h - 50 - 30 - 45;
 			}
 		},
 		mounted: function(){
@@ -760,7 +760,7 @@
 			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 			$(".quote .cont").height(h - 50 - 30 - 45);
 //			$(".trade_right, .echarts_box").height(h - 50 - 30 - 10);
-			this.chartHeight = h - 50 -30 - 20;
+			this.chartHeight = h - 50 -30 - 25;
 			//开始画图
 			this.chartShow = true;
 			//调用下拉框
@@ -808,33 +808,13 @@
 					}.bind(this));
 				}.bind(this));
 			}.bind(this));
-			//判断是否登录账户
+			//判断是否登录交易账户
 			var user = localStorage.tradeUser ? JSON.parse(localStorage.tradeUser) : '';
 			if(user){
 				this.tradeLoginShow = false;
 				this.tradeDetailsShow = true;
-				this.chartHeight = h - 50 -30 - 40 - $(".trade_box").height();
+				this.chartHeight = h - 50 - 30 - 35 - $(".trade_box").height();
 				this.tradeUser = user.username;
-				//高度计算
-//				$(".trade_right_top .info .order_details ul li, .trade_right_top .info .order_details p").css({
-//					'height': '30px',
-//					'line-height': '30px',
-//					'font-size': '12px'
-//				});
-//				$(".trade_right_top .info .trade_details .quote_five h3, .trade_right_top .info .trade_details .deal_details .title").css({
-//					'26px': '26px',
-//					'line-height': '26px'
-//				});
-//				$(".trade_right_top .info .trade_details .quote_five li, .trade_right_top .info .trade_details .deal_details ul li").css({
-//					'height': '26px',
-//					'line-height': '26px',
-//					'font-size': '12px'
-//				});
-//				$(".trade_right_top .info .trade_details .quote_five ul, .trade_right_top .info .trade_details .deal_details ul").css({
-//					'height': '120px'
-//				});
-				
-				
 			}
 			//获取平台账户登录信息
 			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
@@ -1052,13 +1032,14 @@
 					width: 190px;
 					overflow: hidden;
 					h3, .title{
-						height: 40px;
-						line-height: 40px;
+						height: 30px;
+						line-height: 30px;
 						font-size: $fs12;
 					}
 					ul{
-						height: 352px;
+						height: 362px;
 						background: $deepblue;
+						overflow-y: auto;
 						li span{
 							&.green{
 								color: $green;
@@ -1074,8 +1055,8 @@
 						text-align: center;
 					}
 					li{
-						height: 35px;
-						line-height: 35px;
+						height: 36px;
+						line-height: 36px;
 						padding: 0 10px;
 						span{
 							display: inline-block;
@@ -1106,10 +1087,9 @@
 						}
 					}
 					ul{
-						overflow-y: auto;
 						li{
-							height: 35px;
-							line-height: 35px;
+							height: 36px;
+							line-height: 36px;
 							border-top: 1px solid $bottom_color;
 							&:first-child{
 								border: none;
@@ -1120,7 +1100,7 @@
 			}
 			.trade_login{
 				width: 100%;
-				height: 288px;
+				height: 280px;
 				overflow: hidden;
 				background: $blue;
 				margin-top: 5px;
@@ -1142,7 +1122,7 @@
 		width: 100%;
 		height: 280px;
 		overflow: hidden;
-		margin-top: 10px;
+		margin-top: 5px;
 		position: relative;
 		.operate{
 			position: absolute;
@@ -1364,54 +1344,37 @@
 			}
 		}
 	}
-	@media only screen and (min-width: 1400px) and (max-width: 1600px) {
+	@media only screen and (min-width: 1366px) and (max-width: 1660px) {
 		.trade_right_top .info .trade_details .quote_five ul, 
 		.trade_right_top .info .trade_details .deal_details ul{
-			height: 290px;
-			overflow-y: auto;
+			height: 192px;
+		}
+		.trade_right_top .info .trade_details .quote_five li,
+		.trade_right_top .info .trade_details .deal_details ul li{
+			height: 30px;
+			line-height: 30px;
 		}
 	}
 	@media only screen and (min-width: 1280px) and (max-width: 1366px) {
-		.trade_right_top .info .trade_details .quote_five ul, 
-		.trade_right_top .info .trade_details .deal_details ul{
-			height: 180px;
-			overflow-y: auto;
+		.trade_right_top .info .order_details .title,
+		.trade_right_top .info .order_details p{
+			height: 36px;
+			line-height: 36px;
 		}
-		.trade_right_top .info .trade_login{
-			padding-top: 85px;
-		}
-		.trade_box, .trade_box .trade_list{
-			height: 260px;
-		}
-		.trade_box .operate .down_order .cont .btn_box{
-			margin-top: 20px;
-		}
-		/*.trade_right_top .info .order_details ul li, .trade_right_top .info .order_details p{
+		.trade_right_top .info .order_details ul li{
 			height: 30px;
 			line-height: 30px;
 			font-size: $fs12;
 		}
-		.trade_right_top .info .trade_details .quote_five h3, 
-		.trade_right_top .info .trade_details .deal_details .title{
-			height: 26px;
-			line-height: 26px;
+		.trade_right_top .info .trade_details .quote_five ul, 
+		.trade_right_top .info .trade_details .deal_details ul{
+			height: 100px;
 		}
 		.trade_right_top .info .trade_details .quote_five li,
 		.trade_right_top .info .trade_details .deal_details ul li{
-			height: 26px;
-			line-height: 26px;
+			height: 24px;
+			line-height: 24px;
 			font-size: $fs12;
-		}*/
-		.trade_right_top .info .trade_details .quote_five ul, 
-		.trade_right_top .info .trade_details .deal_details ul{
-			height: 68px;
-		}
-		.trade_box .trade_list .head p{
-			margin-right: 10px;
-		}
-		.trade_box .trade_list .list .title ul li{
-			width: auto;
-			padding: 0 15px;
 		}
 	}
 </style>

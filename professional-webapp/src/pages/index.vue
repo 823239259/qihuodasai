@@ -78,6 +78,7 @@
 				<div id="volume" class="chart"></div>
 			</div>
 			<div id="echarts_k" v-show="showKline">
+				<h1>日K</h1>
 				<div id="kliness" class="char"></div>
 				<div id="kliness_volume" class="chart"></div>
 			</div>
@@ -147,7 +148,7 @@
 					this.showKline = true;
 					//分时、k线容器赋高度
 					var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-					h = h - 50 - 30 - 40;
+					h = h - 50 - 30 - 40 - 25;
 					$("#volume, #kliness_volume").height(h/2/10*3.7);
 					$("#fens, #kliness").height(h/2/10*6);
 					//开始画图
@@ -190,14 +191,14 @@
 			},
 			quoteIndex: function(n, o){
 				if(this.quoteColor == 'red'){
-					$("tbody tr").eq(n).addClass("red_bg");
+					$(".body li").eq(n).addClass("red_bg");
 					setTimeout(function(){
-						$("tbody tr").eq(n).removeClass("red_bg");
+						$(".body li").eq(n).removeClass("red_bg");
 					}, 500);
 				}else{
-					$("tbody tr").eq(n).addClass("green_bg");
+					$(".body li").eq(n).addClass("green_bg");
 					setTimeout(function(){
-						$("tbody tr").eq(n).removeClass("green_bg");
+						$(".body li").eq(n).removeClass("green_bg");
 					}, 500);
 				}
 			},
@@ -207,7 +208,7 @@
 				}else if(n == ''){
 					this.$store.state.account.isRefresh = '';
 				}
-			}
+			},
 		},
 		methods: {
 			toggle: function(i, name, commodityNo, mainContract, exchangeNo){
@@ -344,11 +345,47 @@
 			}
 		},
 		mounted: function(){
-			//初始化页面高度
-			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-			$(".order").height(h - 50 - 30);
 			//获取平台账户登录信息
 			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
+			//初始化页面高度
+			var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+			$(".order").height(h - 50 - 30);
+			var body_height = h - 125;
+			var body_width = w - 480;
+			if(body_height < 748){
+				$(".cont").css({
+					'height': body_height,
+					'overflow-y': 'scroll'
+				});
+			}
+			if(body_width < 1290){
+				$(".cont").css({
+					'width': body_width,
+					'overflow-x': 'scroll'
+				});
+			}
+		},
+		activated: function(){
+			$(window).resize(function(){
+				var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+				var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+				$(".order").height(h - 50 - 30);
+				var body_height = h - 125;
+				var body_width = w - 480;
+				if(body_height < 748){
+					$(".cont").css({
+						'height': body_height,
+						'overflow-y': 'scroll'
+					});
+				}
+				if(body_width < 1290){
+					$(".cont").css({
+						'width': body_width,
+						'overflow-x': 'scroll'
+					});
+				}
+			});
 		}
 	}
 </script>
@@ -399,8 +436,11 @@
 				}
 			}
 		}
-		#echarts_k{
-			margin-top: 10px;
+		#echarts_k h1{
+			font-size: $fs20;
+			font-weight: bold;
+			margin: 15px 0 0 10px;
+			color: $white;
 		}
 		#fens, #volume, #kliness, #kliness_volume{
 			width: 100%;
@@ -438,6 +478,7 @@
 		.cont{
 			ul{
 				li{
+					min-width: 1290px;
 					overflow: hidden;
 					background: $blue;
 			        cursor: pointer;
@@ -484,14 +525,18 @@
 						opacity: 0;
 					}
 				}
-				&.body li{
-					height: 44px;
-					line-height: 44px;
-					&.red_bg{
-						background: #54323e;
-					}
-					&.green_bg{
-						background: #2c4c4a;
+				&.body{
+					display: block;
+					li{
+						height: 44px;
+						line-height: 44px;
+						overflow: hidden;
+						&.red_bg{
+							background: #54323e;
+						}
+						&.green_bg{
+							background: #2c4c4a;
+						}
 					}
 				}
 			}
@@ -500,19 +545,6 @@
 	.chart{
 		width: 100%;
 		margin: 0 auto;
-	}
-	@media only screen and (min-width: 1400px) and (max-width: 1600px) {
-		.order .cont table tbody tr{
-			height: 37px;
-		}
-	}
-	@media only screen and (min-width: 1280px) and (max-width: 1366px) {
-		.order .cont table tbody tr{
-			height: 30px;
-			td{
-				font-size: $fs12;
-			}
-		}
 	}
 
 </style>

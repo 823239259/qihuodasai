@@ -17,10 +17,21 @@
 		<div id="app"></div>
 	</body>
 	<script type="text/javascript">
+		//日历插件
 		function dateEvent(obj){
 			$(obj).click(function(){
 				WdatePicker();
 			});
 		}
+		//初始化
+		$(document).ready(function(){
+			var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+			$("body").css({
+				'width': w,
+				'height': h,
+				'overflow': 'hidden'
+			});
+		});
 	</script>
 </html>
