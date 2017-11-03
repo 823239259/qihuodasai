@@ -394,9 +394,11 @@
 						            <ul  id="postersOrder" class="listStyle" style="height: 165px; width: 100%;" >
 						                <li class="fisrtLi Guadan"><a class="mui-navigate-right"><span>合约名称</span><span>买卖</span><span>委托价</span><span>委托量</span><span>挂单量</span><span class="dateTimeL">挂单时间</span></a></li>
 						            </ul>
-						             <button type="button" class="mui-btn focusButton" id="fullWithdrawal">全撤</button>
-						            <button type="button" class="mui-btn focusButton " id="kilAnorder">撤单</button>
-						           <button type="button" class="mui-btn focusButton" id="changeSingle">改单</button>
+						            <div id="showRevocation" style="display: none;">
+						            	<button type="button" class="mui-btn focusButton" id="fullWithdrawal">全撤</button>
+							            <button type="button" class="mui-btn focusButton " id="kilAnorder">撤单</button>
+							           <button type="button" class="mui-btn focusButton" id="changeSingle">改单</button>
+						            </div>
 						        </div>
 						        <div id="item3" class="mui-control-content" style="width: 100%;">
 						            <ul  id="Entrust" class="listStyle" style="height: 165px;" >
@@ -859,7 +861,7 @@
 				    				<td class="evenTd "><input type="number" value="1" id="ulossNumber" class="stopCommStyle" onkeyup="value=value.replace(/[^\d\.]/g,'')" onblur="value=value.replace(/[^\d\.]/g,'')"></td>
 				    				<td class="oddTd borderLeft" colspan="2" style="border-right: none;">止盈委托价：
 				    					<select class="mui-btn mui-btn-block selectComm" id="uchoiceLossPrices">
-				    						<span value = "1">市价</span>
+				    						<option value = "1">市价</option>
 				    						<!--<option value = "2">对手价</option>-->
 				    					</select>
 				    				</td>
@@ -1058,6 +1060,9 @@
 			mui.plusReady(function(){
 				document.getElementById("positionList").addEventListener("tap",function(){
 					document.getElementById("show_allClose").style.display="block"
+				});
+				document.getElementById("postersOrder").addEventListener("tap",function(){
+					document.getElementById("showRevocation").style.display="block"			
 				})
 				$(function(){
 					$("#refresh").addClass("rotateClass");
