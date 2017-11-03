@@ -162,6 +162,9 @@ header .title span.current{
 	background: #111720;
 	border-bottom: 0.01rem solid #000;
 }
+.home .cont li.current{
+	background: #1c2234;
+}
 .home .cont li i{
 	display: inline-block;
 	width: 0.24rem;
