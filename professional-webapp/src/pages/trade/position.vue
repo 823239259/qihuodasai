@@ -1,27 +1,29 @@
 <template>
 	<div id="trade_details">
-		<table>
-			<thead>
-				<tr>
-					<td>合约名称</td>
-					<td>多空</td>
-					<td>手数</td>
-					<td>持仓均价</td>
-					<td>浮动盈利</td>
-				</tr>
-			</thead>
-			<tbody>
-				<template v-for="(v, index) in positionListCont">
-					<tr :class="{current: selectedNum == index}" @click="clickEvent(index, v.commodityNocontractNo)">
-						<td>{{v.CommodityName}}</td>
-						<td :class="v.type_color">{{v.type}}</td>
-						<td>{{v.HoldNum}}</td>
-						<td>{{v.price}}</td>
-						<td :class="v.total_color">{{v.total}}</td>
+		<div class="trade_details_box">
+			<table>
+				<thead>
+					<tr>
+						<td>合约名称</td>
+						<td>多空</td>
+						<td>手数</td>
+						<td>持仓均价</td>
+						<td>浮动盈利</td>
 					</tr>
-				</template>
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					<template v-for="(v, index) in positionListCont">
+						<tr :class="{current: selectedNum == index}" @click="clickEvent(index, v.commodityNocontractNo)">
+							<td>{{v.CommodityName}}</td>
+							<td :class="v.type_color">{{v.type}}</td>
+							<td>{{v.HoldNum}}</td>
+							<td>{{v.price}}</td>
+							<td :class="v.total_color">{{v.total}}</td>
+						</tr>
+					</template>
+				</tbody>
+			</table>
+		</div>
 		<div class="tools">
 			<button class="btn blue" @click="closePositionAll">全部平仓</button>
 			<button class="btn blue" @click="closePosition">平仓</button>
@@ -179,7 +181,7 @@
 	@import "../../assets/css/common.scss";
 	#trade_details{
 		height: 151px;
-		overflow-y: auto;
+		overflow: auto;
 	}
 	table{
 		thead tr{
@@ -203,11 +205,6 @@
 			width: 90px;
 			height: 30px;
 			line-height: 30px;
-		}
-	}
-	@media only screen and (min-width: 1280px) and (max-width: 1366px) {
-		#trade_details{
-			width: 635px;
 		}
 	}
 </style>
