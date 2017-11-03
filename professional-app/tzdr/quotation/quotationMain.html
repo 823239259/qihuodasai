@@ -16,6 +16,12 @@
 				-webkit-transform: rotate(1000deg);
 				-webkit-transition: all linear 3s;
 			}
+			.greenback{
+				background-color: #28392e;
+			}
+			.redback{
+				background-color: #412e2e;
+			}
 		</style>
 		<script>
 			window.onerror = function(sMessage, sUrl, sLine) {
@@ -463,7 +469,8 @@
 								ChangeRate[i].style.textAlign = "center"
 								ChangeRate[i].style.width = "65px";
 								ChangeRate[i].style.borderRadius = "5px";
-								ChangeRate[i].style.backgroundColor = "#16a951";
+//								ChangeRate[i].style.backgroundColor = "#16a951";
+								ChangeRate[i].style.color = "#16a951";
 							} else {
 								ChangeValue[i].innerText = MoreData.ChangeValue.toFixed(1);
 								ChangeValue[i].className = "redBg ChangeValue";
@@ -471,15 +478,24 @@
 //								ChangeRate[i].className = "redBg ChangeRate";
 								ChangeRate[i].style.width = "65px";
 								ChangeRate[i].style.borderRadius = "5px";
-								ChangeRate[i].style.backgroundColor = "#e9392a";
-								
+//								ChangeRate[i].style.backgroundColor = "#e9392a";
+								ChangeRate[i].style.color = "#e9392a";
 							}
 							if(Number(MoreData.LastPrice) - Number(MoreData.PreSettlePrice) < 0) {
 								LastPrice[i].innerText = MoreData.LastPrice.toFixed(product.DotSize[i]);
-								LastPrice[i].className = "greenFont QLastPrice";
+//								LastPrice[i].className = "greenFont QLastPrice";
+//								document.getElementsByClassName("openPage")[i].setAttribute("class","greenback")
+								$(".openPage").eq(i).addClass("greenback")
+								setTimeout(function(){
+									$(".openPage").removeClass("greenback")
+								},2000)
 							} else {
 								LastPrice[i].innerText = MoreData.LastPrice.toFixed(product.DotSize[i]);
-								LastPrice[i].className = "redFont QLastPrice";
+//								LastPrice[i].className = "redFont QLastPrice";
+								$(".openPage").eq(i).addClass("redback")
+								setTimeout(function(){
+									$(".openPage").removeClass("redback")
+								},2000)
 							}
 							if(Number(MoreData.TotalVolume) != null){
 								Volume[i].innerHTML = MoreData.TotalVolume

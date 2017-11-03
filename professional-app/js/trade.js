@@ -3008,6 +3008,7 @@ function doInsertOrder(param) {
  */
 function doInsertAllSellingOrder() {
 	for(var i = 0; i < postionIndex; i++) {
+		document.getElementById("show_allClose").style.display="none";
 		var contractCode = localCachePositionContractCode[i];
 		if(contractCode == undefined || $(".postion-index" + i + "").html() == undefined) {
 			continue;
@@ -3038,6 +3039,7 @@ function doInsertSellingOrder() {
 	var param = new Array();
 	param[0] = tradeParam;
 	closing(param);
+	document.getElementById("show_allClose").style.display="none"
 }
 /**
  * 反手操作
@@ -3073,6 +3075,7 @@ function doInsertAllCancleOrder() {
 		var param = new Array();
 		param[0] = tradeParam
 		cancleOrder(param);
+		document.getElementById("showRevocation").style.display="none"
 	}
 }
 /**
@@ -3089,6 +3092,7 @@ function doInsertCancleOrder() {
 	var param = new Array();
 	param[0] = tradeParam
 	cancleOrder(param);
+	document.getElementById("showRevocation").style.display="none"
 }
 /**
  * 改单操作
@@ -3117,6 +3121,7 @@ function doInsertChangeSingleOrder() {
 	param[0] = tradeParam;
 	modifyOrder(param);
 	isUpdateOrder = true;
+	document.getElementById("showRevocation").style.display="none"
 }
 /**
  * 添加止损操作
@@ -3174,6 +3179,7 @@ function doGetInsertStopLoss() {
 		$("#ulossTitle").removeClass("mui-active");
 		$("#stopTitle1").addClass("mui-active");
 		$("#lossTitle1").removeClass("mui-active");
+		document.getElementById("show_allClose").style.display="none"
 	}
 }
 /**
@@ -3205,6 +3211,7 @@ function doGetInsertLossLoss() {
 		$("#ulossTitle").removeClass("mui-active");
 		$("#stopTitle1").addClass("mui-active");
 		$("#lossTitle1").removeClass("mui-active");
+		document.getElementById("show_allClose").style.display="none"
 	}
 }
 /**
