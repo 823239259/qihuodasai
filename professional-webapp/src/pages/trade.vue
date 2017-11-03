@@ -364,7 +364,7 @@
 				tradeLoginShow: true,
 				tradeDetailsShow: false,
 				chartShow: false,
-				chartHeight: '',
+//				chartHeight: '',
 				tradeUser: '',
 				selectedList: [],
 				selectedData: '',
@@ -375,6 +375,8 @@
 				selectedTradeDetails: 'position',
 				selectedNum: 0,
 				confirmText: '',
+				w: '',
+				h: '',
 			}
 		},
 		computed: {
@@ -411,6 +413,12 @@
 			forceLine(){
 				return this.$store.state.market.forceLine;
 			},
+			tradeUserName(){
+				return this.$store.state.market.tradeConfig.username;
+			},
+			chartHeight(){
+				return this.$store.state.market.chartHeight;
+			}
 		},
 		filters:{
 			fixNumTwo: function(num){
@@ -432,6 +440,21 @@
 				this.defaultNum = parseInt(n);
 				if(n < 1 || n == ''){
 					this.defaultNum = 0;
+				}
+			},
+			tradeUserName: function(n, o){
+				if(n){
+					
+					this.tradeLoginShow = false;
+					this.tradeDetailsShow = true;
+					this.$store.state.market.chartHeight = this.h - 50 - 30 - 35 - $(".trade_box").height();
+					this.chartShow = true;
+					this.tradeUser = n;
+				}else{
+					this.tradeLoginShow = true;
+					this.tradeDetailsShow = false;
+					this.$store.state.market.chartHeight = this.h - 50 - 30 - 25;
+					this.chartShow = true;
 				}
 			}
 		},
@@ -751,17 +774,17 @@
 				localStorage.tradeUser =  '';
 				this.$store.state.account.username = '';
 				this.$store.state.account.password = '';
-				var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-				this.chartHeight = h - 50 - 30 - 45;
+//				var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+//				this.chartHeight = h - 50 - 30 - 45;
 			}
 		},
 		mounted: function(){
 			//初始化高度
-			var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-			$(".quote .cont").height(h - 50 - 30 - 45);
-			this.chartHeight = h - 50 -30 - 25;
-			$(".trade_list, #trade_details").width(w - $("#nav").width() - $(".quote").width() - $(".operate").width() - 30);
+			this.w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+			this.h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+			$(".quote .cont").height(this.h - 50 - 30 - 45);
+			this.$store.state.market.chartHeight = this.h - 50 -30 - 25;
+			$(".trade_list, #trade_details").width(this.w - $("#nav").width() - $(".quote").width() - $(".operate").width() - 30);
 			//开始画图
 			this.chartShow = true;
 			//调用下拉框
@@ -814,7 +837,7 @@
 			if(user){
 				this.tradeLoginShow = false;
 				this.tradeDetailsShow = true;
-				this.chartHeight = h - 50 - 30 - 35 - $(".trade_box").height();
+				this.$store.state.market.chartHeight = this.h - 50 - 30 - 35 - $(".trade_box").height();
 				this.tradeUser = user.username;
 			}
 			//获取平台账户登录信息
@@ -827,12 +850,13 @@
 		activated: function(){
 			//获取自选合约列表
 			this.isSelectedOrder();
+			//初始化高度
 			$(window).resize(function(){
-				var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-				var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-				$(".quote .cont").height(h - 50 - 30 - 45);
-				this.chartHeight = h - 50 -30 - 25;
-				$(".trade_list").width(w - $("#nav").width() - $(".quote").width() - $(".operate").width() - 30);
+				this.w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+				this.h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+				$(".quote .cont").height(this.h - 50 - 30 - 45);
+				this.chartHeight = this.h - 50 -30 - 25;
+				$(".trade_list, #trade_details").width(this.w - $("#nav").width() - $(".quote").width() - $(".operate").width() - 30);
 			});
 		}
 	}

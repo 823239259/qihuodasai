@@ -18,6 +18,9 @@
 			quoteSocket(){
 				return this.$store.state.quoteSocket;
 			},
+			chartHeight(){
+				return this.$store.state.market.chartHeight;
+			}
 		},
 		watch: {
 			quoteInitStep: function(n, o){
@@ -37,10 +40,34 @@
 					};
 					this.quoteSocket.send(JSON.stringify(data));
 				}
+			},
+			chartHeight: function(n, o){
+//				console.log(n);
+				if(n && n != ''){
+					this.$store.state.isshow.isfens = true;
+					$("#fens").height(n/10*6.8);
+					$("#volume").height(n/10*3);
+//					console.log(1111);
+					var data = {
+						Method: "QryHistory",
+						Parameters:{
+							ExchangeNo: this.currentdetail.ExchangeNo,
+							CommodityNo: this.currentdetail.CommodityNo,
+							ContractNo: this.currentdetail.MainContract,
+							HisQuoteType: 0,
+							BeginTime: "",
+							EndTime: "",
+							Count: 0
+						}
+					};
+					this.quoteSocket.send(JSON.stringify(data));
+				}
 			}
 		},	
 		mounted: function(){
-			var h = this.$parent.chartHeight;
+			console.log(this.chartHeight);
+//			var h = this.$parent.chartHeight;
+			var h = this.chartHeight;
 			$("#fens").height(h/10*6.8);
 			$("#volume").height(h/10*3);
 			if(this.quoteInitStep != ''){

@@ -21,8 +21,6 @@ var isshow = {
 //账户信息
 var account = {
 	state: {
-		username: '',
-		password: '',
 		isRefresh: false
 	}
 }
@@ -134,6 +132,7 @@ var market = {
 				"TotalVolume": 26287
 			}
 		},
+		chartHeight: '',
 		//绘制分时的设置
 		option1: {},   //成交量
 		option2: {},   //价格
@@ -2364,7 +2363,6 @@ export default new Vuex.Store({
 									//["20", "48", "00"]
 									var arr4 = arr3[1].split(':'); //历史
 									if(context.state.market.selectTime == 1) {
-										console.log(11111);
 										if(arr2[1] == arr4[1]) {
 											arr[0] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][0];
 											if(arr[1] < context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][3]) {
