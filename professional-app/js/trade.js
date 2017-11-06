@@ -2115,7 +2115,12 @@ $(function() {
  */
 function initConditionData() {
 	var chioceContract = $("#chioceContract").val();
+	console.log(chioceContract);
 	var localQuote = getLocalCacheQuote(chioceContract);
+	console.log('11111111111111111')
+	console.log(JSON.stringify(localQuote))
+	var a = CacheQuoteBase.getCacheContractAttribute(chioceContract.substring(0,2), "LastPrice");
+	console.log(a);
 	if(localQuote != undefined) {
 		$("#ConditoionPricesInput").val(localQuote.LastPrice);
 	}
