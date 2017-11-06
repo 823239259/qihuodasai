@@ -764,15 +764,9 @@
 //				this.tradeLoginSpeShow = true;
 			},
 			exitEvent: function(){
-				this.$router.push({path: '/index'});
-				this.$store.state.account.isRefresh = 1;
-				this.tradeDetailsShow = false;
-				this.tradeLoginShow = true;
 				localStorage.tradeUser =  '';
-				this.$store.state.account.username = '';
-				this.$store.state.account.password = '';
-//				var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-//				this.chartHeight = h - 50 - 30 - 45;
+				this.$store.state.market.tradeConfig.username = '';
+				this.$store.state.market.tradeConfig.password = '';
 			}
 		},
 		mounted: function(){
