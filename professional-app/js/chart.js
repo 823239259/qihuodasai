@@ -612,6 +612,8 @@ mui.plusReady(function() {
 	var changeValue = document.getElementById("changeValue");
 	var rose = document.getElementById("rose");
 	var freshPrices = document.getElementById("freshPrices");
+	var showNewPrice = document.getElementById("showConditionPrice");
+	var showConditionPrice = document.getElementById("showConditionPrice1");
 	var volumePricesNumber = document.getElementById("volumePricesNumber");
 	var buyPrices = document.getElementById("buyPrices");
 	var buyPricesNumber = document.getElementById("buyPricesNumber");
@@ -670,6 +672,8 @@ mui.plusReady(function() {
 		sellPricesNumber.innerHTML = DATA.Parameters.BidQty1;
 		volumePricesNumber.innerHTML = DATA.Parameters.TotalVolume;
 		freshPrices.innerText = DATA.Parameters.LastPrice.toFixed(doSize);
+		showNewPrice.innerText = DATA.Parameters.LastPrice.toFixed(doSize);
+		showConditionPrice1.innerText = DATA.Parameters.LastPrice.toFixed(doSize);
 		if(Number(DATA.Parameters.AskPrice1) - Number(DATA.Parameters.PreSettlePrice) < 0) {
 			buyPrices.className = "PricesLeft greenFont";
 		} else if(Number(DATA.Parameters.AskPrice1) - Number(DATA.Parameters.PreSettlePrice) > 0) {
