@@ -194,6 +194,21 @@ var CacheQuoteBase = {
 		return this.jCacheContractAttribute[commodityNo][attr];
 	}
 };
+
+var CacheQuoteBase00 = {
+	jCacheContractAttribute: {}, // key 为CommodityNo
+	setCacheContractAttribute: function(jQuote) {
+		this.jCacheContractAttribute[jQuote.CommodityNo] = jQuote;
+	},
+	getCacheContractAttribute: function(commodityNo, attr) {
+		if(isEmpty(this.jCacheContractAttribute[commodityNo]) || isEmpty(this.jCacheContractAttribute[commodityNo][attr])) {
+			return 0;
+		}
+		return this.jCacheContractAttribute[commodityNo][attr];
+	}
+};
+
+
 /**
  * 缓存订阅合约行情信息，包括
  * 		{"CommodityNo":"CL","ContractNo":"1703","ErrorCode":0,"ErrorMsg":"订阅成功","ExchangeNo":"CME",

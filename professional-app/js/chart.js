@@ -73,6 +73,27 @@ mui.plusReady(function() {
 	$("#MainContract").text(Transfer.name[2] + Transfer.name[1]);
 	initMarketSocket();
 
+	function sendSubscrib(jsonData) {
+					var commoditys = jsonData.Parameters;
+					var size = commoditys.length;
+					var setTime = null;
+					for(var i = 0; i < size; i++) {
+
+						if(commoditys[i].IsUsed == 0) {
+							continue;
+						}
+
+						product.CommodityName.push(commoditys[i].CommodityName);
+						product.CommodityNo1.push(commoditys[i].MainContract);
+						product.CommodityNo2.push(commoditys[i].CommodityNo);
+						product.DotSize.push(commoditys[i].DotSize);
+						product.ExchangeNo.push(commoditys[i].ExchangeNo);
+						product.MiniTikeSize.push(commoditys[i].MiniTikeSize);
+						product.ContractSize.push(commoditys[i].ContractSize);
+						socket.send('{"Method":"Subscribe","Parameters":{"ExchangeNo":"' + commoditys[i].ExchangeNo + '","CommodityNo":"' + commoditys[i].CommodityNo + '","ContractNo":"' + commoditys[i].MainContract + '"}}');
+					}
+		}
+
 	function initMarketSocket() {
 		marketSocket = new WebSocket(marketSocketUrl);
 		var marketLoadParam = {}
@@ -107,6 +128,16 @@ mui.plusReady(function() {
 			if(method == "OnRspLogin") {
 				sendHistoryMessage(0);
 				masendMessage('QryCommodity', null);
+			}else if(method == "OnRspQryCommodity"){
+				var a = JSON.parse(evt.data).Parameters;
+				for(var i=0;i<a.length-1;i++){
+					if(a[i].IsUsed !=0){
+						masendMessage('Subscribe','{"ExchangeNo":"'+a[i].ExchangeNo+'","CommodityNo":"'+a[i].CommodityNo+'","ContractNo":"'+a[i].MainContract+'"}');
+					}
+				}
+			}else if(method =="OnRspSubscribe"){
+				
+				
 			} else if(method == "OnRspQryHistory") {
 				var historyParam = jsonData;
 				if(historyParam.Parameters == null) {
@@ -123,7 +154,7 @@ mui.plusReady(function() {
 					processingData(historyParam);
 					processingCandlestickVolumeData(historyParam);
 				}
-			} else if(method == "OnRtnQuote") {
+			}else if(method == "OnRtnQuote") {
 				var quoteParam = jsonData;
 				if(quoteParam.Parameters == null) return;
 				var subscribeParam = quoteParam.Parameters;
@@ -131,6 +162,10 @@ mui.plusReady(function() {
 				var newCommdityNo = subscribeParam.CommodityNo;
 				var newContractNo = subscribeParam.ContractNo;		
 				marketLoadParam[newCommdityNo] = subscribeParam;
+				
+				CacheQuoteBase00.setCacheContractAttribute(subscribeParam);
+//				console.log(JSON.stringify(CacheQuoteBase00.jCacheContractAttribute.CL));
+				console.log(CacheQuoteBase00.getCacheContractAttribute('CL','AskPrice1'));
 				lightChartData(quoteParam);   //绘制闪电图
 				$("#refresh").removeClass("rotateClass");
 				var commodityNo = $("#commodeityNo").val();
@@ -179,7 +214,6 @@ mui.plusReady(function() {
 					var newCommdityNo = comm.CommodityNo;
 					var newContractNo = comm.MainContract;
 					var newExchangeNo = comm.ExchangeNo;
-					
 					/**
 			        * 缓存行情信息
 			        */
@@ -199,8 +233,6 @@ mui.plusReady(function() {
 							setMarketSubCommdity(commdityAndContract, commdityAndContract);
 						}
 					}
-//					console.log(111111111111111)
-//					console.log(commdityAndContract);
 					$("#chioceContract").append("<option value='" + commdityAndContract + "'>" + comm.CommodityName + "</option>")
 					$("#chioceContract1").append("<option value='" + commdityAndContract + "'>" + comm.CommodityName + "</option>")
 					if(comm.IsUsed==0){

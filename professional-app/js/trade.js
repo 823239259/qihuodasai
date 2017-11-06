@@ -2092,9 +2092,14 @@ $(function() {
 	$("#chioceContract").change(function() {
 		var $this = $(this);
 		var contractCode = $this.val();
+		console.log('1111111');
+		console.log(contractCode);
 		var localQuote = getLocalCacheQuote(contractCode);
+		console.log('222222');
+		console.log(JSON.stringify(localQuote));
 		if(localQuote != undefined) {
-			$("#ConditoionPricesInput").val(localQuote.LastPrice);
+			$('#showConditionPrice').text(parseFloat(localQuote.LastPrice).toFixed(CacheQuoteBase.getCacheContractAttribute(contractCode.substring(0,contractCode.length-4), "DotSize")));
+			$("#ConditoionPricesInput").val(parseFloat(localQuote.LastPrice).toFixed(CacheQuoteBase.getCacheContractAttribute(contractCode.substring(0,contractCode.length-4), "DotSize")));
 		}
 
 	});
@@ -2115,14 +2120,10 @@ $(function() {
  */
 function initConditionData() {
 	var chioceContract = $("#chioceContract").val();
-	console.log(chioceContract);
 	var localQuote = getLocalCacheQuote(chioceContract);
-	console.log('11111111111111111')
-	console.log(JSON.stringify(localQuote))
-	var a = CacheQuoteBase.getCacheContractAttribute(chioceContract.substring(0,2), "LastPrice");
-	console.log(a);
 	if(localQuote != undefined) {
-		$("#ConditoionPricesInput").val(localQuote.LastPrice);
+		$('#showConditionPrice').text(parseFloat(localQuote.LastPrice).toFixed(CacheQuoteBase.getCacheContractAttribute(chioceContract.substring(0,2), "DotSize")));
+		$("#ConditoionPricesInput").val(parseFloat(localQuote.LastPrice).toFixed(CacheQuoteBase.getCacheContractAttribute(chioceContract.substring(0,2), "DotSize")));
 	}
 	var chioceContractTime = $("#chioceContract1").val();
 	localQuote = getLocalCacheQuote(chioceContractTime);	
