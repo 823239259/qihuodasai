@@ -164,10 +164,10 @@
 	mui.callService = function() {
 		plus.nativeUI.confirm("工作日 8:30-24:00  周末 9:00-17:00", function(e) {
 				if(e.index == 1) {
-					plus.device.dial("4001801860", false);
+					plus.device.dial("4008528008", false);
 				}
 			},
-			"400-180-1860", ["取消", "呼叫"]);
+			"400-852-8008", ["取消", "呼叫"]);
 	}
 	/*//呼出美洽在线客服
 	document.getElementById("consistentBeauty").addEventListener("tap",function(){

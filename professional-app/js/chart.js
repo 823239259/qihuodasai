@@ -199,6 +199,9 @@ mui.plusReady(function() {
 							setMarketSubCommdity(commdityAndContract, commdityAndContract);
 						}
 					}
+//					console.log(111111111111111)
+//					console.log(commdityAndContract);
+//					console.log(comm.CommodityName);
 					$("#chioceContract").append("<option value='" + commdityAndContract + "'>" + comm.CommodityName + "</option>")
 					$("#chioceContract1").append("<option value='" + commdityAndContract + "'>" + comm.CommodityName + "</option>")
 					if(comm.IsUsed==0){
@@ -828,84 +831,84 @@ mui.plusReady(function() {
 		$("#TimeChart1").css("opacity", "1");
 	});
 	document.getElementById("tradeMenu").addEventListener("tap", function() {
-		if(!mui.cacheUser.isLogin()){
-			mui.confirm("您还未登录平台，请先登录","提示",["确认","取消"],function(e){
-				if (e.index != 1) {
-	                        mui.openWindow({
-	                        	url:"../login/login.html",
-	                        	id:"login.html"
-	                        })
-	                    } 
-			},false)
-		}else if(plus.webview.currentWebview()){
-			mui.app_request("/user/ftrade/list",{stateType:4},function(result){
-				if(result.data.tradeList == ''){
-					mui.confirm("您还未申请过交易账户开户或已终结开户的方案，请先去申请","提示",['确认','取消'],function(e){
-						if(e.index!=1){
-							mui.openWindow({
-								url:"../future/cp.html",
-								id:"../future/cp.html"
-							})
-						}
-					},false)
-				}else{
-					if(vadationIsLogin()) {
-						if(plus.storage.getItem("QuotationGuidanceTrade3") == null) {
-							plus.storage.setItem("QuotationGuidanceTrade3", "1");
-							var height = window.innerHeight;
-							var width = window.innerWidth;
-							$(".top").css({
-								"height": height + "px",
-								"width": width + "px",
-								"position": "fixed",
-								"z-index": "999",
-								"display": "block",
-								"top": "0px",
-								"background": "url('../../images/tipsBG.png') no-repeat",
-								"background-size": "60% auto",
-								"background-position": "center 85%",
-							})
-						}
-						$("#headerMenu table td").removeClass("mui-active");
-						$("#chartAllDiv").removeClass("mui-active");
-						$("#tradeMenu").addClass("mui-active");
-						$("#trade").addClass("mui-active");
-						$("#Handicap").removeClass("mui-active");
-						$(".BuyDiv").css({ "display": "none" });
-						$("#lightDiagram").removeClass("mui-active");
-						$("#lightChartDiv").removeClass("mui-active");
-					}
-				}
-			},function(result){
-				return;
-			})
-		}
-//		else if(vadationIsLogin()) {
-//			if(plus.storage.getItem("QuotationGuidanceTrade3") == null) {
-//				plus.storage.setItem("QuotationGuidanceTrade3", "1");
-//				var height = window.innerHeight;
-//				var width = window.innerWidth;
-//				$(".top").css({
-//					"height": height + "px",
-//					"width": width + "px",
-//					"position": "fixed",
-//					"z-index": "999",
-//					"display": "block",
-//					"top": "0px",
-//					"background": "url('../../images/tipsBG.png') no-repeat",
-//					"background-size": "60% auto",
-//					"background-position": "center 85%",
-//				})
-//			}
-//			$("#headerMenu table td").removeClass("mui-active");
-//			$("#chartAllDiv").removeClass("mui-active");
-//			$("#tradeMenu").addClass("mui-active");
-//			$("#trade").addClass("mui-active");
-//			$("#Handicap").removeClass("mui-active");
-//			$(".BuyDiv").css({ "display": "none" });
-//			$("#lightDiagram").removeClass("mui-active");
-//			$("#lightChartDiv").removeClass("mui-active");
+//		if(!mui.cacheUser.isLogin()){
+//			mui.confirm("您还未登录平台，请先登录","提示",["确认","取消"],function(e){
+//				if (e.index != 1) {
+//	                        mui.openWindow({
+//	                        	url:"../login/login.html",
+//	                        	id:"login.html"
+//	                        })
+//	                    } 
+//			},false)
+//		}else if(plus.webview.currentWebview()){
+//			mui.app_request("/user/ftrade/list",{stateType:4},function(result){
+//				if(result.data.tradeList == ''){
+//					mui.confirm("您还未申请过交易账户开户或已终结开户的方案，请先去申请","提示",['确认','取消'],function(e){
+//						if(e.index!=1){
+//							mui.openWindow({
+//								url:"../future/cp.html",
+//								id:"../future/cp.html"
+//							})
+//						}
+//					},false)
+//				}else{
+//					if(vadationIsLogin()) {
+//						if(plus.storage.getItem("QuotationGuidanceTrade3") == null) {
+//							plus.storage.setItem("QuotationGuidanceTrade3", "1");
+//							var height = window.innerHeight;
+//							var width = window.innerWidth;
+//							$(".top").css({
+//								"height": height + "px",
+//								"width": width + "px",
+//								"position": "fixed",
+//								"z-index": "999",
+//								"display": "block",
+//								"top": "0px",
+//								"background": "url('../../images/tipsBG.png') no-repeat",
+//								"background-size": "60% auto",
+//								"background-position": "center 85%",
+//							})
+//						}
+//						$("#headerMenu table td").removeClass("mui-active");
+//						$("#chartAllDiv").removeClass("mui-active");
+//						$("#tradeMenu").addClass("mui-active");
+//						$("#trade").addClass("mui-active");
+//						$("#Handicap").removeClass("mui-active");
+//						$(".BuyDiv").css({ "display": "none" });
+//						$("#lightDiagram").removeClass("mui-active");
+//						$("#lightChartDiv").removeClass("mui-active");
+//					}
+//				}
+//			},function(result){
+//				return;
+//			})
 //		}
+   		if(vadationIsLogin()) {
+			if(plus.storage.getItem("QuotationGuidanceTrade3") == null) {
+				plus.storage.setItem("QuotationGuidanceTrade3", "1");
+				var height = window.innerHeight;
+				var width = window.innerWidth;
+				$(".top").css({
+					"height": height + "px",
+					"width": width + "px",
+					"position": "fixed",
+					"z-index": "999",
+					"display": "block",
+					"top": "0px",
+					"background": "url('../../images/tipsBG.png') no-repeat",
+					"background-size": "60% auto",
+					"background-position": "center 85%",
+				})
+			}
+			$("#headerMenu table td").removeClass("mui-active");
+			$("#chartAllDiv").removeClass("mui-active");
+			$("#tradeMenu").addClass("mui-active");
+			$("#trade").addClass("mui-active");
+			$("#Handicap").removeClass("mui-active");
+			$(".BuyDiv").css({ "display": "none" });
+			$("#lightDiagram").removeClass("mui-active");
+			$("#lightChartDiv").removeClass("mui-active");
+		}
 	});
 
 	document.getElementById("HandicapButton").addEventListener("tap", function() {
