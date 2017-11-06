@@ -364,7 +364,7 @@
 				tradeLoginShow: true,
 				tradeDetailsShow: false,
 				chartShow: false,
-//				chartHeight: '',
+				loginChartHeight: '',
 				tradeUser: '',
 				selectedList: [],
 				selectedData: '',
@@ -444,17 +444,14 @@
 			},
 			tradeUserName: function(n, o){
 				if(n){
-					
 					this.tradeLoginShow = false;
 					this.tradeDetailsShow = true;
 					this.$store.state.market.chartHeight = this.h - 50 - 30 - 35 - $(".trade_box").height();
-					this.chartShow = true;
 					this.tradeUser = n;
 				}else{
 					this.tradeLoginShow = true;
 					this.tradeDetailsShow = false;
 					this.$store.state.market.chartHeight = this.h - 50 - 30 - 25;
-					this.chartShow = true;
 				}
 			}
 		},

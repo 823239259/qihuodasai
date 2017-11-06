@@ -757,6 +757,8 @@ export default new Vuex.Store({
 			}
 			fens.setOption(state.market.option1);
 			volume.setOption(state.market.option2);
+			fens.resize();
+			volume.resize();
 		},
 		//更新分时图数据
 		setfensoptionsecond: function(state) {
@@ -2201,11 +2203,11 @@ export default new Vuex.Store({
 				}
 			};
 			context.state.tradeSocket.onclose = function(evt) {
-//				console.log('tradeClose:');
+				console.log('tradeClose:');
 //				context.state.tradeSocket=null;
 			};
 			context.state.tradeSocket.onerror = function(evt) {
-//				console.log('tradeError:');
+				console.log('tradeError');
 			};
 			context.state.tradeSocket.onmessage = function(evt) {
 				context.dispatch('handleTradeMessage',evt);

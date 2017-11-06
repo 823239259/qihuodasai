@@ -42,12 +42,10 @@
 				}
 			},
 			chartHeight: function(n, o){
-//				console.log(n);
 				if(n && n != ''){
 					this.$store.state.isshow.isfens = true;
 					$("#fens").height(n/10*6.8);
 					$("#volume").height(n/10*3);
-//					console.log(1111);
 					var data = {
 						Method: "QryHistory",
 						Parameters:{
@@ -65,9 +63,12 @@
 			}
 		},	
 		mounted: function(){
-			console.log(this.chartHeight);
-//			var h = this.$parent.chartHeight;
-			var h = this.chartHeight;
+			var h;
+			if(this.$parent.loginChartHeight){
+				h = this.$parent.loginChartHeight;
+			}else{
+				h = this.$store.state.market.chartHeight;
+			}
 			$("#fens").height(h/10*6.8);
 			$("#volume").height(h/10*3);
 			if(this.quoteInitStep != ''){
