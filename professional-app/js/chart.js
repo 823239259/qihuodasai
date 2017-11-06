@@ -845,7 +845,32 @@ mui.plusReady(function() {
 						}
 					},false)
 				}else{
-					vadationIsLogin();
+					if(vadationIsLogin()) {
+						if(plus.storage.getItem("QuotationGuidanceTrade3") == null) {
+							plus.storage.setItem("QuotationGuidanceTrade3", "1");
+							var height = window.innerHeight;
+							var width = window.innerWidth;
+							$(".top").css({
+								"height": height + "px",
+								"width": width + "px",
+								"position": "fixed",
+								"z-index": "999",
+								"display": "block",
+								"top": "0px",
+								"background": "url('../../images/tipsBG.png') no-repeat",
+								"background-size": "60% auto",
+								"background-position": "center 85%",
+							})
+						}
+						$("#headerMenu table td").removeClass("mui-active");
+						$("#chartAllDiv").removeClass("mui-active");
+						$("#tradeMenu").addClass("mui-active");
+						$("#trade").addClass("mui-active");
+						$("#Handicap").removeClass("mui-active");
+						$(".BuyDiv").css({ "display": "none" });
+						$("#lightDiagram").removeClass("mui-active");
+						$("#lightChartDiv").removeClass("mui-active");
+					}
 				}
 			},function(result){
 				return;
