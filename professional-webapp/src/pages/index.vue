@@ -209,7 +209,7 @@
 				}else if(n == ''){
 					this.$store.state.account.isRefresh = '';
 				}
-			},
+			}
 		},
 		methods: {
 			toggle: function(i, name, commodityNo, mainContract, exchangeNo){
@@ -346,7 +346,7 @@
 			}
 		},
 		mounted: function(){
-//			localStorage.removeItem('firstInTo');
+			localStorage.removeItem('firstInTo');
 			//获取平台账户登录信息
 			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
 			//初始化页面高度

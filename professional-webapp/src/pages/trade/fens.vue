@@ -24,7 +24,7 @@
 		},
 		watch: {
 			quoteInitStep: function(n, o){
-				if(n && n != ''){
+				if(n && n == true){
 					this.$store.state.isshow.isfens = true;
 					var data = {
 						Method: "QryHistory",
@@ -71,20 +71,20 @@
 			}
 			$("#fens").height(h/10*6.8);
 			$("#volume").height(h/10*3);
+			var data = {
+				Method: "QryHistory",
+				Parameters:{
+					ExchangeNo: this.currentdetail.ExchangeNo,
+					CommodityNo: this.currentdetail.CommodityNo,
+					ContractNo: this.currentdetail.MainContract,
+					HisQuoteType: 0,
+					BeginTime: "",
+					EndTime: "",
+					Count: 0
+				}
+			};
+			this.$store.state.isshow.isfens = true;
 			if(this.quoteInitStep != ''){
-				this.$store.state.isshow.isfens = true;
-				var data = {
-					Method: "QryHistory",
-					Parameters:{
-						ExchangeNo: this.currentdetail.ExchangeNo,
-						CommodityNo: this.currentdetail.CommodityNo,
-						ContractNo: this.currentdetail.MainContract,
-						HisQuoteType: 0,
-						BeginTime: "",
-						EndTime: "",
-						Count: 0
-					}
-				};
 				this.quoteSocket.send(JSON.stringify(data));
 			}
 		}
