@@ -2308,37 +2308,94 @@ function bindOpertion() {
 		}
 	});
 	$(".marketBuy").bind("click", function() {
-		if(vadationIsLogin()) {
-			var $this = $(this);
-			var lastPrice = $("#freshPrices").text();
-			if(lastPrice <= 0 || lastPrice == undefined || lastPrice == null || isNaN(lastPrice)) {
-				alertProtype("交易错误", "提示", Btn.confirmed());
+		if(!mui.cacheUser.isLogin()){
+			mui.confirm("您还未登录平台，请先登录","提示",["确认","取消"],function(e){
+				if (e.index != 1) {
+	                        mui.openWindow({
+	                        	url:"../login/login.html",
+	                        	id:"login.html"
+	                        })
+	                    } 
+			},false)
+		}else if(plus.webview.currentWebview()){
+			mui.app_request("/user/ftrade/list",{stateType:4},function(result){
+				if(result.data.tradeList == ''){
+					mui.confirm("您您还未申请过交易账户开户或已终结开户的方案，请先去申请","提示",['确认','取消'],function(e){
+						if(e.index!=1){
+							mui.openWindow({
+								url:"../future/cp.html",
+								id:"../future/cp.html"
+							})
+						}
+					},false)
+				}else{
+					if(vadationIsLogin()) {
+						var $this = $(this);
+						var lastPrice = $("#freshPrices").text();
+						if(lastPrice <= 0 || lastPrice == undefined || lastPrice == null || isNaN(lastPrice)) {
+							alertProtype("交易错误", "提示", Btn.confirmed());
+							return;
+						}
+						var commodityNo = $("#commodeityNo").val();
+						var contractNo = $("#contractNo").val();
+						var orderNum = $("#orderNum").val();
+						var miniTikeSize = $("#miniTikeSize").val();
+						var orderNum = $("#orderNum").val();
+						if(orderNum <= 0) {
+							mui.toast("请输入正确的手数");
+							return;
+						}
+						if(orderNum > 200) {
+							mui.toast("最多只能输入200手");
+							return;
+						}
+						var drection = $this.attr("data-tion-buy");
+						var localCommodity = getMarketCommdity(commodityNo + contractNo);
+						var dotSize = 2;
+						if(localCommodity != undefined) {
+							dotSize = Number(localCommodity.DotSize);
+						}
+						var limitPrice = doGetMarketPrice(lastPrice, miniTikeSize, drection, dotSize);
+						buyOrderPrice = limitPrice;
+						var content = "确认提交订单：【" + commodityNo + contractNo + "】,价格【市价】,手数【" + orderNum + "】,方向【" + analysisBusinessBuySell(drection) + "】?";
+						var isFlag = alertProtype(content, "确认下单?", Btn.confirmedAndCancle(), marketBuy, null, $this);
+					}
+				}
+			},function(result){
 				return;
-			}
-			var commodityNo = $("#commodeityNo").val();
-			var contractNo = $("#contractNo").val();
-			var orderNum = $("#orderNum").val();
-			var miniTikeSize = $("#miniTikeSize").val();
-			var orderNum = $("#orderNum").val();
-			if(orderNum <= 0) {
-				mui.toast("请输入正确的手数");
-				return;
-			}
-			if(orderNum > 200) {
-				mui.toast("最多只能输入200手");
-				return;
-			}
-			var drection = $this.attr("data-tion-buy");
-			var localCommodity = getMarketCommdity(commodityNo + contractNo);
-			var dotSize = 2;
-			if(localCommodity != undefined) {
-				dotSize = Number(localCommodity.DotSize);
-			}
-			var limitPrice = doGetMarketPrice(lastPrice, miniTikeSize, drection, dotSize);
-			buyOrderPrice = limitPrice;
-			var content = "确认提交订单：【" + commodityNo + contractNo + "】,价格【市价】,手数【" + orderNum + "】,方向【" + analysisBusinessBuySell(drection) + "】?";
-			var isFlag = alertProtype(content, "确认下单?", Btn.confirmedAndCancle(), marketBuy, null, $this);
+			})
 		}
+//		if(vadationIsLogin()) {
+//			var $this = $(this);
+//			var lastPrice = $("#freshPrices").text();
+//			if(lastPrice <= 0 || lastPrice == undefined || lastPrice == null || isNaN(lastPrice)) {
+//				alertProtype("交易错误", "提示", Btn.confirmed());
+//				return;
+//			}
+//			var commodityNo = $("#commodeityNo").val();
+//			var contractNo = $("#contractNo").val();
+//			var orderNum = $("#orderNum").val();
+//			var miniTikeSize = $("#miniTikeSize").val();
+//			var orderNum = $("#orderNum").val();
+//			if(orderNum <= 0) {
+//				mui.toast("请输入正确的手数");
+//				return;
+//			}
+//			if(orderNum > 200) {
+//				mui.toast("最多只能输入200手");
+//				return;
+//			}
+//			var drection = $this.attr("data-tion-buy");
+//			var localCommodity = getMarketCommdity(commodityNo + contractNo);
+//			var dotSize = 2;
+//			if(localCommodity != undefined) {
+//				dotSize = Number(localCommodity.DotSize);
+//			}
+//			var limitPrice = doGetMarketPrice(lastPrice, miniTikeSize, drection, dotSize);
+//			buyOrderPrice = limitPrice;
+//			var content = "确认提交订单：【" + commodityNo + contractNo + "】,价格【市价】,手数【" + orderNum + "】,方向【" + analysisBusinessBuySell(drection) + "】?";
+//			var isFlag = alertProtype(content, "确认下单?", Btn.confirmedAndCancle(), marketBuy, null, $this);
+//		}
 	})
 	$("#changeSingle").bind("click", function() {
 		if(vadationIsLoginMuiTip()) {
