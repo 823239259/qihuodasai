@@ -486,18 +486,18 @@
 //								LastPrice[i].className = "greenFont QLastPrice";
 //								document.getElementsByClassName("openPage")[i].setAttribute("class","greenback")
 								clearTimeout();
-								$(".openPage").eq(i).addClass("greenback")
-								setTimeout(function(){
-									$(".openPage").removeClass("greenback")
-								},500)
+//								$(".openPage").eq(i).addClass("greenback")
+//								setTimeout(function(){
+//									$(".openPage").removeClass("greenback")
+//								},500)
 							} else {
 								LastPrice[i].innerText = MoreData.LastPrice.toFixed(product.DotSize[i]);
 //								LastPrice[i].className = "redFont QLastPrice";
-								clearTimeout();
-								$(".openPage").eq(i).addClass("redback")
-								setTimeout(function(){
-									$(".openPage").removeClass("redback")
-								},500)
+//								clearTimeout();
+//								$(".openPage").eq(i).addClass("redback")
+//								setTimeout(function(){
+//									$(".openPage").removeClass("redback")
+//								},500)
 							}
 							if(Number(MoreData.TotalVolume) != null){
 								Volume[i].innerHTML = MoreData.TotalVolume

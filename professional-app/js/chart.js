@@ -201,7 +201,6 @@ mui.plusReady(function() {
 					}
 //					console.log(111111111111111)
 //					console.log(commdityAndContract);
-//					console.log(comm.CommodityName);
 					$("#chioceContract").append("<option value='" + commdityAndContract + "'>" + comm.CommodityName + "</option>")
 					$("#chioceContract1").append("<option value='" + commdityAndContract + "'>" + comm.CommodityName + "</option>")
 					if(comm.IsUsed==0){
@@ -212,7 +211,6 @@ mui.plusReady(function() {
 					} else {
 						tradeTitleHtml.innerHTML += "<option value='" + commdityAndContract + "'>" + comm.CommodityName + "</option>"
 					}
-
 				}
 				queryCommodityIsFlag = true;
 			} else if(method == "OnRspSubscribe") {
@@ -615,8 +613,8 @@ mui.plusReady(function() {
 	var changeValue = document.getElementById("changeValue");
 	var rose = document.getElementById("rose");
 	var freshPrices = document.getElementById("freshPrices");
-	var showNewPrice = document.getElementById("showConditionPrice");
-	var showConditionPrice = document.getElementById("showConditionPrice1");
+//	var showNewPrice = document.getElementById("showConditionPrice");
+//	var showConditionPrice = document.getElementById("showConditionPrice1");
 	var volumePricesNumber = document.getElementById("volumePricesNumber");
 	var buyPrices = document.getElementById("buyPrices");
 	var buyPricesNumber = document.getElementById("buyPricesNumber");
@@ -668,6 +666,8 @@ mui.plusReady(function() {
 	})
 
 	function insertDATA(DATA) {
+//		console.log('111111111111111')
+//		console.log(JSON.stringify(DATA));
 		var doSize = $("#doSize").val();
 		buyPrices.innerHTML = DATA.Parameters.AskPrice1.toFixed(doSize);
 		buyPricesNumber.innerHTML = DATA.Parameters.AskQty1;
@@ -675,8 +675,8 @@ mui.plusReady(function() {
 		sellPricesNumber.innerHTML = DATA.Parameters.BidQty1;
 		volumePricesNumber.innerHTML = DATA.Parameters.TotalVolume;
 		freshPrices.innerText = DATA.Parameters.LastPrice.toFixed(doSize);
-		showNewPrice.innerText = DATA.Parameters.LastPrice.toFixed(doSize);
-		showConditionPrice1.innerText = DATA.Parameters.LastPrice.toFixed(doSize);
+//		showNewPrice.innerText = DATA.Parameters.LastPrice.toFixed(doSize);
+//		showConditionPrice1.innerText = DATA.Parameters.LastPrice.toFixed(doSize);
 		if(Number(DATA.Parameters.AskPrice1) - Number(DATA.Parameters.PreSettlePrice) < 0) {
 			buyPrices.className = "PricesLeft greenFont";
 		} else if(Number(DATA.Parameters.AskPrice1) - Number(DATA.Parameters.PreSettlePrice) > 0) {
