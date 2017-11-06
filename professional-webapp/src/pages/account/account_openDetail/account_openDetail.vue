@@ -39,17 +39,18 @@
 						<tbody>
 							<tr v-for="item in item" v-if="show_detail">
 								<td>{{item.businessTypeStr}}</td>
-								<td>{{item.stateTypeStr}}</td>
+								<td v-if="item.stateTypeStr == '审核不通过'">开户失败</td>
+								<td v-else="item.stateTypeStr != '审核不通过'">{{item.stateTypeStr}}</td>
 								<td>{{item.traderBond}}元</td>
 								<td v-if="item.appendTraderBond!=''">{{item.appendTraderBond}}</td>
 								<td v-else>-</td>
 								<td>{{item.traderTotal}}元</td>
 								<td>{{item.lineLoss}}美元</td>
-								<td>2017-07-06</br>16:29:55</td>
+								<td>{{item.appTime}}</br>16:29:55</td>
 								<td>-</td>
 								<td v-if="item.endAmount!=''">{{item.endAmount}}</td>
 								<td v-else="item.endAmount == ''">-</td>
-								<td v-if="item.stateTypeStr =='开户中'"></td>
+								<td v-if="item.stateTypeStr =='开户中' || item.stateTypeStr=='审核不通过' ">-</td>
 								<td v-else="item.stateTypeStr == '操盘中'">
 									<span v-on:click="toOpenDetailTrade">查看账户</span></br>
 									<span v-on:click="toAdditionlMargin">补充保证金</span></br>
@@ -162,18 +163,46 @@
 				$(e.currentTarget).addClass("current").siblings().removeClass("current");
 				switch (index){
 					case 0:
-					console.log(1)
-					break;
+						var data = {
+							    stateType:''
+						}
+						this.getData(data);
+						break;
 					case 1:
-					console.log(2)
-					break;
+						var data = {
+						    stateType:1
+						}
+						this.getData(data);
+						break;
 					case 2:
-					console.log(3)
-					break;
+						var data = {
+						    stateType:4
+						}
+						this.getData(data);
+						break;
 					case 3:
-					console.log(4)
-					break;
+						var data = {
+						    stateType:6
+						}
+						this.getData(data);
+						break;
 				}
+			},
+			//获取数据
+			getData:function(a){
+				var headers = {
+					token : JSON.parse(localStorage.user).token,
+					secret : JSON.parse(localStorage.user).secret
+				}
+				pro.fetch("post",'/user/ftrade/list',a,headers).then(function(res){
+					if(res.success == true){
+						if(res.code == 1){
+							this.item = res.data.tradeList;
+						}
+					}
+				}.bind(this)).catch(function(err){
+					layer.msg('网络不给力，请稍后重试',{time:1000})
+				})
 			}
 		},
 		mounted :function(){
@@ -199,6 +228,8 @@
 						else {
 							this.show_detail = true;
 							this.item = res.data.tradeList;
+							var time = pro.date('y-m-d',1509415137)
+							console.log(time)
 						}
 					}
 				}

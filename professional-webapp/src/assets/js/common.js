@@ -123,14 +123,21 @@ pro.fetch = function(type, url, params, header){
  * 时间搓转化成2017-07-07 02:05:0
  * 
  */
-pro.formatDate=function(now) { 
-	var year=now.getFullYear(); 
-	var month=now.getMonth()+1; 
-	var date=now.getDate(); 
-	var hour=now.getHours(); 
-	var minute=now.getMinutes(); 
-	var second=now.getSeconds(); 
-	return year+"-"+month+"-"+date+" "+hour+":"+minute+":"+second; 
-} 
-
+pro.getDate=function(d,time){
+	var date=new Date(time);
+    var year=date.getYear()+1900;
+    var month=date.getMonth()+1;
+    var day=date.getDate();
+    var hour=date.getHours();
+    var minu=date.getMinutes();
+    var sec=date.getSeconds();
+    var d1=year+"-"+month+"-"+day+" "+hour+":"+minu+":"+sec;
+    var d2=year+"-"+month+"-"+day
+    if(d=="y-m-d"){
+        console.log(d2)
+    }else if(d=="y-m-d h:i:s"){
+        console.log(d1);
+    }
+}
+//getDate("y-m-d h:i:s",1509678253763)
 export default pro

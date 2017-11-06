@@ -132,10 +132,11 @@
 	}
 	.login {
 		position: absolute;
-		top: 30%;	
-		left: 40%;
+		top: 50%;	
+		left: 50%;
 		width: 400px;
 		height: 330px;
+		margin: -165px 0 0 -200px;
 		background-color: $blue;
 		text-align : center;
 		z-index : 100;

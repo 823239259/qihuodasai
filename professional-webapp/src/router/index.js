@@ -24,6 +24,7 @@ import safe_resetLoginPassword from "../pages/account/account_safe/account_reset
 import safe_withdrawalPassword from "../pages/account/account_safe/account_withdrawalPassword.vue"
 import openDetail_viewAccount from "../pages/account/account_openDetail/account_viewAccount.vue"
 import openDetail_additionalMargin from "../pages/account/account_openDetail/account_additionalMargin.vue"
+import registrationProtocol from "../pages/account/registrationProtocol.vue"
 Vue.use(Router)
 
 export default new Router({
@@ -124,6 +125,10 @@ export default new Router({
 		{
 			path : '/forgetPassword',
 			component : forgetPassword
+		},
+		{
+			path : '/registrationProtocol',
+			component : registrationProtocol
 		}
 	]
 })

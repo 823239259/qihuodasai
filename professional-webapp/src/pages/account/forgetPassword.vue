@@ -188,10 +188,11 @@
 	}
 	.forgetPassword {
 		position : relative;
-		left : 40%;
-		top:30%;
+		left :50%;
+		top:50%;
 		width: 400px;
 		height: 300px;
+		margin: -150px 0 0 -200px;
 		text-align : center;
 		color :$lightblue ;
 		background-color: $blue;

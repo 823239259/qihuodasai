@@ -14,19 +14,17 @@
 		<div class="account_bindBankCard_center">
 			<ul>
 				<li>
-					<input type="radio" name="radiobutton" value="radiobutton" checked> 
+					<input type="radio" v-model="radiobutton" value="哈哈">哈哈
+					<span>招商银行</span><span>尾号8603</span><label>默认</label>
+					<select name="管理">
+						<option value="1">设为默认</option>
+						<option value="2">取消</option>
+					</select>
 				</li>
 				<li>
-					<input type="radio" name="radiobutton" value="radiobutton" checked>  
-				</li>
-				<li>
-					<input type="radio" name="radiobutton" value="radiobutton" checked>  
-				</li>
-				<li>
-					<button class="btn yellow" v-on:click="toAddBankCard">添加银行卡</button>
+					<input type="radio" v-model="radiobutton" value="嘿嘿"/>嘿嘿
 				</li>
 			</ul>
-			
 		</div>
 		<div class="account_bindBankCard_btm">
 			<p>投资有分析，入市需谨慎</p>
@@ -40,7 +38,8 @@
 		name : "safe_bindBankCard",
 		data(){
 			return{
-				bankList : ''
+				bankList : '',
+				radiobutton:"二百五"
 			}
 		},
 		methods:{
@@ -126,15 +125,30 @@
 			height: 160px;
 			background-color: $blue;
 			text-align: center;
-			input {
+			li{
 				width: 400px;
-				height: 30px;
-				border: 1px solid $bottom_color;
-				border-radius: 5px;
+				height: 40px;
+				border: 1px solid $yellow;
+				display: inline-block;
+				margin: auto;
+				line-height: 40px;
 			}
 			.btn {
 				width: 160px;
 				height: 30px;
+			}
+			input{
+				width: 20px;
+				height: 20px;
+				border: 1px solid $yellow;
+				border-radius: 10px;
+			}
+			select {
+				width: 50px;
+				height: 20px;
+				background-color: $bottom_color;
+				color: $white;
+				
 			}
 		}
 		.account_bindBankCard_btm {

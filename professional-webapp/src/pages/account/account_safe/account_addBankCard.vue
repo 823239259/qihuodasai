@@ -3,7 +3,11 @@
 		<div class="account_addBankCard_top">
 			<p>姓名：<input type="text" v-model="username" /></p>
 			<p>开户银行：<input type="text" v-model="bank"/></p>
-			<p>开户省份：<input type="text" v-model="prov"/></p>
+			<p>开户省份：
+				<select name="下拉框">
+					<option value="">四川省</option>
+				</select>
+			</p>
 			<p>开户城市：<input type="text" v-model="city"/></p>
 			<p>开户支行：<input type="text" v-model="address"/></p>
 			<p>银行卡卡号：<input type="text" v-model="bankId"/></p>
@@ -122,6 +126,12 @@
 				height: 30px;
 				margin-left: 50%;
 				margin-top: 10px;
+			}
+			select{
+				background-color: $bottom_color;
+				color: $white;
+				width: 160px;
+				height: 30px;
 			}
 		}
 		.account_addBankCard_btm {

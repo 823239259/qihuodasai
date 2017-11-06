@@ -8,7 +8,7 @@
 			<i class="span_code" v-on:click="getCode">{{volid ? info : (time + '秒')}}</i>
 			<input type="password"  class="input_1 input_5" placeholder="请输入密码（6-16位密码）" id="pwd" v-model.trim="pwd"/>
 			<i class="ifont ifont_eyes" v-on:click="eyeEvent">&#xe61c;</i>
-			<p class="color_light">注册即表示	同意并已阅读<span class="span_white">《用户注册协议》</span></p>
+			<p class="color_light">注册即表示	同意并已阅读<a href="registrationProtocol" class="span_white" target="_blank">《用户注册协议》</a></p>
 			<button class="btn yellow" v-on:click="register">注册</button>
 			<p class="color_light">已有期货大赛账号？<span class="span_white" v-on:click="toLogin">立即登录</span></p>
 		</div>
