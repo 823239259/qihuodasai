@@ -21,7 +21,7 @@ var isshow = {
 //账户信息
 var account = {
 	state: {
-		isRefresh: false
+		isRefresh: false,
 	}
 }
 
@@ -171,6 +171,20 @@ var market = {
 		tradeParameters: [],
 		//当前选中合约
 		currentdetail: {},
+		currentdetailDefault: {
+			CommodityName: "国际原油",
+			CommodityNo: "CL",
+			ContractSize: 10,
+			CurrencyNo: "USD",
+			DotSize: 2,
+			ExchangeNo: "NYMEX",
+			Index: 1,
+			IsDomestic: 0,
+			IsUsed: 1,
+			LastQuotation: {
+				LastPrice: 55.81
+			}
+		},
 		//当前选中合约的成交明细
 		currentTradeDetails: [],
 		

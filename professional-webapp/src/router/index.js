@@ -40,7 +40,7 @@ export default new Router({
 		},
 		{
 			path: '/trade',
-			component: trade
+			component: trade,
 		},
 		{
 			path: '/account',
