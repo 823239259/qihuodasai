@@ -371,7 +371,27 @@
 					</div>
 				</li>
 			</ul>
+			<!--快捷入口-->
+			<div id="Operation_content" class="mui-backdrop">
+				<div class="Operation_all">
+					<div class="Operation_title">
+						<span id="kh">开户</span>
+						<span id="jydl">交易登录</span>
+						<span id="zjfa">终结方案</span>
+					</div>
+					<span id="Operation_Close">×</span>
+				</div>
+			</div>
 		</div>
 	</body>
-	<script></script>
+	<script>
+		mui.init();
+		var kj = {
+					kh: "../future/cp.html",
+					/*开户*/
+					zj: "../future/openingRecord.html" /*终结方案*/
+				}
+		initOperation(kj);
+		tzdr.operation();
+	</script>
 </html>

@@ -164,10 +164,10 @@
 	mui.callService = function() {
 		plus.nativeUI.confirm("工作日 8:30-24:00  周末 9:00-17:00", function(e) {
 				if(e.index == 1) {
-					plus.device.dial("4001801860", false);
+					plus.device.dial("4008528008", false);
 				}
 			},
-			"400-180-1860", ["取消", "呼叫"]);
+			"400-852-8008", ["取消", "呼叫"]);
 	}
 	/*//呼出美洽在线客服
 	document.getElementById("consistentBeauty").addEventListener("tap",function(){
@@ -519,8 +519,19 @@ var tzdr = {
 	},
 	operation: function() {
 		document.getElementById("quickMode").addEventListener("tap", function() {
-			$("#Operation_content").css("display", "block");
-			$("#quickMode").hide()
+			if(!mui.cacheUser.isLogin()){
+				mui.confirm("您还未登录平台，请先登录","提示",["确认","取消"],function(e){
+					if (e.index != 1) {
+		                        mui.openWindow({
+		                        	url:"../login/login.html",
+		                        	id:"login.html"
+		                        })
+		                    } 
+				},false)
+			}else{
+				$("#Operation_content").css("display", "block");
+				$("#quickMode").hide()
+			}
 		});
 		document.getElementById("Operation_Close").addEventListener("tap", function() {
 			$("#Operation_content").css("display", "none");
@@ -707,6 +718,7 @@ String.prototype.trim = function() {
 var tranferParam;
 
 function initOperation(data) {
+	
 	document.getElementById("kh").addEventListener("tap", function() {
 		mui.app_refresh('cp');
 		mui.openWindow({

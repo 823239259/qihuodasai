@@ -145,7 +145,7 @@
 			    <a class="mui-icon mui-icon-left-nav mui-pull-left quotationBack mui-action-back" id= "backClose"><i>返回</i></a>
 			    <h1 class="mui-title mainTitle"><p class="mainTitleFirst"></p><p id="CommodityNo"></p></h1>
 			    <!--<span class="mui-icon mui-icon-help" style="color: white;margin-left: 50%;" id="toNoviceGuide"></span>-->
-			    <img src="../../images/questions.png" alt="" id="toNoviceGuide" style="display: inline-block;width: 20px;height: 20px;margin-left: 55%;margin-top: 10px;"/>
+			    <img src="../../images/questions.png" alt="" id="toNoviceGuide" style="display: inline-block;width: 20px;height: 20px;margin-left: 48%;margin-top:11px;"/>
 			     <a class="mui-icon mui-icon-loop mui-pull-right" id="refresh" style="margin-right: 35px;"></a>
 			   	<a id="muneBox" href="#topPopover"></a>
 			</header>
@@ -1010,11 +1010,85 @@
 					})
 //					点击到交易规则
 					$("#toNoviceGuide").on("tap",function(){
-						mui.openWindow({
-							url:"../agree/noviceGuide.html",
-							id : "noviceGuide" 
-						})
+						var title = plus.webview.currentWebview().name[0];
+						switch (title){
+							case "国际原油":
+							var idss = "1";
+							openGuide(idss,title)
+								break;
+							case "恒指期货":
+							var idss = "2";
+							openGuide(idss,title)
+								break;
+								case "美黄金":
+							var idss = "3";
+							openGuide(idss,title)
+								break;
+							case "德国DAX指数":
+							var idss = "4";
+							openGuide(idss,title)
+								break;
+								case "小恒指":
+							var idss = "5";
+							openGuide(idss,title)
+								break;
+							case "富时A50":
+							var idss = "6";
+							openGuide(idss,title)
+								break;
+								case "美铜":
+							var idss = "7";
+							openGuide(idss,title)
+								break;
+							case "美白银":
+							var idss = "8";
+							openGuide(idss,title)
+								break;
+								case "迷你道琼":
+							var idss = "9";
+							openGuide(idss,title)
+								break;
+							case "迷你纳斯达克":
+							var idss = "10";
+							openGuide(idss,title)
+								break;
+								case "迷你标准普尔":
+							var idss = "11";
+							openGuide(idss,title)
+								break;
+							case "日经225":
+							var idss = "12";
+							openGuide(idss,title)
+								break;
+								case "H股指数":
+							var idss = "13";
+							openGuide(idss,title)
+								break;
+							case "小H股指数":
+							var idss = "14";
+							openGuide(idss,title)
+								break;
+								case "小原油":
+							var idss = "15";
+							openGuide(idss,title)
+								break;
+							case "迷你德国DAX指数":
+							var idss = "16";
+							openGuide(idss,title)
+								break;
+							case "天然气":
+							var idss = "17";
+							openGuide(idss,title);
+								break
+						}
+				});
+				function openGuide(idss,title){
+					mui.openWindow({
+						url:"../agree/noviceGuideTitle.html",
+						id : "noviceGuideTitle" ,
+						extras:{ids:idss,titleall:title}
 					})
+				}
 				loadCss();
 				var Proportion=1;
     			function loadCss(){
