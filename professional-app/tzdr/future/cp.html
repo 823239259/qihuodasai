@@ -69,6 +69,7 @@
 				padding: 7.5px 10px;
 			}
 			#openAccount_process{
+				display: none;
 				color: white;
 				background-color:#ff6a00 ;
 				position: fixed;
@@ -200,6 +201,7 @@
 						url : "../account/openAccountProcess.html",
 						id : "openAccountProcess.html"
 					})
+					document.getElementById("openAccount_process").style.display="none"
 					var user_openProcess = 1;
 					localStorage.setItem("user_process",JSON.stringify(user_openProcess))
 				})
