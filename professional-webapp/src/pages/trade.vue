@@ -396,7 +396,11 @@
 				return this.$store.state.market.tradeParameters;
 			},
 			currentdetail(){
-				return this.$store.state.market.currentdetail;
+				if(this.$store.state.market.currentdetail.CommodityNo){
+					return this.$store.state.market.currentdetail;
+				}else{
+					return JSON.parse(sessionStorage.currentDetails);
+				}
 			},
 			currentTradeDetails(){
 				return this.$store.state.market.currentTradeDetails;
@@ -407,9 +411,6 @@
 			jCacheTotalAccount(){
 				return this.$store.state.market.CacheAccount.jCacheTotalAccount;
 			},
-//			positionListCont(){
-//				return this.$store.state.market.positionListCont;
-//			},
 			forceLine(){
 				return this.$store.state.market.forceLine;
 			},
@@ -448,10 +449,6 @@
 					this.tradeDetailsShow = true;
 					this.$store.state.market.chartHeight = this.h - 50 - 30 - 35 - $(".trade_box").height();
 					this.tradeUser = n;
-				}else{
-					this.tradeLoginShow = true;
-					this.tradeDetailsShow = false;
-					this.$store.state.market.chartHeight = this.h - 50 - 30 - 25;
 				}
 			}
 		},
@@ -767,7 +764,11 @@
 				localStorage.tradeUser =  '';
 				this.$store.state.market.tradeConfig.username = '';
 				this.$store.state.market.tradeConfig.password = '';
-			}
+				this.tradeLoginShow = true;
+				this.tradeDetailsShow = false;
+				this.$store.state.market.chartHeight = this.h - 50 - 30 - 25;
+				layer.msg('退出成功', {time: 1000});
+			},
 		},
 		mounted: function(){
 			//初始化高度
@@ -837,6 +838,14 @@
 			this.isSelectedOrder();
 			//设置当前合约的限价
 			this.tradePrices = this.currentdetail.LastQuotation.LastPrice;
+			//是否跳转至首页			
+//			if(localStorage.firstInTo && localStorage.firstInTo == 1){
+//				if(this.$route.path == '/trade'){
+//					this.$router.replace({path: '/index'});
+//				}
+//			}else{
+//				localStorage.firstInTo = 1;
+//			}
 		},
 		activated: function(){
 			//获取自选合约列表
@@ -849,6 +858,9 @@
 				this.chartHeight = this.h - 50 -30 - 25;
 				$(".trade_list, #trade_details").width(this.w - $("#nav").width() - $(".quote").width() - $(".operate").width() - 30);
 			});
+		},
+		created: function(){
+			
 		}
 	}
 </script>
@@ -1361,6 +1373,7 @@
 					height: 210px;
 					overflow: hidden;
 					background: $blue;
+					position: relative;
 				}
 			}
 		}

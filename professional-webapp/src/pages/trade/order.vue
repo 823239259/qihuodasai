@@ -279,10 +279,10 @@
 		}
 	}
 	.tools{
-		position: fixed;
-		bottom: 45px;
-		left: 730px;
-		margin: 15px 0 0 10px;
+		position: absolute;
+		bottom: 10px;
+		left: 10px;
+		z-index: 2;
 		.btn{
 			width: 90px;
 			height: 30px;

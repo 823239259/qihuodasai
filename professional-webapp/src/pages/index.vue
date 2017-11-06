@@ -144,6 +144,7 @@
 				if(n && n == true){
 					this.$store.state.market.currentdetail = this.Parameters[0];
 					this.$store.state.market.currentTradeDetails = this.tradeParameters[0];
+					sessionStorage.currentDetails = JSON.stringify(this.Parameters[0]);
 					this.showFens = true;
 					this.showKline = true;
 					//分时、k线容器赋高度
@@ -345,6 +346,7 @@
 			}
 		},
 		mounted: function(){
+//			localStorage.removeItem('firstInTo');
 			//获取平台账户登录信息
 			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
 			//初始化页面高度
