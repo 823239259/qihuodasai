@@ -838,14 +838,19 @@
 			this.isSelectedOrder();
 			//设置当前合约的限价
 			this.tradePrices = this.currentdetail.LastQuotation.LastPrice;
-			//是否跳转至首页			
-//			if(localStorage.firstInTo && localStorage.firstInTo == 1){
-//				if(this.$route.path == '/trade'){
-//					this.$router.replace({path: '/index'});
-//				}
-//			}else{
-//				localStorage.firstInTo = 1;
-//			}
+			this.$nextTick(function () {
+				//是否跳转至首页
+				if(localStorage.firstInTo && localStorage.firstInTo == 1){
+					this.chartShow = false;
+					localStorage.removeItem('firstInTo');
+					if(this.$route.path == '/trade'){
+						this.$router.replace({path: '/index'});
+					}
+				}else{
+					localStorage.firstInTo = 1;
+				}
+			}.bind(this));
+			
 		},
 		activated: function(){
 			//获取自选合约列表
@@ -858,6 +863,7 @@
 				this.chartHeight = this.h - 50 -30 - 25;
 				$(".trade_list, #trade_details").width(this.w - $("#nav").width() - $(".quote").width() - $(".operate").width() - 30);
 			});
+			this.chartShow = true;
 		},
 		created: function(){
 			
