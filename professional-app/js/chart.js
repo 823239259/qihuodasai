@@ -836,7 +836,7 @@ mui.plusReady(function() {
 		}else if(plus.webview.currentWebview()){
 			mui.app_request("/user/ftrade/list",{stateType:4},function(result){
 				if(result.data.tradeList == ''){
-					mui.confirm("您您还未申请过交易账户开户或已终结开户的方案，请先去申请","提示",['确认','取消'],function(e){
+					mui.confirm("您还未申请过交易账户开户或已终结开户的方案，请先去申请","提示",['确认','取消'],function(e){
 						if(e.index!=1){
 							mui.openWindow({
 								url:"../future/cp.html",
