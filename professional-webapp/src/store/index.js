@@ -15,6 +15,7 @@ var isshow = {
 		isfens: false,
 		iskline: false,
 		islight: false,
+		loadingShow: false,
 	}
 };
 
@@ -2246,6 +2247,7 @@ export default new Vuex.Store({
 				context.state.wsjsondata = JSON.parse(evt.data);
 				if(context.state.wsjsondata.Method == "OnRspLogin") { // 登录行情服务器
 					layer.msg('行情服务器连接成功',{time: 1000});
+					context.state.isshow.loadingShow = true;
 					// 查询服务器支持品种用于订阅
 					context.state.quoteSocket.send('{"Method":"QryCommodity","Parameters":{' + null + '}}');
 				} else if(context.state.wsjsondata.Method == "OnRspQryCommodity") { // 行情服务器支持的品种

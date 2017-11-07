@@ -287,6 +287,7 @@
 		width: 20px;
 		height: 20px;
 		margin: 10px 0 4px 0;
+		background-size: 100% 100%;
 	}
 	/*左部导航*/
 	.container_left {
@@ -307,25 +308,25 @@
 	            &:hover, &.current{
 	            	background: $deepblue;
 	            	.icon_quote{
-	            		background-image: url(assets/images/icon_quote1.png);
+	            		background: url(assets/images/icon_quote1.png) no-repeat center center;
 	            	}
 	            	.icon_trade{
-	            		background-image: url(assets/images/icon_trade1.png);
+	            		background: url(assets/images/icon_trade1.png) no-repeat center center;
 	            	}
 	            	.icon_open{
-	            		background-image: url(assets/images/icon_open1.png);
+	            		background: url(assets/images/icon_open1.png) no-repeat center center;
 	            	}
 	            	.icon_live{
-	            		background-image: url(assets/images/icon_live1.png);
+	            		background: url(assets/images/icon_live1.png) no-repeat center center;
 	            	}
 	            	.icon_calendar{
-	            		background-image: url(assets/images/icon_calendar1.png);
+	            		background: url(assets/images/icon_calendar1.png) no-repeat center center;
 	            	}
 	            	.icon_download{
-	            		background-image: url(assets/images/icon_download1.png);
+	            		background: url(assets/images/icon_download1.png) no-repeat center center;
 	            	}
 	            	.icon_account{
-	            		background-image: url(assets/images/icon_account1.png);
+	            		background: url(assets/images/icon_account1.png) no-repeat center center;
 	            	}
 	            	p{
 	            		color: $yellow;
