@@ -10,65 +10,38 @@
 		<link href="css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="css/own.css" />
 		<script src="js/jquery-1.11.3.js"></script>
-		<style>
-			/*body{
-	    		padding:0px;
-	    		margin: 0px;
-	    		background-image: url(images/startPage.png) ;
-	    		background-repeat: no-repeat;
-	    		background-size: 100% 100%;
-	    	}*/
-		</style>
 	</head>
 
 	<body style="background-color: #ffffff;">
+		<script type="text/javascript">
+			//// 制作完成马甲包:key = [引导页, 主页]
+			// 富途牛牛
+			var ftnn = ["alias/mjb1/home.html","alias/mjb1/home.html"];
+			// Tiger Trade
+			var tigerTrade = ["alias/mjb2/guide.html","alias/mjb2/home.html"];
+			
+			//// 渠道代码与马甲包关系：渠道 = 对应马甲包
+			var alias = new Array();
+			// ios——富途牛牛
+			alias["test578f8f4a9d484900018d"] = ftnn;
+		</script>
+		
+		
 		<script>
 			mui.plusReady(function() {
-				//				mui.app_request('/banner/list',{
-				//					"type": 10
-				//				},
-				//					function(result){
-				//						console.log(JSON.stringify(result));
-				//						$("#startPage").attr("src",tzdr.constants.base_images_url+"upload/banner/2017/05/31/27a5eb47ace2dd38e047bdc40c94a0d9.png");
-				//					},function(result){
-				//						console.log(JSON.stringify(result));
-				//					}
-				//	    		);
-				//				$("img").css({
-				//						"width":window.innerWidth+"px ",
-				//						"height":window.innerHeight+"px",
-				//					
-				//				});
-				//状态栏设置
-				//Android双击home键退出应用
-				var first = null;
-				setstatus();
-
-				function setstatus() {
-					if(plus.navigator.isFullscreen()) {
-						plus.navigator.setFullscreen(false);
-					}
-				};
-				//状态栏设置
+				mui.getJSON("manifest.json",null,function(data){
+					var appVersion = data.version.name;
+					var appChannelID = "test578f8f4a9d484900018d";
+					
+					plus.storage.setItem("apk", appChannelID); // 注册渠道
+					
+					display(appVersion, appChannelID);
+				});
+				
 				plus.storage.setItem("MarketPrompt", "1"); //行情头部显示
 				
-				if(plus.storage.getItem("guide") == null) {
-					plus.storage.setItem("guide", "12");
-					plus.storage.setItem("apk", "59155332717c1948e5001b22");
-					setTimeout(function() {
-						mui.openWindow({
-							url: "guide.html",
-							id: "guide.html"
-						})
-					}, 1500);
-				} else {
-					setTimeout(function() {
-						mui.openWindow({
-							id: "quotationMain",
-							url: "tzdr/quotation/quotationMain.html"
-						})
-					}, 1500)
-				};
+				//Android双击home键退出应用
+				var first = null;
 				//Android双击home键退出应用
 				mui.back = function() {
 					if(!first) {
@@ -83,135 +56,59 @@
 						}
 					}
 				};
-
-				// 获取本地应用资源版本号
-				plus.runtime.getProperty(plus.runtime.appid, function(inf) {
-					wgtVer = inf.version;
-					//检查更新版本 
-					checkUpdate(function() {});
-				});
-				var dataVersion;
-				// 检测更新
-				function checkUpdate(_callback) {
-					//获取最新版本信息
-					var paramUrl = {
-						url: "tzdr/login/login.html"
-					}
-					mui.app_request('/getVersion', {
-							force: true
-						},
-						function(result) {
-							dataVersion = result.data.version;
-							if(dataVersion.indexOf("Android") < 0) { // 版本格式不兼容，不能更新(以新版本配置是否包含'Android'关键字判断)
-								return;
-							}
-							dataVersion = JSON.parse(dataVersion);
-							updateApk1(_callback);
-						},
-						function(result) {
-							//								_callback();
-							//								if(mui.cacheUser.isLogin()){
-							//									mui.openWindow({url:"tzdr/quotation/quotationMain.html",id:"quotationMain"});
-							//								}
-							return;
-						}, paramUrl
-					);
-				}
-
-				function updateApk1(_callback) {
-					//http://api.mzkqh.com/upload/H50967E1D_.apk
-					var nowDate = new Date();
-					var Android = dataVersion.Android;
-					var iOS = dataVersion.iOS;
-					var upDateAndroid = new Date(Android.date);
-					var upDateiOS = new Date(iOS.date);
-					if(plus.os.name == "Android") {
-						if(Android.version > wgtVer) {
-							if(nowDate >= upDateAndroid) {
-								if(Android.isForceUpdate == true) {
-									plus.nativeUI.alert("本次升级有较大更新，请务必重新下载安装！", function() {
-										if(Android.bigUrl == null || Android.bigUrl == "" || Android.bigUrl == undefined || Android.bigUrl.length == 0) {
-											downWgt(function() {
-												if(mui.cacheUser.isLogin()) {
-													mui.openWindow({
-														url: "tzdr/quotation/quotationMain.html",
-														id: "quotationMain"
-													});
-												}
-											}); // 下载升级包
-										} else {
-											var _download_url = Android.bigUrl;
-											plus.runtime.openURL(_download_url);
-										}
-
-									}, "软件升级", "立即下载");
-								} else {
-									plus.nativeUI.confirm("检测到有新版本需要升级，是否升级到最新版本?", function(e) {
-										if(e.index == 0) {
-											if(Android.bigUrl == "" || Android.bigUrl.length == 0 || Android.bigUrl == null) {
-												downWgt(function() {
-													if(mui.cacheUser.isLogin()) {
-														mui.openWindow({
-															url: "tzdr/quotation/quotationMain.html",
-															id: "quotationMain"
-														});
-													}
-												}); // 下载升级包
-											} else {
-												var _download_url = Android.bigUrl;
-												plus.runtime.openURL(_download_url);
-											}
-
-										} else {
-											if(mui.cacheUser.isLogin()) {
-												mui.openWindow({
-													url: "tzdr/quotation/quotationMain.html",
-													id: "quotationMain"
-												});
-											}
-										}
-									}, "软件升级", ["升级", "稍后再说"]);
+			});
+			
+			// 显示
+			function display(appVersion, appChannelID) {
+				//判断是否显示马甲包
+					mui.app_request('/judgeShow', {
+						"appVersion": appVersion,
+						"parms": appChannelID
+					}, function(result) {
+						if(result.message == "开启") { // 显示马甲包
+							if(plus.storage.getItem("showAliasGuide") != false) { // 显示马甲引导页
+								plus.storage.setItem("showAliasGuide", false);
+								setTimeout(function() {
+									mui.openWindow({
+										url: alias[appChannelID][0],
+										id: 'aliasGuide'
+									});
+								}, 1500);
+							} else {
+								setTimeout(function() {
+									mui.openWindow({
+										url: alias[appChannelID][1],
+										id: 'aliasHome'
+									});
+								}, 1500)
+							};
+						} else if(result.message == "屏蔽") { // 显示主包
+							if(plus.storage.getItem("showGuide") != false) { // 显示主包引导页
+								plus.storage.setItem("showGuide", false);
+								setTimeout(function() {
+									mui.openWindow({
+										url: "guide.html",
+										id: "guide"
+									});
+								}, 1500);
+							} else {
+								if(mui.cacheUser.isLogin()) { // 登录后显示行情页
+									setTimeout(function() {
+										mui.openWindow({
+											url: 'tzdr/quotation/quotationMain.html',
+											id: 'quotationMain'
+										});
+									}, 1500)
+								} else { // 未登录显示操盘申请页
+									mui.openWindow({
+										url: 'home.html',
+										id: 'home'
+									});
 								}
-							}
+							};
 						}
-					}
-				};
-
-				// 下载wgt文件
-				function downWgt(_callback, data) {
-					plus.nativeUI.showWaiting("下载升级包...");
-					plus.downloader.createDownload(dataVersion.Android.littleUrl, {
-						filename: "_doc/update/"
-					}, function(d, status) {
-						plus.nativeUI.closeWaiting();
-						if(status == 200) {
-							installWgt(d.filename, _callback); // 安装wgt包
-						} else {
-							// 弹出系统提示对话框
-							plus.nativeUI.alert("下载升级包失败！如多次失败请到官网下载最新APP。", function() {
-								_callback();
-							}, "软件升级", "确定");
-						}
-					}).start();
-				}
-
-				// 更新应用资源
-				function installWgt(path, _callback) {
-					plus.nativeUI.showWaiting("软件升级...");
-					plus.runtime.install(path, {
-						force: true
-					}, function() {
-						plus.nativeUI.closeWaiting();
-						plus.runtime.restart();
-					}, function(e) {
-						plus.nativeUI.closeWaiting();
-						// 弹出系统提示对话框
-						plus.nativeUI.alert("应用升级失败！如多次失败请到官网下载最新APP。", function() {
-							_callback();
-						}, "软件升级", "确定");
 					});
-				}
-			})
+			}
 		</script>
 	</body>
 

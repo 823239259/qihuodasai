@@ -129,7 +129,7 @@
 			},
 			isRefresh(){
 				return this.$store.state.account.isRefresh;
-			}
+			},
 		},
 		filters:{
 			fixNumTwo: function(num){
@@ -209,7 +209,7 @@
 				}else if(n == ''){
 					this.$store.state.account.isRefresh = '';
 				}
-			}
+			},
 		},
 		methods: {
 			toggle: function(i, name, commodityNo, mainContract, exchangeNo){
@@ -223,6 +223,8 @@
 						this.$store.state.market.currentTradeDetails = o;
 					}
 				}.bind(this));
+				this.$store.state.isshow.isfens = true;
+				this.$store.state.isshow.iskline = true;
 				this.$store.state.market.currentNo = commodityNo;
 				this.current = i;
 				this.orderName = name;

@@ -115,7 +115,7 @@
 						var parameters = data.Parameters;
 						switch (data.Method){
 							case 'OnRtnHeartBeat':
-								console.log('last:'+parameters.Ref);
+//								console.log('last:'+parameters.Ref);
 								break;
 							case 'OnRspLogin'://登录回复
 								if(parameters.Code==0){

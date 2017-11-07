@@ -435,7 +435,6 @@
 					}
 				}else{
 					if(this.timeAddtionPrice){
-						console.log(this.miniTikeSize);
 						var d2 = this.timeAddtionPrice % this.miniTikeSize;
 						if(d2 >= 0.000000001 && parseFloat(this.miniTikeSize-d2) >= 0.0000000001){
 							this.$refs.dialog.isShow = true;
