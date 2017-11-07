@@ -192,7 +192,7 @@ function handleData(evt) {
 				var orderPrice = orderParam.OrderPrice;
 				var orderNum = orderParam.OrderNum;
 				isUpdateOrder = false;
-				tip("改单成功:合约【" + contractCode + "】,委托价【" + orderPrice + "】,委托量【" + orderNum + "】");
+				tip("改单成功:合约【" + contractCode + "】,订单号为:【"+orderId+"】");
 			}
 			//订单成交通知
 		} else if(method == "OnRtnOrderTraded") {
