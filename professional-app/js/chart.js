@@ -209,42 +209,46 @@ mui.plusReady(function() {
 				var tradeTitleHtml = document.getElementById("tradeTitle");
 				for(var i = 0; i < size; i++) {
 					
-					var comm = commoditys[i];
-					var newCommdityNo = comm.CommodityNo;
-					var newContractNo = comm.MainContract;
-					var newExchangeNo = comm.ExchangeNo;
-					/**
-			        * 缓存行情信息
-			        */
-			        CacheQuoteBase.setCacheContractAttribute(comm);
-			        
-					//如果是当前合约与品种更新乘数
-					if(valiationIsPresent(newCommdityNo, newContractNo)) {
-						$("#contractSize").val(comm.ContractSize);
-					}
-					var commdityAndContract = newCommdityNo + newContractNo;
-					setMarketCommdity(commdityAndContract, comm);
-					//验证在执行交易请求数据时，是否还有未订阅的持仓信息，
-					var comContract = marketNotSubCommdity[commdityAndContract];
-					if(comContract != undefined) {
-						if(marketSubCommdity[commdityAndContract] == undefined) {
-							subscribeHold(newExchangeNo, newCommdityNo, newContractNo);
-							setMarketSubCommdity(commdityAndContract, commdityAndContract);
+					if(commoditys[i].IsUsed !=0){
+						var comm = commoditys[i];
+						var newCommdityNo = comm.CommodityNo;
+						var newContractNo = comm.MainContract;
+						var newExchangeNo = comm.ExchangeNo;
+						/**
+				        * 缓存行情信息
+				        */
+				        CacheQuoteBase.setCacheContractAttribute(comm);
+				        
+						//如果是当前合约与品种更新乘数
+						if(valiationIsPresent(newCommdityNo, newContractNo)) {
+							$("#contractSize").val(comm.ContractSize);
 						}
-					}
-					$("#chioceContract").append("<option value='" + commdityAndContract + "'>" + comm.CommodityName + "</option>")
-					$("#chioceContract1").append("<option value='" + commdityAndContract + "'>" + comm.CommodityName + "</option>")
-					if(comm.IsUsed==0){
-			        		continue
-			        	}
-					if(Transfer.name[2] == newCommdityNo) {
-						tradeTitleHtml.innerHTML += "<option value=" + commdityAndContract + " selected>" + comm.CommodityName + "</option>"
-					} else {
-						tradeTitleHtml.innerHTML += "<option value='" + commdityAndContract + "'>" + comm.CommodityName + "</option>"
-					}
+						var commdityAndContract = newCommdityNo + newContractNo;
+						setMarketCommdity(commdityAndContract, comm);
+						//验证在执行交易请求数据时，是否还有未订阅的持仓信息，
+						var comContract = marketNotSubCommdity[commdityAndContract];
+						if(comContract != undefined) {
+							if(marketSubCommdity[commdityAndContract] == undefined) {
+								subscribeHold(newExchangeNo, newCommdityNo, newContractNo);
+								setMarketSubCommdity(commdityAndContract, commdityAndContract);
+							}
+						}
+						$("#chioceContract").append("<option value='" + commdityAndContract + "'>" + comm.CommodityName + "</option>")
+						$("#chioceContract1").append("<option value='" + commdityAndContract + "'>" + comm.CommodityName + "</option>")
+						if(comm.IsUsed==0){
+				        		continue
+				        	}
+						if(Transfer.name[2] == newCommdityNo) {
+							tradeTitleHtml.innerHTML += "<option value=" + commdityAndContract + " selected>" + comm.CommodityName + "</option>"
+						} else {
+							tradeTitleHtml.innerHTML += "<option value='" + commdityAndContract + "'>" + comm.CommodityName + "</option>"
+						}
 				}
+					
+					
+			}
 				queryCommodityIsFlag = true;
-			} else if(method == "OnRspSubscribe") {
+		} else if(method == "OnRspSubscribe") {
 				var quoteParam = jsonData;
 			}
 			updateEnd=(new Date()).getTime();
