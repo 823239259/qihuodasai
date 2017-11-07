@@ -274,7 +274,7 @@ Date.prototype.format = function(format) {
 var tzdr = {
 	// 系统常量
 	constants: {
-		api_domain: "http://test.api.duokongtai.cn/",
+		api_domain: "http://api.duokongtai.cn/",
 		api_recharge: "http://www.duokongtai.cn/",	//充值
 		//图片地址
 		base_images_url: 'http://manage.duokongtai.cn/',
