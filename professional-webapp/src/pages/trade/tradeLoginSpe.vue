@@ -115,7 +115,6 @@
 			pro.fetch('post', '/user/getTradeAccount', '', headers).then(function(res){
 				if(res.success == true && res.code == 1){
 					this.accountList = res.data;
-					console.log(this.accountList);
 				}
 			}.bind(this)).catch(function(err){
 				var data = err.data;

@@ -813,10 +813,36 @@
 			$(".trade_list, #trade_details").width(this.w - $("#nav").width() - $(".quote").width() - $(".operate").width() - 30);
 			//开始画图
 			this.chartShow = true;
+			//判断是否登录交易账户
+			var user = localStorage.tradeUser ? JSON.parse(localStorage.tradeUser) : '';
+			if(user){
+				this.tradeLoginShow = false;
+				this.tradeDetailsShow = true;
+				this.$store.state.market.chartHeight = this.h - 50 - 30 - 35 - $(".trade_box").height();
+				this.tradeUser = user.username;
+			}
+			//获取平台账户登录信息
+			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
+			//获取自选合约列表
+			this.isSelectedOrder();
+			//设置当前合约的限价
+			this.tradePrices = this.currentdetail.LastQuotation.LastPrice;
 			//调用下拉框
 			$(".slt-box").each(function(i, o){
 				pro.selectEvent(o, function(data){
+					//移除行情列表选中样式
+					$(".quote .cont tr").removeClass("current");
+					//更新页面数据
 					var commodityNo = data;
+					this.addStar = true;
+					this.optional = '添加自选';
+					this.selectedList.forEach(function(o, i){
+						console.log(o);
+						if(o.CommodityNo == commodityNo){
+							this.addStar = false;
+							this.optional = '取消自选';
+						}
+					}.bind(this));
 					this.Parameters.forEach(function(o, i){
 						if(commodityNo == o.CommodityNo){
 							this.$store.state.market.currentdetail = o;
@@ -858,20 +884,6 @@
 					}.bind(this));
 				}.bind(this));
 			}.bind(this));
-			//判断是否登录交易账户
-			var user = localStorage.tradeUser ? JSON.parse(localStorage.tradeUser) : '';
-			if(user){
-				this.tradeLoginShow = false;
-				this.tradeDetailsShow = true;
-				this.$store.state.market.chartHeight = this.h - 50 - 30 - 35 - $(".trade_box").height();
-				this.tradeUser = user.username;
-			}
-			//获取平台账户登录信息
-			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
-			//获取自选合约列表
-			this.isSelectedOrder();
-			//设置当前合约的限价
-			this.tradePrices = this.currentdetail.LastQuotation.LastPrice;
 //			this.$nextTick(function () {
 //				//是否跳转至首页
 //				if(localStorage.firstInTo && localStorage.firstInTo == 1){
