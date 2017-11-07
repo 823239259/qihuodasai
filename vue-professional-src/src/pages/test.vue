@@ -116,7 +116,6 @@
 			}
 		},
 		activated:function(){
-			console.log(1);
 			this.add(this.$store);
 		}
 	}

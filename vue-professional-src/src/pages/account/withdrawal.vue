@@ -203,7 +203,6 @@
 					if(data.success == true){
 						if(data.code == 1){
 							if(data.data.length > 0){
-								console.log(data.data);
 								data.data.forEach(function(o, i){
 									if(o.default == true){
 										this.defaultBank = o.card.substr(0,4) + '***********' + o.card.substr(-4,4);
