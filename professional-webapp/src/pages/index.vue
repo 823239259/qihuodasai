@@ -223,6 +223,8 @@
 						this.$store.state.market.currentTradeDetails = o;
 					}
 				}.bind(this));
+				this.$store.state.isshow.isfens = true;
+				this.$store.state.isshow.iskline = true;
 				this.$store.state.market.currentNo = commodityNo;
 				this.current = i;
 				this.orderName = name;

@@ -96,9 +96,10 @@
 		</div>
 		<div class="container">
 			<keep-alive>
-				<router-view v-if="!$route.meta.notKeepAlive"></router-view>
+				<router-view></router-view>
+				<!--<router-view v-if="!$route.meta.notKeepAlive"></router-view>-->
 			</keep-alive>
-			<router-view v-if="$route.meta.notKeepAlive"></router-view>
+			<!--<router-view v-if="$route.meta.notKeepAlive"></router-view>-->
 		</div>
 		<warning v-if="warningShow"></warning>
 		<!--退出弹窗-->
@@ -111,18 +112,15 @@
 				<button class="green btn" v-on:click="canal">取消</button>
 			</div>
 		</div>
-		<!--loading-->
-		<loading ref="loading"></loading>
 	</div>
 </template>
 
 <script>
 	import warning from "./pages/trade/warning.vue"
-	import loading from "./components/loading.vue"
 	import { mapMutations,mapActions } from 'vuex'
 	export default {
 		name: 'app',
-		components : {warning, loading},
+		components : {warning},
 		data(){
 			return {
 				warningShow: false,
@@ -209,7 +207,6 @@
 				this.$store.state.isshow.isfensshow = false;
 				this.$store.state.isshow.isklineshow = false;
 				var index = $(e.currentTarget).index();
-				console.log(index);
 				if(index == 0){
 					this.$router.push({path: '/index'});
 					$("#nav li").eq(1).addClass("current").siblings().removeClass("current");
@@ -220,7 +217,6 @@
 							this.$router.push({path: '/index'});
 							break;
 						case 2:
-						console.log(9999);
 							this.$router.push({path: '/trade'});
 							break;
 						case 3:
@@ -273,7 +269,6 @@
 			}
 		},
 		mounted: function(){
-			this.$refs.loading.isshow = true;
 			//初始化行情
 			if(this.quoteInitStatus == false){
 				this.initQuoteClient();

@@ -838,18 +838,18 @@
 			this.isSelectedOrder();
 			//设置当前合约的限价
 			this.tradePrices = this.currentdetail.LastQuotation.LastPrice;
-			this.$nextTick(function () {
-				//是否跳转至首页
-				if(localStorage.firstInTo && localStorage.firstInTo == 1){
-					this.chartShow = false;
-					localStorage.removeItem('firstInTo');
-					if(this.$route.path == '/trade'){
-						this.$router.replace({path: '/index'});
-					}
-				}else{
-					localStorage.firstInTo = 1;
-				}
-			}.bind(this));
+//			this.$nextTick(function () {
+//				//是否跳转至首页
+//				if(localStorage.firstInTo && localStorage.firstInTo == 1){
+//					this.chartShow = false;
+//					localStorage.removeItem('firstInTo');
+//					if(this.$route.path == '/trade'){
+//						this.$router.replace({path: '/index'});
+//					}
+//				}else{
+//					localStorage.firstInTo = 1;
+//				}
+//			}.bind(this));
 			
 		},
 		activated: function(){
