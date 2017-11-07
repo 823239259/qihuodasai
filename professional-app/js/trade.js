@@ -192,7 +192,7 @@ function handleData(evt) {
 				var orderPrice = orderParam.OrderPrice;
 				var orderNum = orderParam.OrderNum;
 				isUpdateOrder = false;
-				tip("改单成功:合约【" + contractCode + "】,委托价【" + orderPrice + "】,委托量【" + orderNum + "】");
+				tip("改单成功:合约【" + contractCode + "】,订单号为:【"+orderId+"】");
 			}
 			//订单成交通知
 		} else if(method == "OnRtnOrderTraded") {
@@ -2838,7 +2838,7 @@ function bindOpertion() {
 			var conditoionPricesInput00 = Number(conditoionPricesInput);
 			var a = formatFloat(conditoionPricesInput00,DotSize)*10000;
 			var b = formatFloat(MiniTikeSize,DotSize)*10000;
-			if(a%b!=0){
+			if(parseFloat(a%b).toFixed(5)!=0){
 				tip('输入价格不符合最小变动价,最小变动价为:'+MiniTikeSize);
 				return;
 			}
