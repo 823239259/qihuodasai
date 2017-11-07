@@ -3950,12 +3950,12 @@ function getCurrentDateAndTime(){
 }
 
 /**
- * 获取当前日期
+ * 获取当前日期截取到当天23:59:59
  */
 function getCurrentDate(){
 	
-	var weekStartDate = new Date(nowYear, nowMonth, nowDay);   
-    return formatDate(weekStartDate);   
+	var weekStartDate = new Date(nowYear, nowMonth, nowDay);  
+    return formatDate11(weekStartDate);   
 }
 /**
  * 获取当前日期与当前的日期的零点
@@ -4029,4 +4029,18 @@ function formatDate(date) {
         myweekday = "0" + myweekday;   
     }   
     return (myyear + "-" + mymonth + "-" + myweekday+' '+'00:00:00');   
+}
+
+//获取当前最晚时间
+function formatDate11(date) {   
+    var myyear = date.getFullYear();   
+    var mymonth = date.getMonth() + 1;   
+    var myweekday = date.getDate();   
+    if (mymonth < 10) {   
+        mymonth = "0" + mymonth;   
+    }   
+    if (myweekday < 10) {   
+        myweekday = "0" + myweekday;   
+    }   
+    return (myyear + "-" + mymonth + "-" + myweekday+' '+'23:59:59');   
 }
