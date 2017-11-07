@@ -40,7 +40,7 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="cont" v-if="!quoteShow">
+			<div class="cont cont_all" v-if="!quoteShow">
 				<table>
 					<thead>
 						<tr>
@@ -383,6 +383,12 @@
 			quoteInitStep(){
 				return this.$store.state.market.quoteInitStep;
 			},
+			quoteIndex(){
+				return this.$store.state.market.quoteIndex;
+			},
+			quoteColor(){
+				return this.$store.state.market.quoteColor;
+			},
 			quoteSocket(){
 				return this.$store.state.quoteSocket;
 			},
@@ -435,6 +441,19 @@
 					this.$store.state.market.currentdetail = this.Parameters[0];
 					this.$store.state.market.currentTradeDetails = this.tradeParameters[0];
 					this.$store.state.market.currentNo = this.Parameters[0].CommodityNo;
+				}
+			},
+			quoteIndex: function(n, o){
+				if(this.quoteColor == 'red'){
+					$(".cont_all tbody tr").eq(n).addClass("red_bg");
+					setTimeout(function(){
+						$(".cont_all tbody tr").eq(n).removeClass("red_bg");
+					}, 500);
+				}else{
+					$(".cont_all tbody tr").eq(n).addClass("green_bg");
+					setTimeout(function(){
+						$(".cont_all tbody tr").eq(n).removeClass("green_bg");
+					}, 500);
 				}
 			},
 			defaultNum: function(n,o){
@@ -944,6 +963,12 @@
 							float: left;
 							margin: 11px 0 0 5px;
 							color: $lightblue;
+						}
+						&.red_bg{
+							background: #54323e;
+						}
+						&.green_bg{
+							background: #2c4c4a;
 						}
 					}
 				}
