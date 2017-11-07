@@ -83,17 +83,13 @@
 				<div id="kliness_volume" class="chart"></div>
 			</div>
 		</div>
-		<!--loading-->
-		<loading ref="loading"></loading>
 	</div>
 </template>
 
 <script>
 	import pro from '../assets/js/common.js'
-	import loading from "../components/loading.vue"
 	export default{
 		name:'index',
-		components : {loading},
 		data(){
 			return{
 				current: 0,
@@ -134,9 +130,6 @@
 			isRefresh(){
 				return this.$store.state.account.isRefresh;
 			},
-			loadingShow(){
-				return this.$store.state.isshow.loadingShow;
-			}
 		},
 		filters:{
 			fixNumTwo: function(num){
@@ -217,12 +210,6 @@
 					this.$store.state.account.isRefresh = '';
 				}
 			},
-			loadingShow: function(n, o){
-				if(n == true){
-					this.$refs.loading.isshow = false;
-					this.$store.state.isshow.loadingShow = false;
-				}
-			}
 		},
 		methods: {
 			toggle: function(i, name, commodityNo, mainContract, exchangeNo){
@@ -359,7 +346,6 @@
 			}
 		},
 		mounted: function(){
-			this.$refs.loading.isshow = true;
 			//获取平台账户登录信息
 			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
 			//初始化页面高度
