@@ -776,8 +776,23 @@
 				this.$store.state.isshow.isklineshow = false;
 			},
 			toTradeLogin: function(){
-				this.$refs.tradeLogin.show = true;
-//				this.tradeLoginSpeShow = true;
+				var headers = {
+					token:  this.userInfo.token,
+					secret: this.userInfo.secret,
+					version: ''
+				};
+				pro.fetch('post', '/user/getTradeAccount', '', headers).then(function(res){
+					if(res.success == true && res.code == 1){
+						if(res.data.length > 0){
+							this.$refs.tradeLoginSpe.show = true;
+						}else{
+							this.$refs.tradeLogin.show = true;
+						}
+					}
+				}.bind(this)).catch(function(err){
+					var data = err.data;
+					if(data) layer.msg(data.message, {time: 1000});
+				});
 			},
 			exitEvent: function(){
 				localStorage.tradeUser =  '';

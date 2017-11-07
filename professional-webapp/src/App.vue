@@ -96,10 +96,9 @@
 		</div>
 		<div class="container">
 			<keep-alive>
-				<router-view></router-view>
-				<!--<router-view v-if="!$route.meta.notKeepAlive"></router-view>-->
+				<router-view v-if="!$route.meta.notKeepAlive"></router-view>
 			</keep-alive>
-			<!--<router-view v-if="$route.meta.notKeepAlive"></router-view>-->
+			<router-view v-if="$route.meta.notKeepAlive"></router-view>
 		</div>
 		<warning v-if="warningShow"></warning>
 		<!--退出弹窗-->
@@ -141,9 +140,6 @@
 			quoteInitStatus(){
 				return this.$store.state.market.quoteInitStatus;
 			},
-			loadingShow(){
-				return this.$store.state.isshow.loadingShow;
-			}
 		},
 		filters:{
 			fixNumTwo: function(num){
@@ -151,14 +147,6 @@
 			},
 			fixNum: function(num, dotsize){
 				return num.toFixed(dotsize);
-			}
-		},
-		watch: {
-			loadingShow: function(n, o){
-				if(n == true){
-					this.$refs.loading.isshow = false;
-					this.$store.state.isshow.loadingShow = false;
-				}
 			}
 		},
 		methods: {
