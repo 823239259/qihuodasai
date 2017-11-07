@@ -1888,11 +1888,15 @@ $(function() {
 	$("#choiceStopPrices2").change(function() {
 		var $this = $(this);
 		var val = $this.val();
+		var con = $('#stopEvenTd1').text();
+		var miniTikeSize0 = CacheQuoteBase11.getCacheContractAttribute(con.substring(0,con.length-4),'MiniTikeSize');
+		var dotSize0 =CacheQuoteBase11.getCacheContractAttribute(con.substring(0,con.length-4),'DotSize'); 
 		if(val == 2) {
-			$("#stopChoicePrices3").val(0);
+			
+			$("#stopChoicePrices3").val(parseFloat(miniTikeSize0).toFixed(dotSize0));
 			$("#Increase2").val(0);
 		} else if(val == 0) {
-			$("#stopChoicePrices3").val($("#stopEvenPrice1").text());
+			$("#stopChoicePrices3").val(parseFloat($("#stopEvenPrice1").text()).toFixed(dotSize0));
 		}
 	});
 	$("#chioceTimeAdditional").change(function() {
@@ -3317,7 +3321,9 @@ function doUpdateModifyStopLoss() {
 				stopChoicePrices3 = Number(stopChoicePrices3) + Number(lastPrice);
 			}
 		}
-		var tradeParam = createModifyStopLossParam(stopLossNo, modifyFlag, num, stopLossType, orderType, parseFloat(Math.abs(stopLossDiff)).toFixed(2), stopChoicePrices3);
+		var contract = $('#stopEvenTd1').text();
+		var dotsize01 = CacheQuoteBase11.getCacheContractAttribute(contract.substring(0,contract.length-4),'DotSize');
+		var tradeParam = createModifyStopLossParam(stopLossNo, modifyFlag, num, stopLossType, orderType, parseFloat(stopLossDiff).toFixed(dotsize01), stopChoicePrices3);
 		doModifyStopLoss(tradeParam)
 	}
 }
@@ -3944,12 +3950,12 @@ function getCurrentDateAndTime(){
 }
 
 /**
- * 获取当前日期
+ * 获取当前日期截取到当天23:59:59
  */
 function getCurrentDate(){
 	
-	var weekStartDate = new Date(nowYear, nowMonth, nowDay);   
-    return formatDate(weekStartDate);   
+	var weekStartDate = new Date(nowYear, nowMonth, nowDay);  
+    return formatDate11(weekStartDate);   
 }
 /**
  * 获取当前日期与当前的日期的零点
@@ -4023,4 +4029,18 @@ function formatDate(date) {
         myweekday = "0" + myweekday;   
     }   
     return (myyear + "-" + mymonth + "-" + myweekday+' '+'00:00:00');   
+}
+
+//获取当前最晚时间
+function formatDate11(date) {   
+    var myyear = date.getFullYear();   
+    var mymonth = date.getMonth() + 1;   
+    var myweekday = date.getDate();   
+    if (mymonth < 10) {   
+        mymonth = "0" + mymonth;   
+    }   
+    if (myweekday < 10) {   
+        myweekday = "0" + myweekday;   
+    }   
+    return (myyear + "-" + mymonth + "-" + myweekday+' '+'23:59:59');   
 }
