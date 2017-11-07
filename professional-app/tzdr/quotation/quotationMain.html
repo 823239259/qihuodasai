@@ -461,28 +461,6 @@
 					var Volume = document.getElementsByClassName("volume");
 					for(var i = 0; i < productContentLeft.length; i++) {
 						if(MoreData.CommodityNo == productContentLeft[i].innerHTML) {
-//							LastVolume[i].innerText = MoreData.TotalVolume;
-//							var lastChangeRate=CacheQuoteBase03.getCacheContractAttribute(MoreData.CommodityNo,'ChangeRate');
-//							if(Number(MoreData.ChangeRate)-Number(lastChangeRate) < 0) {
-//								ChangeValue[i].innerText = MoreData.ChangeValue.toFixed(2);
-//								ChangeValue[i].className = "greenBg ChangeValue";
-//								ChangeRate[i].innerText = MoreData.ChangeRate.toFixed(2) + "%";
-////								ChangeRate[i].className = "greenBg ChangeRate";
-//								ChangeRate[i].style.textAlign = "center"
-//								ChangeRate[i].style.width = "65px";
-//								ChangeRate[i].style.borderRadius = "5px";
-////								ChangeRate[i].style.backgroundColor = "#16a951";
-////								ChangeRate[i].style.color = "#16a951";
-//							} else {
-//								ChangeValue[i].innerText = MoreData.ChangeValue.toFixed(1);
-//								ChangeValue[i].className = "redBg ChangeValue";
-//								ChangeRate[i].innerText = "+" + MoreData.ChangeRate.toFixed(2) + "%";
-////								ChangeRate[i].className = "redBg ChangeRate";
-//								ChangeRate[i].style.width = "65px";
-//								ChangeRate[i].style.borderRadius = "5px";
-////								ChangeRate[i].style.backgroundColor = "#e9392a";
-////								ChangeRate[i].style.color = "#e9392a";
-//							}
 							if(Number(MoreData.ChangeRate) < 0) {
 								ChangeValue[i].innerText = MoreData.ChangeValue.toFixed(2);
 								ChangeValue[i].className = "greenBg ChangeValue";
@@ -492,6 +470,7 @@
 								ChangeRate[i].style.width = "65px";
 								ChangeRate[i].style.borderRadius = "5px";
 								ChangeRate[i].style.color = "#16a951";
+								LastPrice[i].style.color="#16a951";
 							} else {
 								ChangeValue[i].innerText = MoreData.ChangeValue.toFixed(1);
 								ChangeValue[i].className = "redBg ChangeValue";
@@ -500,6 +479,7 @@
 								ChangeRate[i].style.width = "65px";
 								ChangeRate[i].style.borderRadius = "5px";
 								ChangeRate[i].style.color = "#e9392a";
+								LastPrice[i].style.color="#e9392a";
 								
 							}
 							var lastLastPrice=CacheQuoteBase03.getCacheContractAttribute(MoreData.CommodityNo,'LastPrice');
@@ -507,7 +487,7 @@
 								LastPrice[i].innerText = MoreData.LastPrice.toFixed(product.DotSize[i]);
 //								console.log('1111111111111111111');
 //								console.log(MoreData.LastPrice);
-								console.log(lastLastPrice);
+//								console.log(lastLastPrice);
 								$(".openPage").eq(i).addClass("greenback")
 								setTimeout(function(){
 									$(".openPage").removeClass("greenback")
