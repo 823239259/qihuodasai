@@ -344,7 +344,6 @@
 				setTimeout(function(){
 					this.isconnected = false;
 					this.iconIsconnected = true;
-					console.log(this.iconIsconnected);
 					this.colors = 'red';
 				}.bind(this), 2000);
 			}.bind(this), function(){
