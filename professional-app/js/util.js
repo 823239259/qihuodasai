@@ -208,6 +208,18 @@ var CacheQuoteBase00 = {
 	}
 };
 
+var CacheQuoteBase11 = {
+	jCacheContractAttribute: {}, // key 为CommodityNo
+	setCacheContractAttribute: function(jQuote) {
+		this.jCacheContractAttribute[jQuote.CommodityNo] = jQuote;
+	},
+	getCacheContractAttribute: function(commodityNo, attr) {
+		if(isEmpty(this.jCacheContractAttribute[commodityNo]) || isEmpty(this.jCacheContractAttribute[commodityNo][attr])) {
+			return 0;
+		}
+		return this.jCacheContractAttribute[commodityNo][attr];
+	}
+};
 
 /**
  * 缓存订阅合约行情信息，包括
@@ -257,6 +269,34 @@ var CacheQuoteSubscribe = {
 	}
 };
 
+var CacheQuoteSubscribe00 = {
+	jCacheContractQuote: {}, // key 为contract(jQuote.CommodityNo + jQuote.ContractNo)
+	setCacheContractQuote: function(jQuote) {
+		// 根据行情服务器的配置更新到合约行情缓存配置
+		jQuote.CommodityName = CacheQuoteBase.getCacheContractAttribute(jQuote.CommodityNo, "CommodityName");
+		jQuote.CurrencyNo = CacheQuoteBase.getCacheContractAttribute(jQuote.CommodityNo, "CurrencyNo");
+		jQuote.DotSize = CacheQuoteBase.getCacheContractAttribute(jQuote.CommodityNo, "DotSize");
+		jQuote.ExchangeNo = CacheQuoteBase.getCacheContractAttribute(jQuote.CommodityNo, "ExchangeNo");
+		jQuote.Index = CacheQuoteBase.getCacheContractAttribute(jQuote.CommodityNo, "Index");
+		jQuote.MainContract = CacheQuoteBase.getCacheContractAttribute(jQuote.CommodityNo, "MainContract");
+		jQuote.ContractSize = CacheQuoteBase.getCacheContractAttribute(jQuote.CommodityNo, "ContractSize");
+		jQuote.MiniTikeSize = CacheQuoteBase.getCacheContractAttribute(jQuote.CommodityNo, "MiniTikeSize");
+		jQuote.TradingTimeSeg = CacheQuoteBase.getCacheContractAttribute(jQuote.CommodityNo, "TradingTimeSeg");
+
+		this.jCacheContractQuote[jQuote.CommodityNo + jQuote.ContractNo] = jQuote;
+	},
+	getCacheContractQuote: function(contract, attr1, attr2) {
+		if(isEmpty(this.jCacheContractQuote[contract]) || isEmpty(this.jCacheContractQuote[contract][attr1])) {
+			return 0;
+		}
+		if(arguments.length == 2) {
+			//		vsLog("this.jCacheContractQuote[" + contract + "][" + attr1 + "]=" + this.jCacheContractQuote[contract][attr1]);
+			return this.jCacheContractQuote[contract][attr1];
+		}
+		//	vsLog("this.jCacheContractQuote[" + contract + "][" + attr1 + "][" + attr2 + "]=" + this.jCacheContractQuote[contract][attr1][attr2]);
+		return this.jCacheContractQuote[contract][attr1][attr2];
+	}
+};
 
 	var formatFloat = function(num, digit) {
 		var m = Math.pow(10, Math.abs(digit)); 

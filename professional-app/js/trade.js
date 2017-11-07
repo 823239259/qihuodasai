@@ -2092,14 +2092,15 @@ $(function() {
 	$("#chioceContract").change(function() {
 		var $this = $(this);
 		var contractCode = $this.val();
-		console.log('1111111');
-		console.log(contractCode);
 		var localQuote = getLocalCacheQuote(contractCode);
-		console.log('222222');
-		console.log(JSON.stringify(localQuote));
+		
 		if(localQuote != undefined) {
-			$('#showConditionPrice').text(parseFloat(localQuote.LastPrice).toFixed(CacheQuoteBase.getCacheContractAttribute(contractCode.substring(0,contractCode.length-4), "DotSize")));
-			$("#ConditoionPricesInput").val(parseFloat(localQuote.LastPrice).toFixed(CacheQuoteBase.getCacheContractAttribute(contractCode.substring(0,contractCode.length-4), "DotSize")));
+//			$('#showConditionPrice').text(parseFloat(localQuote.LastPrice).toFixed(CacheQuoteBase.getCacheContractAttribute(contractCode.substring(0,contractCode.length-4), "DotSize")));
+//			$("#ConditoionPricesInput").val(parseFloat(localQuote.LastPrice).toFixed(CacheQuoteBase.getCacheContractAttribute(contractCode.substring(0,contractCode.length-4), "DotSize")));
+			var lastprice = CacheQuoteBase00.getCacheContractAttribute(contractCode.substring(0,contractCode.length-4),'LastPrice');
+			var dotsize = CacheQuoteBase11.getCacheContractAttribute(contractCode.substring(0,contractCode.length-4),'DotSize')
+			$('#showConditionPrice').text(parseFloat(lastprice).toFixed(dotsize));
+			$("#ConditoionPricesInput").val(parseFloat(lastprice).toFixed(dotsize));
 		}
 
 	});
@@ -3816,9 +3817,9 @@ function openLogin() {
 			backpageID: "transactionDetails"
 		}
 	});
-	if(!isConnectionError) {
-		/*socket.onclose();*/
-	}
+//	if(!isConnectionError) {
+//		/*socket.onclose();*/
+//	}
 	loginOut();
 	plus.nativeUI.closeWaiting();
 
