@@ -153,6 +153,21 @@ mui.plusReady(function() {
 				var newContractNo = subscribeParam.ContractNo;		
 				marketLoadParam[newCommdityNo] = subscribeParam;
 				
+				var a00 = $('#chioceContract').val();
+				var commodityNo00 = a00.substring(0,a00.length-4);
+				if(commodityNo00==subscribeParam.CommodityNo){
+					var dotsize00=CacheQuoteBase11.getCacheContractAttribute(subscribeParam.CommodityNo,'DotSize');
+					$('#showConditionPrice').text(parseFloat(subscribeParam.LastPrice).toFixed(dotsize00));
+				}
+				
+				var b00 = $('#chioceContract1').val();
+				var commodityNo01 = b00.substring(0,b00.length-4);
+				if(commodityNo01==subscribeParam.CommodityNo){
+					
+					var dotsize00=CacheQuoteBase11.getCacheContractAttribute(subscribeParam.CommodityNo,'DotSize');
+					$('#showConditionPrice1').text(parseFloat(subscribeParam.LastPrice).toFixed(dotsize00));
+				}
+				
 				CacheQuoteBase00.setCacheContractAttribute(subscribeParam);
 //				console.log(JSON.stringify(CacheQuoteBase00.jCacheContractAttribute.CL));
 //				console.log(CacheQuoteBase00.getCacheContractAttribute('CL','AskPrice1'));
