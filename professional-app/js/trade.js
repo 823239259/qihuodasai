@@ -1877,7 +1877,9 @@ $(function() {
 		var $this = $(this);
 		var val = $this.val();
 		if(val == 2) {
-			$("#stopChoicePrices1").val(0);
+			var a0 = $("#stopEvenTd").text();
+			var miniTikeSize = CacheQuoteBase11.getCacheContractAttribute(a0.substring(0,a0.length-4),'MiniTikeSize');
+			$("#stopChoicePrices1").val(miniTikeSize);
 			$("#Increase").val(0);
 		} else if(val == 0) {
 			$("#stopChoicePrices1").val($("#stopEvenPrice").text());
@@ -2108,7 +2110,11 @@ $(function() {
 		var $this = $(this);
 		var contractCode = $this.val();
 		var localQuote = getLocalCacheQuote(contractCode);
+		
 		if(localQuote != undefined){
+			var lastprice = CacheQuoteBase00.getCacheContractAttribute(contractCode.substring(0,contractCode.length-4),'LastPrice');
+			var dotsize = CacheQuoteBase11.getCacheContractAttribute(contractCode.substring(0,contractCode.length-4),'DotSize')
+			$('#showConditionPrice1').text(parseFloat(lastprice).toFixed(dotsize));
 			$("#ConditoionPricesInput").val(localQuote.LastPrice);
 		}else{
 			
@@ -2124,6 +2130,7 @@ function initConditionData() {
 	var localQuote = getLocalCacheQuote(chioceContract);
 	if(localQuote != undefined) {
 		$('#showConditionPrice').text(parseFloat(localQuote.LastPrice).toFixed(CacheQuoteBase.getCacheContractAttribute(chioceContract.substring(0,2), "DotSize")));
+		$('#showConditionPrice1').text(parseFloat(localQuote.LastPrice).toFixed(CacheQuoteBase.getCacheContractAttribute(chioceContract.substring(0,2), "DotSize")));
 		$("#ConditoionPricesInput").val(parseFloat(localQuote.LastPrice).toFixed(CacheQuoteBase.getCacheContractAttribute(chioceContract.substring(0,2), "DotSize")));
 	}
 	var chioceContractTime = $("#chioceContract1").val();
