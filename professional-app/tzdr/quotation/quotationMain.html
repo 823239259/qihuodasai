@@ -373,10 +373,9 @@
 						} else if(method == "OnRtnQuote") {
 							
 							var MoreData = JSON.parse(evt.data).Parameters;
-							CacheQuoteBase03.setCacheContractAttribute(MoreData);
-							
 							//更新行情的数据
 							insertData1(MoreData);
+							CacheQuoteBase03.setCacheContractAttribute(MoreData);
 						}
 					};
 					socket.onerror = function(evt) {};
@@ -484,19 +483,22 @@
 //								ChangeRate[i].style.backgroundColor = "#e9392a";
 //								ChangeRate[i].style.color = "#e9392a";
 							}
-							var lastLastPrice=CacheQuoteBase03.getCacheContractAttribute('CL','LastPrice');
+							var lastLastPrice=CacheQuoteBase03.getCacheContractAttribute(MoreData.CommodityNo,'LastPrice');
 							if(Number(MoreData.LastPrice) - Number(lastLastPrice) < 0) {
 								LastPrice[i].innerText = MoreData.LastPrice.toFixed(product.DotSize[i]);
+//								console.log('1111111111111111111');
+//								console.log(MoreData.LastPrice);
+								console.log(lastLastPrice);
 								$(".openPage").eq(i).addClass("greenback")
 								setTimeout(function(){
 									$(".openPage").removeClass("greenback")
-								},3000);
+								},1000);
 							} else if(Number(MoreData.LastPrice) - Number(lastLastPrice) > 0) {
 								LastPrice[i].innerText = MoreData.LastPrice.toFixed(product.DotSize[i]);
 								$(".openPage").eq(i).addClass("redback")
 								setTimeout(function(){
 									$(".openPage").removeClass("redback")
-								},3000);
+								},1000);
 							}
 							if(Number(MoreData.TotalVolume) != null){
 								Volume[i].innerHTML = MoreData.TotalVolume
