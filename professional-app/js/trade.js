@@ -1888,11 +1888,15 @@ $(function() {
 	$("#choiceStopPrices2").change(function() {
 		var $this = $(this);
 		var val = $this.val();
+		var con = $('#stopEvenTd1').text();
+		var miniTikeSize0 = CacheQuoteBase11.getCacheContractAttribute(con.substring(0,con.length-4),'MiniTikeSize');
+		var dotSize0 =CacheQuoteBase11.getCacheContractAttribute(con.substring(0,con.length-4),'DotSize'); 
 		if(val == 2) {
-			$("#stopChoicePrices3").val(0);
+			
+			$("#stopChoicePrices3").val(parseFloat(miniTikeSize0).toFixed(dotSize0));
 			$("#Increase2").val(0);
 		} else if(val == 0) {
-			$("#stopChoicePrices3").val($("#stopEvenPrice1").text());
+			$("#stopChoicePrices3").val(parseFloat($("#stopEvenPrice1").text()).toFixed(dotSize0));
 		}
 	});
 	$("#chioceTimeAdditional").change(function() {
@@ -3317,7 +3321,9 @@ function doUpdateModifyStopLoss() {
 				stopChoicePrices3 = Number(stopChoicePrices3) + Number(lastPrice);
 			}
 		}
-		var tradeParam = createModifyStopLossParam(stopLossNo, modifyFlag, num, stopLossType, orderType, parseFloat(Math.abs(stopLossDiff)).toFixed(2), stopChoicePrices3);
+		var contract = $('#stopEvenTd1').text();
+		var dotsize01 = CacheQuoteBase11.getCacheContractAttribute(contract.substring(0,contract.length-4),'DotSize');
+		var tradeParam = createModifyStopLossParam(stopLossNo, modifyFlag, num, stopLossType, orderType, parseFloat(stopLossDiff).toFixed(dotsize01), stopChoicePrices3);
 		doModifyStopLoss(tradeParam)
 	}
 }
