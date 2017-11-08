@@ -1150,8 +1150,8 @@
 						text-align: center;
 					}
 					li{
-						height: 36px;
-						line-height: 36px;
+						height: 34px;
+						line-height: 34px;
 						padding: 0 10px;
 						span{
 							display: inline-block;
@@ -1183,8 +1183,8 @@
 					}
 					ul{
 						li{
-							height: 36px;
-							line-height: 36px;
+							height: 34px;
+							line-height: 34px;
 							border-top: 1px solid $bottom_color;
 							&:first-child{
 								border: none;
@@ -1441,12 +1441,12 @@
 	@media only screen and (min-width: 1366px) and (max-width: 1660px) {
 		.trade_right_top .info .trade_details .quote_five ul, 
 		.trade_right_top .info .trade_details .deal_details ul{
-			height: 192px;
+			height: 165px;
 		}
 		.trade_right_top .info .trade_details .quote_five li,
 		.trade_right_top .info .trade_details .deal_details ul li{
-			height: 30px;
-			line-height: 30px;
+			height: 28px;
+			line-height: 28px;
 		}
 		.trade_box .trade_list{
 			overflow-x: auto;
@@ -1465,12 +1465,12 @@
 		}
 		.trade_right_top .info .trade_details .quote_five ul, 
 		.trade_right_top .info .trade_details .deal_details ul{
-			height: 100px;
+			height: 75px;
 		}
 		.trade_right_top .info .trade_details .quote_five li,
 		.trade_right_top .info .trade_details .deal_details ul li{
-			height: 24px;
-			line-height: 24px;
+			height: 22px;
+			line-height: 22px;
 			font-size: $fs12;
 		}
 		.trade_box .trade_list .head p{
