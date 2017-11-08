@@ -220,7 +220,7 @@
 							this.$router.push({path: '/download'});
 							break;
 						case 7:
-							if(JSON.parse(localStorage.user == '')){
+							if(!localStorage.user){
 								layer.msg("请先登录账户",{time:500});
 								setTimeout(function(){
 									this.$router.push({path:'/login'})

@@ -219,7 +219,6 @@
 				secret : JSON.parse(localStorage.user).secret
 			}
 			pro.fetch("post",'/user/ftrade/list',data,headers).then(function(res){
-//				console.log(res);
 				if(res.success == true){
 					if(res.code == 1){
 						if(res.data.tradeList == ''){
@@ -228,13 +227,12 @@
 						else {
 							this.show_detail = true;
 							this.item = res.data.tradeList;
-							var time = pro.date('y-m-d',1509415137)
-							console.log(time)
+							var time = pro.getDate("y-m-d h:i:s",this.item[2].appTime*1000);
 						}
 					}
 				}
 			}.bind(this)).catch(function(err){
-				layer.msg('网络不给力，请稍后重试',{time:1000})
+				layer.msg('网络不给力，请稍后重试',{time:1000});
 			})
 		}
 	}

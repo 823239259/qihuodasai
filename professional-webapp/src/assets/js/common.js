@@ -134,10 +134,9 @@ pro.getDate=function(d,time){
     var d1=year+"-"+month+"-"+day+" "+hour+":"+minu+":"+sec;
     var d2=year+"-"+month+"-"+day
     if(d=="y-m-d"){
-        console.log(d2)
+        return d2;
     }else if(d=="y-m-d h:i:s"){
-        console.log(d1);
+        return d1;
     }
 }
-//getDate("y-m-d h:i:s",1509678253763)
 export default pro
