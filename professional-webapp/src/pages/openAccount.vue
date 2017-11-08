@@ -13,6 +13,7 @@
 				<ul>
 					<li >
 						<button v-for="item in item" class="btn" @click="chose">￥{{item.traderBond}}</button>
+						
 					</li>
 					<li>
 						<button class="btn yellow" v-on:click="to_openAccount_2">下一步</button>
@@ -24,10 +25,10 @@
 			</div>
 			<div class="openAccount_center_right">
 				<ul>
-					<li>您的投资本金：<label>{{show_price}}元</label><i>(固定汇率6.8，1美元=6.8元人民币)</i></li>
+					<li>您的投资本金：<label>{{show_price}}元</label><i>(固定汇率{{rate}}，1美元={{rate}}元人民币)</i></li>
 					<li>总操盘资金<i>（盈利全归你）</i></li>
-					<li>17680元=1360元<i>（本金）</i>+1620元<i>（获得资金）</i></li>
-					<li>亏损平仓线：<span>16728元（2460美元）</span><i>（平仓线=总操盘资金-风险保证金x0.6）</i></li>
+					<li>{{traderTotal}}元={{show_price}}元<i>（本金）</i>+{{traderTotal-show_price}}元<i>（获得资金）</i></li>
+					<li>亏损平仓线：<span>{{lineLoss}}元（{{(lineLoss/rate).toFixed(2)}}美元）</span><i>（平仓线=总操盘资金-风险保证金x0.6）</i></li>
 					<li>管理费：<span>免费</span></li>
 					<li>交易时间：<span>请参照交易规则</span></li>
 				</ul>
@@ -74,69 +75,25 @@
 				<div class="btm_left">
 					<table>
 						<thead>
-							<tr class="color_deepblue">
+							<tr class="color_deepblue" >
 								<td>期货产品</td>
 								<td>交易时间段</td>
 								<td>初始持仓手数</td>
 								<td>单边手续费</td>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-								<td>富时A50</br><i>cn1607</i></td>
-								<td>09:05-11:55</br><i>16:45-16:55</i></td>
-								<td>10</td>
-								<td>58.00元/手</td>
-							</tr>
-							<tr>
-								<td>富时A50</br><i>cn1607</i></td>
-								<td>09:05-11:55</br><i>16:45-16:55</i></td>
-								<td>10</td>
-								<td>58.00元/手</td>
-							</tr>
-							<tr>
-								<td>富时A50</br><i>cn1607</i></td>
-								<td>09:05-11:55</br><i>16:45-16:55</i></td>
-								<td>10</td>
-								<td>58.00元/手</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div class="btm_right">
-					<table>
-						<thead>
-							<tr class="color_deepblue">
-								<td>期货产品</td>
-								<td>交易时间段</td>
-								<td>初始持仓手数</td>
-								<td>单边手续费</td>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>富时A50</br><i>cn1607</i></td>
-								<td>09:05-11:55</br><i>16:45-16:55</i></td>
-								<td>10</td>
-								<td>58.00元/手</td>
-							</tr>
-							<tr>
-								<td>富时A50</br><i>cn1607</i></td>
-								<td>09:05-11:55</br><i>16:45-16:55</i></td>
-								<td>10</td>
-								<td>58.00元/手</td>
-							</tr>
-							<tr>
-								<td>富时A50</br><i>cn1607</i></td>
-								<td>09:05-11:55</br><i>16:45-16:55</i></td>
-								<td>10</td>
-								<td>58.00元/手</td>
+						<tbody class="show_list">
+							<tr v-for="k in temp.contractList" class="show_list_td">
+								<td>{{k.tradeType | cnname}}</br><i>{{k.mainContract}}</i></td>
+								<td>{{k.tradTime}}</td>
+								<td>{{k.shoushu | filtershoushu(chooseType)}}</td>
+								<td>{{k.price}}元/手</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 				<div class="btm_btm">
-					<span>展开</span>
+					<span v-on:click="show_listAll">展开</span>
 				</div>
 			</div>
 			<div class="openAccount_btm_btm">
@@ -170,10 +127,21 @@
 				isshow_openAccount_2 : false,
 				isshow_openAccount_3 : false,
 				show_price : '',
-				item: []
+				item: '',
+				lineLoss:'',
+				listLeft : '',
+				listRight :'',
+				rate:'',
+				traderTotal:'',
+				temp:{},
+				chooseType: 3000
 			}
 		},
 		methods : {
+			//展开
+			show_listAll:function(){
+				
+			},
 			to_comfirmPayment : function(){
 				this.isshow_comfirmPayment=!this.isshow_comfirmPayment
 			},
@@ -187,28 +155,313 @@
 				//截取价格并显示
 				var show_price=$(e.currentTarget).html().substring(1);
 				this.show_price = show_price;
+				this.chooseType = parseInt(show_price);
 				$(e.currentTarget).addClass("btn1").siblings().removeClass("btn1");
+				switch (index){
+					case 0:
+						this.lineLoss = this.item[0].lineLoss;
+						this.traderTotal = this.item[0].traderTotal;
+						break;
+					case 1:
+						this.lineLoss = this.item[1].lineLoss;
+						this.traderTotal = this.item[1].traderTotal;
+						break;
+					case 2:
+						this.lineLoss = this.item[2].lineLoss;
+						this.traderTotal = this.item[2].traderTotal;
+						break;
+					case 3:
+						this.lineLoss = this.item[3].lineLoss;
+						this.traderTotal = this.item[3].traderTotal;
+						break;
+					case 4:
+						this.lineLoss = this.item[4].lineLoss;
+						this.traderTotal = this.item[4].traderTotal;
+						break;
+					case 5:
+						this.lineLoss = this.item[5].lineLoss;
+						this.traderTotal = this.item[5].traderTotal;
+						break;
+					case 6:
+						this.lineLoss = this.item[6].lineLoss;
+						this.traderTotal = this.item[6].traderTotal;
+						break;
+					case 7:
+						this.lineLoss = this.item[7].lineLoss;
+						this.traderTotal = this.item[7].traderTotal;
+						break;
+				}
 			}
 		},
-		beforeCreate:function(){
-			pro.fetch("post",'/ftrade/params',{businessType:8},'').then((res)=>{
-				var data = res.data
+		created:function(){
+			//获取汇率
+			var headers ={
+				token:JSON.parse(localStorage.user).token,
+				secret:JSON.parse(localStorage.user).secret
+			}
+			pro.fetch("post","/user/getbalancerate",{businessType:1},headers).then((res)=>{
 				if(res.success == true){
 					if(res.code == 1){
+						this.rate = res.data.rate;
+					}
+				}
+			}).catch((err)=>{
+				if(err.success ==false ){
+					
+				}else{
+					
+				}
+			})
+			//获取数据列表
+			pro.fetch("post",'/ftrade/params',{businessType:8},'').then((res)=>{
+				var data = res.data;
+				if(res.success == true){
+					if(res.code == 1){
+						this.temp = data;
 						this.item = data.paramList;
-//						console.log(this.item)
-						
+						this.$store.state.tempTradeapply = this.temp;
+						this.temp.contractList.forEach(function(o, i) {
+							switch(o.tradeType) {
+								case 0:   //return '富时A50'
+									var arr = [];
+									this.temp.paramList.forEach(function(a) {
+										arr.push(a.tranLever);
+										o.shoushu = arr;
+									}.bind(this));
+									break;
+								case 6:   //return '国际原油'
+									var arr = [];
+									this.temp.paramList.forEach(function(a) {
+										arr.push(a.crudeTranLever);
+										o.shoushu = arr;
+									}.bind(this));
+									break;
+								case 7:   //return '恒指期货'
+									var arr = [];
+									this.temp.paramList.forEach(function(a) {
+										arr.push(a.hsiTranLever);
+										o.shoushu = arr;
+									}.bind(this));
+									break;
+								case 9:   //return '迷你道指'
+									var arr = [];
+									this.temp.paramList.forEach(function(a) {
+										arr.push(a.mdtranLever);
+										o.shoushu = arr;
+									}.bind(this));
+									break;
+								case 10:   //return '迷你纳指'
+									var arr = [];
+									this.temp.paramList.forEach(function(a) {
+										arr.push(a.mntranLever);
+										o.shoushu = arr;
+									}.bind(this));
+									break;
+								case 11:   //return '迷你标普'
+									var arr = [];
+									this.temp.paramList.forEach(function(a) {
+										arr.push(a.mbtranLever);
+										o.shoushu = arr;
+									}.bind(this));
+									break;
+								case 12:   //return '德国DAX'
+									var arr = [];
+									this.temp.paramList.forEach(function(a) {
+										arr.push(a.daxtranLever);
+										o.shoushu = arr;
+									}.bind(this));
+									break;
+								case 13:   //return '日经225'
+									var arr = [];
+									this.temp.paramList.forEach(function(a) {
+										arr.push(a.nikkeiTranLever);
+										o.shoushu = arr;
+									}.bind(this));
+									break;
+								case 14:   //return '小恒指'
+									var arr = [];
+									this.temp.paramList.forEach(function(a) {
+										arr.push(a.lhsiTranActualLever);
+										o.shoushu = arr;
+									}.bind(this));
+									break;
+								case 15:   //return '美黄金'
+									var arr = [];
+									this.temp.paramList.forEach(function(a) {
+										arr.push(a.agTranActualLever);
+										o.shoushu = arr;
+									}.bind(this));
+									break;
+								case 16:   //return 'H股指数'
+									var arr = [];
+									this.temp.paramList.forEach(function(a) {
+										arr.push(a.hIndexActualLever);
+										o.shoushu = arr;
+									}.bind(this));
+									break;
+								case 17:   //return '小H股指数'
+									var arr = [];
+									this.temp.paramList.forEach(function(a) {
+										arr.push(a.xhIndexActualLever);
+										o.shoushu = arr;
+									}.bind(this));
+									break;
+								case 18:   //return '美铜'
+									var arr = [];
+									this.temp.paramList.forEach(function(a) {
+										arr.push(a.aCopperActualLever);
+										o.shoushu = arr;
+									}.bind(this));
+									break;
+								case 19:   //return '美白银'
+									var arr = [];
+									this.temp.paramList.forEach(function(a) {
+										arr.push(a.aSilverActualLever);
+										o.shoushu = arr;
+									}.bind(this));
+									break;
+								case 20:   //return '小原油'
+									var arr = [];
+									this.temp.paramList.forEach(function(a) {
+										arr.push(a.smaActualLever);
+										o.shoushu = arr;
+									}.bind(this));
+									break;
+								case 21:   //迷你德国DAX指数
+									var arr = [];
+									this.temp.paramList.forEach(function(a) {
+										arr.push(a.daxtranMinActualLever);
+										o.shoushu = arr;
+									}.bind(this));
+									break;
+								case 22:   //return '天然气'
+									var arr = [];
+									this.temp.paramList.forEach(function(a) {
+										if(a.naturalGasActualLever==null){
+											arr.push(0);
+										}else{
+											arr.push(a.naturalGasActualLever);
+										}
+										o.shoushu = arr;
+									}.bind(this));
+									break;
+							}
+						}.bind(this));
 					}
 				}
 			}).catch((err)=>{
 				if(err.success == false){
-//					console.log(11111111111)
+					
 				}else{
-//						console.log(err)
+					
 				}
-			
 			})
 		},
+		filters:{
+			filtershoushu: function(arr,chooseType){
+				switch(chooseType){
+					case 3000:
+						return arr[0];
+						break;
+					case 6000:
+						return arr[1];
+						break;
+					case 10000:
+						return arr[2];
+						break;
+					case 12000:
+						return arr[3];
+						break;
+					case 15000:
+						return arr[4];
+						break;
+					case 50000:
+						return arr[5];
+						break;
+					case 100000:
+						return arr[6];
+						break;
+					case 200000:
+						return arr[7];
+						break;
+				}
+			},
+			moneytype: function(num) {
+				if(num) return num.toLocaleString();
+			},
+			cnname: function(a) {
+				switch(a) {
+					case 0:
+						return '富时A50'
+						break;
+					case 6:
+						return '国际原油'
+						break;
+					case 7:
+						return '恒指期货'
+						break;
+					case 9:
+						return '迷你道指'
+						break;
+					case 10:
+						return '迷你纳指'
+						break;
+					case 11:
+						return '迷你标普'
+						break;
+					case 12:
+						return '德国DAX'
+						break;
+					case 13:
+						return '日经225'
+						break;
+					case 14:
+						return '小恒指'
+						break;
+					case 15:
+						return '美黄金'
+						break;
+					case 16:
+						return 'H股指数'
+						break;
+					case 17:
+						return '小H股指数'
+						break;
+					case 18:
+						return '美铜'
+						break;
+					case 19:
+						return '美白银'
+						break;
+					case 20:
+						return '小原油'
+						break;
+					case 21:
+						return '迷你德国DAX指数'  //迷你德国DAX指数
+						break;
+					case 22:
+						return '天然气'
+						break;
+				}
+			},
+			varieties: function(e){    //交易品种
+				switch(e) {
+					case 8:
+						return "国际综合";
+						break;
+					case 7:
+						return "恒指期货";
+						break;
+					case 6:
+						return "国际原油";
+						break;
+					case 0:
+						return "富时A50";
+						break;
+				}
+			}
+		}
+		
 	}
 </script>
 
@@ -361,16 +614,23 @@
 		border-top: 1px solid $bottom_color;
 	}
 	.btm_left {
-		width: 49.5%;
-		float: left;
-		height: 200px;
+		width: 100%;
 		background-color: $blue;
 	}
-	.btm_right {
-		width: 49.5%;
-		float: right;
-		height: 200px;
-		background-color: $blue;
+	.show_list{
+		display: block;
+		width: 100%;
+		
+	}
+	.show_list_td{
+		width:49.5%; 
+		
+		&:nth-child(odd){
+			float: left;
+		}
+		&:nth-child(even){
+			float: right;
+		}
 	}
 	table{
 	 	tr{
@@ -391,6 +651,8 @@
 	 .color_deepblue {
 	 	background-color: $deepblue;
 	 	height: 30px;
+	 	width: 100%;
+	 	display: block;
 	 }
 	 .openAccount_center_step2 {
 	 	margin-top: 10px;
