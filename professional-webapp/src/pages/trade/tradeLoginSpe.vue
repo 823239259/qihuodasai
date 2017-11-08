@@ -85,6 +85,8 @@
 										localStorage.setItem("tradeUser", JSON.stringify(userData));
 										setTimeout(function(){
 											this.show = false;
+											this.$router.push({path: '/index'});
+											this.$store.state.account.isRefresh = 1;
 										}.bind(this),500);
 									}else{
 										layer.msg(parameters.Message, {time: 1000});

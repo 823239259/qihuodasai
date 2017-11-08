@@ -802,6 +802,10 @@
 				this.tradeDetailsShow = false;
 				this.$store.state.market.chartHeight = this.h - 50 - 30 - 25;
 				layer.msg('退出成功', {time: 1000});
+				setTimeout(function(){
+					this.$router.push({path: '/index'});
+					this.$store.state.account.isRefresh = 1;
+				}.bind(this),500);
 			},
 		},
 		mounted: function(){
