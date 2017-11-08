@@ -1,18 +1,28 @@
 <template>
-	<div id="warning">
+	<div id="warning" v-if="show">
 		<div class="bg"></div>
 		<div class="warning">
 			<div class="title">
 				<h3>警告！</h3>
-				<i class="ifont">&#xe624;</i>
+				<i class="ifont" @click="closeEvent">&#xe624;</i>
 			</div>
 			<div class="cont">
 				<p class="tips">网络名称：服务发生中断</p>
 				<div class="details">
-					<p><i class="ifont">&#xe624;</i><b>交易服务：</b><span class="red">已断开</span></p>
-					<p><i class="ifont ifont_green">&#xe62a;</i><b>行情服务：</b><span>正常</span></p>
+					<p>
+						<i class="ifont ifont_red" v-show="quoteShow">&#xe624;</i>
+						<i class="ifont ifont_green" v-show="!quoteShow">&#xe62a;</i>
+						<b>行情服务：</b>
+						<span :class="{red: quoteShow}">{{quoteStatus}}</span>
+					</p>
+					<p>
+						<i class="ifont ifont_red" v-show="tradeShow">&#xe624;</i>
+						<i class="ifont ifont_green" v-show="!tradeShow">&#xe62a;</i>
+						<b>交易服务：</b>
+						<span :class="{red: tradeShow}">{{tradeStatus}}</span>
+					</p>
 				</div>
-				<p class="status"><b>已断开，<span class="red">5s</span>后自动重连</b><b class="red connect">立即重连</b></p>
+				<p class="status"><b v-show="statusShow">已断开，<span class="red">{{time}}s</span>后自动重连</b><b v-show="!statusShow">正在连接…</b><b class="red connect" @click="connectEvent">立即重连</b></p>
 			</div>
 		</div>
 	</div>
@@ -21,6 +31,58 @@
 <script>
 	export default{
 		name: 'warning',
+		data(){
+			return{
+				show: false,
+				time: '',
+				statusShow: true,
+				quoteShow: true,
+				tradeShow: true,
+				quoteStatus: '已断开',
+				tradeStatus: '已断开',
+			}
+		},
+		computed: {
+			warningType(){
+				return this.$store.state.isshow.warningType;
+			}
+		},
+		methods: {
+			closeEvent: function(){
+				this.show = false;
+			},
+			timeEvent: function(){
+				console.log(this.show);
+				if(this.show == true){
+					this.time = 6;
+					var timing = setInterval(function(){
+						this.time--;
+						if(this.time <= 0){
+							clearInterval(timing);
+							this.statusShow = false;
+							setTimeout(function(){
+								this.show = false;
+								this.$router.push({path: '/index'});
+								this.$store.state.account.isRefresh = 1;
+							}.bind(this), 2000);
+						}
+					}.bind(this), 1000);
+				}
+			},
+			connectEvent: function(){
+				if(this.statusShow == false) return;
+				this.statusShow = false;
+				setTimeout(function(){
+					this.show = false;
+					this.$router.push({path: '/index'});
+					this.$store.state.account.isRefresh = 1;
+				}.bind(this), 2000);
+			}
+		},
+		mounted: function(){
+			//倒计时
+			this.timeEvent();
+		}
 	}
 </script>
 
@@ -76,11 +138,13 @@
 				}
 				.ifont{
 					margin-right: 10px;
+					font-weight: bold;
+				}
+				.ifont_red{
 					color: $red;
 				}
 				.ifont_green{
 					color: $green;
-					font-weight: bold;
 					font-size: $fs18;
 					margin-right: 7px;
 				}

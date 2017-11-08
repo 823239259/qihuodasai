@@ -842,7 +842,6 @@
 					this.addStar = true;
 					this.optional = '添加自选';
 					this.selectedList.forEach(function(o, i){
-						console.log(o);
 						if(o.CommodityNo == commodityNo){
 							this.addStar = false;
 							this.optional = '取消自选';

@@ -83,13 +83,16 @@
 				<div id="kliness_volume" class="chart"></div>
 			</div>
 		</div>
+		<warning ref="warning"></warning>
 	</div>
 </template>
 
 <script>
+	import warning from "./trade/warning.vue"
 	import pro from '../assets/js/common.js'
 	export default{
 		name:'index',
+		components : {warning},
 		data(){
 			return{
 				current: 0,
@@ -130,6 +133,9 @@
 			isRefresh(){
 				return this.$store.state.account.isRefresh;
 			},
+			warningShow(){
+				return this.$store.state.isshow.warningShow;
+			}
 		},
 		filters:{
 			fixNumTwo: function(num){
@@ -140,6 +146,14 @@
 			}
 		},
 		watch: {
+			warningShow: function(n, o){
+				console.log(n);
+				if(n && n == true){
+					this.$refs.warning.show = true;
+				}else{
+					this.$refs.warning.show = false;
+				}
+			},
 			quoteInitStep: function(n, o){
 				if(n && n == true){
 					this.$store.state.market.currentdetail = this.Parameters[0];

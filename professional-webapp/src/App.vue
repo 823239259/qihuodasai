@@ -100,7 +100,6 @@
 			</keep-alive>
 			<router-view v-if="$route.meta.notKeepAlive"></router-view>
 		</div>
-		<warning v-if="warningShow"></warning>
 		<!--退出弹窗-->
 		<div id="isExit" v-show="isShow_exit">
 			<div class="bg"></div>
@@ -115,11 +114,9 @@
 </template>
 
 <script>
-	import warning from "./pages/trade/warning.vue"
 	import { mapMutations,mapActions } from 'vuex'
 	export default {
 		name: 'app',
-		components : {warning},
 		data(){
 			return {
 				warningShow: false,

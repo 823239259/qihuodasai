@@ -16,6 +16,8 @@ var isshow = {
 		iskline: false,
 		islight: false,
 		loadingShow: false,
+		warningShow: false,
+		warningType: '',
 	}
 };
 
@@ -2237,7 +2239,9 @@ export default new Vuex.Store({
 				context.state.quoteSocket.send('{"Method":"Login","Parameters":{"UserName":"'+context.state.market.quoteConfig.userName+'","PassWord":"'+context.state.market.quoteConfig.passWord+'"}}');
 			};
 			context.state.quoteSocket.onclose = function(evt) {
-//				console.log('close');
+				console.log('close');
+				context.state.isshow.warningType = 1;
+				context.state.isshow.warningShow = true;
 			};
 			context.state.quoteSocket.onerror = function(evt) {
 //				console.log('error');
