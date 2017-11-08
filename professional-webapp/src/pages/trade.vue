@@ -755,8 +755,9 @@
 									this.orderId = o.commodityCode;
 									this.currentQuote = i;
 								}
+								var code = o.commodityCode;
 								this.Parameters.forEach(function(v, k){
-									if(o.commodityCode == v.CommodityNo){
+									if(code == v.CommodityNo){
 										this.selectedList.push(v);
 									}
 								}.bind(this));
@@ -914,9 +915,6 @@
 				$(".trade_list, #trade_details").width(this.w - $("#nav").width() - $(".quote").width() - $(".operate").width() - 30);
 			});
 			this.chartShow = true;
-		},
-		created: function(){
-			
 		}
 	}
 </script>

@@ -43,7 +43,7 @@
 					<i class="ifont">&#xe68f;</i>
 					<span>在线客服</span>
 				</div>
-				<iframe :src="csAddress"></iframe>
+				<iframe :src="csAddress" v-if="csAddressCurrent"></iframe>
 				<div class="tel fl">
 					<i class="ifont">&#xe611;</i>
 					<span>客服热线：</span>
@@ -156,12 +156,11 @@
 			customerService: function(){
 				if(this.csAddressCurrent == false){
 					this.csAddressCurrent = true;
-					this.csAddress = 'http://test.www.vs.com/topic/consistentBeauty/consistentbeauty.html?phone=15928423292&userName=wxf';
+					this.csAddress = 'http://test.www.vs.com/topic/consistentBeauty/consistentbeauty.html?phone='+ this.userInfo.username +'&userName=aaa';
 				}else{
 					this.csAddressCurrent = false;
 					this.csAddress = '';
 				}
-				
 			},
 			fullScreen: function(){
 				if(this.fullScreenCurrent == false){
@@ -262,6 +261,8 @@
 				this.initQuoteClient();
 				this.$store.state.market.quoteInitStatus == true;
 			};
+			//获取平台账户登录信息
+			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
 			//判断是否登录
 			if(localStorage.user){
 				this.show_tologin = false;
@@ -508,12 +509,13 @@
 		padding: 50px 0 0 70px;
 	}
 	iframe {
-		/*width: auto; 
-		height: auto; */
+		width: 480px; 
+		height: 480px; 
+		overflow: hidden;
 		position: fixed; 
-		bottom: -180px;
+		bottom: 0px;
 		right: 0;
-		z-index: -1;
+		z-index: 1;
 		border: none;
 	}
 	/*退出框*/
