@@ -11,17 +11,8 @@
 			</div>
 			<div class="openAccount_center_left">
 				<ul>
-					<li>
-						<button class="btn1">￥3000</button>
-					<button class="btn1">￥6000</button>
-					<button class="btn1">￥10000</button>
-					<button class="btn1">￥12000</button>
-					</li>
-					<li>
-						<button class="btn1">￥15000</button>
-						<button class="btn1">￥50000</button>
-						<button class="btn1">￥100000</button>
-						<button class="btn1">￥200000</button>
+					<li >
+						<button v-for="item in item" class="btn" @click="chose">￥{{item.traderBond}}</button>
 					</li>
 					<li>
 						<button class="btn yellow" v-on:click="to_openAccount_2">下一步</button>
@@ -33,7 +24,7 @@
 			</div>
 			<div class="openAccount_center_right">
 				<ul>
-					<li>您的投资本金：<label>3000元</label><i>(固定汇率6.8，1美元=6.8元人民币)</i></li>
+					<li>您的投资本金：<label>{{show_price}}元</label><i>(固定汇率6.8，1美元=6.8元人民币)</i></li>
 					<li>总操盘资金<i>（盈利全归你）</i></li>
 					<li>17680元=1360元<i>（本金）</i>+1620元<i>（获得资金）</i></li>
 					<li>亏损平仓线：<span>16728元（2460美元）</span><i>（平仓线=总操盘资金-风险保证金x0.6）</i></li>
@@ -168,6 +159,7 @@
 </template>
 <script>
 	import openAccount_confirmPayment from "./openAccount/openAccount_confirmPayment.vue"
+	import pro from "../assets/js/common.js"
 	export default{
 		name:'openAccount',
 		components : {openAccount_confirmPayment},
@@ -176,7 +168,9 @@
 				isshow_comfirmPayment : false,
 				isshow_openAccount_1 : true,
 				isshow_openAccount_2 : false,
-				isshow_openAccount_3 : false
+				isshow_openAccount_3 : false,
+				show_price : '',
+				item: []
 			}
 		},
 		methods : {
@@ -186,8 +180,35 @@
 			to_openAccount_2 :function(){
 				this.isshow_openAccount_2 = true,
 				this.isshow_openAccount_1 = false
+			},
+			//选择不同价格
+			chose:function(e){
+				var index = $(e.currentTarget).index();
+				//截取价格并显示
+				var show_price=$(e.currentTarget).html().substring(1);
+				this.show_price = show_price;
+				$(e.currentTarget).addClass("btn1").siblings().removeClass("btn1");
 			}
-		}
+		},
+		beforeCreate:function(){
+			pro.fetch("post",'/ftrade/params',{businessType:8},'').then((res)=>{
+				var data = res.data
+				if(res.success == true){
+					if(res.code == 1){
+						this.item = data.paramList;
+//						console.log(this.item)
+						
+					}
+				}
+			}).catch((err)=>{
+				if(err.success == false){
+//					console.log(11111111111)
+				}else{
+//						console.log(err)
+				}
+			
+			})
+		},
 	}
 </script>
 
@@ -213,29 +234,31 @@
 		height: 280px;
 	}
 	.openAccount_center_left {
-			width: 50%;
-			background-color: $blue;
-			height: 240px;
-			float: left;
-			text-align: center;
-			span {
-				color: $white;
+		width: 50%;
+		background-color: $blue;
+		height: 240px;
+		float: left;
+		text-align: center;
+		span {
+			color: $white;
+		}
+		li {
+			&:nth-child(1){
+				padding-top: 15px;
+				width: 50%;
+				margin: auto;
 			}
-			li {
-				&:nth-child(1){
-					padding-top: 30px;
-				}
-				&:nth-child(2){
-					margin-top: 20px;
-				}
-				&:nth-child(3){
-					margin-top: 25px;
-				}
-				&:nth-child(4){
-					margin-top: 20px;
-				}
+			&:nth-child(2){
+				margin-top: 20px;
+			}
+			&:nth-child(3){
+				margin-top: 25px;
+			}
+			&:nth-child(4){
+				margin-top: 20px;
 			}
 		}
+	}
 	.title {
 		height: 40px;
 		width: 100%;
@@ -254,14 +277,21 @@
 			}
 		}
 	}
-	.openAccount_center_left .btn1 {
-		background-color: $blue;
+	.btn{
+		margin:0px 5px;
+		margin-top: 15px;
 		width: 80px;
 		height: 40px;
-		border: 1px solid #7a7f99;
+		color: $white;
+		border: 5px;
+		background-image: url(../assets/images/icon_choseMoneyNo.png);
+	}
+	.btn1 {
+		width: 80px;
+		height: 40px;
 		color: $white;	
-		font-weight: 600;
 		border-radius: 5px;
+		background-image: url(../assets/images/icon_choseMoney.png);
 	}
 	.yellow {
 		width: 120px;
