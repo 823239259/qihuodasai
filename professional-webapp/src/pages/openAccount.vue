@@ -216,9 +216,9 @@
 				}
 			}).catch((err)=>{
 				if(err.success ==false ){
-					
+					layer.msg(err.data.message,{time:2000});
 				}else{
-					
+					layer.msg("网络不给力，请稍后再试",{time:2000});
 				}
 			})
 			//获取数据列表
@@ -362,9 +362,9 @@
 				}
 			}).catch((err)=>{
 				if(err.success == false){
-					
+					layer.msg("网络不给力，请稍后再试",{time:2000});
 				}else{
-					
+					layer.msg(err.data.message,{time:2000});
 				}
 			})
 		},

@@ -27,6 +27,7 @@ import openDetail_additionalMargin from "../pages/account/account_openDetail/acc
 import registrationProtocol from "../pages/account/registrationProtocol.vue"
 import confirmPayment from "../pages/openAccount/openAccount_confirmPayment.vue"
 import openAccount_success from "../pages/openAccount/openAccount_success.vue"
+import recharge from "../pages/account/recharge/recharge.vue"
 Vue.use(Router)
 
 export default new Router({
@@ -139,6 +140,10 @@ export default new Router({
 		{
 			path:"/openAccount_success",
 			component:openAccount_success
+		},
+		{
+			path:"/recharge",
+			component:recharge
 		}
 	]
 })
