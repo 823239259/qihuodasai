@@ -2283,6 +2283,7 @@ export default new Vuex.Store({
 								_dealDetails['price'] = e.LastQuotation.LastPrice;
 								_dealDetails['volume'] = e.LastQuotation.LastVolume;
 								_dealDetails['_price'] = e.LastQuotation.PreSettlePrice;
+								_dealDetails['dotSize'] = e.DotSize;
 								dealDetails.CommodityNo = e.CommodityNo;
 								dealDetails.data.push(_dealDetails);
 								context.state.market.tradeParameters.push(dealDetails); 
@@ -2317,6 +2318,7 @@ export default new Vuex.Store({
 							_dealDetails00['price'] = val.LastPrice;
 							_dealDetails00['volume'] = val.LastVolume;
 							_dealDetails00['_price'] = val.PreSettlePrice;
+							_dealDetails00['dotSize'] = context.state.market.orderTemplist[key].DotSize;
 							if(o.data.length >= 10){
 								o.data.shift();
 							}

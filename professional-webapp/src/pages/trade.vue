@@ -95,7 +95,7 @@
 							</div>
 						</div>
 						<p>
-							<span :class="{red: currentdetail.LastQuotation.LastPrice > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.LastPrice < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.LastPrice}}</span>
+							<span :class="{red: currentdetail.LastQuotation.LastPrice > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.LastPrice < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.LastPrice | fixNum(currentdetail.DotSize)}}</span>
 							<span :class="{green: currentdetail.LastQuotation.ChangeRate < 0, red: currentdetail.LastQuotation.ChangeRate > 0}">{{currentdetail.LastQuotation.ChangeValue | fixNum(currentdetail.DotSize)}}/{{currentdetail.LastQuotation.ChangeRate | fixNumTwo}}%</span>
 						</p>
 						<ul>
@@ -209,7 +209,7 @@
 								<template v-for="v in currentTradeDetails.data">
 									<li>
 										<span>{{v.time}}</span>
-										<span :class="{red: v.price > v._price, green: v.price < v._price}">{{v.price}}</span>
+										<span :class="{red: v.price > v._price, green: v.price < v._price}">{{v.price | fixNum(v.dotSize)}}</span>
 										<span>{{v.volume}}</span>
 									</li>
 								</template>
