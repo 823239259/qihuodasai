@@ -203,7 +203,8 @@ var market = {
 				FrozenMoney : 0.0,	// 冻结资金
 				Deposit : 0.0,	// 保证金
 				CounterFee : 0.0,	// 手续费
-				RiskRate : 0.0	// 风险率
+				RiskRate : 0.0,	// 风险率
+				RiskDegree: 0.0,   //风险度
 			}
 		},
 		//订单状态
@@ -217,6 +218,7 @@ var market = {
 			6: "未知"
 		},
 		forceLine: 0.00,    //强平线
+		initBalance: 0.00,   //初始资金
 		//存持仓列表
 		qryHoldTotalArr: [],
 		positionListCont: [],
@@ -1263,6 +1265,8 @@ export default new Vuex.Store({
 						layer.msg('交易服务器连接成功',{time: 1000});
 						//设置强平线
 						context.state.market.forceLine = parameters.ForceLine;
+						//初始资金
+						context.state.market.initBalance = parameters.InitBalance;
 						//查询持仓合计 
 						context.state.tradeSocket.send('{"Method":"QryHoldTotal","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
 						//查询订单 
@@ -2101,8 +2105,12 @@ export default new Vuex.Store({
 				context.state.market.CacheAccount.jCacheTotalAccount.CounterFee += jCacheAccount[e].CounterFee * jCacheAccount[e].CurrencyRate;
 			}
 			// 风险率 = 保证金 / 今权益 * 100%
+//			console.log(context.state.market.CacheAccount.jCacheTotalAccount.Deposit);
+//			console.log(context.state.market.CacheAccount.jCacheTotalAccount.TodayBalance);
 			context.state.market.CacheAccount.jCacheTotalAccount.RiskRate 
 				= context.state.market.CacheAccount.jCacheTotalAccount.Deposit / context.state.market.CacheAccount.jCacheTotalAccount.TodayBalance / 100;
+			//风险度 =（初始资金 - 今权益）/（初始资金 - 强平线）
+			context.state.market.CacheAccount.jCacheTotalAccount.RiskDegree =  (context.state.market.initBalance - context.state.market.CacheAccount.jCacheTotalAccount.TodayBalance) / (context.state.market.initBalance - context.state.market.forceLine) * 100;
 		},
 		initCacheAccount:function(context,parameters){
 			if(parameters!=null){

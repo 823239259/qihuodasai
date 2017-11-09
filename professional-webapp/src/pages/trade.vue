@@ -292,7 +292,7 @@
 						<p><span>持仓盈亏：</span><em>{{jCacheTotalAccount.FloatingProfit | fixNumTwo}}</em></p>
 						<p><span>交易盈亏：</span><em>{{jCacheTotalAccount.CloseProfit | fixNumTwo}}</em></p>
 						<p><span>平仓线：</span><em>{{forceLine}}</em></p>
-						<p><span>风险度%：</span><em>{{jCacheTotalAccount.RiskRate | fixNum(4)}}%</em></p>
+						<p><span>风险度%：</span><em>{{jCacheTotalAccount.RiskDegree | fixNum(2)}}%</em></p>
 					</div>
 					<div class="list">
 						<div class="title">
