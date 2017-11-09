@@ -147,7 +147,6 @@
 		},
 		watch: {
 			warningShow: function(n, o){
-				console.log(n);
 				if(n && n == true){
 					this.$refs.warning.show = true;
 				}else{

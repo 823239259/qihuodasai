@@ -2197,6 +2197,9 @@ export default new Vuex.Store({
 			setInterval(heartBeatUpdate,15000);	
 			function heartBeatUpdate(){
 				if(context.state.market.HeartBeat.lastHeartBeatTimestamp == context.state.market.HeartBeat.oldHeartBeatTimestamp){
+					if(context.state.isshow.warningShow == true) return;
+					context.state.isshow.warningType = 2;
+					context.state.isshow.warningShow = true;
 					console.log('交易服务器断开，正在重连');
 				}else{
 					context.state.market.HeartBeat.oldHeartBeatTimestamp = context.state.market.HeartBeat.lastHeartBeatTimestamp; // 更新上次心跳时间
@@ -2221,7 +2224,9 @@ export default new Vuex.Store({
 			};
 			context.state.tradeSocket.onclose = function(evt) {
 				console.log('tradeClose:');
-//				context.state.tradeSocket=null;
+				if(context.state.isshow.warningShow == true) return;
+				context.state.isshow.warningType = 2;
+				context.state.isshow.warningShow = true;
 			};
 			context.state.tradeSocket.onerror = function(evt) {
 				console.log('tradeError');
@@ -2241,7 +2246,7 @@ export default new Vuex.Store({
 			context.state.quoteSocket.onclose = function(evt) {
 				console.log('close');
 				context.state.isshow.warningType = 1;
-//				context.state.isshow.warningShow = true;
+				context.state.isshow.warningShow = true;
 			};
 			context.state.quoteSocket.onerror = function(evt) {
 //				console.log('error');

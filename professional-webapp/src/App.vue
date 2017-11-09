@@ -85,14 +85,14 @@
 				<i class="ifont" v-show="parameters[1].LastQuotation.LastPrice < parameters[1].LastQuotation.PreSettlePrice" :class="{red: parameters[1].LastQuotation.LastPrice > parameters[1].LastQuotation.PreSettlePrice, green: parameters[1].LastQuotation.LastPrice < parameters[1].LastQuotation.PreSettlePrice}">&#xe76a;</i>
 				<i class="ifont" v-show="parameters[1].LastQuotation.LastPrice >= parameters[1].LastQuotation.PreSettlePrice" :class="{red: parameters[1].LastQuotation.LastPrice > parameters[1].LastQuotation.PreSettlePrice, green: parameters[1].LastQuotation.LastPrice < parameters[1].LastQuotation.PreSettlePrice}">&#xe761;</i>
 			</p>
-			<p class="net net_yes">
+			<p class="net net_yes" v-show="iconShow">
 				<i class="icon icon_yes"></i>
 				<span>已连接</span>
 			</p>
-			<!--<p class="net net_no">
+			<p class="net net_no" v-show="!iconShow">
 				<i class="icon icon_no"></i>
 				<span>已断开</span>
-			</p>-->
+			</p>
 		</div>
 		<div class="container">
 			<keep-alive>
@@ -128,6 +128,7 @@
 				isShow_exit : false,
 				show_tologin : false,
 				show_login : false,
+				iconShow: true,
 			}
 		},
 		computed: {
@@ -137,6 +138,9 @@
 			quoteInitStatus(){
 				return this.$store.state.market.quoteInitStatus;
 			},
+			showWarning(){
+				return this.$store.state.isshow.warningShow;
+			}
 		},
 		filters:{
 			fixNumTwo: function(num){
@@ -145,6 +149,15 @@
 			fixNum: function(num, dotsize){
 				return num.toFixed(dotsize);
 			}
+		},
+		watch: {
+			showWarning: function(n, o){
+				if(n && n == true){
+					this.iconShow = false;
+				}else{
+					this.iconShow = true;
+				}
+			},
 		},
 		methods: {
 			...mapActions([

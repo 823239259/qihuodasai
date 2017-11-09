@@ -1,5 +1,5 @@
 <template>
-	<div id="warning" v-if="show">
+	<div id="warning" v-show="show">
 		<div class="bg"></div>
 		<div class="warning">
 			<div class="title">
@@ -35,6 +35,7 @@
 			return{
 				show: false,
 				time: '',
+				timing: null,
 				statusShow: true,
 				quoteShow: true,
 				tradeShow: true,
@@ -47,27 +48,42 @@
 				return this.$store.state.isshow.warningType;
 			}
 		},
+		watch: {
+			show: function(n, o){
+				if(n && n == true){
+					//倒计时
+					this.timeEvent();
+				}
+			},
+			warningType: function(n, o){
+				if(n && n == 1){
+					this.quoteShow = true;
+				}else if(n && n == 2){
+					this.quoteShow = false;
+					this.quoteStatus = '正常';
+				}
+			}
+		},
 		methods: {
 			closeEvent: function(){
 				this.show = false;
+				this.time = 0;
+				clearInterval(this.timing);
 			},
 			timeEvent: function(){
-				console.log(this.show);
-				if(this.show == true){
-					this.time = 6;
-					var timing = setInterval(function(){
-						this.time--;
-						if(this.time <= 0){
-							clearInterval(timing);
-							this.statusShow = false;
-							setTimeout(function(){
-								this.show = false;
-								this.$router.push({path: '/index'});
-								this.$store.state.account.isRefresh = 1;
-							}.bind(this), 2000);
-						}
-					}.bind(this), 1000);
-				}
+				this.time = 5;
+				this.timing = setInterval(function(){
+					this.time--;
+					if(this.time <= 0){
+						clearInterval(this.timing);
+						this.statusShow = false;
+						setTimeout(function(){
+							this.show = false;
+							this.$router.push({path: '/index'});
+							this.$store.state.account.isRefresh = 1;
+						}.bind(this), 2000);
+					}
+				}.bind(this), 1000);
 			},
 			connectEvent: function(){
 				if(this.statusShow == false) return;
@@ -80,8 +96,7 @@
 			}
 		},
 		mounted: function(){
-			//倒计时
-			this.timeEvent();
+			
 		}
 	}
 </script>
@@ -152,6 +167,7 @@
 		}
 		span{
 			color: $green;
+			font-weight: bold;
 			&.red{
 				color: $red;
 			}
