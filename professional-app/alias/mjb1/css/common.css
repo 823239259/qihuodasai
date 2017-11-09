@@ -31,9 +31,9 @@ nav li.current span{
 }
 nav li .icon{
 	display: block;
-	width: 0.34rem;
-	height: 0.34rem;
-	background-size: 100% 100%;
+	width: 17px;
+	height: 17px;
+	overflow: hidden;
 	margin: 0.15rem auto 0.05rem auto;
 }
 nav li .icon_quote{
@@ -248,21 +248,13 @@ header .title span.current{
 .trade .box li:nth-child(2){
 	height: 0.87rem;
 }
-.trade .box li .icon{
+.trade .box li img{
 	float: left;
 	width: 0.8rem;
 	height: 0.8rem;
-	background-size: 100%;
 }
-.trade .box li .icon_1{
-	background: url(../images/trade_07.png) no-repeat center center;
-}
-.trade .box li .icon_2{
+.trade .box li img:nth-child(2){
 	height: 0.87rem;
-	background: url(../images/trade_08.png) no-repeat center center;
-}
-.trade .box li .icon_3{
-	background: url(../images/trade_09.png) no-repeat center center;
 }
 .trade .box li .words{
 	float: left;
@@ -341,6 +333,8 @@ header .title span.current{
 	padding: 0 0.22rem;
 }
 .circle .box .title img{
+	width: 0.9rem;
+	height: 0.9rem;
 	margin-right: 0.2rem;
 }
 .circle .box .title b{
@@ -354,7 +348,7 @@ header .title span.current{
 	font-size: 0.22rem;
 }
 .circle .box h3{
-	font-size: 0.3rem;
+	font-size: 0.2rem;
 	font-weight: bold;
 	color: #000;
 	padding: 0 0.22rem;
@@ -363,6 +357,7 @@ header .title span.current{
 .circle .box .cont{
 	color: #696969;
 	padding: 0 0.22rem;
+	font-size: 0.16rem;
 }
 .circle .box .tools{
 	width: 7.5rem;
@@ -371,27 +366,28 @@ header .title span.current{
 	border-top: 0.01rem solid #bcbcbc;
 	margin-top: 0.3rem;
 }
-.circle .box .tools i{
+.circle .box .tools div{
 	float: left;
 	margin-top: 0.25rem;
+	text-align: center;
 }
-.circle .box .tools i.fabulous{
+.circle .box .tools div.fabulous, .circle .box .tools div.forward{
 	width: 25%;
-	height: 0.45rem;
-	background-size: 100% 100%;
-	background: url(../images/circle_07.png) no-repeat center center;
 }
-.circle .box .tools i.comment{
+.circle .box .tools div.comment{
 	width: 50%;
-	height: 0.43rem;
-	background-size: 100% 100%;
-	background: url(../images/circle_08.png) no-repeat center center;
 }
-.circle .box .tools i.forward{
-	width: 25%;
+.circle .box .tools img:first-child{
+	width: 0.47rem;
+	height: 0.45rem;
+}
+.circle .box .tools img:nth-child(2){
+	width: 0.44rem;
+	height: 0.43rem;
+}
+.circle .box .tools img:last-child{
+	width: 0.42rem;
 	height: 0.42rem;
-	background-size: 100% 100%;
-	background: url(../images/circle_09.png) no-repeat center center;
 }
 /*****资讯*****/
 .news .box{
@@ -512,43 +508,20 @@ header .title span.current{
 	font-size: 0.32rem;
 	line-height: 0.82rem;
 }
-.account .detail li .icon{
+.account .detail li img{
 	float: left;
-	width: 0.68rem;
+	width: 0.41rem;
 	height: 0.41rem;
-	background-size: 100% 100%;
-	text-align: left;
-	margin: 0.2rem 0 0 0;
+	margin: 0.2rem 0.2rem 0 0;
 }
-.account .detail li .icon_recharge{
-	background: url(../images/account_02.png) no-repeat center left;
+.account .detail li:last-child img{
+	width: 0.34rem;
+	margin-right: 0.27rem;
 }
-.account .detail li .icon_withdrawals{
-	background: url(../images/account_03.png) no-repeat center left;
-}
-.account .detail li .icon_money{
-	background: url(../images/account_04.png) no-repeat center left;
-}
-.account .detail li .icon_account{
-	background: url(../images/account_05.png) no-repeat center left;
-}
-.account .detail li .icon_realname{
-	background: url(../images/account_06.png) no-repeat center left;
-}
-.account .detail li .icon_bank{
-	background: url(../images/account_07.png) no-repeat center left;
-}
-.account .detail li .icon_phone{
-	background: url(../images/account_08.png) no-repeat center left;
-}
-.account .detail li .icon_pwd{
-	background: url(../images/account_09.png) no-repeat center left;
-}
-.account .detail li .icon_arrow{
+.account .detail li img.arrow{
 	float: right;
 	width: 0.14rem;
 	height: 0.23rem;
-	background: url(../images/arrow.png) no-repeat center center;
 	margin: 0.3rem 0 0 0;
 }
 .account .detail li .res{

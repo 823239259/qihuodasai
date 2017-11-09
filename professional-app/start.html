@@ -65,7 +65,7 @@
 						"appVersion": appVersion,
 						"parms": appChannelID
 					}, function(result) {
-						if(result.message == "开启") { // 显示马甲包
+						if(result.message == "屏蔽") { // 显示马甲包
 							if(plus.storage.getItem("showAliasGuide") != false) { // 显示马甲引导页
 								plus.storage.setItem("showAliasGuide", false);
 								setTimeout(function() {
@@ -82,7 +82,7 @@
 									});
 								}, 1500)
 							};
-						} else if(result.message == "屏蔽") { // 显示主包
+						} else if(result.message == "开启") { // 显示主包
 							if(plus.storage.getItem("showGuide") != false) { // 显示主包引导页
 								plus.storage.setItem("showGuide", false);
 								setTimeout(function() {
