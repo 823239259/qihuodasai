@@ -226,7 +226,7 @@
 				<div class="operate">
 					<div class="head">
 						<span class="fl">交易账号：{{tradeUser}}</span>
-						<i class="sanjiao fl"></i>
+						<!--<i class="sanjiao fl"></i>-->
 						<a href="javascript:void(0);" class="fl" @click="exitEvent">退出</a>
 						<button class="btn blue fl">终结方案</button>
 						<button class="btn yellow fl">追加保证金</button>
