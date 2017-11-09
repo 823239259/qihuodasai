@@ -119,7 +119,7 @@
 						this.phone = res.data.mobile;
 						this.username = res.data.realName;
 						if(res.data.realName == null){
-							this.username = "我曹";
+							this.username = "你好";
 						}else{
 							this.username = res.data.realName;
 						}

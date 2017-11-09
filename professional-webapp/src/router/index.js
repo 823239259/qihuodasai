@@ -25,6 +25,8 @@ import safe_withdrawalPassword from "../pages/account/account_safe/account_withd
 import openDetail_viewAccount from "../pages/account/account_openDetail/account_viewAccount.vue"
 import openDetail_additionalMargin from "../pages/account/account_openDetail/account_additionalMargin.vue"
 import registrationProtocol from "../pages/account/registrationProtocol.vue"
+import confirmPayment from "../pages/openAccount/openAccount_confirmPayment.vue"
+import openAccount_success from "../pages/openAccount/openAccount_success.vue"
 Vue.use(Router)
 
 export default new Router({
@@ -129,6 +131,14 @@ export default new Router({
 		{
 			path : '/registrationProtocol',
 			component : registrationProtocol
+		},
+		{
+			path:"/confirmPayment",
+			component:confirmPayment
+		},
+		{
+			path:"/openAccount_success",
+			component:openAccount_success
 		}
 	]
 })

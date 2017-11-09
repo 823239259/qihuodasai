@@ -1,7 +1,8 @@
 <template>
 	<div id="openAccount">
 		<div class="openAccount_top">
-			<img src="../assets/images/icon_openaccount_01.png" alt="" />
+			<img src="../assets/images/icon_openaccount_01.png" v-if="showpage==true"/>
+			<img src="../assets/images/icon_openaccount_02.png" v-else="showpage == false"/>
 		</div>
 		<div class="openAccount_center" v-if="isshow_openAccount_1">
 			<div class="title">
@@ -13,7 +14,6 @@
 				<ul>
 					<li >
 						<button v-for="item in item" class="btn" @click="chose">￥{{item.traderBond}}</button>
-						
 					</li>
 					<li>
 						<button class="btn yellow" v-on:click="to_openAccount_2">下一步</button>
@@ -27,8 +27,8 @@
 				<ul>
 					<li>您的投资本金：<label>{{show_price}}元</label><i>(固定汇率{{rate}}，1美元={{rate}}元人民币)</i></li>
 					<li>总操盘资金<i>（盈利全归你）</i></li>
-					<li>{{traderTotal}}元={{show_price}}元<i>（本金）</i>+{{traderTotal-show_price}}元<i>（获得资金）</i></li>
-					<li>亏损平仓线：<span>{{lineLoss}}元（{{(lineLoss/rate).toFixed(2)}}美元）</span><i>（平仓线=总操盘资金-风险保证金x0.6）</i></li>
+					<li>{{traderTotal}}美元={{(show_price/rate).toFixed(0)}}美元<i>（本金）</i>+{{traderTotal-(show_price/rate).toFixed(0)}}美元<i>（获得资金）</i></li>
+					<li>亏损平仓线：<span>{{lineLoss*rate}}元（{{lineLoss}}美元）</span><i>（平仓线=总操盘资金-风险保证金x0.6）</i></li>
 					<li>管理费：<span>免费</span></li>
 					<li>交易时间：<span>请参照交易规则</span></li>
 				</ul>
@@ -51,9 +51,9 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td>5000美元</td>
-							<td>4800美元</td>
-							<td>3000元</td>
+							<td>{{traderTotal}}美元</td>
+							<td>{{lineLoss}}美元</td>
+							<td>{{show_price}}元</td>
 							<td>免费</td>
 							<td></td>
 						</tr>
@@ -61,9 +61,9 @@
 				</table>
 			</div>
 			<div class="to_openAccount">
-				<span>支付金额：<i>3000</i>元</span>
+				<span>支付金额：<i>{{show_price}}</i>元</span>
 				<button class="btn yellow" v-on:click="to_comfirmPayment">立即开户</button>
-				<label>返回修改</label>
+				<label v-on:click="back">返回修改</label>
 			</div>
 		</div>
 		<div class="openAccount_btm">
@@ -72,10 +72,16 @@
 				<span>（一个账号可同时交易多种期货产品）</span>
 			</div>
 			<div class="openAccount_btm_center">
-				<div class="btm_left">
+				<div class="product_list">
 					<table>
 						<thead>
 							<tr class="color_deepblue" >
+								<td>期货产品</td>
+								<td>交易时间段</td>
+								<td>初始持仓手数</td>
+								<td>单边手续费</td>
+							</tr>
+							<tr class="color_deepblue1" >
 								<td>期货产品</td>
 								<td>交易时间段</td>
 								<td>初始持仓手数</td>
@@ -100,33 +106,17 @@
 				<span>投资有风险，入市需谨慎</span>
 			</div>
 		</div>
-		<div class="openAccount_step3" v-if="isshow_openAccount_3">
-			<div class="openAccount_step3_top">
-					<p>开户成功！账户将以短信形式通知您</p>
-					<p>系统将在30分钟内下发操盘账户，超时请联系客服处理。</p>
-					<button class="btn blue">立即操盘</button>
-					<button class="btn blue">查看行情</button>
-			</div>
-			<div class="openAccount_step3_btm">
-				<p>投资有风险，入市需谨慎</p>				
-			</div>
-		</div>
-		<openAccount_confirmPayment v-if="isshow_comfirmPayment" />
 	</div>
 </template>
 <script>
-	import openAccount_confirmPayment from "./openAccount/openAccount_confirmPayment.vue"
 	import pro from "../assets/js/common.js"
 	export default{
 		name:'openAccount',
-		components : {openAccount_confirmPayment},
 		data(){
 			return {
-				isshow_comfirmPayment : false,
 				isshow_openAccount_1 : true,
 				isshow_openAccount_2 : false,
-				isshow_openAccount_3 : false,
-				show_price : '',
+				show_price : 3000,
 				item: '',
 				lineLoss:'',
 				listLeft : '',
@@ -134,20 +124,39 @@
 				rate:'',
 				traderTotal:'',
 				temp:{},
-				chooseType: 3000
+				chooseType: 3000,
+				show_list:true,
+				showpage:true
 			}
 		},
 		methods : {
+			//返回修改
+			back:function(){
+				this.isshow_openAccount_2 = false,
+				this.isshow_openAccount_1 = true,
+				this.showpage = true
+			},
 			//展开
 			show_listAll:function(){
-				
+				if(this.show_list == true){
+					$(".product_list").css("overflow-y","scroll");
+					$(".btm_btm>span").html("关闭")
+					return this.show_list = false
+				}else if(this.show_list == false){
+					$(".product_list").css("overflow-y","visible");
+					$(".btm_btm>span").html("展开");
+					return this.show_list = true;
+				}
 			},
 			to_comfirmPayment : function(){
-				this.isshow_comfirmPayment=!this.isshow_comfirmPayment
+				this.payMoney = this.chooseType
+				console.log(this.payMoney);
+				this.$router.push({path:"/confirmPayment",query:{"payMoney":this.payMoney}});
 			},
 			to_openAccount_2 :function(){
 				this.isshow_openAccount_2 = true,
-				this.isshow_openAccount_1 = false
+				this.isshow_openAccount_1 = false,
+				this.showpage=false
 			},
 			//选择不同价格
 			chose:function(e){
@@ -193,7 +202,7 @@
 				}
 			}
 		},
-		created:function(){
+		beforeCreate:function(){
 			//获取汇率
 			var headers ={
 				token:JSON.parse(localStorage.user).token,
@@ -217,6 +226,8 @@
 				var data = res.data;
 				if(res.success == true){
 					if(res.code == 1){
+						this.traderTotal = data.paramList[0].traderTotal;
+						this.lineLoss = data.paramList[0].lineLoss;
 						this.temp = data;
 						this.item = data.paramList;
 						this.$store.state.tempTradeapply = this.temp;
@@ -460,8 +471,7 @@
 						break;
 				}
 			}
-		}
-		
+		},
 	}
 </script>
 
@@ -476,8 +486,8 @@
 		height: 140px;
 		background-color: $blue;
 		img {
-			width: 720px;
-			height: 60px;
+			width: 723px;
+			height: 63px;
 			margin-top: 40px;
 		}
 	}
@@ -584,6 +594,7 @@
 		margin-top: 10px;
 		height: 300px;
 		background-color: $bottom_color;
+		/*overflow: scroll;*/
 	}
 	.openAccount_btm_top {
 		height: 40px;
@@ -613,28 +624,38 @@
 		background-color: $blue;
 		border-top: 1px solid $bottom_color;
 	}
-	.btm_left {
+	.product_list {
 		width: 100%;
-		background-color: $blue;
+		height: 220px;
 	}
 	.show_list{
 		display: block;
 		width: 100%;
-		
+		td{
+			width: 25%;
+			float: left;
+		}
 	}
 	.show_list_td{
 		width:49.5%; 
-		
+		td{
+			padding-top: 10px;
+		}
 		&:nth-child(odd){
 			float: left;
+			background-color: $blue;
 		}
 		&:nth-child(even){
 			float: right;
+			background-color: $blue;
+			&:hover{
+				background-color:$blue;
+			}
 		}
 	}
 	table{
 	 	tr{
-	 		background-color: $blue;
+	 		/*background-color: $blue;*/
 	 		height: 50px;
 	 		border-bottom: 1px solid $bottom_color;
 	 	}
@@ -649,10 +670,34 @@
 	 	background-color: $bottom_color;
 	 }
 	 .color_deepblue {
+	 	&:hover{
+	 		background-color: $deepblue;
+	 	}
+	 	float: left;
 	 	background-color: $deepblue;
 	 	height: 30px;
-	 	width: 100%;
+	 	width: 49.5%;
 	 	display: block;
+	 	line-height: 30px;
+	 	td{
+	 		width: 25%;
+	 		float: left;
+	 	}
+	 }
+	  .color_deepblue1 {
+	  	&:hover{
+	 		background-color: $deepblue;
+	 	}
+	  	float: right;
+	 	background-color: $deepblue;
+	 	height: 30px;
+	 	width: 49.5%;
+	 	display: block;
+	 	line-height: 30px;
+	 	td{
+	 		width: 25%;
+	 		float: left;
+	 	}
 	 }
 	 .openAccount_center_step2 {
 	 	margin-top: 10px;
@@ -678,39 +723,11 @@
 	 	i{
 	 		color: $yellow;
 	 		font-size: $fs16;
-	 		font-weight: 600;
+	 		font-weight: 500;
 	 	}
-	 }
-	 .openAccount_step3_top {
-	 	width: 100%;
-	 	height: 400px;
-	 	background-color: $blue;
-	 	text-align: center;
-	 	.btn {
-	 		width: 120px;
-	 		height: 30px;
-	 		margin-top: 30px;
-	 	}
-	 	p {
-	 		&:nth-child(1){
-	 			padding-top: 100px;
-	 			color: $white;
-	 			font-size: $fs16;
-	 			font-weight: 600;
-	 		}
-	 		&:nth-child(2){
-	 			margin-top: 20px;
-	 		}
-	 	}
-	 }
-	 .openAccount_step3_btm {
-	 	p{
-	 		height: 40px;
-	 		background-color: $bottom_color;
-	 		line-height: 40px;
-	 		margin-bottom: 50px;
-	 		text-align: center;
-	 		font-size: $fs12;
+	 	.yellow{
+	 		margin-bottom: 20px;
+	 		color: #242633;
 	 	}
 	 }
 </style>
