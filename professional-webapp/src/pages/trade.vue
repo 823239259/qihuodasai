@@ -132,14 +132,14 @@
 									<b>昨结：</b>
 									<span>{{currentdetail.LastQuotation.PreSettlePrice}}</span>
 								</div>
-								<div class="col">
+								<!--<div class="col">
 									<b>涨停：</b>
 									<span>{{currentdetail.LastQuotation.LimitUpPrice}}</span>
 								</div>
 								<div class="col">
 									<b>跌停：</b>
 									<span>{{currentdetail.LastQuotation.LimitDownPrice}}</span>
-								</div>
+								</div>-->
 							</li>
 						</ul>
 					</div>
