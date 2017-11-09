@@ -28,6 +28,7 @@ var isshow = {
 //控制个人数据
 var account = {
 	state: {
+		packChannel: '',
 		islogin: false, //是否登录
 		phone: '', //账户
 		password: '', //密码 

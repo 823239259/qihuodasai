@@ -75,6 +75,9 @@
 			version: function(){
 //				return JSON.parse(localStorage.version).ios;
 				return '1.1';
+			},
+			packChannel(){
+				return this.$store.state.account.packChannel;
 			}
 		},
 		methods: {
@@ -134,6 +137,7 @@
 						params: {
 							mobile: this.phone,
 							password: this.pwd,
+							channel: this.packChannel,
 							code: this.code
 						},
 						timeout: 5000,
