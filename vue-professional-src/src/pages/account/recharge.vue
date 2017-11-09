@@ -2,7 +2,7 @@
 	<div id="recharge">
 		<tipsDialog :msg="msgTips"></tipsDialog>
 		<topbar title="我要充值"></topbar>
-		<back></back>
+		<back @tap.native="backEvent"></back>
 		<cs title="客服"></cs>
 		<div class="page_cont">
 			<p class="money_before">余额：<span>{{balance}}</span>元</p>
@@ -43,9 +43,17 @@
 			},
 			PATH: function(){
 				return this.$store.getters.PATH;
+			},
+			isRefresh(){
+				return this.$route.query.isRefresh;
 			}
 		},
 		methods: {
+			backEvent: function(){
+				if(this.isRefresh == 1){
+					this.$router.go(-5);
+				}
+			},
 			testMoney: function(){
 				if(this.money != '' && this.floatReg.test(this.money) ==  false){
 					this.$children[0].isShow = true;

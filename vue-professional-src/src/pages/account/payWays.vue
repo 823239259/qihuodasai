@@ -26,7 +26,7 @@
 		},
 		methods: {
 			backEvent: function(){
-				this.$router.replace({path: '/recharge'});
+				this.$router.replace({path: '/recharge', query: {isRefresh: 1}});
 			}
 		},
 		mounted: function(){}
