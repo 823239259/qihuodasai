@@ -1855,6 +1855,9 @@ export default new Vuex.Store({
 			if(parameters!=null){
 				if(parameters.OrderStatus == 5){
 					layer.msg(parameters.StatusMsg, {time: 1000});
+					setTimeout(function(){
+						context.state.market.buyStatus = false;
+					}, 1000);
 					return;
 				}
 				var CommodityName = context.state.market.orderTemplist[parameters.CommodityNo].CommodityName;
@@ -1882,7 +1885,7 @@ export default new Vuex.Store({
 				}
 				setTimeout(function(){
 					context.state.market.buyStatus = false;
-				}, 2000);
+				}, 1000);
 				
 			}
 		},
@@ -1913,7 +1916,7 @@ export default new Vuex.Store({
 					layer.msg(parameters.StatusMsg + ':合约【'+ parameters.ContractCode +'】,订单号:【'+ parameters.OrderID +'】', {time: 1000});
 					setTimeout(function(){
 						context.state.market.cancelStatus = false;
-					}, 2000);
+					}, 1000);
 				}
 			}else if(parameters.OrderStatus == 6){
 				return true;
@@ -1924,7 +1927,7 @@ export default new Vuex.Store({
 					layer.msg(parameters.StatusMsg + ':合约【'+ parameters.ContractCode +'】,订单号:【'+ parameters.OrderID +'】', {time: 1000});
 					setTimeout(function(){
 						context.state.market.cancelStatus = false;
-					}, 2000);
+					}, 1000);
 //				}
 			}
 		},
