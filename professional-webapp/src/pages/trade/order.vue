@@ -93,11 +93,12 @@
 				this.entrustNum = num;
 			},
 			cancelOrderAll: function(){
-				if(this.cancelStatus == true) return;
 				if(this.orderListCont.length > 0){
 					layer.confirm('此次操作会撤掉您委托列表中所有的合约，请您慎重选择。确认撤单全部合约？', {
 						btn: ['确定','取消']
 					}, function(index){
+						if(this.cancelStatus == true) return;
+						this.$store.state.market.cancelStatus = true;
 						this.orderListCont.forEach(function(o,i){
 							var Contract = o.ContractCode.substring(0, o.ContractCode.length-4);
 							var b = {
@@ -120,7 +121,6 @@
 								}
 							};
 							this.tradeSocket.send(JSON.stringify(b));
-							this.$store.state.market.cancelStatus = true;
 						}.bind(this));
 						layer.close(index);
 					}.bind(this));
@@ -129,7 +129,6 @@
 				}
 			},
 			cancelOrder: function(){
-				if(this.cancelStatus == true) return;
 				var confirmText;
 				if(this.currentOrderID != ''){
 					this.orderListCont.forEach(function(o,i){
@@ -158,8 +157,9 @@
 							layer.confirm(confirmText, {
 								btn: ['确定','取消']
 							}, function(index){
-								this.tradeSocket.send(JSON.stringify(b));
+								if(this.cancelStatus == true) return;
 								this.$store.state.market.cancelStatus = true;
+								this.tradeSocket.send(JSON.stringify(b));
 								layer.close(index);
 							}.bind(this));
 						}
@@ -170,7 +170,6 @@
 			},
 			editOrder: function(){
 				if(this.currentOrderID != ''){
-					if(this.cancelStatus == true) return;
 					this.showDialog = true;
 					layer.open({
 						type: 1,
@@ -187,6 +186,8 @@
 							}else if(this.entrustNum < 0){
 								layer.msg('委托数量不能为负',{time: 1000});
 							}else{
+								if(this.cancelStatus == true) return;
+								this.$store.state.market.cancelStatus = true;
 								this.orderListCont.forEach(function(o,i){
 									if(this.currentOrderID == o.OrderID){
 										var Contract = o.ContractCode.substring(0, o.ContractCode.length - 4);
@@ -211,7 +212,6 @@
 											}
 										};
 										this.tradeSocket.send(JSON.stringify(b));
-										this.$store.state.market.cancelStatus = true;
 									}
 								}.bind(this));
 							}
