@@ -425,6 +425,9 @@
 			},
 			chartHeight(){
 				return this.$store.state.market.chartHeight;
+			},
+			buyStatus(){
+				return this.$store.state.market.buyStatus;
 			}
 		},
 		filters:{
@@ -637,6 +640,7 @@
 				return this.defaultNum--;
 			},
 			buy: function(){
+				if(this.buyStatus == true) return;
 				var buildIndex = 0, b;
 				if(buildIndex > 100) buildIndex = 0;
 				if(this.priceShow == true){   //市价下单
@@ -682,10 +686,12 @@
 					btn: ['确定','取消']
 				}, function(index){
 					this.tradeSocket.send(JSON.stringify(b));
+					this.$store.state.market.buyStatus = true;
 					layer.close(index);
 				}.bind(this));
 			},
 			sell: function(){
+				if(this.buyStatus == true) return;
 				var buildIndex = 0, b;
 				if(buildIndex > 100) buildIndex = 0;
 				if(this.priceShow == true){   //市价下单
@@ -731,6 +737,7 @@
 					btn: ['确定','取消']
 				}, function(index){
 					this.tradeSocket.send(JSON.stringify(b));
+					this.$store.state.market.buyStatus = true;
 					layer.close(index);
 				}.bind(this));
 			},

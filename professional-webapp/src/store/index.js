@@ -239,17 +239,16 @@ var market = {
 		//成交历史列表
 		queryHisList: [], 
 		
-		
-		
-		
-		
-		
 		//切换后合约的名字
 		jContractFloatingProfitVO:{
 			currencyNo:'',
 			floatingProfit:0.0
 		},
-		layer:null,
+		layer: null,
+		//判断是否可以进行交易操作
+		buyStatus: false,
+		cancelStatus: false,
+		
 		
 		//止损止盈
 		stopLossList: [],
@@ -1881,6 +1880,7 @@ export default new Vuex.Store({
 				}else{
 					layer.msg('委托失败（'+CommodityName+','+price+','+DirectionStr+OrderNum+'手,失败原因:'+parameters.StatusMsg+'）', {time: 1000});
 				}
+				context.state.market.buyStatus = false;
 			}
 		},
 		updateApply:function(context,parameters){
@@ -1908,6 +1908,7 @@ export default new Vuex.Store({
 					context.state.market.OnRspOrderInsertOrderListCont[context.state.market.OnRspOrderInsertOrderListCont.length-index-1].OrderNum
 						= parameters.OrderNum;
 					layer.msg(parameters.StatusMsg + ':合约【'+ parameters.ContractCode +'】,订单号:【'+ parameters.OrderID +'】', {time: 1000});
+					context.state.market.cancelStatus = false;
 				}
 			}else if(parameters.OrderStatus == 6){
 				return true;
@@ -1916,6 +1917,7 @@ export default new Vuex.Store({
 					context.state.market.orderListCont.splice(index,1);
 					context.state.market.OnRspOrderInsertOrderListCont.splice(context.state.market.OnRspOrderInsertOrderListCont.length-index-1,1);
 					layer.msg(parameters.StatusMsg + ':合约【'+ parameters.ContractCode +'】,订单号:【'+ parameters.OrderID +'】', {time: 1000});
+					context.state.market.cancelStatus = false;
 //				}
 			}
 		},
@@ -2111,6 +2113,9 @@ export default new Vuex.Store({
 				= context.state.market.CacheAccount.jCacheTotalAccount.Deposit / context.state.market.CacheAccount.jCacheTotalAccount.TodayBalance / 100;
 			//风险度 =（初始资金 - 今权益）/（初始资金 - 强平线）
 			context.state.market.CacheAccount.jCacheTotalAccount.RiskDegree =  (context.state.market.initBalance - context.state.market.CacheAccount.jCacheTotalAccount.TodayBalance) / (context.state.market.initBalance - context.state.market.forceLine) * 100;
+			if(context.state.market.CacheAccount.jCacheTotalAccount.RiskDegree < 0){
+				context.state.market.CacheAccount.jCacheTotalAccount.RiskDegree = 0;
+			}
 		},
 		initCacheAccount:function(context,parameters){
 			if(parameters!=null){

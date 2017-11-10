@@ -60,6 +60,9 @@
 			tradeSocket(){
 				return this.$store.state.tradeSocket;
 			},
+			buyStatus(){
+				return this.$store.state.market.buyStatus;
+			}
 		},
 		methods: {
 			clickEvent: function(i, id){
@@ -67,6 +70,7 @@
 				this.currentOrderID = id;
 			},
 			closePositionAll: function(){
+				if(this.buyStatus == true) return;
 				if(this.positionListCont.length > 0){
 					layer.confirm('此次操作会平掉您持仓列表中所有的合约，请您慎重选择。确认平仓全部合约？', {
 						btn: ['确定','取消']
@@ -92,6 +96,7 @@
 								}
 							};
 							this.tradeSocket.send(JSON.stringify(b));
+							this.$store.state.market.buyStatus = true;
 						}.bind(this));
 						layer.close(index);
 					}.bind(this));
@@ -100,6 +105,7 @@
 				}
 			},
 			closePosition: function(){
+				if(this.buyStatus == true) return;
 				var confirmText;
 				if(this.currentOrderID != ''){
 					this.positionListCont.forEach(function(o,i){
@@ -129,6 +135,7 @@
 								btn: ['确定','取消']
 							}, function(index){
 								this.tradeSocket.send(JSON.stringify(b));
+								this.$store.state.market.buyStatus = true;
 								layer.close(index);
 							}.bind(this));
 						}

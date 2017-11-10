@@ -73,6 +73,9 @@
 			tradeSocket(){
 				return this.$store.state.tradeSocket;
 			},
+			cancelStatus(){
+				return this.$store.state.market.cancelStatus;
+			}
 		},
 		watch: {
 			OnRspOrderInsertOrderListCont: function(n, o){
@@ -90,6 +93,7 @@
 				this.entrustNum = num;
 			},
 			cancelOrderAll: function(){
+				if(this.cancelStatus == true) return;
 				if(this.orderListCont.length > 0){
 					layer.confirm('此次操作会撤掉您委托列表中所有的合约，请您慎重选择。确认撤单全部合约？', {
 						btn: ['确定','取消']
@@ -116,6 +120,7 @@
 								}
 							};
 							this.tradeSocket.send(JSON.stringify(b));
+							this.$store.state.market.cancelStatus = true;
 						}.bind(this));
 						layer.close(index);
 					}.bind(this));
@@ -124,6 +129,7 @@
 				}
 			},
 			cancelOrder: function(){
+				if(this.cancelStatus == true) return;
 				var confirmText;
 				if(this.currentOrderID != ''){
 					this.orderListCont.forEach(function(o,i){
@@ -153,6 +159,7 @@
 								btn: ['确定','取消']
 							}, function(index){
 								this.tradeSocket.send(JSON.stringify(b));
+								this.$store.state.market.cancelStatus = true;
 								layer.close(index);
 							}.bind(this));
 						}
@@ -163,6 +170,7 @@
 			},
 			editOrder: function(){
 				if(this.currentOrderID != ''){
+					if(this.cancelStatus == true) return;
 					this.showDialog = true;
 					layer.open({
 						type: 1,
@@ -203,11 +211,10 @@
 											}
 										};
 										this.tradeSocket.send(JSON.stringify(b));
+										this.$store.state.market.cancelStatus = true;
 									}
 								}.bind(this));
 							}
-							console.log(this.entrustPrice);
-							console.log(this.entrustNum);
 							layer.close(index);
 							this.showDialog = false;
 						}.bind(this),
