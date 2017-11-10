@@ -238,6 +238,8 @@
 			}
 		},
 		activated:function(){
+		},
+		mounted:function(){
 			//获取支持提现的银行卡
 			this.getBankList();
 			//获取支持省市

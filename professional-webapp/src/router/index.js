@@ -28,6 +28,7 @@ import registrationProtocol from "../pages/account/registrationProtocol.vue"
 import confirmPayment from "../pages/openAccount/openAccount_confirmPayment.vue"
 import openAccount_success from "../pages/openAccount/openAccount_success.vue"
 import recharge from "../pages/account/recharge/recharge.vue"
+import account_editBankCard from "../pages/account/account_safe/account_editBankCard.vue"
 Vue.use(Router)
 
 export default new Router({
@@ -95,6 +96,9 @@ export default new Router({
 			},{
 				path : '/openDetail_additionalMargin',
 				component : openDetail_additionalMargin
+			},{
+				path:'/account_editBankCard',
+				component:account_editBankCard
 			}]
 		},
 		{

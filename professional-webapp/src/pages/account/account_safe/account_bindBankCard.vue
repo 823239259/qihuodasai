@@ -61,7 +61,7 @@
 						this.setDeaultBank(this.bankId);
 						break;
 					case "3":
-						this.$router.push({path:'/safe_addBankCard'});
+						this.$router.push({path:'/account_editBankCard'});
 						break;
 					case "4":
 						this.delBankCard(this.bankId);
