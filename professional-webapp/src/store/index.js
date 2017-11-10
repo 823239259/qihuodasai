@@ -1880,7 +1880,10 @@ export default new Vuex.Store({
 				}else{
 					layer.msg('委托失败（'+CommodityName+','+price+','+DirectionStr+OrderNum+'手,失败原因:'+parameters.StatusMsg+'）', {time: 1000});
 				}
-				context.state.market.buyStatus = false;
+				setTimeout(function(){
+					context.state.market.buyStatus = false;
+				}, 2000);
+				
 			}
 		},
 		updateApply:function(context,parameters){
@@ -1908,7 +1911,9 @@ export default new Vuex.Store({
 					context.state.market.OnRspOrderInsertOrderListCont[context.state.market.OnRspOrderInsertOrderListCont.length-index-1].OrderNum
 						= parameters.OrderNum;
 					layer.msg(parameters.StatusMsg + ':合约【'+ parameters.ContractCode +'】,订单号:【'+ parameters.OrderID +'】', {time: 1000});
-					context.state.market.cancelStatus = false;
+					setTimeout(function(){
+						context.state.market.cancelStatus = false;
+					}, 2000);
 				}
 			}else if(parameters.OrderStatus == 6){
 				return true;
@@ -1917,7 +1922,9 @@ export default new Vuex.Store({
 					context.state.market.orderListCont.splice(index,1);
 					context.state.market.OnRspOrderInsertOrderListCont.splice(context.state.market.OnRspOrderInsertOrderListCont.length-index-1,1);
 					layer.msg(parameters.StatusMsg + ':合约【'+ parameters.ContractCode +'】,订单号:【'+ parameters.OrderID +'】', {time: 1000});
-					context.state.market.cancelStatus = false;
+					setTimeout(function(){
+						context.state.market.cancelStatus = false;
+					}, 2000);
 //				}
 			}
 		},

@@ -640,7 +640,6 @@
 				return this.defaultNum--;
 			},
 			buy: function(){
-				if(this.buyStatus == true) return;
 				var buildIndex = 0, b;
 				if(buildIndex > 100) buildIndex = 0;
 				if(this.priceShow == true){   //市价下单
@@ -685,13 +684,13 @@
 				layer.confirm(this.confirmText, {
 					btn: ['确定','取消']
 				}, function(index){
-					this.tradeSocket.send(JSON.stringify(b));
+					if(this.buyStatus == true) return;
 					this.$store.state.market.buyStatus = true;
+					this.tradeSocket.send(JSON.stringify(b));
 					layer.close(index);
 				}.bind(this));
 			},
 			sell: function(){
-				if(this.buyStatus == true) return;
 				var buildIndex = 0, b;
 				if(buildIndex > 100) buildIndex = 0;
 				if(this.priceShow == true){   //市价下单
@@ -736,8 +735,9 @@
 				layer.confirm(this.confirmText, {
 					btn: ['确定','取消']
 				}, function(index){
-					this.tradeSocket.send(JSON.stringify(b));
+					if(this.buyStatus == true) return;
 					this.$store.state.market.buyStatus = true;
+					this.tradeSocket.send(JSON.stringify(b));
 					layer.close(index);
 				}.bind(this));
 			},
