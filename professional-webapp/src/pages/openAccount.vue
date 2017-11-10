@@ -13,7 +13,7 @@
 			<div class="openAccount_center_left">
 				<ul>
 					<li >
-						<button v-for="item in item" class="btn" @click="chose">￥{{item.traderBond}}</button>
+						<button v-for="(item,index) in item" class="btn" :class="{btn1:current1 == index}" @click="chose">￥{{item.traderBond}}</button>
 					</li>
 					<li>
 						<button class="btn yellow" v-on:click="to_openAccount_2">下一步</button>
@@ -126,7 +126,8 @@
 				temp:{},
 				chooseType: 3000,
 				show_list:true,
-				showpage:true
+				showpage:true,
+				current1:0
 			}
 		},
 		methods : {

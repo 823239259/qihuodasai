@@ -193,7 +193,7 @@
 				this.$router.push({path:'/withDraw_bankcard'})
 			},
 			toRecharge:function(){
-				
+				this.$router.push({path:"/recharge"})
 			}
 		},
 		mounted:function(){
