@@ -17,12 +17,12 @@
 					<i class="ifont">&#xe698;</i>
 					<span>{{k.bankName}}</span>
 					<span>尾号{{k.card.substr(-4,4)}}</span>
-					<label  v-if="k.default == true">默认</label>
-					<label  v-else="k.default!=true"></label>
+					<label  v-if="k.default !=true"></label>
+					<label  v-else="k.default==true">默认</label>
 					<select id="manage" @change="chooseChandle">
 						<option value="1">管理</option>
-						<option value="2" v-if="k.default == true">设为默认</option>
-						<option value="2" v-else="k.default！=true">取消默认</option>
+						<option value="2" v-if="k.default !=true">设为默认</option>
+						<option value="2" v-else="k.default==true"></option>
 						<option value="3">编辑</option>
 						<option value="4">删除</option>
 					</select>
@@ -44,12 +44,13 @@
 			return{
 				bindBankList : [],
 				bankId:'',
-				current1:0
+				current1:0,
 			}
 		},
 		methods:{
 			choosBank:function(e){
 				var index = $(e.currentTarget).index();
+//				$(e.currentTarget).addClass("btn1").siblings().removeClass("btn1");
 				return this.bankId = this.bindBankList[index].bankId;
 			},
 			//select事件
