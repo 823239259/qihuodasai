@@ -35,7 +35,7 @@
 				info: '获取验证码',
 				phoneReg: /^(((13[0-9])|(14[5-7])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/,
 				num: 0,
-				phoneReg: /^(((13[0-9])|(14[5-7])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/,
+				pwdReg: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,18}$/,
 				pwd : '',
 				newPwd:'',
 				telReg : false
@@ -116,7 +116,7 @@
 				}else if(this.code == ''){
 					layer.msg('请输入验证码', {time: 1000});
 				}else if(this.telReg == false){
-					layer.msg('请输入正确手机号', {time: 1000});
+					layer.msg('请先获取验证码', {time: 1000});
 				}else{
 					$(".forgetPassword").css('display','none');
 					$(".resetPassword").css('display','block')

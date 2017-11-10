@@ -2,41 +2,115 @@
 	<div id="confirmPayment">
 		<div class="bg"></div>
 		<div class="confirmPayment">
-			<p>确认支付<i class="ifont">&#xe624;</i></p>
-			<p>账户余额：<span>0.08</span>元</p>
-			<p>支付金额：<span>300</span>元</p>
-			<p>您的账户余额<i>0.88</i>元，本次支付还差<i>4000</i>元</p>
-			<button class="btn yellow" v-on:click="to_openAccount_3">去充值</button>
-			<button class="btn green">取消</button>
+			<p v-if="accountMoney-payMoney>0">确认支付<i class="ifont" v-on:click="close">&#xe624;</i></p>
+			<p v-else="accountMoney-payMoney!>0">去充值<i class="ifont" v-on:click="close">&#xe624;</i></p>
+			<p>账户余额：<span>{{accountMoney}}</span>元</p>
+			<p>支付金额：<span>{{payMoney}}</span>元</p>
+			<p v-if="accountMoney-payMoney>0">您的账户余额<i>{{accountMoney}}</i>元，本次支付完毕剩余<i>{{accountMoney-payMoney}}</i>元</p>
+			<p v-else="accountMoney-payMoney!>0">您的账户余额<i>{{accountMoney}}</i>元，本次支付还差<i>{{Math.abs(accountMoney-payMoney)}}</i>元</p>
+			<button class="btn yellow" v-on:click="to_payMoney" v-if="accountMoney-payMoney>0">确认支付</button>
+			<button class="btn yellow" v-on:click="to_Recharge" v-else="accountMoney!>0">去充值</button>
+			<button class="btn green" v-on:click="cancel">取消</button>
 		</div>
 	</div>
 </template>
 
 <script>
+	import pro from "../../assets/js/common.js"
 	export default {
-		name : "openAccount_confirmPayment",
+		name : "confirmPayment",
 		data(){
 			return{
-				
+				accountMoney:'',
+				payMoney:'',
+				refresh:true
 			}
 		},
+		mounted:function(){
+			this.payMoney=this.$route.query.payMoney;
+		},
 		methods : {
-			to_openAccount_3 :function(){
-				console.log('111111111111111')
+			//充值
+			to_Recharge:function(){
+				
+			},
+			//支付
+			to_payMoney :function(){
+				var data = {
+//					vid:'',
+					"traderBond":this.payMoney,
+					"tranLever":0,
+					"businessType":8
+				}
+				var headers = {
+					token:JSON.parse(localStorage.user).token,
+					secret:JSON.parse(localStorage.user).secret
+				}
+				pro.fetch("post","/user/ftrade/handle",data,headers).then((res)=>{
+					var data = res.data;
+					if(res.success == true){
+						if(res.code == 1){
+							this.$router.push({path:'/openAccount_success'});
+						}
+					}
+				}).catch((err)=>{
+					if(err.data.success == false){
+						layer.msg("err.data.message",{time:2000});
+					}else{
+						layer.msg("网络不给力，请稍后再试",{time:2000})
+					}
+				})
+			},
+			//关闭
+			close:function(){
+				this.$router.push({path:"/openAccount"})
+			},
+			//取消
+			cancel:function(){
+				this.$router.push({path:"/openAccount"})
+			},
+			getUserMsg:function(){
+				var data = {
+					businessType:4
+				}
+				var headers = {
+					token:JSON.parse(localStorage.user).token,
+					secret:JSON.parse(localStorage.user).secret
+				}
+				pro.fetch("post","/user/getbalancerate",data,headers).then((res)=>{
+					var data =res.data;
+					if(res.success == true){
+						if(res.code == 1){
+							this.accountMoney = data.balance;
+						}
+					}
+				}).catch((err)=>{
+					if(err.data.success == false){
+						layer.msg("err.data.message",{time:2000})
+					}else{
+						layer.msg("网络不给力，请稍后再试",{time:2000})
+					}
+				})
 			}
-		}
+		},
+		activated: function() {
+			//获取用户账户信息
+			this.getUserMsg();
+			this.payMoney=this.$route.query.payMoney;
+		},
 	}
 </script>
 
 <style lang="scss" scoped type="text/css">
 @import "../../assets/css/common.scss";
 	.confirmPayment{
-		position: absolute;
+		position: fixed;
 		top: 50%;
-		left: 40%;
+		left: 50%;
 		z-index: 100;
 		width: 400px;
 		height: 240px;
+		margin:-120px 0 0 -200px;
 		background-color: $blue;
 		text-align: center;
 		border-radius: 10px;

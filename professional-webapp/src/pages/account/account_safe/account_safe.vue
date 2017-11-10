@@ -10,7 +10,7 @@
 					</div>
 				</div>
 				<div class="acount_safe_btm">
-					<p>您设置了<span>3</span>个保护，还有<span>2</span>保护项可设置</p>
+					<p>您设置了<span>{{protect}}</span>个保护，还有<span>{{5-protect}}</span>保护项可设置</p>
 					<table>
 						<tbody>
 							<tr>
@@ -18,7 +18,8 @@
 								<td>实名认证</td>
 								<td v-if="realName == null">未认证</td>
 								<td v-else="realName != null" class="yellow_status">已认证</td>
-								<td>认证信息：*小四，51116*************2222</td>
+								<td v-if="realName == null">您还没有实名认证完成更高级认证后将提升您的充值与体现权限。</td>
+								<td v-else="realName!=null">认证信息：{{username}}，51116*************2222</td>
 								<td v-on:click="toCertification" v-if="realName == null">去认证</td>
 								<td v-else="realName != null"></td>
 							</tr>
@@ -27,7 +28,8 @@
 								<td>提现密码</td>
 								<td v-if="isWithdrawPwd==false">未设置</td>
 								<td v-else="isWithdrawPwd==true" class="yellow_status">已设置</td>
-								<td>认证信息：*小四，51116*************2222</td>
+								<td v-if="isWithdrawPwd==false">账户资金变动时，需先验证体现密码</td>
+								<td v-else="isWithdrawPwd==true" class="yellow_status">您已设置提现密码，请保管好自己的密码</td>
 								<td v-on:click="toaWithdrawalPassword" v-if="isWithdrawPwd==false">去设置</td>
 								<td v-on:click="toaWithdrawalPassword" v-else="isWithdrawPwd==true">去修改</td>
 							</tr>
@@ -36,7 +38,8 @@
 								<td>绑定银行卡</td>
 								<td v-if="isBoundBankCard==false">未绑定</td>
 								<td v-else="isBoundBankCard==true" class="yellow_status">已绑定</td>
-								<td>认证信息：*小四，51116*************2222</td>
+								<td v-if="isBoundBankCard==false">您还没有绑定银行卡，完成绑定后可提现到银行卡中</td>
+								<td v-else="isBoundBankCard==true" class="yellow_status">您已绑定银行卡，可提现到银行卡中</td>
 								<td v-on:click="toAddBankCard" v-if="isBoundBankCard==false">去绑定</td>
 								<td v-on:click="toBindBankCard" v-else="isBoundBankCard==true">去修改</td>
 							</tr>
@@ -44,14 +47,14 @@
 								<td><img src="../../../assets/images/icon_loginpassword.png" alt="" /></td>
 								<td>登录密码</td>
 								<td class="yellow_status">已设置</td>
-								<td>认证信息：*小四，51116*************2222</td>
+								<td>登录网站时使用</td>
 								<td v-on:click="toResetLoginPassword">修改</td>
 							</tr>
 							<tr>
 								<td><img src="../../../assets/images/icon_bindtel.png" alt="" /></td>
 								<td>绑定手机</td>
 								<td class="yellow_status">已绑定</td>
-								<td>认证信息：*小四，51116*************2222</td>
+								<td>您已绑定手机{{phone}}</td>
 								<td v-on:click="toResetCellPassword" >修改</td>
 							</tr>
 						</tbody>
@@ -72,6 +75,7 @@
 				realName :'',
 				isBoundBankCard:'',
 				isWithdrawPwd:'',
+				protect:'',
 			}
 		},
 		methods:{
@@ -95,6 +99,7 @@
 			toResetCellPassword:function(){
 				this.$router.push({path:'/safe_resetCellPhone'})
 			},
+			//添加银行卡
 			toAddBankCard :function(){
 				this.$router.push({path:'/safe_addBankCard'})
 			}
@@ -116,10 +121,8 @@
 						this.realName = res.data.realName;
 						this.isWithdrawPwd = res.data.isWithdrawPwd;
 						this.isBoundBankCard = res.data.isBoundBankCard;
-						this.phone = res.data.mobile;
-						this.username = res.data.realName;
 						if(res.data.realName == null){
-							this.username = "我曹";
+							this.username = "你好";
 						}else{
 							this.username = res.data.realName;
 						}

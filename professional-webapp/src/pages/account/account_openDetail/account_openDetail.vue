@@ -57,6 +57,7 @@
 									<span v-on:click="toSettlementScheme">结算方案</span>
 								</td>
 								<td v-else="item.stateTypeStr == '已结算'" v-on:click="toParticulars">结算明细</td>
+								<td v-else="item.stateTypeStr == '已完结'" v-on:click="toParticulars">结算明细</td>
 							</tr>
 							<!--<tr>
 								<td>国际综合</td>
@@ -144,7 +145,9 @@
 				$(e.currentTarget).addClass("current").siblings().removeClass("current");
 				switch (index){
 					case 0:
-					console.log(1)
+					var time = new Date().getTime();
+					var a = pro.getDate('y-m-d',time);
+					console.log(a)
 					break;
 					case 1:
 					console.log(2)
@@ -227,7 +230,6 @@
 						else {
 							this.show_detail = true;
 							this.item = res.data.tradeList;
-							var time = pro.getDate("y-m-d h:i:s",this.item[2].appTime*1000);
 						}
 					}
 				}
