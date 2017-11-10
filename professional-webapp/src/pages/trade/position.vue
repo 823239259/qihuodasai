@@ -70,11 +70,12 @@
 				this.currentOrderID = id;
 			},
 			closePositionAll: function(){
-				if(this.buyStatus == true) return;
 				if(this.positionListCont.length > 0){
 					layer.confirm('此次操作会平掉您持仓列表中所有的合约，请您慎重选择。确认平仓全部合约？', {
 						btn: ['确定','取消']
 					}, function(index){
+						if(this.buyStatus == true) return;
+						this.$store.state.market.buyStatus = true;
 						this.positionListCont.forEach(function(o,i){
 							var buildIndex = 0;
 							if(buildIndex > 100) buildIndex = 0;
@@ -96,7 +97,6 @@
 								}
 							};
 							this.tradeSocket.send(JSON.stringify(b));
-							this.$store.state.market.buyStatus = true;
 						}.bind(this));
 						layer.close(index);
 					}.bind(this));
@@ -105,14 +105,12 @@
 				}
 			},
 			closePosition: function(){
-				if(this.buyStatus == true) return;
 				var confirmText;
 				if(this.currentOrderID != ''){
 					this.positionListCont.forEach(function(o,i){
 						if(this.currentOrderID == o.commodityNocontractNo){
 							var buildIndex = 0;
 							if(buildIndex > 100) buildIndex = 0;
-							console.log(o.commodityNocontractNo);
 							var Contract = o.commodityNocontractNo.substring(0, o.commodityNocontractNo.length-4);
 							var drection;
 							o.type == '多' ? drection = 1 : drection = 0;
@@ -134,8 +132,9 @@
 							layer.confirm(confirmText, {
 								btn: ['确定','取消']
 							}, function(index){
-								this.tradeSocket.send(JSON.stringify(b));
+								if(this.buyStatus == true) return;
 								this.$store.state.market.buyStatus = true;
+								this.tradeSocket.send(JSON.stringify(b));
 								layer.close(index);
 							}.bind(this));
 						}
