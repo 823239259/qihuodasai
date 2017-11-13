@@ -110,7 +110,7 @@
 			},
 			conditionSearch: function(index){
 				var date = new Date();
-				var time = pro.formatDate(date).split(' ')[0];
+				var time = pro.getDate("y-m-d", date.getTime()).split(' ')[0];
 				this.startTime = time;
 				this.endTime = time;
 				this.selectedNum = index;
@@ -186,7 +186,7 @@
 			dateEvent('.startTime');
 			dateEvent('.endTime');
 			var date = new Date();
-			var time = pro.formatDate(date).split(' ')[0];
+			var time = pro.getDate("y-m-d", date.getTime()).split(' ')[0];
 			this.startTime = time;
 			this.endTime = time;
 			//默认查询当天数据
