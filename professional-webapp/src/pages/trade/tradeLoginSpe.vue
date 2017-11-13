@@ -109,20 +109,22 @@
 			//获取平台账户登录信息
 			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
 			//获取交易账户
-			var headers = {
-				token:  this.userInfo.token,
-				secret: this.userInfo.secret,
-				version: ''
-			};
-			pro.fetch('post', '/user/getTradeAccount', '', headers).then(function(res){
-				if(res.success == true && res.code == 1){
-					this.accountList = res.data;
-				}
-			}.bind(this)).catch(function(err){
-				var data = err.data;
-				if(data) layer.msg(data.message, {time: 1000});
-			});
-			
+			if(this.userInfo){
+				var headers = {
+					token:  this.userInfo.token,
+					secret: this.userInfo.secret,
+					version: ''
+				};
+				pro.fetch('post', '/user/getTradeAccount', '', headers).then(function(res){
+					if(res.success == true && res.code == 1){
+						this.accountList = res.data;
+					}
+				}.bind(this)).catch(function(err){
+					console.log(111111);
+					var data = err.data;
+					if(data) layer.msg(data.message, {time: 1000});
+				});
+			}
 		}
 	}
 </script>
