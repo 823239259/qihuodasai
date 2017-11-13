@@ -25,7 +25,7 @@
 						<td>{{v.Deposit}}</td>
 						<td>{{v.FrozenMoney}}</td>
 						<td>{{v.FloatingProfit}}</td>
-						<td>{{v.CloseProfit}}</td>
+						<td>{{v.CloseProfit | fixNumTwo}}</td>
 						<td>{{v.InMoney}}</td>
 						<td>{{v.OutMoney}}</td>
 					</tr>
@@ -43,6 +43,14 @@
 			moneyDetail: function(){
 				return this.$store.state.market.CacheAccount.moneyDetail;
 			},
+		},
+		filters:{
+			fixNumTwo: function(num){
+				return num.toFixed(2);
+			},
+			fixNum: function(num, dotsize){
+				return num.toFixed(dotsize);
+			}
 		},
 		methods: {
 			

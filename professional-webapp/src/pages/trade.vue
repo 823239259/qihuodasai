@@ -229,7 +229,7 @@
 						<!--<i class="sanjiao fl"></i>-->
 						<a href="javascript:void(0);" class="fl" @click="exitEvent">退出</a>
 						<button class="btn blue fl">终结方案</button>
-						<button class="btn yellow fl">追加保证金</button>
+						<button class="btn yellow fl" @click="toAddMoney">追加保证金</button>
 					</div>
 					<div class="down_order">
 						<div class="title">
@@ -816,6 +816,9 @@
 					this.$router.push({path: '/index'});
 					this.$store.state.account.isRefresh = 1;
 				}.bind(this),500);
+			},
+			toAddMoney: function(){
+				this.$router.push({path: '/openDetail_additionalMargin'});
 			},
 		},
 		mounted: function(){
