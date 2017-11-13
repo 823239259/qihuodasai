@@ -4,7 +4,7 @@
 		<div class="login">
 			<p>登录<i class="ifont ifont_x" v-on:click="close">&#xe624;</i></p>
 			<input type="text" id="phone" class="input_1" placeholder="请输入手机号码" v-model.trim="phone" />
-			<input type="password" id="pwd" class="input_1" placeholder="请输入密码" v-model.trim="pwd"/><i class=" ifont ifont_eye" v-on:click="eyeEvent">&#xe64f;</i>
+			<input type="password" id="pwd" class="input_1" placeholder="请输入密码" v-model.trim="pwd"/><i class=" ifont ifont_eye" v-on:click="eyeEvent">&#xe61c;</i>
 			<p class="span_right" v-on:click="toForgetPassword">忘记密码?</p>
 			<button class="btn yellow" v-on:click="login">登录</button>
 			<p class="color_light">还没有期货大赛账号？<span class="span_white" v-on:click="tORegister">立即注册</span></p>
@@ -113,9 +113,11 @@
 			eyeEvent : function(e){
 				if(this.eyeShow == false){
 					this.eyeShow = true;
+					$(e.target).html("&#xe61c;");
 					$(e.target).addClass("current").siblings("#pwd").attr("type",'text');
 				}else{
 					this.eyeShow = false;
+					$(e.target).html("&#xe64f;")
 					$(e.target).removeClass("current").siblings("#pwd").attr("type",'password');
 				}
 			},

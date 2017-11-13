@@ -22,14 +22,14 @@
 						<img src="../../../assets/images/icon_moneyuse.png" alt="可用资金" />
 						<div>
 							<p>可用资金<i class="ifont question">&#xe66d;</i></p>
-							<span class="surveyMoney">￥{{balance}}</span>
+							<span class="surveyMoney">￥{{balance.toFixed(2)}}</span>
 						</div>
 					</li>
 					<li>
 						<img src="../../../assets/images/icon_money.png" alt="冻结资金" />
 						<div>
 							<p>冻结资金<i class="ifont question">&#xe66d;</i></p>
-							<span class="surveyMoney">￥{{frzBal}}</span>
+							<span class="surveyMoney">￥{{frzBal.toFixed(2)}}</span>
 						</div>
 					</li>
 					<li>
@@ -42,7 +42,7 @@
 		<div class="account_money"></div>
 		<div class="survey_functionChoose">
 			<div class="survey_functionChoose_top">
-				<p id="color_dea">收入<span class="white">{{incomeNum}}</span>笔，共<i class="color_yellow">{{incomeMoney}}</i>元 支出<span class="white">{{outlayNum}}</span>笔，共<i  class="color_yellow">{{outlayMoney}}</i>元  </p>
+				<p id="color_dea">收入<span class="white">{{incomeNum}}</span>笔，共<i class="color_yellow">{{incomeMoney.toFixed(2)}}</i>元 支出<span class="white">{{outlayNum}}</span>笔，共<i  class="color_yellow">{{outlayMoney.toFixed(2)}}</i>元  </p>
 			</div>
 			<div class="survey_functionChoose_center">
 				<ul>
