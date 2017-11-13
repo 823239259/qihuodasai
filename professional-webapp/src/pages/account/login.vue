@@ -113,10 +113,12 @@
 			eyeEvent : function(e){
 				if(this.eyeShow == false){
 					this.eyeShow = true;
-					$(e.target).html("&#xe64f;")
+					$(e.target).html("&#xe61c;");
+					$(e.target).addClass("current").siblings("#pwd").attr("type",'text');
 				}else{
 					this.eyeShow = false;
-					$(e.target).html("&#xe61c;")
+					$(e.target).html("&#xe64f;")
+					$(e.target).removeClass("current").siblings("#pwd").attr("type",'password');
 				}
 			},
 			close :function(){
