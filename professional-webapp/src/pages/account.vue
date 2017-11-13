@@ -1,9 +1,9 @@
 <template>
 	<div id="account">
 		<div id="router_path">
-			<span v-on:click="show_accountSurvey">账户概括</span>
-			<span v-on:click="show_accountOpenDetail">开户明细</span>
-			<span v-on:click="show_accountSafe">安全设置</span>
+			<template v-for="(v, index) in tabList">
+				<span :class="{current: currentNum == index}" @click="show_accountSurvey(index)">{{v}}</span>
+			</template>
 		</div>
 		<div id="container">
 			<router-view ></router-view>
@@ -17,27 +17,27 @@
 		name:'account',
 		data(){
 			return {
-				
+				tabList: ['账户概括','开户明细','安全设置'],
+				currentNum: 0,
 			}
 		},
 		methods : {
-			show_accountSurvey : function(){
-				this.$router.push({path:'/account_survey'});
+			show_accountSurvey : function(index){
+				this.currentNum = index;
+				if(index == 0){
+					this.$router.push({path:'/account_survey'});
+				}else if(index == 1){
+					this.$router.push({path:'/account_safe'})
+				}else if(index == 2){
+					this.$router.push({path:'/account_openDetail'})
+				}
 			},
-			show_accountSafe : function(){
-				this.$router.push({path:'/account_safe'})
-			},
-			show_accountOpenDetail : function(){
-				this.$router.push({path:'/account_openDetail'})
-			}
 		}
-		
 	}
 </script>
 
 <style lang="scss" scoped type="text/css">
 @import "../assets/css/common.scss";
-	
 	#account {
 		width: 80%;
 	}
@@ -46,14 +46,19 @@
 		position : relative;
 		width : 80%;
 		span {
-			&:hover {
-				color: yellow;
-			}
-			background-color : $blue;
+			display: inline-block;
 			width: 120px;
-			height: 30px;
-			line-height : 30px;
-			padding : 5px 20px 5px 20px;
+			height: 32px;
+			line-height: 32px;
+			text-align: center;
+			background-color : $blue;
+			margin-right: 5px;
+			cursor: pointer;
+			border-bottom: 5px solid $black;
+			&:hover, &.current {
+				color: $yellow;
+				border-color: $blue;
+			}
 		}
 	}
 	#container{

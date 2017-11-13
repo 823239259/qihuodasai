@@ -244,7 +244,6 @@
 @import "../../../assets/css/common.scss";
 	#account_openDetail{
 			width: 100%;
-			margin-top: 5px;
 			.account_openDetail_top {
 				/*height: 110px;*/
 				background-color: $blue;
