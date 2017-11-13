@@ -37,7 +37,7 @@
 			//支付
 			to_payMoney :function(){
 				var data = {
-//					vid:'',
+					vid:'',
 					"traderBond":this.payMoney,
 					"tranLever":0,
 					"businessType":8
@@ -55,7 +55,7 @@
 					}
 				}).catch((err)=>{
 					if(err.data.success == false){
-						layer.msg("err.data.message",{time:2000});
+						layer.msg(err.data.message,{time:2000});
 					}else{
 						layer.msg("网络不给力，请稍后再试",{time:2000})
 					}
@@ -86,7 +86,7 @@
 					}
 				}).catch((err)=>{
 					if(err.data.success == false){
-						layer.msg("err.data.message",{time:2000})
+						layer.msg(err.data.message,{time:2000})
 					}else{
 						layer.msg("网络不给力，请稍后再试",{time:2000})
 					}

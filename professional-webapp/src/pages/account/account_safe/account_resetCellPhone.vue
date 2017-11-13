@@ -162,6 +162,9 @@
 			background-color: $blue;
 			text-align : center;
 			p {
+				&:nth-child(1){
+					margin-right: 156px;
+				}
 				padding-top : 20px;
 				&:nth-child(3){
 					margin-right: 70px;

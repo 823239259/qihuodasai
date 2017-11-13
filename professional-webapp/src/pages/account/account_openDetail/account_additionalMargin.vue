@@ -9,7 +9,7 @@
 			<div class="center">
 				<p>账户资金：<span>{{account_money}}</span>元</p>
 				<p>追加保证金：<input type="text"  v-model="additionlMoney"/>元</p>
-				<p>换算美元：&nbsp;<span>{{additionlMoney}}</span>美元</p>
+				<p>换算美元：&nbsp;<span>{{(additionlMoney/account_USdollar).toFixed(2)}}</span>美元</p>
 				<ul>
 					<li>注意：</li>
 					<li>1.系统将在下个交易日前为您的期货账户追加保证金；</li>
@@ -147,6 +147,7 @@
 			border: 1px solid $lightblue;
 			border-radius: 5px;
 			margin: 0 5px;
+			color: $white;
 		}
 	}
 </style>
