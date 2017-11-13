@@ -159,29 +159,6 @@
 								layer.msg('网络不给力，请稍后重试', {time: 5000});
 							}
 						}.bind(this))
-					}else if(this.type == "resetMobile"){
-						var data={
-								mobile: this.phone,
-								type: 3
-						};
-						var headers = {
-							token : JSON.parse(localStorage.user).token,
-							secret : JSON.parse(localStorage.user).secret
-						}
-						pro.fetch("post",'/user/security/send_sms',headers).then((res)=>{
-							if(res.success == true){
-								if(res.code == 1){
-									layer.msg('设置成功',{time:1000});
-									setTimeout(function(){
-										this.isshow = false;
-									}.bind(this),1000);
-								}else {
-									layer.msg(res.code,{time:1000});
-								}
-							}
-						}).catch((err)=>{
-							layer.msg('网络不给力，请稍后重试', {time: 1000});
-						})
 					}else if(this.type == 'resetWithDrawPWD'){
 						var data={
 								mobile: this.phone,
