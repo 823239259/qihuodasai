@@ -504,6 +504,7 @@
 								layer.msg('添加成功', {time: 1000});
 								this.addStar = false;
 								this.optional = '取消自选';
+								this.isSelectedOrder();
 							}
 						}
 					}.bind(this)).catch(function(error){
@@ -524,6 +525,7 @@
 								layer.msg('删除成功', {time: 1000});
 								this.addStar = true;
 								this.optional = '添加自选';
+								this.isSelectedOrder();
 							}else{
 								layer.msg(res.message, {time: 1000});
 							}
