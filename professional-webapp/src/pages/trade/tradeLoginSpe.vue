@@ -120,7 +120,6 @@
 						this.accountList = res.data;
 					}
 				}.bind(this)).catch(function(err){
-					console.log(111111);
 					var data = err.data;
 					if(data) layer.msg(data.message, {time: 1000});
 				});

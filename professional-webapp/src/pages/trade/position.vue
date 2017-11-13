@@ -27,8 +27,8 @@
 		<div class="tools">
 			<button class="btn blue" @click="closePositionAll">全部平仓</button>
 			<button class="btn blue" @click="closePosition">平仓</button>
-			<!--<button class="btn blue" @click="backTrade">反手</button>
-			<button class="btn blue">止损止盈</button>-->
+			<button class="btn blue" @click="backTrade">反手</button>
+			<!--<button class="btn blue">止损止盈</button>-->
 		</div>
 	</div>
 </template>
@@ -62,7 +62,10 @@
 			},
 			buyStatus(){
 				return this.$store.state.market.buyStatus;
-			}
+			},
+			jCacheTotalAccount(){
+				return this.$store.state.market.CacheAccount.jCacheTotalAccount;
+			},
 		},
 		methods: {
 			clickEvent: function(i, id){
@@ -144,7 +147,50 @@
 				}
 			},
 			backTrade: function(){
-				
+				var confirmText;
+				if(this.currentOrderID != ''){
+					this.positionListCont.forEach(function(o,i){
+						if(this.currentOrderID == o.commodityNocontractNo){
+							if(o.price > this.jCacheTotalAccount.TodayCanUse){
+								layer.msg('当前余额不足，反手操作失败', {time: 1000});
+								return;
+							}
+							var buildIndex = 0;
+							if(buildIndex > 100) buildIndex = 0;
+							var Contract = o.commodityNocontractNo.substring(0, o.commodityNocontractNo.length-4);
+							var drection, _drection;
+							o.type == '多' ? drection = 1 : drection = 0;
+							var b = {
+								"Method": 'InsertOrder',
+								"Parameters":{
+									"ExchangeNo": this.orderTemplist[Contract].ExchangeNo,
+									"CommodityNo": this.templateList[Contract].CommodityNo,
+									"ContractNo": this.templateList[Contract].ContractNo,
+									"OrderNum": o.HoldNum,
+									"Drection": drection,
+									"PriceType": 1,
+									"LimitPrice": 0.00,
+									"TriggerPrice": 0,
+									"OrderRef": this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+								}
+							};
+							confirmText = '确定反手:【'+ o.commodityNocontractNo +'】,价格【市价】,手数【'+ o.HoldNum +'】？';
+							layer.confirm(confirmText, {
+								btn: ['确定','取消']
+							}, function(index){
+								if(this.buyStatus == true) return;
+								this.$store.state.market.buyStatus = true;
+								this.tradeSocket.send(JSON.stringify(b));
+								setTimeout(function(){
+									this.tradeSocket.send(JSON.stringify(b));
+								}.bind(this), 500);
+								layer.close(index);
+							}.bind(this));
+						}
+					}.bind(this));
+				}else{
+					layer.msg('请选择一条数据', {time: 1000});
+				}
 			},
 			operateData: function(obj){
 				this.$store.state.market.positionListCont = [];
