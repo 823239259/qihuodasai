@@ -19,7 +19,7 @@
 								<td v-if="realName == null">未认证</td>
 								<td v-else="realName != null" class="yellow_status">已认证</td>
 								<td v-if="realName == null">您还没有实名认证完成更高级认证后将提升您的充值与体现权限。</td>
-								<td v-else="realName!=null">认证信息：{{username}}，51116*************2222</td>
+								<td v-else="realName!=null">认证信息：{{username}}</td>
 								<td v-on:click="toCertification" v-if="realName == null">去认证</td>
 								<td v-else="realName != null"></td>
 							</tr>
@@ -116,7 +116,6 @@
 			pro.fetch("post","/user/security",{},headers).then((res)=>{
 				if(res.success == true){
 					if(res.code == 1){
-						this.username = res.data.realName;
 						this.phone = res.data.mobile;
 						this.realName = res.data.realName;
 						this.isWithdrawPwd = res.data.isWithdrawPwd;

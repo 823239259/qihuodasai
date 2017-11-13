@@ -46,10 +46,10 @@
 			</div>
 			<div class="survey_functionChoose_center">
 				<ul>
-					<li>今天</li>
-					<li>7天</li>	
-					<li>15天</li>
-					<li>30天</li>
+					<li class="active" v-on:click="timeChoose">今天</li>
+					<li v-on:click="timeChoose">7天</li>	
+					<li v-on:click="timeChoose">15天</li>
+					<li v-on:click="timeChoose">30天</li>
 					<li>起始时间</li>
 					<li><select name="">
 						<option value="">2017-10-15</option>
@@ -62,9 +62,9 @@
 			</div>
 			<div class="survey_functionChoose_btm">
 				<ul>
-					<li>全部</li>
-					<li>收入</li>
-					<li>支出</li>
+					<li class="active" v-on:click="chooseQuery">全部</li>
+					<li v-on:click="chooseQuery">收入</li>
+					<li v-on:click="chooseQuery">支出</li>
 				</ul>
 			</div>
 		</div>
@@ -117,17 +117,11 @@
 					</tr>-->
 				</tbody>
 			</table>
-			<div class="page_next">
-				<ul>
-					<li>下一页</li>
-					<li>5</li>
-					<li>4</li>
-					<li>3</li>
-					<li>2</li>
-					<li>1</li>
-					<li>上一页</li>
-				</ul>
-			</div>
+			 <div class="pager">
+			    <button class="btn_span"  @click="prePage">上一页</button>
+			    <span  @click="toIndexPage" v-for="(n,index) in pageCount" :class="{active:current1 == index}">{{n}}</span>
+			    <button class="btn_span"  @click="nextPage">下一页</button>
+			  </div>
 			<p class="p_center">投资有风险，入市需谨慎</p>
 		</div>
 	</div>
@@ -147,58 +141,188 @@
 				incomeMoney:'',
 				outlayNum:'',
 				outlayMoney:'',
-				item:[]
+				item:[],
+				pageCount:'',
+				current1:0,
+				current:1
 			}
-		},
-		created(){
-			var token = JSON.parse(localStorage.user).token;
-			var secret = JSON.parse(localStorage.user).secret;
-			this.username = JSON.parse(localStorage.user).username;
-			var headers = {
-				token : token,
-				secret :secret
-			}
-			//获取余额等信息
-			//查询资金明细
-			var info = {
-				pageIndex:1,
-				size:10,
-				startTime:'',
-				endTime:'',
-				operaType:''
-			};
-			pro.fetch("post",'/user/fund/list',info,headers).then((res)=>{
-				var data = res.data
-				if(res.success == true){	
-					if(res.code == 1){
-						this.incomeNum=data.incomeNum;
-						this.incomeMoney=data.incomeMoney;
-						this.outlayNum=data.outlayNum;
-						this.outlayMoney=data.outlayMoney;
-						this.frzBal=data.frzBal;
-						this.balance=data.balance;
-			//资金收入支出详情列表fundList
-						this.item=data.fundList;
-						var time = new Date(this.item[0].subTime)
-					}
-				}
-			}).catch((err)=>{
-				console.log(err)
-				layer.msg('网络不给力，请稍后再试', {time: 1000});
-			})
 		},
 		methods:{
+			//条件查询
+			chooseQuery:function(e){
+				$(e.currentTarget).addClass("active").siblings().removeClass("active");
+				var index = $(e.currentTarget).index();
+				switch (index){
+					case 0:
+					this.GetList('','','',2)
+						break;
+					case 1:
+					this.GetList('','','',1)
+						break;
+					case 2:
+					this.GetList('','','',0)
+						break;
+					default:
+						break;
+				}
+			},
+			//时间选择
+			timeChoose:function(e){
+				var index = $(e.currentTarget).index();
+				$(e.currentTarget).addClass("active").siblings().removeClass("active");
+				switch (index){
+					case 0:
+						this.GetList('',this.getMonthStartDate(),this.getCurrentDateAndTime(),'')
+						break;
+					case 1:
+						this.GetList('',this.getWeekStartDate(),this.getCurrentDateAndTime(),'')
+						break;
+					case 2:
+					this.GetList('',this.getHalfMonthStartDate(),this.getCurrentDateAndTime(),'')
+						break;
+					case 3:
+					this.GetList('',this.getMonthStartDate(),this.getCurrentDateAndTime(),'')
+						break;
+					default:
+						break;
+				}
+			},
+			//去目标页
+			toIndexPage:function(e) {
+				var index =parseInt($(e.currentTarget).index());
+				$(e.currentTarget).addClass("active").siblings().removeClass("active");
+				this.GetList(index,'','','');
+				this.current1 = index
+				return;
+		   	},
+			// 下一页
+			 nextPage:function() {
+			 	if((this.current)+1 >this.pageCount){
+			 		return;
+			 	}else{
+			 		console.log(this.current)
+			 		this.GetList((this.current+1),'','','');
+			 		this.current++;
+			 		return 
+			 	}
+		    },
+			// 上一页
+			 prePage:function(){
+			 	if((this.current-1) <=0){
+			 		console.log(1111111)
+			 		console.log(this.current);
+			 		return;
+			 	}else{
+			 		console.log(22222222)
+			 		console.log(this.current);
+			 		this.GetList((this.current - 1),'','','');
+			 		this.current--;
+			 		return;
+			 	}
+			},
 			toWithDraw : function (){
 				this.$router.push({path:'/withDraw_bankcard'})
 			},
 			toRecharge:function(){
 				this.$router.push({path:"/recharge"})
+			},
+			//获取数据
+			GetList:function(page,startT,endT,chooseType){
+				this.username = JSON.parse(localStorage.user).username;
+				var token = JSON.parse(localStorage.user).token;
+				var secret = JSON.parse(localStorage.user).secret;
+				var headers = {
+					token : token,
+					secret :secret
+				}
+				var info = {
+					pageIndex:page,
+					size:10,
+					startTime:startT,
+					endTime:endT,
+					operaType:chooseType
+				};
+				pro.fetch("post",'/user/fund/list',info,headers).then((res)=>{
+					var data = res.data
+					if(res.success == true){	
+						if(res.code == 1){
+							this.incomeNum=data.incomeNum;
+							this.incomeMoney=data.incomeMoney;
+							this.outlayNum=data.outlayNum;
+							this.outlayMoney=data.outlayMoney;
+							this.frzBal=data.frzBal;
+							this.balance=data.balance;
+							this.pageCount = data.totalPage;
+							//console.log(this.pageCount)
+							//资金收入支出详情列表fundList
+							this.item=data.fundList;
+							var time = pro.getDate("y-m-d h:i:s",this.item[0].subTime*1000);
+						}
+					}
+				}).catch((err)=>{
+					layer.msg('网络不给力，请稍后再试', {time: 1000});
+				})
+			},
+			//获取当前最晚时间
+			//7天
+			getWeekStartDate:function() {
+				var date00 = new Date();//当前日期   
+				var nowDayOfWeek = date00.getDay(); //今天本周的第几天   
+				var nowDay = date00.getDate(); //当前日   
+				var nowMonth = date00.getMonth(); //当前月   
+				var nowYear = date00.getYear(); //当前年   
+				nowYear += (nowYear < 2000) ? 1900 : 0;
+			    var weekStartDate = new Date(nowYear, nowMonth, nowDay - 7);   
+			    return this.formatDate11(weekStartDate);   
+			} ,
+			//一月内
+			getMonthStartDate:function(){
+				var date00 = new Date();//当前日期   
+				var nowDayOfWeek = date00.getDay(); //今天本周的第几天   
+				var nowDay = date00.getDate(); //当前日   
+				var nowMonth = date00.getMonth(); //当前月   
+				var nowYear = date00.getYear(); //当前年   
+				nowYear += (nowYear < 2000) ? 1900 : 0;
+				var weekStartDate = new Date(nowYear, nowMonth, nowDay - this.getCurrentMonthDays());   
+			    return this.formatDate11(weekStartDate);   
+			},
+			//15天
+			getHalfMonthStartDate:function(){ 
+				var date00 = new Date();//当前日期   
+				var nowDayOfWeek = date00.getDay(); //今天本周的第几天   
+				var nowDay = date00.getDate(); //当前日   
+				var nowMonth = date00.getMonth(); //当前月   
+				var nowYear = date00.getYear(); //当前年   
+				nowYear += (nowYear < 2000) ? 1900 : 0;
+			    var weekStartDate = new Date(nowYear, nowMonth, nowDay - 15);   
+			    return this.formatDate11(weekStartDate);   
+			},
+			formatDate11:function(date){  
+			    var myyear = date.getFullYear();   
+			    var mymonth = date.getMonth() + 1;   
+			    var myweekday = date.getDate();   
+			    if (mymonth < 10) {   
+			        mymonth = "0" + mymonth;   
+			    }   
+			    if (myweekday < 10) {   
+			        myweekday = "0" + myweekday;   
+			    }   
+			    return (myyear + "-" + mymonth + "-" + myweekday+' '+'23:59:59');   
+			},
+			getCurrentMonthDays:function(){
+				var CurrentDate = new Date(nowYear, nowMonth, nowDay); 
+				return CurrentDate.getDate();
+			},
+			getCurrentDateAndTime:function(){
+				var data00 = new Date();
+				return date00.getFullYear()+'-'+(date00.getMonth()+1)+'-'+date00.getDate()+' '+date00.getHours()+':'+date00.getMinutes()+':'+date00.getSeconds();
 			}
 		},
 		mounted:function(){
+			//获取默认
+			this.GetList('','','','');
 		}
 	}
-	
 </script>
 
 <style lang="scss" scoped type="text/css">
@@ -334,13 +458,6 @@
 			margin-left: 5px;
 			color: $yellow;
 		}
-		.page_next {
-			height: 60px;
-			line-height: 60px;
-			li {
-				float: right;
-			}
-		}
 		.account_money {
 			width: 100%;
 		}
@@ -383,7 +500,23 @@
 			padding-left: 20px;
 		}
 		.moneyDetail_list {
-			height: 400px;
+			height: 300px;
 			overflow-y: scroll;
+		}
+		/*分页*/
+		.pager {
+			float: right;
+			span{
+				margin: 0 10px;
+			}
+		}
+		.btn_span{
+			color: $white;
+			background-color: $blue;
+			border: none;
+			margin: 0 10px;
+		}
+		.active {
+		  color: $yellow;
 		}
 </style>
