@@ -147,6 +147,7 @@
 			border: 1px solid $lightblue;
 			border-radius: 5px;
 			margin: 0 5px;
+			color: $white;
 		}
 	}
 </style>
