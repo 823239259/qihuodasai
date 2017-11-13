@@ -77,11 +77,11 @@
 								var userData = {'username':this.phone,'password':this.pwd,'token':res.data.token,'secret':res.data.secret};
 								localStorage.setItem("user", JSON.stringify(userData));
 								this.$router.push({path: '/index'});
+								this.$store.state.account.isRefresh = 1;
 							}
 						}
 					}.bind(this)).catch(function(err){
 						var data = err.data;
-						console.log(data)
 						this.num = data.data.num;
 						if(data.success == false){
 							if(this.num > 2){
@@ -91,18 +91,17 @@
 									loginName : this.phone,
 									password :this.pwd
 								}
-							}else {
-								if(data.date != undefined){
-									var h = (data.data.date/3600).toString();
-									var hour = h.split('.')[0];
-									var minute = parseInt((h - hour) * 60);
-									layer.msg(data.message + '，距解冻时间还有' + hour + '小时' + minute + '分', {time: 3000});
-								}else{
-									layer.msg(data.message, {time: 1000});
-								}
+							}
+							if(data.data.date != undefined){
+								var h = (data.data.date/3600).toString();
+								var hour = h.split('.')[0];
+								var minute = parseInt((h - hour) * 60);
+								layer.msg(data.message + '，距解冻时间还有' + hour + '小时' + minute + '分', {time: 3000});
+							}else{
+								layer.msg(data.message, {time: 1000});
 							}
 						}else {
-							layer.msg('网路不给力',{time:5000})
+							layer.msg('网路不给力',{time: 2000})
 						}
 					}.bind(this));
 				}

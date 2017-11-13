@@ -7,10 +7,10 @@
 					<li class="current">
 						<span>国际期货</span>
 					</li>
-					<!--<li>
-						<span>国内期货</span>
-					</li>
 					<li>
+						<span @click="click">国内期货</span>
+					</li>
+					<!--<li>
 						<span>添加外汇</span>
 					</li>-->
 				</ul>
@@ -225,6 +225,10 @@
 			},
 		},
 		methods: {
+			click: function(){
+//				console.log(window.location.origin);
+				window.open(window.location.origin + '/aaa.html');
+			},
 			toggle: function(i, name, commodityNo, mainContract, exchangeNo){
 				this.Parameters.forEach(function(o, i){
 					if(commodityNo == o.CommodityNo){
