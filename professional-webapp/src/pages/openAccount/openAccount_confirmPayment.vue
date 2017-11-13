@@ -48,8 +48,6 @@
 				}
 				pro.fetch("post","/user/ftrade/handle",data,headers).then((res)=>{
 					var data = res.data;
-					console.log(111111111111)
-					console.log(res);
 					if(res.success == true){
 						if(res.code == 1){
 							this.$router.push({path:'/openAccount_success'});
