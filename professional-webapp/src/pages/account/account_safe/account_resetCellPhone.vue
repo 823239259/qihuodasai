@@ -5,9 +5,9 @@
 			</div>
 			<div class="account_resetCellPassword_center">
 				<p>旧手机号码：<span>{{username}}</span></p>
-				<p>短信验证码：<input type="text" v-model="oldCode"/><i class="getcode" v-on:click="getOldCode">{{volid ? info : (time + '秒')}}</i></p>
+				<p>短信验证码：<input type="text" v-model="oldCode"/><i class="getcode" v-on:click="getOldCode">{{oldVolid ? info : (oldTime + '秒')}}</i></p>
 				<p>新手机号码：<input type="text" v-model="newMobile" maxlength="11"/></p>
-				<p>短信验证码:<input type="text" v-model="newCode"/><i class="getcode" v-on:click="getNewCode">{{volids ? infos : (times + '秒')}}</i></p>
+				<p>短信验证码:<input type="text" v-model="newCode"/><i class="getcode" v-on:click="getNewCode">{{newVolid ? info : (newTime + '秒')}}</i></p>
 				<button class="btn yellow" v-on:click="toResetMobile">确认</button>
 			</div>
 			<div class="account_resetCellPassword_btm">
@@ -18,7 +18,6 @@
 				</ul>
 				<p>投资有风险，入市需谨慎</p>
 			</div>
-			<codeDialog ref="codeDialog" type="resetMobile"></codeDialog>
 		</div>
 </template>
 
@@ -27,17 +26,16 @@
 	import codeDialog from "../../../components/codeDialog.vue"
 	export default {
 		name : "safe_resetCellPhone",
-		components : {codeDialog},
 		data(){
 			return{
+				oldTime:'',
+				newTime:'',
 				oldCode:'',
 				newMobile:'',
 				newCode:'',
 				info:'点击获取',
 				infos:'点击获取',
-				time : 0,
 				path:'',
-				times:'',
 				phone:'',
 				username:'',
 				phoneReg: /^(((13[0-9])|(14[5-7])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/,
@@ -50,15 +48,15 @@
 			environment(){
 				return this.$store.state.environment;
 			},
-			volid: function(){
-				if(this.time <= 0){
+			oldVolid: function(){
+				if(this.oldTime <= 0){
 					return true
 				}else{
 					return false
 				}
 			},
-			volids: function(){
-				if(this.times <= 0){
+			newVolid: function(){
+				if(this.newTime <= 0){
 					return true
 				}else{
 					return false
@@ -81,8 +79,8 @@
 						secret : JSON.parse(localStorage.user).secret
 					}
 					var data = {
-						newMobile:this.newCode ,
-						oldCode:this.newMobile,
+						newMobile:this.newMobile,
+						oldCode:this.oldCode,
 						newCode:this.newCode
 					}
 					pro.fetch("post",'/user/security/upphone',data,headers).then((res)=>{
@@ -90,46 +88,159 @@
 							if(res.code == 1){
 								layer.msg('设置成功',{time:1000})
 								this.$router.path({path:'/account_safe'})
-							}else {
-								layer.msg(res.code,{time:1000})
 							}
 						}
 					}).catch((err)=>{
-						layer.msg('网络不给力，请稍后再试',{time:1000})
+						if(err.data.success == false){
+							switch (err.data.code){
+								case '-1':
+									this.$children[0].isShow = true;
+									layer.msg('修改失败',{time:1000});
+									break;
+								case '2':
+									this.$children[0].isShow = true;
+									layer.msg('手机号已存在',{time:1000});
+									break;
+								case '5':
+									this.$children[0].isShow = true;
+									layer.msg('新手机验证码超时',{time:1000});
+									break;
+								case '6':
+									this.$children[0].isShow = true;
+									layer.msg('新手机验证码错误',{time:1000});
+									break;
+								default:
+									break;
+							}
+						}else{
+							layer.msg('网络不给力，请稍后再试',{time:1000})
+						}
 					})
 				}
 			},
 			getOldCode :function(e){
 				if($(e.target).hasClass('current')) return false;
-				this.phone = JSON.parse(localStorage.user).username;
-				this.$refs.codeDialog.path =  "http://test.api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
-				this.$refs.codeDialog.phone = this.phone;
 				//页面效果
 				$(e.target).addClass('current');
-				this.time = 60;
+				this.oldTime = 60;
 				var timing = setInterval(function(){
-					this.time--;
-					if(this.time <= 0){
+					this.oldTime--;
+					if(this.oldTime <= 0){
 						clearInterval(timing);
 						$(e.target).removeClass('current');
 					}
 				}.bind(this), 1000);
+				//获取验证码
+				var data = {
+					mobile: this.phone,
+					type: 1
+				}
+				var headers = {
+					token : JSON.parse(localStorage.user).token,
+					secret :JSON.parse(localStorage.user).secret
+				}
+				pro.fetch("post","/user/security/send_sms",data,headers).then((res)=>{
+					if(res.success == true){
+						if(res.code == 1){
+							layer.msg("发送成功",{time:1000})
+						}
+					}
+				}).catch((err)=>{
+					if(err.data.success == false){
+						switch (err.data.code){
+							case 2:
+								this.$children[0].isShow = true;
+								layer.msg("短信验证码发送失败",{time:1000})
+								break;
+							case 4:
+								this.$children[0].isShow = true;
+								this.msg = '手机号码不存在';
+								layer.msg("手机号码不存在",{time:1000})
+								break;
+							case 5:
+								this.$children[0].isShow = true;
+								this.msg = '操作过于频繁，请稍候再试';
+								layer.msg("操作过于频繁，请稍候再试",{time:1000})
+								break;
+							case 6:
+								this.$children[0].isShow = true;
+								this.msg = '电话号码格式错误';
+								layer.msg("电话号码格式错误",{time:1000})
+								break;
+							default:
+								break;
+						}
+					}else {
+						layer.msg("网络不给力，请稍后再试",{time:1000})
+					}
+				})
 				
 			},
 			getNewCode:function(e){
-				if($(e.target).hasClass('current')) return false;
-				this.$refs.codeDialog.path =  "http://test.api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.newMobile;
-				this.$refs.codeDialog.phone = this.newMobile;
-				//页面效果
-				$(e.target).addClass('current');
-				this.times = 60;
-				var timing = setInterval(function(){
-					this.times--;
-					if(this.times <= 0){
-						clearInterval(timing);
-						$(e.target).removeClass('current');
+				if(this.newMobile == ''){
+					layer.msg("请输入新手机号码",)
+				}else{
+					if($(e.target).hasClass('current')) return false;
+					//页面效果
+					$(e.target).addClass('current');
+					this.newTime = 60;
+					var timing = setInterval(function(){
+						this.newTime--;
+						if(this.newTime <= 0){
+							clearInterval(timing);
+							$(e.target).removeClass('current');
+						}
+					}.bind(this), 1000);
+					//获取验证码
+					var data = {
+						mobile: this.newMobile,
+						type: 1
 					}
-				}.bind(this), 1000);
+					var headers = {
+						token : JSON.parse(localStorage.user).token,
+						secret :JSON.parse(localStorage.user).secret
+					}
+					pro.fetch("post","/user/security/send_sms",data,headers).then((res)=>{
+						if(res.success == true){
+							if(res.code == 1){
+								layer.msg("发送成功",{time:1000})
+							}
+						}
+					}).catch((err)=>{
+						if(err.data.success == false){
+							switch (err.data.code){
+								case 2:
+									this.$children[0].isShow = true;
+									layer.msg("短信验证码发送失败",{time:1000})
+									break;
+								case 3:
+									this.$children[0].isShow = true;
+									this.msg = '手机号码已经存在';
+									layer.msg("手机号码已经存在",{time:1000})
+									break;
+								case 4:
+									this.$children[0].isShow = true;
+									this.msg = '手机号码不存在';
+									layer.msg("手机号码不存在",{time:1000})
+									break;
+								case 5:
+									this.$children[0].isShow = true;
+									this.msg = '操作过于频繁，请稍候再试';
+									layer.msg("操作过于频繁，请稍候再试",{time:1000})
+									break;
+								case 6:
+									this.$children[0].isShow = true;
+									this.msg = '电话号码格式错误';
+									layer.msg("电话号码格式错误",{time:1000})
+									break;
+								default:
+									break;
+							}
+						}else {
+							layer.msg("网络不给力，请稍后再试",{time:1000})
+						}
+					})
+				}
 			}
 		},
 		created(){
