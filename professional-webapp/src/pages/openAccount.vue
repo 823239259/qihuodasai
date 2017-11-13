@@ -1,7 +1,7 @@
 <template>
 	<div id="openAccount">
 		<div class="openAccount_top">
-			<img src="../assets/images/icon_openaccount_01.png" v-if="showpage==true"/>
+			<img src="../assets/images/icon_openaccount_01.png" v-if="showpage == true"/>
 			<img src="../assets/images/icon_openaccount_02.png" v-else="showpage == false"/>
 		</div>
 		<div class="openAccount_center" v-if="isshow_openAccount_1">
@@ -12,7 +12,7 @@
 			</div>
 			<div class="openAccount_center_left">
 				<ul>
-					<li >
+					<li>
 						<button v-for="(item,index) in item" class="btn" :class="{btn1:current1 == index}" @click="chose">￥{{item.traderBond}}</button>
 					</li>
 					<li>

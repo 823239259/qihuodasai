@@ -7,12 +7,12 @@
 					<li class="current">
 						<span>国际期货</span>
 					</li>
-					<li>
+					<!--<li>
 						<span>国内期货</span>
 					</li>
 					<li>
 						<span>添加外汇</span>
-					</li>
+					</li>-->
 				</ul>
 			</div>
 			<div class="cont">
