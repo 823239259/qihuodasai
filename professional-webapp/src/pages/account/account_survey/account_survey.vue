@@ -22,14 +22,14 @@
 						<img src="../../../assets/images/icon_moneyuse.png" alt="可用资金" />
 						<div>
 							<p>可用资金<i class="ifont question">&#xe66d;</i></p>
-							<span class="surveyMoney">￥{{balance.toFixed(2)}}</span>
+							<span class="surveyMoney">￥{{balance}}</span>
 						</div>
 					</li>
 					<li>
 						<img src="../../../assets/images/icon_money.png" alt="冻结资金" />
 						<div>
 							<p>冻结资金<i class="ifont question">&#xe66d;</i></p>
-							<span class="surveyMoney">￥{{frzBal.toFixed(2)}}</span>
+							<span class="surveyMoney">￥{{frzBal}}</span>
 						</div>
 					</li>
 					<li>
@@ -42,7 +42,7 @@
 		<div class="account_money"></div>
 		<div class="survey_functionChoose">
 			<div class="survey_functionChoose_top">
-				<p id="color_dea">收入<span class="white">{{incomeNum}}</span>笔，共<i class="color_yellow">{{incomeMoney.toFixed(2)}}</i>元 支出<span class="white">{{outlayNum}}</span>笔，共<i  class="color_yellow">{{outlayMoney.toFixed(2)}}</i>元  </p>
+				<p id="color_dea">收入<span class="white">{{incomeNum}}</span>笔，共<i class="color_yellow">{{incomeMoney}}</i>元 支出<span class="white">{{outlayNum}}</span>笔，共<i  class="color_yellow">{{outlayMoney}}</i>元  </p>
 			</div>
 			<div class="survey_functionChoose_center">
 				<ul>
@@ -85,7 +85,6 @@
 						<td v-if="item.money >0" class="color_yellow">收入</td>
 						<td v-else="item.money <0">支出</td>	
 						<td>{{item.money}}元</td>
-						<!--<td>{{item.balance}}元</td>-->
 						<td>{{item.remark}}</td>
 					</tr>
 					<!--<tr>
@@ -210,7 +209,6 @@
 		background-color: $blue;
 		width: 100%;
 		float: left;
-		
 	}
 		li {
 				width: 60px;
@@ -264,7 +262,7 @@
 		}
 		.account_info {
 			width: 100%;
-			height: 240px;			
+			height: 240px;		
 		}
 		.info_left {
 			width: 50%;
@@ -347,7 +345,6 @@
 			width: 100%;
 		}
 		
-		
 		#color_blue {
 					color: $lightblue;
 					background-color: $blue;
@@ -384,5 +381,9 @@
 		}
 		.surveyMoney {
 			padding-left: 20px;
+		}
+		.moneyDetail_list {
+			height: 400px;
+			overflow-y: scroll;
 		}
 </style>
