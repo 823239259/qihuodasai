@@ -37,7 +37,7 @@
 			//支付
 			to_payMoney :function(){
 				var data = {
-//					vid:'',
+					vid:'',
 					"traderBond":this.payMoney,
 					"tranLever":0,
 					"businessType":8
@@ -48,6 +48,8 @@
 				}
 				pro.fetch("post","/user/ftrade/handle",data,headers).then((res)=>{
 					var data = res.data;
+					console.log(111111111111)
+					console.log(res);
 					if(res.success == true){
 						if(res.code == 1){
 							this.$router.push({path:'/openAccount_success'});
@@ -55,7 +57,7 @@
 					}
 				}).catch((err)=>{
 					if(err.data.success == false){
-						layer.msg("err.data.message",{time:2000});
+						layer.msg(err.data.message,{time:2000});
 					}else{
 						layer.msg("网络不给力，请稍后再试",{time:2000})
 					}
@@ -86,7 +88,7 @@
 					}
 				}).catch((err)=>{
 					if(err.data.success == false){
-						layer.msg("err.data.message",{time:2000})
+						layer.msg(err.data.message,{time:2000})
 					}else{
 						layer.msg("网络不给力，请稍后再试",{time:2000})
 					}
