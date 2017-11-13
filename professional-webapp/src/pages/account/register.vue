@@ -88,10 +88,10 @@
 			eyeEvent : function(e){
 				if(this.eyeShow == false){
 					this.eyeShow = true;
-					$(e.target).addClass("current").siblings("#pwd").attr("type",'text');
+					$(e.target).html("&#xe64f;")
 				}else{
 					this.eyeShow = false;
-					$(e.target).removeClass("current").siblings("#pwd").attr("type",'password');
+					$(e.target).html("&#xe61c;")
 				}
 			},
 			register : function(){

@@ -58,7 +58,7 @@
 					pro.fetch("post",'/user/ftrade/addbond',data,headers).then((res)=>{
 						if(res.success == true){
 							if(res.code == 1){
-								this.account_USdollar = this.additionlMoney*res.data.rate
+//								this.account_USdollar = this.additionlMoney*res.data.rate
 							}
 						}
 					}).catch((err)=>{
