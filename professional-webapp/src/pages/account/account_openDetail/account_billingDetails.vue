@@ -5,7 +5,7 @@
 			<p class="title">终结方案<i class="ifont ifont_x" v-on:click="close">&#xe624;</i></p>
 			<div class="details">
 				<p>结算金额明细</p>
-				<p><span>616156.51</span>元（结算金额）<span>=300元</span>（操盘保证金）+<span>00元</span>（追加保证金）+<span>62661515.315元</span>（交易盈亏）-<span>158元</span>（手续费）</p>
+				<p><span>{{endAmount}}</span>元（结算金额）<span>={{traderBond}}元</span>（操盘保证金）+<span>{{appendTraderBond}}元</span>（追加保证金）+<span>{{tradeSell}}元</span>（交易盈亏）-<span>{{tranFees}}元</span>（手续费）</p>
 				<p><i>注意：</i>交易手续费= 合约手续费x交易手数</p>
 			</div>
 			<div class="handDetails">
@@ -138,7 +138,14 @@
 			return{
 				current1:0,
 				pageCount:'',
-				id:''
+				id:'',
+				endAmount:'',
+				traderBond:'',
+				appendTraderBond:'',
+				tranProfitLoss:'',
+				endParities:'',
+				tranFees:"",
+				tradeSell:''
 			}
 		},
 		methods:{
@@ -161,20 +168,31 @@
 					secret:JSON.parse(localStorage.user).secret
 				}
 				var data = {
-					id:''
+					id:this.id
 				}
 				console.log(data)
-				pro.fetch("post","/user/ftrade/getFstTradeDetail",data,headers).then((res)=>{
+				pro.fetch("post","/ user/ftrade/details",data,headers).then((res)=>{
 					console.log(res)
 					if(res.success == true){
 						if(res.code == 1){
-//							console.log(res);
+							this.endAmount = res.data.endAmount.toFixed(2)
+							this.traderBond = res.data.traderBond
+							this.appendTraderBond = res.data.appendTraderBond
+							this.tranProfitLoss=res.data.tranProfitLoss,
+							this.endParities=res.data.endParities,
+							this.tradeSell = (this.tranProfitLoss*this.endParities).toFixed(2)
+							this.tranFees = res.data.tranFees
 						}
 					}
 				}).catch((err)=>{
 					console.log(err)
 //					if(err.data.success == false){
-//						
+//						switch (err.data.success){
+//							case value:
+//								break;
+//							default:
+//								break;
+//						}
 //					}else {
 //						layer.msg("网络不给力，请稍后再试",{time:2000})
 //					}
