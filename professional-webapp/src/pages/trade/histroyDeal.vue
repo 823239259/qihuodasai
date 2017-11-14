@@ -124,7 +124,7 @@
 		    		var beginTime = year + '/' + month + '/' + day+' 00:00:00';
 		    		
 		    		var date00 = new Date(); 
-		    		date00.setDate(date00.getDate());
+		    		date00.setDate(date00.getDate() + 1);
 		    		var year00 = date00.getFullYear();
 		    		var day00 = date00.getDate() > 9 ? date00.getDate() : "0" + date00.getDate();
 		    		var month00 = (date00.getMonth() + 1) > 9 ? (date00.getMonth() + 1) : "0"+ (date00.getMonth() + 1);
