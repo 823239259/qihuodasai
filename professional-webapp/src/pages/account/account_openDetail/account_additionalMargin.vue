@@ -31,7 +31,8 @@
 				account_money : '',
 				account_USdollar : '',
 				additionlMoney : '',
-				changemoney : ''
+				changemoney : '',
+				id:''
 			}
 		},
 		methods:{
@@ -43,7 +44,7 @@
 			},
 			sure_additionlMoney : function(){
 				var data = {
-					id : '',
+					id :this.id,
 					addBond : this.additionlMoney
 				}
 				var headers = {
@@ -51,23 +52,58 @@
 					secret : JSON.parse(localStorage.user).secret
 				}
 				if(this.additionlMoney == ''){
-					layer.msg('请输入补充保证金的金额',{time:1000})
+					layer.msg('请输入补充保证金的金额',{time:2000})
 				}else if(this.additionlMoney < 500){
-					layer.msg('补充保证金的金额需要大于500元',{time:1000})
+					layer.msg('补充保证金的金额需要大于500元',{time:2000})
+				}else if(this.account_money < this.additionlMoney){
+					layer.msg("余额不足，请先去充值",{time:2000})
 				}else{
 					pro.fetch("post",'/user/ftrade/addbond',data,headers).then((res)=>{
 						if(res.success == true){
 							if(res.code == 1){
-//								this.account_USdollar = this.additionlMoney*res.data.rate
+								layer.msg("追加成功",{time:2000});
+								this.$router.push({path:'account_openDetail'})
 							}
 						}
 					}).catch((err)=>{
-						layer.msg('网络不给力，请稍后再试',{time:1000})
+						if(err.data.success == false){
+							switch (err.data.code){
+								case '-1':
+									layer.msg("认证失败",{time:2000});
+									break;
+								case '2':
+									layer.msg("余额不足",{time:2000});
+									break;
+								case '3':
+									layer.msg("未找到该方案",{time:2000});
+									break;
+								case '4':
+									layer.msg("该方案已完结",{time:2000});
+									break;
+								case '5':
+									layer.msg("追加金额低于默认最小金额",{time:2000});
+									break;
+								case '6':
+									layer.msg("方案编号不能为空",{time:2000});
+									break;
+								case '7':
+									layer.msg("追加金额不能为空或者0",{time:2000});
+									break;
+								case '8':
+									layer.msg("追加保证金失败",{time:2000});
+									break;
+								default:
+									break;
+							}
+						}else{
+							layer.msg('网络不给力，请稍后再试',{time:2000})
+						}
 					})
 				}
 			}
 		},
 		mounted:function(){
+			this.id = this.$route.query.id;
 			var data = {
 				businessType : 1,
 			}
@@ -85,6 +121,9 @@
 			}).catch((err)=>{
 				layer.msg('网络不给力，请稍后再试',{time:1000})
 			})
+		},
+		activated:function(){
+			this.id = this.$route.query.id;
 		}
 	}
 </script>

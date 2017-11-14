@@ -38,7 +38,8 @@
 				pwdReg: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,18}$/,
 				pwd : '',
 				newPwd:'',
-				telReg : false
+				telReg : false,
+				checkPhone:''
 			}
 		},
 		computed : {
@@ -73,6 +74,7 @@
 						this.$refs.codeDialog.phone = this.phone;
 					}else{
 						//请求发送验证码
+						this.checkPhone = this.phone;
 						var data = {
 							mobile:this.phone,
 							type : 2
@@ -117,6 +119,8 @@
 					layer.msg('请输入验证码', {time: 1000});
 				}else if(this.telReg == false){
 					layer.msg('请先获取验证码', {time: 1000});
+				}else if(this.phone!=this.checkPhone){
+					layer.msg("请输入正确手机号码",{time:1000})
 				}else{
 					$(".forgetPassword").css('display','none');
 					$(".resetPassword").css('display','block')
@@ -139,7 +143,7 @@
 						code: this.code
 					};
 					var headers = {version:this.version}
-					pro.fetch("post",'reset_password',data,headers).then(function(res){
+					pro.fetch("post",'/reset_password',data,headers).then(function(res){
 						if(res.success == true){
 							if(res.code == 1){
 								layer.msg('密码重置成功', {time: 1000});
@@ -154,7 +158,7 @@
 						var data = err.data;
 						if(data.success == false){
 							this.code = '';
-							this.num = res.num;
+							this.num = err.num;
 							layer.msg(data.message, {time: 1000});
 						}else {
 							layer.msg('网络不给力，请稍后重试',{time:5000})
@@ -209,6 +213,7 @@
 			}
 		}
 		input {
+			margin-bottom: 10px;
 			width: 320px;
 			height: 40px;
 			color: $white;
