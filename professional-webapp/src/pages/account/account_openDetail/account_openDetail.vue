@@ -226,7 +226,6 @@
 						else {
 							this.show_detail = true;
 							this.item = res.data.tradeList;
-							console.log(this.item)
 						}
 					}
 				}
