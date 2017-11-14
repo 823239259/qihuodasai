@@ -4,7 +4,7 @@
 			<img src="../assets/images/icon_openaccount_01.png" v-if="showpage == true"/>
 			<img src="../assets/images/icon_openaccount_02.png" v-else="showpage == false"/>
 		</div>
-		<div class="openAccount_center" v-if="isshow_openAccount_1">
+		<div class="openAccount_center">
 			<div class="title">
 				<span>开户入金</span>
 				<span>操盘保证金越多，可持仓手数越多</span>
@@ -34,7 +34,7 @@
 				</ul>
 			</div>
 		</div>
-		<div class="openAccount_center_step2" v-if="isshow_openAccount_2">
+		<div class="openAccount_center_step2" v-if="isshow_openAccount">
 			<div class="title">
 				<span>确认方案信息</span>
 			</div>
@@ -98,13 +98,13 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="btm_btm">
-					<span v-on:click="show_listAll">展开</span>
-				</div>
 			</div>
-			<div class="openAccount_btm_btm">
-				<span>投资有风险，入市需谨慎</span>
+			<div class="btm_btm">
+				<span v-on:click="show_listAll">展开</span>
 			</div>
+		</div>
+		<div class="openAccount_btm_btm">
+			<span>投资有风险，入市需谨慎</span>
 		</div>
 	</div>
 </template>
@@ -114,8 +114,7 @@
 		name:'openAccount',
 		data(){
 			return {
-				isshow_openAccount_1 : true,
-				isshow_openAccount_2 : false,
+				isshow_openAccount: false,
 				show_price : 3000,
 				item: '',
 				lineLoss:'',
@@ -494,8 +493,8 @@
 	}
 	.openAccount_center {
 		width: 100%;
-		margin-top: 10px;
 		height: 280px;
+		margin-top: 5px;
 	}
 	.openAccount_center_left {
 		width: 50%;
@@ -505,6 +504,9 @@
 		text-align: center;
 		span {
 			color: $white;
+		}
+		.btn.yellow{
+			color: $black;
 		}
 		li {
 			&:nth-child(1){
@@ -528,6 +530,7 @@
 		width: 100%;
 		line-height: 40px;
 		background-color: $bottom_color;
+		padding: 0 10px;
 		span {
 			&:nth-child(1){
 				color : $white;
@@ -568,9 +571,9 @@
 		height: 240px;
 		float: left;
 		li {
-			text-indent: 5px;
 			height:40px; 
 			line-height: 40px;
+			padding-left: 10px;
 			&:nth-child(4){
 				border-bottom: 1px solid $bottom_color;
 				border-top: 1px solid $bottom_color;
@@ -592,8 +595,7 @@
 	}
 	.openAccount_btm {
 		width: 100%;
-		margin-top: 10px;
-		height: 300px;
+		margin-top: 5px;
 		background-color: $bottom_color;
 		/*overflow: scroll;*/
 	}
@@ -602,6 +604,7 @@
 		width: 100%;
 		line-height: 40px;
 		background-color: $bottom_color;
+		padding-left: 10px;
 		span {
 			&:first-child {
 				font-size: $fs16;
@@ -613,17 +616,22 @@
 		}
 	}
 	.openAccount_btm_center {
-		background-color: $bottom_color;
 		width: 100%;
+		height: 234px;
+		overflow: hidden;
+		background-color: $bottom_color;
 	}
-	.btm_btm {
+	.btm_btm{
 		width: 100%;
 		height: 60px;
-		float: left;
 		line-height: 60px;
 		text-align: center;
+		overflow: hidden;
 		background-color: $blue;
 		border-top: 1px solid $bottom_color;
+	}
+	.btm_btm span{
+		cursor: pointer;
 	}
 	.product_list {
 		width: 100%;
@@ -661,14 +669,18 @@
 	 		border-bottom: 1px solid $bottom_color;
 	 	}
 	 }
-	 .openAccount_btm_btm {
-	 	/*margin-top: 10x;*/
-	 	float: left;
+	 .openAccount_btm_btm{
 	 	width: 100%;
 	 	height: 40px;
-	 	text-align: center;
 	 	line-height: 40px;
+	 	overflow: hidden;
+	 	text-align: center;
+	 	margin-top: 5px;
 	 	background-color: $bottom_color;
+	 }
+	 .openAccount_btm_btm span{
+	 	color: #7a7f99;
+	 	font-size: $fs12;
 	 }
 	 .color_deepblue {
 	 	&:hover{
