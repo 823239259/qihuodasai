@@ -115,17 +115,6 @@
 				}
 			},
 			getOldCode :function(e){
-				if($(e.target).hasClass('current')) return false;
-				//页面效果
-				$(e.target).addClass('current');
-				this.oldTime = 60;
-				var timing = setInterval(function(){
-					this.oldTime--;
-					if(this.oldTime <= 0){
-						clearInterval(timing);
-						$(e.target).removeClass('current');
-					}
-				}.bind(this), 1000);
 				//获取验证码
 				var data = {
 					mobile: this.phone,
@@ -138,6 +127,17 @@
 				pro.fetch("post","/user/security/send_sms",data,headers).then((res)=>{
 					if(res.success == true){
 						if(res.code == 1){
+							if($(e.target).hasClass('current')) return false;
+								//页面效果
+								$(e.target).addClass('current');
+								this.oldTime = 60;
+								var timing = setInterval(function(){
+									this.oldTime--;
+									if(this.oldTime <= 0){
+										clearInterval(timing);
+										$(e.target).removeClass('current');
+									}
+								}.bind(this), 1000);
 							layer.msg("发送成功",{time:2000})
 						}
 					}
@@ -173,17 +173,6 @@
 				}else if(this.phoneReg.test(this.newMobile) == false){
 					layer.msg("手机格式不正确",{time:2000})
 				}else{
-					if($(e.target).hasClass('current')) return false;
-					//页面效果
-					$(e.target).addClass('current');
-					this.newTime = 60;
-					var timing = setInterval(function(){
-						this.newTime--;
-						if(this.newTime <= 0){
-							clearInterval(timing);
-							$(e.target).removeClass('current');
-						}
-					}.bind(this), 1000);
 					//获取验证码
 					var data = {
 						mobile: this.newMobile,
@@ -196,6 +185,17 @@
 					pro.fetch("post","/user/security/send_sms",data,headers).then((res)=>{
 						if(res.success == true){
 							if(res.code == 1){
+								if($(e.target).hasClass('current')) return false;
+									//页面效果
+									$(e.target).addClass('current');
+									this.newTime = 60;
+									var timing = setInterval(function(){
+										this.newTime--;
+										if(this.newTime <= 0){
+											clearInterval(timing);
+											$(e.target).removeClass('current');
+										}
+									}.bind(this), 1000);
 								layer.msg("发送成功",{time:2000})
 							}
 						}
