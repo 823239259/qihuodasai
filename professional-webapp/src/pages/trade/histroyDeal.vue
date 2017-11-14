@@ -74,19 +74,6 @@
 			},
 		},
 		methods: {
-			serchEvent: function(){
-				this.selectedNum = -1;
-				this.startTime = $(".startTime").val();
-				this.endTime = $(".endTime").val();
-				var beginTime = $(".startTime").val() + ' 00:00:00';
-				var endTime = $(".endTime").val() + ' 00:00:00';
-				this.histroyDealList = [];
-				this.$store.state.market.queryHisList = [];
-				this.tradeSocket.send('{"Method":"QryHisTrade","Parameters":{"ClientNo":"'+JSON.parse(localStorage.tradeUser).username	+'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'"}}');
-				setTimeout(function(){
-					this.operateData();
-				}.bind(this),500);
-			},
 			operateData: function(){
 				this.queryHisList.forEach(function(o, i){
 					var data = {};
@@ -107,6 +94,20 @@
 					data.TradeDateTime = o.TradeDateTime;
 					this.histroyDealList.push(data);
 				}.bind(this));
+			},
+			serchEvent: function(){
+				this.selectedNum = -1;
+				this.startTime = $(".startTime").val();
+				this.endTime = $(".endTime").val();
+				var beginTime = $(".startTime").val() + ' 00:00:00';
+				var t =  Date.parse(new Date(this.endTime)) + 86400000;
+				var endTime = pro.getDate("y-m-d", t) + ' 00:00:00';
+				this.histroyDealList = [];
+				this.$store.state.market.queryHisList = [];
+				this.tradeSocket.send('{"Method":"QryHisTrade","Parameters":{"ClientNo":"'+JSON.parse(localStorage.tradeUser).username	+'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'"}}');
+				setTimeout(function(){
+					this.operateData();
+				}.bind(this),500);
 			},
 			conditionSearch: function(index){
 				var date = new Date();
@@ -145,7 +146,7 @@
 		    		var beginTime = year + '/' + month + '/' + day+' 00:00:00';
 		    		
 		    		var date00 = new Date(); 
-		    		date00.setDate(date00.getDate());
+		    		date00.setDate(date00.getDate() + 1);
 		    		var year00 = date00.getFullYear();
 		    		var day00 = date00.getDate() > 9 ? date00.getDate() : "0" + date00.getDate();
 		    		var month00 = (date00.getMonth() + 1) > 9 ? (date00.getMonth() + 1) : "0"+ (date00.getMonth() + 1);
@@ -166,7 +167,7 @@
 		    		var beginTime = year + '/' + month + '/' + day+' 00:00:00';
 		    		
 		    		var date00 = new Date(); 
-		    		date00.setDate(date00.getDate());
+		    		date00.setDate(date00.getDate() + 1);
 		    		var year00 = date00.getFullYear();
 		    		var day00 = date00.getDate() > 9 ? date00.getDate() : "0" + date00.getDate();
 		    		var month00 = (date00.getMonth() + 1) > 9 ? (date00.getMonth() + 1) : "0"+ (date00.getMonth() + 1);
