@@ -2,43 +2,22 @@
 	<div id="app">
 		<div id="nav" class="container_left">
 			<ul>
-				<li @click="clickEvent">
+				<li @click="toIndex">
 					<img src="./assets/images/logo.png" alt="logo" />
 				</li>
-				<li class="current" @click="clickEvent">
-					<i class="icon icon_quote"></i>
-					<p>行情</p>
-				</li>
-				<li @click="clickEvent">
-					<i class="icon icon_trade"></i>
-					<p>交易</p>
-				</li>
-				<li @click="clickEvent">
-					<i class="icon icon_open"></i>
-					<p>开户</p>
-				</li>
-				<li @click="clickEvent">
-					<i class="icon icon_live"></i>
-					<p>直播</p>
-				</li>
-				<li @click="clickEvent">
-					<i class="icon icon_calendar"></i>
-					<p>日历</p>
-				</li>
-				<li @click="clickEvent">
-					<i class="icon icon_download"></i>
-					<p>下载</p>
-				</li>
-				<li @click="clickEvent">
-					<i class="icon icon_account"></i>
-					<p>我的</p>
-				</li>
+				<template v-for="(v, index) in navList">
+					<li :class="{current: currentNav == index}" @click="clickEvent(index)">
+						<i class="icon" :class="v.cs"></i>
+						<p>{{v.name}}</p>
+					</li>
+				</template>
 			</ul>
 		</div>
 		<div class="container_top">
 			<div class="fl box"></div>
 			<div class="fl">
-				<i class="ifont zoom" @click="fullScreen">&#xe62e;</i>
+				<i class="ifont zoom" @click="fullScreen" v-show="!fullScreenCurrent">&#xe62e;</i>
+				<i class="ifont zoom" @click="fullScreen" v-show="fullScreenCurrent">&#xe612;</i>
 				<div class="customer_service fl" :class="{current: csAddressCurrent}" @click="customerService">
 					<i class="ifont">&#xe68f;</i>
 					<span>在线客服</span>
@@ -56,7 +35,7 @@
 			</div>
 			<!--登陆后显示样式-->
 			<div class="fr_login" v-show="show_login">
-				<i>欢迎，</i><span class="userPhone"></span>
+				<i>欢迎，</i><span class="userPhone">{{userName}}</span>
 				<i v-on:click="exit">退出</i>
 			</div>
 		</div>
@@ -119,7 +98,6 @@
 		name: 'app',
 		data(){
 			return {
-				warningShow: false,
 				fullScreenCurrent: false,
 				csAddress: '',
 				csAddressCurrent: false,
@@ -129,6 +107,29 @@
 				show_tologin : false,
 				show_login : false,
 				iconShow: true,
+				zoomShow: true,
+				navList: [{
+					name: '行情',
+					cs: 'icon_quote'
+				},{
+					name: '交易',
+					cs: 'icon_trade'
+				},{
+					name: '开户',
+					cs: 'icon_open'
+				},{
+					name: '直播',
+					cs: 'icon_live'
+				},{
+					name: '日历',
+					cs: 'icon_calendar'
+				},{
+					name: '下载',
+					cs: 'icon_download'
+				},{
+					name: '我的',
+					cs: 'icon_account'
+				}],
 			}
 		},
 		computed: {
@@ -138,8 +139,11 @@
 			quoteInitStatus(){
 				return this.$store.state.market.quoteInitStatus;
 			},
-			showWarning(){
-				return this.$store.state.isshow.warningShow;
+			currentNav(){
+				return this.$store.state.account.currentNav;
+			},
+			userName(){
+				return this.$store.state.account.userName;	
 			}
 		},
 		filters:{
@@ -158,6 +162,12 @@
 					this.iconShow = true;
 				}
 			},
+			userName: function(n, o){
+				if(n){
+					this.show_tologin = false;
+					this.show_login = true;
+				}
+			}
 		},
 		methods: {
 			...mapActions([
@@ -197,50 +207,68 @@
 					    document.msExitFullscreen();
 					}
 				}
+				document.addEventListener("fullscreenchange", function () {  
+			        fullscreenState.innerHTML = (document.fullscreen) ? "" : "not ";  
+			    }, false);  
+			    document.addEventListener("mozfullscreenchange", function () {  
+			        fullscreenState.innerHTML = (document.mozFullScreen) ? "" : "not ";  
+			    }, false);  
+			    document.addEventListener("webkitfullscreenchange", function () {  
+			        fullscreenState.innerHTML = (document.webkitIsFullScreen) ? "" : "not ";  
+			    }, false);  
+			    document.addEventListener("msfullscreenchange", function () {  
+			        fullscreenState.innerHTML = (document.msFullscreenElement) ? "" : "not ";  
+			    }, false);  
 			},
-			clickEvent: function(e){
+			toIndex: function(){
+				this.$router.push({path: '/index'});
+				this.$store.state.account.currentNav = 0;
+			},
+			clickEvent: function(index){
 				this.$store.state.isshow.isfens = false;
 				this.$store.state.isshow.iskline = false;
 				this.$store.state.isshow.isfensshow = false;
 				this.$store.state.isshow.isklineshow = false;
-				var index = $(e.currentTarget).index();
-				if(index == 0){
-					this.$router.push({path: '/index'});
-					$("#nav li").eq(1).addClass("current").siblings().removeClass("current");
-				}else{
-					$(e.currentTarget).addClass("current").siblings().removeClass("current");
-					switch (index){
-						case 1:
-							this.$router.push({path: '/index'});
-							break;
-						case 2:
-							this.$router.push({path: '/trade'});
-							break;
-						case 3:
+				switch (index){
+					case 0:
+						this.$router.push({path: '/index'});
+						this.$store.state.account.currentNav = 0;
+						break;
+					case 1:
+						this.$router.push({path: '/trade'});
+						this.$store.state.account.currentNav = 1;
+						break;
+					case 2:
+						if(this.userInfo == ''){
+							this.$router.push({path: '/login'});
+							this.$store.state.account.currentNav = 6;
+						}else{
 							this.$router.push({path: '/openAccount'});
-							break;
-						case 4:
-							this.$router.push({path: '/liveStream'});
-							break;
-						case 5:
-							this.$router.push({path: '/calendar'});
-							break;
-						case 6:
-							this.$router.push({path: '/download'});
-							break;
-						case 7:
-							if(!localStorage.user){
-								layer.msg("请先登录账户",{time:500});
-								setTimeout(function(){
-									this.$router.push({path:'/login'})
-								}.bind(this),1500)
-							}else{
-								this.$router.push({path: '/account'});
-							}
-							break;
-						default:
-							break;
-					}
+							this.$store.state.account.currentNav = 2;
+						}
+						break;
+					case 3:
+						this.$router.push({path: '/liveStream'});
+						this.$store.state.account.currentNav = 3;
+						break;
+					case 4:
+						this.$router.push({path: '/calendar'});
+						this.$store.state.account.currentNav = 4;
+						break;
+					case 5:
+						this.$router.push({path: '/download'});
+						this.$store.state.account.currentNav = 5;
+						break;
+					case 6:
+						if(this.userInfo == ''){
+							this.$router.push({path: '/login'});
+						}else{
+							this.$router.push({path: '/account'});
+						}
+						this.$store.state.account.currentNav = 6;
+						break;
+					default:
+						break;
 				}
 			},
 			toRegister : function(){
@@ -254,14 +282,17 @@
 				this.$store.state.isshow.isklineshow = false;
 			},
 			//退出登录,清空localstorge
-			exit : function(){
-				this.isShow_exit=true
+			exit: function(){
+				this.isShow_exit = true
 			},
-			confirm : function(){
+			confirm: function(){
 				localStorage.user = '';
-				location.replace(location.href)
+				this.$router.push({path: '/index'});
+				this.$store.state.account.isRefresh = 1;
+				this.$store.state.account.currentNav = 0;
+				this.isShow_exit = false
 			},
-			canal :function(){
+			canal: function(){
 				this.isShow_exit=false
 			}
 		},
@@ -277,12 +308,21 @@
 			if(localStorage.user){
 				this.show_tologin = false;
 				this.show_login = true;
-				var username = JSON.parse(localStorage.user).username;
-				$(".userPhone").html(username);
+				this.$store.state.account.userName = JSON.parse(localStorage.user).username;
 			}else{
 				this.show_tologin = true;
 				this.show_login = false;
 			}
+		},
+		activated: function(){
+			//监听退出全屏
+			document.onkeydown = function (e) {
+	        	e = e || event;
+	            if (e.keyCode == 27) {  //判断是否单击的esc按键
+	            	console.log(111);
+	                this.fullScreenCurrent = false;
+	            }
+		 	}.bind(this);
 		}
 	}
 </script>
@@ -447,6 +487,7 @@
 			color: #ccd5ff;
 			font-size: $fs12;
 			float: left;
+			cursor: pointer;
 		}
 		.userPhone{
 			color: $yellow;

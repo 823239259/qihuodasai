@@ -99,7 +99,7 @@
 									}.bind(this),1000);
 								}
 							}else{
-									layer.msg('网络不给力，请稍后重试', {time: 5000});
+								layer.msg('网络不给力，请稍后重试', {time: 5000});
 							}
 						}.bind(this))
 					}else if(this.type == 'register'){

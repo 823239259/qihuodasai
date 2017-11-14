@@ -83,7 +83,7 @@
 				</thead>
 				<tbody>
 					<tr v-for="item in item">
-						<td>{{item.subTime}}</td>
+						<td>{{item.subTime | getTime}}</td>
 						<td v-if="item.money >0" class="color_yellow">收入</td>
 						<td v-else="item.money <0">支出</td>	
 						<td>{{item.money}}元</td>
@@ -149,6 +149,11 @@
 				current:1,
 				showmoney:false,
 				showMoneyNo:false,
+			}
+		},
+		filters: {
+			getTime: function(e){
+				return pro.getDate('y-m-d h:i:s',e*1000);
 			}
 		},
 		methods:{
