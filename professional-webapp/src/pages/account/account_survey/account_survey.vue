@@ -6,7 +6,8 @@
 				<ul>
 					<li>
 						<img src="../../../assets/images/icon_smileFace.png" alt="笑脸" />
-						<span>{{username}}</span>
+						<span v-if="realName == null">{{username}}</span>
+						<span v-else = "realName!=null">{{realName}}</span>
 						<img src="../../../assets/images/icon_acc1.png" alt="账户" />
 						<img src="../../../assets/images/icon_password1.png" alt="提现密码" />
 					</li>
@@ -149,6 +150,8 @@
 				current:1,
 				showmoney:false,
 				showMoneyNo:false,
+				realName:'',
+				isBoundBankCard : ''
 			}
 		},
 		filters: {
@@ -247,7 +250,6 @@
 			},
 			//获取数据
 			GetList:function(page,startT,endT,chooseType){
-				this.username = JSON.parse(localStorage.user).username;
 				var token = JSON.parse(localStorage.user).token;
 				var secret = JSON.parse(localStorage.user).secret;
 				var headers = {
@@ -389,11 +391,44 @@
 			    var currentdate = year + seperator1 + month + seperator1 + strDate+
 			    " "+"23：59：59";
 			    return currentdate
+			},
+			//获取实名信息
+			getSafeInfo:function(){
+				var phoneNumber= JSON.parse(localStorage.user).username;
+				this.username = phoneNumber.substr(0, 3) + '****' + phoneNumber.substr(7); 
+				console.log(this.username);
+				var token = JSON.parse(localStorage.user).token;
+				var secret = JSON.parse(localStorage.user).secret;
+				var headers = {
+					token : token,
+					secret :secret
+				}
+				pro.fetch("post","/user/security",'',headers).then((res)=>{
+					if(res.success == true){
+						if(res.code == 1){
+							var realname = res.data.realName
+							if(realname!=null){
+								this.realName = realname.substr(0,1)+'**'+realname.substr(2);
+							}else {
+								this.realName = null
+							}
+							this.isBoundBankCard = res.data.isBoundBankCard;
+						}
+					}
+				}).catch((err)=>{
+					if(err.data.success == false){
+						layer.msg(err.data.message,{time:2000})
+					}else {
+						layer.msg("网络不给力，请稍后再试",{time:2000})
+					}
+				})
 			}
 		},
 		mounted:function(){
 			//获取默认
 			this.GetList('','','','');
+			//获取实名和提现密码
+			this.getSafeInfo();
 		}
 	}
 </script>
@@ -496,6 +531,7 @@
 				color: $black;	
 			}
 			span {
+				text-align: center;
 				width: 80px;
 				display: inline-block;
 				position: relative;
