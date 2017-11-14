@@ -4,7 +4,7 @@
 			<img src="../assets/images/icon_openaccount_01.png" v-if="showpage == true"/>
 			<img src="../assets/images/icon_openaccount_02.png" v-else="showpage == false"/>
 		</div>
-		<div class="openAccount_center">
+		<div class="openAccount_center" v-if="isshow_openAccount_1">
 			<div class="title">
 				<span>开户入金</span>
 				<span>操盘保证金越多，可持仓手数越多</span>
@@ -35,7 +35,7 @@
 			</div>
 			<p class="loss_mark" v-show="lossMark">当账户总资产低于平仓线时，我们有权将您的持仓全部平仓，为避免强制平仓，请及时追加保证金。</p>
 		</div>
-		<div class="openAccount_center_step2" v-if="isshow_openAccount">
+		<div class="openAccount_center_step2" v-if="isshow_openAccount_2">
 			<div class="title">
 				<span>确认方案信息</span>
 			</div>
@@ -116,7 +116,8 @@
 		name:'openAccount',
 		data(){
 			return {
-				isshow_openAccount: false,
+				isshow_openAccount_1: true, 
+				isshow_openAccount_2: false,
 				show_price : 3000,
 				item: '',
 				lineLoss:'',
