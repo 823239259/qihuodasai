@@ -28,7 +28,7 @@
 					<li>您的投资本金：<label>{{show_price}}元</label><i>(固定汇率{{rate}}，1美元={{rate}}元人民币)</i></li>
 					<li>总操盘资金<i>（盈利全归你）</i></li>
 					<li>{{traderTotal}}美元={{(show_price/rate).toFixed(0)}}美元<i>（本金）</i>+{{traderTotal-(show_price/rate).toFixed(0)}}美元<i>（获得资金）</i></li>
-					<li>亏损平仓线：<i class="ifont" @click="showLossMark">&#xe66d;</i><span>{{lineLoss*rate}}元（{{lineLoss}}美元）</span><i>（平仓线=总操盘资金-风险保证金x0.6）</i></li>
+					<li>亏损平仓线：<i class="ifont" @mouseenter="showLossMark" @mouseleave="hideLossMark">&#xe66d;</i><span>{{lineLoss*rate}}元（{{lineLoss}}美元）</span><i>（平仓线=总操盘资金-风险保证金x0.6）</i></li>
 					<li>管理费：<span>免费</span></li>
 					<li>交易时间：<span>请参照交易规则</span></li>
 				</ul>
@@ -81,13 +81,13 @@
 								<td>期货产品</td>
 								<td>交易时间段</td>
 								<td>初始持仓手数</td>
-								<td>单边手续费<i class="ifont" @click="showProcedures">&#xe66d;</i></td>
+								<td>单边手续费<i class="ifont" @mouseenter="showProcedures" @mouseleave="hideProcedures">&#xe66d;</i></td>
 							</tr>
 							<tr class="color_deepblue1" >
 								<td>期货产品</td>
 								<td>交易时间段</td>
 								<td>初始持仓手数</td>
-								<td>单边手续费 <i class="ifont" @click="showProcedures">&#xe66d;</i></td>
+								<td>单边手续费 <i class="ifont" @mouseenter="showProcedures" @mouseleave="hideProcedures">&#xe66d;</i></td>
 							</tr>
 						</thead>
 						<tbody class="show_list">
@@ -134,20 +134,18 @@
 				procedures: false,
 			}
 		},
-		methods : {
+		methods: {
 			showLossMark: function(){
-				if(this.lossMark == false){
-					this.lossMark = true;
-				}else{
-					this.lossMark = false;
-				}
+				this.lossMark = true;
+			},
+			hideLossMark: function(){
+				this.lossMark = false;
 			},
 			showProcedures: function(){
-				if(this.procedures == false){
-					this.procedures = true;
-				}else{
-					this.procedures = false;
-				}
+				this.procedures = true;
+			},
+			hideProcedures: function(){
+				this.procedures = false;
 			},
 			//返回修改
 			back:function(){
