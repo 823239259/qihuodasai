@@ -177,7 +177,9 @@
 				
 			},
 			getNewCode:function(e){
-				if(this.newMobile == ''){
+				if(this.newMobile == this.username){
+					layer.msg("该手机号已经被注册，请更换后重试",{time:2000})
+				}else if(this.newMobile == ''){
 					layer.msg("请输入新手机号码",)
 				}else{
 					if($(e.target).hasClass('current')) return false;
