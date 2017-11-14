@@ -11,7 +11,7 @@
 				<div class="account">
 					<ul>
 						<template v-for="(v, index) in accountList">
-							<li @click="loginEvent(v.account, v.password)">
+							<li @click="loginEvent(v.account, v.password, v.fid)">
 								<p>账户：{{v.account}}</p>
 								<p>密码：******</p>
 								<p>初始资金：{{v.initcapital}}元</p>
@@ -36,7 +36,6 @@
 			return{
 				show: false,
 				accountList: [],
-				
 			}
 		},
 		computed: {
@@ -56,7 +55,7 @@
 				this.$router.push({path: '/openAccount'});
 				$("#nav li").eq(3).addClass("current").siblings().removeClass("current");
 			},
-			loginEvent: function(user, pwd){
+			loginEvent: function(user, pwd, fid){
 				var data = {
 					appVersions: this.$store.state.market.tradeConfig.version
 				};
@@ -81,7 +80,7 @@
 										layer.msg('登录成功', {time: 1000});
 										this.$store.state.market.tradeConfig.username = user;
 										this.$store.state.market.tradeConfig.password = Base64.encode(pwd);
-										var userData = {'username': user, 'password': Base64.encode(pwd)};  
+										var userData = {'username': user, 'password': Base64.encode(pwd), 'fid': fid};  
 										localStorage.setItem("tradeUser", JSON.stringify(userData));
 										setTimeout(function(){
 											this.show = false;
