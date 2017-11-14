@@ -228,7 +228,7 @@
 						<span class="fl">交易账号：{{tradeUser}}</span>
 						<!--<i class="sanjiao fl"></i>-->
 						<a href="javascript:void(0);" class="fl" @click="exitEvent">退出</a>
-						<button class="btn blue fl" v-show="openAccountTools">终结方案</button>
+						<button class="btn blue fl" v-show="openAccountTools" @click="endProject">终结方案</button>
 						<button class="btn yellow fl" v-show="openAccountTools" @click="toAddMoney">追加保证金</button>
 					</div>
 					<div class="down_order">
@@ -828,6 +828,18 @@
 				}
 				this.$router.push({path: '/openDetail_additionalMargin', query: {id: fid}});
 			},
+			endProject: function(){
+				if(localStorage.tradeUser){
+					var fid = JSON.parse(localStorage.tradeUser).fid;
+				}
+				this.confirmText = '是否终结该方案？';
+				layer.confirm(this.confirmText, {
+					btn: ['确定','取消']
+				}, function(index){
+					
+					layer.close(index);
+				}.bind(this));
+			}
 		},
 		mounted: function(){
 			//初始化高度

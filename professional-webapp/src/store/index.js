@@ -1261,7 +1261,8 @@ export default new Vuex.Store({
 				case 'OnRtnHeartBeat':
 					context.state.market.HeartBeat.lastHeartBeatTimestamp = parameters.Ref; // 更新心跳最新时间戳
 					break;
-				case 'OnRspLogin'://登录回复
+				case 'OnRspLogin':
+					//回复
 					if(parameters.Code == 0){
 						layer.msg('交易服务器连接成功',{time: 1000});
 						//设置强平线
@@ -1295,8 +1296,10 @@ export default new Vuex.Store({
 				case 'OnRspLogout': //登出回复
 					if(parameters.Code == 0){
 //						console.log('登出成功');
+						layer.msg('登出成功', {time: 1000});
 					}else{
 //						console.log('登出失败');
+						layer.msg(parameters.Message, {time: 1000});
 					}
 					break;
 				case 'OnRspQryHoldTotal': //查询持仓合计回复

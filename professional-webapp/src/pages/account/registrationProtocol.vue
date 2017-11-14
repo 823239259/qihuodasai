@@ -1,6 +1,6 @@
 <template>
-	<div style="color: $white;padding-left: 10px;padding-right: 10px;">
-		<h1 style="text-align: center;"><strong>用户注册协议 </strong></h1>
+	<div id="agreement">
+		<h1>用户注册协议 </h1>
 		<P>在您注册成为本应用用户前请务必仔细阅读以下条款。若您一旦注册，则表示您同意接受本应用的服务并受以下条款的约束。若您不接受以下条款，请您立即停止注册或主动停止使用本应用的服务。</P>
 		<h4>一、 本协议的签署和修订</h4>
 		<P>1.1 本应用只接受符合中华人民共和国法律规定的具有完全民事权利和民事行为能力，能够独立承担民事责任的自然人成为用户。
@@ -175,9 +175,42 @@
 </template>
 <script>
 	export default{
-		name : "registrationProtocol"
+		name : "agreement",
+		mounted: function(){
+			//初始化高度
+			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+			$("#agreement").height(h - 90);
+		}
 	}
 </script>
-
-<style>
+<style lang="scss" scoped type="text/css">
+	@import "../../assets/css/common.scss";
+	#agreement{
+		width: 1400px;
+		overflow-y: auto;
+		background: $blue;
+		margin: 0 auto;
+		h1{
+			height: 42px;
+			line-height: 42px;
+			text-align: center;
+			border-bottom: 1px solid $black;
+			padding: 0 15px;
+			color: $yellow;
+			font-size: $fs16;
+		}
+		h4{
+			height: 36px;
+			line-height: 36px;
+			padding: 0 15px;
+			color: $yellow;
+			font-size: $fs14;
+		}
+		p{
+			line-height: 26px;
+			color: $white;
+			font-size: $fs14;;
+			padding: 8px 15px;
+		}
+	}
 </style>
