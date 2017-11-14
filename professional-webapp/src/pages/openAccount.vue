@@ -28,11 +28,12 @@
 					<li>您的投资本金：<label>{{show_price}}元</label><i>(固定汇率{{rate}}，1美元={{rate}}元人民币)</i></li>
 					<li>总操盘资金<i>（盈利全归你）</i></li>
 					<li>{{traderTotal}}美元={{(show_price/rate).toFixed(0)}}美元<i>（本金）</i>+{{traderTotal-(show_price/rate).toFixed(0)}}美元<i>（获得资金）</i></li>
-					<li>亏损平仓线：<span>{{lineLoss*rate}}元（{{lineLoss}}美元）</span><i>（平仓线=总操盘资金-风险保证金x0.6）</i></li>
+					<li>亏损平仓线：<i class="ifont" @click="showLossMark">&#xe66d;</i><span>{{lineLoss*rate}}元（{{lineLoss}}美元）</span><i>（平仓线=总操盘资金-风险保证金x0.6）</i></li>
 					<li>管理费：<span>免费</span></li>
 					<li>交易时间：<span>请参照交易规则</span></li>
 				</ul>
 			</div>
+			<p class="loss_mark" v-show="lossMark">当账户总资产低于平仓线时，我们有权将您的持仓全部平仓，为避免强制平仓，请及时追加保证金。</p>
 		</div>
 		<div class="openAccount_center_step2" v-if="isshow_openAccount">
 			<div class="title">
@@ -73,19 +74,20 @@
 			</div>
 			<div class="openAccount_btm_center">
 				<div class="product_list">
+					<p class="loss_mark" v-show="procedures">买卖期货成交后按成交合约总价值的一定比例，支付的单边交易费用。</p>
 					<table>
 						<thead>
-							<tr class="color_deepblue" >
+							<tr class="color_deepblue">
 								<td>期货产品</td>
 								<td>交易时间段</td>
 								<td>初始持仓手数</td>
-								<td>单边手续费</td>
+								<td>单边手续费<i class="ifont" @click="showProcedures">&#xe66d;</i></td>
 							</tr>
 							<tr class="color_deepblue1" >
 								<td>期货产品</td>
 								<td>交易时间段</td>
 								<td>初始持仓手数</td>
-								<td>单边手续费</td>
+								<td>单边手续费 <i class="ifont" @click="showProcedures">&#xe66d;</i></td>
 							</tr>
 						</thead>
 						<tbody class="show_list">
@@ -126,10 +128,26 @@
 				chooseType: 3000,
 				show_list:true,
 				showpage:true,
-				current1:0
+				current1:0,
+				lossMark: false,
+				procedures: false,
 			}
 		},
 		methods : {
+			showLossMark: function(){
+				if(this.lossMark == false){
+					this.lossMark = true;
+				}else{
+					this.lossMark = false;
+				}
+			},
+			showProcedures: function(){
+				if(this.procedures == false){
+					this.procedures = true;
+				}else{
+					this.procedures = false;
+				}
+			},
 			//返回修改
 			back:function(){
 				this.isshow_openAccount_2 = false,
@@ -495,6 +513,21 @@
 		width: 100%;
 		height: 280px;
 		margin-top: 5px;
+		position: relative;
+	}
+	.loss_mark{
+		position: absolute;
+		top: 200px;
+		right: 500px;
+		width: 300px;
+		height: 60px;
+		line-height: 20px;
+		overflow: hidden;
+		background: #596080;
+		border-radius: 5px;
+		color: $white;
+		font-size: $fs12;
+		padding: 10px;
 	}
 	.openAccount_center_left {
 		width: 50%;
@@ -588,6 +621,12 @@
 			i {
 				font-size: $fs12;
 			}
+			.ifont{
+				font-size: $fs16;
+				color: $yellow;
+				margin: 0 5px 0 0;
+				cursor: pointer;
+			}
 			label {
 				color: $yellow;
 			}
@@ -635,7 +674,22 @@
 	}
 	.product_list {
 		width: 100%;
-		height: 220px;
+		height: 234px;
+		position: relative;
+		thead tr .ifont{
+			color: $yellow;
+			font-size: $fs16;
+			margin-left: 5px;
+			cursor: pointer;
+		}
+		tr{
+			cursor: default;
+		}
+		.loss_mark{
+			position: absolute;
+			top: 50px;
+			right: 590px;
+		}
 	}
 	.show_list{
 		display: block;
