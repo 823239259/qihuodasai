@@ -52,9 +52,9 @@
 								<td v-else="item.endAmount == ''">-</td>
 								<td v-if="item.stateTypeStr =='开户中' || item.stateTypeStr=='审核不通过' ">-</td>
 								<td v-else="item.stateTypeStr == '操盘中'">
-									<span>查看账户</span></br>
-									<span v-on:click="addMoney">补充保证金</span></br>
-									<span>结算方案</span>
+									<span v-on:click="toCheckAccount">查看账户</span></br>
+									<span v-on:click="addMoney(item.id)">补充保证金</span></br>
+									<span v-on:click="toCloseAccount">结算方案</span>
 								</td>
 								<td v-else="item.stateTypeStr == '已结算'" v-on:click="toParticulars">结算明细</td>
 								<td v-else="item.stateTypeStr == '已完结'" v-on:click="toParticulars">结算明细</td>
@@ -117,34 +117,18 @@
 			}
 		},
 		methods:{
-//			chooseList:function(e){
-//				var index = parseInt($(e.currentTarget).index());
-//				this.listId = this.item[index].id;
-//				var listId = this.listId
-//				$(".trList").children("td").children("span").on("click",function(){
-//					var _this = $(this);
-//					switch (_this.text()){
-//						case "查看账户":
-////							this.$router.push({path:'/openDetail_viewAccount'});
-//							break;
-//						case "补充保证金":
-//							console.log(111111111);
-//							console.log(listId);
-//							this.$router.push({path:"/openDetail_additionalMargin",query:{"id":listId}})
-//							break;	
-//						case "结算方案":
-//						
-//							break;
-//						case "结算明细":
-//							
-//						default:
-//							break;
-//					}
-//				})
-//			},
-			addMoney:function(e){
+			//结算方案
+			toCloseAccount:function(){
 				
-				console.log(11111)
+			},
+			//查看账户
+			toCheckAccount:function(){
+			this.$router.push({path:'/openDetail_viewAccount'});	
+			},
+			//添加保证金
+			addMoney:function(a){
+				this.listId = a;
+				this.$router.push({path:"/openDetail_additionalMargin",query:{"id":this.listId}});
 			},
 			//去开户
 			toOpenAccount :function(){
