@@ -31,6 +31,7 @@
 		},
 		methods: {
 			toCertification :function(){
+				var cardReg = /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
 				var realName = this.realName;
 				var IDcard = this.IDcard;
 				var headers = {
@@ -43,29 +44,46 @@
 				}
 				if(this.realName == ''){
 					layer.msg('请输入姓名', {time: 1000});
-				}
-				else if(typeof(this.realName)!='string'){
+				}else if(typeof(this.realName)!='string'){
 					layer.msg('请输入正确姓名',{time:1000})
-				}
-				else if(this.IDcard == ''){
+				}else if(this.IDcard == ''){
 					layer.msg('请输入身份证号码', {time: 1000});
 				}else if(this.IDcard.length<18){
-					layer.msg('请输入正确身份证号码', {time: 1000});
-				}
-				else {
+					layer.msg('请输入18位身份证号码', {time: 1000});
+				}else if(cardReg.test(this.IDcard)==false){
+					layer.msg('请输入正确的身份证号码', {time: 2000});
+				}else {
 					pro.fetch("post",'/user/security/validatecard',data,headers).then(function(res){
 						if(res.success == true){
 							if(res.code == 1){
 								layer.msg('认证成功',{time:1000});
 								this.$router.push({path:'/account_safe'});
-							}else{
-								layer.msg(res.code,{time:1000});
 							}
-						}else {
-							
 						}
 					}.bind(this)).catch(function(err){
-						layer.msg('网络超时，请稍后再试',{time:1000});
+						if(err.data.success == false){
+							switch (err.data.code){
+								case '-1':
+									layer.msg("认证失败",{time:2000});
+									break;
+								case '2':
+									layer.msg("实名认证失败",{time:2000});
+									break;
+								case '3':
+									layer.msg("身份证号格式有误",{time:2000});
+									break;
+								case '4':
+									layer.msg("该身份证已经被认证过",{time:2000});
+									break;
+								case '8':
+									layer.msg("操作频率过高",{time:2000});
+									break;
+								default:
+									break;
+							}
+						}else{
+							layer.msg('网络超时，请稍后再试',{time:1000});
+						}
 					})
 				}
 			}
