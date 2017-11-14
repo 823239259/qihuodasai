@@ -21,17 +21,19 @@
 					<li>
 						<img src="../../../assets/images/icon_moneyuse.png" alt="可用资金" />
 						<div>
-							<p>可用资金<i class="ifont question">&#xe66d;</i></p>
+							<p>可用资金<i class="ifont question" v-on:mouseenter="showHide" v-on:mouseleave="hide">&#xe66d;</i></p>
 							<span class="surveyMoney">￥{{balance}}</span>
 						</div>
 					</li>
+					<span id="showMoney" v-if="showmoney" >您可提现和开户的金额</span>
 					<li>
 						<img src="../../../assets/images/icon_money.png" alt="冻结资金" />
 						<div>
-							<p>冻结资金<i class="ifont question">&#xe66d;</i></p>
+							<p>冻结资金<i class="ifont question"  v-on:mouseenter="showHide1" v-on:mouseleave="hide1">&#xe66d;</i></p>
 							<span class="surveyMoney">￥{{frzBal}}</span>
 						</div>
 					</li>
+					<span id="showmoney1" v-if="showMoneyNo">冻结资金（您提现时被冻结的金额）</span>
 					<li>
 						<p id="color_blue">注：账户总资产=可用资金+冻结资金</p>
 					</li>
@@ -144,10 +146,24 @@
 				item:[],
 				pageCount:'',
 				current1:0,
-				current:1
+				current:1,
+				showmoney:false,
+				showMoneyNo:false,
 			}
 		},
 		methods:{
+			hide1:function(){
+				this.showMoneyNo = false
+			},
+			showHide1:function(){
+				this.showMoneyNo = true
+			},
+			hide:function(){
+				this.showmoney = false
+			},
+			showHide:function(){
+				this.showmoney =true
+			},
 			//条件查询
 			chooseQuery:function(e){
 				$(e.currentTarget).addClass("active").siblings().removeClass("active");
@@ -570,5 +586,19 @@
 		}
 		.active {
 		  color: $yellow;
+		}
+		#showMoney{
+			font-size: $fs14;
+			color: $yellow;
+			position: relative;
+			top: -36px;
+			left: 450px;
+		}
+		#showmoney1{
+			font-size: $fs14;
+			color: $yellow;
+			position: relative;
+			top: -36px;
+			left: 450px;
 		}
 </style>
