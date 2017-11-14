@@ -172,16 +172,16 @@
 				$(e.currentTarget).addClass("active").siblings().removeClass("active");
 				switch (index){
 					case 0:
-						this.GetList('',this.getMonthStartDate(),this.getCurrentDateAndTime(),'')
+						this.GetList('',this.getNowDate(),this.getNowFormatDate(),'')
 						break;
 					case 1:
-						this.GetList('',this.getWeekStartDate(),this.getCurrentDateAndTime(),'')
+						this.GetList('',this.getWeekDate(),this.getNowFormatDate(),'')
 						break;
 					case 2:
-					this.GetList('',this.getHalfMonthStartDate(),this.getCurrentDateAndTime(),'')
+					this.GetList('',this.getHalfMonthDate(),this.getNowFormatDate(),'')
 						break;
 					case 3:
-					this.GetList('',this.getMonthStartDate(),this.getCurrentDateAndTime(),'')
+					this.GetList('',this.getMonthDate(),this.getNowFormatDate(),'')
 						break;
 					default:
 						break;
@@ -209,11 +209,9 @@
 			// 上一页
 			 prePage:function(){
 			 	if((this.current-1) <=0){
-			 		console.log(1111111)
 			 		console.log(this.current);
 			 		return;
 			 	}else{
-			 		console.log(22222222)
 			 		console.log(this.current);
 			 		this.GetList((this.current - 1),'','','');
 			 		this.current--;
@@ -263,59 +261,113 @@
 					layer.msg('网络不给力，请稍后再试', {time: 1000});
 				})
 			},
-			//获取当前最晚时间
-			//7天
-			getWeekStartDate:function() {
-				var date00 = new Date();//当前日期   
-				var nowDayOfWeek = date00.getDay(); //今天本周的第几天   
-				var nowDay = date00.getDate(); //当前日   
-				var nowMonth = date00.getMonth(); //当前月   
-				var nowYear = date00.getYear(); //当前年   
-				nowYear += (nowYear < 2000) ? 1900 : 0;
-			    var weekStartDate = new Date(nowYear, nowMonth, nowDay - 7);   
-			    return this.formatDate11(weekStartDate);   
-			} ,
-			//一月内
-			getMonthStartDate:function(){
-				var date00 = new Date();//当前日期   
-				var nowDayOfWeek = date00.getDay(); //今天本周的第几天   
-				var nowDay = date00.getDate(); //当前日   
-				var nowMonth = date00.getMonth(); //当前月   
-				var nowYear = date00.getYear(); //当前年   
-				nowYear += (nowYear < 2000) ? 1900 : 0;
-				var weekStartDate = new Date(nowYear, nowMonth, nowDay - this.getCurrentMonthDays());   
-			    return this.formatDate11(weekStartDate);   
+			//获取结束时间
+			 getNowFormatDate:function() {
+			    var date = new Date();
+			    var seperator1 = "-";
+			    var seperator2 = ":";
+			    var month = date.getMonth() + 1;
+			    var strDate = date.getDate();
+			    if (month >= 1 && month <= 9) {
+			        month = "0" + month;
+			    }
+			    if (strDate >= 0 && strDate <= 9) {
+			        strDate = "0" + strDate;
+			    }
+			    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate+
+			    " "+"23：59：59";
+			    return currentdate;
 			},
-			//15天
-			getHalfMonthStartDate:function(){ 
-				var date00 = new Date();//当前日期   
-				var nowDayOfWeek = date00.getDay(); //今天本周的第几天   
-				var nowDay = date00.getDate(); //当前日   
-				var nowMonth = date00.getMonth(); //当前月   
-				var nowYear = date00.getYear(); //当前年   
-				nowYear += (nowYear < 2000) ? 1900 : 0;
-			    var weekStartDate = new Date(nowYear, nowMonth, nowDay - 15);   
-			    return this.formatDate11(weekStartDate);   
+			//获取一天
+			 getNowDate:function() {
+			    var date = new Date();
+			    var seperator1 = "-";
+			    var seperator2 = ":";
+			    var month = date.getMonth() + 1;
+			    var strDate = date.getDate();
+			    if (month >= 1 && month <= 9) {
+			        month = "0" + month;
+			    }
+			    if (strDate >= 0 && strDate <= 9) {
+			        strDate = "0" + strDate;
+			    }
+			    if(strDate=1){
+			    	month--;
+			    	strDate = 30-1
+			    }
+			    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate+
+			    " "+"00：00：00";
+			    return currentdate;
 			},
-			formatDate11:function(date){  
-			    var myyear = date.getFullYear();   
-			    var mymonth = date.getMonth() + 1;   
-			    var myweekday = date.getDate();   
-			    if (mymonth < 10) {   
-			        mymonth = "0" + mymonth;   
-			    }   
-			    if (myweekday < 10) {   
-			        myweekday = "0" + myweekday;   
-			    }   
-			    return (myyear + "-" + mymonth + "-" + myweekday+' '+'23:59:59');   
+			//获取7天时间
+			getWeekDate:function(){
+				var date = new Date();
+			    var seperator1 = "-";
+			    var seperator2 = ":";
+			    var month = date.getMonth() + 1;
+			    var strDate = date.getDate();
+			    if (month >= 1 && month <= 9) {
+			        month = "0" + month;
+			    }
+			    if (strDate >= 0 && strDate <= 9) {
+			        strDate = "0" + strDate;
+			    }
+			    if(strDate<7){
+			    	month--;
+			    	strDate = (30 + strDate - 7)
+			    }else{
+			    	strDate = strDate - 7
+			    }
+			    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate+
+			    " "+"23：59：59";
+			    return currentdate
 			},
-			getCurrentMonthDays:function(){
-				var CurrentDate = new Date(nowYear, nowMonth, nowDay); 
-				return CurrentDate.getDate();
+			//获取15天数据
+			getHalfMonthDate:function(){
+				var date = new Date();
+			    var seperator1 = "-";
+			    var seperator2 = ":";
+			    var month = date.getMonth() + 1;
+			    var strDate = date.getDate();
+			    if (month >= 1 && month <= 9) {
+			        month = "0" + month;
+			    }
+			    if (strDate >= 0 && strDate <= 9) {
+			        strDate = "0" + strDate;
+			    }
+			    if(strDate<15){
+			    	month--;
+			    	strDate = (30 + strDate - 15)
+			    }else{
+			    	strDate = strDate - 15
+			    }
+			    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate+
+			    " "+"23：59：59";
+			    return currentdate
 			},
-			getCurrentDateAndTime:function(){
-				var data00 = new Date();
-				return date00.getFullYear()+'-'+(date00.getMonth()+1)+'-'+date00.getDate()+' '+date00.getHours()+':'+date00.getMinutes()+':'+date00.getSeconds();
+			//获取一个月数据
+			getMonthDate:function(){
+				var date = new Date();
+			    var seperator1 = "-";
+			    var seperator2 = ":";
+			    var month = date.getMonth() + 1;
+			    var strDate = date.getDate();
+			    var year = date.getFullYear();
+			    if (month >= 1 && month <= 9) {
+			        month = "0" + month;
+			    }
+			    if (strDate >= 0 && strDate <= 9) {
+			        strDate = "0" + strDate;
+			    }
+			    if(month = 1){
+			    	year--;
+			    	month = 12;
+			    }else{
+			    	month--;
+			    }
+			    var currentdate = year + seperator1 + month + seperator1 + strDate+
+			    " "+"23：59：59";
+			    return currentdate
 			}
 		},
 		mounted:function(){

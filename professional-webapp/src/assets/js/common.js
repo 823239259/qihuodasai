@@ -128,6 +128,21 @@ pro.getDate=function(d,time){
     var year=date.getYear()+1900;
     var month=date.getMonth()+1;
     var day=date.getDate();
+    if(day<10){
+    	day = "0"+day;
+    }
+    if(month<10){
+    	month = "0"+month
+    }
+    if(hour<10){
+    	hour = "0"+hour
+    }
+    if(minu<10){
+    	minu = "0"+minu
+    }
+    if(sec < 10){ 
+    	sec = "0"+sec
+    }
     var hour=date.getHours();
     var minu=date.getMinutes();
     var sec=date.getSeconds();
