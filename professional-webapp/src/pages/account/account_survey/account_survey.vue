@@ -45,7 +45,7 @@
 		<div class="account_money"></div>
 		<div class="survey_functionChoose">
 			<div class="survey_functionChoose_top">
-				<p id="color_dea">收入<span class="white">{{incomeNum | fixNumTwo}}</span>笔，共<i class="color_yellow">{{incomeMoney | fixNumTwo}}</i>元 支出<span class="white">{{outlayNum | fixNumTwo}}</span>笔，共<i  class="color_yellow">{{outlayMoney | fixNumTwo}}</i>元  </p>
+				<p id="color_dea">收入<span class="white">{{incomeNum}}</span>笔，共<i class="color_yellow">{{incomeMoney | fixNumTwo}}</i>元 支出<span class="white">{{outlayNum}}</span>笔，共<i  class="color_yellow">{{outlayMoney | fixNumTwo}}</i>元  </p>
 			</div>
 			<div class="survey_functionChoose_center">
 				<ul>
@@ -159,7 +159,12 @@
 				return pro.getDate('y-m-d h:i:s',e*1000);
 			},
 			fixNumTwo: function(num){
-				return num.toFixed(2);
+				if(typeof num == 'number'){
+					return num.toFixed(2);
+				}else{
+					return num;
+				}
+				
 			},
 		},
 		methods:{
@@ -399,7 +404,6 @@
 			getSafeInfo:function(){
 				var phoneNumber= JSON.parse(localStorage.user).username;
 				this.username = phoneNumber.substr(0, 3) + '****' + phoneNumber.substr(7); 
-				console.log(this.username);
 				var token = JSON.parse(localStorage.user).token;
 				var secret = JSON.parse(localStorage.user).secret;
 				var headers = {
