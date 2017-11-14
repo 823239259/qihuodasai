@@ -2241,7 +2241,7 @@ export default new Vuex.Store({
 			context.state.tradeSocket.onopen = function(evt){
 				//登录
 				if(context.state.tradeSocket.readyState == 1){ //连接已建立，可以进行通信。
-					if(localStorage.getItem('tradeUser')){
+					if(localStorage.tradeUser && localStorage.tradeUser != 'null'){
 						context.state.tradeSocket.send('{"Method":"Login","Parameters":{"ClientNo":"'+JSON.parse(localStorage.getItem('tradeUser')).username+'","PassWord":"'+JSON.parse(localStorage.getItem('tradeUser')).password+'","IsMock":'+context.state.market.tradeConfig.model+',"Version":"'+context.state.market.tradeConfig.version+'","Source":"'+context.state.market.tradeConfig.client_source+'"}}');
 					}else{
 						if(context.state.market.tradeConfig.username!=''){
