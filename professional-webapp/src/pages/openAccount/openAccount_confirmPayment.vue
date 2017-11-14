@@ -6,7 +6,7 @@
 			<p v-else="accountMoney-payMoney!>0">去充值<i class="ifont" v-on:click="close">&#xe624;</i></p>
 			<p>账户余额：<span>{{accountMoney}}</span>元</p>
 			<p>支付金额：<span>{{payMoney}}</span>元</p>
-			<p v-if="accountMoney-payMoney>0">您的账户余额<i>{{accountMoney}}</i>元，本次支付完毕剩余<i>{{accountMoney-payMoney}}</i>元</p>
+			<p v-if="accountMoney-payMoney>0">您的账户余额<i>{{accountMoney}}</i>元，本次支付完毕剩余<i>{{accountMoney-payMoney | fixNumTwo}}</i>元</p>
 			<p v-else="accountMoney-payMoney!>0">您的账户余额<i>{{accountMoney}}</i>元，本次支付还差<i>{{Math.abs(accountMoney-payMoney)}}</i>元</p>
 			<button class="btn yellow" v-on:click="to_payMoney" v-if="accountMoney-payMoney>0">确认支付</button>
 			<button class="btn yellow" v-on:click="to_Recharge" v-else="accountMoney!>0">去充值</button>
@@ -24,6 +24,14 @@
 				accountMoney:'',
 				payMoney:'',
 				refresh:true
+			}
+		},
+		filters:{
+			fixNumTwo: function(num){
+				return num.toFixed(2);
+			},
+			fixNum: function(num, dotsize){
+				return num.toFixed(dotsize);
 			}
 		},
 		mounted:function(){

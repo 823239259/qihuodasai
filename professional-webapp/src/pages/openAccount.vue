@@ -28,11 +28,12 @@
 					<li>您的投资本金：<label>{{show_price}}元</label><i>(固定汇率{{rate}}，1美元={{rate}}元人民币)</i></li>
 					<li>总操盘资金<i>（盈利全归你）</i></li>
 					<li>{{traderTotal}}美元={{(show_price/rate).toFixed(0)}}美元<i>（本金）</i>+{{traderTotal-(show_price/rate).toFixed(0)}}美元<i>（获得资金）</i></li>
-					<li>亏损平仓线：<span>{{lineLoss*rate}}元（{{lineLoss}}美元）</span><i>（平仓线=总操盘资金-风险保证金x0.6）</i></li>
+					<li>亏损平仓线：<i class="ifont" @click="showLossMark">&#xe66d;</i><span>{{lineLoss*rate}}元（{{lineLoss}}美元）</span><i>（平仓线=总操盘资金-风险保证金x0.6）</i></li>
 					<li>管理费：<span>免费</span></li>
 					<li>交易时间：<span>请参照交易规则</span></li>
 				</ul>
 			</div>
+			<p class="loss_mark" v-show="lossMark">当账户总资产低于平仓线时，我们有权将您的持仓全部平仓，为避免强制平仓，请及时追加保证金。</p>
 		</div>
 		<div class="openAccount_center_step2" v-if="isshow_openAccount_2">
 			<div class="title">
@@ -73,19 +74,20 @@
 			</div>
 			<div class="openAccount_btm_center">
 				<div class="product_list">
+					<p class="loss_mark" v-show="procedures">买卖期货成交后按成交合约总价值的一定比例，支付的单边交易费用。</p>
 					<table>
 						<thead>
-							<tr class="color_deepblue" >
+							<tr class="color_deepblue">
 								<td>期货产品</td>
 								<td>交易时间段</td>
 								<td>初始持仓手数</td>
-								<td>单边手续费</td>
+								<td>单边手续费<i class="ifont" @click="showProcedures">&#xe66d;</i></td>
 							</tr>
 							<tr class="color_deepblue1" >
 								<td>期货产品</td>
 								<td>交易时间段</td>
 								<td>初始持仓手数</td>
-								<td>单边手续费</td>
+								<td>单边手续费 <i class="ifont" @click="showProcedures">&#xe66d;</i></td>
 							</tr>
 						</thead>
 						<tbody class="show_list">
@@ -98,13 +100,13 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="btm_btm">
-					<span v-on:click="show_listAll">展开</span>
-				</div>
 			</div>
-			<div class="openAccount_btm_btm">
-				<span>投资有风险，入市需谨慎</span>
+			<div class="btm_btm">
+				<span v-on:click="show_listAll">展开</span>
 			</div>
+		</div>
+		<div class="openAccount_btm_btm">
+			<span>投资有风险，入市需谨慎</span>
 		</div>
 	</div>
 </template>
@@ -114,8 +116,8 @@
 		name:'openAccount',
 		data(){
 			return {
-				isshow_openAccount_1 : true,
-				isshow_openAccount_2 : false,
+				isshow_openAccount_1: true, 
+				isshow_openAccount_2: false,
 				show_price : 3000,
 				item: '',
 				lineLoss:'',
@@ -127,10 +129,26 @@
 				chooseType: 3000,
 				show_list:true,
 				showpage:true,
-				current1:0
+				current1:0,
+				lossMark: false,
+				procedures: false,
 			}
 		},
 		methods : {
+			showLossMark: function(){
+				if(this.lossMark == false){
+					this.lossMark = true;
+				}else{
+					this.lossMark = false;
+				}
+			},
+			showProcedures: function(){
+				if(this.procedures == false){
+					this.procedures = true;
+				}else{
+					this.procedures = false;
+				}
+			},
 			//返回修改
 			back:function(){
 				this.isshow_openAccount_2 = false,
@@ -494,8 +512,23 @@
 	}
 	.openAccount_center {
 		width: 100%;
-		margin-top: 10px;
 		height: 280px;
+		margin-top: 5px;
+		position: relative;
+	}
+	.loss_mark{
+		position: absolute;
+		top: 200px;
+		right: 500px;
+		width: 300px;
+		height: 60px;
+		line-height: 20px;
+		overflow: hidden;
+		background: #596080;
+		border-radius: 5px;
+		color: $white;
+		font-size: $fs12;
+		padding: 10px;
 	}
 	.openAccount_center_left {
 		width: 50%;
@@ -505,6 +538,9 @@
 		text-align: center;
 		span {
 			color: $white;
+		}
+		.btn.yellow{
+			color: $black;
 		}
 		li {
 			&:nth-child(1){
@@ -528,6 +564,7 @@
 		width: 100%;
 		line-height: 40px;
 		background-color: $bottom_color;
+		padding: 0 10px;
 		span {
 			&:nth-child(1){
 				color : $white;
@@ -568,9 +605,9 @@
 		height: 240px;
 		float: left;
 		li {
-			text-indent: 5px;
 			height:40px; 
 			line-height: 40px;
+			padding-left: 10px;
 			&:nth-child(4){
 				border-bottom: 1px solid $bottom_color;
 				border-top: 1px solid $bottom_color;
@@ -585,6 +622,12 @@
 			i {
 				font-size: $fs12;
 			}
+			.ifont{
+				font-size: $fs16;
+				color: $yellow;
+				margin: 0 5px 0 0;
+				cursor: pointer;
+			}
 			label {
 				color: $yellow;
 			}
@@ -592,8 +635,7 @@
 	}
 	.openAccount_btm {
 		width: 100%;
-		margin-top: 10px;
-		height: 300px;
+		margin-top: 5px;
 		background-color: $bottom_color;
 		/*overflow: scroll;*/
 	}
@@ -602,6 +644,7 @@
 		width: 100%;
 		line-height: 40px;
 		background-color: $bottom_color;
+		padding-left: 10px;
 		span {
 			&:first-child {
 				font-size: $fs16;
@@ -613,21 +656,41 @@
 		}
 	}
 	.openAccount_btm_center {
-		background-color: $bottom_color;
 		width: 100%;
+		height: 234px;
+		overflow: hidden;
+		background-color: $bottom_color;
 	}
-	.btm_btm {
+	.btm_btm{
 		width: 100%;
 		height: 60px;
-		float: left;
 		line-height: 60px;
 		text-align: center;
+		overflow: hidden;
 		background-color: $blue;
 		border-top: 1px solid $bottom_color;
 	}
+	.btm_btm span{
+		cursor: pointer;
+	}
 	.product_list {
 		width: 100%;
-		height: 220px;
+		height: 234px;
+		position: relative;
+		thead tr .ifont{
+			color: $yellow;
+			font-size: $fs16;
+			margin-left: 5px;
+			cursor: pointer;
+		}
+		tr{
+			cursor: default;
+		}
+		.loss_mark{
+			position: absolute;
+			top: 50px;
+			right: 590px;
+		}
 	}
 	.show_list{
 		display: block;
@@ -661,14 +724,18 @@
 	 		border-bottom: 1px solid $bottom_color;
 	 	}
 	 }
-	 .openAccount_btm_btm {
-	 	/*margin-top: 10x;*/
-	 	float: left;
+	 .openAccount_btm_btm{
 	 	width: 100%;
 	 	height: 40px;
-	 	text-align: center;
 	 	line-height: 40px;
+	 	overflow: hidden;
+	 	text-align: center;
+	 	margin-top: 5px;
 	 	background-color: $bottom_color;
+	 }
+	 .openAccount_btm_btm span{
+	 	color: #7a7f99;
+	 	font-size: $fs12;
 	 }
 	 .color_deepblue {
 	 	&:hover{
