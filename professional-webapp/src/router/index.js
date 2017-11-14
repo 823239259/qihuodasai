@@ -29,6 +29,8 @@ import confirmPayment from "../pages/openAccount/openAccount_confirmPayment.vue"
 import openAccount_success from "../pages/openAccount/openAccount_success.vue"
 import recharge from "../pages/account/recharge/recharge.vue"
 import account_editBankCard from "../pages/account/account_safe/account_editBankCard.vue"
+import agreement from "../pages/openAccount/agreement.vue"
+import tradersRules from "../pages/openAccount/tradersRules.vue"
 Vue.use(Router)
 
 export default new Router({
@@ -116,6 +118,14 @@ export default new Router({
 		{
 			path: '/openAccount',
 			component: openAccount
+		},
+		{
+			path: '/agreement',
+			component: agreement
+		},
+		{
+			path: '/tradersRules',
+			component: tradersRules
 		},
 		{
 			path: '/test',

@@ -8,7 +8,7 @@
 			<div class="title">
 				<span>开户入金</span>
 				<span>操盘保证金越多，可持仓手数越多</span>
-				<span>国际操盘规则</span>
+				<span @click="toTradersRules">国际操盘规则</span>
 			</div>
 			<div class="openAccount_center_left">
 				<ul>
@@ -19,7 +19,7 @@
 						<button class="btn yellow" v-on:click="to_openAccount_2">下一步</button>
 					</li>
 					<li>
-						<p>提交申请即代表你已阅读并同意<span>《国际期货综合操盘合作协议》</span></p>
+						<p>提交申请即代表你已阅读并同意<span @click="toAgreement">《国际期货综合操盘合作协议》</span></p>
 					</li>
 				</ul>
 			</div>
@@ -167,9 +167,14 @@
 					return this.show_list = true;
 				}
 			},
+			toAgreement: function(){
+				this.$router.push({path: '/agreement'});
+			},
+			toTradersRules: function(){
+				this.$router.push({path: '/tradersRules'});
+			},
 			to_comfirmPayment : function(){
 				this.payMoney = this.chooseType
-				console.log(this.payMoney);
 				this.$router.push({path:"/confirmPayment",query:{"payMoney":this.payMoney}});
 			},
 			to_openAccount_2 :function(){
@@ -557,6 +562,9 @@
 			&:nth-child(4){
 				margin-top: 20px;
 			}
+			span{
+				cursor: pointer;
+			}
 		}
 	}
 	.title {
@@ -575,6 +583,7 @@
 			&:nth-child(3){
 				font-size: $fs14;
 				float: right;
+				cursor: pointer;
 			}
 		}
 	}
