@@ -25,6 +25,8 @@ var isshow = {
 var account = {
 	state: {
 		isRefresh: false,
+		userName: '',
+		currentNav: 0,
 	}
 }
 

@@ -79,8 +79,9 @@
 								this.secret = res.data.secret;
 								var userData = {'username':this.phone,'password':this.pwd,'token':res.data.token,'secret':res.data.secret};
 								localStorage.setItem("user", JSON.stringify(userData));
-								this.$router.push({path: '/index'});
-								this.$store.state.account.isRefresh = 1;
+								this.$store.state.account.userName = this.phone;
+								this.$router.push({path: '/account'});
+								this.$store.state.account.currentNav = 6;
 							}
 						}
 					}.bind(this)).catch(function(err){
