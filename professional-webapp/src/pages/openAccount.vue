@@ -496,6 +496,10 @@
 				}
 			}
 		},
+		activated: function(){
+			this.isshow_openAccount_2 = false;
+			this.isshow_openAccount_1 = true;
+		}
 	}
 </script>
 
