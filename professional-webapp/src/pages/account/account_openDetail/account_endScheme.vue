@@ -15,6 +15,7 @@
 		name: "account_endScheme",
 		data(){
 			return{
+				
 			}
 		},
 		methods:{
@@ -28,63 +29,64 @@
 //					cId:
 //					businessType:8
 				}
-				pro.fetch("post","/user/ftrade/endtrade",data,headers).then((res)=>{
-					if(res.success == true){
-						if(res.code == 1){
-							layer.msg("操作成功",{time:2000});
-							console.log(11111111111111)
-//							this.$router.push({path:'account_openDetail'})
-						}
-					}
-				}).catch((err)=>{
-					if(err.data.success == false){
-						switch (err.data.code){
-							case '-1':
-									layer.msg("认证失败",{time:2000});
-									break;
-								case '2':
-									layer.msg("系统异常，结算失败",{time:2000});
-									break;
-								case '3':
-									layer.msg("已申请终结",{time:2000});
-									break;
-								case '4':
-									layer.msg("非操盘中",{time:2000});
-									break;
-								case '5':
-									layer.msg("未找到该优惠劵",{time:2000});
-									break;
-								case '6':
-									layer.msg("折扣劵无法使用",{time:2000});
-									break;
-								case '7':
-									layer.msg("方案编号不能为空",{time:2000});
-									break;
-								case '8':
-									layer.msg("参数错误",{time:2000});
-									break;
-								case '9':
-									layer.msg("参数错误",{time:2000});
-									break;
-								case '10':
-									layer.msg("有持仓，不能结算",{time:2000});
-									break;
-								case '11':
-									layer.msg("方案结算失败，每个用户每天最多可结算一个未操盘方案，该方案你可在明天发起申请",{time:2000});
-									break;
-								case '20':
-									layer.msg("连接服务不成功",{time:2000});
-									break;
-								case '22':
-									layer.msg("交易账户不存在",{time:2000});
-									break;
-								default:
-									break;
-						}
-					}else{
-						layer.msg("网络不给力请稍后再试",{time:2000})
-					}
-				})
+//				pro.fetch("post","/user/ftrade/endtrade",data,headers).then((res)=>{
+//					if(res.success == true){
+//						if(res.code == 1){
+//							layer.msg("操作成功",{time:2000});
+//							console.log(11111111111111)
+//							
+//						}
+//					}
+//				}).catch((err)=>{
+//					if(err.data.success == false){
+//						switch (err.data.code){
+//							case '-1':
+//									layer.msg("认证失败",{time:2000});
+//									break;
+//								case '2':
+//									layer.msg("系统异常，结算失败",{time:2000});
+//									break;
+//								case '3':
+//									layer.msg("已申请终结",{time:2000});
+//									break;
+//								case '4':
+//									layer.msg("非操盘中",{time:2000});
+//									break;
+//								case '5':
+//									layer.msg("未找到该优惠劵",{time:2000});
+//									break;
+//								case '6':
+//									layer.msg("折扣劵无法使用",{time:2000});
+//									break;
+//								case '7':
+//									layer.msg("方案编号不能为空",{time:2000});
+//									break;
+//								case '8':
+//									layer.msg("参数错误",{time:2000});
+//									break;
+//								case '9':
+//									layer.msg("参数错误",{time:2000});
+//									break;
+//								case '10':
+//									layer.msg("有持仓，不能结算",{time:2000});
+//									break;
+//								case '11':
+//									layer.msg("方案结算失败，每个用户每天最多可结算一个未操盘方案，该方案你可在明天发起申请",{time:2000});
+//									break;
+//								case '20':
+//									layer.msg("连接服务不成功",{time:2000});
+//									break;
+//								case '22':
+//									layer.msg("交易账户不存在",{time:2000});
+//									break;
+//								default:
+//									break;
+//						}
+//					}else{
+//						layer.msg("网络不给力请稍后再试",{time:2000})
+//					}
+//				})
+				this.$router.push({path:'/openDetail_billingDetails'})
 			},
 			close:function(){
 				this.$router.push({path:'/account_openDetail'});

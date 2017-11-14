@@ -32,6 +32,7 @@ import account_editBankCard from "../pages/account/account_safe/account_editBank
 import agreement from "../pages/openAccount/agreement.vue"
 import tradersRules from "../pages/openAccount/tradersRules.vue"
 import account_endScheme from "../pages/account/account_openDetail/account_endScheme.vue"
+import openDetail_billingDetails from "../pages/account/account_openDetail/account_billingDetails.vue"
 Vue.use(Router)
 
 export default new Router({
@@ -105,6 +106,9 @@ export default new Router({
 			},{
 				path:'/account_endScheme',
 				component:account_endScheme
+			},{
+				path:'/openDetail_billingDetails',
+				component:openDetail_billingDetails
 			}]
 		},
 		{
