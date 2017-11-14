@@ -6,8 +6,8 @@
 		<div class="account_withdrawlPassword_center">
 			<p>手机号码：{{username}}</p>
 			<p>短信验证码：<input type="text" v-model="code" /><i class="getcode" v-on:click="getCode">{{volid ? info : (time + '秒')}}</i></p>
-			<p>提现密码：<input type="text" v-model="withDrawPassword" /></p>
-			<p>确认密码：<input type="text" v-model="sure_withDrawPassword" /></p>
+			<p>提现密码：<input type="password" v-model="withDrawPassword" /></p>
+			<p>确认密码：<input type="password" v-model="sure_withDrawPassword" /></p>
 			<button class="btn yellow" v-on:click="comfire">确认</button>
 		</div>
 		<div class="account_withdrawlPassword_btm">
@@ -18,7 +18,6 @@
 			</ul>
 			<p>投资有风险，入市需谨慎</p>
 		</div>
-		<codeDialog ref="codeDialog" type="resetWithDrawPWD"></codeDialog>
 	</div>
 </template>
 
@@ -27,7 +26,6 @@
 	import codeDialog from "../../../components/codeDialog.vue"
 	export default {
 		name : "safe_withdrawalPassword",
-		components : {codeDialog},
 		data(){
 			return {
 				time:0,
@@ -36,7 +34,8 @@
 				withDrawPassword : '',
 				sure_withDrawPassword: '',
 				phone:'',
-				username:''
+				username:'',
+				pwdReg: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,18}$/
 			}
 		},
 		computed : {
@@ -57,9 +56,6 @@
 		methods :{
 			getCode :function(e){
 				if($(e.target).hasClass('current')) return false;
-				this.phone = JSON.parse(localStorage.user).username;
-				this.$refs.codeDialog.path =  "http://test.api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
-				this.$refs.codeDialog.phone = this.phone;
 				//页面效果
 				$(e.target).addClass('current');
 				this.time = 60;
@@ -70,7 +66,47 @@
 						$(e.target).removeClass('current');
 					}
 				}.bind(this), 1000);
-				
+				//获取验证码
+				var data = {
+					mobile: this.username,
+					type: 1
+				}
+				var headers = {
+					token : JSON.parse(localStorage.user).token,
+					secret :JSON.parse(localStorage.user).secret
+				}
+				pro.fetch("post","/user/security/send_sms",data,headers).then((res)=>{
+					if(res.success == true){
+						if(res.code == 1){
+							layer.msg("发送成功",{time:1000})
+						}
+					}
+				}).catch((err)=>{
+					if(err.data.success == false){
+						switch (err.data.code){
+							case 2:
+								this.$children[0].isShow = true;
+								layer.msg("短信验证码发送失败",{time:1000})
+								break;
+							case 4:
+								this.$children[0].isShow = true;
+								layer.msg("手机号码不存在",{time:1000})
+								break;
+							case 5:
+								this.$children[0].isShow = true;
+								layer.msg("操作过于频繁，请稍候再试",{time:1000})
+								break;
+							case 6:
+								this.$children[0].isShow = true;
+								layer.msg("电话号码格式错误",{time:1000})
+								break;
+							default:
+								break;
+						}
+					}else {
+						layer.msg("网络不给力，请稍后再试",{time:1000})
+					}
+				})
 			},
 			comfire:function(){
 				if(this.code == ''){
@@ -83,6 +119,8 @@
 					this.withDrawPassword = '';
 					this.sure_withDrawPassword = '';
 					layer.msg('两次密码输入不一致，请重新输入',{time:1000});
+				}else if(this.pwdReg.test(this.withDrawPassword) == false || this.pwdReg.test(this.sure_withDrawPassword)==false){
+					layer.msg("密码格式错误，请重新设置",{time:2000});
 				}else {
 					var data = {
 						password : this.withDrawPassword,
@@ -92,10 +130,43 @@
 						token : JSON.parse(localStorage.user).token,
 						secret:JSON.parse(localStorage.user).secret
 					}
-					pro.fetch("post","//user/security/set_withdraw_pwd",data,headers).then((res)=>{
-						
+					pro.fetch("post","/user/security/set_withdraw_pwd",data,headers).then((res)=>{
+						if(res.success == true){
+							if(res.code == 1){
+								layer.msg("设置成功",{time:2000});
+								this.$router.push({path:'/account_safe'})
+							}
+						}
 					}).catch((err)=>{
-						
+						console.log(err);
+						if(err.data.success == false){
+							switch (err.data.code){
+								case '-1':
+									this.$children[0].isShow = true;
+									layer.msg("认证失败",{time:2000});
+									break;
+								case '2':
+									this.$children[0].isShow = true;
+									layer.msg("参数没有传递",{time:2000});
+									break;
+								case '3':
+									this.$children[0].isShow = true;
+									layer.msg("用户信息不存在",{time:2000});
+									break;
+								case '4':
+									this.$children[0].isShow = true;
+									layer.msg("提现密码不能和登录密码相同",{time:2000});
+									break;
+								case '6':
+									this.$children[0].isShow = true;
+									layer.msg("验证码错误",{time:2000});
+									break;
+								default:
+									break;
+							}
+						}else{
+							layer.msg("网络不给力，请稍后再试",{time:1000})
+						}
 					})
 				}
 			}
@@ -140,7 +211,7 @@
 					margin-left: 60px;
 				}
 				&:nth-child(1) {
-					margin-right: 90px;
+					margin-right: 84px;
 				}
 			}
 			input {
@@ -148,6 +219,7 @@
 				height: 30px;
 				border: 1px solid $bottom_color;
 				border-radius: 5px;
+				color: $white;
 			}
 			.btn {
 				width: 160px;
