@@ -19,15 +19,15 @@
 				<template v-for="v in moneyDetail">
 					<tr>
 						<td>{{v.CurrencyName}}</td>
-						<td>{{v.OldAmount}}</td>
-						<td>{{v.TodayBalance}}</td>
-						<td>{{v.TodayCanUse}}</td>
-						<td>{{v.Deposit}}</td>
-						<td>{{v.FrozenMoney}}</td>
-						<td>{{v.FloatingProfit}}</td>
+						<td>{{v.OldAmount | fixNumTwo}}</td>
+						<td>{{v.TodayBalance | fixNumTwo}}</td>
+						<td>{{v.TodayCanUse | fixNumTwo}}</td>
+						<td>{{v.Deposit | fixNumTwo}}</td>
+						<td>{{v.FrozenMoney | fixNumTwo}}</td>
+						<td>{{v.FloatingProfit | fixNumTwo}}</td>
 						<td>{{v.CloseProfit | fixNumTwo}}</td>
-						<td>{{v.InMoney}}</td>
-						<td>{{v.OutMoney}}</td>
+						<td>{{v.InMoney | fixNumTwo}}</td>
+						<td>{{v.OutMoney | fixNumTwo}}</td>
 					</tr>
 				</template>
 			</tbody>
@@ -43,6 +43,9 @@
 			moneyDetail: function(){
 				return this.$store.state.market.CacheAccount.moneyDetail;
 			},
+			jCacheTotalAccount: function(){
+				return this.$store.state.market.CacheAccount;
+			}
 		},
 		filters:{
 			fixNumTwo: function(num){
@@ -56,7 +59,11 @@
 			
 		},
 		mounted: function(){
-			console.log(this.moneyDetail);
+			this.moneyDetail.forEach(function(o, i){
+				console.log(o);
+				o.TodayBalance = o.TodayAmount;
+				o.TodayCanUse = o.TodayAmount - o.Deposit - o.FrozenMoney
+			}.bind(this));
 		}
 	}
 </script>
