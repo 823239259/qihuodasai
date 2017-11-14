@@ -54,7 +54,7 @@
 								<td v-else="item.stateTypeStr == '操盘中'">
 									<span v-on:click="toCheckAccount">查看账户</span></br>
 									<span v-on:click="addMoney(item.id)">补充保证金</span></br>
-									<span v-on:click="toCloseAccount">结算方案</span>
+									<span v-on:click="toCloseAccount(item.id)">结算方案</span>
 								</td>
 								<td v-else="item.stateTypeStr == '已结算'" v-on:click="toParticulars">结算明细</td>
 								<td v-else="item.stateTypeStr == '已完结'" v-on:click="toParticulars">结算明细</td>
@@ -118,8 +118,9 @@
 		},
 		methods:{
 			//结算方案
-			toCloseAccount:function(){
-				
+			toCloseAccount:function(a){
+				this.listId = a;
+				this.$router.push({path:'/account_endScheme',query:{"id":this.listId}})
 			},
 			//查看账户
 			toCheckAccount:function(){

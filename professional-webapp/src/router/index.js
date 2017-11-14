@@ -31,6 +31,7 @@ import recharge from "../pages/account/recharge/recharge.vue"
 import account_editBankCard from "../pages/account/account_safe/account_editBankCard.vue"
 import agreement from "../pages/openAccount/agreement.vue"
 import tradersRules from "../pages/openAccount/tradersRules.vue"
+import account_endScheme from "../pages/account/account_openDetail/account_endScheme.vue"
 Vue.use(Router)
 
 export default new Router({
@@ -101,6 +102,9 @@ export default new Router({
 			},{
 				path:'/account_editBankCard',
 				component:account_editBankCard
+			},{
+				path:'/account_endScheme',
+				component:account_endScheme
 			}]
 		},
 		{
