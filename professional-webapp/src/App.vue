@@ -239,7 +239,7 @@
 						this.$store.state.account.currentNav = 1;
 						break;
 					case 2:
-						if(this.userInfo == ''){
+						if(this.userName == ''){
 							this.$router.push({path: '/login'});
 							this.$store.state.account.currentNav = 6;
 						}else{
@@ -260,7 +260,7 @@
 						this.$store.state.account.currentNav = 5;
 						break;
 					case 6:
-						if(this.userInfo == ''){
+						if(this.userName == ''){
 							this.$router.push({path: '/login'});
 						}else{
 							this.$router.push({path: '/account'});

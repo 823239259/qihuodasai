@@ -237,9 +237,9 @@
 								<li class="current">
 									<span>普通单</span>
 								</li>
-								<li>
+								<!--<li>
 									<span>条件单</span>
-								</li>
+								</li>-->
 							</ul>
 						</div>
 						<div class="cont">
@@ -371,7 +371,8 @@
 				priceShow: true,
 				defaultNum: 1,
 				tradePrices: 0,
-				tradeDetailsList: ['持仓','挂单','委托','止损单','条件单','当日成交','历史成交','资金明细'],
+//				tradeDetailsList: ['持仓','挂单','委托','止损单','条件单','当日成交','历史成交','资金明细'],
+				tradeDetailsList: ['持仓','挂单','委托','当日成交','历史成交','资金明细'],
 				selectedTradeDetails: 'position',
 				selectedNum: 0,
 				confirmText: '',
