@@ -92,11 +92,11 @@
 					layer.msg('确认卡号与储蓄卡号不一致',{time:1000})
 				}else {
 					var data = {
-							bank:this.bank,
-							card:this.bankId,
-							prov:this.province,
-							city:this.city,
-							address: this.address
+						bank:this.bank,
+						card:this.bankId,
+						prov:this.province,
+						city:this.city,
+						address: this.address
 					};
 					var headers = {
 						token : JSON.parse(localStorage.user).token,
@@ -123,7 +123,7 @@
 					}).catch((err)=>{
 						if(err.data.success == false){
 							switch (err.data.code){
-								case -1:
+								case '-1':
 									this.bank ='';
 									this.bankId='';
 									this.province='';
@@ -131,7 +131,7 @@
 									this.address='';
 									layer.msg("认证失败",{time:2000})
 									break;
-								case 2:
+								case '2':
 									this.bank ='';
 									this.bankId='';
 									this.province='';
@@ -139,7 +139,7 @@
 									this.address='';
 									layer.msg("设置失败",{time:2000})
 									break;
-								case 3:
+								case '3':
 									this.bank ='';
 									this.bankId='';
 									this.province='';
@@ -147,7 +147,7 @@
 									this.address='';
 									layer.msg("用户信息不存在",{time:2000})
 									break;
-								case 4:
+								case '4':
 									this.bank ='';
 									this.bankId='';
 									this.province='';
@@ -155,7 +155,7 @@
 									this.address='';
 									layer.msg("银行卡号已经存在",{time:2000})
 									break;
-								case 5:
+								case '5':
 									this.bank ='';
 									this.bankId='';
 									this.province='';
