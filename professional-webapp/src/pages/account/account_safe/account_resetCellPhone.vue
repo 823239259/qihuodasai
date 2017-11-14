@@ -94,19 +94,15 @@
 						if(err.data.success == false){
 							switch (err.data.code){
 								case '-1':
-									this.$children[0].isShow = true;
 									layer.msg('修改失败',{time:1000});
 									break;
 								case '2':
-									this.$children[0].isShow = true;
 									layer.msg('手机号已存在',{time:1000});
 									break;
 								case '5':
-									this.$children[0].isShow = true;
 									layer.msg('新手机验证码超时',{time:1000});
 									break;
 								case '6':
-									this.$children[0].isShow = true;
 									layer.msg('新手机验证码错误',{time:1000});
 									break;
 								default:
@@ -133,7 +129,7 @@
 				//获取验证码
 				var data = {
 					mobile: this.phone,
-					type: 1
+					type: 3
 				}
 				var headers = {
 					token : JSON.parse(localStorage.user).token,
@@ -142,29 +138,22 @@
 				pro.fetch("post","/user/security/send_sms",data,headers).then((res)=>{
 					if(res.success == true){
 						if(res.code == 1){
-							layer.msg("发送成功",{time:1000})
+							layer.msg("发送成功",{time:2000})
 						}
 					}
 				}).catch((err)=>{
 					if(err.data.success == false){
 						switch (err.data.code){
-							case 2:
-								this.$children[0].isShow = true;
+							case '2':
 								layer.msg("短信验证码发送失败",{time:1000})
 								break;
-							case 4:
-								this.$children[0].isShow = true;
-								this.msg = '手机号码不存在';
+							case '4':
 								layer.msg("手机号码不存在",{time:1000})
 								break;
-							case 5:
-								this.$children[0].isShow = true;
-								this.msg = '操作过于频繁，请稍候再试';
+							case '5':
 								layer.msg("操作过于频繁，请稍候再试",{time:1000})
 								break;
-							case 6:
-								this.$children[0].isShow = true;
-								this.msg = '电话号码格式错误';
+							case '6':
 								layer.msg("电话号码格式错误",{time:1000})
 								break;
 							default:
@@ -181,6 +170,8 @@
 					layer.msg("该手机号已经被注册，请更换后重试",{time:2000})
 				}else if(this.newMobile == ''){
 					layer.msg("请输入新手机号码",)
+				}else if(this.phoneReg.test(this.newMobile) == false){
+					layer.msg("手机格式不正确",{time:2000})
 				}else{
 					if($(e.target).hasClass('current')) return false;
 					//页面效果
@@ -196,7 +187,7 @@
 					//获取验证码
 					var data = {
 						mobile: this.newMobile,
-						type: 1
+						type: 3
 					}
 					var headers = {
 						token : JSON.parse(localStorage.user).token,
@@ -205,34 +196,25 @@
 					pro.fetch("post","/user/security/send_sms",data,headers).then((res)=>{
 						if(res.success == true){
 							if(res.code == 1){
-								layer.msg("发送成功",{time:1000})
+								layer.msg("发送成功",{time:2000})
 							}
 						}
 					}).catch((err)=>{
 						if(err.data.success == false){
 							switch (err.data.code){
-								case 2:
-									this.$children[0].isShow = true;
+								case "2":
 									layer.msg("短信验证码发送失败",{time:1000})
 									break;
-								case 3:
-									this.$children[0].isShow = true;
-									this.msg = '手机号码已经存在';
+								case "3":
 									layer.msg("手机号码已经存在",{time:1000})
 									break;
-								case 4:
-									this.$children[0].isShow = true;
-									this.msg = '手机号码不存在';
+								case "4":
 									layer.msg("手机号码不存在",{time:1000})
 									break;
-								case 5:
-									this.$children[0].isShow = true;
-									this.msg = '操作过于频繁，请稍候再试';
+								case "5":
 									layer.msg("操作过于频繁，请稍候再试",{time:1000})
 									break;
-								case 6:
-									this.$children[0].isShow = true;
-									this.msg = '电话号码格式错误';
+								case "6":
 									layer.msg("电话号码格式错误",{time:1000})
 									break;
 								default:
