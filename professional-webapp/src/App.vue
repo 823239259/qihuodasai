@@ -42,7 +42,7 @@
 		<div class="container_bottom">
 			<p v-if="parameters[0]">
 				<span>国际原油：</span>
-				<span :class="{red: parameters[0].LastQuotation.LastPrice > parameters[0].LastQuotation.PreSettlePrice, green: parameters[0].LastQuotation.LastPrice < parameters[0].LastQuotation.PreSettlePrice}">{{parameters[0].LastQuotation.LastPrice}}</span>
+				<span :class="{red: parameters[0].LastQuotation.LastPrice > parameters[0].LastQuotation.PreSettlePrice, green: parameters[0].LastQuotation.LastPrice < parameters[0].LastQuotation.PreSettlePrice}">{{parameters[0].LastQuotation.LastPrice | fixNumTwo}}</span>
 				<span :class="{green: parameters[0].LastQuotation.ChangeRate < 0, red: parameters[0].LastQuotation.ChangeRate > 0}">{{parameters[0].LastQuotation.ChangeValue | fixNum(parameters[0].DotSize)}}</span>
 				<span :class="{green: parameters[0].LastQuotation.ChangeRate < 0, red: parameters[0].LastQuotation.ChangeRate > 0}">{{parameters[0].LastQuotation.ChangeRate | fixNumTwo}}%</span>
 				<i class="ifont" v-show="parameters[0].LastQuotation.LastPrice < parameters[0].LastQuotation.PreSettlePrice" :class="{red: parameters[0].LastQuotation.LastPrice > parameters[0].LastQuotation.PreSettlePrice, green: parameters[0].LastQuotation.LastPrice < parameters[0].LastQuotation.PreSettlePrice}">&#xe76a;</i>
@@ -50,7 +50,7 @@
 			</p>
 			<p v-if="parameters[2]">
 				<span>美黄金：</span>
-				<span :class="{red: parameters[2].LastQuotation.LastPrice > parameters[2].LastQuotation.PreSettlePrice, green: parameters[2].LastQuotation.LastPrice < parameters[2].LastQuotation.PreSettlePrice}">{{parameters[2].LastQuotation.LastPrice}}</span>
+				<span :class="{red: parameters[2].LastQuotation.LastPrice > parameters[2].LastQuotation.PreSettlePrice, green: parameters[2].LastQuotation.LastPrice < parameters[2].LastQuotation.PreSettlePrice}">{{parameters[2].LastQuotation.LastPrice | fixNumTwo}}</span>
 				<span :class="{green: parameters[2].LastQuotation.ChangeRate < 0, red: parameters[2].LastQuotation.ChangeRate > 0}">{{parameters[2].LastQuotation.ChangeValue | fixNum(parameters[2].DotSize)}}</span>
 				<span :class="{green: parameters[2].LastQuotation.ChangeRate < 0, red: parameters[2].LastQuotation.ChangeRate > 0}">{{parameters[2].LastQuotation.ChangeRate | fixNumTwo}}%</span>
 				<i class="ifont" v-show="parameters[2].LastQuotation.LastPrice < parameters[2].LastQuotation.PreSettlePrice" :class="{red: parameters[2].LastQuotation.LastPrice > parameters[2].LastQuotation.PreSettlePrice, green: parameters[2].LastQuotation.LastPrice < parameters[2].LastQuotation.PreSettlePrice}">&#xe76a;</i>
@@ -58,7 +58,7 @@
 			</p>
 			<p v-if="parameters[1]">
 				<span>恒指期货：</span>
-				<span :class="{red: parameters[1].LastQuotation.LastPrice > parameters[1].LastQuotation.PreSettlePrice, green: parameters[1].LastQuotation.LastPrice < parameters[1].LastQuotation.PreSettlePrice}">{{parameters[1].LastQuotation.LastPrice}}</span>
+				<span :class="{red: parameters[1].LastQuotation.LastPrice > parameters[1].LastQuotation.PreSettlePrice, green: parameters[1].LastQuotation.LastPrice < parameters[1].LastQuotation.PreSettlePrice}">{{parameters[1].LastQuotation.LastPrice | fixNumTwo}}</span>
 				<span :class="{green: parameters[1].LastQuotation.ChangeRate < 0, red: parameters[1].LastQuotation.ChangeRate > 0}">{{parameters[1].LastQuotation.ChangeValue | fixNum(parameters[1].DotSize)}}</span>
 				<span :class="{green: parameters[1].LastQuotation.ChangeRate < 0, red: parameters[1].LastQuotation.ChangeRate > 0}">{{parameters[1].LastQuotation.ChangeRate | fixNumTwo}}%</span>
 				<i class="ifont" v-show="parameters[1].LastQuotation.LastPrice < parameters[1].LastQuotation.PreSettlePrice" :class="{red: parameters[1].LastQuotation.LastPrice > parameters[1].LastQuotation.PreSettlePrice, green: parameters[1].LastQuotation.LastPrice < parameters[1].LastQuotation.PreSettlePrice}">&#xe76a;</i>
