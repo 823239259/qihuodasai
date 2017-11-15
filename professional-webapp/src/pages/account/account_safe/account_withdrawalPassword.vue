@@ -55,17 +55,7 @@
 		},
 		methods :{
 			getCode :function(e){
-				if($(e.target).hasClass('current')) return false;
-				//页面效果
-				$(e.target).addClass('current');
-				this.time = 60;
-				var timing = setInterval(function(){
-					this.time--;
-					if(this.time <= 0){
-						clearInterval(timing);
-						$(e.target).removeClass('current');
-					}
-				}.bind(this), 1000);
+				
 				//获取验证码
 				var data = {
 					mobile: this.username,
@@ -78,6 +68,17 @@
 				pro.fetch("post","/user/security/send_sms",data,headers).then((res)=>{
 					if(res.success == true){
 						if(res.code == 1){
+							if($(e.target).hasClass('current')) return false;
+							//页面效果
+							$(e.target).addClass('current');
+							this.time = 60;
+							var timing = setInterval(function(){
+								this.time--;
+								if(this.time <= 0){
+									clearInterval(timing);
+									$(e.target).removeClass('current');
+								}
+							}.bind(this), 1000);
 							layer.msg("发送成功",{time:1000})
 						}
 					}
@@ -85,19 +86,15 @@
 					if(err.data.success == false){
 						switch (err.data.code){
 							case 2:
-								this.$children[0].isShow = true;
 								layer.msg("短信验证码发送失败",{time:1000})
 								break;
 							case 4:
-								this.$children[0].isShow = true;
 								layer.msg("手机号码不存在",{time:1000})
 								break;
 							case 5:
-								this.$children[0].isShow = true;
 								layer.msg("操作过于频繁，请稍候再试",{time:1000})
 								break;
 							case 6:
-								this.$children[0].isShow = true;
 								layer.msg("电话号码格式错误",{time:1000})
 								break;
 							default:
@@ -142,23 +139,18 @@
 						if(err.data.success == false){
 							switch (err.data.code){
 								case '-1':
-									this.$children[0].isShow = true;
 									layer.msg("认证失败",{time:2000});
 									break;
 								case '2':
-									this.$children[0].isShow = true;
 									layer.msg("参数没有传递",{time:2000});
 									break;
 								case '3':
-									this.$children[0].isShow = true;
 									layer.msg("用户信息不存在",{time:2000});
 									break;
 								case '4':
-									this.$children[0].isShow = true;
 									layer.msg("提现密码不能和登录密码相同",{time:2000});
 									break;
 								case '6':
-									this.$children[0].isShow = true;
 									layer.msg("验证码错误",{time:2000});
 									break;
 								default:
