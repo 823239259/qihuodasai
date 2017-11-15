@@ -152,7 +152,7 @@
 		},
 		methods:{
 			close:function(){
-				
+				this.$router.push({path:'/account_openDetail'})
 			},
 			toIndexPage:function(){
 				
