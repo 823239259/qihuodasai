@@ -118,30 +118,32 @@
 				//获取验证码
 				var data = {
 					mobile: this.phone,
-					type: 3
+					type: 1
 				}
 				var headers = {
 					token : JSON.parse(localStorage.user).token,
 					secret :JSON.parse(localStorage.user).secret
 				}
 				pro.fetch("post","/user/security/send_sms",data,headers).then((res)=>{
+					console.log(res)
 					if(res.success == true){
 						if(res.code == 1){
 							if($(e.target).hasClass('current')) return false;
-								//页面效果
-								$(e.target).addClass('current');
-								this.oldTime = 60;
-								var timing = setInterval(function(){
-									this.oldTime--;
-									if(this.oldTime <= 0){
-										clearInterval(timing);
-										$(e.target).removeClass('current');
-									}
-								}.bind(this), 1000);
-							layer.msg("发送成功",{time:2000})
+									//页面效果
+									$(e.target).addClass('current');
+									this.oldTime = 60;
+									var timing = setInterval(function(){
+										this.oldTime--;
+										if(this.oldTime <= 0){
+											clearInterval(timing);
+											$(e.target).removeClass('current');
+										}
+									}.bind(this), 1000);
+								layer.msg("发送成功",{time:2000})
 						}
 					}
 				}).catch((err)=>{
+					console.log(err)
 					if(err.data.success == false){
 						switch (err.data.code){
 							case '2':

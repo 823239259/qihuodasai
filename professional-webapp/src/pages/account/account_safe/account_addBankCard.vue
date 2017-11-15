@@ -4,7 +4,7 @@
 			<p>姓名：<input type="text" v-model="username" /></p>
 			<p>开户银行：
 				<select id="bank" v-model="bank">
-					<option value=""></option>
+					<option value="">请选择银行类型</option>
 					<template v-for="key in bankList">
 						<option :value="key.abbreviation">{{key.bankName}}</option>
 					</template>
@@ -12,7 +12,7 @@
 			</p>
 			<p>开户省份：
 				<select id="province" v-model="province">
-					<option value=""></option>
+					<option value="">请选择开户省份</option>
 					<template v-for="key in provinceList">
 						<option :value="key.text">{{key.text}}</option>
 					</template>
@@ -20,7 +20,7 @@
 			</p>
 			<p>开户城市：
 				<select id="city" v-model="city">
-					<option value=""></option>
+					<option value="">请选择开户城市</option>
 					<template v-for="key in cityList">
 						<option :value="key.text">{{key.text}}</option>
 					</template>

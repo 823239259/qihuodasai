@@ -218,6 +218,7 @@
 				secret : JSON.parse(localStorage.user).secret
 			}
 			pro.fetch("post",'/user/ftrade/list',data,headers).then(function(res){
+				console.log(res)
 				if(res.success == true){
 					if(res.code == 1){
 						if(res.data.tradeList == ''){
