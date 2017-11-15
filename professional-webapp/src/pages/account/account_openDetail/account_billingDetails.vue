@@ -5,7 +5,7 @@
 			<p class="title">终结方案<i class="ifont ifont_x" v-on:click="close">&#xe624;</i></p>
 			<div class="details">
 				<p>结算金额明细</p>
-				<p><span>{{endAmount}}</span>元（结算金额）<span>={{traderBond}}元</span>（操盘保证金）+<span>{{appendTraderBond}}元</span>（追加保证金）+<span>{{tradeSell}}元</span>（交易盈亏）-<span>{{tranFees}}元</span>（手续费）</p>
+				<p><span>{{endAmount}}</span>元（结算金额）<span>={{traderBond}}元</span>（操盘保证金）+<span>{{appendTraderBond}}元</span>（追加保证金）<span>{{tradeSell}}元</span>（交易盈亏）-<span>{{tranFees}}元</span>（手续费）</p>
 				<p><i>注意：</i>交易手续费= 合约手续费x交易手数</p>
 			</div>
 			<div class="handDetails">
@@ -14,19 +14,19 @@
 					<thead>
 						<tr>
 							<td>合约名称</td>
-							<td>服饰a50</td>
-							<td>国际原油</td>
+							<td v-for="(key,value) in handList">{{value}}</td>
+							<!--<td>国际原油</td>
 							<td>恒指期货</td>
-							<td>迷你恒指</td>
+							<td>迷你恒指</td>-->
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td>交易手数</td>
+							<td v-for="(key,value) in handList">{{key}}</td>
+							<!--<td>10</td>
 							<td>10</td>
-							<td>10</td>
-							<td>10</td>
-							<td>10</td>
+							<td>10</td>-->
 						</tr>
 					</tbody>
 				</table>
@@ -53,7 +53,23 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
+						<tr v-for="item in historyList">
+							<td>1</td>
+							<td>2017-11-07 23：12:12</td>
+							<td>{{item.userNo}}</td>
+							<td>{{item.currencyNo}}</td>
+							<td>{{item.exchangeNo}}</td>
+							<td>{{item.commodityNo}}</td>
+							<td>+</td>
+							<td>-</td>
+							<td>{{item.tradePrice}}</td>
+							<td>{{item.free}}</td>
+							<td>55.00</td>
+							<td>10</td>
+							<td>0</td>
+							<td>{{item.tradeType}}</td>
+						</tr>
+						<!--<tr>
 							<td>1</td>
 							<td>2017-11-07 23：12:12</td>
 							<td>qd0030</td>
@@ -100,23 +116,7 @@
 							<td>10</td>
 							<td>0</td>
 							<td>强制平仓</td>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td>2017-11-07 23：12:12</td>
-							<td>qd0030</td>
-							<td>usd</td>
-							<td>hed</td>
-							<td>hsi1071</td>
-							<td>+</td>
-							<td>-</td>
-							<td>23165.00</td>
-							<td>59.00</td>
-							<td>55.00</td>
-							<td>10</td>
-							<td>0</td>
-							<td>强制平仓</td>
-						</tr>
+						</tr>-->
 					</tbody>
 				</table>
 				<div class="pager">
@@ -145,7 +145,9 @@
 				tranProfitLoss:'',
 				endParities:'',
 				tranFees:"",
-				tradeSell:''
+				tradeSell:'',
+				handList:{},
+				historyList:[],
 			}
 		},
 		methods:{
@@ -159,50 +161,126 @@
 				
 			},
 			nextPage:function(){
-				
 			},
 			//获取成交详情
-			details:function(a){
+			details:function(){
 				var headers = {
 					token:JSON.parse(localStorage.user).token,
 					secret:JSON.parse(localStorage.user).secret
 				}
 				var data = {
-					id:this.id
+					id:"4028805d5f6b1c64015f702721640021"
 				}
-				console.log(data)
 				pro.fetch("post","/ user/ftrade/details",data,headers).then((res)=>{
-					console.log(res)
+					var data = res.data.details
 					if(res.success == true){
 						if(res.code == 1){
-							this.endAmount = res.data.endAmount.toFixed(2)
-							this.traderBond = res.data.traderBond
-							this.appendTraderBond = res.data.appendTraderBond
-							this.tranProfitLoss=res.data.tranProfitLoss,
-							this.endParities=res.data.endParities,
-							this.tradeSell = (this.tranProfitLoss*this.endParities).toFixed(2)
-							this.tranFees = res.data.tranFees
+							this.endAmount = data.endAmount;
+							this.traderBond = data.traderBond;
+							this.appendTraderBond = data.appendTraderBond;
+							this.tranProfitLoss=data.tranProfitLoss;
+							this.endParities=data.endParities;
+							this.tradeSell = this.tranProfitLoss*this.endParities;
+							this.tranFees = data.tranFees;
+							if(data.tranActualLever!=0){
+								this.handList.富时A50 = data.tranActualLever
+							}
+							if(data.crudeTranActualLever!=0){
+								this.handList.国际原油 = data.crudeTranActualLever
+							}
+							if(data.hsiTranActualLever!=0){
+								this.handList.恒指期货 = data.hsiTranActualLever
+							}
+							if(data.mdtranActualLever!=0){
+								this.handList.迷你道值 = data.mdtranActualLever
+							}
+							if(data.mntranActualLever!=0){
+								this.handList.迷你纳值 = data.mntranActualLever
+							}
+							if(data.mbtranActualLever!=0){
+								this.handList.迷你标普 = data.mbtranActualLever
+							}
+							if(data.daxtranActualLever!=0){
+								this.handList.德国DAX = data.daxtranActualLever
+							}
+							if(data.nikkeiTranActualLever!=0){
+								this.handList.日经225 = data.nikkeiTranActualLever
+							}
+							if(data.lhsiTranActualLever!=0){
+								this.handList.小恒指 = data.lhsiTranActualLever
+							}
+							if(data.agTranActualLever!=0){
+								this.handList.美黄金 = data.agTranActualLever
+							}
+							if(data.hIndexActualLever!=0){
+								this.handList.H股指数 = data.hIndexActualLever
+							}
+							if(data.xHStockMarketLever!=0){
+								this.handList.小H股指数 = data.xHStockMarketLever
+							}
+							if(data.ameCopperMarketLever!=0){
+								this.handList.美铜 = data.ameCopperMarketLever
+							}
+							if(data.aSilverActualLever!=0){
+								this.handList.美白银 = data.aSilverActualLever
+							}
+							if(data.smallCrudeOilMarketLever!=0){
+								this.handList.小原油 = data.smallCrudeOilMarketLever
+							}
+							if(data.daxtranMinActualLever!=0){
+								this.handList.迷你德国DAX = data.daxtranMinActualLever
+							}
+							if(data.naturalGasActualLever!=0){
+								this.handList.天然气 = data.naturalGasActualLever
+							}
 						}
 					}
 				}).catch((err)=>{
 					console.log(err)
-//					if(err.data.success == false){
-//						switch (err.data.success){
-//							case value:
-//								break;
-//							default:
-//								break;
-//						}
-//					}else {
-//						layer.msg("网络不给力，请稍后再试",{time:2000})
-//					}
+					if(err.success == false){
+						switch (err.code){
+							case value:
+								break;
+							default:
+								break;
+						}
+					}else {
+						layer.msg("网络不给力，请稍后再试",{time:2000})
+					}
+				})
+			},
+			//获取历史成交
+			getHistory:function(){
+				var headers = {
+					token:JSON.parse(localStorage.user).token,
+					secret:JSON.parse(localStorage.user).secret
+				}
+				var data = {
+					id:"4028805d5f6b1c64015f702721640021"
+				}
+				pro.fetch("post","/user/ftrade/getFstTradeDetail",data,headers).then((res)=>{
+					console.log(res.data)
+					if(res.success == true){
+						if(res.code == ""){
+							this.historyList = res.data.splice(0,6)
+							this.pageCount = Math.ceil(this.historyList.length/5) ;
+						}
+					}
+				}).catch((err)=>{
+					if(err.success == false){
+						
+					}else{
+						layer.msg("网络不给力，请稍后再试",{time:2000})
+					}
 				})
 			}
 		},
 		mounted:function(){
 			this.id = this.$route.query.id;
 			//获取成交详情
-			this.details(this.id);
+			this.details();
+			//获取历史成交
+			this.getHistory();
 		},
 		actived:function(){
 			this.id = this.$route.query.id;
@@ -303,6 +381,9 @@
 	}
 	.pager{
 		float: right;
+		span{
+			margin: 0 10px;
+		}
 	}
 	.btn_span{
 		color: $white;
