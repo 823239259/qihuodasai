@@ -1215,7 +1215,7 @@ export default new Vuex.Store({
 				}
 			};
 		},
-		//动态更新K线图（蜡烛图）数据
+		//动态更新数据(分时图用)
 		updateTempdata: function(state, obj) {  
 			state.market.markettemp.forEach(function(e) {
 				if(e.CommodityNo == obj) {
@@ -2380,6 +2380,7 @@ export default new Vuex.Store({
 									context.state.market.charttimems = context.state.market.charttimetime.getTime();
 									context.state.market.charttime = context.state.market.charttimems - context.state.market.charttimems2;
 									if(context.state.market.charttime >= 1000 || context.state.market.charttimetemp >= 1000) {
+										context.commit('updateTempdata', context.state.market.currentNo);
 										context.commit('setfensoptionsecond');
 										context.commit('drawfens', {
 											id1: 'fens',
