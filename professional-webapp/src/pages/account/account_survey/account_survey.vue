@@ -54,13 +54,21 @@
 					<li v-on:click="timeChoose">15天</li>
 					<li v-on:click="timeChoose">30天</li>
 					<li>起始时间</li>
-					<li><select name="">
+					<div class="time">
+						<input type="text" readonly="readonly" class="fl startTime" :value="startTime" />
+						<i class="ifont fl">&#xe690;</i>
+						<input type="text" readonly="readonly" class="fr endTime" :value="endTime" />
+					</div>
+					<li>
+						<button class="btn blue" @click="serchEvent">搜索</button>
+					</li>
+					<!--<li><select name="">
 						<option value="">2017-10-15</option>
 					</select></li>
 					<li><i class="ifont toright">&#xe604;</i></li>
 					<li><select name="">
 						<option value="">2017-10-15</option>
-					</select></li>
+					</select></li>-->
 				</ul>
 			</div>
 			<div class="survey_functionChoose_btm">
@@ -151,7 +159,9 @@
 				showmoney:false,
 				showMoneyNo:false,
 				realName:'',
-				isBoundBankCard : ''
+				isBoundBankCard : '',
+				startTime: '',
+				endTime: ''
 			}
 		},
 		filters: {
@@ -168,6 +178,21 @@
 			},
 		},
 		methods:{
+			//日历
+			serchEvent: function(){
+				this.selectedNum = -1;
+				this.startTime = $(".startTime").val();
+				this.endTime = $(".endTime").val();
+				var beginTime = $(".startTime").val() + ' 00:00:00';
+				var t =  Date.parse(new Date(this.endTime)) + 86400000;
+				var endTime = pro.getDate("y-m-d", t) + ' 00:00:00';
+				this.histroyDealList = [];
+				this.$store.state.market.queryHisList = [];
+				this.tradeSocket.send('{"Method":"QryHisTrade","Parameters":{"ClientNo":"'+JSON.parse(localStorage.tradeUser).username	+'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'"}}');
+				setTimeout(function(){
+					this.operateData();
+				}.bind(this),500);
+			},
 			hide1:function(){
 				this.showMoneyNo = false
 			},
@@ -232,7 +257,6 @@
 			 	if((this.current)+1 >this.pageCount){
 			 		return;
 			 	}else{
-			 		console.log(this.current)
 			 		this.GetList((this.current+1),'','','');
 			 		this.current++;
 			 		return 
@@ -241,10 +265,8 @@
 			// 上一页
 			 prePage:function(){
 			 	if((this.current-1) <=0){
-			 		console.log(this.current);
 			 		return;
 			 	}else{
-			 		console.log(this.current);
 			 		this.GetList((this.current - 1),'','','');
 			 		this.current--;
 			 		return;
@@ -272,8 +294,6 @@
 					operaType:chooseType
 				};
 				pro.fetch("post",'/user/fund/list',info,headers).then((res)=>{
-					console.log(1111111111);
-					console.log(res);
 					var data = res.data
 					if(res.success == true){	
 						if(res.code == 1){
@@ -284,7 +304,6 @@
 							this.frzBal=data.frzBal;
 							this.balance=data.balance;
 							this.pageCount = data.totalPage;
-							//console.log(this.pageCount)
 							//资金收入支出详情列表fundList
 							this.item=data.fundList;
 //							var time = pro.getDate("y-m-d h:i:s",this.item[0].subTime*1000);
@@ -434,6 +453,11 @@
 			this.GetList('',this.getNowDate(),this.getNowFormatDate(),'');
 			//获取实名和提现密码
 			this.getSafeInfo();
+			//调用日历插件
+			dateEvent('.startTime');
+			dateEvent('.endTime');
+//			this.startTime = time;
+//			this.endTime = time;
 		}
 	}
 </script>
@@ -646,5 +670,31 @@
 			position: relative;
 			top: -36px;
 			left: 450px;
+		}
+		.time{
+			float: left;
+			width: 270px;
+			height: 30px;
+			overflow: hidden;
+			border: 1px solid $lightblue;
+			margin-top: -5px;
+			border-radius: 4px;
+			input{
+				width: 109px;
+				height: 28px;
+				line-height: 28px;
+				padding: 0 5px;
+				color: $white;
+				cursor: pointer;
+			}
+			.ifont{
+				width: 30px;
+				height: 28px;
+				line-height: 28px;
+				text-align: center;
+				background: $lightblue;
+				font-size: $fs18;
+				color: $blue;
+			}
 		}
 </style>
