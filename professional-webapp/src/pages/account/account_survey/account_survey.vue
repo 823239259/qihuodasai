@@ -272,6 +272,8 @@
 					operaType:chooseType
 				};
 				pro.fetch("post",'/user/fund/list',info,headers).then((res)=>{
+					console.log(1111111111);
+					console.log(res);
 					var data = res.data
 					if(res.success == true){	
 						if(res.code == 1){
@@ -285,7 +287,7 @@
 							//console.log(this.pageCount)
 							//资金收入支出详情列表fundList
 							this.item=data.fundList;
-							var time = pro.getDate("y-m-d h:i:s",this.item[0].subTime*1000);
+//							var time = pro.getDate("y-m-d h:i:s",this.item[0].subTime*1000);
 						}
 					}
 				}).catch((err)=>{
@@ -306,7 +308,7 @@
 			        strDate = "0" + strDate;
 			    }
 			    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate+
-			    " "+"23：59：59";
+			    ""+"23：59：59";
 			    return currentdate;
 			},
 			//获取一天
@@ -322,12 +324,8 @@
 			    if (strDate >= 0 && strDate <= 9) {
 			        strDate = "0" + strDate;
 			    }
-			    if(strDate=1){
-			    	month--;
-			    	strDate = 30-1
-			    }
-			    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate+
-			    " "+"00：00：00";
+			    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + (strDate-1)+
+			    " "+"00:00:00";
 			    return currentdate;
 			},
 			//获取7天时间
@@ -350,7 +348,7 @@
 			    	strDate = strDate - 7
 			    }
 			    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate+
-			    " "+"23：59：59";
+			    " "+"23:59:59";
 			    return currentdate
 			},
 			//获取15天数据
@@ -373,7 +371,7 @@
 			    	strDate = strDate - 15
 			    }
 			    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate+
-			    " "+"23：59：59";
+			    " "+"23:59:59";
 			    return currentdate
 			},
 			//获取一个月数据
@@ -397,7 +395,7 @@
 			    	month--;
 			    }
 			    var currentdate = year + seperator1 + month + seperator1 + strDate+
-			    " "+"23：59：59";
+			    " "+"23:59:59";
 			    return currentdate
 			},
 			//获取实名信息
@@ -433,7 +431,7 @@
 		},
 		mounted:function(){
 			//获取默认
-			this.GetList('','','','');
+			this.GetList('',this.getNowDate(),this.getNowFormatDate(),'');
 			//获取实名和提现密码
 			this.getSafeInfo();
 		}
