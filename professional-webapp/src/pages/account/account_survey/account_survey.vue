@@ -8,8 +8,10 @@
 						<img src="../../../assets/images/icon_smileFace.png" alt="笑脸" />
 						<span v-if="realName == null">{{username}}</span>
 						<span v-else = "realName!=null">{{realName}}</span>
-						<img src="../../../assets/images/icon_acc1.png" alt="账户" />
-						<img src="../../../assets/images/icon_password1.png" alt="提现密码" />
+						<img src="../../../assets/images/icon_acc1.png" alt="账户" v-if="realName == null" v-on:click="toCertification" />
+						<img src="../../../assets/images/icon_acc1.png" alt="账户" v-else="realName != null" />
+						<img src="../../../assets/images/icon_password1.png" alt="提现密码" v-if="realName == null" v-on:click="towWithDrawlPassword"/>
+						<img src="../../../assets/images/icon_password1.png" alt="提现密码" v-else="realName != null" v-on:click="towWithDrawlPassword"/>
 					</li>
 					<li>
 						<button class="btn yellow" v-on:click="toRecharge">充值</button>
@@ -178,6 +180,14 @@
 			},
 		},
 		methods:{
+			//实名
+			toCertification:function(){
+				this.$router.push({path:'/safe_certification'});
+			},
+			//设置提现密码
+			towWithDrawlPassword:function(){
+				this.$router.push({path:'/safe_withdrawalPassword'});
+			},
 			//日历
 			serchEvent: function(){
 				this.selectedNum = -1;
