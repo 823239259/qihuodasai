@@ -6,8 +6,8 @@
 		<div class="account_resetLoginPassword_center">
 			<p>手机号码:{{username}}</p>
 			<p>获取验证码：<input type="text" v-model="code"/><i class="getcode" v-on:click="getCode">{{volid ? info : (time + '秒')}}</i></p>
-			<p>新登录密码：<input type="text" v-model="newLoginPassword" /></p>
-			<p>确认新密码：<input type="text" v-model="sureLoginPassword"/></p>
+			<p>新登录密码：<input type="password" v-model="newLoginPassword" /></p>
+			<p>确认新密码：<input type="password" v-model="sureLoginPassword"/></p>
 			<button class="btn yellow" v-on:click="toResetLoginPassword">确认</button>
 		</div>
 		<div class="account_resetLoginPassword_btm">
@@ -85,30 +85,91 @@
 							if(res.code == 1){
 								layer.msg('设置成功',{time:1000});
 								this.$router.push({path:'/account_safe'})
-							}else {
-								layer.msg(res.code,{time:1000});
 							}
 						}
 					}).catch((err)=>{
-						layer.msg('网络不给力，请稍后重试',{time:1000});
+						if(err.data.success == false){
+							switch (err.data.code){
+								case '-2':
+									layer.msg('参数错误',{time:1000});
+									break;
+								case '-1':
+									layer.msg('认证失败',{time:1000});
+									break;
+								case '3':
+									layer.msg('用户信息不存在',{time:1000});
+									break;
+								case '4':
+									layer.msg('密码格式错误',{time:1000});
+									break;
+								case '5':
+									layer.msg('验证码失效',{time:1000});
+									break;
+								case '6':
+									layer.msg('验证码错误',{time:1000});
+									break;
+								case '7':
+									layer.msg('新密码与旧密码相同',{time:1000});
+									break;
+								default:
+									break;
+							}
+						}else{
+								layer.msg('网络不给力，请稍后重试',{time:1000});
+						}
 					})
 				}
 			},
 			getCode :function(e){
-				if($(e.target).hasClass('current')) return false;
-				this.phone = JSON.parse(localStorage.user).username;
-				this.$refs.codeDialog.path =  "http://test.api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
-				this.$refs.codeDialog.phone = this.phone;
-				//页面效果
-				$(e.target).addClass('current');
-				this.time = 60;
-				var timing = setInterval(function(){
-					this.time--;
-					if(this.time <= 0){
-						clearInterval(timing);
-						$(e.target).removeClass('current');
+				//获取验证码
+				var data = {
+					mobile: this.phone,
+					type: 1
+				}
+				var headers = {
+					token : JSON.parse(localStorage.user).token,
+					secret :JSON.parse(localStorage.user).secret
+				}
+				pro.fetch("post","/user/security/send_sms",data,headers).then((res)=>{
+					if(res.success == true){
+						if(res.code == 1){
+							if($(e.target).hasClass('current')) return false;
+									//页面效果
+									$(e.target).addClass('current');
+									this.time = 60;
+									var timing = setInterval(function(){
+										this.time--;
+										if(this.time <= 0){
+											clearInterval(timing);
+											$(e.target).removeClass('current');
+										}
+									}.bind(this), 1000);
+								layer.msg("发送成功",{time:2000})
+						}
 					}
-				}.bind(this), 1000);
+				}).catch((err)=>{
+					console.log(err)
+					if(err.data.success == false){
+						switch (err.data.code){
+							case '2':
+								layer.msg("短信验证码发送失败",{time:1000})
+								break;
+							case '4':
+								layer.msg("手机号码不存在",{time:1000})
+								break;
+							case '5':
+								layer.msg("操作过于频繁，请稍候再试",{time:1000})
+								break;
+							case '6':
+								layer.msg("电话号码格式错误",{time:1000})
+								break;
+							default:
+								break;
+						}
+					}else {
+						layer.msg("网络不给力，请稍后再试",{time:1000})
+					}
+				})
 			},
 		},
 		created(){
