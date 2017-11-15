@@ -152,7 +152,7 @@
 		},
 		methods:{
 			close:function(){
-				
+				this.$router.push({path:'/account_openDetail'})
 			},
 			toIndexPage:function(){
 				
@@ -169,7 +169,7 @@
 					secret:JSON.parse(localStorage.user).secret
 				}
 				var data = {
-					id:"4028805d5f6b1c64015f702721640021"
+					id:this.id
 				}
 				pro.fetch("post","/ user/ftrade/details",data,headers).then((res)=>{
 					var data = res.data.details
@@ -256,7 +256,7 @@
 					secret:JSON.parse(localStorage.user).secret
 				}
 				var data = {
-					id:"4028805d5f6b1c64015f702721640021"
+					id:this.id
 				}
 				pro.fetch("post","/user/ftrade/getFstTradeDetail",data,headers).then((res)=>{
 					console.log(res.data)

@@ -535,7 +535,7 @@
 	.loss_mark{
 		position: absolute;
 		top: 200px;
-		right: 500px;
+		right: 400px;
 		width: 300px;
 		height: 60px;
 		line-height: 20px;

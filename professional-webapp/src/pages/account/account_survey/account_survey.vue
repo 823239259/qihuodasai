@@ -8,8 +8,10 @@
 						<img src="../../../assets/images/icon_smileFace.png" alt="笑脸" />
 						<span v-if="realName == null">{{username}}</span>
 						<span v-else = "realName!=null">{{realName}}</span>
-						<img src="../../../assets/images/icon_acc1.png" alt="账户" />
-						<img src="../../../assets/images/icon_password1.png" alt="提现密码" />
+						<img src="../../../assets/images/icon_acc1.png" alt="账户" v-if="realName == null" v-on:click="toCertification" />
+						<img src="../../../assets/images/icon_acc1.png" alt="账户" v-else="realName != null" />
+						<img src="../../../assets/images/icon_password1.png" alt="提现密码" v-if="realName == null" v-on:click="towWithDrawlPassword"/>
+						<img src="../../../assets/images/icon_password1.png" alt="提现密码" v-else="realName != null" v-on:click="towWithDrawlPassword"/>
 					</li>
 					<li>
 						<button class="btn yellow" v-on:click="toRecharge">充值</button>
@@ -54,13 +56,21 @@
 					<li v-on:click="timeChoose">15天</li>
 					<li v-on:click="timeChoose">30天</li>
 					<li>起始时间</li>
-					<li><select name="">
+					<div class="time">
+						<input type="text" readonly="readonly" class="fl startTime" :value="startTime" />
+						<i class="ifont fl">&#xe690;</i>
+						<input type="text" readonly="readonly" class="fr endTime" :value="endTime" />
+					</div>
+					<li>
+						<button class="btn blue" @click="serchEvent">搜索</button>
+					</li>
+					<!--<li><select name="">
 						<option value="">2017-10-15</option>
 					</select></li>
 					<li><i class="ifont toright">&#xe604;</i></li>
 					<li><select name="">
 						<option value="">2017-10-15</option>
-					</select></li>
+					</select></li>-->
 				</ul>
 			</div>
 			<div class="survey_functionChoose_btm">
@@ -151,7 +161,9 @@
 				showmoney:false,
 				showMoneyNo:false,
 				realName:'',
-				isBoundBankCard : ''
+				isBoundBankCard : '',
+				startTime: '',
+				endTime: ''
 			}
 		},
 		filters: {
@@ -168,6 +180,24 @@
 			},
 		},
 		methods:{
+			//实名
+			toCertification:function(){
+				this.$router.push({path:'/safe_certification'});
+			},
+			//设置提现密码
+			towWithDrawlPassword:function(){
+				this.$router.push({path:'/safe_withdrawalPassword'});
+			},
+			//日历
+			serchEvent: function(){
+				this.selectedNum = -1;
+				this.startTime = $(".startTime").val();
+				this.endTime = $(".endTime").val();
+				var beginTime = $(".startTime").val() + ' 00:00:00';
+				var t =  Date.parse(new Date(this.endTime)) + 86400000;
+				var endTime = pro.getDate("y-m-d", t) + ' 00:00:00';
+				this.GetList('',beginTime,endTime,'')
+			},
 			hide1:function(){
 				this.showMoneyNo = false
 			},
@@ -232,7 +262,6 @@
 			 	if((this.current)+1 >this.pageCount){
 			 		return;
 			 	}else{
-			 		console.log(this.current)
 			 		this.GetList((this.current+1),'','','');
 			 		this.current++;
 			 		return 
@@ -241,10 +270,8 @@
 			// 上一页
 			 prePage:function(){
 			 	if((this.current-1) <=0){
-			 		console.log(this.current);
 			 		return;
 			 	}else{
-			 		console.log(this.current);
 			 		this.GetList((this.current - 1),'','','');
 			 		this.current--;
 			 		return;
@@ -282,10 +309,9 @@
 							this.frzBal=data.frzBal;
 							this.balance=data.balance;
 							this.pageCount = data.totalPage;
-							//console.log(this.pageCount)
 							//资金收入支出详情列表fundList
 							this.item=data.fundList;
-							var time = pro.getDate("y-m-d h:i:s",this.item[0].subTime*1000);
+//							var time = pro.getDate("y-m-d h:i:s",this.item[0].subTime*1000);
 						}
 					}
 				}).catch((err)=>{
@@ -306,7 +332,7 @@
 			        strDate = "0" + strDate;
 			    }
 			    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate+
-			    " "+"23：59：59";
+			    " "+"23:59:59";
 			    return currentdate;
 			},
 			//获取一天
@@ -322,12 +348,8 @@
 			    if (strDate >= 0 && strDate <= 9) {
 			        strDate = "0" + strDate;
 			    }
-			    if(strDate=1){
-			    	month--;
-			    	strDate = 30-1
-			    }
-			    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate+
-			    " "+"00：00：00";
+			    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + (strDate-1)+
+			    " "+"00:00:00";
 			    return currentdate;
 			},
 			//获取7天时间
@@ -350,7 +372,7 @@
 			    	strDate = strDate - 7
 			    }
 			    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate+
-			    " "+"23：59：59";
+			    " "+"23:59:59";
 			    return currentdate
 			},
 			//获取15天数据
@@ -373,7 +395,7 @@
 			    	strDate = strDate - 15
 			    }
 			    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate+
-			    " "+"23：59：59";
+			    " "+"23:59:59";
 			    return currentdate
 			},
 			//获取一个月数据
@@ -397,7 +419,7 @@
 			    	month--;
 			    }
 			    var currentdate = year + seperator1 + month + seperator1 + strDate+
-			    " "+"23：59：59";
+			    " "+"23:59:59";
 			    return currentdate
 			},
 			//获取实名信息
@@ -433,9 +455,16 @@
 		},
 		mounted:function(){
 			//获取默认
-			this.GetList('','','','');
+			this.GetList('',this.getNowDate(),this.getNowFormatDate(),'');
 			//获取实名和提现密码
 			this.getSafeInfo();
+			//调用日历插件
+			dateEvent('.startTime');
+			dateEvent('.endTime');
+			var date = new Date();
+			var time = pro.getDate("y-m-d", date.getTime()).split(' ')[0];
+			this.startTime = time;
+			this.endTime = time;
 		}
 	}
 </script>
@@ -648,5 +677,31 @@
 			position: relative;
 			top: -36px;
 			left: 450px;
+		}
+		.time{
+			float: left;
+			width: 270px;
+			height: 30px;
+			overflow: hidden;
+			border: 1px solid $lightblue;
+			margin-top: -5px;
+			border-radius: 4px;
+			input{
+				width: 109px;
+				height: 28px;
+				line-height: 28px;
+				padding: 0 5px;
+				color: $white;
+				cursor: pointer;
+			}
+			.ifont{
+				width: 30px;
+				height: 28px;
+				line-height: 28px;
+				text-align: center;
+				background: $lightblue;
+				font-size: $fs18;
+				color: $blue;
+			}
 		}
 </style>

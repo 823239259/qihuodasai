@@ -90,6 +90,8 @@
 					layer.msg('请输入正确的银行卡号',{time:1000})
 				}else if(this.bankId!=this.sure_bankId){
 					layer.msg('确认卡号与储蓄卡号不一致',{time:1000})
+				}else if(this.username == ''){
+					layer.msg("请输入用户姓名",{time:1000})
 				}else {
 					var data = {
 						bank:this.bank,
@@ -280,7 +282,8 @@
 				margin-top: 10px;
 			}
 			select{
-				background-color: $bottom_color;
+				
+				opacity: 10;
 				color: $white;
 				width: 160px;
 				height: 30px;
@@ -288,6 +291,9 @@
 				border-radius:5px; 
 				&:hover{
 					border: 1px solid $yellow;
+				}
+				option{
+					background-color: $bottom_color;
 				}
 			}
 		}
