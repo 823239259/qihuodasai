@@ -33,6 +33,9 @@
 					this.$router.push({path:'/account_safe'});
 				}
 			},
+		},
+		activated: function(){
+			this.currentNum = 0;
 		}
 	}
 </script>

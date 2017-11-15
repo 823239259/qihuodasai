@@ -29,7 +29,7 @@
 								<td v-if="isWithdrawPwd==false">未设置</td>
 								<td v-else="isWithdrawPwd==true" class="yellow_status">已设置</td>
 								<td v-if="isWithdrawPwd==false">账户资金变动时，需先验证体现密码</td>
-								<td v-else="isWithdrawPwd==true" class="yellow_status">您已设置提现密码，请保管好自己的密码</td>
+								<td v-else="isWithdrawPwd==true">您已设置提现密码，请保管好自己的密码</td>
 								<td v-on:click="toaWithdrawalPassword" v-if="isWithdrawPwd==false">去设置</td>
 								<td v-on:click="toaWithdrawalPassword" v-else="isWithdrawPwd==true">去修改</td>
 							</tr>
@@ -70,12 +70,13 @@
 		name:"account_safe",
 		data(){
 			return{
+				userInfo: '',
 				username : '',
 				phone : '',
 				realName :'',
 				isBoundBankCard:'',
 				isWithdrawPwd:'',
-				protect:'',
+				protect: 2,
 			}
 		},
 		methods:{
@@ -102,10 +103,22 @@
 			//添加银行卡
 			toAddBankCard :function(){
 				this.$router.push({path:'/safe_addBankCard'})
-			}
+			},
+			getUserSafeMsg: function(){
+				
+			},
 		},
 		mounted:function(){
-			
+			//获取用户平台登录信息
+			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
+			//统计完成了几项保护
+			if(this.realName != null) this.protect += 1;
+			if(this.isWithdrawPwd == true) this.protect += 1;
+			if(this.isBoundBankCard == true) this.protect += 1;
+		},
+		activated: function(){
+			//获取用户账户信息
+			this.getUserSafeMsg();
 		},
 		beforeCreate(){
 			var headers = {
