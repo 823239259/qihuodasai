@@ -14,7 +14,8 @@
 		<div class="account_bindBankCard_center">
 			<ul>
 				<li  v-for="(k,index) in bindBankList" class="bankList" v-on:click="choosBank" :class="{curr:current1 == index}">
-					<i class="ifont">&#xe698;</i>
+					<i class="ifont" v-if="k.default ==true">&#xe698;</i>
+					<i class="ifont" v-else="k.default!=true">&#xe626;</i>
 					<span>{{k.bankName}}</span>
 					<span>尾号{{k.card.substr(-4,4)}}</span>
 					<label  v-if="k.default !=true"></label>
@@ -50,7 +51,7 @@
 		methods:{
 			choosBank:function(e){
 				var index = $(e.currentTarget).index();
-//				$(e.currentTarget).addClass("btn1").siblings().removeClass("btn1");
+				$(e.currentTarget).addClass("curr").siblings().removeClass("curr");
 				return this.bankId = this.bindBankList[index].bankId;
 			},
 			//select事件
@@ -235,19 +236,20 @@
 			}
 		}
 		.account_bindBankCard_center {
+			padding-top: 20px;
 			width: 100%;
-			height: 160px;
 			background-color: $blue;
 			text-align: center;
 			li{
 				width: 400px;
 				height: 40px;
-				display: inline-block;
 				margin: auto;
 				border-radius: 5px;
 				line-height: 40px;
-				margin-top: 30px;
-				span{
+				border: 1px solid #7a7f99;
+				margin-bottom: 30px;
+			}
+			span{
 					float: left;
 					margin-left: 10px;
 					&:nth-child(2){
@@ -260,18 +262,11 @@
 					margin-left: 10px;
 					color: $white;
 				}
-			}
 			.btn {
 				width: 160px;
 				height: 30px;
 				margin-top: 20px;
-				color: black;
-			}
-			input{
-				width: 20px;
-				height: 20px;
-				border: 1px solid $yellow;
-				border-radius: 10px;
+				margin-bottom: 20px;
 			}
 			select {
 				background-color: $blue;
@@ -280,6 +275,9 @@
 				border: none;
 				margin-right: 20px;
 				line-height: 38px;
+			}
+			.curr{
+				border: 1px solid $yellow;
 			}
 		}
 		.account_bindBankCard_btm {
@@ -299,7 +297,5 @@
 		float: left;
 		margin-left: 20px;
 	}
-	.curr{
-		border: 1px solid $yellow;
-	}
+	
 </style>
