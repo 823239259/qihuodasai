@@ -186,12 +186,7 @@
 				var beginTime = $(".startTime").val() + ' 00:00:00';
 				var t =  Date.parse(new Date(this.endTime)) + 86400000;
 				var endTime = pro.getDate("y-m-d", t) + ' 00:00:00';
-				this.histroyDealList = [];
-				this.$store.state.market.queryHisList = [];
-				this.tradeSocket.send('{"Method":"QryHisTrade","Parameters":{"ClientNo":"'+JSON.parse(localStorage.tradeUser).username	+'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'"}}');
-				setTimeout(function(){
-					this.operateData();
-				}.bind(this),500);
+				this.GetList('',beginTime,endTime,'')
 			},
 			hide1:function(){
 				this.showMoneyNo = false
@@ -456,8 +451,10 @@
 			//调用日历插件
 			dateEvent('.startTime');
 			dateEvent('.endTime');
-//			this.startTime = time;
-//			this.endTime = time;
+			var date = new Date();
+			var time = pro.getDate("y-m-d", date.getTime()).split(' ')[0];
+			this.startTime = time;
+			this.endTime = time;
 		}
 	}
 </script>
