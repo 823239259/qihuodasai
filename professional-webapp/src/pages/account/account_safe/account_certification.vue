@@ -76,7 +76,7 @@
 									layer.msg("该身份证已经被认证过",{time:2000});
 									break;
 								case '8':
-									layer.msg("操作频率过高",{time:2000});
+									layer.msg("您已经超过认证失败最高次数限制了",{time:2000});
 									break;
 								default:
 									break;
