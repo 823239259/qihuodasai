@@ -107,7 +107,7 @@
 					pro.fetch('post','/user/withdraw/add_bank',data,headers).then((res)=>{
 						if(res.success == ''){
 							if(res.caode == 1){
-								layer.msg("绑定成功",{time:1000});
+								layer.msg("绑定成功",{time:2000});
 								this.bank ='';
 								this.bankId='';
 								this.province='';

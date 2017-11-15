@@ -57,14 +57,15 @@
 								<td v-else="item.stateTypeStr != '已完结'">-</td>
 								<td v-if="item.endAmount!=''">{{item.endAmount}}</td>
 								<td v-else="item.endAmount == ''">-</td>
-								<td v-if="item.stateTypeStr =='开户中' || item.stateTypeStr=='审核不通过' ">-</td>
-								<td v-else="item.stateTypeStr == '操盘中'">
-									<span v-on:click="toCheckAccount">查看账户</span></br>
+								<td v-if="item.stateTypeStr =='开户中'">-</td>
+								<td v-else-if="item.stateTypeStr=='审核不通过'">-</td>
+								<td v-else-if="item.stateTypeStr=='开户失败'">-</td>
+								<td v-else-if="item.stateTypeStr == '操盘中'">
+									<span v-on:click="toCheckAccount(item.id)">查看账户</span></br>
 									<span v-on:click="addMoney(item.id)">补充保证金</span></br>
 									<span v-on:click="toCloseAccount(item.id)">结算方案</span>
 								</td>
-								<td v-else="item.stateTypeStr == '已结算'" v-on:click="toParticulars">结算明细</td>
-								<td v-else="item.stateTypeStr == '已完结'" v-on:click="toParticulars">结算明细</td>
+								<td v-else-if="item.stateTypeStr == '已完结'" v-on:click="toParticulars(item.id)">结算明细</td>
 							</tr>
 							<!--<tr>
 								<td>国际综合</td>
@@ -144,20 +145,27 @@
 			//结算方案
 			toCloseAccount:function(a){
 				this.listId = a;
-				this.$router.push({path:'/account_endScheme',query:{"id":this.listId}})
+				console.log(this.listId);
+				this.$router.push({path:'/account_endScheme',query:{"id":this.listId}});
 			},
 			//查看账户
-			toCheckAccount:function(){
-			this.$router.push({path:'/openDetail_viewAccount'});	
+			toCheckAccount:function(a){
+				this.listId = a;
+			this.$router.push({path:'/openDetail_viewAccount',query:{"id":this.listId}});	
 			},
 			//添加保证金
 			addMoney:function(a){
 				this.listId = a;
 				this.$router.push({path:"/openDetail_additionalMargin",query:{"id":this.listId}});
 			},
+			//去结算明细
+			toParticulars:function(a){
+				this.listId = a;
+				this.$router.push({path:"/openDetail_billingDetails",query:{"id":this.listId}});
+			},
 			//去开户
 			toOpenAccount :function(){
-				this.$router.push({path:'/openAccount'})
+				this.$router.push({path:'/openAccount'});
 			},
 			//时间查询
 			timeQUuery :function(e){
@@ -166,7 +174,6 @@
 				switch (index){
 					//今天
 					case 0:
-					console.log(1111111111111111)
 					this.getData('',this.getNowDate(),this.getNowFormatDate(),'')
 					break;
 					//一个月
@@ -221,6 +228,7 @@
 					if(res.success == true){
 						if(res.code == 1){
 							this.item = res.data.tradeList;
+							console.log(this.item)
 						}
 					}
 				}.bind(this)).catch(function(err){
