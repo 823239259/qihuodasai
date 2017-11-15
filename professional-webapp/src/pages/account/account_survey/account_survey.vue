@@ -322,7 +322,7 @@
 			        strDate = "0" + strDate;
 			    }
 			    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate+
-			    ""+"23：59：59";
+			    " "+"23:59:59";
 			    return currentdate;
 			},
 			//获取一天
