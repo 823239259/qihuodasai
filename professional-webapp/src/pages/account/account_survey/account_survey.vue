@@ -415,7 +415,7 @@
 						if(res.code == 1){
 							var realname = res.data.realName
 							if(realname!=null){
-								this.realName = realname.substr(0,1)+'**'+realname.substr(2);
+								this.realName = '*'+realname.substr(1,5);
 							}else {
 								this.realName = null
 							}
