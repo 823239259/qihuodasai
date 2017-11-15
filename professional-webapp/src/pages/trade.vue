@@ -927,7 +927,7 @@
 			//获取自选合约列表
 			this.isSelectedOrder();
 			//设置当前合约的限价
-			this.tradePrices = this.currentdetail.LastQuotation.LastPrice;
+			this.tradePrices = parseFloat(this.currentdetail.LastQuotation.LastPrice).toFixed(this.currentdetail.DotSize);
 			//调用下拉框
 			$(".slt-box").each(function(i, o){
 				pro.selectEvent(o, function(data){

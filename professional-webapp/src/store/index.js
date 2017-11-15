@@ -2015,14 +2015,22 @@ export default new Vuex.Store({
 				}else{
 					context.state.market.positionListCont.splice(positionListContCurrentIndex,1);
 					context.state.market.qryHoldTotalArr.splice(context.state.market.qryHoldTotalArr.length-1-positionListContCurrentIndex,1);
+					//如果没有持仓 持仓盈亏归0
+					if(context.state.market.positionListCont.length == 0){
+						let jCacheAccount = context.state.market.CacheAccount.jCacheAccount;
+						for(let i in jCacheAccount){
+							jCacheAccount[i].FloatingProfit = 0;
+						}
+					}
+					context.state.market.CacheHoldFloatingProfit.jHoldFloatingProfit[parameters.CommodityNo+parameters.ContractNo] 
+							= {"currencyNo" : context.state.market.orderTemplist[parameters.CommodityNo].CurrencyNo, "floatingProfit": 0};
 				}
 			}
 		},
 		updateAccountFloatingProfit:function(context,parameters){
 			if(context.state.market.ifUpdateAccountProfit){
-				// 遍历持仓浮盈，根据币种合并逐笔浮盈
+				//遍历持仓浮盈，根据币种合并逐笔浮盈
 				for(var contract in context.state.market.CacheHoldFloatingProfit.jHoldFloatingProfit){
-					
 					var contractFloatingProfit =context.state.market.CacheHoldFloatingProfit.jHoldFloatingProfit[contract];
 					var obj = context.state.market.CacheHoldFloatingProfit.jCurrencyNoFloatingProfit[contractFloatingProfit.currencyNo];
 					if (obj == null || typeof(obj) == "undefined" || obj.length == 0){
@@ -2067,7 +2075,7 @@ export default new Vuex.Store({
 						}
 					});
 				}
-				// 清空币种盈亏
+				//清空币种盈亏
 				context.state.market.CacheHoldFloatingProfit.jCurrencyNoFloatingProfit = {};
 				//更新账户盈亏
 				context.dispatch('updateTotalAccount');
@@ -2090,11 +2098,23 @@ export default new Vuex.Store({
 			context.state.market.CacheAccount.jCacheAccount[parameters.CurrencyNo].FrozenMoney = parameters.FrozenMoney;
 		},
 		updateTotalAccount:function(context,parameters){
+			if(parameters != null){
+				context.state.market.CacheAccount.jCacheAccount[parameters.AccountNo].FloatingProfit = parameters.floatingProfit;
+				context.state.market.CacheAccount.moneyDetail.forEach(function(o, i){
+					if(o.AccountNo == parameters.AccountNo){
+						context.state.market.CacheAccount.floating = true;
+						o.FloatingProfit = null;
+						o.FloatingProfit = parameters.floatingProfit;
+						context.state.market.CacheAccount.moneyDetail.splice(i,1,o);
+					}
+				});
+//				context.state.market.CacheAccount.moneyDetail[parameters.AccountNo].FloatingProfit = parameters.floatingProfit;
+			}
 			var obj = context.state.market.CacheAccount.jCacheAccount;
 			if (obj == null || typeof(obj) == "undefined" || obj.length == 0) {
-				return 0;
+				return;
 			}
-			var jCacheAccount = context.state.market.CacheAccount.jCacheAccount;
+//			var jCacheAccount = context.state.market.CacheAccount.jCacheAccount;
 			context.state.market.CacheAccount.jCacheTotalAccount.FloatingProfit=0.0;
 			context.state.market.CacheAccount.jCacheTotalAccount.TodayBalance=0.0;
 			context.state.market.CacheAccount.jCacheTotalAccount.TodayCanUse=0.0;
@@ -2103,27 +2123,25 @@ export default new Vuex.Store({
 			context.state.market.CacheAccount.jCacheTotalAccount.Deposit=0.0;
 			context.state.market.CacheAccount.jCacheTotalAccount.CounterFee=0.0;
 			context.state.market.CacheAccount.jCacheTotalAccount.RiskRate =0.0;
-			for( var e in jCacheAccount){
+			for(var e in obj){
 				// 逐笔浮盈：直接从当前资金账户获取
-				var floatingProfit = jCacheAccount[e].FloatingProfit;
-				context.state.market.CacheAccount.jCacheTotalAccount.FloatingProfit  += floatingProfit * jCacheAccount[e].CurrencyRate;
+				var floatingProfit = obj[e].FloatingProfit;
+				context.state.market.CacheAccount.jCacheTotalAccount.FloatingProfit += floatingProfit * obj[e].CurrencyRate;
 				// 今权益 = 今结存 + 浮盈
-				var tmpTodayBalance = jCacheAccount[e].TodayAmount + floatingProfit;
-				context.state.market.CacheAccount.jCacheTotalAccount.TodayBalance += tmpTodayBalance * jCacheAccount[e].CurrencyRate;
+				var tmpTodayBalance = obj[e].TodayAmount + floatingProfit;
+				context.state.market.CacheAccount.jCacheTotalAccount.TodayBalance += tmpTodayBalance * obj[e].CurrencyRate;
 				// 今可用=今权益-冻结资金-保证金
-				context.state.market.CacheAccount.jCacheTotalAccount.TodayCanUse += (tmpTodayBalance - jCacheAccount[e].FrozenMoney - jCacheAccount[e].Deposit) * jCacheAccount[e].CurrencyRate;
+				context.state.market.CacheAccount.jCacheTotalAccount.TodayCanUse += (tmpTodayBalance - obj[e].FrozenMoney - obj[e].Deposit) * obj[e].CurrencyRate;
 				// 平仓盈亏
-				context.state.market.CacheAccount.jCacheTotalAccount.CloseProfit += jCacheAccount[e].CloseProfit * jCacheAccount[e].CurrencyRate;
+				context.state.market.CacheAccount.jCacheTotalAccount.CloseProfit += obj[e].CloseProfit * obj[e].CurrencyRate;
 				// 冻结资金
-				context.state.market.CacheAccount.jCacheTotalAccount.FrozenMoney += jCacheAccount[e].FrozenMoney * jCacheAccount[e].CurrencyRate;
+				context.state.market.CacheAccount.jCacheTotalAccount.FrozenMoney += obj[e].FrozenMoney * obj[e].CurrencyRate;
 				// 保证金
-				context.state.market.CacheAccount.jCacheTotalAccount.Deposit += jCacheAccount[e].Deposit * jCacheAccount[e].CurrencyRate;
+				context.state.market.CacheAccount.jCacheTotalAccount.Deposit += obj[e].Deposit * obj[e].CurrencyRate;
 				// 手续费
-				context.state.market.CacheAccount.jCacheTotalAccount.CounterFee += jCacheAccount[e].CounterFee * jCacheAccount[e].CurrencyRate;
+				context.state.market.CacheAccount.jCacheTotalAccount.CounterFee += obj[e].CounterFee * obj[e].CurrencyRate;
 			}
 			// 风险率 = 保证金 / 今权益 * 100%
-//			console.log(context.state.market.CacheAccount.jCacheTotalAccount.Deposit);
-//			console.log(context.state.market.CacheAccount.jCacheTotalAccount.TodayBalance);
 			context.state.market.CacheAccount.jCacheTotalAccount.RiskRate 
 				= context.state.market.CacheAccount.jCacheTotalAccount.Deposit / context.state.market.CacheAccount.jCacheTotalAccount.TodayBalance / 100;
 			//风险度 =（初始资金 - 今权益）/（初始资金 - 强平线）
@@ -2154,9 +2172,9 @@ export default new Vuex.Store({
 						// 合约乘数 = 最小变动价格 / 最小变动点数
 						var mult = context.state.market.orderTemplist[parameters.CommodityNo].ContractSize/context.state.market.orderTemplist[parameters.CommodityNo].MiniTikeSize;
 						// 浮动盈亏 = (价差/最小变动) * (合约乘数 * 最小变动) * 手数 = 价差 * 合约乘数(最小变动价格 / 最小变动点数) * 手数
-						var tmpFloatingProfit = parseFloat(diff * mult * currentPositionListContObj.HoldNum).toFixed(2);
+						var	tmpFloatingProfit = parseFloat(diff * mult * currentPositionListContObj.HoldNum).toFixed(2);
 						if(currentPositionListContObj.type == '空') { // 空反向
-									tmpFloatingProfit = -tmpFloatingProfit;
+							tmpFloatingProfit = -tmpFloatingProfit;
 						}	
 						if(tmpFloatingProfit>=0){
 							currentPositionListContObj.total_color = 'red';

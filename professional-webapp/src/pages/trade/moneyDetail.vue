@@ -60,9 +60,8 @@
 		},
 		mounted: function(){
 			this.moneyDetail.forEach(function(o, i){
-				console.log(o);
 				o.TodayBalance = o.TodayAmount;
-				o.TodayCanUse = o.TodayAmount - o.Deposit - o.FrozenMoney
+				o.TodayCanUse = o.TodayAmount - o.Deposit - o.FrozenMoney;
 			}.bind(this));
 		}
 	}
