@@ -74,7 +74,8 @@
 			</div>
 			<div class="openAccount_btm_center">
 				<div class="product_list">
-					<p class="loss_mark" v-show="procedures">买卖期货成交后按成交合约总价值的一定比例，支付的单边交易费用。</p>
+					<p class="loss_mark loss_mark_left" v-show="procedures">买卖期货成交后按成交合约总价值的一定比例，支付的单边交易费用。</p>
+					<p class="loss_mark loss_mark_right" v-show="proceduresR">买卖期货成交后按成交合约总价值的一定比例，支付的单边交易费用。</p>
 					<table>
 						<thead>
 							<tr class="color_deepblue">
@@ -87,7 +88,7 @@
 								<td>期货产品</td>
 								<td>交易时间段</td>
 								<td>初始持仓手数</td>
-								<td>单边手续费 <i class="ifont" @mouseenter="showProcedures" @mouseleave="hideProcedures">&#xe66d;</i></td>
+								<td>单边手续费 <i class="ifont" @mouseenter="showProceduresR" @mouseleave="hideProceduresR">&#xe66d;</i></td>
 							</tr>
 						</thead>
 						<tbody class="show_list">
@@ -132,6 +133,7 @@
 				current1:0,
 				lossMark: false,
 				procedures: false,
+				proceduresR: false,
 			}
 		},
 		methods: {
@@ -146,6 +148,12 @@
 			},
 			hideProcedures: function(){
 				this.procedures = false;
+			},
+			showProceduresR: function(){
+				this.proceduresR = true;
+			},
+			hideProceduresR: function(){
+				this.proceduresR = false;
 			},
 			//返回修改
 			back:function(){
@@ -700,8 +708,13 @@
 		}
 		.loss_mark{
 			position: absolute;
-			top: 50px;
-			right: 590px;
+			top: 30px;
+		}
+		.loss_mark_left{
+			left: 380px;
+		}
+		.loss_mark_right{
+			right: 40px;
 		}
 	}
 	.show_list{
