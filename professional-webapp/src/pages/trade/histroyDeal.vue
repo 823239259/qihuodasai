@@ -55,7 +55,7 @@
 			return{
 				startTime: '',
 				endTime: '',
-				conditionList: ['今天','7天','30天'],
+				conditionList: ['一天内','7天','30天'],
 				selectedNum: 0,
 				histroyDealList: [],
 			}
