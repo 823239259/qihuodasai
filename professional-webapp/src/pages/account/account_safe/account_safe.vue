@@ -14,7 +14,7 @@
 					<table>
 						<tbody>
 							<tr>
-								<td><img src="../../../assets/images/icon_acc1.png" alt="" /></td>
+								<td><i class="icon icon_realname" :class="{current: realName != null}"></i></td>
 								<td>实名认证</td>
 								<td v-if="realName == null">未认证</td>
 								<td v-else="realName != null" class="yellow_status">已认证</td>
@@ -24,7 +24,7 @@
 								<td v-else="realName != null"></td>
 							</tr>
 							<tr>
-								<td><img src="../../../assets/images/icon_password1.png" alt="" /></td>
+								<td><i class="icon icon_pwd" :class="{current: isWithdrawPwd == true}"></i></td>
 								<td>提现密码</td>
 								<td v-if="isWithdrawPwd==false">未设置</td>
 								<td v-else="isWithdrawPwd==true" class="yellow_status">已设置</td>
@@ -34,7 +34,7 @@
 								<td v-on:click="toaWithdrawalPassword" v-else="isWithdrawPwd==true" class="yellow_status">去修改</td>
 							</tr>
 							<tr>
-								<td><img src="../../../assets/images/icon_bindcard.png" alt="" /></td>
+								<td><i class="icon icon_bank" :class="{current: isBoundBankCard == true}"></i></td>
 								<td>绑定银行卡</td>
 								<td v-if="isBoundBankCard==false">未绑定</td>
 								<td v-else="isBoundBankCard==true" class="yellow_status">已绑定</td>
@@ -44,14 +44,14 @@
 								<td v-on:click="toBindBankCard" v-else="isBoundBankCard==true" class="yellow_status">去修改</td>
 							</tr>
 							<tr>
-								<td><img src="../../../assets/images/icon_loginpassword.png" alt="" /></td>
+								<td><i class="icon icon_loginpwd"></i></td>
 								<td>登录密码</td>
 								<td class="yellow_status">已设置</td>
 								<td>登录网站时使用</td>
 								<td v-on:click="toResetLoginPassword" class="yellow_status">去修改</td>
 							</tr>
 							<tr>
-								<td><img src="../../../assets/images/icon_bindtel.png" alt="" /></td>
+								<td><i class="icon icon_phone"></i></td>
 								<td>绑定手机</td>
 								<td class="yellow_status">已绑定</td>
 								<td>您已绑定手机{{phone}}</td>
@@ -105,7 +105,6 @@
 				this.$router.push({path:'/safe_addBankCard'})
 			},
 			getUserSafeMsg: function(){
-				console.log(999);
 				var headers = {
 					token : this.userInfo.token,
 					secret : this.userInfo.secret
@@ -161,15 +160,6 @@
 						}else{
 							this.username =  '*'+res.data.realName.substr(1,5);
 						}
-//						if(res.data.realName != null){
-//							this.project = 3
-//						}
-//						if(res.data.isBoundBankCard!=null){
-//							this.project = 4
-//						}
-//						if(res.data.isWithdrawPwd!=null){
-//							this.project = 5
-//						}
 					}
 				}
 			}).catch((err)=>{
@@ -241,7 +231,35 @@
 					background-color: $blue;
 					border-bottom: 1px solid $bottom_color;
 				}
-				
+				.icon{
+					width: 20px;
+					height: 20px;
+					background-size: 100% 100%;
+				}
+				.icon_realname{
+					background: url(../../../assets/images/acc_01.png) no-repeat center center;
+				}
+				.icon_realname.current{
+					background: url(../../../assets/images/acc_02.png) no-repeat center center;
+				}
+				.icon_pwd{
+					background: url(../../../assets/images/acc_03.png) no-repeat center center;
+				}
+				.icon_pwd.current{
+					background: url(../../../assets/images/acc_04.png) no-repeat center center;
+				}
+				.icon_bank{
+					background: url(../../../assets/images/acc_05.png) no-repeat center center;
+				}
+				.icon_bank.current{
+					background: url(../../../assets/images/acc_06.png) no-repeat center center;
+				}
+				.icon_loginpwd{
+					background: url(../../../assets/images/acc_08.png) no-repeat center center;
+				}
+				.icon_phone{
+					background: url(../../../assets/images/acc_10.png) no-repeat center center;
+				}
 			}
 			.p_center{
 				height: 40px;
