@@ -1,7 +1,7 @@
 <template>
 	<div id="account_addBankCard">
 		<div class="account_addBankCard_top">
-			<p>姓名：<input type="text" v-model="username" /></p>
+			<p><span>姓名：</span><input type="text" v-model="username" /></p>
 			<p>开户银行：
 				<select id="bank" v-model="bank">
 					<option value="">请选择银行类型</option>
@@ -27,7 +27,7 @@
 				</select>
 			</p>
 			<p>开户支行：<input type="text" v-model="address"/></p>
-			<p>银行卡卡号：<input type="text" v-model="bankId"/><span>(不支持存折)</span></p>
+			<p><span>银行卡卡号：</span><input type="text" v-model="bankId"/><span>(不支持存折)</span></p>
 			<p>确认卡号：<input type="text" v-model="sure_bankId"/></p>
 			<button class="btn yellow" v-on:click="addBankCard">确认</button>
 		</div>
@@ -105,24 +105,27 @@
 						secret : JSON.parse(localStorage.user).secret
 					};
 					pro.fetch('post','/user/withdraw/add_bank',data,headers).then((res)=>{
-						if(res.success == ''){
-							if(res.caode == 1){
+						if(res.success == true){
+							if(res.code == 1){
 								layer.msg("绑定成功",{time:2000});
 								this.bank ='';
 								this.bankId='';
 								this.province='';
 								this.city='';
 								this.address='';
-								//重接拉取已绑定银行卡数据
-								this.getBindBankList();
 								if(this.setFirstDeault == 1){
 									this.setDefaultBank();
 									this.setFirstDeault =2
+								}else{
+									
 								}
-								this.$router.push({path:'/safe_bindBankCard'})
+								//重接拉取已绑定银行卡数据
+								this.getBindBankList();
+								this.$router.push({path:'/safe_bindBankCard'});
 							}
 						}
 					}).catch((err)=>{
+						console.log(err)
 						if(err.data.success == false){
 							switch (err.data.code){
 								case '-1':
@@ -206,7 +209,7 @@
 					token : JSON.parse(localStorage.user).token,
 					secret : JSON.parse(localStorage.user).secret
 				}
-				pro.fetch("post",'user/withdraw/set_default_bank',{bankId:this.defaultBankId},headers).then((res)=>{
+				pro.fetch("post",'/user/withdraw/set_default_bank',{bankId:this.defaultBankId},headers).then((res)=>{
 					if(res.success == true){
 						if(res.code == 1){
 							layer.msg("已为您设置成默认银行卡",{time:2000});
@@ -263,6 +266,11 @@
 				padding-top: 20px;
 				span {
 					font-size : $fs12;
+				}
+				&:nth-child(1){
+					span{
+						margin-left:34px;
+					}
 				}
 			}
 			input {
