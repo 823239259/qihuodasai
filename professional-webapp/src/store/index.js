@@ -2163,7 +2163,7 @@ export default new Vuex.Store({
 											context.state.market.jsonData.Parameters.Data[context.state.market.jsonData.Parameters.Data.length - 1][0] = time;
 											context.state.market.jsonData.Parameters.Data[context.state.market.jsonData.Parameters.Data.length - 1][6] = vol;
 										}else{
-											context.state.market.jsonData.Parameters.Data.shift();
+//											context.state.market.jsonData.Parameters.Data.shift();
 											context.state.market.jsonData.Parameters.Data.push(arr);
 										}
 										context.commit('setfensoption');
