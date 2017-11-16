@@ -224,7 +224,9 @@
 					endTime:endT,
 					stateType:chooseType
 				};
+				console.log(info);
 				pro.fetch("post",'/user/ftrade/list',info,headers).then(function(res){
+					console.log(res)
 					if(res.success == true){
 						if(res.code == 1){
 							this.item = res.data.tradeList;

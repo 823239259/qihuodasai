@@ -13,14 +13,14 @@
 		</div>
 		<div class="account_bindBankCard_center">
 			<ul>
-				<li  v-for="(k,index) in bindBankList" class="bankList" v-on:click="choosBank" :class="{curr:current1 == index}">
+				<li  v-for="(k,index) in bindBankList" class="bankList"  :class="{curr:current1 == index}">
 					<i class="ifont" v-if="k.default ==true">&#xe698;</i>
 					<i class="ifont" v-else="k.default!=true">&#xe626;</i>
 					<span>{{k.bankName}}</span>
 					<span>尾号{{k.card.substr(-4,4)}}</span>
 					<label  v-if="k.default !=true"></label>
 					<label  v-else="k.default==true">默认</label>
-					<select id="manage" @change="chooseChandle">
+					<select id="manage" @change="chooseChandle(k.bankId)">
 						<option value="1">管理</option>
 						<option value="2" v-if="k.default !=true">设为默认</option>
 						<option value="2" v-else="k.default==true"></option>
@@ -49,23 +49,18 @@
 			}
 		},
 		methods:{
-			choosBank:function(e){
-				var index = $(e.currentTarget).index();
-				$(e.currentTarget).addClass("curr").siblings().removeClass("curr");
-				return this.bankId = this.bindBankList[index].bankId;
-			},
 			//select事件
 			chooseChandle:function(e){
 				var index = $("#manage option:selected").val();
 				switch (index){
 					case "2":
-						this.setDeaultBank(this.bankId);
+						this.setDeaultBank(e);
 						break;
 					case "3":
 						this.$router.push({path:'/account_editBankCard'});
 						break;
 					case "4":
-						this.delBankCard(this.bankId);
+						this.delBankCard(e);
 						break;
 					default:
 						break;
@@ -76,11 +71,12 @@
 				this.$router.push({path:'/safe_addBankCard'})
 			},
 			//删除银行卡
-			delBankCard:function(){
+			delBankCard:function(e){
 				var headers = {
 					token : JSON.parse(localStorage.user).token,
 					secret : JSON.parse(localStorage.user).secret
 				}
+				console.log(1111111111111)
 				layer.open({
 					title:"删除银行卡",
 				    type: 1,
@@ -90,7 +86,7 @@
 				    content: '删除银行卡将无法提现到该银行卡中，确认删除？',
 				    btn:['确认','取消'],
 				    btn1:function(){
-						pro.fetch("post",'/user/withdraw/del_bank',{bankId:delbankid},headers).then((res)=>{
+						pro.fetch("post",'/user/withdraw/del_bank',{bankId:this.bankId},headers).then((res)=>{
 							if(res.success == true){
 								if(res.code == 1){
 									layer.msg('删除成功',{time:1000});
@@ -120,8 +116,9 @@
 									default:
 										break;
 								}
+							}else{
+								layer.msg("网络不给力，请稍后再试",{time:1000})
 							}
-							layer.msg("网络不给力，请稍后再试",{time:1000})
 						})
 					},
 					btn2:function(){
@@ -130,7 +127,7 @@
 				});
 			},
 			//设置默认
-			setDeaultBank:function(setDefaultBank){
+			setDeaultBank:function(e){
 				var headers = {
 					token : JSON.parse(localStorage.user).token,
 					secret : JSON.parse(localStorage.user).secret
@@ -143,8 +140,8 @@
 				    shadeClose: true, 
 				    content: '确认将该银行卡设为默认提现银行卡？',
 				    btn:['确认','取消'],
-				    btn1:function(setDefaultBank){
-				    	pro.fetch("post",'/user/withdraw/set_default_bank',{bankId:setDefaultBank},headers).then((res)=>{
+				    btn1:function(e){
+				    	pro.fetch("post",'/user/withdraw/set_default_bank',{bankId:e},headers).then((res)=>{
 							if(res.success == true){
 								if(res.code == 1){
 									layer.msg('设置默认成功',{time:1000})
@@ -181,6 +178,8 @@
 					token : JSON.parse(localStorage.user).token,
 					secret : JSON.parse(localStorage.user).secret
 				}).then((res)=>{
+					console.log(111111111);
+					console.log(res)
 					var data = res.data 
 					if(res.success == true){
 						if(res.code == 1){
@@ -190,6 +189,8 @@
 						}
 					}
 				}).catch((err)=>{
+					console.log(222222222);
+					console.log(err)
 					if(err.data.success == false){
 						layer.msg("获取用户信息失败，请重试",{time:2000});
 					}else{
