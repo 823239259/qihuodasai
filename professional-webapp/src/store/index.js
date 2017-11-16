@@ -2130,17 +2130,19 @@ export default new Vuex.Store({
 							
 							
 							if(context.state.market.currentNo == e.CommodityNo) {
+								console.log(JSON.parse(evt.data).Parameters);
 								context.state.market.CacheLastQuote.push(JSON.parse(evt.data).Parameters);
 								if(context.state.market.CacheLastQuote.length > 2){
 									context.state.market.CacheLastQuote.shift();
 								}
 								//更新分时图
 								if(context.state.isshow.isfensshow == true && context.state.isshow.isfens == true) {
-									var arr = [], arr1, arr2, arr3, arr4, minutes;
-									minutes = JSON.parse(evt.data).Parameters.DateTimeStamp;
-									minutes = minutes.split(' ')[1];
-									minutes = minutes.split(':')[2];
-									if(minutes == '00'){
+									var arr = [], arr1, arr2, arr3, arr4;
+									context.state.market.charttimetime = new Date();
+									context.state.market.charttimems = context.state.market.charttimetime.getTime();
+									context.state.market.charttime = context.state.market.charttimems - context.state.market.charttimems2;
+									if(context.state.market.charttime >= 1000 || context.state.market.charttimetemp >= 1000) {
+										console.log(111);
 										arr = [];
 										arr[0] = JSON.parse(evt.data).Parameters.DateTimeStamp;
 										arr[1] = JSON.parse(evt.data).Parameters.LastPrice;
@@ -2153,6 +2155,8 @@ export default new Vuex.Store({
 										arr2 = arr1[1].split(':'); //最新时间
 										arr3 = context.state.market.jsonData.Parameters.Data[context.state.market.jsonData.Parameters.Data.length - 1][0].split(' ');
 										arr4 = arr3[1].split(':'); //历史时间
+										console.log(arr2);
+										console.log(arr4);
 										if(arr2[1] == arr4[1]) {
 											var time = context.state.market.jsonData.Parameters.Data[context.state.market.jsonData.Parameters.Data.length - 1][0];
 											var vol = parseInt(context.state.market.jsonData.Parameters.Data[context.state.market.jsonData.Parameters.Data.length - 1][6]) + parseInt(arr[6]);
@@ -2168,7 +2172,12 @@ export default new Vuex.Store({
 											id1: 'fens',
 											id2: 'volume'
 										});
+										context.state.market.charttimetemp = 0;
+									} else {
+										context.state.market.charttimetemp += context.state.market.charttime;
 									}
+									context.state.market.charttimetime2 = new Date();
+									context.state.market.charttimems2 = context.state.market.charttimetime2.getTime();
 								}
 								//更新闪电图
 								if(context.state.isshow.islightshow == true && context.state.isshow.islight == true) {
