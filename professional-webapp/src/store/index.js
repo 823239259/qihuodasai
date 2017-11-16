@@ -780,229 +780,7 @@ export default new Vuex.Store({
 			fens.resize();
 			volume.resize();
 		},
-		//更新分时图数据
-		setfensoptionsecond: function(state) {
-			var echarts = require('echarts/lib/echarts');
-			var vol = [],
-				price = [],
-				time = [];
-//				averagePrices = [];
-			state.market.jsonData.Parameters.Data.forEach(function(e) {
-				vol.push(e[6]);
-				time.push(e[0].split(' ')[1].split(':')[0] + ':' + e[0].split(' ')[1].split(':')[1]);
-				price.push(e[1]);
-			});
-			var dosizeL = state.market.currentdetail.DotSize;
-			state.market.option1 = {
-				grid: {
-					x: 50,
-					y: 30,
-					x2: 30,
-					y2: 20
-				},
-				color: ['#edf07c'],
-				tooltip: {},
-				xAxis: [{
-					type: 'category',
-					position: 'bottom',
-					boundaryGap: true,
-					axisTick: {
-						onGap: false
-					},
-					splitLine: {
-						show: false
-					},
-					axisLabel: {
-						textStyle: {
-							fontSize: 10,
-						}
-					},
-					axisLine: {
-						lineStyle: {
-							color: '#8392A5'
-						}
-					},
-					data: time
-				}],
-				yAxis: [{
-					type: 'value',
-					name: '成交量(万)',
-					axisLine: {
-						lineStyle: {
-							color: '#8392A5'
-						}
-					},
-					axisTick: {
-						show: false,
-					},
-					scale: true,
-					axisLabel: {
-						formatter: function(a) {
-							a = +a;
-							return isFinite(a) ?
-								echarts.format.addCommas(+a / 10000) :
-								'';
-						},
-						textStyle: {
-							fontSize: 10
-						}
-					},
-					splitLine: {
-						show: true,
-						lineStyle: {
-							color: "#8392A5"
-						}
-					}
-				}],
-				tooltip: {
-					trigger: 'axis',
-					axisPointer: {
-						type: 'line',
-						animation: false,
-						lineStyle: {
-							color: '#ffffff',
-							width: 1,
-							opacity: 1
-						}
-					},
-					triggerOn: 'mousemove|click'
-				},
-				series: [{
-					name: '成交量',
-					type: 'bar',
-					data: vol
-				}]
-			};
-			state.market.option2 = {
-				backgroundColor: 'transparent',
-				tooltip: {
-					show: true,
-					transitionDuration: 0,
-					trigger: 'axis',
-					axisPointer: {
-						type: 'line',
-						animation: false,
-						lineStyle: {
-							color: '#ffffff',
-							width: 1,
-							opacity: 1
-						}
-					},
-					formatter: function(params) {
-						var time = params[0].name;
-						var val = parseFloat(params[0].value).toFixed(dosizeL);
-						if(time == null || time == "") {
-							return
-						}
-						var html = '时间:' + time + '<br/>' +
-							'价格: ' + val + '<br/>';
-						return html;
-					},
-				},
-				toolbox: {
-					show: false,
-				},
-				animation: false,
-				xAxis: [{
-					type: 'category',
-					show: false,
-					data: time,
-					axisLine: {
-						lineStyle: {
-							color: '#8392A5'
-						}
-					},
-					boundaryGap: true
-				}],
-				yAxis: [{
-					type: 'value',
-					scale: true,
-					position: "left",
-					axisTick: {
-						show: false,
-					},
-					axisLine: {
-						lineStyle: {
-							color: '#8392A5'
-						}
-					},
-					splitArea: {
-						show: false
-					},
-					axisLabel: {
-						inside: false,
-						margin: 4,
-					},
-					splitLine: {
-						show: true,
-						lineStyle: {
-							color: "#8392A5"
-						}
-					},
-					
-				}],
-				grid: {
-					x: 50,
-					y: 20,
-					x2: 30,
-					y2: 5
-				},
-				series: [
-					{
-						type: 'line',
-						data: price,
-						markLine: {
-							symbol: ['none', 'none'],
-						  	data:[
-			                	{ value: 48.12, xAxis: -1, yAxis: 48.12},     
-        						{ xAxis:123 , yAxis: 48.12},
-				            ],
-				            lineStyle: {
-			                   normal: {
-			                       width: 1,
-			                       color: "#ff0000"
-			                   }
-			                },
-						}
-						
-					},
-					{
-						type: 'line',
-						itemStyle: {
-							normal: {
-								color: "#fff"
-							}
-						},
-						lineStyle: {
-							normal: {
-								width: 1,
-								type: 'dashed'
-							}
-						},
-						itemLine: {
-							normal: {
-								color: "#ffffff"
-							}
-						},
-						symbolSize: 0,
-//						data: averagePrices,
-						label: {
-			                normal: {
-			                    show: false,
-			                    position: 'top'
-			                }
-			          	},
-			            markLine:{
-			          		data:[
-			                	{ value: 48.2, xAxis: -1, yAxis: 48.2},     
-      							{ xAxis:500 , yAxis: 48.2},
-				            ]
-			            }
-					}
-				]
-			};
-		},
-		//根据历史数据设置分时图数据
+		//设置分时图数据
 		setfensoption: function(state) {
 			var echarts = require('echarts/lib/echarts');
 			var vol = [],
@@ -1215,42 +993,6 @@ export default new Vuex.Store({
 				}
 			};
 		},
-		//动态更新数据(分时图用)
-		updateTempdata: function(state, obj) {  
-			state.market.markettemp.forEach(function(e) {
-				if(e.CommodityNo == obj) {
-					state.market.tempArr[0] = e.LastQuotation.DateTimeStamp;
-					state.market.tempArr[1] = e.LastQuotation.LastPrice.toFixed(e.DotSize);
-					state.market.tempArr[2] = e.LastQuotation.OpenPrice.toFixed(e.DotSize);
-					state.market.tempArr[3] = e.LastQuotation.LowPrice.toFixed(e.DotSize);
-					state.market.tempArr[4] = e.LastQuotation.HighPrice.toFixed(e.DotSize);
-					state.market.tempArr[5] = e.LastQuotation.Position;
-					state.market.tempArr[6] = e.LastQuotation.LastVolume;
-					
-				}
-			});
-			var arr1 = state.market.jsonData.Parameters.Data[state.market.jsonData.Parameters.Data.length - 1][0].split(' ');
-			var arr2 = arr1[1].split(':');
-			var arr3 = state.market.tempArr[0].split(' ');
-			var arr4 = arr3[1].split(':');
-			if(arr2[1] == arr4[1]) {
-				if(state.market.CacheLastQuote[1].TotalVolume<=state.market.CacheLastQuote[0].TotalVolume){
-					return;
-				} 
-				var time = state.market.jsonData.Parameters.Data[state.market.jsonData.Parameters.Data.length - 1][0];
-				var vol = parseInt(state.market.jsonData.Parameters.Data[state.market.jsonData.Parameters.Data.length - 1][6]) + parseInt(state.market.tempArr[6]);
-				state.market.jsonData.Parameters.Data[state.market.jsonData.Parameters.Data.length - 1] = state.market.tempArr;
-				state.market.jsonData.Parameters.Data[state.market.jsonData.Parameters.Data.length - 1][0] = time;
-				state.market.jsonData.Parameters.Data[state.market.jsonData.Parameters.Data.length - 1][6] = vol;
-				
-			} else {
-				state.market.jsonData.Parameters.Data.shift();
-				state.market.jsonData.Parameters.Data.push(state.market.tempArr);
-				var time = state.market.tempArr[0].split(' ');
-				time = time[0] + ' ' + arr4[0] + ':00:00';
-				state.market.jsonData.Parameters.Data[state.market.jsonData.Parameters.Data.length - 1][0] = time;
-			}
-		}
 	},
 	actions: {
 		//处理交易数据
@@ -2394,22 +2136,39 @@ export default new Vuex.Store({
 								}
 								//更新分时图
 								if(context.state.isshow.isfensshow == true && context.state.isshow.isfens == true) {
-									context.state.market.charttimetime = new Date();
-									context.state.market.charttimems = context.state.market.charttimetime.getTime();
-									context.state.market.charttime = context.state.market.charttimems - context.state.market.charttimems2;
-									if(context.state.market.charttime >= 1000 || context.state.market.charttimetemp >= 1000) {
-										context.commit('updateTempdata', context.state.market.currentNo);
-										context.commit('setfensoptionsecond');
+									var arr = [], arr1, arr2, arr3, arr4, minutes;
+									minutes = JSON.parse(evt.data).Parameters.DateTimeStamp;
+									minutes = minutes.split(' ')[1];
+									minutes = minutes.split(':')[2];
+									if(minutes == '00'){
+										arr = [];
+										arr[0] = JSON.parse(evt.data).Parameters.DateTimeStamp;
+										arr[1] = JSON.parse(evt.data).Parameters.LastPrice;
+										arr[2] = JSON.parse(evt.data).Parameters.OpenPrice;
+										arr[3] = JSON.parse(evt.data).Parameters.LowPrice;
+										arr[4] = JSON.parse(evt.data).Parameters.HighPrice;
+										arr[5] = JSON.parse(evt.data).Parameters.Position;
+										arr[6] = JSON.parse(evt.data).Parameters.LastVolume;
+										arr1 = JSON.parse(evt.data).Parameters.DateTimeStamp.split(' ');
+										arr2 = arr1[1].split(':'); //最新时间
+										arr3 = context.state.market.jsonData.Parameters.Data[context.state.market.jsonData.Parameters.Data.length - 1][0].split(' ');
+										arr4 = arr3[1].split(':'); //历史时间
+										if(arr2[1] == arr4[1]) {
+											var time = context.state.market.jsonData.Parameters.Data[context.state.market.jsonData.Parameters.Data.length - 1][0];
+											var vol = parseInt(context.state.market.jsonData.Parameters.Data[context.state.market.jsonData.Parameters.Data.length - 1][6]) + parseInt(arr[6]);
+											context.state.market.jsonData.Parameters.Data[context.state.market.jsonData.Parameters.Data.length - 1] = arr;
+											context.state.market.jsonData.Parameters.Data[context.state.market.jsonData.Parameters.Data.length - 1][0] = time;
+											context.state.market.jsonData.Parameters.Data[context.state.market.jsonData.Parameters.Data.length - 1][6] = vol;
+										}else{
+											context.state.market.jsonData.Parameters.Data.shift();
+											context.state.market.jsonData.Parameters.Data.push(arr);
+										}
+										context.commit('setfensoption');
 										context.commit('drawfens', {
 											id1: 'fens',
 											id2: 'volume'
 										});
-										context.state.market.charttimetemp = 0;
-									} else {
-										context.state.market.charttimetemp += context.state.market.charttime;
 									}
-									context.state.market.charttimetime2 = new Date();
-									context.state.market.charttimems2 = context.state.market.charttimetime2.getTime();
 								}
 								//更新闪电图
 								if(context.state.isshow.islightshow == true && context.state.isshow.islight == true) {
