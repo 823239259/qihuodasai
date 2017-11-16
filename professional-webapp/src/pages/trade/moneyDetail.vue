@@ -77,7 +77,7 @@
 		overflow-y: auto;
 	}*/
 	#trade_details{
-		height: 190px;
+		height: 210px;
 		overflow-y: auto;
 	}
 	table{
