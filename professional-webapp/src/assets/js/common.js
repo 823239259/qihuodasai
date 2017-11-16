@@ -120,7 +120,7 @@ pro.fetch = function(type, url, params, header){
 }
 
 /**
- * 时间搓转化成2017-07-07 02:05:0
+ * 时间搓转化成2017-07-07 02:05:00
  * 
  */
 pro.getDate=function(d,time){
@@ -128,29 +128,29 @@ pro.getDate=function(d,time){
     var year=date.getYear()+1900;
     var month=date.getMonth()+1;
     var day=date.getDate();
-    if(day<10){
-    	day = "0"+day;
-    }
-    if(month<10){
-    	month = "0"+month
-    }
-    if(hour<10){
-    	hour = "0"+hour
-    }
-    if(minu<10){
-    	minu = "0"+minu
-    }
-    if(sec < 10){ 
-    	sec = "0"+sec
-    }
     var hour=date.getHours();
     var minu=date.getMinutes();
     var sec=date.getSeconds();
-    var d1=year+"-"+month+"-"+day+" "+hour+":"+minu+":"+sec;
-    var d2=year+"-"+month+"-"+day
-    if(d=="y-m-d"){
+    if(day < 10){
+    	day = "0" + day;
+    }
+    if(month < 10){
+    	month = "0" + month;
+    }
+    if(hour < 10){
+    	hour = "0" + hour;
+    }
+    if(minu < 10){
+    	minu = "0" + minu;
+    }
+    if(sec < 10){ 
+    	sec = "0" + sec;
+    }
+    var d1 = year + "-"+ month + "-" + day + " " + hour + ":" + minu + ":" + sec;
+    var d2 = year + "-"+ month + "-" + day;
+    if(d == "y-m-d"){
         return d2;
-    }else if(d=="y-m-d h:i:s"){
+    }else if(d == "y-m-d h:i:s"){
         return d1;
     }
 }

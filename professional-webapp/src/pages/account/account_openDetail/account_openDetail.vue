@@ -67,30 +67,6 @@
 								</td>
 								<td v-else-if="item.stateTypeStr == '已完结'" v-on:click="toParticulars(item.id)">结算明细</td>
 							</tr>
-							<!--<tr>
-								<td>国际综合</td>
-								<td>开户中</td>
-								<td>3000元</td>
-								<td>-</td>
-								<td>3000元</td>
-								<td>5270美元</td>
-								<td>2017-07-06</br>16:29:55</td>
-								<td>-</td>
-								<td>-</td>
-								<td v-on:click="toAdditionlMargin">查看账号</td>
-							</tr>
-							<tr>
-								<td>国际综合</td>
-								<td>开户中</td>
-								<td>3000元</td>
-								<td>-</td>
-								<td>3000元</td>
-								<td>5270美元</td>
-								<td>2017-07-06</br>16:29:55</td>
-								<td>-</td>
-								<td>-</td>
-								<td v-on:click="toParticulars">结算明细</td>
-							</tr>-->
 						</tbody>
 					</table>
 					<div v-if="show_button" class="show_button">
@@ -424,6 +400,7 @@
 			.account_openDetail_notice {
 				height: 120px;
 				background-color: $blue;
+				padding: 0 10px;
 				p {
 					color: $yellow;
 					font-size: $fs14;
