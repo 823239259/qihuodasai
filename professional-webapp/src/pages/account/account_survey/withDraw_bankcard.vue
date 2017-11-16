@@ -5,23 +5,45 @@
 			<p>（您还为绑定银行卡，暂不能进行提现操作）</p>	
 		</div>
 		<div class="account_withDraw_top" v-if="showBoundCard">
-			<ul>
+			<ul class="title">
 				<li>
-					选择银行卡：
-					<div>
-						<i></i>
-						<span>招商银行</span>
-						<span>0803</span>
-						<select name="" id=""></select>
-					</div>
+					提取余额到银行卡
 				</li>
 				<li>
-					提现金额：<input type="text" />元<span>（收取 <i>0</i>元提现手续费，实际到账<i>0</i>元）</span>
+					余额：
 				</li>
-				<li>	
-					<button class="btn" v-on:click="toWith_draw">下一步</button>
+				<li>
+					{{accountMoney}}元
+				</li>
+				<li>
+					（累计免费提现金额：<i>{{operateMoney}}</i>）元
+				</li>
+				<li>
+					添加银行卡
+				</li>
+				<li>
+					提现记录
 				</li>
 			</ul>
+			<ul class="banklist">
+				<li  v-for="(k,index) in bandCardList" class="chooseNo" v-on:click="chooseBankCard(k.bankId,index)" :class="{chooseIn:current1 == index}">
+					<i class="ifont" v-if="k.default ==true">&#xe698;</i>
+					<i class="ifont" v-else="k.default!=true">&#xe626;</i>
+					<span>{{k.bankName}}</span>
+					<span>尾号{{k.card.substr(-4,4)}}</span>
+					<label  v-if="k.default !=true"></label>
+					<label  v-else="k.default==true">默认</label>
+					<select id="manage" @change="chooseChandle(k.bankId)">
+						<option value="1">管理</option>
+						<option value="2" v-if="k.default !=true">设为默认</option>
+						<option value="2" v-else="k.default==true"></option>
+						<option value="3">编辑</option>
+						<option value="4">删除</option>
+					</select>
+				</li>
+			</ul>
+			<p class="writeIn">提现金额：<input type="text" v-model="withDrawMoney" v-on:input="changeRate"/>元<span>（收取 <i>{{rate}}</i>元提现手续费，实际到账<i>{{withDrawMoney-rate}}</i>元）</span></p>
+			<button class="btn blue" v-on:click="toWith_draw">下一步</button>
 		</div>
 		<div class="account_withDraw_btm">
 			<ul>
@@ -51,32 +73,123 @@
 		data(){
 			return{
 				showUnboundCard:false,
-				showBoundCard:false
+				showBoundCard:false,
+				bandCardList:'',
+				withDrawMoney:'',
+				accountMoney:'',
+				rate:'',
+				operateMoney:'',
+				current1:0,
+				bankid:''
 			}
 		},
 		methods:{
 			toWith_draw:function(){
-				this.$router.push({path:'/sure_withDraw'})
+				console.log(this.bankid);
+				if(this.withDrawMoney<0){
+					layer.msg("提现金额不能为负数");
+				}else if(this.withDrawMoney == 0){
+					layer.msg("请输入提现金额");
+				}else if(this.withDrawMoney > this.accountMoney){
+					layer.msg("提现大于账户余额，请重新输入");
+				}else{
+					this.$router.push({path:'/sure_withDraw',query:{"bankid":this.bankid,"withFee":this.rate,"withMoney":this.withDrawMoney}})
+				}
+			},
+			//获取绑定银行卡列表
+			getBandCard:function(){
+				var headers = {
+					token : JSON.parse(localStorage.user).token,
+					secret : JSON.parse(localStorage.user).secret
+				}
+				pro.fetch("post","/user/withdraw/bank_list",'',headers).then((res)=>{
+					if(res.success == true){
+						if(res.code == 1){
+							if(res.data == ''){
+								this.showUnboundCard = true;
+								this.showBoundCard = false;
+							}else{
+								this.showUnboundCard = false;
+								this.showBoundCard = true;
+								this.bandCardList = res.data;
+							}
+						}
+					}
+				}).catch((err)=>{
+					if(err.data.success == false){
+						switch (err.data.code){
+							case '3':
+							layer.msg("用户信息不存在",{time:2000})
+								break;
+							default:
+								break;
+						}
+					}else{
+						layer.msg('网络不给力，请稍后再试', {time: 2000});
+					}
+				})
+			},
+			//获取余额
+			getAccountMonet:function(){
+				var headers = {
+					token : JSON.parse(localStorage.user).token,
+					secret : JSON.parse(localStorage.user).secret
+				}
+				var data ={
+					businessType:4,
+					couponBusinessType:''
+				}
+				pro.fetch("post",'/user/getbalancerate',data,headers).then((res)=>{
+					if(res.success == true){
+						if(res.code == 1){
+							this.accountMoney = res.data.balance;
+							this.operateMoney = res.data.operateMoney;
+						}
+					}
+				}).catch((err)=>{
+					if(err.data.success == false){
+						
+					}else{
+						layer.msg('网络不给力，请稍后再试', {time: 2000});
+					}
+				})
+			},
+			//计算提现手续费
+			withDrawFree:function(){
+				var headers = {
+					token : JSON.parse(localStorage.user).token,
+					secret : JSON.parse(localStorage.user).secret
+				}
+				var data ={
+					money:this.withDrawMoney
+				}
+				pro.fetch("post","/user/withdraw/drawFee",data,headers).then((res)=>{
+					if(res.success == true){
+						if(res.code == 1){
+							this.rate = res.data.fee;
+						}
+					}
+				}).catch((err)=>{
+					if(err.data.success == false){
+						
+					}else{
+						layer.msg('网络不给力，请稍后再试', {time: 2000});
+					}
+				})
+			},
+			changeRate:function(){
+				this.withDrawFree();
+			},
+			chooseBankCard:function(a,c){
+				this.current1 = c
+				this.bankid = a;
+				return;
 			}
 		},
 		mounted:function(){
-			var headers = {
-				token : JSON.parse(localStorage.user).token,
-				secret : JSON.parse(localStorage.user).secret
-			}
-//			pro.fetch("post",'/user/security',{},headers).then((res)=>{
-//					if(res.success==true){
-//						if(res.code==1){
-//							if(res.data.isBoundBankCard==true){
-//								this.showUnboundCard=true
-//							}else{
-//								this.showBoundCard=true
-//							}
-//						}
-//					}
-//				}).catch((res)=>{
-//					layer.msg('网络不给力，请稍后再试', {time: 1000});
-//				})
+			//互获取绑定卡列表
+			this.getBandCard();
+			this.getAccountMonet();
 		}
 	}
 </script>
@@ -89,13 +202,77 @@
 	.account_withDraw_top {
 		background-color: $blue;
 		text-align: center;
-		input {
-			border: 1px solid $blue;
-			height: 30px;	
-			width: 120px;
+		.title{
+			height: 40px;
+			width:100%;
+			li{
+				float: left;
+			}
 		}
-		li {
-			width : 100%;
+		.banklist{
+			.chooseIn {
+				border-color:$yellow;
+			}
+		}
+		.chooseNo{
+			margin-top: 10px;
+			line-height: 40px;
+			border: 1px solid #7a7f99;
+			width: 400px;
+			height: 40px;
+			margin: auto;
+			margin-bottom: 10px;
+			border-radius: 5px;
+			span{
+				float: left;
+				margin-left: 10px;
+				&:nth-child(2){
+					color: white;
+					font-size: $fs16;
+				}
+			}
+		}
+		.ifont {
+			color: $yellow;
+			font-size: $fs16;
+			float: left;
+			margin-left: 20px;
+		}
+		
+		label{
+			float: left;
+			margin-left: 10px;
+			color: $white;
+		}
+		select {
+			background-color: $blue;
+			color: $lightblue;
+			float: right;
+			border: none;
+			margin-right: 20px;
+			line-height: 38px;
+		}
+		input{
+			width: 120px;
+			height: 30px;
+			border-radius: 5px;
+			border: 1px solid #7a7f99;
+			margin-right: 10px;
+			color: $white;
+		}
+		.writeIn{
+			position: relative;
+			right: 36px;
+			span{
+				color: $yellow;
+			}
+		}
+		.btn{
+			position: relative;
+			top: 10px;
+			left: -140px;
+			width: 120px;
+			height: 30px;
 		}
 	}
 	.account_withDraw_btm {

@@ -32,17 +32,17 @@
 		data(){
 			return{
 				withdrawPwd:'',
-				fee:''
+				withFee:'',
+				bankid:'',
+				withMoney:''
+				
 			}
 		},
 		methods:{
+			//提现
 			withDraw_money:function(){
 				var token = JSON.parse(localStorage.user).token;
 				var secret = JSON.parse(localStorage.user).secret;
-				var withdrawPwd =this.withdrawPwd;
-				var money=this.money;
-				var card =this.card;
-				var bank = this.bank;
 				var data = {
 					bank:bank,
 				    card:card,
@@ -53,43 +53,33 @@
 					token : token,
 					secret :secret
 				}
-				if(withdrawPwd=''){
-					layer.msg('请输入支付密码', {time: 1000});
-				}else{
-					pro.fetch("post",'/user/withdraw/handle',data,headers).then((res)=>{
-					if(res.success==true){
-						if(res.code==1){
-							
-							layer.msg('提现申请已提交，等待要银行处理。若24小时未到账请拨打：400-852-8008', {time: 2000});
-						}else{
-							layer.msg(res.code, {time: 2000});
-						}
-					}}).catch((err)=>{
-						console.log(err);
-						layer.msg('网络不给力，请稍后再试', {time: 1000});
-					})
-				}
+				pro.fetch("post","/user/withdraw/handle",data,headers).then((res)=>{
+					
+				}).catch((err)=>{
+					
+				})
+			},
+			//查询银行卡信息
+			queryBank:function(){
+				pro.fetch("post","/user/withdraw/queryBank",data,headers).then((res)=>{
+					
+				}).catch((err)=>{
+					
+				})
 			}
 		},
-		created(){
-			//计算提现手续费
-			pro.fetch("post",'/user/withdraw/drawFee',{money:this.money},{
-				token:JSON.parse(localStorage.user).token,
-				secret:JSON.parse(localStorage.user).secret
-			}).then((res)=>{
-				if(res.success == true){
-					if(res.code == 1){
-						this.fee = res.data.fee
-					}else{
-						layer.msg(res.code, {time: 1000});
-					}
-				}else{
-					layer.msg('网络不给力，请稍后再试', {time: 1000});
-				}
-			}).catch((err)=>{
-				
-				layer.msg('网络不给力，请稍后再试', {time: 1000});
-			})
+		mounted:function(){
+			this.bankid=this.$route.query.bankid;
+			this.withFee=this.$route.query.withFee;
+			this.withMoney=this.$route.query.withMoney;
+			console.log(this.bankid);
+			console.log(this.withFee);
+			console.log(this.withMoney)
+		},
+		activated:function(){
+			this.bankid=this.$route.query.bankid;
+			this.withFee=this.$route.query.withFee;
+			this.withMoney=this.$route.query.withMoney;
 		}
 		
 	}
