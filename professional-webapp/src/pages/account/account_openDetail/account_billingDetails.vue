@@ -51,15 +51,15 @@
 					<tbody>
 						<tr v-for="(item,index) in historyList">
 							<td>{{index+1}}</td>
-							<td>{{item.tradeDate | getTime}}</td>
+							<td>{{item.tradeDate}}</td>
 							<td>{{item.userNo}}</td>
 							<td>{{item.currencyNo}}</td>
 							<td>{{item.exchangeNo}}</td>
 							<td>{{item.commodityNo}}</td>
-							<td v-if="buyNum!=''">{{item.buyNum}}</td>
-							<td v-else="buyNum==''">0</td>
-							<td v-if="sellNum!=''">{{item.sellNum}}</td>
-							<td v-else="sellNum==''">0</td>
+							<td v-if="item.buyNum!=''">{{item.buyNum}}</td>
+							<td v-else="item.buyNum==''">0</td>
+							<td v-if="item.sellNum!=''">{{item.sellNum}}</td>
+							<td v-else="item.sellNum==''">0</td>
 							<td>{{item.tradePrice}}</td>
 							<td>{{item.free}}</td>
 						</tr>
@@ -114,12 +114,11 @@
 					</tbody>
 				</table>
 				<div class="pager">
-				    <button class="btn_span"  @click="prePage">上一页</button>
-				    <span  @click="toIndexPage" v-for="(n,index) in pageCount" :class="{active:current1 == index}">{{n}}</span>
-				    <button class="btn_span"  @click="nextPage">下一页</button>
+				    <button class="btn_span"   v-show="currentPage != 1" @click="currentPage-- && goIndex(currentPage--,'last')">上一页</button>
+				    <span  v-for="index in pages" @click="goIndex(index)" :class="{active:currentPage == index}" :key="index">{{index}}</span>
+				    <button class="btn_span"  v-show="pageCount != currentPage && pageCount != 0 " @click="currentPage++ && goIndex(currentPage++,'!last')">下一页</button>
 				  </div>
 			</div>
-			
 		</div>
 	</div>
 </template>
@@ -131,7 +130,6 @@
 		data(){
 			return{
 				current1:0,
-				pageCount:'',
 				id:'',
 				endAmount:'',
 				traderBond:'',
@@ -141,7 +139,12 @@
 				tranFeesTotal:"",
 				tradeSell:'',
 				handList:{},
-				historyList:[],
+				historyList:[],//显示数据
+				pageCount:'',//总页数
+				eachPage:5,//每页条数
+				showPage:true,//是否显示分页
+				currentPage:1,//当前页
+				totalHistoryList:[]//总数据
 			}
 		},
 		filters:{
@@ -150,23 +153,19 @@
 			},
 			fixNum: function(num, dotsize){
 				return Number(num).toFixed(dotsize);
-			},
-			getTime:function(e){
-				return pro.getDate('y-m-d h:i:s',e*1000);
 			}
 		},
 		methods:{
+			goIndex:function(index,el){
+	            if(index == this.currentPage) return;
+	            this.currentPage = index;
+	            var curtotal=(this.currentPage-1)*this.eachPage;//上一页显示的最后一条
+	            var tiaoshu=this.currentPage*this.eachPage;//当前页显示的最后一条
+	            this.historyList=this.totalHistoryList.slice(curtotal,tiaoshu); //当前页应显示的数据
+	        },
 			close:function(){
 				this.$router.push({path:'/account_openDetail'});
 				this.$store.state.account.currentNav = 6;
-			},
-			toIndexPage:function(){
-				
-			},
-			prePage:function(){
-				
-			},
-			nextPage:function(){
 			},
 			//获取成交详情
 			details:function(){
@@ -242,7 +241,6 @@
 						}
 					}
 				}).catch((err)=>{
-					console.log(err)
 					if(err.success == false){
 						switch (err.code){
 							case value:
@@ -265,11 +263,13 @@
 					id:this.id
 				}
 				pro.fetch("post","/user/ftrade/getFstTradeDetail",data,headers).then((res)=>{
-					console.log(res.data)
 					if(res.success == true){
 						if(res.code == ""){
-							this.historyList = res.data.splice(0,6)
-							this.pageCount = Math.ceil(this.historyList.length/5) ;
+							this.totalHistoryList = res.data;
+							this.pageCount = Math.ceil(this.totalHistoryList.length/5);
+							var curtotal=(this.currentPage-1)*this.eachPage;//上一页显示的最后一条
+				            var tiaoshu=this.currentPage*this.eachPage;//当前页显示的最后一条
+				            this.historyList=this.totalHistoryList.slice(curtotal,tiaoshu); //当前页应显示的数据
 						}
 					}
 				}).catch((err)=>{
@@ -290,6 +290,28 @@
 		},
 		actived:function(){
 			this.id = this.$route.query.id;
+		},
+		computed:{
+			pages:function(){
+                var pag = [];
+                    if( this.currentPage < this.eachPage ){
+                      
+                       var i = Math.min(this.eachPage,this.pageCount);
+                       while(i){
+                           pag.unshift(i--);
+                       }
+                    }else{ 
+                       var middle = this.currentPage - Math.floor(this.eachPage / 2 ),
+                           i = this.eachPage;
+                       if( middle >  (this.pageCount - this.eachPage)  ){
+                           middle = (this.pageCount - this.eachPage) + 1
+                       }
+                       while(i--){
+                           pag.push( middle++ );
+                       }
+                   }
+                 return pag
+                }
 		}
 	}
 </script>
