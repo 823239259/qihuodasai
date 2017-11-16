@@ -12,17 +12,17 @@
 				<li>
 					余额：
 				</li>
-				<li>
+				<li class="yel">
 					{{accountMoney}}元
 				</li>
 				<li>
-					（累计免费提现金额：<i>{{operateMoney}}</i>）元
-				</li>
-				<li>
-					添加银行卡
+					（累计免费提现金额：<i class="yel">{{operateMoney}}</i>）元
 				</li>
 				<li>
 					提现记录
+				</li>
+				<li>
+					添加银行卡
 				</li>
 			</ul>
 			<ul class="banklist">
@@ -37,8 +37,8 @@
 						<option value="1">管理</option>
 						<option value="2" v-if="k.default !=true">设为默认</option>
 						<option value="2" v-else="k.default==true"></option>
-						<option value="3">编辑</option>
-						<option value="4">删除</option>
+						<option value="3">删除</option>
+						<option value="4">编辑</option>
 					</select>
 				</li>
 			</ul>
@@ -84,6 +84,124 @@
 			}
 		},
 		methods:{
+			//select事件
+			chooseChandle:function(e){
+				var index = $("#manage option:selected").val();
+				switch (index){
+					case "2":
+						this.setDeaultBank(e);
+						break;
+					case "4":
+						this.$router.push({path:'/account_editBankCard'});
+						break;
+					case "3":
+						this.delBankCard(e);
+						break;
+					default:
+						break;
+				}
+			},
+			//删除银行卡
+			delBankCard:function(e){
+				var headers = {
+					token : JSON.parse(localStorage.user).token,
+					secret : JSON.parse(localStorage.user).secret
+				}
+				layer.open({
+					title:"删除银行卡",
+				    type: 1,
+				    skin: 'layui-layer-demo', 
+				    anim: 2,
+				    shadeClose: true, 
+				    content: '删除银行卡将无法提现到该银行卡中，确认删除？',
+				    btn:['确认','取消'],
+				    btn1:function(){
+						pro.fetch("post",'/user/withdraw/del_bank',{bankId:this.bankId},headers).then((res)=>{
+							if(res.success == true){
+								if(res.code == 1){
+									layer.msg('删除成功',{time:1000});
+									//重新拉取已绑定银行卡
+									this.bandCardList = [];
+									this.getBandCard();
+								}
+							}
+						}).catch((err)=>{
+							if(err.data.success == false){
+								switch (err.data.code){
+									case '-1':
+										layer.msg("认证失败，参数错误或为空",{time:2000});
+										break;
+									case '2':
+										layer.msg("删除失败",{time:2000});
+										break;
+									case '3':
+										layer.msg("用户信息不存在",{time:2000});
+										break;
+									case '4':
+										layer.msg("银行卡信息不存在",{time:2000});
+										break;
+									case '5':
+										layer.msg("该银行卡正在提现中，不能删除",{time:2000});
+										break;
+									default:
+										break;
+								}
+							}else{
+								layer.msg("网络不给力，请稍后再试",{time:1000})
+							}
+						})
+					},
+					btn2:function(){
+						this.$router.push({path:"/withDraw_bankcard"});
+					}.bind(this)
+				});
+			},
+			//设置默认
+			setDeaultBank:function(e){
+				var headers = {
+					token : JSON.parse(localStorage.user).token,
+					secret : JSON.parse(localStorage.user).secret
+				}
+				layer.open({
+					title:"设为默认",
+				    type: 1,
+				    skin: 'layui-layer-demo', 
+				    anim: 2,
+				    shadeClose: true, 
+				    content: '确认将该银行卡设为默认提现银行卡？',
+				    btn:['确认','取消'],
+				    btn1:function(e){
+				    	pro.fetch("post",'/user/withdraw/set_default_bank',{bankId:e},headers).then((res)=>{
+							if(res.success == true){
+								if(res.code == 1){
+									layer.msg('设置默认成功',{time:1000})
+									//重新拉取选项卡
+									this.bandCardList = [];
+									this.getBandCard();
+								}
+							}
+						}).catch((err)=>{
+							if(err.data.success == false){
+								switch (err.data.code){
+									case -1:
+									layer.msg("认证失败，参数错误或为空",{time:2000});
+										break;
+									case 3:
+									layer.msg("银行卡不存在",{time:2000});
+										break
+									default:
+										break;
+								}
+							}
+							layer.msg('网络不给力，请稍后再试',{time:1000})
+						})
+				    },
+				    btn2:function(){
+				    	this.$router.push({path:"/safe_bindBankCard"});
+				    }.bind(this)
+				})
+			},
+			//去确认
 			toWith_draw:function(){
 				console.log(this.bankid);
 				if(this.withDrawMoney<0){
@@ -148,7 +266,9 @@
 					}
 				}).catch((err)=>{
 					if(err.data.success == false){
-						
+						if(err.data.code == "3"){
+							layer.msg('用户信息不存在', {time: 2000});
+						}
 					}else{
 						layer.msg('网络不给力，请稍后再试', {time: 2000});
 					}
@@ -203,10 +323,32 @@
 		background-color: $blue;
 		text-align: center;
 		.title{
+			margin-bottom: 20px;
+			background-color: $bottom_color;
 			height: 40px;
 			width:100%;
 			li{
-				float: left;
+				line-height: 40px;
+				&:nth-child(1){
+					float: left;
+				}
+				&:nth-child(2){
+					float: left;
+				}
+				&:nth-child(3){
+					float: left;
+				}
+				&:nth-child(4){
+					float: left;
+				}
+				&:nth-child(5){
+					
+					float: right;
+				}
+				&:nth-child(6){
+					margin-right: 20px;
+					float: right;
+				}
 			}
 		}
 		.banklist{
@@ -262,9 +404,14 @@
 		}
 		.writeIn{
 			position: relative;
-			right: 36px;
+			left: 2px;
 			span{
 				color: $yellow;
+				i{
+					display: inline-block;
+					width: 50px;
+					font-size: fs12;
+				}
 			}
 		}
 		.btn{
@@ -361,5 +508,8 @@
 			font-size: $fs12;
 			text-align: center;
 		}
+	}
+	.yel{
+		color: $yellow;
 	}
 </style>
