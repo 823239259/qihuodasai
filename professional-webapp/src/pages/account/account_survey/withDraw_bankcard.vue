@@ -1,7 +1,7 @@
 <template>
 	<div id="withDraw_bankcard">
 		<div class="withDraw_unboundBankCard" v-if="showUnboundCard">
-			<button class="btn yellow">绑定银行卡</button>
+			<button class="btn yellow" v-on:click="toAddBankCard">绑定银行卡</button>
 			<p>（您还为绑定银行卡，暂不能进行提现操作）</p>	
 		</div>
 		<div class="account_withDraw_top" v-if="showBoundCard">
@@ -84,6 +84,9 @@
 			}
 		},
 		methods:{
+			toAddBankCard:function(){
+				this.$router.push({path:'/safe_addBankCard'});
+			},
 			//select事件
 			chooseChandle:function(e){
 				var index = $("#manage option:selected").val();
