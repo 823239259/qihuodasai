@@ -352,18 +352,25 @@
 				/*height: 110px;*/
 				background-color: $blue;
 				li {
+					padding: 0 10px;
 					&:nth-child(1){
 						height: 70px;
 						border-bottom: 1px solid $bottom_color;
 						line-height: 70px;
-						span{
-							float: left;
-							margin-right: 10px;
-						}
 					}
 					&:nth-child(2){
 						height: 40px;
 						line-height: 40px;
+					}
+					span{
+						float: left;
+						margin-right: 20px;
+					}
+					.btn{
+						height: 30px;
+						line-height: 30px;
+						padding: 0 10px;
+						margin-left: 20px;
 					}
 				}
 				.time{
@@ -395,6 +402,24 @@
 			}
 			.account_openDetail_center{
 				background-color: $blue;
+				thead tr{
+					height: 30px;
+					line-height: 30px;
+					background: $bottom_color;
+				}
+				td{
+					padding-left: 10px;
+					
+				}
+				tbody tr td{
+					padding: 15px 0 15px 10px;
+					border-bottom: 1px solid $bottom_color;
+					span{
+						text-decoration: underline;
+						line-height: 18px;
+						font-size: $fs12;
+					}
+				}
 			}
 			.account_openDetail_notice {
 				height: 120px;
@@ -414,7 +439,7 @@
 					width: 100%;
 					height: 40px;
 					line-height: 40px;
-					margin-top: 10px;
+					margin-top: 5px;
 					background-color: $blue;
 					text-align: center;
 					font-size: $fs12;

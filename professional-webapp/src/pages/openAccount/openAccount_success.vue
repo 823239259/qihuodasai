@@ -28,10 +28,12 @@
 		},
 		methods:{
 			to_hq:function(){
-				this.$router.push({path:"/"})
+				this.$router.push({path:"/"});
+				this.$store.state.account.currentNav = 0;
 			},
 			to_trade:function(){
-				this.$router.push({path:"/trade"})
+				this.$router.push({path:"/trade"});
+				this.$store.state.account.currentNav = 1;
 			}
 		}
 	}
