@@ -152,7 +152,8 @@
 		},
 		methods:{
 			close:function(){
-				this.$router.push({path:'/account_openDetail'})
+				this.$router.push({path:'/account_openDetail'});
+				this.$store.state.account.currentNav = 6;
 			},
 			toIndexPage:function(){
 				
