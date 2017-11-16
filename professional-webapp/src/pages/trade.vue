@@ -116,15 +116,15 @@
 							<li>
 								<div class="col">
 									<b>开盘：</b>
-									<span :class="{red: currentdetail.LastQuotation.OpenPrice > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.OpenPrice < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.OpenPrice}}</span>
+									<span :class="{red: currentdetail.LastQuotation.OpenPrice > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.OpenPrice < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.OpenPrice | fixNum(currentdetail.DotSize)}}</span>
 								</div>
 								<div class="col">
 									<b>最高：</b>
-									<span :class="{red: currentdetail.LastQuotation.HighPrice > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.HighPrice < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.HighPrice}}</span>
+									<span :class="{red: currentdetail.LastQuotation.HighPrice > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.HighPrice < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.HighPrice | fixNum(currentdetail.DotSize)}}</span>
 								</div>
 								<div class="col">
 									<b>最低：</b>
-									<span :class="{red: currentdetail.LastQuotation.LowPrice > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.LowPrice < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.LowPrice}}</span>
+									<span :class="{red: currentdetail.LastQuotation.LowPrice > currentdetail.LastQuotation.PreSettlePrice, green: currentdetail.LastQuotation.LowPrice < currentdetail.LastQuotation.PreSettlePrice}">{{currentdetail.LastQuotation.LowPrice | fixNum(currentdetail.DotSize)}}</span>
 								</div>
 							</li>
 							<li>
