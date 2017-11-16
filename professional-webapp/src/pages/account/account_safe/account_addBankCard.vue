@@ -108,19 +108,12 @@
 						if(res.success == true){
 							if(res.code == 1){
 								layer.msg("绑定成功",{time:2000});
-								this.bank ='';
-								this.bankId='';
-								this.province='';
-								this.city='';
-								this.address='';
-								if(this.setFirstDeault == 1){
-									this.setDefaultBank();
-									this.setFirstDeault =2
-								}else{
-									
-								}
+//								if(this.setFirstDeault == 1){
+//									this.setDefaultBank();
+//									this.setFirstDeault =2
+//								}else{
+//								}
 								//重接拉取已绑定银行卡数据
-								this.getBindBankList();
 								this.$router.push({path:'/safe_bindBankCard'});
 							}
 						}
@@ -204,43 +197,46 @@
 				})
 			},
 			//第一次绑定默认银行卡
-			setDefaultBank:function(){
-				var headers ={
-					token : JSON.parse(localStorage.user).token,
-					secret : JSON.parse(localStorage.user).secret
-				}
-				pro.fetch("post",'/user/withdraw/set_default_bank',{bankId:this.defaultBankId},headers).then((res)=>{
-					if(res.success == true){
-						if(res.code == 1){
-							layer.msg("已为您设置成默认银行卡",{time:2000});
-						}
-					}
-				}).catch((err)=>{
-					layer.msg("网络不给力，请稍后再试",{time:2000})
-				})
-			},
+//			setDefaultBank:function(){
+//				var headers ={
+//					token : JSON.parse(localStorage.user).token,
+//					secret : JSON.parse(localStorage.user).secret
+//				}
+//				pro.fetch("post",'/user/withdraw/set_default_bank',{bankId:this.defaultBankId},headers).then((res)=>{
+//					if(res.success == true){
+//						if(res.code == 1){
+//							layer.msg("已为您设置成默认银行卡",{time:2000});
+//						}
+//					}
+//				}).catch((err)=>{
+//					layer.msg("网络不给力，请稍后再试",{time:2000})
+//				})
+//			},
 			//第一次绑定成功后重新获取绑定银行卡
-			getBindBankList: function(){
-				var headers ={
-					token : JSON.parse(localStorage.user).token,
-					secret : JSON.parse(localStorage.user).secret
-				}
-				pro.fetch("post","/user/withdraw/bank_list",'',headers).then((res)=>{
-					if(res.success == true){
-						if(res.code == 1){
-							if(res.data.bankId!=''){
-								this.defaultBankId == res.data.bankId
-							}
-						}
-					}
-				}).catch((err)=>{
-					if(err.data.success == false){
-	
-					}else{
-						layer.msg("网络不给力，请稍后再试",{time:2000})
-					}
-				})
-			}
+//			getBindBankList: function(){
+//				var headers ={
+//					token : JSON.parse(localStorage.user).token,
+//					secret : JSON.parse(localStorage.user).secret
+//				}
+//				pro.fetch("post","/user/withdraw/bank_list",'',headers).then((res)=>{
+//					if(res.success == true){
+//						if(res.code == 1){
+//							if(res.data!=''){
+//								console.log()
+//								this.defaultBankId == res.data.bankId
+//							}
+//						}
+//					}
+//				}).catch((err)=>{
+//					if(err.data.success == false){
+//						if(err.data.code == "3"){
+//							layer.msg("用户信息不存在",{time:2000})
+//						}
+//					}else{
+//						layer.msg("网络不给力，请稍后再试",{time:2000})
+//					}
+//				})
+//			}
 		},
 		activated:function(){
 		},

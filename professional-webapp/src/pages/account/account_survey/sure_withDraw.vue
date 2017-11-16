@@ -2,16 +2,16 @@
 	<div id="withDraw_sure">
 		<div class="withDraw_sure_top">
 			<ul>
-				<li>银行卡信息：<span>舒</span><i>招商银行（**** **** **** 0803）</i></li>
-				<li>提现金额：<span class="color_yellow">0</span>元</li>
-				<li>提现手续费：<span>{{fee}}</span>元<i>（按揭提现金额的0.5%收取）</i></li>
-				<li>实际到账金额：<span class="color_yellow">9.9</span>元<i>（提现金额-提现手续费）</i></li>
+				<li>银行卡信息：<span>{{username}}</span><i>{{bankName}}（{{bankCrad}}）</i></li>
+				<li>提现金额：<span class="color_yellow">{{withMoney}}</span>元</li>
+				<li>提现手续费：<span>{{withFee}}</span>元<i>（按揭提现金额的0.5%收取）</i></li>
+				<li>实际到账金额：<span class="color_yellow">{{withMoney-withFee}}</span>元<i>（提现金额-提现手续费）</i></li>
 			</ul>
 		</div>
 		<div class="withDraw_sure_center">
 			<ul>
-				<li>提现密码：<input type="text" v-model="withdrawPwd"/><span>忘记密码</span></li>
-				<li><button class="btn yellow" v-on:click="withDraw_money">确认提现</button><span>返回修改</span></li>
+				<li>提现密码：<input type="password" v-model="withdrawPwd"/><span v-on:click="toResetPassword">忘记密码</span></li>
+				<li><button class="btn yellow" v-on:click="withDraw_money">确认提现</button><span v-on:click="back">返回修改</span></li>
 			</ul>
 		</div>
 		<div class="withDraw_sure_btm">
@@ -32,64 +32,148 @@
 		data(){
 			return{
 				withdrawPwd:'',
-				fee:''
+				withFee:'',
+				bankid:'',
+				withMoney:'',
+				bankName:'',
+				username:'',
+				bankCrad:'',
+				pwdReg:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,18}$/,
+				bankCardShow:''
 			}
 		},
 		methods:{
+			//忘记密码
+			toResetPassword:function(){
+				this.$router.push({path:'/safe_withdrawalPassword'})
+			},
+			back:function(){
+				this.$router.push({path:'/withDraw_bankcard'})
+			},
+			//提现
 			withDraw_money:function(){
 				var token = JSON.parse(localStorage.user).token;
 				var secret = JSON.parse(localStorage.user).secret;
-				var withdrawPwd =this.withdrawPwd;
-				var money=this.money;
-				var card =this.card;
-				var bank = this.bank;
-				var data = {
-					bank:bank,
-				    card:card,
-				    money:money,
-				    withdrawPwd:withdrawPwd
-				}
 				var headers = {
 					token : token,
 					secret :secret
 				}
-				if(withdrawPwd=''){
-					layer.msg('请输入支付密码', {time: 1000});
-				}else{
-					pro.fetch("post",'/user/withdraw/handle',data,headers).then((res)=>{
-					if(res.success==true){
-						if(res.code==1){
-							
-							layer.msg('提现申请已提交，等待要银行处理。若24小时未到账请拨打：400-852-8008', {time: 2000});
-						}else{
-							layer.msg(res.code, {time: 2000});
+				var data = {
+					bank:this.bankName,
+				    card:this.bankCardShow,
+				    money:this.withMoney,
+				    withdrawPwd:this.withdrawPwd
+				}
+				if(this.withdrawPwd==''){
+					layer.msg("请输入提现密码");
+				}else if(this.pwdReg(this.withdrawPwd)==false){
+					this.withdrawPwd = '';
+					layer.msg("密码格式输入有误，请重试",{time:2000});
+				}else {
+					pro.fetch("post","/user/withdraw/handle",data,headers).then((res)=>{
+						if(res.success == true){
+							if(res.code == 1){
+								layer.msg("提现申请已提交，等待要银行处理。若24小时未到账请拨打：400-852-8008",{time:2000});
+								this.$router.push({pat:"/account_survey"});
+							}
 						}
-					}}).catch((err)=>{
-						console.log(err);
-						layer.msg('网络不给力，请稍后再试', {time: 1000});
+					}).catch((err)=>{
+						if(err.data.success == false){
+							switch (err.data.code){
+								case '-1':
+									layer.msg("认证失败",{time:2000});
+									break;
+								case '0':
+									layer.msg("token失效",{time:2000});
+									break;
+								case '2':
+									layer.msg("此账户暂未绑定银行卡",{time:2000});
+									break;
+								case '3':
+									layer.msg("用户信息不存在",{time:2000});
+									break;
+								case '4':
+									layer.msg("银行卡卡号不存在",{time:2000});
+									break;
+								case '5':
+									layer.msg("存在欠费无法提现",{time:2000});
+									break;
+								case '6':
+									layer.msg("系统升级期间无法提现",{time:2000});
+									break;
+								case '7':
+									layer.msg("余额不足不能提现",{time:2000});
+									break;
+								case '8':
+									layer.msg("当天取款次数不能超过5次",{time:2000});
+									break;
+								case '9':
+									layer.msg("每次提现金额不能小于10元",{time:2000});
+									break;
+								case '10':
+									layer.msg("提现密码错误",{time:2000});
+									break;
+								case '11':
+									layer.msg("暂不支持此银行提现",{time:2000});
+									break;
+								case '12':
+									layer.msg("单笔提现金额不能超过5万元",{time:2000});
+									break;
+								case '15':
+									layer.msg("提现渠道设置参数错误",{time:2000});
+									break;
+								default:
+									break;
+							}
+						}else{
+							layer.msg("网络不给力，请稍后再试",{time:2000})
+						}
 					})
 				}
+			},
+			//查询银行卡信息
+			queryBank:function(){
+				var data = {
+					bankId:this.bankid
+				}
+				var token = JSON.parse(localStorage.user).token;
+				var secret = JSON.parse(localStorage.user).secret;
+				var headers = {
+					token : token,
+					secret :secret
+				}
+				pro.fetch("post","/user/withdraw/queryBank",data,headers).then((res)=>{
+					if(res.success == true){
+						if(res.code == 1){
+							var phoneNumber = res.data.tname;
+							this.username = '*' + phoneNumber.substr(1,5);
+							this.bankName = res.data.bankName;
+							var card = res.data.card;
+							this.bankCrad = "**** **** **** "+card.substr(15,20);
+							this.bankCardShow = res.data.card;
+						}
+					}
+				}).catch((err)=>{
+					if(err.data.success == false){
+						
+					}
+					layer.msg("网络不给力，请稍后再试",{time:2000})
+				})
 			}
 		},
-		created(){
-			//计算提现手续费
-			pro.fetch("post",'/user/withdraw/drawFee',{money:this.money},{
-				token:JSON.parse(localStorage.user).token,
-				secret:JSON.parse(localStorage.user).secret
-			}).then((res)=>{
-				if(res.success == true){
-					if(res.code == 1){
-						this.fee = res.data.fee
-					}else{
-						layer.msg(res.code, {time: 1000});
-					}
-				}else{
-					layer.msg('网络不给力，请稍后再试', {time: 1000});
-				}
-			}).catch((err)=>{
-				
-				layer.msg('网络不给力，请稍后再试', {time: 1000});
-			})
+		mounted:function(){
+			this.bankid=this.$route.query.bankid;
+			this.withFee=this.$route.query.withFee;
+			this.withMoney=this.$route.query.withMoney;
+			console.log(this.bankid);
+			console.log(this.withFee);
+			console.log(this.withMoney)
+			this.queryBank();
+		},
+		activated:function(){
+			this.bankid=this.$route.query.bankid;
+			this.withFee=this.$route.query.withFee;
+			this.withMoney=this.$route.query.withMoney;
 		}
 		
 	}
@@ -131,6 +215,7 @@
 				height: 30px;
 				border: 1px solid $bottom_color;
 				border-radius: 5px;
+				color: $white;
 			}
 			.btn {
 				width: 120px;

@@ -5,7 +5,7 @@
 			<p class="title">终结方案<i class="ifont ifont_x" v-on:click="close">&#xe624;</i></p>
 			<div class="details">
 				<p>结算金额明细</p>
-				<p><span>{{endAmount | fixNumTwo}}</span>元（结算金额）<span>={{traderBond | fixNumTwo}}元</span>（操盘保证金）+<span>{{appendTraderBond | fixNumTwo}}元</span>（追加保证金）<span>{{tradeSell | fixNumTwo}}元</span>（交易盈亏）-<span>{{tranFeesTotal | fixNumTwo}}元</span>（手续费）</p>
+				<p><span>{{endAmount | fixNumTwo}}</span>元（结算金额）<span>={{traderBond | fixNumTwo}}元</span>（操盘保证金）+<span>{{appendTraderBond | fixNumTwo}}元</span>（追加保证金）<span>+{{tradeSell | fixNumTwo}}元</span>（交易盈亏）-<span>{{tranFeesTotal | fixNumTwo}}元</span>（手续费）</p>
 				<p><i>注意：</i>交易手续费= 合约手续费x交易手数</p>
 			</div>
 			<div class="handDetails">
@@ -49,9 +49,9 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr v-for="item in historyList">
-							<td>1</td>
-							<td>2017-11-07 23：12:12</td>
+						<tr v-for="(item,index) in historyList">
+							<td>{{index+1}}</td>
+							<td>{{item.tradeDate | getTime}}</td>
 							<td>{{item.userNo}}</td>
 							<td>{{item.currencyNo}}</td>
 							<td>{{item.exchangeNo}}</td>
@@ -146,10 +146,13 @@
 		},
 		filters:{
 			fixNumTwo: function(num){
-				return num.toFixed(2);
+				return Number(num).toFixed(2);
 			},
 			fixNum: function(num, dotsize){
-				return num.toFixed(dotsize);
+				return Number(num).toFixed(dotsize);
+			},
+			getTime:function(e){
+				return pro.getDate('y-m-d h:i:s',e*1000);
 			}
 		},
 		methods:{

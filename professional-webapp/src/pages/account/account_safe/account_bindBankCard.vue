@@ -258,11 +258,11 @@
 						font-size: $fs16;
 					}
 				}
-				label{
-					float: left;
-					margin-left: 10px;
-					color: $white;
-				}
+			label{
+				float: left;
+				margin-left: 10px;
+				color: $white;
+			}
 			.btn {
 				width: 160px;
 				height: 30px;
