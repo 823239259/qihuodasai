@@ -20,7 +20,7 @@
 								<td v-else="realName != null" class="yellow_status">已认证</td>
 								<td v-if="realName == null">您还没有实名认证完成更高级认证后将提升您的充值与体现权限。</td>
 								<td v-else="realName!=null">认证信息：{{username}}</td>
-								<td v-on:click="toCertification" v-if="realName == null">去认证</td>
+								<td v-on:click="toCertification" v-if="realName == null" class="yellow_status">去认证</td>
 								<td v-else="realName != null"></td>
 							</tr>
 							<tr>
@@ -31,7 +31,7 @@
 								<td v-if="isWithdrawPwd==false">账户资金变动时，需先验证体现密码</td>
 								<td v-else="isWithdrawPwd==true">您已设置提现密码，请保管好自己的密码</td>
 								<td v-on:click="toaWithdrawalPassword" v-if="isWithdrawPwd==false">去设置</td>
-								<td v-on:click="toaWithdrawalPassword" v-else="isWithdrawPwd==true">去修改</td>
+								<td v-on:click="toaWithdrawalPassword" v-else="isWithdrawPwd==true" class="yellow_status">去修改</td>
 							</tr>
 							<tr>
 								<td><img src="../../../assets/images/icon_bindcard.png" alt="" /></td>
@@ -41,21 +41,21 @@
 								<td v-if="isBoundBankCard==false">您还没有绑定银行卡，完成绑定后可提现到银行卡中</td>
 								<td v-else="isBoundBankCard==true" >您已绑定银行卡，可提现到银行卡中</td>
 								<td v-on:click="toAddBankCard" v-if="isBoundBankCard==false">去绑定</td>
-								<td v-on:click="toBindBankCard" v-else="isBoundBankCard==true">去修改</td>
+								<td v-on:click="toBindBankCard" v-else="isBoundBankCard==true" class="yellow_status">去修改</td>
 							</tr>
 							<tr>
 								<td><img src="../../../assets/images/icon_loginpassword.png" alt="" /></td>
 								<td>登录密码</td>
 								<td class="yellow_status">已设置</td>
 								<td>登录网站时使用</td>
-								<td v-on:click="toResetLoginPassword">修改</td>
+								<td v-on:click="toResetLoginPassword" class="yellow_status">去修改</td>
 							</tr>
 							<tr>
 								<td><img src="../../../assets/images/icon_bindtel.png" alt="" /></td>
 								<td>绑定手机</td>
 								<td class="yellow_status">已绑定</td>
 								<td>您已绑定手机{{phone}}</td>
-								<td v-on:click="toResetCellPassword" >修改</td>
+								<td v-on:click="toResetCellPassword" class="yellow_status">去修改</td>
 							</tr>
 						</tbody>
 					</table>
