@@ -12,23 +12,21 @@
 			</div>
 			<button class="btn blue" @click="serchEvent">搜索</button>
 		</div>
-		<table>
-			<thead>
-				<tr>
-					<td>序号</td>
-					<td>合约代码</td>
-					<td>交易所</td>
-					<td>币种</td>
-					<td>买卖</td>
-					<td>成交价</td>
-					<td>成交量</td>
-					<td>手续费</td>
-					<td>成交时间</td>
-				</tr>
-			</thead>
-		</table>
 		<div class="table_box">
 			<table>
+				<thead>
+					<tr>
+						<td>序号</td>
+						<td>合约代码</td>
+						<td>交易所</td>
+						<td>币种</td>
+						<td>买卖</td>
+						<td>成交价</td>
+						<td>成交量</td>
+						<td>手续费</td>
+						<td>成交时间</td>
+					</tr>
+				</thead>
 				<tbody>
 					<template v-for="v in histroyDealList">
 						<tr>
@@ -247,7 +245,7 @@
 		}
 	}
 	.table_box{
-		height: 100px;
+		height: 150px;
 		overflow-y: auto;
 	}
 	table{
