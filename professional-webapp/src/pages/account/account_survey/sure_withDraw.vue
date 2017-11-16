@@ -10,7 +10,7 @@
 		</div>
 		<div class="withDraw_sure_center">
 			<ul>
-				<li>提现密码：<input type="password" v-model="withdrawPwd"/><span>忘记密码</span></li>
+				<li>提现密码：<input type="password" v-model="withdrawPwd"/><span v-on:click="toResetPassword">忘记密码</span></li>
 				<li><button class="btn yellow" v-on:click="withDraw_money">确认提现</button><span v-on:click="back">返回修改</span></li>
 			</ul>
 		</div>
@@ -43,6 +43,10 @@
 			}
 		},
 		methods:{
+			//忘记密码
+			toResetPassword:function(){
+				this.$router.push({path:'/safe_withdrawalPassword'})
+			},
 			back:function(){
 				this.$router.push({path:'/withDraw_bankcard'})
 			},
