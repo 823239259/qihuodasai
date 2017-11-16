@@ -1170,7 +1170,10 @@ export default new Vuex.Store({
 					break;	
 				case 'OnError':
 					if(parameters!=null){
-						context.state.market.layer=parameters.Message + Math.floor(Math.random()*10);
+						layer.msg(parameters.Message,{time: 1000});
+						setTimeout(function(){
+							context.state.market.cancelStatus = false;
+						}, 1000);
 					}
 					break;
 				default:
