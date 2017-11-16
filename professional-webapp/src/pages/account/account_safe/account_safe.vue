@@ -39,7 +39,7 @@
 								<td v-if="isBoundBankCard==false">未绑定</td>
 								<td v-else="isBoundBankCard==true" class="yellow_status">已绑定</td>
 								<td v-if="isBoundBankCard==false">您还没有绑定银行卡，完成绑定后可提现到银行卡中</td>
-								<td v-else="isBoundBankCard==true" class="yellow_status">您已绑定银行卡，可提现到银行卡中</td>
+								<td v-else="isBoundBankCard==true" >您已绑定银行卡，可提现到银行卡中</td>
 								<td v-on:click="toAddBankCard" v-if="isBoundBankCard==false">去绑定</td>
 								<td v-on:click="toBindBankCard" v-else="isBoundBankCard==true">去修改</td>
 							</tr>
@@ -76,7 +76,7 @@
 				realName :'',
 				isBoundBankCard:'',
 				isWithdrawPwd:'',
-				protect: 2,
+				protect: 2
 			}
 		},
 		methods:{
@@ -104,45 +104,53 @@
 			toAddBankCard :function(){
 				this.$router.push({path:'/safe_addBankCard'})
 			},
-			getUserSafeMsg: function(){
-				
-			},
+//			getUserSafeMsg: function(){
+//				
+//			},
 		},
 		mounted:function(){
 			//获取用户平台登录信息
 			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
-			//统计完成了几项保护
-			if(this.realName != null) this.protect += 1;
-			if(this.isWithdrawPwd == true) this.protect += 1;
-			if(this.isBoundBankCard == true) this.protect += 1;
+			
 		},
-		activated: function(){
+		activated:function(){
 			//获取用户账户信息
-			this.getUserSafeMsg();
+//			this.getUserSafeMsg();
 		},
 		beforeCreate(){
 			var headers = {
-				token : JSON.parse(localStorage.user).token,
-				secret : JSON.parse(localStorage.user).secret
-			}
-			//判断安全信息
-			pro.fetch("post","/user/security",{},headers).then((res)=>{
-				if(res.success == true){
-					if(res.code == 1){
-						this.phone = res.data.mobile;
-						this.realName = res.data.realName;
-						this.isWithdrawPwd = res.data.isWithdrawPwd;
-						this.isBoundBankCard = res.data.isBoundBankCard;
-						if(res.data.realName == null){
-							this.username = "你好";
-						}else{
-							this.username = res.data.realName;
+					token : JSON.parse(localStorage.user).token,
+					secret : JSON.parse(localStorage.user).secret
+				}
+				//判断安全信息
+				pro.fetch("post","/user/security",{},headers).then((res)=>{
+					if(res.success == true){
+						if(res.code == 1){
+							var phoneNumber= res.data.mobile;
+							this.phone = phoneNumber.substr(0, 3) + '****' + phoneNumber.substr(7)
+							this.realName = res.data.realName;
+							this.isWithdrawPwd = res.data.isWithdrawPwd;
+							this.isBoundBankCard = res.data.isBoundBankCard;
+							if(res.data.realName == null){
+								this.username = "你好";
+							}else{
+								this.username =  '*'+res.data.realName.substr(1,5);
+							}
+							if(res.data.realName != null){
+								this.project = 3
+							}
+							if(res.data.isBoundBankCard!=null){
+								this.project = 4
+							}
+							if(res.data.isWithdrawPwd!=null){
+								this.project = 5
+							}
+							console.log(this.project)
 						}
 					}
-				}
-			}).catch((err)=>{
-				layer.msg('网络不给力，请稍后再试',{time:1000});
-			})
+				}).catch((err)=>{
+					layer.msg('网络不给力，请稍后再试',{time:1000});
+				})
 		}
 	}
 </script>

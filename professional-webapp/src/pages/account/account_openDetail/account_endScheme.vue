@@ -15,7 +15,6 @@
 		name: "account_endScheme",
 		data(){
 			return{
-				
 			}
 		},
 		methods:{
@@ -26,10 +25,11 @@
 				}
 				var data = {
 					id:this.id
-//					cId:
+//					cId:'',
 //					businessType:8
 				}
 				pro.fetch("post","/user/ftrade/endtrade",data,headers).then((res)=>{
+					console.log(res)
 					if(res.success == true){
 						if(res.code == 1){
 							layer.msg("操作成功",{time:2000});
@@ -37,6 +37,7 @@
 						}
 					}
 				}).catch((err)=>{
+					console.log(err)
 					if(err.data.success == false){
 						switch (err.data.code){
 							case '-1':
@@ -95,7 +96,7 @@
 		},
 		mounted:function(){
 			this.id = this.$route.query.id;
-			
+			console.log(this.id);
 		},
 		actived:function(){
 			this.id = this.$route.query.id;
