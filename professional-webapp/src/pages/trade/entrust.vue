@@ -11,6 +11,7 @@
 					<td>已成交</td>
 					<td>已撤单</td>
 					<td>下单时间</td>
+					<td>状态说明</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -24,6 +25,7 @@
 						<td>{{v.TradeNum}}</td>
 						<td>{{v.RevokeNum}}</td>
 						<td>{{v.InsertDateTime}}</td>
+						<td>{{v.StatusMsg}}</td>
 					</tr>
 				</template>
 			</tbody>
@@ -60,6 +62,7 @@
 		},
 		methods: {
 			operateData: function(obj){
+				console.log(obj);
 				this.entrustList = [];
 				if(obj){
 					obj.forEach(function(o, i){
@@ -93,6 +96,7 @@
 							data.InsertDateTime = o.InsertDateTime;
 							data.ContractCode = o.ContractCode;
 							data.OrderID = o.OrderID;
+							data.StatusMsg = o.StatusMsg;
 							this.entrustList.unshift(data);
 						}
 					}.bind(this));
