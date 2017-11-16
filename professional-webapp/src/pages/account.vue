@@ -23,7 +23,6 @@
 		},
 		methods : {
 			show_accountSurvey : function(index){
-				console.log(index);
 				this.currentNum = index;
 				if(index == 0){
 					this.$router.push({path:'/account_survey'});
