@@ -454,6 +454,20 @@
 			}
 		},
 		mounted:function(){
+			//初始化高度
+			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+			var _h = h - 80 - 47;
+			var contH = $("#account_survey").height();
+			if(contH > _h){
+				$("#account_survey").height(_h);
+			}
+			$(window).resize(function(){
+				var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+				var _h = h - 80 - 47;
+				if(contH > _h){
+					$("#account_survey").height(_h);
+				}
+			});
 			//获取默认
 			this.GetList('',this.getNowDate(),this.getNowFormatDate(),'');
 			//获取实名和提现密码
@@ -471,11 +485,11 @@
 
 <style lang="scss" scoped type="text/css">
 @import "../../../assets/css/common.scss";
-	
 	#account_survey {
 		/*display: none;*/
 		background-color: $blue;
 		width: 100%;
+		overflow-y: auto;
 		float: left;
 	}
 		li {
@@ -644,10 +658,10 @@
 		.surveyMoney {
 			padding-left: 20px;
 		}
-		.moneyDetail_list {
+		/*.moneyDetail_list {
 			height: 300px;
 			overflow-y: scroll;
-		}
+		}*/
 		/*分页*/
 		.pager {
 			float: right;
