@@ -2130,7 +2130,6 @@ export default new Vuex.Store({
 							
 							
 							if(context.state.market.currentNo == e.CommodityNo) {
-								console.log(JSON.parse(evt.data).Parameters);
 								context.state.market.CacheLastQuote.push(JSON.parse(evt.data).Parameters);
 								if(context.state.market.CacheLastQuote.length > 2){
 									context.state.market.CacheLastQuote.shift();
@@ -2142,7 +2141,6 @@ export default new Vuex.Store({
 									context.state.market.charttimems = context.state.market.charttimetime.getTime();
 									context.state.market.charttime = context.state.market.charttimems - context.state.market.charttimems2;
 									if(context.state.market.charttime >= 1000 || context.state.market.charttimetemp >= 1000) {
-										console.log(111);
 										arr = [];
 										arr[0] = JSON.parse(evt.data).Parameters.DateTimeStamp;
 										arr[1] = JSON.parse(evt.data).Parameters.LastPrice;
@@ -2155,8 +2153,6 @@ export default new Vuex.Store({
 										arr2 = arr1[1].split(':'); //最新时间
 										arr3 = context.state.market.jsonData.Parameters.Data[context.state.market.jsonData.Parameters.Data.length - 1][0].split(' ');
 										arr4 = arr3[1].split(':'); //历史时间
-										console.log(arr2);
-										console.log(arr4);
 										if(arr2[1] == arr4[1]) {
 											var time = context.state.market.jsonData.Parameters.Data[context.state.market.jsonData.Parameters.Data.length - 1][0];
 											var vol = parseInt(context.state.market.jsonData.Parameters.Data[context.state.market.jsonData.Parameters.Data.length - 1][6]) + parseInt(arr[6]);
