@@ -4,8 +4,8 @@
 			<p><span>提示：</span>认证年龄需满<span>18</span>周岁，不建议<span>60</span>岁以上的用户交易</p>
 		</div>
 		<div class="account_certification_center">
-			<p>姓名：<input type="text" v-model="realName" /></p>
-			<p>身份证号码：<input type="text" v-model="IDcard" class="IDcard" maxlength="18"/></p>
+			<p><label>姓名：</label><input type="text" v-model="realName" /></p>
+			<p><label>身份证号码：</label><input type="text" v-model="IDcard" class="IDcard" maxlength="18"/></p>
 			<button class="btn yellow" v-on:click="toCertification">确认</button>
 		</div>
 		<div class="account_certification_btm">
@@ -112,13 +112,28 @@
 			height: 190px;
 			text-align: center;
 			background-color: $blue;
+			p{
+				width: 320px;
+				margin: 0 auto;
+				padding-top: 20px;
+				overflow: hidden;
+			}
+			label{
+				float: left;
+				display: inline-block;
+				width: 100px;
+				height: 30px;
+				line-height: 30px;
+				text-align: right;
+			}
 			input {
+				float: left;
 				width: 160px;
 				height: 30px;
 				border: 1px solid $bottom_color;
 				border-radius: 5px;	
+				padding: 0 5px;
 				color:$white;
-				margin-top: 20px;
 				&:hover {
 					border: 1px solid $yellow;
 				}
@@ -127,7 +142,7 @@
 				margin-left: 40px;
 				width : 160px;
 				height : 30px;
-				margin-top: 10px;
+				margin-top: 20px;
 			}
 		}
 		.account_certification_btm {
