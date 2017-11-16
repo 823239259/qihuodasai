@@ -823,4 +823,9 @@
 	 		color: #242633;
 	 	}
 	 }
+	 @media only screen and (min-width: 1280px) and (max-width: 1366px) {
+	 	.openAccount_center_left li:nth-child(1){
+	 		width: 70%;
+	 	}
+	 }
 </style>
