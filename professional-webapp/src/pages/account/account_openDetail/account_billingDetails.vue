@@ -5,7 +5,7 @@
 			<p class="title">终结方案<i class="ifont ifont_x" v-on:click="close">&#xe624;</i></p>
 			<div class="details">
 				<p>结算金额明细</p>
-				<p><span>{{endAmount}}</span>元（结算金额）<span>={{traderBond}}元</span>（操盘保证金）+<span>{{appendTraderBond}}元</span>（追加保证金）<span>{{tradeSell}}元</span>（交易盈亏）-<span>{{tranFees}}元</span>（手续费）</p>
+				<p><span>{{endAmount}}</span>元（结算金额）<span>={{traderBond}}元</span>（操盘保证金）+<span>{{appendTraderBond}}元</span>（追加保证金）<span>{{tradeSell}}元</span>（交易盈亏）-<span>{{tranFeesTotal}}元</span>（手续费）</p>
 				<p><i>注意：</i>交易手续费= 合约手续费x交易手数</p>
 			</div>
 			<div class="handDetails">
@@ -46,10 +46,6 @@
 							<td>卖</td>
 							<td>成交价</td>
 							<td>手续费</td>
-							<td>平仓盈亏</td>
-							<td>平仓手数</td>
-							<td>开仓手数</td>
-							<td>类型</td>
 						</tr>
 					</thead>
 					<tbody>
@@ -60,14 +56,12 @@
 							<td>{{item.currencyNo}}</td>
 							<td>{{item.exchangeNo}}</td>
 							<td>{{item.commodityNo}}</td>
-							<td>+</td>
-							<td>-</td>
+							<td v-if="buyNum!=''">{{item.buyNum}}</td>
+							<td v-else="buyNum==''">0</td>
+							<td v-if="sellNum!=''">{{item.sellNum}}</td>
+							<td v-else="sellNum==''">0</td>
 							<td>{{item.tradePrice}}</td>
 							<td>{{item.free}}</td>
-							<td>55.00</td>
-							<td>10</td>
-							<td>0</td>
-							<td>{{item.tradeType}}</td>
 						</tr>
 						<!--<tr>
 							<td>1</td>
@@ -144,7 +138,7 @@
 				appendTraderBond:'',
 				tranProfitLoss:'',
 				endParities:'',
-				tranFees:"",
+				tranFeesTotal:"",
 				tradeSell:'',
 				handList:{},
 				historyList:[],
@@ -172,7 +166,7 @@
 				var data = {
 					id:this.id
 				}
-				pro.fetch("post","/ user/ftrade/details",data,headers).then((res)=>{
+				pro.fetch("post","/user/ftrade/details",data,headers).then((res)=>{
 					var data = res.data.details
 					if(res.success == true){
 						if(res.code == 1){
@@ -182,7 +176,7 @@
 							this.tranProfitLoss=data.tranProfitLoss;
 							this.endParities=data.endParities;
 							this.tradeSell = this.tranProfitLoss*this.endParities;
-							this.tranFees = data.tranFees;
+							this.tranFeesTotal = data.tranFeesTotal;
 							if(data.tranActualLever!=0){
 								this.handList.富时A50 = data.tranActualLever
 							}

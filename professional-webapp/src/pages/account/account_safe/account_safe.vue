@@ -18,9 +18,9 @@
 								<td>实名认证</td>
 								<td v-if="realName == null">未认证</td>
 								<td v-else="realName != null" class="yellow_status">已认证</td>
-								<td v-if="realName == null">您还没有实名认证完成更高级认证后将提升您的充值与体现权限。</td>
+								<td v-if="realName == null">您还没有实名认证完成更高级认证后将提升您的充值与提现权限。</td>
 								<td v-else="realName!=null">认证信息：{{username}}</td>
-								<td v-on:click="toCertification" v-if="realName == null" class="yellow_status">去认证</td>
+								<td v-on:click="toCertification" v-if="realName == null">去认证</td>
 								<td v-else="realName != null"></td>
 							</tr>
 							<tr>
@@ -28,7 +28,7 @@
 								<td>提现密码</td>
 								<td v-if="isWithdrawPwd==false">未设置</td>
 								<td v-else="isWithdrawPwd==true" class="yellow_status">已设置</td>
-								<td v-if="isWithdrawPwd==false">账户资金变动时，需先验证体现密码</td>
+								<td v-if="isWithdrawPwd==false">账户资金变动时，需先验证提现密码</td>
 								<td v-else="isWithdrawPwd==true">您已设置提现密码，请保管好自己的密码</td>
 								<td v-on:click="toaWithdrawalPassword" v-if="isWithdrawPwd==false">去设置</td>
 								<td v-on:click="toaWithdrawalPassword" v-else="isWithdrawPwd==true" class="yellow_status">去修改</td>
