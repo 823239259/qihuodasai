@@ -459,6 +459,7 @@
 			//初始化高度
 			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 			var _h = h - 80 - 47;
+			var contH = $("#account_survey").height();
 			if(contH > _h){
 				$("#account_survey").height(_h);
 			}
