@@ -52,8 +52,8 @@
 								<td v-else>-</td>
 								<td>{{item.traderTotal}}元</td>
 								<td>{{item.lineLoss}}美元</td>
-								<td>{{item.appTime | getTime}}</td>
-								<td v-if="item.stateTypeStr == '已完结'">{{item.endTime | getTime}}</td>
+								<td>{{item.appTime | getTime}}</br>{{item.appTime | getTimeTwo}}</td>
+								<td v-if="item.stateTypeStr == '已完结'">{{item.endTime | getTime}}</br>{{item.appTime | getTimeTwo}}</td>
 								<td v-else="item.stateTypeStr != '已完结'">-</td>
 								<td v-if="item.endAmount!=''">{{item.endAmount}}</td>
 								<td v-else="item.endAmount == ''">-</td>
@@ -104,7 +104,10 @@
 		},
 		filters:{
 			getTime: function(e){
-				return pro.getDate('y-m-d h:i:s',e*1000);
+				return pro.getDate('y-m-d',e*1000);
+			},
+			getTimeTwo:function(e){
+				return pro.getDate('h:i:s',e*1000);
 			}
 		},
 		methods:{

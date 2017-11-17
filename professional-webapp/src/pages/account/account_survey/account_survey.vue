@@ -94,7 +94,7 @@
 				</thead>
 				<tbody>
 					<tr v-for="item in item">
-						<td>{{item.subTime | getTime}}</td>
+						<td>{{item.subTime | getTime}}</br>{{item.subTime | getTimeTwo}}</td>
 						<td v-if="item.money >0" class="color_yellow">收入</td>
 						<td v-else="item.money <0">支出</td>	
 						<td>{{item.money}}元</td>
@@ -167,8 +167,11 @@
 			}
 		},
 		filters: {
+			getTimeTwo:function(e){
+				return pro.getDate('h:i:s',e*1000);
+			},
 			getTime: function(e){
-				return pro.getDate('y-m-d h:i:s',e*1000);
+				return pro.getDate('y-m-d',e*1000);
 			},
 			fixNumTwo: function(num){
 				if(typeof num == 'number'){
@@ -658,10 +661,10 @@
 		.surveyMoney {
 			padding-left: 20px;
 		}
-		/*.moneyDetail_list {
+		.moneyDetail_list {
 			height: 300px;
 			overflow-y: scroll;
-		}*/
+		}
 		/*分页*/
 		.pager {
 			float: right;
