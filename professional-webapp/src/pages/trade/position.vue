@@ -67,6 +67,14 @@
 				return this.$store.state.market.CacheAccount.jCacheTotalAccount;
 			},
 		},
+		watch: {
+			positionListCont: function(n, o){
+				if(n.length == 0){
+					this.currentOrderID = '';
+					this.selectedNum = -1;
+				}
+			}
+		},
 		methods: {
 			clickEvent: function(i, id){
 				this.selectedNum = i;
