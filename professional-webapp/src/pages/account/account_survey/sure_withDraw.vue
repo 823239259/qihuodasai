@@ -64,6 +64,7 @@
 				    money:this.withMoney,
 				    withdrawPwd:this.withdrawPwd
 				}
+				console.log(data)
 				if(this.withdrawPwd==''){
 					layer.msg("请输入提现密码");
 				}else if(pwdReg.test(this.withdrawPwd)==false){
@@ -147,7 +148,7 @@
 						if(res.code == 1){
 							var phoneNumber = res.data.tname;
 							this.username = '*' + phoneNumber.substr(1,5);
-							this.bankName = res.data.bankName;
+							this.bankName = res.data.abbreviation;
 							var card = res.data.card;
 							this.bankCrad = "**** **** **** "+card.substr(15,20);
 							this.bankCardShow = res.data.card;
