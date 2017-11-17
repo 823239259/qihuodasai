@@ -85,7 +85,6 @@
 				}
 			},
 			orderListCont: function(n, o){
-				console.log(n);
 				layer.closeAll();
 				this.showDialog = false;
 				this.currentOrderID = '';
