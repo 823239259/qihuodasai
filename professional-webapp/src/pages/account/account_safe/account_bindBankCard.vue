@@ -13,7 +13,7 @@
 		</div>
 		<div class="account_bindBankCard_center">
 			<ul>
-				<li  v-for="(k,index) in bindBankList" class="bankList"  :class="{curr:current1 == index}">
+				<li  v-for="(k,index) in bindBankList" class="bankList"  :class="{curr:current1 == index}" v-on:click="chooseBank(index)">
 					<i class="ifont" v-if="k.default ==true">&#xe698;</i>
 					<i class="ifont" v-else="k.default!=true">&#xe626;</i>
 					<span>{{k.bankName}}</span>
@@ -49,6 +49,9 @@
 			}
 		},
 		methods:{
+			chooseBank:function(index){
+				this.current1 = index
+			},
 			//select事件
 			chooseChandle:function(e){
 				var index = $("#manage option:selected").val();

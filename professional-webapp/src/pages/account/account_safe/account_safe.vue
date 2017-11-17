@@ -132,6 +132,20 @@
 			},
 		},
 		mounted:function(){
+			//初始化高度
+			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+			var _h = h - 80 - 47;
+			var contH = $("#account_safe").height();
+			if(contH > _h){
+				$("#account_safe").height(_h);
+			}
+			$(window).resize(function(){
+				var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+				var _h = h - 80 - 47;
+				if(contH > _h){
+					$("#account_safe").height(_h);
+				}
+			});
 			//获取用户平台登录信息
 			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
 			//获取用户账户信息
@@ -176,6 +190,7 @@
 			height: 540px;
 			background-color: #242633;
 			float: left;
+			overflow-y: auto;
 			.account_safe_top {
 				height: 150px;
 				width:100%;

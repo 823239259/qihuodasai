@@ -148,10 +148,13 @@ pro.getDate=function(d,time){
     }
     var d1 = year + "-"+ month + "-" + day + " " + hour + ":" + minu + ":" + sec;
     var d2 = year + "-"+ month + "-" + day;
+    var d3 = hour+":"+minu+":"+sec;
     if(d == "y-m-d"){
         return d2;
     }else if(d == "y-m-d h:i:s"){
         return d1;
+    }else if(d == "h:i:s"){
+    	return d3;
     }
 }
 export default pro

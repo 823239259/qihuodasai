@@ -52,8 +52,8 @@
 								<td v-else>-</td>
 								<td>{{item.traderTotal}}元</td>
 								<td>{{item.lineLoss}}美元</td>
-								<td>{{item.appTime | getTime}}</td>
-								<td v-if="item.stateTypeStr == '已完结'">{{item.endTime | getTime}}</td>
+								<td>{{item.appTime | getTime}}</br>{{item.appTime | getTimeTwo}}</td>
+								<td v-if="item.stateTypeStr == '已完结'">{{item.endTime | getTime}}</br>{{item.appTime | getTimeTwo}}</td>
 								<td v-else="item.stateTypeStr != '已完结'">-</td>
 								<td v-if="item.endAmount!=''">{{item.endAmount}}</td>
 								<td v-else="item.endAmount == ''">-</td>
@@ -104,7 +104,10 @@
 		},
 		filters:{
 			getTime: function(e){
-				return pro.getDate('y-m-d h:i:s',e*1000);
+				return pro.getDate('y-m-d',e*1000);
+			},
+			getTimeTwo:function(e){
+				return pro.getDate('h:i:s',e*1000);
 			}
 		},
 		methods:{
@@ -307,6 +310,20 @@
 			}
 		},
 		mounted:function(){
+			//初始化高度
+			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+			var _h = h - 80 - 47;
+			var contH = $("#account_openDetail").height();
+			if(contH > _h){
+				$("#account_openDetail").height(_h);
+			}
+			$(window).resize(function(){
+				var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+				var _h = h - 80 - 47;
+				if(contH > _h){
+					$("#account_openDetail").height(_h);
+				}
+			});
 			//获取初始开户记录
 			this.getData('',this.getNowDate(),this.getNowFormatDate(),'');
 			//调用日历插件
@@ -316,16 +333,18 @@
 			var time = pro.getDate("y-m-d", date.getTime()).split(' ')[0];
 			this.startTime = time;
 			this.endTime = time;
-		},
+		}
 	}
 </script>
 
 <style lang="scss" scoped type="text/css">
 @import "../../../assets/css/common.scss";
 	#account_openDetail{
+			overflow-y: auto;
+			float: left;
 			width: 100%;
 			.account_openDetail_top {
-				/*height: 110px;*/
+				height:110px;
 				background-color: $blue;
 				li {
 					padding: 0 10px;
@@ -377,6 +396,7 @@
 				}
 			}
 			.account_openDetail_center{
+				height: 500px;
 				background-color: $blue;
 				thead tr{
 					height: 30px;
@@ -412,6 +432,7 @@
 				}
 			}
 			.account_openDetail_btm{
+				height: 40px;
 				p {
 					width: 100%;
 					height: 40px;
