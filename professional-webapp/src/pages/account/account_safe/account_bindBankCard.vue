@@ -53,17 +53,19 @@
 				this.current1 = index
 			},
 			//select事件
-			chooseChandle:function(e){
+			chooseChandle:function(a){
 				var index = $("#manage option:selected").val();
 				switch (index){
 					case "2":
-						this.setDeaultBank(e);
+						this.setDeaultBank(a);
 						break;
 					case "3":
 						this.$router.push({path:'/account_editBankCard'});
 						break;
 					case "4":
-						this.delBankCard(e);
+					console.log(2222222222222)
+					console.log(a);
+						this.delBankCard(a);
 						break;
 					default:
 						break;
@@ -74,12 +76,13 @@
 				this.$router.push({path:'/safe_addBankCard'})
 			},
 			//删除银行卡
-			delBankCard:function(e){
+			delBankCard:function(a){
 				var headers = {
 					token : JSON.parse(localStorage.user).token,
 					secret : JSON.parse(localStorage.user).secret
 				}
-				console.log(1111111111111)
+				console.log(1111111111111);
+				console.log(a);
 				layer.open({
 					title:"删除银行卡",
 				    type: 1,
@@ -89,13 +92,14 @@
 				    content: '删除银行卡将无法提现到该银行卡中，确认删除？',
 				    btn:['确认','取消'],
 				    btn1:function(){
-						pro.fetch("post",'/user/withdraw/del_bank',{bankId:this.bankId},headers).then((res)=>{
+						pro.fetch("post",'/user/withdraw/del_bank',{bankId:a},headers).then((res)=>{
 							if(res.success == true){
 								if(res.code == 1){
-									layer.msg('删除成功',{time:1000});
+									layer.msg('删除成功',{time:2000});
 									//重新拉取已绑定银行卡
 									this.bindBankList = [];
 									this.getBindBankList();
+									layer.closeAll();
 								}
 							}
 						}).catch((err)=>{
@@ -123,7 +127,7 @@
 								layer.msg("网络不给力，请稍后再试",{time:1000})
 							}
 						})
-					},
+					}.bind(this),
 					btn2:function(){
 						this.$router.push({path:"/safe_bindBankCard"});
 					}.bind(this)
@@ -181,8 +185,6 @@
 					token : JSON.parse(localStorage.user).token,
 					secret : JSON.parse(localStorage.user).secret
 				}).then((res)=>{
-					console.log(111111111);
-					console.log(res)
 					var data = res.data 
 					if(res.success == true){
 						if(res.code == 1){
@@ -192,8 +194,6 @@
 						}
 					}
 				}).catch((err)=>{
-					console.log(222222222);
-					console.log(err)
 					if(err.data.success == false){
 						layer.msg("获取用户信息失败，请重试",{time:2000});
 					}else{
