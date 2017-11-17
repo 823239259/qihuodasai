@@ -20,12 +20,17 @@
 					<span>尾号{{k.card.substr(-4,4)}}</span>
 					<label  v-if="k.default !=true"></label>
 					<label  v-else="k.default==true">默认</label>
-					<select id="manage" @change="chooseChandle(k.bankId)">
-						<option value="1">管理</option>
-						<option value="2" v-if="k.default !=true">设为默认</option>
-						<option value="2" v-else="k.default==true"></option>
-						<option value="3">编辑</option>
-						<option value="4">删除</option>
+					<select id="manage" v-model="currentIndex"  v-if="k.default !=true">
+						<option value="">管理</option>
+						<template v-for="y in chooseList" >
+							<option :value="y.text">{{y.text}}</option>
+						</template>
+					</select>
+					<select id="manage" v-model="currentIndex"  v-else="k.default == true">
+						<option value="">管理</option>
+						<template v-for="y in chooseList1" >
+							<option :value="y.text">{{y.text}}</option>
+						</template>
 					</select>
 				</li>
 			</ul>
@@ -46,7 +51,15 @@
 				bindBankList : [],
 				bankId:'',
 				current1:0,
+				currentIndex:'',
+				chooseList:[{text:"设为默认"},{text:"编辑"},{text:"删除"}],
+				chooseList1:[{text:"编辑"},{text:"删除"}]
 			}
+		},
+		watch:{
+			currentIndex:function(e){
+				console.log(e)
+			}.bind(this)
 		},
 		methods:{
 			chooseBank:function(index){
@@ -55,6 +68,7 @@
 			//select事件
 			chooseChandle:function(a){
 				var index = $("#manage option:selected").val();
+				console.log(index);
 				switch (index){
 					case "2":
 						this.setDeaultBank(a);
@@ -63,8 +77,6 @@
 						this.$router.push({path:'/account_editBankCard'});
 						break;
 					case "4":
-					console.log(2222222222222)
-					console.log(a);
 						this.delBankCard(a);
 						break;
 					default:
@@ -81,8 +93,6 @@
 					token : JSON.parse(localStorage.user).token,
 					secret : JSON.parse(localStorage.user).secret
 				}
-				console.log(1111111111111);
-				console.log(a);
 				layer.open({
 					title:"删除银行卡",
 				    type: 1,
@@ -147,7 +157,7 @@
 				    shadeClose: true, 
 				    content: '确认将该银行卡设为默认提现银行卡？',
 				    btn:['确认','取消'],
-				    btn1:function(e){
+				    btn1:function(){
 				    	pro.fetch("post",'/user/withdraw/set_default_bank',{bankId:e},headers).then((res)=>{
 							if(res.success == true){
 								if(res.code == 1){
@@ -155,6 +165,7 @@
 									//重新拉取选项卡
 									this.bindBankList = [];
 									this.getBindBankList();
+									layer.closeAll();
 								}
 							}
 						}).catch((err)=>{
@@ -172,7 +183,7 @@
 							}
 							layer.msg('网络不给力，请稍后再试',{time:1000})
 						})
-				    },
+				    }.bind(this),
 				    btn2:function(){
 				    	this.$router.push({path:"/safe_bindBankCard"});
 				    }.bind(this)
