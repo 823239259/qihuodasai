@@ -18,9 +18,9 @@
 				<li>
 					（累计免费提现金额：<i class="yel">{{operateMoney}}</i>）元
 				</li>
-				<li v-on:click="toWithRord">
+				<!--<li v-on:click="toWithRord">
 					提现记录
-				</li>
+				</li>-->
 				<li v-on:click="toAddBankCard">
 					添加银行卡
 				</li>
