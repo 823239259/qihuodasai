@@ -44,7 +44,6 @@
 			</div>
 		</div>
 		<p class="p_left">资金明细</p>
-		<div class="account_money"></div>
 		<div class="survey_functionChoose">
 			<div class="survey_functionChoose_top">
 				<p id="color_dea">收入<span class="white">{{incomeNum}}</span>笔，共<i class="color_yellow">{{incomeMoney | fixNumTwo}}</i>元 支出<span class="white">{{outlayNum}}</span>笔，共<i  class="color_yellow">{{outlayMoney | fixNumTwo}}</i>元  </p>
@@ -130,13 +129,13 @@
 					</tr>-->
 				</tbody>
 			</table>
-			 <div class="pager">
+		</div>
+		<div class="pager">
 			    <button class="btn_span"  @click="prePage">上一页</button>
 			    <span  @click="toIndexPage" v-for="(n,index) in pageCount" :class="{active:current1 == index}">{{n}}</span>
 			    <button class="btn_span"  @click="nextPage">下一页</button>
 			  </div>
-			<p class="p_center">投资有风险，入市需谨慎</p>
-		</div>
+		<p class="p_center">投资有风险，入市需谨慎</p>
 	</div>
 </template>
 
@@ -460,7 +459,6 @@
 			//初始化高度
 			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 			var _h = h - 80 - 47;
-			var contH = $("#account_survey").height();
 			if(contH > _h){
 				$("#account_survey").height(_h);
 			}
@@ -507,6 +505,8 @@
 			text-indent: 5px;
 		}
 		.p_center {
+			width: 100%;
+			float: left;
 			text-align: center;
 			height: 40px;
 			line-height: 40px;
@@ -620,9 +620,6 @@
 			margin-left: 5px;
 			color: $yellow;
 		}
-		.account_money {
-			width: 100%;
-		}
 		
 		#color_blue {
 					color: $lightblue;
@@ -661,13 +658,18 @@
 		.surveyMoney {
 			padding-left: 20px;
 		}
-		.moneyDetail_list {
-			height: 300px;
-			overflow-y: scroll;
-		}
+		/*.moneyDetail_list {*/
+			/*max-height: 250px;*/
+			/*overflow-y: scroll;*/
+			/*overflow-y: scroll;*/
+		/*}*/
 		/*分页*/
 		.pager {
-			float: right;
+			width: 100%;
+			float: left;
+			height: 40px;
+			line-height: 40px;
+			text-align: right;
 			span{
 				margin: 0 10px;
 			}

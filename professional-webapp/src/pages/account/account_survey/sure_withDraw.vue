@@ -38,7 +38,6 @@
 				bankName:'',
 				username:'',
 				bankCrad:'',
-				pwdReg:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,18}$/,
 				bankCardShow:''
 			}
 		},
@@ -52,6 +51,7 @@
 			},
 			//提现
 			withDraw_money:function(){
+				var pwdReg = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,18}$/;
 				var token = JSON.parse(localStorage.user).token;
 				var secret = JSON.parse(localStorage.user).secret;
 				var headers = {
@@ -66,7 +66,7 @@
 				}
 				if(this.withdrawPwd==''){
 					layer.msg("请输入提现密码");
-				}else if(this.pwdReg(this.withdrawPwd)==false){
+				}else if(pwdReg.test(this.withdrawPwd)==false){
 					this.withdrawPwd = '';
 					layer.msg("密码格式输入有误，请重试",{time:2000});
 				}else {

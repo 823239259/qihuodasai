@@ -206,7 +206,6 @@
 			},
 			//去确认
 			toWith_draw:function(){
-				console.log(this.bankid);
 				if(this.withDrawMoney<0){
 					layer.msg("提现金额不能为负数");
 				}else if(this.withDrawMoney == 0){
@@ -233,6 +232,7 @@
 								this.showUnboundCard = false;
 								this.showBoundCard = true;
 								this.bandCardList = res.data;
+								this.bankid = res.data[0].bankId
 							}
 						}
 					}
