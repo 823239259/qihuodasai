@@ -163,9 +163,12 @@
 				}
 			},
 			userName: function(n, o){
-				if(n){
+				if(n != ''){
 					this.show_tologin = false;
 					this.show_login = true;
+				}else{
+					this.show_tologin = true;
+					this.show_login = false;
 				}
 			}
 		},
@@ -286,9 +289,10 @@
 				this.isShow_exit = true
 			},
 			confirm: function(){
-				localStorage.user = '';
-				this.$router.push({path: '/index'});
-				this.$store.state.account.isRefresh = 1;
+				localStorage.removeItem('user');
+				this.$store.state.account.userName = '';
+				this.$router.push({path: '/'});
+//				this.$store.state.account.isRefresh = 1;
 				this.$store.state.account.currentNav = 0;
 				this.isShow_exit = false
 			},
