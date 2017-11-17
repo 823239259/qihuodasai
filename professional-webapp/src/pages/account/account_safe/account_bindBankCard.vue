@@ -20,11 +20,11 @@
 					<span>尾号{{k.card.substr(-4,4)}}</span>
 					<label  v-if="k.default !=true"></label>
 					<label  v-else="k.default==true">默认</label>
-					<em class="fr" @click="showTools">管理</em>
+					<em class="fr" @click="showTools(index)">管理</em>
 					<div class="hide_tools">
-						<span @click="setDefault">设为默认</span>
-						<span>编辑</span>
-						<span>删除</span>
+						<span @click="setDeaultBank(k.bankId)">设为默认</span>
+						<span @click="toAddBankCard">编辑</span>
+						<span @click="delBankCard(k.bankId)">删除</span>
 					</div>
 				</li>
 			</ul>
@@ -53,24 +53,21 @@
 			}
 		},
 		methods:{
-			showTools: function(){
+			showTools: function(a){
+					console.log(a)
 //					this.showToolsDiv=index;
-					if($(".hide_tools").css("display")=="none"){
-						$(".hide_tools").show();
+					if($(".hide_tools").eq(a).css("display")=="none"){
+						$(".hide_tools").eq(a).show();
 					}else{
-						$(".hide_tools").hide();
+						$(".hide_tools").eq(a).hide();
 					}
-			},
-			setDefault: function(e){
-				$(e.currentTarget).parent('.hide_tools').hide();
-				$(e.currentTarget).text('取消默认');
 			},
 			chooseBank:function(index){
 				this.current1 = index
 			},
 			//添加银行卡
 			toAddBankCard:function(){
-				this.$router.push({path:'/safe_addBankCard'})
+				this.$router.push({path:'/safe_addBankCard'});
 			},
 			//删除银行卡
 			delBankCard:function(a){
@@ -184,6 +181,8 @@
 					var data = res.data 
 					if(res.success == true){
 						if(res.code == 1){
+							console.log(111111111111111)
+							console.log(this.bindBankList);
 							data.forEach(function(o,i){
 								this.bindBankList.push(o);
 							}.bind(this));
