@@ -83,6 +83,12 @@
 					//更新挂单列表数据
 					this.operateData(n);
 				}
+			},
+			orderListCont: function(n, o){
+				layer.closeAll();
+				this.showDialog = false;
+				this.currentOrderID = '';
+				this.selectedNum = -1;
 			}
 		},
 		methods: {
@@ -219,9 +225,6 @@
 							this.showDialog = false;
 						}.bind(this),
 						btn2: function(index){
-							this.showDialog = false;
-						}.bind(this),
-						cancel: function(){
 							this.showDialog = false;
 						}.bind(this)
 					});

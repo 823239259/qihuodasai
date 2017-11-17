@@ -1174,6 +1174,9 @@ export default new Vuex.Store({
 						setTimeout(function(){
 							context.state.market.cancelStatus = false;
 						}, 1000);
+						setTimeout(function(){
+							context.state.market.buyStatus = false;
+						}, 1000);
 					}
 					break;
 				default:
