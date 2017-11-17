@@ -580,6 +580,7 @@
 				}
 			},
 			listClickEvent: function(i, commodityNo, mainContract, exchangeNo){
+				console.log(this.selected);
 				this.Parameters.forEach(function(o, i){
 					if(commodityNo == o.CommodityNo){
 						this.$store.state.market.currentdetail = o;
@@ -599,33 +600,46 @@
 					this.currentQuoteAll = i;
 					this.currentQuote = -1;
 				}
-				var data = {
-					Method: "QryHistory",
-					Parameters:{
-						ExchangeNo: exchangeNo,
-						CommodityNo: commodityNo,
-						ContractNo: mainContract,
-						HisQuoteType: 0,
-						BeginTime: "",
-						EndTime: "",
-						Count: 0
-					}
-				};
-				this.quoteSocket.send(JSON.stringify(data));
-				this.$store.state.market.selectTime = 1440;
-				var datas = {
-					Method: "QryHistory",
-					Parameters:{
-						ExchangeNo: exchangeNo,
-						CommodityNo: commodityNo,
-						ContractNo: mainContract,
-						HisQuoteType: 1440,
-						BeginTime: "",
-						EndTime: "",
-						Count: 0
-					}
-				};
-				this.quoteSocket.send(JSON.stringify(datas));
+				if(this.selected == 1){
+					var data = {
+						Method: "QryHistory",
+						Parameters:{
+							ExchangeNo: exchangeNo,
+							CommodityNo: commodityNo,
+							ContractNo: mainContract,
+							HisQuoteType: 0,
+							BeginTime: "",
+							EndTime: "",
+							Count: 0
+						}
+					};
+					this.quoteSocket.send(JSON.stringify(data));
+				}else if(this.selected == 2){
+					this.$store.state.market.selectTime = 1;
+				}else if(this.selected == 3){
+					this.$store.state.market.selectTime = 5;
+				}else if(this.selected == 4){
+					this.$store.state.market.selectTime = 15;
+				}else if(this.selected == 5){
+					this.$store.state.market.selectTime = 30;
+				}else if(this.selected == 6){
+					this.$store.state.market.selectTime = 1440;
+				}
+				if(this.selected >= 2){
+					var datas = {
+						Method: "QryHistory",
+						Parameters:{
+							ExchangeNo: exchangeNo,
+							CommodityNo: commodityNo,
+							ContractNo: mainContract,
+							HisQuoteType: this.$store.state.market.selectTime,
+							BeginTime: "",
+							EndTime: "",
+							Count: 0
+						}
+					};
+					this.quoteSocket.send(JSON.stringify(datas));
+				}
 				//是否自选
 				this.isSelectedOrder();
 			},
