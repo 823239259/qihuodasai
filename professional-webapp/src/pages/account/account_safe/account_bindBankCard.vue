@@ -20,8 +20,8 @@
 					<span>尾号{{k.card.substr(-4,4)}}</span>
 					<label  v-if="k.default !=true"></label>
 					<label  v-else="k.default==true">默认</label>
-					<em class="fr" @click="showTools">管理</em>
-					<div class="hide_tools">
+					<em class="fr" @click="showTools(index)">管理</em>
+					<div class="hide_tools" v-show="showToolsDiv===index">
 						<span @click="setDefault">设为默认</span>
 						<span>编辑</span>
 						<span>删除</span>
@@ -47,17 +47,14 @@
 				current1:0,
 				currentIndex: '管理',
 				chooseList:[{text:"设为默认"},{text:"编辑"},{text:"删除"}],
-				chooseList1:[{text:"编辑"},{text:"删除"}]
+				chooseList1:[{text:"编辑"},{text:"删除"}],
+				showToolsDiv:-1,
+				show:false
 			}
 		},
-//		watch:{
-//			currentIndex:function(n, o){
-//				console.log(n);
-//			}
-//		},
 		methods:{
-			showTools: function(e){
-				$(e.currentTarget).next('.hide_tools').show();
+			showTools: function(index){
+					this.showToolsDiv=index;
 			},
 			setDefault: function(e){
 				$(e.currentTarget).parent('.hide_tools').hide();
@@ -252,7 +249,6 @@
 					cursor: pointer;
 				}
 				.hide_tools{
-					display: none;
 					position: absolute;
 					top: 40px;
 					right: 0;
