@@ -20,18 +20,12 @@
 					<span>尾号{{k.card.substr(-4,4)}}</span>
 					<label  v-if="k.default !=true"></label>
 					<label  v-else="k.default==true">默认</label>
-					<select id="manage" v-model="currentIndex"  v-if="k.default !=true">
-						<option value="">管理</option>
-						<template v-for="y in chooseList" >
-							<option :value="y.text">{{y.text}}</option>
-						</template>
-					</select>
-					<select id="manage" v-model="currentIndex"  v-else="k.default == true">
-						<option value="">管理</option>
-						<template v-for="y in chooseList1" >
-							<option :value="y.text">{{y.text}}</option>
-						</template>
-					</select>
+					<em class="fr" @click="showTools">管理</em>
+					<div class="hide_tools">
+						<span @click="setDefault">设为默认</span>
+						<span>编辑</span>
+						<span>删除</span>
+					</div>
 				</li>
 			</ul>
 			<button class="btn yellow" v-on:click="toAddBankCard">添加银行卡</button>
@@ -51,37 +45,26 @@
 				bindBankList : [],
 				bankId:'',
 				current1:0,
-				currentIndex:'',
+				currentIndex: '管理',
 				chooseList:[{text:"设为默认"},{text:"编辑"},{text:"删除"}],
 				chooseList1:[{text:"编辑"},{text:"删除"}]
 			}
 		},
-		watch:{
-			currentIndex:function(e){
-				console.log(e)
-			}.bind(this)
-		},
+//		watch:{
+//			currentIndex:function(n, o){
+//				console.log(n);
+//			}
+//		},
 		methods:{
+			showTools: function(e){
+				$(e.currentTarget).next('.hide_tools').show();
+			},
+			setDefault: function(e){
+				$(e.currentTarget).parent('.hide_tools').hide();
+				$(e.currentTarget).text('取消默认');
+			},
 			chooseBank:function(index){
 				this.current1 = index
-			},
-			//select事件
-			chooseChandle:function(a){
-				var index = $("#manage option:selected").val();
-				console.log(index);
-				switch (index){
-					case "2":
-						this.setDeaultBank(a);
-						break;
-					case "3":
-						this.$router.push({path:'/account_editBankCard'});
-						break;
-					case "4":
-						this.delBankCard(a);
-						break;
-					default:
-						break;
-				}
 			},
 			//添加银行卡
 			toAddBankCard:function(){
@@ -263,15 +246,44 @@
 				line-height: 40px;
 				border: 1px solid #7a7f99;
 				margin-bottom: 30px;
-			}
-			span{
-					float: left;
-					margin-left: 10px;
-					&:nth-child(2){
-						color: white;
-						font-size: $fs16;
+				position: relative;
+				em{
+					margin-right: 10px;
+					cursor: pointer;
+				}
+				.hide_tools{
+					display: none;
+					position: absolute;
+					top: 40px;
+					right: 0;
+					z-index: 2;
+					width: 80px;
+					text-align: center;
+					background: $black;
+					border: 1px solid $bottom_color;
+					span{
+						display: block;
+						width: 100%;
+						height: 30px;
+						line-height: 30px;
+						color: $white;
+						font-size: $fs14;
+						margin: 0;
+						cursor: pointer;
 					}
 				}
+			}
+			span{
+				float: left;
+				margin-left: 10px;
+				&:nth-child(2){
+					color: white;
+					font-size: $fs16;
+				}
+				&:last-child{
+					float: right;
+				}
+			}
 			label{
 				float: left;
 				margin-left: 10px;
