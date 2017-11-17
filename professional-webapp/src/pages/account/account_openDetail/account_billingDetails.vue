@@ -5,7 +5,8 @@
 			<p class="title">终结方案<i class="ifont ifont_x" v-on:click="close">&#xe624;</i></p>
 			<div class="details">
 				<p>结算金额明细</p>
-				<p><span>{{endAmount | fixNumTwo}}</span>元（结算金额）<span>={{traderBond | fixNumTwo}}元</span>（操盘保证金）+<span>{{appendTraderBond | fixNumTwo}}元</span>（追加保证金）<span>+{{tradeSell | fixNumTwo}}元</span>（交易盈亏）-<span>{{tranFeesTotal | fixNumTwo}}元</span>（手续费）</p>
+				<p v-if="tradeSell<0"><span>{{endAmount | fixNumTwo}}</span>元（结算金额）<span>={{traderBond | fixNumTwo}}元</span>（操盘保证金）+<span>{{appendTraderBond | fixNumTwo}}元</span>（追加保证金）<span >{{tradeSell | fixNumTwo}}元</span>（交易盈亏）-<span>{{tranFeesTotal | fixNumTwo}}元</span>（手续费）</p>
+				<p v-else="tradeSell !<0"><span>{{endAmount | fixNumTwo}}</span>元（结算金额）<span>={{traderBond | fixNumTwo}}元</span>（操盘保证金）+<span>{{appendTraderBond | fixNumTwo}}元</span>（追加保证金）<span >+{{tradeSell | fixNumTwo}}元</span>（交易盈亏）-<span>{{tranFeesTotal | fixNumTwo}}元</span>（手续费）</p>
 				<p><i>注意：</i>交易手续费= 合约手续费x交易手数</p>
 			</div>
 			<div class="handDetails">
