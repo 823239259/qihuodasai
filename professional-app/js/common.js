@@ -520,7 +520,7 @@ var tzdr = {
 	operation: function() {
 		document.getElementById("quickMode").addEventListener("tap", function() {
 			if(!mui.cacheUser.isLogin()){
-				mui.confirm("您还未登录平台账号，确认登录？","登录提示",["取消","确认"],function(e){
+				mui.confirm("您还未登录平台，请您先登录","登录提示",["否","是"],function(e){
 					if (e.index == 1) {
 		                        mui.openWindow({
 		                        	url:"../login/login.html",
