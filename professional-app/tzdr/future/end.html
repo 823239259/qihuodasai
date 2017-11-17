@@ -107,7 +107,11 @@
 					},function(result){
 						document.getElementById('end_btn').removeAttribute('disabled');  //恢复按钮为非禁用
 						mui.toast("申请成功，系统会尽快处理！");
-						mui.app_back(win.businessPageId,true);   //放回businessPageId页面，并且刷新该页面信息
+//						mui.app_back(win.businessPageId,true);   //放回businessPageId页面，并且刷新该页面信息
+						mui.openWindow({
+							url:"openingRecord.html",
+							id:"openingRecord.html"
+						})
 						return;
 					},function(result){
 						document.getElementById('end_btn').removeAttribute('disabled');  //恢复按钮为非禁用
@@ -118,7 +122,7 @@
 							mui.toast("已申请终结，不能重复申请！");
 							return;
 						}else if(result.code==4){
-							mui.toast("该方案为非操盘中，无法申请终结！");
+							mui.toast("您的方案已结算，无法再次结算。！");
 							return;
 						}else if(result.code==5){
 							mui.toast("未找到该折扣劵劵，申请终结失败！");
