@@ -448,11 +448,12 @@
 			to_openAccount_2 :function(){
 				this.isshow_openAccount_2 = true,
 				this.isshow_openAccount_1 = false,
-				this.showpage=false
+				this.showpage = false
 			},
 			//选择不同价格
 			chose:function(e){
 				var index = $(e.currentTarget).index();
+				this.current1 = index;
 				//截取价格并显示
 				var show_price=$(e.currentTarget).html().substring(1);
 				this.show_price = show_price;
