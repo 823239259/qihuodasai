@@ -71,6 +71,7 @@
 			positionListCont: function(n, o){
 				if(n.length == 0){
 					this.currentOrderID = '';
+					this.selectedNum = -1;
 				}
 			}
 		},
