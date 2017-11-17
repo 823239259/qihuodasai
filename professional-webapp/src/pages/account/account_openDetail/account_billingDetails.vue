@@ -198,10 +198,10 @@
 								this.handList.恒指期货 = data.hsiTranActualLever
 							}
 							if(data.mdtranActualLever!=0){
-								this.handList.迷你道值 = data.mdtranActualLever
+								this.handList.迷你道指 = data.mdtranActualLever
 							}
 							if(data.mntranActualLever!=0){
-								this.handList.迷你纳值 = data.mntranActualLever
+								this.handList.迷你纳指 = data.mntranActualLever
 							}
 							if(data.mbtranActualLever!=0){
 								this.handList.迷你标普 = data.mbtranActualLever
