@@ -135,10 +135,10 @@
 			</table>
 		</div>
 		<div class="pager">
-			    <button class="btn_span"  @click="prePage">上一页</button>
-			    <span  @click="toIndexPage" v-for="(n,index) in pageCount" :class="{active:current1 == index}">{{n}}</span>
-			    <button class="btn_span"  @click="nextPage">下一页</button>
-			  </div>
+		    <button class="btn_span"  @click="prePage">上一页</button>
+		    <span  @click="toIndexPage" v-for="(n,index) in pageCount" :class="{active:current1 == index}">{{n}}</span>
+		    <button class="btn_span"  @click="nextPage">下一页</button>
+		  </div>
 		<p class="p_center">投资有风险，入市需谨慎</p>
 	</div>
 </template>
@@ -493,10 +493,10 @@
 @import "../../../assets/css/common.scss";
 	#account_survey {
 		/*display: none;*/
-		background-color: $blue;
 		width: 100%;
 		overflow-y: auto;
 		float: left;
+		height: 1050px;
 	}
 		li {
 				width: 60px;
@@ -510,18 +510,22 @@
 			text-indent: 5px;
 		}
 		.p_center {
+			margin-top: 5px;
 			width: 100%;
 			float: left;
 			text-align: center;
 			height: 40px;
 			line-height: 40px;
+			background-color: $bottom_color;
 		}
 		.survey_functionChoose_top {
+			background-color: $blue;
 			height: 60px;
 			border-bottom: 1px solid $bottom_color;
 			line-height: 60px;
 		}
 		.survey_functionChoose_center {
+			background-color: $blue;
 			height: 70px;
 			padding-top: 30px;
 			border-bottom: 1px solid $bottom_color;
@@ -542,6 +546,7 @@
 			margin-left: 45px;
 		}
 		.survey_functionChoose_btm {
+			background-color: $blue;
 			font-size: $fs12;
 			height: 45px;
 			line-height: 45px;
@@ -550,7 +555,11 @@
 				float: left;
 			}
 		}
+		.moneyDetail_list{
+			/*height: 400px;*/
+		}
 		.account_info {
+			background-color: $blue;
 			width: 100%;
 			height: 240px;		
 		}
@@ -693,6 +702,7 @@
 		}
 		/*分页*/
 		.pager {
+			background-color: $blue;
 			width: 100%;
 			float: left;
 			height: 40px;
