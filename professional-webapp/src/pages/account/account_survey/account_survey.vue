@@ -20,27 +20,31 @@
 				</ul>
 			</div> 
 			<div class="info_right">
-				<ul>
-					<li>
-						<img src="../../../assets/images/icon_moneyuse.png" alt="可用资金" />
-						<div>
-							<p>可用资金<i class="ifont question" v-on:mouseenter="showHide" v-on:mouseleave="hide">&#xe66d;</i></p>
-							<span class="surveyMoney">￥{{balance}}</span>
-						</div>
-					</li>
-					<span id="showMoney" v-if="showmoney" >您可提现和开户的金额</span>
-					<li>
-						<img src="../../../assets/images/icon_money.png" alt="冻结资金" />
-						<div>
-							<p>冻结资金<i class="ifont question"  v-on:mouseenter="showHide1" v-on:mouseleave="hide1">&#xe66d;</i></p>
-							<span class="surveyMoney">￥{{frzBal}}</span>
-						</div>
-					</li>
-					<span id="showmoney1" v-if="showMoneyNo">冻结资金（您提现时被冻结的金额）</span>
-					<li>
-						<p id="color_blue">注：账户总资产=可用资金+冻结资金</p>
-					</li>
-				</ul>
+				<div class="info_right_top">
+					<div class="right_left">
+						<ul>
+							<li><img src="../../../assets/images/icon_moneyuse.png" alt="可用资金" /></li>
+							<li><img src="../../../assets/images/icon_money.png" alt="冻结资金" /></li>
+						</ul>
+					</div>
+					<div class="right_right">
+						<ul>
+							<li>
+								<span>可用资金</span><i class="ifont question" v-on:mouseenter="showHide" v-on:mouseleave="hide">&#xe66d;</i>
+								<p class="surveyMoney">￥{{balance}}</p>
+							</li>
+							<span class="showMoney" v-if="showmoney" >您可提现和开户的金额</span>
+							<li>
+								<span>冻结资金</span><i class="ifont question"  v-on:mouseenter="showHide1" v-on:mouseleave="hide1">&#xe66d;</i>
+								<p class="surveyMoney">￥{{frzBal}}</p>
+							</li>
+							<span class="showmoney1" v-if="showMoneyNo">冻结资金（您提现时被冻结的金额）</span>
+						</ul>
+					</div>
+				</div>
+				<div class="info_right_btm">
+					<p id="color_blue">注：账户总资产=可用资金+冻结资金</p>
+				</div>
 			</div>
 		</div>
 		<p class="p_left">资金明细</p>
@@ -551,6 +555,8 @@
 			height: 240px;		
 		}
 		.info_left {
+			height: 240px;
+			border-right: 1px solid $bottom_color;
 			width: 50%;
 			float: left;
 			li {
@@ -593,48 +599,77 @@
 			}
 		}
 		.info_right {
+			height: 240px;
 			width: 50%;
 			float: left;
-			li {
-				display: flex;
-				justify-content:center;
+			.info_right_top{
 				width: 100%;
-				margin-top: 30px;
-				height: 40px;
+				.right_left{
+					padding-right: 10px;
+					width: 50%;
+					float: left;
+					li{
+						padding-top: 20px;
+						height: 80px;
+						width: 100%;
+						text-align: right;
+						img{
+							display: inline;
+						}
+					}
+				}
+				.right_right{
+					position: relative;
+					width: 50%;
+					float: left;
+					li{
+						padding-top: 20px;
+						display: block;
+						width: 100%;
+						height: 80px;
+						.question{
+							font-size: 16px;
+							color: $yellow;
+						}
+						.color_yellow  {
+							color: $yellow;
+							margin: 0 5px;
+							font-weight: 700;
+						}
+						.surveyMoney{
+							color: white;
+							font-weight: 700;
+							font-size: 20px;
+						}
+					}
+					.showMoney{
+						font-size: $fs14;
+						color: $yellow;
+						position: absolute;
+						top: 20px;
+						left: 70px;
+					}
+					.showmoney1{
+						font-size: $fs14;
+						color: $yellow;
+						position: absolute;
+						top: 100px;
+						left: 70px;
+					}
+				}
 			}
-			p {
-				margin-left: 20px;
-				background-color: $blue;
-			}
-			img {
-				position: relative;
-				top: 6px;
-			}
-			span {
-				font-size: 18px;
-				font-weight: 500;
-				color: $white;
+			.info_right_btm{
+				padding-top: 10px;
+				width: 100%;
+				height: 80px;
+				float: left;
+				text-align: center;
 			}
 		}
-		.question {
-			font-size: 16px;
-			margin-left: 5px;
-			color: $yellow;
-		}
-		
 		#color_blue {
 					color: $lightblue;
 					background-color: $blue;
 				}
-		#color_dea {
-			/*background-color: $blue;*/
-			/*color: $lightblue;*/
-		}
-		.color_yellow  {
-			color: $yellow;
-			margin: 0 5px;
-			font-weight: 700;
-		}
 		.white {
 			color: $white;
 			margin: 0 5px;
@@ -656,14 +691,6 @@
 			color: $yellow;
 			font-weight: 500;
 		}
-		.surveyMoney {
-			padding-left: 20px;
-		}
-		/*.moneyDetail_list {*/
-			/*max-height: 250px;*/
-			/*overflow-y: scroll;*/
-			/*overflow-y: scroll;*/
-		/*}*/
 		/*分页*/
 		.pager {
 			width: 100%;
@@ -683,20 +710,6 @@
 		}
 		.active {
 		  color: $yellow;
-		}
-		#showMoney{
-			font-size: $fs14;
-			color: $yellow;
-			position: relative;
-			top: -36px;
-			left: 450px;
-		}
-		#showmoney1{
-			font-size: $fs14;
-			color: $yellow;
-			position: relative;
-			top: -36px;
-			left: 450px;
 		}
 		.time{
 			float: left;
