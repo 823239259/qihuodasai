@@ -21,8 +21,12 @@
 					<label  v-if="k.default !=true"></label>
 					<label  v-else="k.default==true">默认</label>
 					<em class="fr" @click="showTools(index)">管理</em>
-					<div class="hide_tools">
+					<div class="hide_tools" v-if="k.default!=true">
 						<span @click="setDeaultBank(k.bankId)">设为默认</span>
+						<span @click="toAddBankCard">编辑</span>
+						<span @click="delBankCard(k.bankId)">删除</span>
+					</div>
+					<div class="hide_tools" v-if="k.default==true">
 						<span @click="toAddBankCard">编辑</span>
 						<span @click="delBankCard(k.bankId)">删除</span>
 					</div>
@@ -44,18 +48,12 @@
 			return{
 				bindBankList : [],
 				bankId:'',
-				current1:0,
-				currentIndex: '管理',
-				chooseList:[{text:"设为默认"},{text:"编辑"},{text:"删除"}],
-				chooseList1:[{text:"编辑"},{text:"删除"}],
-//				showToolsDiv:-1,
-//				show:false
+				current1:0
 			}
 		},
 		methods:{
 			showTools: function(a){
 					console.log(a)
-//					this.showToolsDiv=index;
 					if($(".hide_tools").eq(a).css("display")=="none"){
 						$(".hide_tools").eq(a).show();
 					}else{

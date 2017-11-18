@@ -33,13 +33,23 @@
 					<span>尾号{{k.card.substr(-4,4)}}</span>
 					<label  v-if="k.default !=true"></label>
 					<label  v-else="k.default==true">默认</label>
-					<select id="manage" @change="chooseChandle(k.bankId)">
+					<!--<select id="manage" @change="chooseChandle(k.bankId)">
 						<option value="1">管理</option>
 						<option value="2" v-if="k.default !=true">设为默认</option>
 						<option value="2" v-else="k.default==true"></option>
 						<option value="3">删除</option>
 						<option value="4">编辑</option>
-					</select>
+					</select>-->
+					<em class="fr" @click="showTools(index)">管理</em>
+					<div class="hide_tools" v-if="k.default!=true">
+						<span @click="setDeaultBank(k.bankId)">设为默认</span>
+						<span @click="toAddBankCard">编辑</span>
+						<span @click="delBankCard(k.bankId)">删除</span>
+					</div>
+					<div class="hide_tools" v-if="k.default==true">
+						<span @click="toAddBankCard">编辑</span>
+						<span @click="delBankCard(k.bankId)">删除</span>
+					</div>
 				</li>
 			</ul>
 			<p class="writeIn">提现金额：<input type="text" v-model="withDrawMoney" v-on:input="changeRate"/>元<span>（收取 <i>{{rate}}</i>元提现手续费，实际到账<i>{{withDrawMoney-rate}}</i>元）</span></p>
@@ -84,28 +94,19 @@
 			}
 		},
 		methods:{
+			showTools: function(a){
+					console.log(a)
+					if($(".hide_tools").eq(a).css("display")=="none"){
+						$(".hide_tools").eq(a).show();
+					}else{
+						$(".hide_tools").eq(a).hide();
+					}
+			},
 			toWithRord:function(){
 				this.$router.push({path:'/account_survey'});
 			},
 			toAddBankCard:function(){
 				this.$router.push({path:'/safe_addBankCard'});
-			},
-			//select事件
-			chooseChandle:function(e){
-				var index = $("#manage option:selected").val();
-				switch (index){
-					case "2":
-						this.setDeaultBank(e);
-						break;
-					case "4":
-						this.$router.push({path:'/account_editBankCard'});
-						break;
-					case "3":
-						this.delBankCard(e);
-						break;
-					default:
-						break;
-				}
 			},
 			//删除银行卡
 			delBankCard:function(e){
@@ -122,13 +123,14 @@
 				    content: '删除银行卡将无法提现到该银行卡中，确认删除？',
 				    btn:['确认','取消'],
 				    btn1:function(){
-						pro.fetch("post",'/user/withdraw/del_bank',{bankId:this.bankId},headers).then((res)=>{
+						pro.fetch("post",'/user/withdraw/del_bank',{bankId:e},headers).then((res)=>{
 							if(res.success == true){
 								if(res.code == 1){
 									layer.msg('删除成功',{time:1000});
 									//重新拉取已绑定银行卡
 									this.bandCardList = [];
 									this.getBandCard();
+									layer.closeAll();
 								}
 							}
 						}).catch((err)=>{
@@ -156,7 +158,7 @@
 								layer.msg("网络不给力，请稍后再试",{time:1000})
 							}
 						})
-					},
+					}.bind(this),
 					btn2:function(){
 						this.$router.push({path:"/withDraw_bankcard"});
 					}.bind(this)
@@ -176,7 +178,7 @@
 				    shadeClose: true, 
 				    content: '确认将该银行卡设为默认提现银行卡？',
 				    btn:['确认','取消'],
-				    btn1:function(e){
+				    btn1:function(){
 				    	pro.fetch("post",'/user/withdraw/set_default_bank',{bankId:e},headers).then((res)=>{
 							if(res.success == true){
 								if(res.code == 1){
@@ -184,6 +186,7 @@
 									//重新拉取选项卡
 									this.bandCardList = [];
 									this.getBandCard();
+									layer.closeAll();
 								}
 							}
 						}).catch((err)=>{
@@ -201,7 +204,7 @@
 							}
 							layer.msg('网络不给力，请稍后再试',{time:1000})
 						})
-				    },
+				    }.bind(this),
 				    btn2:function(){
 				    	this.$router.push({path:"/safe_bindBankCard"});
 				    }.bind(this)
@@ -371,12 +374,38 @@
 			margin: auto;
 			margin-bottom: 10px;
 			border-radius: 5px;
+			position: relative;
 			span{
 				float: left;
 				margin-left: 10px;
 				&:nth-child(2){
 					color: white;
 					font-size: $fs16;
+				}
+			}
+			em{
+				margin-right: 10px;
+				cursor: pointer;
+			}
+			.hide_tools{
+				display: none;
+				position: absolute;
+				top: 40px;
+				right: 0;
+				z-index: 2;
+				width: 80px;
+				text-align: center;
+				background: $black;
+				border: 1px solid $bottom_color;
+				span{
+					display: block;
+					width: 100%;
+					height: 30px;
+					line-height: 30px;
+					color: $white;
+					font-size: $fs14;
+					margin: 0;
+					cursor: pointer;
 				}
 			}
 		}
@@ -410,12 +439,12 @@
 		}
 		.writeIn{
 			position: relative;
-			left: 2px;
+			left: 6px;
 			span{
 				color: $yellow;
 				i{
 					display: inline-block;
-					width: 50px;
+					width: 56px;
 					font-size: fs12;
 				}
 			}
