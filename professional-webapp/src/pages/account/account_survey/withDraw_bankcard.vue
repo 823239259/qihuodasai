@@ -1,62 +1,63 @@
 <template>
 	<div id="withDraw_bankcard">
-		<div class="withDraw_unboundBankCard" v-if="showUnboundCard">
+		<div class="withDraw_unboundBankCard" v-show="showUnboundCard">
 			<button class="btn yellow" v-on:click="toAddBankCard">绑定银行卡</button>
 			<p>（您还为绑定银行卡，暂不能进行提现操作）</p>	
 		</div>
-		<div class="account_withDraw_top" v-if="showBoundCard">
+		<div class="account_withDraw_top" v-show="showBoundCard">
 			<ul class="title">
-				<li>
-					提取余额到银行卡
-				</li>
-				<li>
-					余额：
-				</li>
-				<li class="yel">
-					{{accountMoney}}元
-				</li>
-				<li>
-					（累计免费提现金额：<i class="yel">{{operateMoney}}</i>）元
-				</li>
-				<!--<li v-on:click="toWithRord">
-					提现记录
-				</li>-->
-				<li v-on:click="toAddBankCard">
-					添加银行卡
-				</li>
+				<li>提取余额到银行卡</li>
+				<li>余额:</li>
+				<li class="yel">{{accountMoney}}元</li>
+				<li>（累计免费提现金额：<i class="yel">{{operateMoney}}</i>）元</li>
+				<!--<li v-on:click="toWithRord">提现记录</li>-->
+				<li v-on:click="toAddBankCard">添加银行卡</li>
 			</ul>
-			<ul class="banklist">
-				<li  v-for="(k,index) in bandCardList" class="chooseNo" v-on:click="chooseBankCard(k.bankId,index)" :class="{chooseIn:current1 == index}">
-					<i class="ifont" v-if="k.default ==true">&#xe698;</i>
-					<i class="ifont" v-else="k.default!=true">&#xe626;</i>
-					<span>{{k.bankName}}</span>
-					<span>尾号{{k.card.substr(-4,4)}}</span>
-					<label  v-if="k.default !=true"></label>
-					<label  v-else="k.default==true">默认</label>
-					<!--<select id="manage" @change="chooseChandle(k.bankId)">
-						<option value="1">管理</option>
-						<option value="2" v-if="k.default !=true">设为默认</option>
-						<option value="2" v-else="k.default==true"></option>
-						<option value="3">删除</option>
-						<option value="4">编辑</option>
-					</select>-->
-					<em class="fr" @click="showTools(index)">管理</em>
-					<div class="hide_tools" v-if="k.default!=true">
-						<span @click="setDeaultBank(k.bankId)">设为默认</span>
-						<span @click="toAddBankCard">编辑</span>
-						<span @click="delBankCard(k.bankId)">删除</span>
-					</div>
-					<div class="hide_tools" v-if="k.default==true">
-						<span @click="toAddBankCard">编辑</span>
-						<span @click="delBankCard(k.bankId)">删除</span>
-					</div>
-				</li>
-			</ul>
-			<p class="writeIn">提现金额：<input type="text" v-model="withDrawMoney" v-on:input="changeRate"/>元<span>（收取 <i>{{rate}}</i>元提现手续费，实际到账<i>{{withDrawMoney-rate}}</i>元）</span></p>
-			<button class="btn blue" v-on:click="toWith_draw">下一步</button>
+			<div class="withDraw_top">
+				<div class="withDraw_top_left">
+					<ul>
+						<li>选择银行卡：</li>
+					</ul>
+				</div>
+				<div class="withDraw_top_right">
+					<ul>
+						<li  v-for="(k,index) in bandCardList" class="chooseNo" v-on:click="chooseBankCard(k.bankId,index)" :class="{chooseIn:current1 == index}">
+							<i class="ifont" v-if="k.default ==true">&#xe698;</i>
+							<i class="ifont" v-else="k.default!=true">&#xe626;</i>
+							<span>{{k.bankName}}</span>
+							<span>尾号{{k.card.substr(-4,4)}}</span>
+							<label  v-if="k.default !=true"></label>
+							<label  v-else="k.default==true">默认</label>
+							<em class="fr" @click="showTools(index)">管理</em>
+							<div class="hide_tools" v-if="k.default!=true">
+								<span @click="setDeaultBank(k.bankId)">设为默认</span>
+								<span @click="toAddBankCard">编辑</span>
+								<span @click="delBankCard(k.bankId)">删除</span>
+							</div>
+							<div class="hide_tools" v-if="k.default==true">
+								<span @click="toAddBankCard">编辑</span>
+								<span @click="delBankCard(k.bankId)">删除</span>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="withDraw_center">
+				<div class="withDraw_center_left">
+					<ul>
+						<li>提现金额：</li>
+					</ul>
+				</div>
+				<div class="withDraw_center_right">
+					<ul>
+						<li><input type="text" v-model="withDrawMoney" v-on:input="changeRate"/>元<span>（收取 <i>{{rate}}</i>元提现手续费，实际到账<i>{{withDrawMoney-rate}}</i>元）</span></li>
+						<li><button class="btn blue" v-on:click="toWith_draw">下一步</button></li>
+					</ul>
+				</div>
+			</div>
 		</div>
 		<div class="account_withDraw_btm">
-			<ul>
+			<ul class="account_withDraw">
 				<li>相关提示</li>
 				<li>大额充值资金无法一次性提现出去怎么办？<p>答：建议使用充值退回功能。</p></li>
 				<li>最快：<span>10</span>分钟到账
@@ -329,29 +330,15 @@
 		width: 100%;
 	}
 	.account_withDraw_top {
-		background-color: $blue;
-		text-align: center;
 		.title{
-			margin-bottom: 20px;
 			background-color: $bottom_color;
 			height: 40px;
 			width:100%;
 			li{
+				margin-right: 5px;
+				float: left;
 				line-height: 40px;
-				&:nth-child(1){
-					float: left;
-				}
-				&:nth-child(2){
-					float: left;
-				}
-				&:nth-child(3){
-					float: left;
-				}
-				&:nth-child(4){
-					float: left;
-				}
 				&:nth-child(5){
-					
 					float: right;
 				}
 				&:nth-child(6){
@@ -360,165 +347,187 @@
 				}
 			}
 		}
-		.banklist{
-			.chooseIn {
-				border-color:$yellow;
-			}
-		}
-		.chooseNo{
-			margin-top: 10px;
-			line-height: 40px;
-			border: 1px solid #7a7f99;
-			width: 400px;
-			height: 40px;
-			margin: auto;
-			margin-bottom: 10px;
-			border-radius: 5px;
-			position: relative;
-			span{
-				float: left;
-				margin-left: 10px;
-				&:nth-child(2){
-					color: white;
-					font-size: $fs16;
-				}
-			}
-			em{
-				margin-right: 10px;
-				cursor: pointer;
-			}
-			.hide_tools{
-				display: none;
-				position: absolute;
-				top: 40px;
-				right: 0;
-				z-index: 2;
-				width: 80px;
-				text-align: center;
-				background: $black;
-				border: 1px solid $bottom_color;
-				span{
-					display: block;
-					width: 100%;
-					height: 30px;
-					line-height: 30px;
-					color: $white;
-					font-size: $fs14;
-					margin: 0;
-					cursor: pointer;
-				}
-			}
-		}
-		.ifont {
-			color: $yellow;
-			font-size: $fs16;
-			float: left;
-			margin-left: 20px;
-		}
-		
-		label{
-			float: left;
-			margin-left: 10px;
-			color: $white;
-		}
-		select {
+		.withDraw_top{
+			padding-top: 10px;
 			background-color: $blue;
-			color: $lightblue;
-			float: right;
-			border: none;
-			margin-right: 20px;
-			line-height: 38px;
-		}
-		input{
-			width: 120px;
-			height: 30px;
-			border-radius: 5px;
-			border: 1px solid #7a7f99;
-			margin-right: 10px;
-			color: $white;
-		}
-		.writeIn{
-			position: relative;
-			left: 6px;
-			span{
-				color: $yellow;
-				i{
-					display: inline-block;
-					width: 56px;
-					font-size: fs12;
-				}
-			}
-		}
-		.btn{
-			position: relative;
-			top: 10px;
-			left: -140px;
-			width: 120px;
-			height: 30px;
-		}
-	}
-	.account_withDraw_btm {
-		width: 100%;
-		background-color: $blue;
-		li {
-			font-size: $fs14;
-			color: $lightblue;
-			text-indent:10px; 
-			&:nth-child(1) {
-				color: $white;
+			float: left;
+			width: 100%;
+			li{
 				height: 40px;
 				line-height: 40px;
 			}
-			&:nth-child(2) {
-				padding-top: 20px;
-				height: 80px;
+			.withDraw_top_left{
+				width: 40%;
+				float: left;
+				text-align: right;
+			}
+			.withDraw_top_right{
+				width: 60%;
+				float: left;
+				.chooseIn{
+					border-color:$yellow!important;
+				}
+				.chooseNo{
+					border: 1px solid #7a7f99;
+					width: 400px;
+					height: 40px;
+					margin-bottom: 10px;
+					border-radius: 5px;
+					position: relative;
+					span{
+						float: left;
+						margin-left: 10px;
+						&:nth-child(2){
+							color: white;
+							font-size: $fs16;
+						}
+					}
+					label{
+						float: left;
+						margin-left: 10px;
+						color: $white;
+					}
+					em{
+						margin-right: 10px;
+						cursor: pointer;
+					}
+					.hide_tools{
+						display: none;
+						position: absolute;
+						top: 40px;
+						right: 0;
+						z-index: 2;
+						width: 80px;
+						text-align: center;
+						background: $black;
+						border: 1px solid $bottom_color;
+						span{
+							display: block;
+							width: 100%;
+							height: 30px;
+							line-height: 30px;
+							color: $white;
+							font-size: $fs14;
+							margin: 0;
+							cursor: pointer;
+						}
+					}
+					.ifont {
+						color: $yellow;
+						font-size: $fs16;
+						float: left;
+						margin-left: 20px;
+					}
+				}
+			}
+			
+		}
+		.withDraw_center{
+			background-color: $blue;
+			float: left;
+			height: 120px;
+			width: 100%;
+			li{
+				height: 40px;
+				line-height: 40px;
+			}
+			.withDraw_center_left{
+				width: 40%;
+				float: left;
+				text-align: right;
+			}
+			.withDraw_center_right{
+				width: 60%;
+				float: left;
+				.btn{
+					width: 120px;
+					height: 30px;
+				}
+				input{
+					&:hover{
+						border-color: $yellow;
+					}
+					width: 120px;
+					height: 30px;
+					border-radius: 5px;
+					border: 1px solid #7a7f99;
+					margin-right: 10px;
+					color: $white;
+				}
+				span{
+					color: $yellow;
+				}
+			}
+		}
+	}
+	.account_withDraw_btm {
+		margin-top: 10px;
+		float: left;
+		height: 400px;
+		width: 100%;
+		background-color: $blue;
+		.account_withDraw{
+			li {
+				font-size: $fs14;
 				color: $lightblue;
-				p {
+				text-indent:10px; 
+				&:nth-child(1) {
 					color: $white;
-					font-size: $fs12;
-					padding-top: 10px;
+					height: 40px;
+					line-height: 40px;
 				}
-			}
-			&:nth-child(3) {
-				padding-top: 20px;
-				height: 140px;
-				border-bottom: 1px solid $bottom_color;
-				border-top: 1px solid $bottom_color;
-				span {
-					font-size: $fs18;
-					color: $white;
-					font-weight: 800;
-					margin: 0 6px;
+				&:nth-child(2) {
+					padding-top: 20px;
+					height: 80px;
+					color: $lightblue;
+					p {
+						color: $white;
+						font-size: $fs12;
+						padding-top: 10px;
+					}
 				}
-				p {
-					padding-top: 10px;
+				&:nth-child(3) {
+					padding-top: 20px;
+					height: 140px;
+					border-bottom: 1px solid $bottom_color;
+					border-top: 1px solid $bottom_color;
+					span {
+						font-size: $fs18;
+						color: $white;
+						font-weight: 800;
+						margin: 0 6px;
+					}
+					p {
+						padding-top: 10px;
+					}
 				}
-			}
-			&:nth-child(4) {
-				height: 80px;
-				padding-top: 20px;
-				border-bottom: 1px solid $bottom_color;
-				span {
-					font-size: $fs18;
-					color: $white;
-					font-weight: 800;
-					margin: 0 5px;
+				&:nth-child(4) {
+					height: 80px;
+					padding-top: 20px;
+					border-bottom: 1px solid $bottom_color;
+					span {
+						font-size: $fs18;
+						color: $white;
+						font-weight: 800;
+						margin: 0 5px;
+					}
+					p {
+						font-size: $fs12;
+						padding-top: 10px;
+					}
 				}
-				p {
-					font-size: $fs12;
-					padding-top: 10px;
-				}
-			}
-			&:nth-child(5) {
-				height: 60px;
-				line-height: 60px;
-				span {
-					color: $yellow;	
+				&:nth-child(5) {
+					height: 60px;
+					line-height: 60px;
+					span {
+						color: $yellow;	
+					}
 				}
 			}
 		}
 	}
 	.btm {
+		float: left;
 		line-height: 40px;
 		text-align: center;
 		height: 40px;

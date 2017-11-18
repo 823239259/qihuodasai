@@ -1,27 +1,44 @@
 <template>
 	<div id="withDraw_sure">
 		<div class="withDraw_sure_top">
-			<ul>
-				<li>银行卡信息：<span>{{username}}</span><i>{{bankName}}（{{bankCrad}}）</i></li>
-				<li>提现金额：<span class="color_yellow">{{withMoney}}</span>元</li>
-				<li>提现手续费：<span>{{withFee}}</span>元<i>（按揭提现金额的0.5%收取）</i></li>
-				<li>实际到账金额：<span class="color_yellow">{{withMoney-withFee}}</span>元<i>（提现金额-提现手续费）</i></li>
-			</ul>
+			<div class="sure_top_left">
+				<ul>
+					<li>银行卡信息：</li>
+					<li>提现金额：</li>
+					<li>提现手续费：</li>
+					<li>实际到账金额：</li>
+				</ul>
+			</div>
+			<div class="sure_top_right">
+				<ul>
+					<li><span>{{username}}</span><i>{{bankName}}（{{bankCrad}}）</i></li>
+					<li><span class="color_yellow">{{withMoney}}</span>元</li>
+					<li><span>{{withFee}}</span>元<i>（按揭提现金额的0.5%收取）</i></li>
+					<li><span class="color_yellow">{{withMoney-withFee}}</span>元<i>（提现金额-提现手续费）</i></li>
+				</ul>
+			</div>
 		</div>
 		<div class="withDraw_sure_center">
-			<ul>
-				<li>提现密码：<input type="password" v-model="withdrawPwd"/><span v-on:click="toResetPassword">忘记密码</span></li>
-				<li><button class="btn yellow" v-on:click="withDraw_money">确认提现</button><span v-on:click="back">返回修改</span></li>
-			</ul>
+			<div class="sure_center_left">
+				<ul>
+					<li>提现密码：</li>
+				</ul>
+			</div>
+			<div class="sure_center_right">
+				<ul>
+					<li><input type="password" v-model="withdrawPwd"/><span v-on:click="toResetPassword">忘记密码</span></li>
+					<li><button class="btn yellow" v-on:click="withDraw_money">确认提现</button><span v-on:click="back">返回修改</span></li>
+				</ul>
+			</div>
 		</div>
 		<div class="withDraw_sure_btm">
-			<p>提现相关</p>
+			<p >提现相关</p>
 			<ul>
 				<li>忘记密码怎么办？</li>
 				<li>答：可点击【忘记密码】重新设置提款密码</li>
 			</ul>
-			<p>投资有风险，入市需谨慎</p>
 		</div>
+		<p class="p_center">投资有风险，入市需谨慎</p>
 	</div>
 </template>
 
@@ -184,19 +201,17 @@
 @import "../../../assets/css/common.scss";
 	#withDraw_sure {
 		width: 100%;
-		li {
-				margin-top:25px;
-			}
 		.withDraw_sure_top {
 			background-color: $blue;
 			padding-top: 20px;
 			height: 210px;
 			width: 100%;
-			border-bottom: 1px solid $blue;
-			text-align: center;
+			border-bottom: 1px solid $bottom_color;
+			/*text-align: center;*/
 			i {
 				font-size: $fs12;
 				margin-left: 5px;
+				text-transform: uppercase;
 			}
 			span {
 				color: $white;
@@ -205,49 +220,82 @@
 				color: $yellow;
 				font-weight: 800;
 			}
+			li {
+				margin-top:25px;
+			}
+			.sure_top_left{
+				width: 50%;
+				float: left;
+				text-align: right;
+			}
+			.sure_top_right{
+				width: 50%;
+				float: left;
+			}
 		}
 		.withDraw_sure_center {
 			background-color: $blue;
 			height: 150px;
 			width: 100%;
-			text-align: center;
-			input {
-				width: 120px;
-				height: 30px;
-				border: 1px solid $bottom_color;
-				border-radius: 5px;
-				color: $white;
+			li{
+				height: 75px;
+				line-height: 75px;
 			}
-			.btn {
-				width: 120px;
-				height: 30px;
-				margin-left: 70px;
-			}
-			 span {
+			span {
 			 	font-size: $fs12;
 			 	margin-left: 10px;
-			 }
-		}
-		.withDraw_sure_btm {
-			background-color: $blue;
-			height: 180px;
-			text-align: center;
-			p {
-				&:nth-child(1) {
-					text-align: left;
-					background-color: $bottom_color;
-					height: 40px;
+			}
+			.sure_center_left{
+				width: 50%;
+				float: left;
+				text-align: right;
+			}
+			.sure_center_right{
+				width: 50%;
+				float: left;
+				input {
+					width: 120px;
+					height: 30px;
+					border: 1px solid $bottom_color;
+					border-radius: 5px;
 					color: $white;
-					line-height: 40px;
+					&:hover{
+						border-color: $yellow;
+					}
 				}
-				&:nth-child(2) {
-					color: $white;
-					height: 40px;
-					line-height: 40px;
-					margin-top: 10px;
-					font-size: $fs12;
+				.btn {
+					width: 120px;
+					height: 30px;
 				}
 			}
+		}
+		.withDraw_sure_btm {
+			margin-top: 5px;
+			text-indent: 10px;
+			background-color: $blue;
+			height: 120px;
+			text-align: center;
+			li{
+				text-align: left;
+				height: 40px;
+				line-height: 40px;
+			}
+			p {
+				text-align: left;
+				background-color: $bottom_color;
+				height: 40px;
+				color: $white;
+				line-height: 40px;
+			}
+		}
+		.p_center{
+			background-color: $bottom_color;
+			text-align: center;
+			width: 100%;
+			height: 40px;
+			line-height: 40px;
+			margin-top: 5px;
+			font-size: $fs12;
 		}
 	}
 </style>

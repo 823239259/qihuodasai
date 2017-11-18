@@ -53,7 +53,7 @@
 								<td>{{item.traderTotal}}元</td>
 								<td>{{item.lineLoss}}美元</td>
 								<td>{{item.appTime | getTime}}</br>{{item.appTime | getTimeTwo}}</td>
-								<td v-if="item.stateTypeStr == '已完结'">{{item.endTime | getTime}}</br>{{item.appTime | getTimeTwo}}</td>
+								<td v-if="item.stateTypeStr == '已完结'">{{item.endTime | getTime}}</br>{{item.endTime | getTimeTwo}}</td>
 								<td v-else="item.stateTypeStr != '已完结'">-</td>
 								<td v-if="item.endAmount!=''">{{item.endAmount}}</td>
 								<td v-else="item.endAmount == ''">-</td>
