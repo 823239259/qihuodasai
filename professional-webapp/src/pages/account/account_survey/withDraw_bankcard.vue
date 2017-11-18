@@ -22,8 +22,8 @@
 				<div class="withDraw_top_right">
 					<ul>
 						<li  v-for="(k,index) in bandCardList" class="chooseNo" v-on:click="chooseBankCard(k.bankId,index)" :class="{chooseIn:current1 == index}">
-							<i class="ifont" v-if="k.default ==true">&#xe698;</i>
-							<i class="ifont" v-else="k.default!=true">&#xe626;</i>
+							<i class="ifont" v-if="current1==index">&#xe698;</i>
+							<i class="ifont" v-else="current1!=index">&#xe626;</i>
 							<span>{{k.bankName}}</span>
 							<span>尾号{{k.card.substr(-4,4)}}</span>
 							<label  v-if="k.default !=true"></label>
@@ -312,6 +312,7 @@
 			},
 			chooseBankCard:function(a,c){
 				this.current1 = c
+				$("i").eq(c).html("")
 				this.bankid = a;
 				return;
 			}
