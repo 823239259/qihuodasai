@@ -10,8 +10,8 @@
 			<div class="recharge_top">
 				<ul>
 					<li>我的余额：</li>
-					<li><span>0.00</span>元</li>
-					<li>（充值后余额：<span>0.00</span>）元</li>
+					<li><span>{{accountMoney}}</span>元</li>
+					<li>（充值后余额：<span>{{totalMoney}}</span>）元</li>
 				</ul>
 			</div>
 			<div class="recharge_center">
@@ -25,7 +25,7 @@
 						<ul>
 							<li><input type="text"  v-model="recharge_money"/></li>
 							<li><span>注意：</span>单次充值金额最低10元</li>
-							<li><button class="btn" >下一步</button></li>
+							<li><button class="btn" v-on:click="nextStep">下一步</button></li>
 						</ul>
 					</div>
 				</div>
@@ -57,28 +57,61 @@
 </template>
 
 <script>
+	import pro from "../../../assets/js/common.js"
 	export default{
 		name : "recharge",
 		data(){
 			return{
-				recharge_money:''
+				recharge_money:'',
+				accountMoney:'',
+				totalMoney:0.00
+			}
+		},
+		watch: {
+			recharge_money: function(){
+				if(this.recharge_money == '' || this.recharge_money == NaN){
+					this.totalMoney = this.accountMoney;
+				}else{
+					var str = this.recharge_money.toString().split('.');
+					if(str[1] && str[1].length > 1){
+						this.money = parseFloat(str[0]+ '.'+str[1].substring(0,2));
+					}
+					this.totalMoney = (Number(this.accountMoney) + Number(this.recharge_money)).toFixed(2);
+				}
+			}
+		},
+		methods:{
+			nextStep:function(){
+				if(this.recharge_money == ''){
+					layer.msg("请输入充值金额",{time:2000});
+				}else if(this.recharge_money < 10 ){
+					layer.msg("充值金额需要大于10元哦~",{time:2000});
+				}else {
+					this.$router.push({path:'/payWays',query:{username:JSON.parse(localStorage.user).username,money:this.recharge_money}});
+				}
 			}
 		},
 		mounted: function(){
 			//初始化高度
 			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-			var _h = h - 80 - 47;
+			var _h = h
 			var contH = $(".recharge").height();
 			if(contH > _h){
 				$(".recharge").height(_h);
 			}
 			$(window).resize(function(){
 				var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-				var _h = h - 80 - 47;
+				var _h = h
 				if(contH > _h){
 					$(".recharge").height(_h);
 				}
 			});
+			//获取用户资金
+			this.accountMoney = this.$route.query.accountMoney;
+			this.totalMoney = this.accountMoney;
+		},
+		activated:function(){
+			this.accountMoney = this.$route.query.accountMoney;
 		}
 	}
 </script>
