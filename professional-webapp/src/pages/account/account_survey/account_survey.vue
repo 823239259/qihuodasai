@@ -38,7 +38,7 @@
 								<span>冻结资金</span><i class="ifont question"  v-on:mouseenter="showHide1" v-on:mouseleave="hide1">&#xe66d;</i>
 								<p class="surveyMoney">￥{{frzBal}}</p>
 							</li>
-							<span class="showmoney1" v-if="showMoneyNo">冻结资金（您提现时被冻结的金额）</span>
+							<span class="showmoney1" v-if="showMoneyNo">您提现时被冻结的金额</span>
 						</ul>
 					</div>
 				</div>
