@@ -27,7 +27,7 @@
 									<span>{{v.CommodityNo + v.MainContract}}</span>
 								</td>
 								<td>
-									<div class="fl">
+									<div class="number fl">
 										<span :class="{red: v.LastQuotation.LastPrice > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice}">{{v.LastQuotation.LastPrice | fixNum(v.DotSize)}}</span>
 										<span :class="{green: v.LastQuotation.ChangeRate < 0, red: v.LastQuotation.ChangeRate > 0}">{{v.LastQuotation.ChangeRate | fixNumTwo}}%</span>
 									</div>
@@ -57,7 +57,7 @@
 									<span>{{v.CommodityNo + v.MainContract}}</span>
 								</td>
 								<td>
-									<div class="fl">
+									<div class="number fl">
 										<span :class="{red: v.LastQuotation.LastPrice > v.LastQuotation.PreSettlePrice, green: v.LastQuotation.LastPrice < v.LastQuotation.PreSettlePrice}">{{v.LastQuotation.LastPrice | fixNum(v.DotSize)}}</span>
 										<span :class="{green: v.LastQuotation.ChangeRate < 0, red: v.LastQuotation.ChangeRate > 0}">{{v.LastQuotation.ChangeRate | fixNumTwo}}%</span>
 									</div>
@@ -1133,9 +1133,10 @@
 			table{
 				td:first-child{
 					padding-left: 10px;
+					width: 100px;
 				}
-				td:last-child{
-					padding-right: 10px;
+				td .number{
+					width: 45px;
 				}
 				thead{
 					tr{

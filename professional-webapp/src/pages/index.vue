@@ -506,7 +506,7 @@
 			}
 		}
 		#echarts_k h1{
-			font-size: $fs20;
+			font-size: $fs18;
 			font-weight: bold;
 			margin: 15px 0 0 10px;
 			color: $white;
