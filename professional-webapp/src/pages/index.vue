@@ -420,39 +420,41 @@
 			//开始画图
 			this.$store.state.isshow.isfens = true;
 			this.$store.state.isshow.iskline = true;
-			this.orderName = this.Parameters[0].CommodityName;
-			this.orderNum = this.Parameters[0].CommodityNo + this.Parameters[0].MainContract;
-			this.orderNo = this.Parameters[0].CommodityNo;
-			var data = {
-				Method: "QryHistory",
-				Parameters:{
-					ExchangeNo: this.Parameters[0].ExchangeNo,
-					CommodityNo: this.Parameters[0].CommodityNo,
-					ContractNo: this.Parameters[0].MainContract,
-					HisQuoteType: 0,
-					BeginTime: "",
-					EndTime: "",
-					Count: 0
-				}
-			};
-			this.quoteSocket.send(JSON.stringify(data));
-			this.$store.state.market.selectTime = 1440;
-			var datas = {
-				Method: "QryHistory",
-				Parameters:{
-					ExchangeNo: this.Parameters[0].ExchangeNo,
-					CommodityNo: this.Parameters[0].CommodityNo,
-					ContractNo: this.Parameters[0].MainContract,
-					HisQuoteType: 1440,
-					BeginTime: "",
-					EndTime: "",
-					Count: 0
-				}
-			};
-			this.quoteSocket.send(JSON.stringify(datas));
-			this.$store.state.market.currentNo = this.Parameters[0].CommodityNo;
-			//是否是自选合约
-			this.isSelectedOrder();
+			if(this.Parameters[0] != undefined){
+				this.orderName = this.Parameters[0].CommodityName;
+				this.orderNum = this.Parameters[0].CommodityNo + this.Parameters[0].MainContract;
+				this.orderNo = this.Parameters[0].CommodityNo;
+				var data = {
+					Method: "QryHistory",
+					Parameters:{
+						ExchangeNo: this.Parameters[0].ExchangeNo,
+						CommodityNo: this.Parameters[0].CommodityNo,
+						ContractNo: this.Parameters[0].MainContract,
+						HisQuoteType: 0,
+						BeginTime: "",
+						EndTime: "",
+						Count: 0
+					}
+				};
+				this.quoteSocket.send(JSON.stringify(data));
+				this.$store.state.market.selectTime = 1440;
+				var datas = {
+					Method: "QryHistory",
+					Parameters:{
+						ExchangeNo: this.Parameters[0].ExchangeNo,
+						CommodityNo: this.Parameters[0].CommodityNo,
+						ContractNo: this.Parameters[0].MainContract,
+						HisQuoteType: 1440,
+						BeginTime: "",
+						EndTime: "",
+						Count: 0
+					}
+				};
+				this.quoteSocket.send(JSON.stringify(datas));
+				this.$store.state.market.currentNo = this.Parameters[0].CommodityNo;
+				//是否是自选合约
+				this.isSelectedOrder();
+			}
 		}
 	}
 </script>

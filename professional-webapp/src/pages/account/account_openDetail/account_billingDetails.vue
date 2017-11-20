@@ -166,7 +166,7 @@
 	        },
 			close:function(){
 				this.$router.push({path:'/account_openDetail'});
-				this.$store.state.account.currentNav = 6;
+				this.$store.state.account.currentNav = 3;
 			},
 			//获取成交详情
 			details:function(){

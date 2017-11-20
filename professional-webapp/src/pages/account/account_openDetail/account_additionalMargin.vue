@@ -63,7 +63,7 @@
 							if(res.code == 1){
 								layer.msg("追加成功",{time:2000});
 								this.$router.push({path:'account_openDetail'});
-								this.$store.state.account.currentNav = 6;
+								this.$store.state.account.currentNav = 3;
 							}
 						}
 					}).catch((err)=>{
