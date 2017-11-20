@@ -104,7 +104,8 @@
 				});
 			}
 		},
-		mounted: function(){
+		mounted: function(){},
+		activated: function(){
 			//获取平台账户登录信息
 			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
 			//获取交易账户
@@ -123,7 +124,7 @@
 					if(data) layer.msg(data.message, {time: 1000});
 				});
 			}
-		}
+		},
 	}
 </script>
 

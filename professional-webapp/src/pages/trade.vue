@@ -1076,6 +1076,8 @@
 //			}.bind(this));
 		},
 		activated: function(){
+			//获取平台账户登录信息
+			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
 			//获取自选合约列表
 			this.isSelectedOrder();
 			//初始化高度
