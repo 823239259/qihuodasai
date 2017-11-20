@@ -1,6 +1,10 @@
 <template>
 	<div id="recharge">
 		<div class="bg"></div>
+		<div class="reaharge_title">
+			<img src="../../../assets/images/recharge_icon4.png" alt="" />
+			<span>盈透支付</span>
+		</div>
 		<div class="recharge">
 			<h2>充值到平台</h2>
 			<div class="recharge_top">
@@ -19,7 +23,7 @@
 					</div>
 					<div class="recharge_center_right">
 						<ul>
-							<li><input type="text" /></li>
+							<li><input type="text"  v-model="recharge_money"/></li>
 							<li><span>注意：</span>单次充值金额最低10元</li>
 							<li><button class="btn" >下一步</button></li>
 						</ul>
@@ -34,13 +38,16 @@
 				<p>充值提醒：</p>
 				<ul>
 					<li>
-						<span>填写并生成，您的充值订单</span>
+						<img src="../../../assets/images/recharge_icon1.png" alt="" />
+						<p>填写并生成，您的充值订单</p>
 					</li>
 					<li>
-						<span>选择支付方式，按照订单进行转账</span>
+						<img src="../../../assets/images/recharge_icon2.png" alt="" />
+						<p>选择支付方式，按照订单进行转账</p>
 					</li>
 					<li>
-						<span>完成转账后，最快5分钟内到账</span>
+						<img src="../../../assets/images/recharge_icon3.png" alt="" />
+						<p>完成转账后，最快5分钟内到账</p>
 					</li>
 				</ul>
 			</div>
@@ -54,8 +61,13 @@
 		name : "recharge",
 		data(){
 			return{
-				
+				recharge_money:''
 			}
+		},
+		mounted: function(){
+			//初始化高度
+//			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+//			$(".recharge").height(h - 90);
 		}
 	}
 </script>
@@ -64,12 +76,31 @@
 	@import "../../../assets/css/common.scss";
 	#recharge{
 		width: 100%;
-		height: 700px;
+		height: 800px;
 	}
 	.bg{
 		background: url(../../../assets/images/recharge_bak.png)  no-repeat;
 		opacity:1;
 		vertical-align:middle;
+	}
+	.reaharge_title{
+		position: fixed;
+		top:0;
+		width: 100%;
+		height: 60px;
+		background-color:#284e95;
+		z-index: 120;
+		span{
+			color: $white;
+			font-size: $fs20;
+		}
+		img{
+			margin-left: 400px;
+			margin-top: 10px;
+			width: 40px;
+			height: 40px;
+			line-height: 60px;
+		}
 	}
 	.recharge{
 		border-radius: 10px;
@@ -200,13 +231,17 @@
 			p{
 				height: 70px;
 				line-height: 70px;
+				color: black;
 			}
 			ul{
-				text-align: center;
 				display: flex;
 				justify-content: space-around;
 				li{
+					float: left;
 					text-align: center;
+					p{
+						color: #666666;
+					}
 				}
 			}
 		}
