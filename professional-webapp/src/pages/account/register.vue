@@ -3,11 +3,20 @@
 		<div class="bg"></div>
 		<div class="register">
 			<p>注册<i class="ifont" v-on:click="close">&#xe624;</i></p>
-			<input type="text" id="phone"  class="input_1" placeholder="请输入手机号" maxlength="11" v-model.trim="phone" autocomplete="off" />
-			<input type="text" id="code" class="input_1 input_4" placeholder="验证码" v-model.trim="code" autocomplete="off" />
-			<i class="span_code" v-on:click="getCode">{{volid ? info : (time + '秒')}}</i>
-			<input type="text" onfocus="this.type='password'"  class="input_1 input_5" placeholder="请输入密码（6-16位密码）" id="pwd" v-model.trim="pwd" autocomplete="off" />
-			<i class="ifont ifont_eyes" v-on:click="eyeEvent">&#xe61c;</i>
+			<div class="">
+				<input type="text" id="phone"  class="input_1" style="display: none;" />
+				<input type="text" id="phone"  class="input_1" placeholder="请输入手机号" maxlength="11" v-model.trim="phone" autocomplete="off" />
+			</div>
+			<div class="">
+				<input type="text" id="code"  class="input_1 input_4" style="display: none;" />
+				<input type="text" id="code" class="input_1 input_4" placeholder="验证码" v-model.trim="code" autocomplete="off" />
+				<i class="span_code" v-on:click="getCode">{{volid ? info : (time + '秒')}}</i>
+			</div>
+			<div class="">
+				<input type="text" id="pwd" class="input_1 input_5" style="display: none;" />
+				<input type="text" id="pwd" onfocus="this.type='password'"  class="input_1 input_5" placeholder="请输入密码（6-16位密码）" v-model.trim="pwd" autocomplete="off" />
+				<i class="ifont ifont_eyes" v-on:click="eyeEvent">&#xe61c;</i>
+			</div>
 			<p class="color_light">注册即表示	同意并已阅读<a href="javascript:void(0);" class="span_white" @click="toRegisterAgreement">《用户注册协议》</a></p>
 			<button class="btn yellow" v-on:click="register">注册</button>
 			<p class="color_light">已有期货大赛账号？<span class="span_white" v-on:click="toLogin">立即登录</span></p>

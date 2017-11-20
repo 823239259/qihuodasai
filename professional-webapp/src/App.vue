@@ -290,6 +290,7 @@
 			},
 			confirm: function(){
 				localStorage.removeItem('user');
+				localStorage.removeItem('tradeUser');
 				this.$store.state.account.userName = '';
 				this.$router.push({path: '/'});
 				this.$store.state.account.isRefresh = 1;
