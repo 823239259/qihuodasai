@@ -283,6 +283,20 @@
 			}
 		},
 		mounted:function(){
+			//初始化高度
+			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+			var _h = h - 80 - 47;
+			var contH = $(".billingDetails").height();
+			if(contH > _h){
+				$(".billingDetails").height(_h);
+			}
+			$(window).resize(function(){
+				var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+				var _h = h - 80 - 47;
+				if(contH > _h){
+					$(".billingDetails").height(_h);
+				}
+			});
 			this.id = this.$route.query.id;
 			//获取成交详情
 			this.details();
@@ -320,10 +334,12 @@
 <style lang="scss" scoped type="text/css">
 @import "../../../assets/css/common.scss";
 	#billingDetails{
-		height: 800px;
+		height: 700px;
 		text-indent: 10px;
 	}
 	.billingDetails{
+		overflow-y: scroll;
+		float: left;
 		position: absolute;
 		top: 50%;
 		left: 50%;

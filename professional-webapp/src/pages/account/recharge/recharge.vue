@@ -3,7 +3,7 @@
 		<div class="bg"></div>
 		<div class="reaharge_title">
 			<img src="../../../assets/images/recharge_icon4.png" alt="" />
-			<span>盈透支付</span>
+			<i>盈透支付</i>
 		</div>
 		<div class="recharge">
 			<h2>充值到平台</h2>
@@ -66,8 +66,19 @@
 		},
 		mounted: function(){
 			//初始化高度
-//			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-//			$(".recharge").height(h - 90);
+			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+			var _h = h - 80 - 47;
+			var contH = $(".recharge").height();
+			if(contH > _h){
+				$(".recharge").height(_h);
+			}
+			$(window).resize(function(){
+				var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+				var _h = h - 80 - 47;
+				if(contH > _h){
+					$(".recharge").height(_h);
+				}
+			});
 		}
 	}
 </script>
@@ -76,7 +87,7 @@
 	@import "../../../assets/css/common.scss";
 	#recharge{
 		width: 100%;
-		height: 800px;
+		height: 780px;
 	}
 	.bg{
 		background: url(../../../assets/images/recharge_bak.png)  no-repeat;
@@ -90,7 +101,7 @@
 		height: 60px;
 		background-color:#284e95;
 		z-index: 120;
-		span{
+		i{
 			color: $white;
 			font-size: $fs20;
 		}
@@ -100,9 +111,12 @@
 			width: 40px;
 			height: 40px;
 			line-height: 60px;
+			display: inline-block;
 		}
 	}
 	.recharge{
+		overflow-y: scroll;
+		float: left;
 		border-radius: 10px;
 		background-color: #FFFFFF;
 		position: absolute;
@@ -110,6 +124,7 @@
 		top: 50%;
 		width: 1000px;
 		height: 700px;
+		margin: auto;
 		margin: -350px 0 0 -500px;
 		z-index: 120;
 		h2{		
