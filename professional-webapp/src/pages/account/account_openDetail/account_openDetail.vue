@@ -43,7 +43,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="item in item" v-if="show_detail">
+							<tr v-for="(item,index) in showList" v-if="show_detail">
 								<td>{{item.businessTypeStr}}</td>
 								<td v-if="item.stateTypeStr == '审核不通过'">开户失败</td>
 								<td v-else="item.stateTypeStr != '审核不通过'">{{item.stateTypeStr}}</td>
@@ -53,7 +53,7 @@
 								<td>{{item.traderTotal}}元</td>
 								<td>{{item.lineLoss}}美元</td>
 								<td>{{item.appTime | getTime}}</br>{{item.appTime | getTimeTwo}}</td>
-								<td v-if="item.stateTypeStr == '已完结'">{{item.endTime | getTime}}</br>{{item.appTime | getTimeTwo}}</td>
+								<td v-if="item.stateTypeStr == '已完结'">{{item.endTime | getTime}}</br>{{item.endTime | getTimeTwo}}</td>
 								<td v-else="item.stateTypeStr != '已完结'">-</td>
 								<td v-if="item.endAmount!=''">{{item.endAmount}}</td>
 								<td v-else="item.endAmount == ''">-</td>
@@ -73,6 +73,11 @@
 						<button class="yellow  btn" v-on:click="toOpenAccount">我要开户</button>
 						<p>(一个账号可同时交易多种期货产品)</p>
 					</div>
+				</div>
+				<div class="pager">
+				    <button class="btn_span"   v-show="currentPage != 1" @click="currentPage-- && goIndex(currentPage--,'last')">上一页</button>
+				    <span  v-for="index in pages" @click="goIndex(index)" :class="{active:currentPage == index}" :key="index">{{index}}</span>
+				    <button class="btn_span"  v-show="pageCount != currentPage && pageCount != 0 " @click="currentPage++ && goIndex(currentPage++,'!last')">下一页</button>
 				</div>
 				<div class="account_openDetail_notice">
 					<p>注意：</p>
@@ -94,12 +99,17 @@
 		name : "account_openDetail",
 		data(){
 			return{
-				item : [],
 				show_detail : true,
 				show_button : false,
 				listId:'',
 				startTime: '',
-				endTime: ''
+				endTime: '',
+				showList:[],//显示数据
+				pageCount:'',//总页数
+				eachPage:10,//每页条数
+				showPage:true,//是否显示分页
+				currentPage:1,//当前页
+				totalList:[]//总数据
 			}
 		},
 		filters:{
@@ -111,6 +121,13 @@
 			}
 		},
 		methods:{
+			goIndex:function(index,el){
+	            if(index == this.currentPage) return;
+	            this.currentPage = index;
+	            var curtotal=(this.currentPage-1)*this.eachPage;//上一页显示的最后一条
+	            var tiaoshu=this.currentPage*this.eachPage;//当前页显示的最后一条
+	            this.showList=this.totalList.slice(curtotal,tiaoshu); //当前页应显示的数据
+	        },
 			//日历
 			serchEvent: function(){
 				this.selectedNum = -1;
@@ -124,7 +141,6 @@
 			//结算方案
 			toCloseAccount:function(a){
 				this.listId = a;
-				console.log(this.listId);
 				this.$router.push({path:'/account_endScheme',query:{"id":this.listId}});
 			},
 			//查看账户
@@ -203,13 +219,18 @@
 					endTime:endT,
 					stateType:chooseType
 				};
-				console.log(info);
 				pro.fetch("post",'/user/ftrade/list',info,headers).then(function(res){
-					console.log(res)
 					if(res.success == true){
 						if(res.code == 1){
-							this.item = res.data.tradeList;
-							console.log(this.item)
+							this.totalList = res.data.tradeList;
+							this.pageCount = Math.ceil(this.totalList.length/this.eachPage);
+							console.log(11111111111111);
+							console.log(this.pageCount);
+							var curtotal=(this.currentPage-1)*this.eachPage;//上一页显示的最后一条
+				            var tiaoshu=this.currentPage*this.eachPage;//当前页显示的最后一条
+				            this.showList=this.totalList.slice(curtotal,tiaoshu); //当前页应显示的数据
+							
+							console.log(this.totalList);
 						}
 					}
 				}.bind(this)).catch(function(err){
@@ -333,6 +354,27 @@
 			var time = pro.getDate("y-m-d", date.getTime()).split(' ')[0];
 			this.startTime = time;
 			this.endTime = time;
+		},
+		computed:{
+			pages:function(){
+                var pag = [];
+                    if( this.currentPage < this.eachPage ){
+                       var i = Math.min(this.eachPage,this.pageCount);
+                       while(i){
+                           pag.unshift(i--);
+                       }
+                    }else{ 
+                       var middle = this.currentPage - Math.floor(this.eachPage / 2 ),
+                           i = this.eachPage;
+                       if( middle >  (this.pageCount - this.eachPage)  ){
+                           middle = (this.pageCount - this.eachPage) + 1
+                       }
+                       while(i--){
+                           pag.push( middle++ );
+                       }
+                   }
+                 return pag
+                }
 		}
 	}
 </script>
@@ -459,5 +501,21 @@
 		}
 		.current {
 			color: $yellow
+		}
+		.pager{
+			margin-right: 10px;
+			float: right;
+			span{
+				margin: 0 10px;
+			}
+		}
+		.btn_span{
+			color: $white;
+			background-color: $blue;
+			border: none;
+			margin: 0 10px;
+		}
+		.active {
+			color: $yellow;
 		}
 </style>

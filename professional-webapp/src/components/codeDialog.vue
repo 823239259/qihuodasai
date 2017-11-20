@@ -116,7 +116,6 @@
 							if(res.success == true){
 								if(res.code == 1){
 									layer.msg('发送成功', {time: 1000});
-									console.log(this.isshow);
 									this.isshow = false;
 								}
 							}

@@ -14,17 +14,21 @@
 		<div class="account_bindBankCard_center">
 			<ul>
 				<li  v-for="(k,index) in bindBankList" class="bankList"  :class="{curr:current1 == index}" v-on:click="chooseBank(index)">
-					<i class="ifont" v-if="k.default ==true">&#xe698;</i>
-					<i class="ifont" v-else="k.default!=true">&#xe626;</i>
+					<i class="ifont" v-if="current1 ==index">&#xe698;</i>
+					<i class="ifont" v-else="current1!=index">&#xe626;</i>
 					<span>{{k.bankName}}</span>
 					<span>尾号{{k.card.substr(-4,4)}}</span>
 					<label  v-if="k.default !=true"></label>
 					<label  v-else="k.default==true">默认</label>
 					<em class="fr" @click="showTools(index)">管理</em>
-					<div class="hide_tools" v-show="showToolsDiv===index">
-						<span @click="setDefault">设为默认</span>
-						<span>编辑</span>
-						<span>删除</span>
+					<div class="hide_tools" v-if="k.default!=true">
+						<span @click="setDeaultBank(k.bankId)">设为默认</span>
+						<span @click="toAddBankCard">编辑</span>
+						<span @click="delBankCard(k.bankId)">删除</span>
+					</div>
+					<div class="hide_tools" v-if="k.default==true">
+						<span @click="toAddBankCard">编辑</span>
+						<span @click="delBankCard(k.bankId)">删除</span>
 					</div>
 				</li>
 			</ul>
@@ -44,28 +48,25 @@
 			return{
 				bindBankList : [],
 				bankId:'',
-				current1:0,
-				currentIndex: '管理',
-				chooseList:[{text:"设为默认"},{text:"编辑"},{text:"删除"}],
-				chooseList1:[{text:"编辑"},{text:"删除"}],
-				showToolsDiv:-1,
-				show:false
+				current1:0
 			}
 		},
 		methods:{
-			showTools: function(index){
-					this.showToolsDiv=index;
-			},
-			setDefault: function(e){
-				$(e.currentTarget).parent('.hide_tools').hide();
-				$(e.currentTarget).text('取消默认');
+			showTools: function(a){
+					console.log(a)
+					if($(".hide_tools").eq(a).css("display")=="none"){
+						$(".hide_tools").eq(a).show();
+					}else{
+						$(".hide_tools").eq(a).hide();
+					}
 			},
 			chooseBank:function(index){
-				this.current1 = index
+				this.current1 = index;
+				$("i").eq(index).html("")
 			},
 			//添加银行卡
 			toAddBankCard:function(){
-				this.$router.push({path:'/safe_addBankCard'})
+				this.$router.push({path:'/safe_addBankCard'});
 			},
 			//删除银行卡
 			delBankCard:function(a){
@@ -179,6 +180,8 @@
 					var data = res.data 
 					if(res.success == true){
 						if(res.code == 1){
+							console.log(111111111111111)
+							console.log(this.bindBankList);
 							data.forEach(function(o,i){
 								this.bindBankList.push(o);
 							}.bind(this));
@@ -249,6 +252,7 @@
 					cursor: pointer;
 				}
 				.hide_tools{
+					display: none;
 					position: absolute;
 					top: 40px;
 					right: 0;
@@ -300,7 +304,7 @@
 				line-height: 38px;
 			}
 			.curr{
-				border: 1px solid $yellow;
+				border-color:$yellow!important;
 			}
 		}
 		.account_bindBankCard_btm {

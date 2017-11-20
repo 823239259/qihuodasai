@@ -9,7 +9,7 @@
 			<div class="center">
 				<p>交易账号：<span>{{tranAccount}}</span></p>
 				<p>交易密码：<span>{{tranPassword}}</span>（请妥善保管您的密码）</p>
-				<p>交易细则：<span>操盘细则</span></p>
+				<p>交易细则：<span v-on:click="toTradersRules">操盘细则</span></p>
 				<button class="btn yellow" v-on:click="toTradeLogin">立即操盘</button>
 				<button class="btn green" v-on:click="back">取消</button>
 			</div>
@@ -30,11 +30,14 @@
 			}
 		},
 		methods:{
+			toTradersRules:function(){
+				this.$router.push({path:"/tradersRules"});
+			},
 			close : function(){
-				this.$router.push({path:'/account_openDetail'})
+				this.$router.push({path:'/account_openDetail'});
 			},
 			back:function(){
-				this.$router.push({path:'/account_openDetail'})
+				this.$router.push({path:'/account_openDetail'});
 			},
 			//去操盘
 			toTradeLogin:function(){
