@@ -133,5 +133,8 @@
 		#trade_details{
 			width: 635px;
 		}
+		table tr td{
+			font-size: $fs12;
+		}
 	}
 </style>
