@@ -16,8 +16,8 @@
 		<div class="container_top">
 			<div class="fl box"></div>
 			<div class="fl">
-				<i class="ifont zoom" @click="fullScreen" v-show="!fullScreenCurrent">&#xe62e;</i>
-				<i class="ifont zoom" @click="fullScreen" v-show="fullScreenCurrent">&#xe612;</i>
+				<i class="ifont zoom" @click="fullScreen">&#xe62e;</i>
+				<!--<i class="ifont zoom" @click="fullScreen" v-show="fullScreenCurrent">&#xe612;</i>-->
 				<div class="customer_service fl" :class="{current: csAddressCurrent}" @click="customerService">
 					<i class="ifont">&#xe68f;</i>
 					<span>在线客服</span>
