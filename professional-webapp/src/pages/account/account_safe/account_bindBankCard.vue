@@ -14,8 +14,8 @@
 		<div class="account_bindBankCard_center">
 			<ul>
 				<li  v-for="(k,index) in bindBankList" class="bankList"  :class="{curr:current1 == index}" v-on:click="chooseBank(index)">
-					<i class="ifont" v-if="k.default ==true">&#xe698;</i>
-					<i class="ifont" v-else="k.default!=true">&#xe626;</i>
+					<i class="ifont" v-if="current1 ==index">&#xe698;</i>
+					<i class="ifont" v-else="current1!=index">&#xe626;</i>
 					<span>{{k.bankName}}</span>
 					<span>尾号{{k.card.substr(-4,4)}}</span>
 					<label  v-if="k.default !=true"></label>
@@ -61,7 +61,8 @@
 					}
 			},
 			chooseBank:function(index){
-				this.current1 = index
+				this.current1 = index;
+				$("i").eq(index).html("")
 			},
 			//添加银行卡
 			toAddBankCard:function(){
@@ -303,7 +304,7 @@
 				line-height: 38px;
 			}
 			.curr{
-				border: 1px solid $yellow;
+				border-color:$yellow!important;
 			}
 		}
 		.account_bindBankCard_btm {
