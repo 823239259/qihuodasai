@@ -32,6 +32,7 @@ import account_editBankCard from "../pages/account/account_safe/account_editBank
 import account_endScheme from "../pages/account/account_openDetail/account_endScheme.vue"
 import openDetail_billingDetails from "../pages/account/account_openDetail/account_billingDetails.vue"
 import tradersRules from"../pages/account/tradersRules.vue"
+import payWays from"../pages/account/recharge/payWays.vue"
 Vue.use(Router)
 export default new Router({
 	mode: 'history',
@@ -159,6 +160,10 @@ export default new Router({
 		},{
 			path:'/tradersRules',
 			component:tradersRules
+		},
+		{
+			path:'/payWays',
+			component:payWays
 		}
 	]
 })

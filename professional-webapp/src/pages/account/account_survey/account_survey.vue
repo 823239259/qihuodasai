@@ -166,7 +166,8 @@
 				realName:'',
 				isBoundBankCard : '',
 				startTime: '',
-				endTime: ''
+				endTime: '',
+				accountMoney:''
 			}
 		},
 		filters: {
@@ -287,7 +288,9 @@
 				this.$router.push({path:'/withDraw_bankcard'})
 			},
 			toRecharge:function(){
-				this.$router.push({path:"/recharge"})
+				this.accountMoney = this.balance;
+				console.log(this.accountMoney);
+				this.$router.push({path:"/recharge",query:{"accountMoney":this.accountMoney}});
 			},
 			//获取数据
 			GetList:function(page,startT,endT,chooseType){
@@ -317,7 +320,6 @@
 							this.pageCount = data.totalPage;
 							//资金收入支出详情列表fundList
 							this.item=data.fundList;
-//							var time = pro.getDate("y-m-d h:i:s",this.item[0].subTime*1000);
 						}
 					}
 				}).catch((err)=>{
