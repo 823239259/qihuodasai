@@ -430,6 +430,9 @@
 			},
 			buyStatus(){
 				return this.$store.state.market.buyStatus;
+			},
+			length(){
+				return this.Parameters.length;
 			}
 		},
 		filters:{
@@ -441,6 +444,66 @@
 			}
 		},
 		watch: {
+			length: function(n, o){
+				if(n && n>= 17){
+					//调用下拉框
+					$(".slt-box").each(function(i, o){
+						pro.selectEvent(o, function(data){
+							//移除行情列表选中样式
+							$(".quote .cont tr").removeClass("current");
+							//更新页面数据
+							var commodityNo = data;
+							this.addStar = true;
+							this.optional = '添加自选';
+							this.selectedList.forEach(function(o, i){
+								if(o.CommodityNo == commodityNo){
+									this.addStar = false;
+									this.optional = '取消自选';
+								}
+							}.bind(this));
+							this.Parameters.forEach(function(o, i){
+								if(commodityNo == o.CommodityNo){
+									this.$store.state.market.currentdetail = o;
+									this.$store.state.market.currentNo = o.CommodityNo;
+									this.tradePrices = o.LastQuotation.LastPrice;
+									var data = {
+										Method: "QryHistory",
+										Parameters:{
+											ExchangeNo: o.ExchangeNo,
+											CommodityNo: o.CommodityNo,
+											ContractNo: o.MainContract,
+											HisQuoteType: 0,
+											BeginTime: "",
+											EndTime: "",
+											Count: 0
+										}
+									};
+									this.quoteSocket.send(JSON.stringify(data));
+									this.$store.state.market.selectTime = 1440;
+									var datas = {
+										Method: "QryHistory",
+										Parameters:{
+											ExchangeNo: o.ExchangeNo,
+											CommodityNo: o.CommodityNo,
+											ContractNo: o.MainContract,
+											HisQuoteType: 1440,
+											BeginTime: "",
+											EndTime: "",
+											Count: 0
+										}
+									};
+									this.quoteSocket.send(JSON.stringify(datas));
+								}
+							}.bind(this));
+							this.tradeParameters.forEach(function(o, i){
+								if(commodityNo == o.CommodityNo){
+									this.$store.state.market.currentTradeDetails = o;
+								}
+							}.bind(this));
+						}.bind(this));
+					}.bind(this));
+				}
+			},
 			quoteInitStep: function(n, o){
 				if(n && n == true){
 					this.$store.state.market.currentdetail = this.Parameters[0];
@@ -580,7 +643,6 @@
 				}
 			},
 			listClickEvent: function(i, commodityNo, mainContract, exchangeNo){
-				console.log(this.selected);
 				this.Parameters.forEach(function(o, i){
 					if(commodityNo == o.CommodityNo){
 						this.$store.state.market.currentdetail = o;
@@ -864,7 +926,6 @@
 							}
 						}
 					}).catch((err)=>{
-						console.log(err);
 						switch (err.data.code){
 							case '-1':
 								layer.msg("认证失败",{time: 1000});
@@ -944,61 +1005,63 @@
 			//设置当前合约的限价
 			this.tradePrices = parseFloat(this.currentdetail.LastQuotation.LastPrice).toFixed(this.currentdetail.DotSize);
 			//调用下拉框
-			$(".slt-box").each(function(i, o){
-				pro.selectEvent(o, function(data){
-					//移除行情列表选中样式
-					$(".quote .cont tr").removeClass("current");
-					//更新页面数据
-					var commodityNo = data;
-					this.addStar = true;
-					this.optional = '添加自选';
-					this.selectedList.forEach(function(o, i){
-						if(o.CommodityNo == commodityNo){
-							this.addStar = false;
-							this.optional = '取消自选';
-						}
-					}.bind(this));
-					this.Parameters.forEach(function(o, i){
-						if(commodityNo == o.CommodityNo){
-							this.$store.state.market.currentdetail = o;
-							this.$store.state.market.currentNo = o.CommodityNo;
-							this.tradePrices = o.LastQuotation.LastPrice;
-							var data = {
-								Method: "QryHistory",
-								Parameters:{
-									ExchangeNo: o.ExchangeNo,
-									CommodityNo: o.CommodityNo,
-									ContractNo: o.MainContract,
-									HisQuoteType: 0,
-									BeginTime: "",
-									EndTime: "",
-									Count: 0
-								}
-							};
-							this.quoteSocket.send(JSON.stringify(data));
-							this.$store.state.market.selectTime = 1440;
-							var datas = {
-								Method: "QryHistory",
-								Parameters:{
-									ExchangeNo: o.ExchangeNo,
-									CommodityNo: o.CommodityNo,
-									ContractNo: o.MainContract,
-									HisQuoteType: 1440,
-									BeginTime: "",
-									EndTime: "",
-									Count: 0
-								}
-							};
-							this.quoteSocket.send(JSON.stringify(datas));
-						}
-					}.bind(this));
-					this.tradeParameters.forEach(function(o, i){
-						if(commodityNo == o.CommodityNo){
-							this.$store.state.market.currentTradeDetails = o;
-						}
+			if(this.length != 0){
+				$(".slt-box").each(function(i, o){
+					pro.selectEvent(o, function(data){
+						//移除行情列表选中样式
+						$(".quote .cont tr").removeClass("current");
+						//更新页面数据
+						var commodityNo = data;
+						this.addStar = true;
+						this.optional = '添加自选';
+						this.selectedList.forEach(function(o, i){
+							if(o.CommodityNo == commodityNo){
+								this.addStar = false;
+								this.optional = '取消自选';
+							}
+						}.bind(this));
+						this.Parameters.forEach(function(o, i){
+							if(commodityNo == o.CommodityNo){
+								this.$store.state.market.currentdetail = o;
+								this.$store.state.market.currentNo = o.CommodityNo;
+								this.tradePrices = o.LastQuotation.LastPrice;
+								var data = {
+									Method: "QryHistory",
+									Parameters:{
+										ExchangeNo: o.ExchangeNo,
+										CommodityNo: o.CommodityNo,
+										ContractNo: o.MainContract,
+										HisQuoteType: 0,
+										BeginTime: "",
+										EndTime: "",
+										Count: 0
+									}
+								};
+								this.quoteSocket.send(JSON.stringify(data));
+								this.$store.state.market.selectTime = 1440;
+								var datas = {
+									Method: "QryHistory",
+									Parameters:{
+										ExchangeNo: o.ExchangeNo,
+										CommodityNo: o.CommodityNo,
+										ContractNo: o.MainContract,
+										HisQuoteType: 1440,
+										BeginTime: "",
+										EndTime: "",
+										Count: 0
+									}
+								};
+								this.quoteSocket.send(JSON.stringify(datas));
+							}
+						}.bind(this));
+						this.tradeParameters.forEach(function(o, i){
+							if(commodityNo == o.CommodityNo){
+								this.$store.state.market.currentTradeDetails = o;
+							}
+						}.bind(this));
 					}.bind(this));
 				}.bind(this));
-			}.bind(this));
+			}
 //			this.$nextTick(function () {
 //				//是否跳转至首页
 //				if(localStorage.firstInTo && localStorage.firstInTo == 1){
@@ -1011,7 +1074,6 @@
 //					localStorage.firstInTo = 1;
 //				}
 //			}.bind(this));
-			
 		},
 		activated: function(){
 			//获取自选合约列表

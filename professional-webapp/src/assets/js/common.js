@@ -12,11 +12,11 @@ var pro = {};
  * 
  */
 function close(obj){
-	obj.slideUp(400);
+	obj.slideUp(100);
 	$(obj).parents(".slt-box").removeClass("current");
 };
 function open(obj){
-	obj.slideDown(400);
+	obj.slideDown(100);
 	$(obj).parents(".slt-box").addClass("current");
 };
 function select(obj,ipt,fun){
