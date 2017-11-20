@@ -41,7 +41,7 @@
 			//充值
 			to_Recharge:function(){
 				if(this.accountMoney < this.payMoney){
-					layer.msg('账户余额不足', {time: 1000});
+					this.$router.push({path:'/recharge',query:{"accountMoney":this.accountMoney}});
 				}
 			},
 			//支付

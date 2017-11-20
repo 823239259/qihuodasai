@@ -143,7 +143,9 @@
 				return this.$store.state.account.currentNav;
 			},
 			userName(){
-				return this.$store.state.account.userName;	
+				var userName = this.$store.state.account.userName;
+				userName = userName.substr(0, 3) + '****' + userName.substr(7); 
+				return 	userName;
 			}
 		},
 		filters:{
