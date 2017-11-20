@@ -4,7 +4,7 @@
 		<div class="login">
 			<p>登录<i class="ifont ifont_x" v-on:click="close">&#xe624;</i></p>
 			<input type="text" id="phone" class="input_1" placeholder="请输入手机号码" v-model.trim="phone" autocomplete="off" />
-			<input type="password" id="pwd" class="input_1" placeholder="请输入密码" v-model.trim="pwd" autocomplete="off" />
+			<input type="text" onfocus="this.type='password'" id="pwd" class="input_1" placeholder="请输入密码" v-model.trim="pwd" autocomplete="off" />
 			<i class=" ifont ifont_eye" v-on:click="eyeEvent" v-show="eyeShow">&#xe64f;</i>
 			<i class=" ifont ifont_eye" v-on:click="eyeEvent" v-show="eyeShowNo">&#xe61c;</i>
 			<p class="span_right" v-on:click="toForgetPassword">忘记密码?</p>
