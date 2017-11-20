@@ -4,7 +4,6 @@
 		<div class="register">
 			<p>注册<i class="ifont" v-on:click="close">&#xe624;</i></p>
 			<div class="">
-				<input type="text" id="phone"  class="input_1" style="display: none;" />
 				<input type="text" id="phone"  class="input_1" placeholder="请输入手机号" maxlength="11" v-model.trim="phone" autocomplete="off" />
 			</div>
 			<div class="">
