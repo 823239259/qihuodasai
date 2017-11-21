@@ -433,6 +433,9 @@
 			},
 			length(){
 				return this.Parameters.length;
+			},
+			selectTime(){
+				return this.$store.state.market.selectTime;
 			}
 		},
 		filters:{
@@ -466,33 +469,48 @@
 									this.$store.state.market.currentdetail = o;
 									this.$store.state.market.currentNo = o.CommodityNo;
 									this.tradePrices = o.LastQuotation.LastPrice;
-									var data = {
-										Method: "QryHistory",
-										Parameters:{
-											ExchangeNo: o.ExchangeNo,
-											CommodityNo: o.CommodityNo,
-											ContractNo: o.MainContract,
-											HisQuoteType: 0,
-											BeginTime: "",
-											EndTime: "",
-											Count: 0
-										}
-									};
-									this.quoteSocket.send(JSON.stringify(data));
-									this.$store.state.market.selectTime = 1440;
-									var datas = {
-										Method: "QryHistory",
-										Parameters:{
-											ExchangeNo: o.ExchangeNo,
-											CommodityNo: o.CommodityNo,
-											ContractNo: o.MainContract,
-											HisQuoteType: 1440,
-											BeginTime: "",
-											EndTime: "",
-											Count: 0
-										}
-									};
-									this.quoteSocket.send(JSON.stringify(datas));
+									if(this.selected == 1 || this.selected == 0){
+										this.selected = 1;
+										this.selectView = 'fens';
+										var data = {
+											Method: "QryHistory",
+											Parameters:{
+												ExchangeNo: o.ExchangeNo,
+												CommodityNo: o.CommodityNo,
+												ContractNo: o.MainContract,
+												HisQuoteType: 0,
+												BeginTime: "",
+												EndTime: "",
+												Count: 0
+											}
+										};
+										this.quoteSocket.send(JSON.stringify(data));
+									}else if(this.selected == 2){
+										this.$store.state.market.selectTime = 1;
+									}else if(this.selected == 3){
+										this.$store.state.market.selectTime = 5;
+									}else if(this.selected == 4){
+										this.$store.state.market.selectTime = 15;
+									}else if(this.selected == 5){
+										this.$store.state.market.selectTime = 30;
+									}else if(this.selected == 6){
+										this.$store.state.market.selectTime = 1440;
+									}
+									if(this.selected >= 2){
+										var datas = {
+											Method: "QryHistory",
+											Parameters:{
+												ExchangeNo: o.ExchangeNo,
+												CommodityNo: o.CommodityNo,
+												ContractNo: o.MainContract,
+												HisQuoteType: this.selectTime,
+												BeginTime: "",
+												EndTime: "",
+												Count: 0
+											}
+										};
+										this.quoteSocket.send(JSON.stringify(datas));
+									}
 								}
 							}.bind(this));
 							this.tradeParameters.forEach(function(o, i){
@@ -662,7 +680,9 @@
 					this.currentQuoteAll = i;
 					this.currentQuote = -1;
 				}
-				if(this.selected == 1){
+				if(this.selected == 1 || this.selected == 0){
+					this.selected = 1;
+					this.selectView = 'fens';
 					var data = {
 						Method: "QryHistory",
 						Parameters:{
@@ -1025,33 +1045,48 @@
 								this.$store.state.market.currentdetail = o;
 								this.$store.state.market.currentNo = o.CommodityNo;
 								this.tradePrices = o.LastQuotation.LastPrice;
-								var data = {
-									Method: "QryHistory",
-									Parameters:{
-										ExchangeNo: o.ExchangeNo,
-										CommodityNo: o.CommodityNo,
-										ContractNo: o.MainContract,
-										HisQuoteType: 0,
-										BeginTime: "",
-										EndTime: "",
-										Count: 0
-									}
-								};
-								this.quoteSocket.send(JSON.stringify(data));
-								this.$store.state.market.selectTime = 1440;
-								var datas = {
-									Method: "QryHistory",
-									Parameters:{
-										ExchangeNo: o.ExchangeNo,
-										CommodityNo: o.CommodityNo,
-										ContractNo: o.MainContract,
-										HisQuoteType: 1440,
-										BeginTime: "",
-										EndTime: "",
-										Count: 0
-									}
-								};
-								this.quoteSocket.send(JSON.stringify(datas));
+								if(this.selected == 1 || this.selected == 0){
+									this.selected = 1;
+									this.selectView = 'fens';
+									var data = {
+										Method: "QryHistory",
+										Parameters:{
+											ExchangeNo: o.ExchangeNo,
+											CommodityNo: o.CommodityNo,
+											ContractNo: o.MainContract,
+											HisQuoteType: 0,
+											BeginTime: "",
+											EndTime: "",
+											Count: 0
+										}
+									};
+									this.quoteSocket.send(JSON.stringify(data));
+								}else if(this.selected == 2){
+									this.$store.state.market.selectTime = 1;
+								}else if(this.selected == 3){
+									this.$store.state.market.selectTime = 5;
+								}else if(this.selected == 4){
+									this.$store.state.market.selectTime = 15;
+								}else if(this.selected == 5){
+									this.$store.state.market.selectTime = 30;
+								}else if(this.selected == 6){
+									this.$store.state.market.selectTime = 1440;
+								}
+								if(this.selected >= 2){
+									var datas = {
+										Method: "QryHistory",
+										Parameters:{
+											ExchangeNo: o.ExchangeNo,
+											CommodityNo: o.CommodityNo,
+											ContractNo: o.MainContract,
+											HisQuoteType: this.selectTime,
+											BeginTime: "",
+											EndTime: "",
+											Count: 0
+										}
+									};
+									this.quoteSocket.send(JSON.stringify(datas));
+								}
 							}
 						}.bind(this));
 						this.tradeParameters.forEach(function(o, i){
