@@ -408,11 +408,11 @@
 			//展开
 			show_listAll:function(){
 				if(this.show_list == true){
-					$(".product_list").css("overflow-y","scroll");
-					$(".btm_btm>span").html("关闭")
+					
+					$(".btm_btm>span").html("关闭");
 					return this.show_list = false
 				}else if(this.show_list == false){
-					$(".product_list").css("overflow-y","visible");
+					
 					$(".btm_btm>span").html("展开");
 					return this.show_list = true;
 				}
@@ -777,6 +777,21 @@
 		},
 		mounted:function(){
 			this.getBtnList();
+			//初始化高度
+			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+			var _h = h - 80 - 47;
+			console.log(_h);
+			var contH = $("#openAccount").height();
+			if(contH > _h){
+				$("#openAccount").height(_h);
+			}
+			$(window).resize(function(){
+				var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+				var _h = h - 80 - 47;
+				if(contH > _h){
+					$("#openAccount").height(_h);
+				}
+			});
 		}
 	}
 </script>
@@ -786,6 +801,7 @@
 	#openAccount {
 		width: 80%;
 		margin: auto;
+		overflow-y: auto;
 	}
 	.openAccount_top {
 		text-align: center;
