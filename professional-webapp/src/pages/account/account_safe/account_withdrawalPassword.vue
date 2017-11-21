@@ -185,6 +185,7 @@
 		width: 100%;
 		.account_withdrawlPassword_top {
 			 p {
+			 	text-indent:10px;
 			 	width: 100%;
 			 	height: 40px;
 			 	line-height: 40px;
@@ -246,6 +247,7 @@
 			width: 100%;
 			height: 170px;
 			p {
+				text-indent: 10px;
 				&:nth-child(1){
 					width: 100%;
 					height: 40px;
@@ -270,6 +272,7 @@
 				background-color: $blue;
 			}
 			li {
+				padding-left: 10px;
 				padding-top:20px; 
 				&:nth-child(2) {
 					color: $white;

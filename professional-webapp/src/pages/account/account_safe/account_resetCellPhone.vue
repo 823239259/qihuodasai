@@ -252,6 +252,7 @@
 		.account_resetCellPassword_top{
 			width:100%;
 			p {
+				text-indent:10px;
 				width: 100%;
 				height: 40px;
 				line-height: 40px;
@@ -312,6 +313,7 @@
 			width: 100%;
 			height: 170px;
 			p {
+				text-indent: 10px;
 				width: 100%;
 				height: 40px;
 				background-color: $bottom_color;
@@ -330,6 +332,7 @@
 				background-color: $blue;
 			}
 			li {
+				padding-left: 10px;
 				&:nth-child(1){
 					padding-top: 20px;
 					font-size: $fs12;
