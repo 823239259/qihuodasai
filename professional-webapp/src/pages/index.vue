@@ -292,49 +292,54 @@
 			addOptional: function(e){
 				//获取平台账户登录信息
 				this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
-				if(this.addStar == true){
-					var data = {
-						commodityCode: this.orderNo,
-						commodityName: this.orderName,
-					};
-					var headers = {
-						token:  this.userInfo.token,
-						secret: this.userInfo.secret
-					};
-					pro.fetch('post', '/contract/saveOptional', data, headers).then(function(res){
-						if(res.success == true){
-							if(res.code == 1){
-								layer.msg('添加成功', {time: 1000});
-								this.addStar = false;
-								this.optional = '取消自选';
+				
+				if(this.userInfo != '' && this.userInfo != undefined){
+					if(this.addStar == true){
+						var data = {
+							commodityCode: this.orderNo,
+							commodityName: this.orderName,
+						};
+						var headers = {
+							token:  this.userInfo.token,
+							secret: this.userInfo.secret
+						};
+						pro.fetch('post', '/contract/saveOptional', data, headers).then(function(res){
+							if(res.success == true){
+								if(res.code == 1){
+									layer.msg('添加成功', {time: 1000});
+									this.addStar = false;
+									this.optional = '取消自选';
+								}
 							}
-						}
-					}.bind(this)).catch(function(error){
-						var data = err.data;
-						layer.msg(data.message, {time: 1000});
-					});
+						}.bind(this)).catch(function(error){
+							var data = err.data;
+							layer.msg(data.message, {time: 1000});
+						});
+					}else{
+						var data = {
+							commodityCode: this.orderId
+						};
+						var headers = {
+							token:  this.userInfo.token,
+							secret: this.userInfo.secret
+						};
+						pro.fetch('post', 'contract/delOptional', data, headers).then(function(res){
+							if(res.success == true){
+								if(res.code == 1){
+									layer.msg('删除成功', {time: 1000});
+									this.addStar = true;
+									this.optional = '添加自选';
+								}else{
+									layer.msg(res.message, {time: 1000});
+								}
+							}
+						}.bind(this)).catch(function(err){
+							var data = err.data;
+							layer.msg(data.message, {time: 1000});
+						});
+					}
 				}else{
-					var data = {
-						commodityCode: this.orderId
-					};
-					var headers = {
-						token:  this.userInfo.token,
-						secret: this.userInfo.secret
-					};
-					pro.fetch('post', 'contract/delOptional', data, headers).then(function(res){
-						if(res.success == true){
-							if(res.code == 1){
-								layer.msg('删除成功', {time: 1000});
-								this.addStar = true;
-								this.optional = '添加自选';
-							}else{
-								layer.msg(res.message, {time: 1000});
-							}
-						}
-					}.bind(this)).catch(function(err){
-						var data = err.data;
-						layer.msg(data.message, {time: 1000});
-					});
+					layer.msg('请先登录平台账号', {time: 1000});
 				}
 			},
 			isSelectedOrder: function(){
@@ -367,8 +372,6 @@
 			}
 		},
 		mounted: function(){
-			//获取平台账户登录信息
-			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
 			//初始化页面高度
 			var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
@@ -389,6 +392,10 @@
 			}
 		},
 		activated: function(){
+			//获取平台账户登录信息
+			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
+			//是否是自选合约
+			this.isSelectedOrder();
 			$(window).resize(function(){
 				var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 				var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
@@ -454,8 +461,6 @@
 				};
 				this.quoteSocket.send(JSON.stringify(datas));
 				this.$store.state.market.currentNo = this.Parameters[0].CommodityNo;
-				//是否是自选合约
-				this.isSelectedOrder();
 			}
 		}
 	}
