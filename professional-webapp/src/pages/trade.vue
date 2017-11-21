@@ -1690,5 +1690,8 @@
 			width: auto;
 			padding: 0 15px;
 		}
+		.trade_box .trade_list .head{
+			padding: 0 0 0 5px;
+		}
 	}
 </style>
