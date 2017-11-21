@@ -87,7 +87,7 @@
 				}else if(this.recharge_money < 10 ){
 					layer.msg("充值金额需要大于10元哦~",{time:2000});
 				}else {
-					this.$router.push({path:'/payWays',query:{username:JSON.parse(localStorage.user).username,money:this.recharge_money}});
+					this.$router.push({path:'/payWays',query:{username:JSON.parse(localStorage.user).username,money:this.recharge_money,accountMoney:this.accountMoney}});
 				}
 			}
 		},

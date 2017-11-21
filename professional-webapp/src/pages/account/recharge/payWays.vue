@@ -3,6 +3,9 @@
 	<div class="bg"></div>
 	<div class="payWays">
 		<div class="page_cont">
+			<div class="back">
+				<h3 v-on:click="back">点击返回</h3>
+			</div>
 			<iframe :src="iframe"></iframe>
 		</div>
 	</div>
@@ -13,12 +16,17 @@
 		name:"payWays",
 		data(){
 			return{
-				
+				accountMoney:''
 			}
 		},
 		computed: {
 			iframe(){
 				return 'http://test.pay.duokongtai.cn/app/appPayinfo?mobile='+ this.$route.query.username +'&money='+ this.$route.query.money;
+			}
+		},
+		methods:{
+			back:function(){
+				this.$router.push({path:'/recharge',query:{accountMoney:this.accountMoney}});
 			}
 		},
 		mounted:function(){
@@ -36,6 +44,7 @@
 					$(".payWays").height(_h);
 				}
 			});
+			this.accountMoney = this.$route.query.accountMoney;
 		}
 	}
 </script>
@@ -63,8 +72,24 @@
 		.page_cont{
 			iframe{
 				width: 400px;
-				height: 600px;
+				height: 560px;
 				border: none;
+				position: relative;
+				top: 40px;
+			}
+			.back{
+				text-align: left;
+				height: 40px;
+				width: 400px;
+				background-color: black;
+				line-height: 40px;
+				color: $white;
+				position: absolute;
+				left: 100px;
+				h3{
+					text-indent: 10px;
+					font-weight: 500;
+				}
 			}
 		}
 	}
