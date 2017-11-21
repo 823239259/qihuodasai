@@ -205,9 +205,12 @@
 				float: left;
 				text-align: right;
 				p{
-					padding-top: 20px;
+					margin-top: 10px;
 					height: 50px;
 					line-height: 50px;
+					&:nth-child(3){
+						border-bottom: 1px solid $bottom_color;
+					}
 				}
 			}
 			.center_right{
@@ -215,9 +218,15 @@
 				float: left;
 				text-align: left;
 				p{
-					padding-top: 20px;
+					margin-top: 10px;
 					height: 50px;
 					line-height: 50px;
+					&:nth-child(3){
+						border-bottom: 1px solid $bottom_color;
+					}
+					&:nth-child(1){
+						color: white;
+					}
 				}
 				input {
 					width : 160px;
@@ -225,9 +234,6 @@
 					border: 1px solid $bottom_color;
 					border-radius: 5px;
 					color: $white;
-					&:hover{
-						border-color: $yellow;
-					}
 				}
 				.btn {
 					width: 160px;
