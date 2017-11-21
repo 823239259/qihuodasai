@@ -4,11 +4,23 @@
 			<p>您正在为账户<span>{{phone}}</span>重置手机密码</p>
 		</div>
 		<div class="account_resetLoginPassword_center">
-			<p>手机号码:{{username}}</p>
-			<p>获取验证码：<input type="text" v-model="code"/><i class="getcode" v-on:click="getCode">{{volid ? info : (time + '秒')}}</i></p>
-			<p>新登录密码：<input type="password" v-model="newLoginPassword" /></p>
-			<p>确认新密码：<input type="password" v-model="sureLoginPassword"/></p>
-			<button class="btn yellow" v-on:click="toResetLoginPassword">确认</button>
+			<div class="center_left">
+				<ul>
+					<p>手机号码:</p>
+					<p>获取验证码：</p>
+					<p>新登录密码：</p>
+					<p>确认新密码：</p>
+				</ul>
+			</div>
+			<div class="center_right">
+				<ul>
+					<p>{{username}}</p>
+					<p><input type="text" v-model="code"/><i class="getcode" v-on:click="getCode">{{volid ? info : (time + '秒')}}</i></p>
+					<p><input type="password" v-model="newLoginPassword" /></p>
+					<p><input type="password" v-model="sureLoginPassword"/></p>
+					<p><button class="btn yellow" v-on:click="toResetLoginPassword">确认</button></p>
+				</ul>
+			</div>
 		</div>
 		<div class="account_resetLoginPassword_btm">
 			<p>设置资金密码遇到问题</p>
@@ -198,34 +210,50 @@
 		}
 		.account_resetLoginPassword_center {
 			width: 100%;
-			height: 260px;
+			height: 330px;
 			background-color: $blue;
 			text-align : center;
-			p {
-				padding-top : 20px;
-				&:nth-child(2){
-					margin-left: 72px;
+			.center_left{
+				width: 50%;
+				float: left;
+				text-align: right;
+				p{
+					margin-top: 10px;
+					height: 50px;
+					line-height: 50px;
+					&:nth-child(3){
+						border-bottom: 1px solid $bottom_color;
+					}
 				}
-				&:nth-child(1){
-					margin-right: 72px;
+			}
+			.center_right{
+				width: 50%;
+				float: left;
+				text-align: left;
+				p{
+					margin-top: 10px;
+					height: 50px;
+					line-height: 50px;
+					&:nth-child(3){
+						border-bottom: 1px solid $bottom_color;
+					}
+					&:nth-child(1){
+						color: white;
+					}
 				}
-			}
-			input {
-				color:$white;
-				width: 160px;
-				height: 30px;
-				border: 1px solid $bottom_color;
-				border-radius: 5px;
-				/*&:hover{
-					border: 1px solid $yellow;
-				}*/
-			}
-			.btn {
-				width: 160px;
-				height: 30px;
-				margin-top: 10px;
-				margin-left: 80px;
-			}
+				input {
+					width : 160px;
+					height: 30px;
+					border: 1px solid $bottom_color;
+					border-radius: 5px;
+					color: $white;
+				}
+				.btn {
+					width: 160px;
+					height: 30px;
+					margin-top: 30px;
+				}
+			}	
 		}
 		.account_resetLoginPassword_btm {
 			width: 100%;
