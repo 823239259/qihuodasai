@@ -88,7 +88,7 @@
 					layer.msg('手机格式错误', {time: 1000});
 				}else{
 					this.$refs.codeDialog.isshow = true;
-					this.$refs.codeDialog.path =  "http://test.api.duokongtai.cn/sendImageCode?code=" + Math.random()*1000 + "&mobile=" + this.phone;
+					this.$refs.codeDialog.path= this.PATH+"/sendImageCode?code="+Math.random()*1000 + "&mobile=" + this.phone;
 					this.$refs.codeDialog.phone = this.phone;
 					//页面效果
 					$(e.target).addClass('current');
@@ -181,12 +181,10 @@
 			}
 		},
 		mounted: function(){
-			console.log(11);
 			this.phone = '';
 			this.pwd = '';
 		},
 		activated: function(){
-			console.log(22);
 			this.phone = '';
 			this.pwd = '';
 		}

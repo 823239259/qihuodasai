@@ -119,9 +119,6 @@
 									this.isshow = false;
 								}
 							}
-							else{
-								layer.msg(res.message, {time: 1000});
-							}
 						}.bind(this)).catch(function(err){
 							var data = err.data;
 							if(data.success == false){

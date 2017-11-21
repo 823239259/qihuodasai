@@ -10,8 +10,8 @@
 						<span v-else = "realName!=null">{{realName}}&nbsp;{{username}}</span>
 						<img src="../../../assets/images/acc_01.png" alt="账户" v-if="realName == null" v-on:click="toCertification" />
 						<img src="../../../assets/images/acc_02.png" alt="账户" v-else="realName != null" />
-						<img src="../../../assets/images/acc_03.png" alt="提现密码" v-if="realName == null" v-on:click="towWithDrawlPassword"/>
-						<img src="../../../assets/images/acc_04.png" alt="提现密码" v-else="realName != null" v-on:click="towWithDrawlPassword"/>
+						<img src="../../../assets/images/acc_03.png" alt="提现密码" v-if="isBoundBankCard == null" v-on:click="towWithDrawlPassword"/>
+						<img src="../../../assets/images/acc_04.png" alt="提现密码" v-else="isBoundBankCard != null" v-on:click="towWithDrawlPassword"/>
 					</li>
 					<li>
 						<button class="btn yellow" v-on:click="toRecharge">充值</button>
@@ -182,7 +182,7 @@
 				eachPage:10,//每页条数
 				showPage:true,//是否显示分页
 				currentPage:1,//当前页
-				totalList:[],//总数据,
+				totalList:[]//总数据,
 			}
 		},
 		filters: {
