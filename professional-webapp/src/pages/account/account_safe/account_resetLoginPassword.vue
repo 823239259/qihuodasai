@@ -7,9 +7,9 @@
 			<div class="center_left">
 				<ul>
 					<p>手机号码:</p>
-					<p>获取验证码：</p>
-					<p>新登录密码：</p>
-					<p>确认新密码：</p>
+					<p>获取验证码:</p>
+					<p>新登录密码:</p>
+					<p>确认新密码:</p>
 				</ul>
 			</div>
 			<div class="center_right">

@@ -4,11 +4,19 @@
 				<p>您正在为账户<span>{{phone}}</span>修改绑定手机</p>
 			</div>
 			<div class="account_resetCellPassword_center">
-				<p>旧手机号码：<span>{{username}}</span></p>
-				<p>短信验证码：<input type="text" v-model="oldCode"/><i class="getcode" v-on:click="getOldCode">{{oldVolid ? info : (oldTime + '秒')}}</i></p>
-				<p>新手机号码：<input type="text" v-model="newMobile" maxlength="11"/></p>
-				<p>短信验证码:<input type="text" v-model="newCode"/><i class="getcode" v-on:click="getNewCode">{{newVolid ? info : (newTime + '秒')}}</i></p>
-				<button class="btn yellow" v-on:click="toResetMobile">确认</button>
+				<div class="center_left">
+					<p>旧手机号码:</p>
+					<p>短信验证码:</p>
+					<p>新手机号码:</p>
+					<p>短信验证码:</p>
+				</div>
+				<div class="center_right">
+					<p>{{username}}</p>
+					<p><input type="text" v-model="oldCode"/><i class="getcode" v-on:click="getOldCode">{{oldVolid ? info : (oldTime + '秒')}}</i></p>
+					<p><input type="text" v-model="newMobile" maxlength="11"/></p>
+					<p><input type="text" v-model="newCode"/><i class="getcode" v-on:click="getNewCode">{{newVolid ? info : (newTime + '秒')}}</i></p>
+					<p><button class="btn yellow" v-on:click="toResetMobile">确认</button></p>
+				</div>
 			</div>
 			<div class="account_resetCellPassword_btm">
 				<p>绑定手机遇到问题</p>
@@ -255,29 +263,49 @@
 		}
 		.account_resetCellPassword_center {
 			width: 100%;
-			height: 290px;
+			height: 330px;
 			background-color: $blue;
 			text-align : center;
-			p {
-				&:nth-child(1){
-					margin-right: 156px;
-				}
-				padding-top : 20px;
-				&:nth-child(3){
-					margin-right: 70px;
+			.center_left{
+				width: 50%;
+				float: left;
+				text-align: right;
+				p{
+					margin-top: 10px;
+					height: 50px;
+					line-height: 50px;
+					&:nth-child(3){
+						border-bottom: 1px solid $bottom_color;
+					}
 				}
 			}
-			input {
-				width: 160px;
-				color: $white;
-				height: 30px;
-				border: 1px solid $bottom_color;
-				border-radius: 5px;
-			}
-			.btn {
-				width: 160px;
-				height: 30px;
-				margin-top: 10px;
+			.center_right{
+				width: 50%;
+				float: left;
+				text-align: left;
+				p{
+					margin-top: 10px;
+					height: 50px;
+					line-height: 50px;
+					&:nth-child(3){
+						border-bottom: 1px solid $bottom_color;
+					}
+					&:nth-child(1){
+						color: white;
+					}
+				}
+				input {
+					width : 160px;
+					height: 30px;
+					border: 1px solid $bottom_color;
+					border-radius: 5px;
+					color: $white;
+				}
+				.btn {
+					width: 160px;
+					height: 30px;
+					margin-top: 30px;
+				}
 			}
 		}
 		.account_resetCellPassword_btm {
