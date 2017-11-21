@@ -289,7 +289,7 @@
 				}
 				var info = {
 					page:page,
-					rows:10,
+					rows:'',
 					startTime:startT,
 					endTime:endT,
 					stateType:chooseType
@@ -298,10 +298,14 @@
 					if(res.success == true){
 						if(res.code == 1){
 							this.totalList = res.data.tradeList;
-							this.pageCount = Math.ceil(this.totalList.length/this.eachPage);
+							console.log(11111111111111);
+							console.log(this.totalList);
+							this.pageCount =Math.round(this.totalList.length/this.eachPage);
 							var curtotal=(this.currentPage-1)*this.eachPage;//上一页显示的最后一条
 				            var tiaoshu=this.currentPage*this.eachPage;//当前页显示的最后一条
 				            this.showList=this.totalList.slice(curtotal,tiaoshu); //当前页应显示的数据
+				            console.log(444444444444);
+				            console.log(this.showList);
 						}
 					}
 				}.bind(this)).catch(function(err){
@@ -398,14 +402,13 @@
 			    }
 			    var currentdate = year + seperator1 + (month-1) + seperator1 + strDate+
 			    " "+"23:59:59";
-			    console.log(currentdate)
 			    return currentdate
 			}
 		},
 		mounted:function(){
 			//初始化高度
 			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-			var _h = h - 80 - 47;
+			var _h = h - 80 - 90;
 			var contH = $("#account_openDetail").height();
 			if(contH > _h){
 				$("#account_openDetail").height(_h);
@@ -420,7 +423,7 @@
 			//获取初始开户记录
 			this.getData('',this.getMonthDate(),this.getNowFormatDate(),'');
 			this.day = 1;
-			this.query = 0;
+			this.query = '';
 			//调用日历插件
 			dateEvent('.startTime');
 			dateEvent('.endTime');
@@ -459,6 +462,7 @@
 			overflow-y: auto;
 			float: left;
 			width: 100%;
+			height:1050px;
 			.account_openDetail_top {
 				height:110px;
 				background-color: $blue;
@@ -515,7 +519,7 @@
 				}
 			}
 			.account_openDetail_center{
-				height: 500px;
+				/*height: 500px;*/
 				background-color: $blue;
 				thead tr{
 					height: 30px;
@@ -584,7 +588,7 @@
 			color: $yellow
 		}
 		.pager{
-			margin-right: 10px;
+			margin-right: 60px;
 			float: right;
 			span{
 				margin: 0 10px;

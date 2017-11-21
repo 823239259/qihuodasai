@@ -96,7 +96,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr v-for="item in item">
+					<tr v-for="item in showList">
 						<td>{{item.subTime | getTime}}</br><i>{{item.subTime | getTimeTwo}}</i></td>
 						<td v-if="item.money >0" class="color_yellow">收入</td>
 						<td v-else="item.money <0">支出</td>	
@@ -134,11 +134,18 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="pager">
+		<!--<div class="pager">
 		    <button class="btn_span"  @click="prePage">上一页</button>
 		    <span  @click="toIndexPage" v-for="(n,index) in pageCount" :class="{active:current1 == index}">{{n}}</span>
 		    <button class="btn_span"  @click="nextPage">下一页</button>
-		  </div>
+		</div>-->
+		<div class="pager">
+		    <button class="btn_span"   v-show="currentPage != 1" @click="currentPage-- && goIndex(currentPage--,'last')">上一页</button>
+		    <span  v-for="index in pages" @click="goIndex(index)" :class="{active:currentPage == index}" :key="index">{{index}}</span>
+		    <button class="btn_span"  v-show="pageCount != currentPage && pageCount != 0 " @click="currentPage++ && goIndex(currentPage++,'!last')">下一页</button>
+		</div>
+		
+		
 		<p class="p_center">投资有风险，入市需谨慎</p>
 	</div>
 </template>
@@ -169,7 +176,13 @@
 				endTime: '',
 				accountMoney:'',
 				day:'',
-				query:''
+				query:'',
+				showList:[],//显示数据
+				pageCount:'',//总页数
+				eachPage:10,//每页条数
+				showPage:true,//是否显示分页
+				currentPage:1,//当前页
+				totalList:[],//总数据,
 			}
 		},
 		filters: {
@@ -189,6 +202,13 @@
 			},
 		},
 		methods:{
+			goIndex:function(index,el){
+	            if(index == this.currentPage) return;
+	            this.currentPage = index;
+	            var curtotal=(this.currentPage-1)*this.eachPage;//上一页显示的最后一条
+	            var tiaoshu=this.currentPage*this.eachPage;//当前页显示的最后一条
+	            this.showList=this.totalList.slice(curtotal,tiaoshu); //当前页应显示的数据
+	        },
 			//实名
 			toCertification:function(){
 				this.$router.push({path:'/safe_certification'});
@@ -319,26 +339,6 @@
 				this.current1 = index
 				return;
 		   	},
-			// 下一页
-			 nextPage:function() {
-			 	if((this.current)+1 >this.pageCount){
-			 		return;
-			 	}else{
-			 		this.GetList((this.current+1),'','','');
-			 		this.current++;
-			 		return 
-			 	}
-		    },
-			// 上一页
-			 prePage:function(){
-			 	if((this.current-1) <=0){
-			 		return;
-			 	}else{
-			 		this.GetList((this.current - 1),'','','');
-			 		this.current--;
-			 		return;
-			 	}
-			},
 			toWithDraw : function (){
 				this.$router.push({path:'/withDraw_bankcard'})
 			},
@@ -357,7 +357,7 @@
 				}
 				var info = {
 					pageIndex:page,
-					size:10,
+					size:100,
 					startTime:startT,
 					endTime:endT,
 					operaType:chooseType
@@ -374,7 +374,11 @@
 							this.balance=data.balance;
 							this.pageCount = data.totalPage;
 							//资金收入支出详情列表fundList
-							this.item=data.fundList;
+							this.totalList = res.data.fundList;
+							this.pageCount = Math.ceil(this.totalList.length/this.eachPage);
+							var curtotal=(this.currentPage-1)*this.eachPage;//上一页显示的最后一条
+				            var tiaoshu=this.currentPage*this.eachPage;//当前页显示的最后一条
+				            this.showList=this.totalList.slice(curtotal,tiaoshu); //当前页应显示的数据
 						}
 					}
 				}).catch((err)=>{
@@ -544,6 +548,27 @@
 			var time = pro.getDate("y-m-d", date.getTime()).split(' ')[0];
 			this.startTime = time;
 			this.endTime = time;
+		},
+		computed:{
+			pages:function(){
+                var pag = [];
+                    if( this.currentPage < this.eachPage ){
+                       var i = Math.min(this.eachPage,this.pageCount);
+                       while(i){
+                           pag.unshift(i--);
+                       }
+                    }else{ 
+                       var middle = this.currentPage - Math.floor(this.eachPage / 2 ),
+                           i = this.eachPage;
+                       if( middle >  (this.pageCount - this.eachPage)  ){
+                           middle = (this.pageCount - this.eachPage) + 1
+                       }
+                       while(i--){
+                           pag.push( middle++ );
+                       }
+                   }
+                 return pag
+                }
 		}
 	}
 </script>
