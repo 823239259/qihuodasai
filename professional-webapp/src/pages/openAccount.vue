@@ -93,7 +93,7 @@
 						</thead>
 						<tbody class="show_list">
 							<tr v-for="k in temp.contractList" class="show_list_td">
-								<td>{{k.tradeType | cnname}}</br><i>{{k.mainContract}}</i></td>
+								<td>{{k.tradeType | cnname}}</br><i> {{k.mainContract}}</i></td>
 								<td>{{k.tradTime}}</td>
 								<td>{{k.shoushu | filtershoushu(chooseType)}}</td>
 								<td>{{k.price}}元/手</td>
@@ -505,6 +505,7 @@
 							this.temp = data;
 							this.item = data.paramList;
 							this.$store.state.tempTradeapply = this.temp;
+							console.log(this.temp.contractList[0].tradTime);
 							this.temp.contractList.forEach(function(o, i) {
 								switch(o.tradeType) {
 									case 0:   //return '富时A50'
@@ -982,6 +983,7 @@
 		}
 		tr{
 			cursor: default;
+			text-indent: 10px;
 		}
 		.loss_mark{
 			position: absolute;
@@ -1024,6 +1026,9 @@
 	 		/*background-color: $blue;*/
 	 		height: 50px;
 	 		border-bottom: 1px solid $bottom_color;
+	 		i{
+	 			margin-left: 10px;
+	 		}
 	 	}
 	 }
 	 .openAccount_btm_btm{
@@ -1074,6 +1079,9 @@
 	 	width: 100%;
 	 	height: 210px;
 	 	background-color: $blue;
+	 	tr{
+	 		text-indent: 10px;
+	 	}
 	 }
 	 .to_openAccount {
 	 	height: 90px;
