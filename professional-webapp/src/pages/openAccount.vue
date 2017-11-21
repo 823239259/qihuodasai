@@ -410,7 +410,13 @@
 				if(this.show_list == true){
 					$(".btm_btm>span").html("关闭");
 					$(".product_list, .openAccount_btm_center").css('height', 'auto');
-					this.show_list = false
+					this.show_list = false;
+					var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+					var _h = h - 90;
+					var contH = $("#openAccount").height();
+					if(contH > _h){
+						$("#openAccount").height(_h);
+					}
 				}else if(this.show_list == false){
 					$(".btm_btm>span").html("展开");
 					this.show_list = true;
@@ -505,7 +511,6 @@
 							this.temp = data;
 							this.item = data.paramList;
 							this.$store.state.tempTradeapply = this.temp;
-							console.log(this.temp.contractList[0].tradTime);
 							this.temp.contractList.forEach(function(o, i) {
 								switch(o.tradeType) {
 									case 0:   //return '富时A50'
@@ -779,8 +784,7 @@
 			this.getBtnList();
 			//初始化高度
 			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-			var _h = h - 80 - 47;
-			console.log(_h);
+			var _h = h - 90;
 			var contH = $("#openAccount").height();
 			if(contH > _h){
 				$("#openAccount").height(_h);
