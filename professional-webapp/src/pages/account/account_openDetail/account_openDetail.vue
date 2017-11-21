@@ -229,13 +229,9 @@
 						if(res.code == 1){
 							this.totalList = res.data.tradeList;
 							this.pageCount = Math.ceil(this.totalList.length/this.eachPage);
-							console.log(11111111111111);
-							console.log(this.pageCount);
 							var curtotal=(this.currentPage-1)*this.eachPage;//上一页显示的最后一条
 				            var tiaoshu=this.currentPage*this.eachPage;//当前页显示的最后一条
 				            this.showList=this.totalList.slice(curtotal,tiaoshu); //当前页应显示的数据
-							
-							console.log(this.totalList);
 						}
 					}
 				}.bind(this)).catch(function(err){
