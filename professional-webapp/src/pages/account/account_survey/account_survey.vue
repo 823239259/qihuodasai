@@ -659,6 +659,11 @@
 						position: absolute;
 						top: 20px;
 						left: 70px;
+						width: 200px;
+						height: 30px;
+						line-height: 30px;
+						background-color: #596080;
+						text-align: center;
 					}
 					.showmoney1{
 						font-size: $fs14;
@@ -666,6 +671,11 @@
 						position: absolute;
 						top: 100px;
 						left: 70px;
+						width: 200px;
+						line-height: 30px;
+						height: 30px;
+						background-color: #596080;
+						text-align: center;
 					}
 				}
 			}

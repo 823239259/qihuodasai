@@ -816,6 +816,9 @@
 		float: left;
 		text-align: center;
 		span {
+			&:hover{
+				color: $yellow;
+			}
 			color: $white;
 		}
 		.btn.yellow{
@@ -858,6 +861,10 @@
 				font-size: $fs14;
 				float: right;
 				cursor: pointer;
+				color: $white;
+				&:hover{
+					color: $yellow;
+				}
 			}
 		}
 	}
@@ -1101,7 +1108,7 @@
 		}
 		p{
 			line-height: 26px;
-			color: $white;
+			color: $lightblue;
 			font-size: $fs14;;
 			padding: 8px 15px;
 		}
@@ -1120,7 +1127,7 @@
 		}
 		p{
 			line-height: 26px;
-			color: $white;
+			color: $lightblue;
 			font-size: $fs14;;
 			padding: 8px 15px;
 			border-bottom: 5px solid $blue;
