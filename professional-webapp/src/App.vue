@@ -244,7 +244,7 @@
 						this.$store.state.account.currentNav = 1;
 						break;
 					case 2:
-						if(this.userName == ''){
+						if(this.userInfo == ''){
 							this.$router.push({path: '/login'});
 							this.$store.state.account.currentNav = 3;
 						}else{
@@ -265,7 +265,7 @@
 //						this.$store.state.account.currentNav = 5;
 //						break;
 					case 3:
-						if(this.userName == ''){
+						if(this.userInfo == ''){
 							this.$router.push({path: '/login'});
 						}else{
 							this.$router.push({path: '/account'});
@@ -309,8 +309,6 @@
 				this.initQuoteClient();
 				this.$store.state.market.quoteInitStatus == true;
 			};
-			//获取平台账户登录信息
-			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
 			//判断是否登录
 			if(localStorage.user){
 				this.show_tologin = false;
@@ -322,6 +320,8 @@
 			}
 		},
 		activated: function(){
+			//获取平台账户登录信息
+			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
 			//监听退出全屏
 			document.onkeydown = function (e) {
 	        	e = e || event;
