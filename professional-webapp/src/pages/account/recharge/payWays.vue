@@ -52,15 +52,15 @@
 		vertical-align:middle;
 	}
 	.payWays{
-		overflow-y: scroll;
-		position: absolute;
-		z-index: 120;
-		left: 40%;
-		margin: auto;
 		.page_cont{
 			iframe{
-				width: 100%;
-				height: 686px;
+				z-index: 120;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin: -300px 0 0 -200px;
+				width: 400px;
+				height: 600px;
 				border: none;
 			}
 		}
