@@ -262,6 +262,7 @@
 					background: $black;
 					border: 1px solid $bottom_color;
 					span{
+						background-color: #586081;
 						display: block;
 						width: 100%;
 						height: 30px;
@@ -270,6 +271,9 @@
 						font-size: $fs14;
 						margin: 0;
 						cursor: pointer;
+						&:hover{
+							background-color:#464c66;
+						}
 					}
 				}
 			}
