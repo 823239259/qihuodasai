@@ -181,12 +181,10 @@
 			}
 		},
 		mounted: function(){
-			console.log(11);
 			this.phone = '';
 			this.pwd = '';
 		},
 		activated: function(){
-			console.log(22);
 			this.phone = '';
 			this.pwd = '';
 		}
