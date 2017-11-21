@@ -25,7 +25,7 @@
 						<ul>
 							<li><input type="text"  v-model="recharge_money"/></li>
 							<li><span>注意：</span>单次充值金额最低10元</li>
-							<li><button class="btn" v-on:click="nextStep">下一步</button></li>
+							<li><button class="btn" v-on:click="nextStep">下一步</button><i v-on:click="back">返回修改</i></li>
 						</ul>
 					</div>
 				</div>
@@ -64,7 +64,8 @@
 			return{
 				recharge_money:'',
 				accountMoney:'',
-				totalMoney:0.00
+				totalMoney:0.00,
+				backto:""
 			}
 		},
 		watch: {
@@ -81,6 +82,15 @@
 			}
 		},
 		methods:{
+			back:function(){
+				console.log(11111111);
+				console.log(this.backto);
+				if(this.backto != undefined){
+					this.$router.push({path:'/account_survey'});
+				}else {
+					this.$router.push({path:'/confirmPayment'});
+				}
+			},
 			nextStep:function(){
 				if(this.recharge_money == ''){
 					layer.msg("请输入充值金额",{time:2000});
@@ -109,9 +119,11 @@
 			//获取用户资金
 			this.accountMoney = this.$route.query.accountMoney;
 			this.totalMoney = this.accountMoney;
+			this.backto = this.$route.query.backhere;
 		},
 		activated:function(){
 			this.accountMoney = this.$route.query.accountMoney;
+			this.backto = this.$route.query.backhere;
 		}
 	}
 </script>
@@ -234,6 +246,13 @@
 						&:nth-child(2){
 							span{
 								color: #ff4c4c;
+							}
+						}
+						i{
+							color: #006699;
+							padding-left: 10px;
+							&:hover{
+								color: $yellow;
 							}
 						}
 					}
