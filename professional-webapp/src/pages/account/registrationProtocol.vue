@@ -208,7 +208,7 @@
 		}
 		p{
 			line-height: 26px;
-			color: $white;
+			color: $lightblue;
 			font-size: $fs14;;
 			padding: 8px 15px;
 		}
