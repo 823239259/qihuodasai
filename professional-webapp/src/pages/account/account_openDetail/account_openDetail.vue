@@ -405,7 +405,7 @@
 		mounted:function(){
 			//初始化高度
 			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-			var _h = h - 80 - 47;
+			var _h = h - 80 - 90;
 			var contH = $("#account_openDetail").height();
 			if(contH > _h){
 				$("#account_openDetail").height(_h);
@@ -459,6 +459,7 @@
 			overflow-y: auto;
 			float: left;
 			width: 100%;
+			height:1050px;
 			.account_openDetail_top {
 				height:110px;
 				background-color: $blue;
@@ -515,7 +516,7 @@
 				}
 			}
 			.account_openDetail_center{
-				height: 500px;
+				/*height: 500px;*/
 				background-color: $blue;
 				thead tr{
 					height: 30px;
