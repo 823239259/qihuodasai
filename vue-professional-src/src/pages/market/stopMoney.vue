@@ -359,6 +359,7 @@
 			hasNostopLossList00: function(){
 				let orderTemplist = this.orderTemplist;
 				this.$store.state.market.hasNostopLossList = [];
+				console.log(this.stopLossList);
 				this.stopLossList.forEach(function(e,i){
 					let s={};
 					s.ClientNo = e.ClientNo;
@@ -402,7 +403,9 @@
 					})();
 					s.StopLossDiff = e.StopLossDiff;
 					s.StopLossNo = e.StopLossNo;
-					s.StopLossPrice = parseFloat(e.StopLossPrice).toFixed(orderTemplist[e.CommodityNo].DotSize);
+					console.log(this.orderTemplist);
+					console.log(s.CommodityNo);
+					s.StopLossPrice = parseFloat(e.StopLossPrice).toFixed(this.orderTemplist[e.CommodityNo].DotSize);
 					s.StopLossType = (function(){
 						if(e.StopLossType==0)
 							return '限价止损';
@@ -414,9 +417,9 @@
 					s.StopLossType00=e.StopLossType;
 					s.triggerCondition=(function(){
 						if(e.StopLossType==0 || e.StopLossType==1)
-							return '触发价:'+parseFloat(e.StopLossPrice).toFixed(orderTemplist[e.CommodityNo].DotSize);
+							return '触发价:'+parseFloat(e.StopLossPrice).toFixed(this.orderTemplist[e.CommodityNo].DotSize);
 						if(e.StopLossType==2)
-							return '动态价:'+parseFloat(e.StopLossDiff).toFixed(orderTemplist[e.CommodityNo].DotSize);
+							return '动态价:'+parseFloat(e.StopLossDiff).toFixed(this.orderTemplist[e.CommodityNo].DotSize);
 					})();
 					
 					s.entrustPrice=(function(){
