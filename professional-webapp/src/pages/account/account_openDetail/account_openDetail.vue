@@ -455,7 +455,11 @@
 				}
 				td{
 					padding-left: 10px;
-					
+					span{
+						&:hover{
+							color: $yellow;
+						}
+					}
 				}
 				tbody tr td{
 					padding: 15px 0 15px 10px;
