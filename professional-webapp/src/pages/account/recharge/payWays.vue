@@ -89,6 +89,10 @@
 				h3{
 					text-indent: 10px;
 					font-weight: 500;
+					&:hover{
+						color: $yellow;
+						cursor:pointer;
+					}
 				}
 			}
 		}

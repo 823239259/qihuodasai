@@ -22,7 +22,7 @@
 							<span @click="conditionQuery" class="current">全部</span>
 							<span @click="conditionQuery">开户中</span>
 							<span @click="conditionQuery">操盘中</span>
-							<span @click="conditionQuery">已结算</span>
+							<span @click="conditionQuery">已完结</span>
 						</li>
 					</ul>
 				</div>
