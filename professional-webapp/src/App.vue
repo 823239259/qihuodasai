@@ -141,6 +141,9 @@
 			currentNav(){
 				return this.$store.state.account.currentNav;
 			},
+			isRefresh(){
+				return this.$store.state.account.isRefresh;
+			},
 			userName(){
 				if(this.$store.state.account.userName){
 					var user = this.$store.state.account.userName;
@@ -169,6 +172,14 @@
 					this.show_login = true;
 				}else{
 					this.show_login = false;
+				}
+			},
+			isRefresh: function(n, o){
+				console.log(n);
+				if(n == 1){
+					window.location.reload();
+				}else if(n == ''){
+					this.$store.state.account.isRefresh = '';
 				}
 			}
 		},
