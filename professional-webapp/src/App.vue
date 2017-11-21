@@ -244,6 +244,7 @@
 						this.$store.state.account.currentNav = 1;
 						break;
 					case 2:
+						this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
 						if(this.userInfo == ''){
 							this.$router.push({path: '/login'});
 							this.$store.state.account.currentNav = 3;
@@ -265,6 +266,7 @@
 //						this.$store.state.account.currentNav = 5;
 //						break;
 					case 3:
+						this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
 						if(this.userInfo == ''){
 							this.$router.push({path: '/login'});
 						}else{
