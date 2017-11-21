@@ -62,7 +62,7 @@
 								<td v-else-if="item.stateTypeStr=='开户失败'">-</td>
 								<td v-else-if="item.stateTypeStr == '操盘中'">
 									<span v-on:click="toCheckAccount(item.id)">查看账户</span></br>
-									<!--<span v-on:click="addMoney(item.id)">补充保证金</span></br>-->
+									<span v-on:click="addMoney(item.id)">补充保证金</span></br>
 									<span v-on:click="toCloseAccount(item.id)">结算方案</span>
 								</td>
 								<td v-else-if="item.stateTypeStr == '已完结'" v-on:click="toParticulars(item.id)">结算明细</td>
@@ -152,10 +152,10 @@
 			this.$router.push({path:'/openDetail_viewAccount',query:{"id":this.listId}});	
 			},
 			//添加保证金
-//			addMoney:function(a){
-//				this.listId = a;
-//				this.$router.push({path:"/openDetail_additionalMargin",query:{"id":this.listId}});
-//			},
+			addMoney:function(a){
+				this.listId = a;
+				this.$router.push({path:"/openDetail_additionalMargin",query:{"id":this.listId}});
+			},
 			//去结算明细
 			toParticulars:function(a){
 				this.listId = a;
@@ -298,14 +298,10 @@
 					if(res.success == true){
 						if(res.code == 1){
 							this.totalList = res.data.tradeList;
-							console.log(11111111111111);
-							console.log(this.totalList);
 							this.pageCount =Math.round(this.totalList.length/this.eachPage);
 							var curtotal=(this.currentPage-1)*this.eachPage;//上一页显示的最后一条
 				            var tiaoshu=this.currentPage*this.eachPage;//当前页显示的最后一条
 				            this.showList=this.totalList.slice(curtotal,tiaoshu); //当前页应显示的数据
-				            console.log(444444444444);
-				            console.log(this.showList);
 						}
 					}
 				}.bind(this)).catch(function(err){
