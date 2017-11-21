@@ -288,7 +288,7 @@ export default new Vuex.Store({
 		PATH: function(state) {
 			if(state.setting == 'dev') {
 				return 'http://test.api.duokongtai.cn';
-			} else if(state.setting == 'build') {
+			} else if(state.setting == 'build'){
 				if(state.environment == 'test'){
 					return 'http://test.api.duokongtai.cn';
 				}else{
