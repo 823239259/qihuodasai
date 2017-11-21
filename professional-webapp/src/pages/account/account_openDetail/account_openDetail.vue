@@ -298,12 +298,14 @@
 					if(res.success == true){
 						if(res.code == 1){
 							this.totalList = res.data.tradeList;
-							console.log(1111111111111)
+							console.log(11111111111111);
 							console.log(this.totalList);
-							this.pageCount = Math.ceil(this.totalList.length/this.eachPage);
+							this.pageCount =Math.round(this.totalList.length/this.eachPage);
 							var curtotal=(this.currentPage-1)*this.eachPage;//上一页显示的最后一条
 				            var tiaoshu=this.currentPage*this.eachPage;//当前页显示的最后一条
 				            this.showList=this.totalList.slice(curtotal,tiaoshu); //当前页应显示的数据
+				            console.log(444444444444);
+				            console.log(this.showList);
 						}
 					}
 				}.bind(this)).catch(function(err){
@@ -400,7 +402,6 @@
 			    }
 			    var currentdate = year + seperator1 + (month-1) + seperator1 + strDate+
 			    " "+"23:59:59";
-			    console.log(currentdate)
 			    return currentdate
 			}
 		},
@@ -422,7 +423,7 @@
 			//获取初始开户记录
 			this.getData('',this.getMonthDate(),this.getNowFormatDate(),'');
 			this.day = 1;
-			this.query = 0;
+			this.query = '';
 			//调用日历插件
 			dateEvent('.startTime');
 			dateEvent('.endTime');
