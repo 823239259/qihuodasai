@@ -407,6 +407,9 @@
 					span{
 						float: left;
 						margin-right: 20px;
+						&:hover{
+							color: $yellow;
+						}
 					}
 					.btn{
 						height: 30px;
