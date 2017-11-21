@@ -115,12 +115,10 @@
 						pro.fetch('post', '/sms', data, headers).then(function(res){
 							if(res.success == true){
 								if(res.code == 1){
+									console.log(1111111)
 									layer.msg('发送成功', {time: 1000});
 									this.isshow = false;
 								}
-							}
-							else{
-								layer.msg(res.message, {time: 1000});
 							}
 						}.bind(this)).catch(function(err){
 							var data = err.data;
