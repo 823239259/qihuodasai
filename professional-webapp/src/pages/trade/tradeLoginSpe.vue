@@ -56,12 +56,12 @@
 				$("#nav li").eq(3).addClass("current").siblings().removeClass("current");
 			},
 			loginEvent: function(user, pwd, fid){
-				var data = {
-					appVersions: this.$store.state.market.tradeConfig.version
-				};
-				pro.fetch('post', '/socket/config/getVersions', data, '').then(function(res){
-					if(res.success == true && res.code == 1){
-						this.url_real = res.data.socketUrl;
+//				var data = {
+//					appVersions: this.$store.state.market.tradeConfig.version
+//				};
+//				pro.fetch('post', '/socket/config/getVersions', data, '').then(function(res){
+//					if(res.success == true && res.code == 1){
+						this.url_real = this.$store.state.market.tradeConfig.url_real;
 						this.$store.state.market.tradeSocket = new WebSocket(this.url_real);
 						this.$store.state.market.tradeSocket.onopen = function(evt){
 							//登录
@@ -95,13 +95,13 @@
 									break;
 							}
 						}.bind(this);
-					}
-				}.bind(this)).catch(function(err){
-					var data = err.data;
-					if(data){
-						layer.msg(data.message, {time: 1000});
-					}
-				});
+//					}
+//				}.bind(this)).catch(function(err){
+//					var data = err.data;
+//					if(data){
+//						layer.msg(data.message, {time: 1000});
+//					}
+//				});
 			}
 		},
 		mounted: function(){},
