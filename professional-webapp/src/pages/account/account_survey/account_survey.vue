@@ -616,7 +616,7 @@
 				width: 100%;
 				.right_left{
 					padding-right: 10px;
-					width: 50%;
+					width: 40%;
 					float: left;
 					li{
 						padding-top: 20px;
@@ -630,7 +630,7 @@
 				}
 				.right_right{
 					position: relative;
-					width: 50%;
+					width: 60%;
 					float: left;
 					li{
 						padding-top: 20px;
@@ -650,6 +650,7 @@
 							color: white;
 							font-weight: 700;
 							font-size: 20px;
+							margin-top: 5px;
 						}
 					}
 					.showMoney{
@@ -689,7 +690,9 @@
 				width: 100%;
 				height: 80px;
 				float: left;
-				text-align: center;
+					p{
+						padding-left:34%;
+					}
 			}
 		}
 		#color_blue {
@@ -701,15 +704,14 @@
 			margin: 0 5px;
 		}
 		table {
-			text-indent: 5px;
 			background-color: none;
 			tr {
-				height: 40px;
+				height: 50px;
 				border-bottom: 1px solid $bottom_color;
 				background-color: $blue;
 				&:nth-child(1)
 					{
-						height: 30px;
+						height: 50px;
 					}	
 			}
 		}

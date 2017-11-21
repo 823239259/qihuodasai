@@ -92,7 +92,7 @@
 						if(res.success == true){
 							if(res.code == 1){
 								layer.msg("提现申请已提交，等待要银行处理。若24小时未到账请拨打：400-852-8008",{time:2000});
-								this.$router.push({pat:"/account_survey"});
+								this.$router.push({path:"/account_survey"});
 							}
 						}
 					}).catch((err)=>{
