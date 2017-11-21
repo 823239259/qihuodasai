@@ -656,25 +656,31 @@
 						font-size: $fs14;
 						color: $yellow;
 						position: absolute;
-						top: 20px;
+						top: 10px;
 						left: 70px;
-						width: 200px;
 						height: 30px;
 						line-height: 30px;
 						background-color: #596080;
 						text-align: center;
+						border-radius: 5px;
+						color: $white;
+						padding: 5px;
+						opacity: 0.8;
 					}
 					.showmoney1{
 						font-size: $fs14;
 						color: $yellow;
 						position: absolute;
-						top: 100px;
+						top: 95px;
 						left: 70px;
-						width: 200px;
 						line-height: 30px;
 						height: 30px;
 						background-color: #596080;
 						text-align: center;
+						color: $white;
+						border-radius: 5px;
+						padding: 5px;
+						opacity: 0.8;
 					}
 				}
 			}
