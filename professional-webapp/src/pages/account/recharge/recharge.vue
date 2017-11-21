@@ -83,8 +83,6 @@
 		},
 		methods:{
 			back:function(){
-				console.log(11111111);
-				console.log(this.backto);
 				if(this.backto != undefined){
 					this.$router.push({path:'/account_survey'});
 				}else {
