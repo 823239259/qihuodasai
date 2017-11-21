@@ -28,8 +28,8 @@
 						<span class="num_sm">买量</span>
 						<span class="num_sm">卖量</span>
 						<span class="num_bg">成交量</span>
-						<span class="num_bg">涨跌</span>
-						<span class="num_bg">涨幅%</span>
+						<span class="num_bg">涨跌额</span>
+						<span class="num_bg">涨跌幅%</span>
 						<span class="num_bg">持仓量</span>
 						<span class="num_bg">开盘</span>
 						<span class="num_bg">最高</span>
