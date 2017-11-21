@@ -4,11 +4,19 @@
 			<p>您正在为账户<span>{{phone}}</span>设置提现密码</p>
 		</div>
 		<div class="account_withdrawlPassword_center">
-			<p>手机号码：{{username}}</p>
-			<p>短信验证码：<input type="text" v-model="code" /><i class="getcode" v-on:click="getCode">{{volid ? info : (time + '秒')}}</i></p>
-			<p>提现密码：<input type="password" v-model="withDrawPassword" /></p>
-			<p>确认密码：<input type="password" v-model="sure_withDrawPassword" /></p>
-			<button class="btn yellow" v-on:click="comfire">确认</button>
+			<div class="center_left">
+				<p>手机号码：</p>
+				<p>短信验证码：</p>
+				<p>提现密码：</p>
+				<p>确认密码：</p>
+			</div>
+			<div class="center_right">
+				<p>{{username}}</p>
+				<p><input type="text" v-model="code" /><i class="getcode" v-on:click="getCode">{{volid ? info : (time + '秒')}}</i></p>
+				<p><input type="password" v-model="withDrawPassword" /></p>
+				<p><input type="password" v-model="sure_withDrawPassword" /></p>
+				<button class="btn yellow" v-on:click="comfire">确认</button>
+			</div>
 		</div>
 		<div class="account_withdrawlPassword_btm">
 			<p>实名认证相关</p>
@@ -55,7 +63,6 @@
 		},
 		methods :{
 			getCode :function(e){
-				
 				//获取验证码
 				var data = {
 					mobile: this.username,
@@ -193,31 +200,46 @@
 			height: 330px;
 			text-align: center;
 			background-color: $blue;	
-			p {
-				padding-top: 20px;
-				&:nth-child(3) {
-					border-top: 1px solid $bottom_color;
-					margin-top: 20px;
-				}
-				&:nth-child(2) {
-					margin-left: 60px;
-				}
-				&:nth-child(1) {
-					margin-right: 84px;
+			.center_left{
+				width: 50%;
+				float: left;
+				text-align: right;
+				p{
+					margin-top: 10px;
+					height: 50px;
+					line-height: 50px;
+					&:nth-child(3){
+						border-bottom: 1px solid $bottom_color;
+					}
 				}
 			}
-			input {
-				width : 160px;
-				height: 30px;
-				border: 1px solid $bottom_color;
-				border-radius: 5px;
-				color: $white;
-			}
-			.btn {
-				width: 160px;
-				height: 30px;
-				margin-top: 30px;
-				margin-left: 70px;
+			.center_right{
+				width: 50%;
+				float: left;
+				text-align: left;
+				p{
+					margin-top: 10px;
+					height: 50px;
+					line-height: 50px;
+					&:nth-child(3){
+						border-bottom: 1px solid $bottom_color;
+					}
+					&:nth-child(1){
+						color: white;
+					}
+				}
+				input {
+					width : 160px;
+					height: 30px;
+					border: 1px solid $bottom_color;
+					border-radius: 5px;
+					color: $white;
+				}
+				.btn {
+					width: 160px;
+					height: 30px;
+					margin-top: 30px;
+				}
 			}
 		}
 		.account_withdrawlPassword_btm {

@@ -616,7 +616,7 @@
 				width: 100%;
 				.right_left{
 					padding-right: 10px;
-					width: 50%;
+					width: 40%;
 					float: left;
 					li{
 						padding-top: 20px;
@@ -630,7 +630,7 @@
 				}
 				.right_right{
 					position: relative;
-					width: 50%;
+					width: 60%;
 					float: left;
 					li{
 						padding-top: 20px;
@@ -650,31 +650,38 @@
 							color: white;
 							font-weight: 700;
 							font-size: 20px;
+							margin-top: 5px;
 						}
 					}
 					.showMoney{
 						font-size: $fs14;
 						color: $yellow;
 						position: absolute;
-						top: 20px;
+						top: 10px;
 						left: 70px;
-						width: 200px;
 						height: 30px;
 						line-height: 30px;
 						background-color: #596080;
 						text-align: center;
+						border-radius: 5px;
+						color: $white;
+						padding: 5px;
+						opacity: 0.8;
 					}
 					.showmoney1{
 						font-size: $fs14;
 						color: $yellow;
 						position: absolute;
-						top: 100px;
+						top: 95px;
 						left: 70px;
-						width: 200px;
 						line-height: 30px;
 						height: 30px;
 						background-color: #596080;
 						text-align: center;
+						color: $white;
+						border-radius: 5px;
+						padding: 5px;
+						opacity: 0.8;
 					}
 				}
 			}
@@ -683,7 +690,9 @@
 				width: 100%;
 				height: 80px;
 				float: left;
-				text-align: center;
+					p{
+						padding-left:34%;
+					}
 			}
 		}
 		#color_blue {
@@ -695,15 +704,14 @@
 			margin: 0 5px;
 		}
 		table {
-			text-indent: 5px;
 			background-color: none;
 			tr {
-				height: 40px;
+				height: 50px;
 				border-bottom: 1px solid $bottom_color;
 				background-color: $blue;
 				&:nth-child(1)
 					{
-						height: 30px;
+						height: 50px;
 					}	
 			}
 		}
