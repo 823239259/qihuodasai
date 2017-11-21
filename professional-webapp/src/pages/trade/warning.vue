@@ -135,6 +135,7 @@
 	}
 	.cont{
 		.tips{
+			width: 400px;
 			height: 40px;
 			line-height: 40px;
 			text-align: center;

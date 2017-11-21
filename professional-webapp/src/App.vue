@@ -29,7 +29,7 @@
 					<em>400-852-8008</em>
 				</div>
 			</div>
-			<div class="fr" v-show="show_tologin">
+			<div class="fr" v-show="!show_login">
 				<a href="javascript: void(0);" v-on:click="toLogin">登录</a>
 				<a href="javascript: void(0);" v-on:click="toRegister">注册</a>
 			</div>
@@ -104,7 +104,6 @@
 				parametersRecommend: [],
 				userInfo : '',
 				isShow_exit : false,
-				show_tologin : false,
 				show_login : false,
 				iconShow: true,
 				zoomShow: true,
@@ -143,9 +142,10 @@
 				return this.$store.state.account.currentNav;
 			},
 			userName(){
-				var userName = this.$store.state.account.userName;
-				userName = userName.substr(0, 3) + '****' + userName.substr(7); 
-				return 	userName;
+				if(this.$store.state.account.userName){
+					var user = this.$store.state.account.userName;
+					return user.substr(0, 3) + '****' + user.substr(7); 
+				}
 			}
 		},
 		filters:{
@@ -154,7 +154,7 @@
 			},
 			fixNum: function(num, dotsize){
 				return num.toFixed(dotsize);
-			}
+			},
 		},
 		watch: {
 			showWarning: function(n, o){
@@ -165,11 +165,9 @@
 				}
 			},
 			userName: function(n, o){
-				if(n != ''){
-					this.show_tologin = false;
+				if(n != '' && n != undefined){
 					this.show_login = true;
 				}else{
-					this.show_tologin = true;
 					this.show_login = false;
 				}
 			}
@@ -293,6 +291,7 @@
 				this.isShow_exit = true;
 			},
 			confirm: function(){
+				console.log(1);
 				localStorage.removeItem('user');
 				localStorage.removeItem('tradeUser');
 				this.$store.state.account.userName = '';
@@ -300,9 +299,10 @@
 				this.$store.state.account.isRefresh = 1;
 				this.$store.state.account.currentNav = 0;
 				this.isShow_exit = false;
+				this.show_login = false;
 			},
 			canal: function(){
-				this.isShow_exit=false;
+				this.isShow_exit = false;
 			}
 		},
 		mounted: function(){
@@ -313,11 +313,9 @@
 			};
 			//判断是否登录
 			if(localStorage.user){
-				this.show_tologin = false;
 				this.show_login = true;
 				this.$store.state.account.userName = JSON.parse(localStorage.user).username;
 			}else{
-				this.show_tologin = true;
 				this.show_login = false;
 			}
 		},
@@ -328,7 +326,6 @@
 			document.onkeydown = function (e) {
 	        	e = e || event;
 	            if (e.keyCode == 27) {  //判断是否单击的esc按键
-	            	console.log(111);
 	                this.fullScreenCurrent = false;
 	            }
 		 	}.bind(this);
