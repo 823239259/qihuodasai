@@ -32,7 +32,8 @@
 				account_USdollar : '',
 				additionlMoney : '',
 				changemoney : '',
-				id:''
+				id:'',
+				type: '',
 			}
 		},
 		methods:{
@@ -62,6 +63,11 @@
 						if(res.success == true){
 							if(res.code == 1){
 								layer.msg("追加成功",{time:2000});
+								if(this.type == 'trade'){
+									this.$router.push({path:'trade'});
+									this.$store.state.account.currentNav = 1;
+									return;
+								}
 								this.$router.push({path:'account_openDetail'});
 								this.$store.state.account.currentNav = 3;
 							}
@@ -105,6 +111,7 @@
 		},
 		mounted:function(){
 			this.id = this.$route.query.id;
+			this.type = this.$route.query.type;
 			var data = {
 				businessType : 1,
 			}

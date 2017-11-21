@@ -923,7 +923,7 @@
 				if(localStorage.tradeUser){
 					var fid = JSON.parse(localStorage.tradeUser).fid;
 				}
-				this.$router.push({path: '/openDetail_additionalMargin', query: {id: fid}});
+				this.$router.push({path: '/openDetail_additionalMargin', query: {id: fid, type: 'trade'}});
 			},
 			endProject: function(){
 				if(localStorage.tradeUser) var fid = JSON.parse(localStorage.tradeUser).fid;
