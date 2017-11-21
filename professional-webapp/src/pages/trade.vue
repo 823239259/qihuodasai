@@ -436,6 +436,9 @@
 			},
 			selectTime(){
 				return this.$store.state.market.selectTime;
+			},
+			isBack(){
+				return this.$store.state.account.isBack;
 			}
 		},
 		filters:{
@@ -447,6 +450,15 @@
 			}
 		},
 		watch: {
+			isBack: function(n, o){
+				if(n == true){
+					localStorage.removeItem('tradeUser');
+					this.$router.push({path: '/index'});
+					this.$store.state.account.currentNav = 0;
+					this.$store.state.account.isRefresh = 1;
+					this.$store.state.account.isBack = false;
+				}
+			},
 			length: function(n, o){
 				if(n && n>= 17){
 					//调用下拉框
