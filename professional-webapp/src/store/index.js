@@ -25,6 +25,7 @@ var isshow = {
 var account = {
 	state: {
 		isRefresh: false,
+		isBack: false,
 		userName: '',
 		currentNav: 0,
 	}
@@ -1041,7 +1042,9 @@ export default new Vuex.Store({
 						layer.msg('登出成功', {time: 1000});
 					}else{
 //						console.log('登出失败');
+						console.log(123);
 						layer.msg(parameters.Message, {time: 1000});
+						context.state.account.isBack = true;
 					}
 					break;
 				case 'OnRspQryHoldTotal': //查询持仓合计回复
