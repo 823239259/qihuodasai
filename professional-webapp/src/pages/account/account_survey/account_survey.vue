@@ -167,7 +167,9 @@
 				isBoundBankCard : '',
 				startTime: '',
 				endTime: '',
-				accountMoney:''
+				accountMoney:'',
+				day:'',
+				query:''
 			}
 		},
 		filters: {
@@ -221,17 +223,66 @@
 			chooseQuery:function(e){
 				$(e.currentTarget).addClass("active").siblings().removeClass("active");
 				var index = $(e.currentTarget).index();
-				switch (index){
+					switch (index){
 					case 0:
-					this.GetList('','','',2)
+					this.showNotice = true;
+					this.query = 2;
+					switch (this.day){
+						case 0:
+							this.GetList('',this.getNowDate(),this.getNowFormatDate(),2)
+							break;
+						case 1:
+							this.GetList('',this.getWeekDate(),this.getNowFormatDate(),2)
+							break;
+						case 2:
+							this.GetList('',this.getHalfMonthDate(),this.getNowFormatDate(),2)
+							break;
+						case 3:
+							this.GetList('',this.getMonthDate(),this.getNowFormatDate(),2)
+							break;
+						default:
+							break;
+					}
 						break;
 					case 1:
-					this.GetList('','','',1)
+						this.showNotice = true;
+						this.query = 1;
+						switch (this.day){
+							case 0:
+							this.GetList('',this.getNowDate(),this.getNowFormatDate(),1)
+							break;
+						case 1:
+							this.GetList('',this.getWeekDate(),this.getNowFormatDate(),1)
+							break;
+						case 2:
+							this.GetList('',this.getHalfMonthDate(),this.getNowFormatDate(),1)
+							break;
+						case 3:
+							this.GetList('',this.getMonthDate(),this.getNowFormatDate(),1)
+							break;
+							default:
+								break;
+						}
 						break;
 					case 2:
-					this.GetList('','','',0)
-						break;
-					default:
+						this.showNotice = false;
+						this.query = 0;
+						switch (this.day){
+							case 0:
+							this.GetList('',this.getNowDate(),this.getNowFormatDate(),0)
+							break;
+						case 1:
+							this.GetList('',this.getWeekDate(),this.getNowFormatDate(),0)
+							break;
+						case 2:
+							this.GetList('',this.getHalfMonthDate(),this.getNowFormatDate(),0)
+							break;
+						case 3:
+							this.GetList('',this.getMonthDate(),this.getNowFormatDate(),0)
+							break;
+							default:
+								break;
+						}
 						break;
 				}
 			},
@@ -241,16 +292,20 @@
 				$(e.currentTarget).addClass("active").siblings().removeClass("active");
 				switch (index){
 					case 0:
-						this.GetList('',this.getNowDate(),this.getNowFormatDate(),'')
+						this.GetList('',this.getNowDate(),this.getNowFormatDate(),this.query);
+						this.day = 0;
 						break;
 					case 1:
-						this.GetList('',this.getWeekDate(),this.getNowFormatDate(),'')
+						this.GetList('',this.getWeekDate(),this.getNowFormatDate(),this.query)
+						this.day = 1;
 						break;
 					case 2:
-					this.GetList('',this.getHalfMonthDate(),this.getNowFormatDate(),'')
+					this.GetList('',this.getHalfMonthDate(),this.getNowFormatDate(),this.query)
+					this.day = 2;
 						break;
 					case 3:
-					this.GetList('',this.getMonthDate(),this.getNowFormatDate(),'')
+					this.GetList('',this.getMonthDate(),this.getNowFormatDate(),this.query)
+					this.day = 3;
 						break;
 					default:
 						break;
@@ -477,7 +532,9 @@
 				}
 			});
 			//获取默认
-			this.GetList('',this.getNowDate(),this.getNowFormatDate(),'');
+			this.GetList('',this.getNowDate(),this.getNowFormatDate(),2);
+			this.day = 0;
+			this.query = 2;
 			//获取实名和提现密码
 			this.getSafeInfo();
 			//调用日历插件

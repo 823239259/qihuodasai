@@ -3,9 +3,9 @@
 				<div class="account_openDetail_top">
 					<ul>
 						<li >
-							<span @click="timeQUuery" class="current">今天</span>
-							<span @click="timeQUuery">一个月</span>
-							<span @click="timeQUuery">三个月</span>
+							<span @click="timeQUuery">今天</span>
+							<span @click="timeQUuery" class="current">一个月</span>
+							<span @click="timeQUuery" >三个月</span>
 							<span @click="timeQUuery">一年</span>
 							<span>起始时间</span>
 							<!--<span>2017-07-15</span>
@@ -62,7 +62,7 @@
 								<td v-else-if="item.stateTypeStr=='开户失败'">-</td>
 								<td v-else-if="item.stateTypeStr == '操盘中'">
 									<span v-on:click="toCheckAccount(item.id)">查看账户</span></br>
-									<span v-on:click="addMoney(item.id)">补充保证金</span></br>
+									<!--<span v-on:click="addMoney(item.id)">补充保证金</span></br>-->
 									<span v-on:click="toCloseAccount(item.id)">结算方案</span>
 								</td>
 								<td v-else-if="item.stateTypeStr == '已完结'" v-on:click="toParticulars(item.id)">结算明细</td>
@@ -110,7 +110,9 @@
 				showPage:true,//是否显示分页
 				currentPage:1,//当前页
 				totalList:[],//总数据,
-				showNotice:true
+				showNotice:true,
+				day:'',
+				query:''
 			}
 		},
 		filters:{
@@ -150,10 +152,10 @@
 			this.$router.push({path:'/openDetail_viewAccount',query:{"id":this.listId}});	
 			},
 			//添加保证金
-			addMoney:function(a){
-				this.listId = a;
-				this.$router.push({path:"/openDetail_additionalMargin",query:{"id":this.listId}});
-			},
+//			addMoney:function(a){
+//				this.listId = a;
+//				this.$router.push({path:"/openDetail_additionalMargin",query:{"id":this.listId}});
+//			},
 			//去结算明细
 			toParticulars:function(a){
 				this.listId = a;
@@ -170,19 +172,23 @@
 				switch (index){
 					//今天
 					case 0:
-					this.getData('',this.getNowDate(),this.getNowFormatDate(),'')
+					this.getData('',this.getNowDate(),this.getNowFormatDate(),this.query)
+					this.day = 0;
 					break;
 					//一个月
 					case 1:
-					this.getData('',this.getMonthDate(),this.getNowFormatDate(),'')
+					this.day = 1;
+					this.getData('',this.getMonthDate(),this.getNowFormatDate(),this.query)
 					break;
 					//三个月
 					case 2:
-					this.getData('',this.getThreeMonthDate(),this.getNowFormatDate(),'')
+					this.day = 2;
+					this.getData('',this.getThreeMonthDate(),this.getNowFormatDate(),this.query)
 					break;
 					//一年
 					case 3:
-					this.getData('',this.getYearDate(),this.getNowFormatDate(),'')
+					this.day = 3;
+					this.getData('',this.getYearDate(),this.getNowFormatDate(),this.query)
 					break;
 				}
 			},
@@ -192,20 +198,84 @@
 				$(e.currentTarget).addClass("current").siblings().removeClass("current");
 				switch (index){
 					case 0:
-						this.showNotice = true;
-						this.getData('','','','')
+					this.showNotice = true;
+					this.query = '';
+					switch (this.day){
+						case 0:
+							this.getData('',this.getNowDate(),this.getNowFormatDate(),'')
+							break;
+						case 1:
+							this.getData('',this.getMonthDate(),this.getNowFormatDate(),'')
+							break;
+						case 2:
+							this.getData('',this.getThreeMonthDate(),this.getNowFormatDate(),'')
+							break;
+						case 3:
+							this.getData('',this.getYearDate(),this.getNowFormatDate(),'')
+							break;
+						default:
+							break;
+					}
 						break;
 					case 1:
 						this.showNotice = true;
-						this.getData('','','',1)
+						this.query = 1;
+						switch (this.day){
+							case 0:
+								this.getData('',this.getNowDate(),this.getNowFormatDate(),1)
+								break;
+							case 1:
+								this.getData('',this.getMonthDate(),this.getNowFormatDate(),1)
+								break;
+							case 2:
+								this.getData('',this.getThreeMonthDate(),this.getNowFormatDate(),1)
+								break;
+							case 3:
+								this.getData('',this.getYearDate(),this.getNowFormatDate(),1)
+								break;
+							default:
+								break;
+						}
 						break;
 					case 2:
 						this.showNotice = false;
-						this.getData('','','',4)
+						this.query = 4;
+						switch (this.day){
+							case 0:
+								this.getData('',this.getNowDate(),this.getNowFormatDate(),4)
+								break;
+							case 1:
+								this.getData('',this.getMonthDate(),this.getNowFormatDate(),4)
+								break;
+							case 2:
+								this.getData('',this.getThreeMonthDate(),this.getNowFormatDate(),4)
+								break;
+							case 3:
+								this.getData('',this.getYearDate(),this.getNowFormatDate(),4)
+								break;
+							default:
+								break;
+						}
 						break;
 					case 3:
 						this.showNotice = false;
-						this.getData('','','',6)
+						this.query = 6;
+						switch (this.day){
+							case 0:
+								this.getData('',this.getNowDate(),this.getNowFormatDate(),6)
+								break;
+							case 1:
+								this.getData('',this.getMonthDate(),this.getNowFormatDate(),6)
+								break;
+							case 2:
+								this.getData('',this.getThreeMonthDate(),this.getNowFormatDate(),6)
+								break;
+							case 3:
+								this.getData('',this.getYearDate(),this.getNowFormatDate(),6)
+								break;
+							default:
+								break;
+						}
 						break;
 				}
 			},
@@ -328,6 +398,7 @@
 			    }
 			    var currentdate = year + seperator1 + (month-1) + seperator1 + strDate+
 			    " "+"23:59:59";
+			    console.log(currentdate)
 			    return currentdate
 			}
 		},
@@ -347,7 +418,9 @@
 				}
 			});
 			//获取初始开户记录
-			this.getData('',this.getNowDate(),this.getNowFormatDate(),'');
+			this.getData('',this.getMonthDate(),this.getNowFormatDate(),'');
+			this.day = 1;
+			this.query = 0;
 			//调用日历插件
 			dateEvent('.startTime');
 			dateEvent('.endTime');
