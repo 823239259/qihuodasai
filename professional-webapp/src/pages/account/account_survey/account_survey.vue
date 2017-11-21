@@ -537,6 +537,9 @@
 			li {
 				float: left;
 				width: 65px;
+				&:hover{
+					color: $yellow;
+				}
 			}
 			select {
 				background-color: $blue;
@@ -566,6 +569,9 @@
 			border-bottom: 1px solid $bottom_color;
 			li {
 				float: left;
+				&:hover{
+					color: $yellow;
+				}
 			}
 		}
 		.moneyDetail_list{
