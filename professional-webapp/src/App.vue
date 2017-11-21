@@ -291,12 +291,11 @@
 				this.isShow_exit = true;
 			},
 			confirm: function(){
-				console.log(1);
 				localStorage.removeItem('user');
 				localStorage.removeItem('tradeUser');
 				this.$store.state.account.userName = '';
-				this.$router.push({path: '/'});
 				this.$store.state.account.isRefresh = 1;
+				this.$router.push({path: '/index'});
 				this.$store.state.account.currentNav = 0;
 				this.isShow_exit = false;
 				this.show_login = false;

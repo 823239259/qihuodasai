@@ -461,6 +461,7 @@
 			},
 			length: function(n, o){
 				if(n && n>= 17){
+					this.isSelectedOrder();
 					//调用下拉框
 					$(".slt-box").each(function(i, o){
 						pro.selectEvent(o, function(data){
@@ -1032,8 +1033,6 @@
 			}
 			//获取平台账户登录信息
 			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
-			//获取自选合约列表
-			this.isSelectedOrder();
 			//设置当前合约的限价
 			this.tradePrices = parseFloat(this.currentdetail.LastQuotation.LastPrice).toFixed(this.currentdetail.DotSize);
 			//调用下拉框
