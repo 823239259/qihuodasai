@@ -6,7 +6,7 @@
 			<!--<input type="text" id="phone" class="input_1" style="display: none;" />-->
 			<input type="text" id="phone" class="input_1" placeholder="请输入手机号码" v-model.trim="phone" autocomplete="off" />
 			<!--<input type="text" id="pwd" class="input_1" style="display: none;" />-->
-			<input type="text" onfocus="this.type='password'" id="pwd" class="input_1 ml30" placeholder="请输入密码" v-model.trim="pwd" autocomplete="off" />
+			<input type="text" onfocus="this.type='password'" id="pwd" class="input_1 ml30" placeholder="请输入密码" v-model.trim="pwd" autocomplete="off" @focus="focusEvent" />
 			<i class=" ifont ifont_eye" v-on:click="eyeEvent" v-show="eyeShow">&#xe64f;</i>
 			<i class=" ifont ifont_eye" v-on:click="eyeEvent" v-show="eyeShowNo">&#xe61c;</i>
 			<p class="span_right" v-on:click="toForgetPassword">忘记密码?</p>
@@ -49,6 +49,12 @@
 			},
 		},
 		methods : {
+			focusEvent: function(e){
+				if(this.eyeShow == true){
+					$(e.currentTarget).attr("type", 'text');
+					$(e.currentTarget).css('background','none');
+				}
+			},
 			toForgetPassword : function(){
 				this.$router.push({path: '/forgetPassword'})
 			},
