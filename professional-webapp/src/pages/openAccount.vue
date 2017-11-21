@@ -366,7 +366,7 @@
 				lineLoss:'',
 				listLeft : '',
 				listRight :'',
-				rate:'',
+				rate:0,
 				traderTotal:'',
 				temp:{},
 				chooseType: 3000,
@@ -493,6 +493,154 @@
 						this.traderTotal = this.item[7].traderTotal;
 						break;
 				}
+			},
+			//获取button列表
+			getBtnList:function(){
+				pro.fetch("post",'/ftrade/params',{businessType:8},'').then((res)=>{
+					var data = res.data;
+					if(res.success == true){
+						if(res.code == 1){
+							this.traderTotal = data.paramList[0].traderTotal;
+							this.lineLoss = data.paramList[0].lineLoss;
+							this.temp = data;
+							this.item = data.paramList;
+							this.$store.state.tempTradeapply = this.temp;
+							this.temp.contractList.forEach(function(o, i) {
+								switch(o.tradeType) {
+									case 0:   //return '富时A50'
+										var arr = [];
+										this.temp.paramList.forEach(function(a) {
+											arr.push(a.tranLever);
+											o.shoushu = arr;
+										}.bind(this));
+										break;
+									case 6:   //return '国际原油'
+										var arr = [];
+										this.temp.paramList.forEach(function(a) {
+											arr.push(a.crudeTranLever);
+											o.shoushu = arr;
+										}.bind(this));
+										break;
+									case 7:   //return '恒指期货'
+										var arr = [];
+										this.temp.paramList.forEach(function(a) {
+											arr.push(a.hsiTranLever);
+											o.shoushu = arr;
+										}.bind(this));
+										break;
+									case 9:   //return '迷你道指'
+										var arr = [];
+										this.temp.paramList.forEach(function(a) {
+											arr.push(a.mdtranLever);
+											o.shoushu = arr;
+										}.bind(this));
+										break;
+									case 10:   //return '迷你纳指'
+										var arr = [];
+										this.temp.paramList.forEach(function(a) {
+											arr.push(a.mntranLever);
+											o.shoushu = arr;
+										}.bind(this));
+										break;
+									case 11:   //return '迷你标普'
+										var arr = [];
+										this.temp.paramList.forEach(function(a) {
+											arr.push(a.mbtranLever);
+											o.shoushu = arr;
+										}.bind(this));
+										break;
+									case 12:   //return '德国DAX'
+										var arr = [];
+										this.temp.paramList.forEach(function(a) {
+											arr.push(a.daxtranLever);
+											o.shoushu = arr;
+										}.bind(this));
+										break;
+									case 13:   //return '日经225'
+										var arr = [];
+										this.temp.paramList.forEach(function(a) {
+											arr.push(a.nikkeiTranLever);
+											o.shoushu = arr;
+										}.bind(this));
+										break;
+									case 14:   //return '小恒指'
+										var arr = [];
+										this.temp.paramList.forEach(function(a) {
+											arr.push(a.lhsiTranActualLever);
+											o.shoushu = arr;
+										}.bind(this));
+										break;
+									case 15:   //return '美黄金'
+										var arr = [];
+										this.temp.paramList.forEach(function(a) {
+											arr.push(a.agTranActualLever);
+											o.shoushu = arr;
+										}.bind(this));
+										break;
+									case 16:   //return 'H股指数'
+										var arr = [];
+										this.temp.paramList.forEach(function(a) {
+											arr.push(a.hIndexActualLever);
+											o.shoushu = arr;
+										}.bind(this));
+										break;
+									case 17:   //return '小H股指数'
+										var arr = [];
+										this.temp.paramList.forEach(function(a) {
+											arr.push(a.xhIndexActualLever);
+											o.shoushu = arr;
+										}.bind(this));
+										break;
+									case 18:   //return '美铜'
+										var arr = [];
+										this.temp.paramList.forEach(function(a) {
+											arr.push(a.aCopperActualLever);
+											o.shoushu = arr;
+										}.bind(this));
+										break;
+									case 19:   //return '美白银'
+										var arr = [];
+										this.temp.paramList.forEach(function(a) {
+											arr.push(a.aSilverActualLever);
+											o.shoushu = arr;
+										}.bind(this));
+										break;
+									case 20:   //return '小原油'
+										var arr = [];
+										this.temp.paramList.forEach(function(a) {
+											arr.push(a.smaActualLever);
+											o.shoushu = arr;
+										}.bind(this));
+										break;
+									case 21:   //迷你德国DAX指数
+										var arr = [];
+										this.temp.paramList.forEach(function(a) {
+											arr.push(a.daxtranMinActualLever);
+											o.shoushu = arr;
+										}.bind(this));
+										break;
+									case 22:   //return '天然气'
+										var arr = [];
+										this.temp.paramList.forEach(function(a) {
+											if(a.naturalGasActualLever==null){
+												arr.push(0);
+											}else{
+												arr.push(a.naturalGasActualLever);
+											}
+											o.shoushu = arr;
+										}.bind(this));
+										break;
+								}
+							}.bind(this));
+						}
+					}
+				}).catch((err)=>{
+					if(err.success == false){
+						layer.msg("网络不给力，请稍后再试",{time:2000});
+					}else{
+						layer.msg(err.data.message,{time:2000});
+					}
+				})
 			}
 		},
 		beforeCreate:function(){
@@ -515,151 +663,7 @@
 				}
 			})
 			//获取数据列表
-			pro.fetch("post",'/ftrade/params',{businessType:8},'').then((res)=>{
-				var data = res.data;
-				if(res.success == true){
-					if(res.code == 1){
-						this.traderTotal = data.paramList[0].traderTotal;
-						this.lineLoss = data.paramList[0].lineLoss;
-						this.temp = data;
-						this.item = data.paramList;
-						this.$store.state.tempTradeapply = this.temp;
-						this.temp.contractList.forEach(function(o, i) {
-							switch(o.tradeType) {
-								case 0:   //return '富时A50'
-									var arr = [];
-									this.temp.paramList.forEach(function(a) {
-										arr.push(a.tranLever);
-										o.shoushu = arr;
-									}.bind(this));
-									break;
-								case 6:   //return '国际原油'
-									var arr = [];
-									this.temp.paramList.forEach(function(a) {
-										arr.push(a.crudeTranLever);
-										o.shoushu = arr;
-									}.bind(this));
-									break;
-								case 7:   //return '恒指期货'
-									var arr = [];
-									this.temp.paramList.forEach(function(a) {
-										arr.push(a.hsiTranLever);
-										o.shoushu = arr;
-									}.bind(this));
-									break;
-								case 9:   //return '迷你道指'
-									var arr = [];
-									this.temp.paramList.forEach(function(a) {
-										arr.push(a.mdtranLever);
-										o.shoushu = arr;
-									}.bind(this));
-									break;
-								case 10:   //return '迷你纳指'
-									var arr = [];
-									this.temp.paramList.forEach(function(a) {
-										arr.push(a.mntranLever);
-										o.shoushu = arr;
-									}.bind(this));
-									break;
-								case 11:   //return '迷你标普'
-									var arr = [];
-									this.temp.paramList.forEach(function(a) {
-										arr.push(a.mbtranLever);
-										o.shoushu = arr;
-									}.bind(this));
-									break;
-								case 12:   //return '德国DAX'
-									var arr = [];
-									this.temp.paramList.forEach(function(a) {
-										arr.push(a.daxtranLever);
-										o.shoushu = arr;
-									}.bind(this));
-									break;
-								case 13:   //return '日经225'
-									var arr = [];
-									this.temp.paramList.forEach(function(a) {
-										arr.push(a.nikkeiTranLever);
-										o.shoushu = arr;
-									}.bind(this));
-									break;
-								case 14:   //return '小恒指'
-									var arr = [];
-									this.temp.paramList.forEach(function(a) {
-										arr.push(a.lhsiTranActualLever);
-										o.shoushu = arr;
-									}.bind(this));
-									break;
-								case 15:   //return '美黄金'
-									var arr = [];
-									this.temp.paramList.forEach(function(a) {
-										arr.push(a.agTranActualLever);
-										o.shoushu = arr;
-									}.bind(this));
-									break;
-								case 16:   //return 'H股指数'
-									var arr = [];
-									this.temp.paramList.forEach(function(a) {
-										arr.push(a.hIndexActualLever);
-										o.shoushu = arr;
-									}.bind(this));
-									break;
-								case 17:   //return '小H股指数'
-									var arr = [];
-									this.temp.paramList.forEach(function(a) {
-										arr.push(a.xhIndexActualLever);
-										o.shoushu = arr;
-									}.bind(this));
-									break;
-								case 18:   //return '美铜'
-									var arr = [];
-									this.temp.paramList.forEach(function(a) {
-										arr.push(a.aCopperActualLever);
-										o.shoushu = arr;
-									}.bind(this));
-									break;
-								case 19:   //return '美白银'
-									var arr = [];
-									this.temp.paramList.forEach(function(a) {
-										arr.push(a.aSilverActualLever);
-										o.shoushu = arr;
-									}.bind(this));
-									break;
-								case 20:   //return '小原油'
-									var arr = [];
-									this.temp.paramList.forEach(function(a) {
-										arr.push(a.smaActualLever);
-										o.shoushu = arr;
-									}.bind(this));
-									break;
-								case 21:   //迷你德国DAX指数
-									var arr = [];
-									this.temp.paramList.forEach(function(a) {
-										arr.push(a.daxtranMinActualLever);
-										o.shoushu = arr;
-									}.bind(this));
-									break;
-								case 22:   //return '天然气'
-									var arr = [];
-									this.temp.paramList.forEach(function(a) {
-										if(a.naturalGasActualLever==null){
-											arr.push(0);
-										}else{
-											arr.push(a.naturalGasActualLever);
-										}
-										o.shoushu = arr;
-									}.bind(this));
-									break;
-							}
-						}.bind(this));
-					}
-				}
-			}).catch((err)=>{
-				if(err.success == false){
-					layer.msg("网络不给力，请稍后再试",{time:2000});
-				}else{
-					layer.msg(err.data.message,{time:2000});
-				}
-			})
+			
 		},
 		filters:{
 			filtershoushu: function(arr,chooseType){
@@ -769,6 +773,9 @@
 			this.isshow_openAccount_2 = false;
 			this.isshow_openAccount_1 = true;
 			this.showpage = true;
+		},
+		mounted:function(){
+			this.getBtnList();
 		}
 	}
 </script>
