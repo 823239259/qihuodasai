@@ -408,13 +408,13 @@
 			//展开
 			show_listAll:function(){
 				if(this.show_list == true){
-					
 					$(".btm_btm>span").html("关闭");
-					return this.show_list = false
+					$(".product_list, .openAccount_btm_center").css('height', 'auto');
+					this.show_list = false
 				}else if(this.show_list == false){
-					
 					$(".btm_btm>span").html("展开");
-					return this.show_list = true;
+					this.show_list = true;
+					$(".product_list, .openAccount_btm_center").css('height', '234px');
 				}
 			},
 			toAgreement: function(){
@@ -1015,6 +1015,7 @@
 	.show_list{
 		display: block;
 		width: 100%;
+		overflow: hidden;
 		td{
 			width: 25%;
 			float: left;
@@ -1198,7 +1199,7 @@
     }
 	@media only screen and (min-width: 1280px) and (max-width: 1366px) {
 	 	.openAccount_center_left li:nth-child(1){
-	 		width: 70%;
+	 		width: 75%;
 	 	}
 	}
 </style>
