@@ -13,7 +13,7 @@
 			</div>
 			<div class="">
 				<input type="text" id="pwd" class="input_1 input_5" style="display: none;" />
-				<input type="text" id="pwd" onfocus="this.type='password'"  class="input_1 input_5" placeholder="请输入密码（6-16位密码）" v-model.trim="pwd" autocomplete="off" />
+				<input type="text" id="pwd" onfocus="this.type='password'"  class="input_1 input_5" placeholder="请输入密码（6-16位密码）" v-model.trim="pwd" autocomplete="off" v-on:focus="focusEvent" />
 				<i class="ifont ifont_eyes" v-on:click="eyeEvent">&#xe61c;</i>
 			</div>
 			<p class="color_light">注册即表示	同意并已阅读<a href="javascript:void(0);" class="span_white" @click="toRegisterAgreement">《用户注册协议》</a></p>
@@ -71,6 +71,12 @@
 			}
 		},
 		methods : {
+			focusEvent: function(e){
+				if(this.eyeShow == true){
+					$(e.currentTarget).attr("type", 'text');
+					$(e.currentTarget).css('background','none');
+				}
+			},
 			toRegisterAgreement: function(){
 				this.$router.push({path: '/registrationProtocol'});
 			},
