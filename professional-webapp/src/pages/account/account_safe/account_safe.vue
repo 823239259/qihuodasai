@@ -283,6 +283,9 @@
 			}
 			.yellow_status {
 				color: $yellow;
+				&:hover{
+					color: $lightblue;
+				}
 			}
 		}
 </style>

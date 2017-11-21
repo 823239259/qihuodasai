@@ -7,7 +7,7 @@
 					<li>
 						<img src="../../../assets/images/icon_smileFace.png" alt="笑脸" />
 						<span v-if="realName == null">{{username}}</span>
-						<span v-else = "realName!=null">{{realName}}</span>
+						<span v-else = "realName!=null">{{realName}}&nbsp;{{username}}</span>
 						<img src="../../../assets/images/acc_01.png" alt="账户" v-if="realName == null" v-on:click="toCertification" />
 						<img src="../../../assets/images/acc_02.png" alt="账户" v-else="realName != null" />
 						<img src="../../../assets/images/acc_03.png" alt="提现密码" v-if="realName == null" v-on:click="towWithDrawlPassword"/>
@@ -603,7 +603,6 @@
 			}
 			span {
 				text-align: center;
-				width: 80px;
 				display: inline-block;
 				position: relative;
 				bottom: 40px;
@@ -659,6 +658,11 @@
 						position: absolute;
 						top: 20px;
 						left: 70px;
+						width: 200px;
+						height: 30px;
+						line-height: 30px;
+						background-color: #596080;
+						text-align: center;
 					}
 					.showmoney1{
 						font-size: $fs14;
@@ -666,6 +670,11 @@
 						position: absolute;
 						top: 100px;
 						left: 70px;
+						width: 200px;
+						line-height: 30px;
+						height: 30px;
+						background-color: #596080;
+						text-align: center;
 					}
 				}
 			}
