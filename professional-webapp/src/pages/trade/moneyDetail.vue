@@ -119,6 +119,11 @@
 			width: 635px;
 			td{
 				font-size: $fs12;
+				padding: 0 0 0 5px;
+				width: 70px;
+				&:first-child{
+					width: 55px;
+				}
 			}
 		}
 	}
