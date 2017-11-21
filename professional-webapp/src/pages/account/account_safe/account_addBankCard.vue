@@ -305,6 +305,7 @@
 			width: 100%;
 			height: 120px;
 			p {
+				text-indent: 10px;
 				width: 100%;
 				height: 40px;
 				background-color: $bottom_color;
@@ -317,6 +318,7 @@
 				background-color: $blue;
 			}
 			li {
+				padding-left: 10px;
 				padding-top:20px; 
 				&:nth-child(2) {
 					color: $white;

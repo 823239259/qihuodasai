@@ -97,7 +97,7 @@
 				</thead>
 				<tbody>
 					<tr v-for="item in item">
-						<td>{{item.subTime | getTime}}</br>{{item.subTime | getTimeTwo}}</td>
+						<td>{{item.subTime | getTime}}</br><i>{{item.subTime | getTimeTwo}}</i></td>
 						<td v-if="item.money >0" class="color_yellow">收入</td>
 						<td v-else="item.money <0">支出</td>	
 						<td>{{item.money}}元</td>
@@ -510,6 +510,7 @@
 			width: 100%;
 			background-color: $bottom_color;
 			text-indent: 5px;
+			text-indent: 10px;
 		}
 		.p_center {
 			margin-top: 5px;
@@ -521,12 +522,14 @@
 			background-color: $bottom_color;
 		}
 		.survey_functionChoose_top {
+			padding-left: 10px;
 			background-color: $blue;
 			height: 60px;
 			border-bottom: 1px solid $bottom_color;
 			line-height: 60px;
 		}
 		.survey_functionChoose_center {
+			padding-left: 10px;
 			background-color: $blue;
 			height: 70px;
 			padding-top: 30px;
@@ -541,6 +544,13 @@
 				color: $white;
 				padding: 3px 20px;
 			}
+			.btn{
+				padding: 0 10px;
+				height: 30px;
+				border-radius: 5px;
+				margin-left: 5px;
+				margin-top: -5px;
+			}
 		}
 		.toright {
 			font-size: 20px;
@@ -548,6 +558,7 @@
 			margin-left: 45px;
 		}
 		.survey_functionChoose_btm {
+			padding-left: 10px;
 			background-color: $blue;
 			font-size: $fs12;
 			height: 45px;
@@ -559,6 +570,14 @@
 		}
 		.moneyDetail_list{
 			/*height: 400px;*/
+			table{
+				tr{
+					text-indent: 10px;
+					i{
+						margin-left: 10px;
+					}
+				}
+			}
 		}
 		.account_info {
 			background-color: $blue;

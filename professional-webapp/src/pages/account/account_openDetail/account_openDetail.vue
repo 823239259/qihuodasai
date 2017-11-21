@@ -79,7 +79,7 @@
 				    <span  v-for="index in pages" @click="goIndex(index)" :class="{active:currentPage == index}" :key="index">{{index}}</span>
 				    <button class="btn_span"  v-show="pageCount != currentPage && pageCount != 0 " @click="currentPage++ && goIndex(currentPage++,'!last')">下一页</button>
 				</div>
-				<div class="account_openDetail_notice">
+				<div class="account_openDetail_notice" v-show="showNotice">
 					<p>注意：</p>
 					<ul>
 						<li>1.交易手续费=合约手续费x手数</li>
@@ -109,7 +109,8 @@
 				eachPage:10,//每页条数
 				showPage:true,//是否显示分页
 				currentPage:1,//当前页
-				totalList:[]//总数据
+				totalList:[],//总数据,
+				showNotice:true
 			}
 		},
 		filters:{
@@ -191,15 +192,19 @@
 				$(e.currentTarget).addClass("current").siblings().removeClass("current");
 				switch (index){
 					case 0:
+						this.showNotice = true;
 						this.getData('','','','')
 						break;
 					case 1:
+						this.showNotice = true;
 						this.getData('','','',1)
 						break;
 					case 2:
+						this.showNotice = false;
 						this.getData('','','',4)
 						break;
 					case 3:
+						this.showNotice = false;
 						this.getData('','','',6)
 						break;
 				}
