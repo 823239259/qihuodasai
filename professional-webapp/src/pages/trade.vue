@@ -1013,10 +1013,6 @@
 								break;
 						}
 					});
-					
-					
-					
-					
 					layer.close(index);
 				}.bind(this));
 			}
