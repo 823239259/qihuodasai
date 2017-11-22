@@ -292,7 +292,6 @@
 			addOptional: function(e){
 				//获取平台账户登录信息
 				this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
-				
 				if(this.userInfo != '' && this.userInfo != undefined){
 					if(this.addStar == true){
 						var data = {

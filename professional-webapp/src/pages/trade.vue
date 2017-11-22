@@ -585,51 +585,57 @@
 				}
 			},
 			addOptional: function(e){
-				if(this.addStar == true){
-					var data = {
-						commodityCode: this.currentdetail.CommodityNo,
-						commodityName: this.currentdetail.CommodityName,
-					};
-					var headers = {
-						token:  this.userInfo.token,
-						secret: this.userInfo.secret
-					};
-					pro.fetch('post', '/contract/saveOptional', data, headers).then(function(res){
-						if(res.success == true){
-							if(res.code == 1){
-								layer.msg('添加成功', {time: 1000});
-								this.addStar = false;
-								this.optional = '取消自选';
-								this.isSelectedOrder();
+				//获取平台账户登录信息
+				this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
+				if(this.userInfo != '' && this.userInfo != undefined){
+					if(this.addStar == true){
+						var data = {
+							commodityCode: this.currentdetail.CommodityNo,
+							commodityName: this.currentdetail.CommodityName,
+						};
+						var headers = {
+							token:  this.userInfo.token,
+							secret: this.userInfo.secret
+						};
+						pro.fetch('post', '/contract/saveOptional', data, headers).then(function(res){
+							if(res.success == true){
+								if(res.code == 1){
+									layer.msg('添加成功', {time: 1000});
+									this.addStar = false;
+									this.optional = '取消自选';
+									this.isSelectedOrder();
+								}
 							}
-						}
-					}.bind(this)).catch(function(error){
-						var data = err.data;
-						layer.msg(data.message, {time: 1000});
-					});
+						}.bind(this)).catch(function(error){
+							var data = err.data;
+							layer.msg(data.message, {time: 1000});
+						});
+					}else{
+						var data = {
+							commodityCode: this.orderId
+						};
+						var headers = {
+							token:  this.userInfo.token,
+							secret: this.userInfo.secret
+						};
+						pro.fetch('post', 'contract/delOptional', data, headers).then(function(res){
+							if(res.success == true){
+								if(res.code == 1){
+									layer.msg('删除成功', {time: 1000});
+									this.addStar = true;
+									this.optional = '添加自选';
+									this.isSelectedOrder();
+								}else{
+									layer.msg(res.message, {time: 1000});
+								}
+							}
+						}.bind(this)).catch(function(err){
+							var data = err.data;
+							layer.msg(data.message, {time: 1000});
+						});
+					}
 				}else{
-					var data = {
-						commodityCode: this.orderId
-					};
-					var headers = {
-						token:  this.userInfo.token,
-						secret: this.userInfo.secret
-					};
-					pro.fetch('post', 'contract/delOptional', data, headers).then(function(res){
-						if(res.success == true){
-							if(res.code == 1){
-								layer.msg('删除成功', {time: 1000});
-								this.addStar = true;
-								this.optional = '添加自选';
-								this.isSelectedOrder();
-							}else{
-								layer.msg(res.message, {time: 1000});
-							}
-						}
-					}.bind(this)).catch(function(err){
-						var data = err.data;
-						layer.msg(data.message, {time: 1000});
-					});
+					layer.msg('请先登录平台账号', {time: 1000});
 				}
 			},
 			tabEvent: function(index){
@@ -892,9 +898,13 @@
 				});
 			},
 			toOpenAccount: function(){
-				this.$router.push({path: '/openAccount'});
-				this.$store.state.isshow.isfensshow = false;
-				this.$store.state.isshow.isklineshow = false;
+				if(this.userInfo != '' && this.userInfo != undefined){
+					this.$router.push({path: '/openAccount'});
+					this.$store.state.isshow.isfensshow = false;
+					this.$store.state.isshow.isklineshow = false;
+				}else{
+					layer.msg('请先登录平台账号', {time: 1000});
+				}
 			},
 			toTradeLogin: function(){
 				if(this.userInfo){
@@ -1020,19 +1030,17 @@
 			$(".trade_list, #trade_details").width(this.w - $("#nav").width() - $(".quote").width() - $(".operate").width() - 30);
 			//开始画图
 			this.chartShow = true;
-			//判断是否登录交易账户
-			var user = localStorage.tradeUser ? JSON.parse(localStorage.tradeUser) : '';
-			if(user){
+			//获取平台账户登录信息
+			var tradeUser = localStorage.tradeUser ? JSON.parse(localStorage.tradeUser) : '';
+			if(tradeUser != '' && tradeUser != undefined){
 				this.tradeLoginShow = false;
 				this.tradeDetailsShow = true;
 				this.$store.state.market.chartHeight = this.h - 50 - 30 - 35 - $(".trade_box").height();
-				this.tradeUser = user.username;
-				if(user.fid == undefined){
+				this.tradeUser = tradeUser.username;
+				if(tradeUser.fid == undefined){
 					this.openAccountTools = false;
 				}
 			}
-			//获取平台账户登录信息
-			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
 			//设置当前合约的限价
 			this.tradePrices = parseFloat(this.currentdetail.LastQuotation.LastPrice).toFixed(this.currentdetail.DotSize);
 			//调用下拉框
