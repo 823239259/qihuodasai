@@ -46,6 +46,7 @@
 							<td>买</td>
 							<td>卖</td>
 							<td>成交价</td>
+							<span>平仓盈亏</span>
 							<td>手续费</td>
 						</tr>
 					</thead>
@@ -62,6 +63,7 @@
 							<td v-if="item.sellNum!=''">{{item.sellNum}}</td>
 							<td v-else="item.sellNum==''">0</td>
 							<td>{{item.tradePrice}}</td>
+							<td>{{item.hedgeProfit}}</td>
 							<td>{{item.free}}</td>
 						</tr>
 						<!--<tr>
@@ -271,6 +273,7 @@
 							var curtotal=(this.currentPage-1)*this.eachPage;//上一页显示的最后一条
 				            var tiaoshu=this.currentPage*this.eachPage;//当前页显示的最后一条
 				            this.historyList=this.totalHistoryList.slice(curtotal,tiaoshu); //当前页应显示的数据
+				            console.log(this.historyList);
 						}
 					}
 				}).catch((err)=>{

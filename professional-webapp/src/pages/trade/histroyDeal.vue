@@ -24,6 +24,7 @@
 						<td>成交价</td>
 						<td>成交量</td>
 						<td>手续费</td>
+						<td>平仓盈亏</td>
 						<td>成交时间</td>
 					</tr>
 				</thead>
@@ -38,6 +39,7 @@
 							<td>{{v.TradePrice}}</td>
 							<td>{{v.TradeNum}}</td>
 							<td>{{v.TradeFee}}</td>
+							<td>{{v.hedgeProfit}}</td>
 							<td>{{v.TradeDateTime}}</td>
 						</tr>
 					</template>
@@ -90,6 +92,7 @@
 					data.TradeNum = o.TradeNum;
 					data.TradeFee = o.TradeFee;
 					data.TradeDateTime = o.TradeDateTime;
+					data.hedgeProfit = o.HedgeProfit;
 					this.histroyDealList.push(data);
 				}.bind(this));
 			},

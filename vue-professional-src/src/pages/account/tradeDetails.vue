@@ -137,6 +137,7 @@
 						<span>买</span>
 						<span>卖</span>
 						<span>成交价</span>
+						<span>平仓盈亏</span>
 						<span>交易手续费</span>
 					</li>
 					<template v-for="(key,index) in getFstTradeDetail">
@@ -150,7 +151,8 @@
 							<span>{{key.buyNum}}</span>
 							<span>{{key.sellNum}}</span>
 							<span>{{key.tradePrice}}</span>
-							<span>{{key.free}}</span>
+							<span>{{key.hedgeProfit}}</span>
+							<span>{{key.free | getTwoNumber}}</span>
 							<!--<span :class="{red: key.type_color == 'red', green: key.type_color == 'green'}">{{key.type}}</span>-->
 							<!--<span :class="{red: key.type_color == 'red', green: key.type_color == 'green'}">{{key.money}}</span>-->
 						</li>
@@ -800,7 +802,7 @@
 					background: @deepblue;
 					overflow-x: scroll;
 					ul {
-						width: 915px*@ip6p;
+						width: 995px*@ip6p;
 						box-sizing: content-box;
 						li {
 							height: 44px;
@@ -845,6 +847,9 @@
 									width: 100px*@ip6p;
 								}
 								&:nth-child(10) {
+									width: 80px*@ip6p;
+								}
+								&:nth-child(11) {
 									width: 100px*@ip6p;
 								}
 								&.red {
@@ -925,7 +930,6 @@
 		}
 	}
 	/*ip6*/
-	
 	@media (min-width:371px) and (max-width:410px) {
 		#tradeDetails {
 			width: 100%;
@@ -1068,7 +1072,7 @@
 					background: @deepblue;
 					overflow-x: scroll;
 					ul {
-						width: 915px*@ip6;
+						width: 995px*@ip6;
 						box-sizing: content-box;
 						li {
 							height: 44px;
@@ -1113,6 +1117,9 @@
 									width: 100px*@ip6;
 								}
 								&:nth-child(10) {
+									width: 80px*@ip6;
+								}
+								&:nth-child(11) {
 									width: 100px*@ip6;
 								}
 								&.red {
@@ -1338,7 +1345,7 @@
 					background: @deepblue;
 					overflow-x: scroll;
 					ul {
-						width: 955px*@ip5;
+						width: 1050px*@ip5;
 						box-sizing: content-box;
 						li {
 							height: 44px;
@@ -1383,6 +1390,9 @@
 									width: 100px*@ip5;
 								}
 								&:nth-child(10) {
+									width: 80px*@ip5;
+								}
+								&:nth-child(11) {
 									width: 100px*@ip5;
 								}
 								&.red {

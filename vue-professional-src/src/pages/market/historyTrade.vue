@@ -37,6 +37,7 @@
 						<span>成交价</span>
 						<span>成交量</span>
 						<span>手续费</span>
+						<span>平仓盈亏</span>
 						<span>成交时间</span>
 					</li>
 					<template v-for="key in dataList">
@@ -49,6 +50,7 @@
 							<span>{{key.TradePrice}}</span>
 							<span>{{key.TradeNum}}</span>
 							<span>{{key.TradeFee}}</span>
+							<span>{{key.hedgeProfit}}</span>
 							<span>{{key.TradeDateTime}}</span>
 						</li>
 					</template>
@@ -140,6 +142,7 @@
 					b.TradeNum = e.TradeNum;
 					b.TradeFee = e.TradeFee;
 					b.TradeDateTime = e.TradeDateTime;
+					b.hedgeProfit = e.HedgeProfit;
 					this.dataList.push(b);
 				}.bind(this));
 				
@@ -328,7 +331,7 @@
 					overflow: scroll;
 					box-sizing: content-box;
 					li{
-						width: 800px;
+						width: 880px;
 						height: 44px;
 						line-height: 44px;
 						border-top: 1px solid @black;
@@ -355,6 +358,9 @@
 								width: 80px;
 							}
 							&:nth-child(9){
+								width: 80px;
+							}
+							&:nth-child(10){
 								width: 150px;
 							}
 							&.red{
@@ -463,7 +469,7 @@
 					overflow: scroll;
 					box-sizing: content-box;
 					li{
-						width: 800px*@ip6;
+						width: 880px*@ip6;
 						height: 44px*@ip6;
 						line-height: 44px*@ip6;
 						border-top: 1px solid @black;
@@ -490,6 +496,9 @@
 								width: 80px*@ip6;
 							}
 							&:nth-child(9){
+								width: 80px*@ip6;
+							}
+							&:nth-child(10){
 								width: 150px*@ip6;
 							}
 							&.red{
@@ -598,7 +607,7 @@
 					overflow: scroll;
 					box-sizing: content-box;
 					li{
-						width: 800px*@ip5;
+						width: 880px*@ip5;
 						height: 44px*@ip5;
 						line-height: 44px*@ip5;
 						border-top: 1px solid @black;
@@ -625,6 +634,9 @@
 								width: 80px*@ip5;
 							}
 							&:nth-child(9){
+								width: 80px*@ip5;
+							}
+							&:nth-child(10){
 								width: 150px*@ip5;
 							}
 							&.red{

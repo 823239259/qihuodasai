@@ -62,7 +62,6 @@
 		},
 		methods: {
 			operateData: function(obj){
-				console.log(obj);
 				this.entrustList = [];
 				if(obj){
 					obj.forEach(function(o, i){
