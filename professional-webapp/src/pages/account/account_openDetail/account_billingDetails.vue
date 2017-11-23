@@ -288,14 +288,14 @@
 		mounted:function(){
 			//初始化高度
 			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-			var _h = h - 80 - 47;
+			var _h = h - 80 - 90;
 			var contH = $(".billingDetails").height();
 			if(contH > _h){
 				$(".billingDetails").height(_h);
 			}
 			$(window).resize(function(){
 				var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-				var _h = h - 80 - 47;
+				var _h = h - 80 - 90;
 				if(contH > _h){
 					$(".billingDetails").height(_h);
 				}
@@ -341,7 +341,7 @@
 		text-indent: 10px;
 	}
 	.billingDetails{
-		overflow-y: scroll;
+		overflow-y: auto;
 		float: left;
 		position: absolute;
 		top: 50%;
