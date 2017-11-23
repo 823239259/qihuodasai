@@ -28,7 +28,7 @@ var isshow = {
 //控制个人数据
 var account = {
 	state: {
-		packChannel: '',
+		packChannel: '',   //统计代码
 		islogin: false, //是否登录
 		phone: '', //账户
 		password: '', //密码 
@@ -364,7 +364,6 @@ export default new Vuex.Store({
 		}
 	},
 	mutations: {
-	
 		drawlight: function(state, e) {
 			// 引入 ECharts 主模块
 			var echarts = require('echarts/lib/echarts');
