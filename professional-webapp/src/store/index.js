@@ -947,6 +947,7 @@ export default new Vuex.Store({
 				}],
 				series: {
 					type: 'line',
+					data: price,
 					label: {
 						normal: {
 							show: false,
@@ -987,7 +988,6 @@ export default new Vuex.Store({
 							}
 						]
 					},
-					data: price
 				}
 			};
 		},
