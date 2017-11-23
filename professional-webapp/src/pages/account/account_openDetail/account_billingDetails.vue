@@ -295,7 +295,7 @@
 			}
 			$(window).resize(function(){
 				var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-				var _h = h - 80 - 90;
+				var _h = h - 80 - 47;
 				if(contH > _h){
 					$(".billingDetails").height(_h);
 				}
