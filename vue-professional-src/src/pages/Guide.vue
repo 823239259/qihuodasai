@@ -2,9 +2,9 @@
 	<div id="guide">
 		<div class="mui-slider">
 			<div class="mui-slider-group">
-				<!--<div class="mui-slider-item">
-					<img src="../assets/img/guide01.png" />
-				</div>-->
+				<div class="mui-slider-item">
+					<img src="../assets/img/guide01.jpg" />
+				</div>
 				<div class="mui-slider-item">
 					<img src="../assets/img/guide02.jpg" />
 				</div>
