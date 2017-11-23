@@ -7,27 +7,39 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<style type="text/css">
+			.mui-bar{
+				box-shadow: none;
+				border-bottom: 1px solid black;
+			}
 			#back {
 				color: white;
 			}
 			.imgs>img{
 				width: 100%;
+				height: 70px;
+				margin-bottom: -10px;
+			}
+			.stepList{
+				width: 100%;
 				height: 80px;
-				margin-top: -10px;
+				background-color: #2B2B2B;
+				border-bottom: 1px solid black;
+				/*margin-top: -10px;*/
+				padding-top: 20px;
+				padding-left: 20px;
+				&:nth-child(1){
+					border-top: 1px solid black;
+				}
 			}
 			span{
 				color: #ff6a00;
 				margin-left: 10px;
-				font-weight: 600;
+				font-weight: 400;
 			}
 			p{
 				color: #999999;
-				margin-left: 10px;
+				margin-left: 50px;
 				font-size: 12px;
-			}
-			.mui-table-view {
-				background-color:#2B2B2B ;
-				margin-top: -10px;
 			}
 			i {
 				display: inline-block;
@@ -58,35 +70,27 @@
 			<div class="imgs">
 				<img src="../../images/process_1.png" alt="" />
 			</div>
-			<ul class="mui-table-view">
-			    <li class="mui-table-view-cell mui-media">
-			        <a href="javascript:;">
-			            <i>A</i>
-			            <div class="mui-media-body">
-			               <span>超低手续费</span> 
-			                <p class='mui-ellipsis'>全场最低19.5元/单边</p>
-			            </div>
-			        </a>
-			    </li>
-			    <li class="mui-table-view-cell mui-media">
-			        <a href="javascript:;">
-			            <i>B</i>
-			            <div class="mui-media-body">
-			                <span>智能交易</span>
-			                <p class='mui-ellipsis'>止损单、止盈单、条件单等类型为投资者保驾护航</p>
-			            </div>
-			        </a>
-			    </li>
-			    <li class="mui-table-view-cell mui-media">
-			        <a href="javascript:;">
-			            <i>C</i>
-			            <div class="mui-media-body">
-			                <span>实时行情</span>
-			                <p class='mui-ellipsis'>全球期货行情永久免费</p>
-			            </div>
-			        </a>
-			    </li>
-			</ul>
+			<div class="stepList">
+				<i>A</i>
+	            <div class="mui-media-body">
+	               <span>超低手续费</span> 
+	                <p class='mui-ellipsis'>全场最低19.5元/单边</p>
+	            </div>
+			</div>
+			<div class="stepList">
+				 <i>B</i>
+	            <div class="mui-media-body">
+	                <span>智能交易</span>
+	                <p class='mui-ellipsis'>止损单、止盈单、条件单等类型为投资者保驾护航</p>
+	            </div>
+			</div>
+			<div  class="stepList">
+				<i>C</i>
+	            <div class="mui-media-body">
+	                <span>实时行情</span>
+	                <p class='mui-ellipsis'>全球期货行情永久免费</p>
+	            </div>
+			</div>
 		</div>
 	</body>
 

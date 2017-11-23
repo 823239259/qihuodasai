@@ -355,7 +355,7 @@ var loadCachTodayCanuse = 0;
 var history_index=1;
 function dealWithQryHisTrade(parameters){
 //	$('#hisTradeList').prepend('<tr class="red"><td width="30px">'+parameters.TradeNo+'</td><td width="80px">'+parameters.ContractCode+'</td><td width="60px">'+dealwithBuyOrSell(parameters.Drection)+'</td><td width="60px">'+parameters.TradeNum+'</td><td width="100px">'+parameters.TradeFee+'</td></tr>');
-	$('#hisTradeList').append('<tr class="red"><td width="50px">'+(history_index++)+'</td><td width="100px">'+parameters.ContractCode+'</td><td width="100px">'+parameters.ExchangeNo+'</td><td width="100px">'+parameters.CurrencyNo+'</td><td width="50px">'+dealwithBuyOrSell(parameters.Drection)+'</td><td width="150px">'+parameters.TradePrice+'</td><td width="50px">'+parameters.TradeNum+'</td><td width="100px">'+parameters.TradeFee+'</td><td width="150px">'+parameters.TradeDateTime+'</td></tr>');
+	$('#hisTradeList').append('<tr class="red"><td width="50px">'+(history_index++)+'</td><td width="100px">'+parameters.ContractCode+'</td><td width="100px">'+parameters.ExchangeNo+'</td><td width="100px">'+parameters.CurrencyNo+'</td><td width="50px">'+dealwithBuyOrSell(parameters.Drection)+'</td><td width="150px">'+parameters.TradePrice+'</td><td width="50px">'+parameters.TradeNum+'</td><td width="100px">'+parameters.TradeFee+'</td><td width="100px">'+parameters.hedgeProfit+'</td><td width="150px">'+parameters.TradeDateTime+'</td></tr>');
 }
 
 function dealwithBuyOrSell(date){

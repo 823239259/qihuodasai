@@ -14,7 +14,12 @@
     <script src="../../js/common1.js"></script>
     <script src="../../js/jquery-1.11.3.js"></script>
     <script>
-    	mui.init();
+    	mui.init({
+    		beforeback:function(){
+    			var reload = plus.webview.getWebviewById("openingRecord");
+    			reload.reload(true);
+    		}
+    	});
     	var win=null;
     	
     	mui.plusReady(function(){
@@ -57,6 +62,7 @@
     		function insertDateils(data){
     			for(var i=0;i<data.length;i++){
     				var _data = data[i];
+    				var showColor = document.getElementsByClassName("showColor");
     				$("#historyDetailsTable").append("<tr>"+
     						"<td>"+Number(i+1)+"</td>" +
 	    				"<td>"+_data.tradeDate+"</td>" +
@@ -68,12 +74,18 @@
 						"<td>"+Number(_data.buyNum)+"</td>" +
 						"<td>"+Number(_data.sellNum)+"</td>" +
 						"<td>"+Number(_data.tradePrice)+"</td>" +
+						"<td class='showColor'>"+_data.hedgeProfit+"</td>"+
 						"<td>"+Number(_data.free)+"</td>" +
 //						"<td>"+_data.orderType+"</td>" +
 //						"<td>"+_data.orderUserno+"</td>" +
 //						"<td>"+_data.orderUsername+"</td>" +
 //						"<td>"+_data.tradeType+"</td>" +
 	    			"</tr>");
+	    			if(_data.hedgeProfit < 0){
+	    				showColor[i].style.color= "green";
+	    			}else if(_data.hedgeProfit >0){
+	    				showColor[i].style.color= "red";
+	    			}
     			}
     			
     		}
@@ -597,6 +609,7 @@
 								<td width="80px">买</td>
 								<td width="80px">卖</td>
 								<td width="100px">成交价</td>
+								<td width="100px">平仓盈亏</td>
 								<td width="80px">手续费</td>
 								<!--<td width="100px">下单类型</td>-->
 								<!--<td width="100px">下单人编号</td>-->
