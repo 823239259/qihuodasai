@@ -565,7 +565,7 @@
 				if(n){
 					this.tradeLoginShow = false;
 					this.tradeDetailsShow = true;
-					this.$store.state.market.chartHeight = this.h - 50 - 30 - 35 - $(".trade_box").height();
+					this.$store.state.market.chartHeight = this.h - 50 - 30 - 45 - $(".trade_box").height();
 					this.tradeUser = n;
 				}
 			}
@@ -935,7 +935,7 @@
 				this.$store.state.market.tradeConfig.password = '';
 				this.tradeLoginShow = true;
 				this.tradeDetailsShow = false;
-				this.$store.state.market.chartHeight = this.h - 50 - 30 - 25;
+				this.$store.state.market.chartHeight = this.h - 50 - 30 - 45;
 				layer.msg('退出成功', {time: 1000});
 				setTimeout(function(){
 					this.$router.push({path: '/index'});
@@ -1022,7 +1022,7 @@
 			this.w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 			this.h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 			$(".quote .cont").height(this.h - 50 - 30 - 45);
-			this.$store.state.market.chartHeight = this.h - 50 -30 - 25;
+			this.$store.state.market.chartHeight = this.h - 50 -30 - 40;
 			$(".trade_list, #trade_details").width(this.w - $("#nav").width() - $(".quote").width() - $(".operate").width() - 30);
 			//开始画图
 			this.chartShow = true;
@@ -1031,7 +1031,7 @@
 			if(tradeUser != '' && tradeUser != undefined){
 				this.tradeLoginShow = false;
 				this.tradeDetailsShow = true;
-				this.$store.state.market.chartHeight = this.h - 50 - 30 - 35 - $(".trade_box").height();
+				this.$store.state.market.chartHeight = this.h - 50 - 30 - 45 - $(".trade_box").height();
 				this.tradeUser = tradeUser.username;
 				if(tradeUser.fid == undefined){
 					this.openAccountTools = false;
@@ -1135,7 +1135,7 @@
 				this.w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 				this.h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 				$(".quote .cont").height(this.h - 50 - 30 - 45);
-				this.chartHeight = this.h - 50 -30 - 25;
+				this.chartHeight = this.h - 50 -30 - 40;
 				$(".trade_list, #trade_details").width(this.w - $("#nav").width() - $(".quote").width() - $(".operate").width() - 30);
 			});
 			this.chartShow = true;
@@ -1257,6 +1257,11 @@
 						color: $yellow;
 					}
 				}
+			}
+			.cont{
+				overflow: hidden;
+				background: $blue;
+				padding-bottom: 10px;
 			}
 		}
 		.info{

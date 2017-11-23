@@ -69,7 +69,7 @@
 			}else{
 				h = this.$store.state.market.chartHeight;
 			}
-			$("#fens").height(h/10*6.8);
+			$("#fens").height(h/10*6.9);
 			$("#volume").height(h/10*3);
 			var data = {
 				Method: "QryHistory",

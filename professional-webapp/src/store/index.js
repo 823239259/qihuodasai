@@ -337,6 +337,7 @@ export default new Vuex.Store({
 					x2: 46,
 					y2: 20
 				},
+//				backgroundColor: '#2d3040',
 				xAxis: [{
 					type: 'category',
 					show: true,
@@ -461,7 +462,12 @@ export default new Vuex.Store({
 				return result;
 			}
 			state.market.option3 = {
-				backgroundColor: 'transparent',
+				grid: {
+					x: 43,
+					y: 20,
+					x2: 30,
+					y2: 5
+				},
 				tooltip: {
 					trigger: 'axis',
 					axisPointer: {
@@ -492,12 +498,6 @@ export default new Vuex.Store({
 						res += '<br/><span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#B37436"></span> MA20 : ' + ma20 + '  <span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#B2B336"></span> MA30 : ' + ma30;
 						return res;
 					}
-				},
-				grid: {
-					x: 43,
-					y: 20,
-					x2: 30,
-					y2: 5
 				},
 				xAxis: {
 					type: 'category',
@@ -787,13 +787,11 @@ export default new Vuex.Store({
 			var vol = [],
 				price = [],
 				time = [];
-//				averagePrices = [];
 			var dosizeL = state.market.currentdetail.DotSize;
 			state.market.jsonData.Parameters.Data.forEach(function(e) {
 				vol.push(e[6]);
 				time.push(e[0].split(' ')[1].split(':')[0] + ':' + e[0].split(' ')[1].split(':')[1]);
 				price.push(e[1]);
-//				averagePrices.push(45.6);
 			})
 			state.market.option1 = {
 				grid: {
@@ -876,7 +874,12 @@ export default new Vuex.Store({
 				}]
 			};
 			state.market.option2 = {
-				backgroundColor: 'transparent',
+				grid: {
+					x: 50,
+					y: 20,
+					x2: 30,
+					y2: 5
+				},
 				tooltip: {
 					show: true,
 					transitionDuration: 0,
@@ -942,14 +945,9 @@ export default new Vuex.Store({
 						}
 					}
 				}],
-				grid: {
-					x: 50,
-					y: 20,
-					x2: 30,
-					y2: 5
-				},
 				series: {
 					type: 'line',
+					data: price,
 					label: {
 						normal: {
 							show: false,
@@ -990,7 +988,6 @@ export default new Vuex.Store({
 							}
 						]
 					},
-					data: price
 				}
 			};
 		},

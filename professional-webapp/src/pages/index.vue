@@ -77,8 +77,8 @@
 				<div id="fens" class="chart"></div>
 				<div id="volume" class="chart"></div>
 			</div>
+			<h1>日K</h1>
 			<div id="echarts_k" v-show="showKline">
-				<h1>日K</h1>
 				<div id="kliness" class="char"></div>
 				<div id="kliness_volume" class="chart"></div>
 			</div>
@@ -423,6 +423,7 @@
 			//分时、k线容器赋高度
 			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 			h = h - 50 - 30 - 40 - 25;
+			$("#echarts_f, #echarts_k").height(h/2);
 			$("#volume, #kliness_volume").height(h/2/10*3.7);
 			$("#fens, #kliness").height(h/2/10*6);
 			//开始画图
@@ -476,6 +477,13 @@
 		right: 0;
 		width: 400px;
 		overflow: hidden;
+		h1{
+			font-size: $fs18;
+			font-weight: bold;
+			background: $blue;
+			padding: 0 0 0 10px;
+			color: $white;
+		}
 		.title{
 			height: 40px;
 			line-height: 40px;
@@ -511,11 +519,8 @@
 				}
 			}
 		}
-		#echarts_k h1{
-			font-size: $fs18;
-			font-weight: bold;
-			margin: 15px 0 0 10px;
-			color: $white;
+		#echarts_f, #echarts_k{
+			background: $blue;
 		}
 		#fens, #volume, #kliness, #kliness_volume{
 			width: 100%;
