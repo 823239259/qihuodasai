@@ -1,35 +1,50 @@
 <template>
 	<div id="account_addBankCard">
 		<div class="account_addBankCard_top">
-			<p><span>姓名：</span><input type="text" v-model="username" /></p>
-			<p>开户银行：
-				<select id="bank" v-model="bank">
-					<option value="">请选择银行类型</option>
-					<template v-for="key in bankList">
-						<option :value="key.abbreviation">{{key.bankName}}</option>
-					</template>
-				</select>
-			</p>
-			<p>开户省份：
-				<select id="province" v-model="province">
-					<option value="">请选择开户省份</option>
-					<template v-for="key in provinceList">
-						<option :value="key.text">{{key.text}}</option>
-					</template>
-				</select>
-			</p>
-			<p>开户城市：
-				<select id="city" v-model="city">
-					<option value="">请选择开户城市</option>
-					<template v-for="key in cityList">
-						<option :value="key.text">{{key.text}}</option>
-					</template>
-				</select>
-			</p>
-			<p>开户支行：<input type="text" v-model="address"/></p>
-			<p><span>银行卡卡号：</span><input type="text" v-model="bankId"/><span>(不支持存折)</span></p>
-			<p>确认卡号：<input type="text" v-model="sure_bankId"/></p>
-			<button class="btn yellow" v-on:click="addBankCard">确认</button>
+			<div class="addBankCard_top_left">
+				<ul>
+					<li>姓名:</li>
+					<li>开户银行:</li>
+					<li>开户省份:</li>
+					<li>开户城市:</li>
+					<li>开户支行:</li>
+					<li>银行卡卡号:</li>
+					<li>确认卡号:</li>
+				</ul>
+			</div>
+			<div class="addBankCard_top_right">
+				<ul>
+					<li><input type="text" v-model="username" /></li>
+					<li>
+						<select id="bank" v-model="bank">
+							<option value="">请选择银行类型</option>
+							<template v-for="key in bankList">
+								<option :value="key.abbreviation">{{key.bankName}}</option>
+							</template>
+						</select>
+					</li>
+					<li>
+						<select id="province" v-model="province">
+							<option value="">请选择开户省份</option>
+							<template v-for="key in provinceList">
+								<option :value="key.text">{{key.text}}</option>
+							</template>
+						</select>
+					</li>
+					<li>
+						<select id="city" v-model="city">
+							<option value="">请选择开户城市</option>
+							<template v-for="key in cityList">
+								<option :value="key.text">{{key.text}}</option>
+							</template>
+						</select>
+					</li>
+					<li><input type="text" v-model="address"/></li>
+					<li><input type="text" v-model="bankId"/></li>
+					<li><input type="text" v-model="sure_bankId"/></li>
+					<li><button class="btn yellow" v-on:click="addBankCard">确认</button></li>
+				</ul>
+			</div>
 		</div>
 		<div class="account_addBankCard_btm">
 			<p>新增/修改银行卡遇到问题</p>
@@ -257,47 +272,50 @@
 			width : 100%;
 			height : 420px;
 			background-color : $blue;
-			p {
-				margin-left: 40%;
-				padding-top: 20px;
-				span {
-					font-size : $fs12;
+			.addBankCard_top_left{
+				width: 50%;
+				float: left;
+				li{
+					text-align:right;
+					height: 52.5px;
+					line-height: 52.5px;
 				}
-				&:nth-child(1){
-					span{
-						margin-left:34px;
+			}
+			.addBankCard_top_right{
+				float: left;
+				width: 50%;
+				li{
+					height: 52.5px;
+					line-height: 52.5px;
+					text-indent: 5px;
+				}
+				input {
+					width: 160px;
+					height: 30px;
+					border: 1px solid $bottom_color;
+					border-radius: 5px;
+					color: $white;
+					&:hover{
+						border: 1px solid $yellow;
 					}
 				}
-			}
-			input {
-				width: 160px;
-				height: 30px;
-				border: 1px solid $bottom_color;
-				border-radius: 5px;
-				color: $white;
-				&:hover{
-					border: 1px solid $yellow;
+				.btn {
+					width: 160px;
+					height: 30px;
 				}
-			}
-			.btn {
-				width: 160px;
-				height: 30px;
-				margin-left: 50%;
-				margin-top: 10px;
-			}
-			select{
-				
-				opacity: 10;
-				color: $white;
-				width: 160px;
-				height: 30px;
-				background-color: #596080;
-				border-radius:5px; 
-				&:hover{
-					border: 1px solid $yellow;
-				}
-				option{
-					background-color: $bottom_color;
+				select{
+					opacity: 10;
+					color: $white;
+					width: 160px;
+					height: 30px;
+					background-color: #596080;
+					border-radius:5px; 
+					&:hover{
+						border: 1px solid $yellow;
+					}
+					option{
+						background-color: $bottom_color;
+					}
 				}
 			}
 		}
