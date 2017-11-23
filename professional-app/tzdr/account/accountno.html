@@ -103,6 +103,18 @@
 						id : "contactUs.html"
 					})
 				})
+				document.getElementById("webInfo").addEventListener("tap",function(){
+					mui.openWindow({
+						url : "contactUs.html",
+						id : "contactUs.html"
+					})
+				})
+				document.getElementById("coupon").addEventListener("tap",function(){
+					mui.openWindow({
+						url : "contactUs.html",
+						id : "contactUs.html"
+					})
+				})
 				//初始化监听头部和底部事件
 				var dataUrl = {
 					home: "../future/cp.html",
@@ -365,8 +377,16 @@
 				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="toNews">
 					<div class="find_tab_div">
 						<img src="../../images/ac_081.png">
-						<div>
+						<div id="webInfo">
 							网站公告<br/><span>最新公告，看这里</span>
+						</div>
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="toCoupon ">
+					<div class="coupon">
+						<img src="../../images/ac_081.png">
+						<div id="coupon">
+							优惠券<br/><span>最新公告，看这里</span>
 						</div>
 					</div>
 				</li>

@@ -518,7 +518,7 @@ var tzdr = {
 		});
 	},
 	operation: function() {
-		document.getElementById("quickMode").addEventListener("tap", function() {
+		document.getElementById("quickMode").addEventListener("touchend", function(e) {
 			if(!mui.cacheUser.isLogin()){
 				mui.confirm("您还未登录，请您先登录","登录提示",["否","是"],function(e){
 					if (e.index == 1) {
@@ -531,11 +531,13 @@ var tzdr = {
 			}else{
 				$("#Operation_content").css("display", "block");
 				$("#quickMode").hide()
+				e.preventDefault();
 			}
 		});
-		document.getElementById("Operation_Close").addEventListener("tap", function() {
+		document.getElementById("Operation_Close").addEventListener("touchend", function(e) {
 			$("#Operation_content").css("display", "none");
 			$("#quickMode").show()			
+			e.preventDefault();
 		});
 	}
 }
