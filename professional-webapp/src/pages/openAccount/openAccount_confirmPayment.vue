@@ -65,7 +65,22 @@
 					}
 				}).catch((err)=>{
 					if(err.data.success == false){
-						layer.msg(err.data.message,{time:2000});
+						switch (err.data.code){
+							case "-1":
+							layer.msg("认证失败",{time:2000});
+								break;
+							case "0":
+							layer.msg("系统异常，请稍后重试",{time:2000});
+								break;
+							case "2":
+							layer.msg("传的参数错误，没有获取到配置方案",{time:2000});
+								break;
+							case "3":
+							layer.msg("用户余额不足",{time:2000});
+								break;
+							default:
+								break;
+						}
 					}else{
 						layer.msg("网络不给力，请稍后再试",{time:2000})
 					}

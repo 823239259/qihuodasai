@@ -277,16 +277,16 @@
 				float: left;
 				li{
 					text-align:right;
-					height: 52.5px;
-					line-height: 52.5px;
+					height: 50px;
+					line-height: 50px;
 				}
 			}
 			.addBankCard_top_right{
 				float: left;
 				width: 50%;
 				li{
-					height: 52.5px;
-					line-height: 52.5px;
+					height: 50px;
+					line-height: 50px;
 					text-indent: 5px;
 				}
 				input {
