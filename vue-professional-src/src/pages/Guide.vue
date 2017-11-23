@@ -2,14 +2,14 @@
 	<div id="guide">
 		<div class="mui-slider">
 			<div class="mui-slider-group">
-				<div class="mui-slider-item">
+				<!--<div class="mui-slider-item">
 					<img src="../assets/img/guide01.png" />
+				</div>-->
+				<div class="mui-slider-item">
+					<img src="../assets/img/guide02.jpg" />
 				</div>
 				<div class="mui-slider-item">
-					<img src="../assets/img/guide02.png" />
-				</div>
-				<div class="mui-slider-item">
-					<img src="../assets/img/guide03.png" @tap='toHome' @swipeleft='toHome'/>
+					<img src="../assets/img/guide03.jpg" @tap='toHome' @swipeleft='toHome'/>
 				</div>
 			</div>
 		</div>
