@@ -249,7 +249,7 @@
 							if(o.OrderPriceType == 1){
 								return '市价';
 							}else{
-								return o.OrderPrice;
+								return parseFloat(o.OrderPrice).toFixed(this.orderTemplist[o.CommodityNo].DotSize);
 							}
 						}();
 						data.delegateNum = o.OrderNum;

@@ -63,7 +63,7 @@
 								return '卖';
 							}
 						}();
-						data.tradePrice = o.TradePrice;
+						data.tradePrice = parseFloat(o.TradePrice).toFixed(this.orderTemplist[o.CommodityNo].DotSize);
 						data.tradeNum = o.TradeNum;
 						data.tradeDateTime = o.TradeDateTime;
 						data.ContractCode = o.ContractCode;
