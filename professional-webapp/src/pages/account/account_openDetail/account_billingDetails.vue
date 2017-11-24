@@ -9,28 +9,35 @@
 				<p v-else="tradeSell !<0"><span>{{endAmount | fixNumTwo}}</span>元（结算金额）<span>={{traderBond | fixNumTwo}}元</span>（操盘保证金）+<span>{{appendTraderBond | fixNumTwo}}元</span>（追加保证金）<span >+{{tradeSell | fixNumTwo}}元</span>（交易盈亏）-<span>{{tranFeesTotal | fixNumTwo}}元</span>（手续费）</p>
 				<p><i>注意：</i>交易手续费= 合约手续费x交易手数</p>
 			</div>
-			<div class="handDetails">
+			<div class="handDetails"  v-if="showTreatyName1 == null" style="height: 120px;">
 				<p>交易明细手数</p>
-				<table >
-					<thead>
-						<tr>
-							<td>合约名称</td>
-							<td v-for="(key,value) in handList">{{value}}</td>
-							<!--<td>国际原油</td>
-							<td>恒指期货</td>
-							<td>迷你恒指</td>-->
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>交易手数</td>
-							<td v-for="(key,value) in handList">{{key}}</td>
-							<!--<td>10</td>
-							<td>10</td>
-							<td>10</td>-->
-						</tr>
-					</tbody>
-				</table>
+				<ul>
+					<li>合约名称</li>
+					<li v-for="key in showTreatyName">{{key}}</li>
+				</ul>
+				<ul>
+					<li>交易手数</li>
+					<li v-for="key in showTreatyHandle">{{key}}</li>
+				</ul>
+			</div>
+			<div class="handDetails" v-if="showTreatyName1 != null" style="height: 220px;">
+				<p>交易明细手数</p>
+				<ul>
+					<li>合约名称</li>
+					<li v-for="key in showTreatyName">{{key}}</li>
+				</ul>
+				<ul>
+					<li>交易手数</li>
+					<li v-for="key in showTreatyHandle">{{key}}</li>
+				</ul>
+				<ul class="nameTwo">
+					<li>合约名称</li>
+					<li v-for="key in showTreatyName1">{{key}}</li>
+				</ul>
+				<ul>
+					<li>交易手数</li>
+					<li v-for="key in showTreatyHandle1">{{key}}</li>
+				</ul>
 			</div>
 			<div class="historyRecord">
 				<p>成交记录</p>
@@ -142,6 +149,10 @@
 				tranFeesTotal:"",
 				tradeSell:'',
 				handList:{},
+				showTreatyName:[],//合约名称1
+				showTreatyName1:[],//合约名称2
+				showTreatyHandle:[],//合约手数1
+				showTreatyHandle1:[],//合约手数2
 				historyList:[],//显示数据
 				pageCount:'',//总页数
 				eachPage:5,//每页条数
@@ -241,12 +252,30 @@
 							if(data.naturalGasActualLever!=0){
 								this.handList.天然气 = data.naturalGasActualLever
 							}
+							var showTreaty=[];
+							var showTreaty1=[];
+							for(var key in this.handList){
+								showTreaty.push(key);
+								showTreaty1.push(this.handList[key]);
+							}
+							if(showTreaty.length>9){
+								this.showTreatyName = showTreaty.slice(0,9);
+								this.showTreatyName1 = showTreaty.slice(9,17);
+								this.showTreatyHandle = showTreaty1.slice(0,9);
+								this.showTreatyHandle1 = showTreaty1.slice(9,17);
+							}else{
+								this.showTreatyName = showTreaty;
+								this.showTreatyHandle = showTreaty1;
+								this.showTreatyName1 = null;
+								this.showTreatyHandle1 = null;
+							}
 						}
 					}
 				}).catch((err)=>{
-					if(err.success == false){
-						switch (err.code){
-							case value:
+					if(err.data.success == false){
+						switch (err.data.code){
+							case "-1":
+								layer.msg("认证失败",{time:2000})
 								break;
 							default:
 								break;
@@ -273,14 +302,15 @@
 							var curtotal=(this.currentPage-1)*this.eachPage;//上一页显示的最后一条
 				            var tiaoshu=this.currentPage*this.eachPage;//当前页显示的最后一条
 				            this.historyList=this.totalHistoryList.slice(curtotal,tiaoshu); //当前页应显示的数据
-				            console.log(this.historyList);
 						}
 					}
 				}).catch((err)=>{
-					if(err.success == false){
-						
+					if(err.data.success == false){
+						if(err.data.code == -1){
+							layer.msg("认证失败",{time:2000});
+						}
 					}else{
-						layer.msg("网络不给力，请稍后再试",{time:2000})
+						layer.msg("网络不给力，请稍后再试",{time:2000});
 					}
 				})
 			}
@@ -348,7 +378,6 @@
 		left: 50%;
 		margin:-300px 0 0 -500px;
 		width: 1000px;
-		height: 600px;
 		z-index: 120;
 		border-radius: 10px;
 		background-color: $deepblue;
@@ -393,17 +422,29 @@
 		}
 	}
 	.handDetails{
-		height: 120px;
+		width: 100%;
+		/*height: 220px;*/
 		p{
 			height: 40px;
 			line-height: 40px;
 			color: $white;
 		}
-		tr{
-			height: 40px;
+		ul{
+			background-color: #2D3040;
+			float: left;
+			width:100%;
+			outline: 1px solid $bottom_color;
+			li{
+				line-height: 40px;
+				text-align: center;
+				height: 40px;
+				width: 10%;
+				float: left;
+				outline: 1px solid $bottom_color;
+			}
 		}
-		td{
-			border: 1px solid $bottom_color;
+		.nameTwo{
+			margin-top: 10px;
 		}
 	}
 	.historyRecord{
