@@ -408,6 +408,7 @@
 				padding-top: 20px;
 			}
 			&:nth-child(3){
+				padding-top: 10px;
 				height: 35px;
 				background-color: $blue;
 			}
