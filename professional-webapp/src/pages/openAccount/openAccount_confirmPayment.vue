@@ -8,7 +8,7 @@
 			<p>支付金额：<span>{{payMoney}}</span>元</p>
 			<p v-if="accountMoney-payMoney>0">您的账户余额<i>{{accountMoney}}</i>元，本次支付完毕剩余<i>{{accountMoney-payMoney | fixNumTwo}}</i>元</p>
 			<p v-else="accountMoney-payMoney!>0">您的账户余额<i>{{accountMoney}}</i>元，本次支付还差<i>{{Math.abs(accountMoney-payMoney)}}</i>元</p>
-			<button class="btn yellow" v-on:click="to_payMoney" v-if="accountMoney-payMoney>0">确认支付</button>
+			<button class="btn yellow" v-on:click="to_payMoney" v-if="accountMoney-payMoney>0 || accountMoney-payMoney==0">确认支付</button>
 			<button class="btn yellow" v-on:click="to_Recharge" v-else="accountMoney!>0">去充值</button>
 			<button class="btn green" v-on:click="cancel">取消</button>
 		</div>
@@ -111,7 +111,15 @@
 					}
 				}).catch((err)=>{
 					if(err.data.success == false){
-						layer.msg(err.data.message,{time:2000})
+						switch (err.data.code){
+							case "3":
+							layer.msg("用户信息不存在",{time:2000});
+								break;
+							case "-1":
+							layer.msg("认证失败",{time:2000});
+							default:
+								break;
+						}
 					}else{
 						layer.msg("网络不给力，请稍后再试",{time:2000})
 					}
