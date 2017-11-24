@@ -1,10 +1,4 @@
 <template>
-	<div id="recharge">
-		<div class="bg"></div>
-		<div class="reaharge_title">
-			<img src="../../../assets/images/recharge_icon4.png" alt="" />
-			<i>盈透支付</i>
-		</div>
 		<div class="recharge">
 			<h2>充值到平台</h2>
 			<div class="recharge_top">
@@ -23,37 +17,39 @@
 					</div>
 					<div class="recharge_center_right">
 						<ul>
-							<li><input type="text"  v-model="recharge_money"/></li>
+							<li><input type="text"  v-model="recharge_money"/>&nbsp;元</li>
 							<li><span>注意：</span>单次充值金额最低10元</li>
 							<li><button class="btn" v-on:click="nextStep">下一步</button><i v-on:click="back">返回修改</i></li>
 						</ul>
 					</div>
 				</div>
-				<div class="recharge_center_2">
-					<p>支付方式有哪些？</p>
-					<p>目前平台支付方式有支付宝扫码、微信扫码支付、快捷支付、支付宝转账支付、支付宝转银行卡支付、网银转账支付六种，后期可能会增加其他方式，请您注意留意。</p>
-				</div>
 			</div>
 			<div class="recharge_btm">
-				<p>充值提醒：</p>
-				<ul>
-					<li>
-						<img src="../../../assets/images/recharge_icon1.png" alt="" />
-						<p>填写并生成，您的充值订单</p>
-					</li>
-					<li>
-						<img src="../../../assets/images/recharge_icon2.png" alt="" />
-						<p>选择支付方式，按照订单进行转账</p>
-					</li>
-					<li>
-						<img src="../../../assets/images/recharge_icon3.png" alt="" />
-						<p>完成转账后，最快5分钟内到账</p>
-					</li>
+				<ul class="recharge_answer">
+					<li>充值相关</li>
+					<li>支付方式有哪些？</li>
+					<li>目前平台支付方式有支付宝扫码、微信扫码支付、快捷支付、支付宝转账支付、支付宝转银行卡支付、网银转账支付六种，后期可能会增加其他方式，请您注意留意。</li>
 				</ul>
+				<div class="recharge_info">
+					<p>充值提醒：</p>
+					<ul>
+						<li>
+							<img src="../../../assets/images/recharge_icon1.png" alt="" />
+							<p>填写并生成，您的充值订单</p>
+						</li>
+						<li>
+							<img src="../../../assets/images/recharge_icon2.png" alt="" />
+							<p>选择支付方式，按照订单进行转账</p>
+						</li>
+						<li>
+							<img src="../../../assets/images/recharge_icon3.png" alt="" />
+							<p>完成转账后，最快5分钟内到账</p>
+						</li>
+					</ul>
+				</div>
 			</div>
-			<h3>投资有风险，入市需谨慎</h3>
+			<p class="p_center">投资有风险，入市需谨慎</p>
 		</div>
-	</div>
 </template>
 
 <script>
@@ -128,73 +124,36 @@
 
 <style lang="scss" scoped type="text/css">
 	@import "../../../assets/css/common.scss";
-	#recharge{
-		width: 100%;
-		height: 780px;
-	}
-	.bg{
-		background: url(../../../assets/images/recharge_bak.png)  no-repeat;
-		opacity:1;
-		vertical-align:middle;
-	}
-	.reaharge_title{
-		position: fixed;
-		top:0;
-		width: 100%;
-		height: 60px;
-		background-color:#284e95;
-		z-index: 120;
-		i{
-			color: $white;
-			font-size: $fs20;
-		}
-		img{
-			margin-left: 400px;
-			margin-top: 10px;
-			width: 40px;
-			height: 40px;
-			line-height: 60px;
-			display: inline-block;
-		}
-	}
 	.recharge{
-		overflow-y: scroll;
-		float: left;
-		border-radius: 10px;
-		background-color: #FFFFFF;
-		position: absolute;
-		left: 50%;
-		top: 50%;
+		position: relative;
+		left: 170px;
 		width: 1000px;
-		height: 700px;
-		margin: auto;
-		margin: -350px 0 0 -500px;
-		z-index: 120;
 		h2{		
-			border-radius: 10px 10px 0 0 ;
-			height: 50px;
-			color: #006699;
+			height: 40px;
+			color: $white;
 			width: 100%;
-			text-align: center;
-			background-color: #e5e9f2;
-			line-height: 50px;
-			font-weight: 800;
-			font-size: $fs20;
+			text-align: left;
+			background-color: $bottom_color;
+			line-height: 40px;
+			font-size: $fs14;
+			text-indent: 10px;
 		}
 		.recharge_top{
+			background-color: $blue;
+			padding-left: 10px;
 			line-height: 60px;
 			margin: auto;
-			width: 95%;
+			width: 100%;
 			height: 60px;
-			border-bottom: 1px solid  #e5e9f2;
+			border-bottom: 1px solid $bottom_color;
 			li{
 				float: left;
 				&:nth-child(1){
-					color: #ff4c4c;
+					color: $lightblue;
 					font-style: $fs16;
 				}
 				&:nth-child(2){
-					color: #ff4c4c;
+					color: $yellow;
 					span{
 						font-size: $fs20;
 						font-weight: 800;
@@ -202,122 +161,138 @@
 				}
 				&:nth-child(3){
 					font-size: $fs14;
-					color: #999999;
+					color:$lightblue;
 					span{
-						color: #ff4c4c;
+						color: $yellow;
 					}
 				}
 			}
 		}
 		.recharge_center{
+			background-color: $blue;
 			margin: auto;
-			width: 95%;
-			height: 360px;
-			border-bottom: 1px solid  #e5e9f2;
+			width: 100%;
+			height: 200px;
 			.recharge_center_1{
 				float: left;
 				width: 100%;
-				height: 230px;
-				border-bottom: 1px solid  #e5e9f2;
+				height: 200px;
 				.recharge_center_left{
-					width: 20%;
+					width: 70px;
 					float: left;
 					text-align: right;
-					height: 230px;
+					height: 200px;
 					li{
-						height: 50px;
-						line-height: 50px;
-						color: black;
-						font-size: $fs16;
-						margin-top: 10px;
+						text-indent: 10px;
+						width: 80px;
+						height: 60px;
+						line-height: 60px;
+						color: $white;
+						font-size: $fs14;
 					}
 					
 				}
 				.recharge_center_right{
-					width: 80%;
-					height: 230px;
+					padding-left: 10px;
+					width: 920px;
+					height: 200px;
 					float: left;
 					li{
-						height: 50px;
-						line-height: 50px;
-						margin-top: 10px;
+						height: 60px;
+						line-height: 60px;
 						&:nth-child(2){
+							font-size: $fs12;
 							span{
-								color: #ff4c4c;
+								color: $yellow;
 							}
 						}
+						input{
+							width: 200px;
+							height: 40px;
+							border: 1px solid $bottom_color;
+							border-radius: 5px;
+							color: $white;
+							font-size: $fs20;
+							&:hover{
+								border-color: $yellow;
+							}
+						}
+						.btn{
+							width: 120px;
+							height: 40px;
+							border-radius: 5px;
+							color: black;
+							background-color: $yellow;
+						}
 						i{
-							color: #006699;
+							font-size: $fs14;
+							color: $lightblue;
 							padding-left: 10px;
 							&:hover{
 								color: $yellow;
 							}
 						}
 					}
-					input{
-						width: 300px;
-						height: 50px;
-						border: 1px solid #e5e9f2;
-						border-radius: 5px;
-						color: #ff4c4c;
-						font-size: $fs20;
-					}
-					.btn{
-						width: 150px;
-						height: 50px;
-						border-radius: 5px;
-						color: $white;
-						background-color: #ff9500;
-					}
-				}
-			}
-			.recharge_center_2{
-				float: left;
-				width: 100%;
-				height: 130px;
-				p{
-					width:100%; 
-					&:nth-child(1){
-						font-size: $fs16;
-						height: 50px;
-						line-height: 50px;
-					}
-					&:nth-child(2){
-						font-size: $fs14;
-						height: 80px;
-					}
 				}
 			}
 		}
 		.recharge_btm{
-			height: 190px;
-			width: 95%;
-			margin: auto;
-			p{
-				height: 70px;
-				line-height: 70px;
-				color: black;
-			}
-			ul{
-				display: flex;
-				justify-content: space-around;
+			margin-top: 5px;
+			background-color: $blue;
+			height: 320px;
+			width: 100%;
+			.recharge_answer{
+				border-bottom: 1px solid $bottom_color;
+				height: 140px;
 				li{
-					float: left;
-					text-align: center;
-					p{
-						color: #666666;
+					font-size: $fs14;
+					width: 100%;
+					padding-left: 10px;
+					&:nth-child(1){
+						height: 30px;
+						line-height: 30px;
+						color: $white;
+						background-color: $bottom_color;
+					}
+					&:nth-child(2){
+						height: 30px;
+						line-height: 30px;
+					}
+					&:nth-child(3){
+						height: 80px;
+						color: $white;
+					}
+				}
+			}
+			.recharge_info{
+				height: 180px;
+				p{
+					height: 40px;
+					line-height: 40px;
+					text-indent: 10px;
+				}
+				ul{
+					padding-top: 20px;
+					height: 140px;
+					display: flex;
+					justify-content: space-around;
+					li{
+						float: left;
+						text-align: center;
+						p{
+							color: $white;
+						}
 					}
 				}
 			}
 		}
-		h3{
-			border-radius: 0 0 10px 10px ;
+		.p_center{
 			height: 40px;
-			width: 100%;
 			text-align: center;
-			background-color: #e5e9f2;
 			line-height: 40px;
-			font-size: $fs16;
+			color: $lightblue;
+			margin-top: 5px;
+			background-color: $bottom_color;
 		}
 	}
 </style>
