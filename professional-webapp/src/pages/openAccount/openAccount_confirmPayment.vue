@@ -56,6 +56,9 @@
 					token:JSON.parse(localStorage.user).token,
 					secret:JSON.parse(localStorage.user).secret
 				}
+				console.log(11111111111111);
+				console.log(data);
+				console.log(headers);
 				pro.fetch("post","/user/ftrade/handle",data,headers).then((res)=>{
 					var data = res.data;
 					if(res.success == true){

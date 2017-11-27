@@ -617,6 +617,7 @@
 			border-bottom: 1px solid $bottom_color;
 			li {
 				float: left;
+				cursor: pointer;
 				width: 65px;
 				&:hover{
 					color: $yellow;
@@ -649,6 +650,7 @@
 			line-height: 45px;
 			border-bottom: 1px solid $bottom_color;
 			li {
+				cursor: pointer;
 				float: left;
 				&:hover{
 					color: $yellow;

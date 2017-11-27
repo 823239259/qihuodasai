@@ -65,7 +65,7 @@
 									<span v-on:click="addMoney(item.id)">补充保证金</span></br>
 									<span v-on:click="toCloseAccount(item.id)">结算方案</span>
 								</td>
-								<td v-else-if="item.stateTypeStr == '已完结'" v-on:click="toParticulars(item.id)">结算明细</td>
+								<td v-else-if="item.stateTypeStr == '已完结'" v-on:click="toParticulars(item.id)" class="chang_color">结算明细</td>
 							</tr>
 						</tbody>
 					</table>
@@ -476,8 +476,29 @@
 					span{
 						float: left;
 						margin-right: 20px;
-						&:hover{
-							color: $yellow;
+						&:nth-child(1){
+							&:hover{
+								color: $yellow;
+								cursor: pointer;
+							}	
+						}
+						&:nth-child(2){
+							&:hover{
+								color: $yellow;
+								cursor: pointer;
+							}	
+						}
+						&:nth-child(3){
+							&:hover{
+								color: $yellow;
+								cursor: pointer;
+							}	
+						}
+						&:nth-child(4){
+							&:hover{
+								color: $yellow;
+								cursor: pointer;
+							}	
 						}
 					}
 					.btn{
@@ -537,6 +558,11 @@
 						text-decoration: underline;
 						line-height: 18px;
 						font-size: $fs12;
+					}
+				}
+				.chang_color{
+					&:hover{
+						color: $yellow;
 					}
 				}
 			}
