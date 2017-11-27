@@ -303,9 +303,7 @@
 							</ul>
 						</div>
 						<div class="cont">
-							<keep-alive>
-								<component :is="selectedTradeDetails"></component>
-							</keep-alive>
+							<component :is="selectedTradeDetails"></component>
 						</div>
 					</div>
 				</div>
@@ -565,6 +563,8 @@
 				if(n && n == true){
 					this.tradeLoginShow = false;
 					this.tradeDetailsShow = true;
+					this.selectedTradeDetails = 'position';
+					this.selectedNum = 0;
 					this.$store.state.market.chartHeight = this.h - 50 - 30 - 45 - $(".trade_box").height();
 					if(this.$store.state.market.tradeConfig.username == '') return;
 					this.tradeUser = this.$store.state.market.tradeConfig.username;
@@ -944,6 +944,15 @@
 				this.tradeDetailsShow = false;
 				this.$store.state.market.chartHeight = this.h - 50 - 30 - 45;
 				layer.msg('退出成功', {time: 1000});
+				
+				this.$store.state.market.qryHoldTotalArr = [];
+				this.$store.state.market.positionListCont = [];
+				this.$store.state.market.OnRspOrderInsertEntrustCont = [];
+				this.$store.state.market.OnRspOrderInsertOrderListCont = [];
+				this.$store.state.market.orderListCont = [];
+				this.$store.state.market.OnRspQryTradeDealListCont = [];
+				this.$store.state.market.queryHisList = [];
+				this.$store.state.market.CacheAccount.moneyDetail = [];
 			},
 			toAddMoney: function(){
 				if(localStorage.tradeUser){
@@ -1036,7 +1045,6 @@
 				this.tradeDetailsShow = true;
 				this.$store.state.market.chartHeight = this.h - 50 - 30 - 45 - $(".trade_box").height();
 				this.tradeUser = tradeUser.username;
-				console.log(tradeUser.username);
 				if(tradeUser.fid == undefined){
 					this.openAccountTools = false;
 				}

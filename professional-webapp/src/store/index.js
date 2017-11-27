@@ -53,16 +53,17 @@ var market = {
 			password:''
 		},
 		//心跳信息
+		HeartBeatTiming: null,   //心跳定时器
 		HeartBeat:{
 			lastHeartBeatTimestamp : 1,	// 行情最后心跳时间
 			oldHeartBeatTimestamp : 0,	// 上一次心跳时间
 			intervalCheckTime : 8000  // 间隔检查时间：8秒
 		},
-		HeartBeat00:{
-			lastHeartBeatTimestamp : 1,	// 交易最后心跳时间
-			oldHeartBeatTimestamp : 0,	// 上一次心跳时间
-			intervalCheckTime : 8000  // 间隔检查时间：8秒
-		},
+//		HeartBeat00:{
+//			lastHeartBeatTimestamp : 1,	// 交易最后心跳时间
+//			oldHeartBeatTimestamp : 0,	// 上一次心跳时间
+//			intervalCheckTime : 8000  // 间隔检查时间：8秒
+//		},
 		quoteInitStatus: false,    //行情是否已经初始化
 		quoteInitStep: '',      //判断行情Parameters是否已经初始化完
 		CacheLastQuote: [],    //缓存最新一条行情数据
@@ -1995,10 +1996,11 @@ export default new Vuex.Store({
 			}
 		},
 		HeartBeatTimingCheck: function(context){
-			setInterval(heartBeatUpdate,15000);	
+			context.state.market.HeartBeatTiming = setInterval(heartBeatUpdate,15000);	
 			function heartBeatUpdate(){
 				if(context.state.market.HeartBeat.lastHeartBeatTimestamp == context.state.market.HeartBeat.oldHeartBeatTimestamp){
 					if(localStorage.tradeUser == undefined || localStorage.tradeUser == ''){
+						clearInterval(context.state.market.HeartBeatTiming);
 						return;
 					}
 					if(context.state.isshow.warningShow == true) return;
@@ -2009,7 +2011,7 @@ export default new Vuex.Store({
 					context.state.market.HeartBeat.oldHeartBeatTimestamp = context.state.market.HeartBeat.lastHeartBeatTimestamp; // 更新上次心跳时间
 				}
 			}
-			heartBeatUpdate();
+//			heartBeatUpdate();
 		},
 		//初始化交易
 		initTrade: function(context){
@@ -2028,6 +2030,7 @@ export default new Vuex.Store({
 				};
 				context.state.tradeSocket.onclose = function(evt) {
 					console.log('tradeClose:');
+					clearInterval(context.state.market.HeartBeatTiming);
 					if(context.state.account.loginStatus == true){
 						if(context.state.isshow.warningShow == true) return;
 						context.state.isshow.warningType = 2;
