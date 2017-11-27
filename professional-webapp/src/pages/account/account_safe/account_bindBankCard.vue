@@ -57,12 +57,12 @@
 				$(".hide_tools").hide();
 			},
 			showTools: function(a){
-					event.stopImmediatePropagation();
-					if($(".hide_tools").eq(a).css("display")=="none"){
-						$(".hide_tools").eq(a).show();
-					}else{
-						$(".hide_tools").eq(a).hide();
-					}
+				event.stopImmediatePropagation();
+				if($(".hide_tools").eq(a).css("display")=="none"){
+					$(".hide_tools").eq(a).show();
+				}else{
+					$(".hide_tools").eq(a).hide();
+				}
 			},
 			chooseBank:function(index){
 				this.current1 = index;
