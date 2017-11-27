@@ -341,6 +341,10 @@
 				line-height: 40px;
 				&:nth-child(5){
 					float: right;
+					&:hover{
+						color: $yellow;
+						cursor: pointer;
+					}
 				}
 				&:nth-child(6){
 					margin-right: 20px;

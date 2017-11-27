@@ -11,7 +11,7 @@
 			</div>
 			<div class="sure_top_right">
 				<ul>
-					<li><span>{{username}}</span><i>{{bankName}}（{{bankCrad}}）</i></li>
+					<li><span>{{username}}</span><i>{{bankChnName}}（{{bankCrad}}）</i></li>
 					<li><span class="color_yellow">{{withMoney}}</span>元</li>
 					<li><span>{{withFee}}</span>元<i>（按揭提现金额的0.5%收取）</i></li>
 					<li><span class="color_yellow">{{withMoney-withFee}}</span>元<i>（提现金额-提现手续费）</i></li>
@@ -55,7 +55,8 @@
 				bankName:'',
 				username:'',
 				bankCrad:'',
-				bankCardShow:''
+				bankCardShow:'',
+				bankChnName:''
 			}
 		},
 		methods:{
@@ -166,6 +167,7 @@
 							var phoneNumber = res.data.tname;
 							this.username = '*' + phoneNumber.substr(1,5);
 							this.bankName = res.data.abbreviation;
+							this.bankChnName = res.data.bankName;
 							var card = res.data.card;
 							this.bankCrad = "**** **** **** "+card.substr(15,20);
 							this.bankCardShow = res.data.card;
@@ -266,6 +268,12 @@
 				.btn {
 					width: 120px;
 					height: 30px;
+				}
+				span{
+					&:hover{
+						color: $yellow;
+						cursor: pointer;
+					}
 				}
 			}
 		}

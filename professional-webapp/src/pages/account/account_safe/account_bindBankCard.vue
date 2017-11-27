@@ -53,7 +53,6 @@
 		},
 		methods:{
 			showTools: function(a){
-					console.log(a)
 					if($(".hide_tools").eq(a).css("display")=="none"){
 						$(".hide_tools").eq(a).show();
 					}else{
@@ -180,8 +179,6 @@
 					var data = res.data 
 					if(res.success == true){
 						if(res.code == 1){
-							console.log(111111111111111)
-							console.log(this.bindBankList);
 							data.forEach(function(o,i){
 								this.bindBankList.push(o);
 							}.bind(this));
