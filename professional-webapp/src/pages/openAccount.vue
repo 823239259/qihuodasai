@@ -13,7 +13,7 @@
 			<div class="openAccount_center_left">
 				<ul>
 					<li>
-						<button v-for="(item,index) in item" class="btn" :class="{btn1:current1 == index}" @click="chose">￥{{item.traderBond}}</button>
+						<button v-for="(item,index) in item" class="btn btn2" :class="{btn1:current1 == index}" @click="chose">￥{{item.traderBond}}</button>
 					</li>
 					<li>
 						<button class="btn yellow" v-on:click="to_openAccount_2">下一步</button>
@@ -904,9 +904,11 @@
 		color: $white;
 		border: 5px;
 		background-image: url(../assets/images/icon_choseMoneyNo.png);
+	}
+	.btn2{
 		&:hover{
-				background-image: url(../assets/images/icon_choseMoney.png);
-			}
+			background-image: url(../assets/images/icon_choseMoney.png);
+		}
 	}
 	.btn1 {
 		width: 80px;
