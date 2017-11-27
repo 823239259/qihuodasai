@@ -504,6 +504,9 @@
 			font-size: $fs12;
 			float: left;
 			cursor: pointer;
+			&:hover{
+				color: $yellow;
+			}
 		}
 		.userPhone{
 			color: $yellow;

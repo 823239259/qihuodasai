@@ -208,6 +208,10 @@
 		.span_right {
 			text-align : right;
 			margin-right : 40px;
+			&:hover{
+				color: $yellow;
+				cursor:pointer;
+			}
 		}
 		.btn {
 			width : 320px;
