@@ -13,8 +13,8 @@
 			<div class="center_right">
 				<p>{{username}}</p>
 				<p><input type="text" v-model="code" /><i class="getcode" v-on:click="getCode">{{volid ? info : (time + '秒')}}</i></p>
-				<p><input type="password" v-model="withDrawPassword" /></p>
-				<p><input type="password" v-model="sure_withDrawPassword" /></p>
+				<p><input type="password" v-model="withDrawPassword" class="chang_color"/></p>
+				<p><input type="password" v-model="sure_withDrawPassword" class="chang_color"/></p>
 				<button class="btn yellow" v-on:click="comfire">确认</button>
 			</div>
 		</div>
@@ -235,6 +235,11 @@
 					border: 1px solid $bottom_color;
 					border-radius: 5px;
 					color: $white;
+				}
+				.chang_color{
+					&:hover{
+						border: 1px solid $yellow;
+					}
 				}
 				.btn {
 					width: 160px;
