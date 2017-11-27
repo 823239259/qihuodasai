@@ -612,28 +612,33 @@
 							layer.msg(data.message, {time: 1000});
 						});
 					}else{
-						var data = {
-							commodityCode: this.orderId
-						};
-						var headers = {
-							token:  this.userInfo.token,
-							secret: this.userInfo.secret
-						};
-						pro.fetch('post', 'contract/delOptional', data, headers).then(function(res){
-							if(res.success == true){
-								if(res.code == 1){
-									layer.msg('删除成功', {time: 1000});
-									this.addStar = true;
-									this.optional = '添加自选';
-									this.isSelectedOrder();
-								}else{
-									layer.msg(res.message, {time: 1000});
+						layer.confirm('您确定删除自选吗?', {
+							btn: ['确定','取消']
+						}, function(index){
+							var data = {
+								commodityCode: this.orderId
+							};
+							var headers = {
+								token:  this.userInfo.token,
+								secret: this.userInfo.secret
+							};
+							pro.fetch('post', 'contract/delOptional', data, headers).then(function(res){
+								if(res.success == true){
+									if(res.code == 1){
+										layer.msg('删除成功', {time: 1000});
+										this.addStar = true;
+										this.optional = '添加自选';
+										this.isSelectedOrder();
+									}else{
+										layer.msg(res.message, {time: 1000});
+									}
 								}
-							}
-						}.bind(this)).catch(function(err){
-							var data = err.data;
-							layer.msg(data.message, {time: 1000});
-						});
+							}.bind(this)).catch(function(err){
+								var data = err.data;
+								layer.msg(data.message, {time: 1000});
+							});
+							layer.close(index);
+						}.bind(this));
 					}
 				}else{
 					layer.msg('请先登录平台账号', {time: 1000});
