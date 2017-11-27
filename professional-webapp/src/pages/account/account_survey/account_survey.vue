@@ -619,8 +619,25 @@
 				float: left;
 				cursor: pointer;
 				width: 65px;
-				&:hover{
-					color: $yellow;
+				&:nth-child(1){
+					&:hover{
+						color: $yellow;
+					}
+				}
+				&:nth-child(2){
+					&:hover{
+						color: $yellow;
+					}
+				}
+				&:nth-child(3){
+					&:hover{
+						color: $yellow;
+					}
+				}
+				&:nth-child(4){
+					&:hover{
+						color: $yellow;
+					}
 				}
 			}
 			select {
