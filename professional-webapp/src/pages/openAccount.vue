@@ -904,6 +904,9 @@
 		color: $white;
 		border: 5px;
 		background-image: url(../assets/images/icon_choseMoneyNo.png);
+		&:hover{
+				background-image: url(../assets/images/icon_choseMoney.png);
+			}
 	}
 	.btn1 {
 		width: 80px;
@@ -987,6 +990,12 @@
 		overflow: hidden;
 		background-color: $blue;
 		border-top: 1px solid $bottom_color;
+		span{
+			&:hover{
+				color: $yellow;
+				cursor:pointer;
+			}
+		}
 	}
 	.btm_btm span{
 		cursor: pointer;
