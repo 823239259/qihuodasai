@@ -16,8 +16,8 @@
 				<ul>
 					<p>{{username}}</p>
 					<p><input type="text" v-model="code"/><i class="getcode" v-on:click="getCode">{{volid ? info : (time + '秒')}}</i></p>
-					<p><input type="password" v-model="newLoginPassword" /></p>
-					<p><input type="password" v-model="sureLoginPassword"/></p>
+					<p><input type="password" v-model="newLoginPassword" class="chang_color"/></p>
+					<p><input type="password" v-model="sureLoginPassword" class="chang_color"/></p>
 					<p><button class="btn yellow" v-on:click="toResetLoginPassword">确认</button></p>
 				</ul>
 			</div>
@@ -253,6 +253,11 @@
 					width: 160px;
 					height: 30px;
 					margin-top: 30px;
+				}
+				.chang_color{
+					&:hover{
+						border: 1px solid $yellow;
+					}
 				}
 			}	
 		}

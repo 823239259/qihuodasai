@@ -287,11 +287,13 @@
 		}
 	}
 	.getcode {
+		width: 70px;
 		position: relative;
 		left: -70px;
 		background-color: $highLight;
 		color: $white;
 		padding: 9px 8px;
 		top: 2px;
+		text-align: center;
 	}
 </style>

@@ -13,8 +13,8 @@
 				<div class="center_right">
 					<p>{{username}}</p>
 					<p><input type="text" v-model="oldCode"/><i class="getcode" v-on:click="getOldCode">{{oldVolid ? info : (oldTime + '秒')}}</i></p>
-					<p><input type="text" v-model="newMobile" maxlength="11"/></p>
-					<p><input type="text" v-model="newCode"/><i class="getcode" v-on:click="getNewCode">{{newVolid ? info : (newTime + '秒')}}</i></p>
+					<p><input type="text" v-model="newMobile" maxlength="11" class="chang_color"/></p>
+					<p><input type="text" v-model="newCode" /><i class="getcode" v-on:click="getNewCode">{{newVolid ? info : (newTime + '秒')}}</i></p>
 					<p><button class="btn yellow" v-on:click="toResetMobile">确认</button></p>
 				</div>
 			</div>
@@ -306,6 +306,11 @@
 					width: 160px;
 					height: 30px;
 					margin-top: 30px;
+				}
+				.chang_color{
+					&:hover{
+						border-color: $yellow;
+					}
 				}
 			}
 		}
