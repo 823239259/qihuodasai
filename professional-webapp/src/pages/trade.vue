@@ -252,7 +252,7 @@
 										<div class="slt-list">
 											<ul>
 												<template v-for="v in Parameters">
-													<li :selectVal="v.CommodityNo">{{v.CommodityName}}</li>
+													<li :selectVal="v.CommodityNo">{{v.CommodityName + ' ' + v.CommodityNo + v.MainContract}}</li>
 												</template>
 											</ul>
 										</div>
@@ -289,7 +289,7 @@
 					<div class="head">
 						<p><span>总资产：</span><em>{{jCacheTotalAccount.TodayBalance | fixNumTwo}}</em></p>
 						<p><span>余额：</span><em>{{jCacheTotalAccount.TodayCanUse | fixNumTwo}}</em></p>
-						<p><span>持仓盈亏：</span><em>{{jCacheTotalAccount.FloatingProfit | fixNumTwo}}</em></p>
+						<p><span>持仓盈亏：</span><em :class="{red: jCacheTotalAccount.FloatingProfit > 0, green: jCacheTotalAccount.FloatingProfit < 0}">{{jCacheTotalAccount.FloatingProfit | fixNumTwo}}</em></p>
 						<p><span>交易盈亏：</span><em>{{jCacheTotalAccount.CloseProfit | fixNumTwo}}</em></p>
 						<p><span>平仓线：</span><em>{{forceLine}}</em></p>
 						<p><span>风险度%：</span><em>{{jCacheTotalAccount.RiskDegree | fixNum(2)}}%</em></p>
@@ -452,7 +452,6 @@
 		watch: {
 			isBack: function(n, o){
 				if(n && n == true){
-					console.log(1222);return;
 					localStorage.removeItem('tradeUser');
 					this.$router.push({path: '/index'});
 					this.$store.state.account.currentNav = 0;
@@ -1250,8 +1249,8 @@
 				text-align: center;
 				span{
 					display: inline-block;
-					margin: 0 5px;
-					font-size: $fs12;
+					margin: 0 10px;
+					font-size: $fs14;
 					cursor: pointer;
 					&:hover, &.current{
 						color: $yellow;
@@ -1478,6 +1477,9 @@
 				a{
 					color: $lightblue;
 					margin: 0 20px;
+					&:hover{
+						color: $yellow;
+					}
 				}
 				.btn{
 					float: right;
@@ -1632,6 +1634,14 @@
 				p{
 					float: left;
 					margin-right: 30px;
+					em{
+						&.red{
+							color: $red;
+						}
+						&.green{
+							color: $green;
+						}
+					}
 				}
 			}
 			.list{

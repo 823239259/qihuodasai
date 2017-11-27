@@ -211,6 +211,9 @@
 				width: 50%;
 				text-align: center;
 				cursor: pointer;
+				&:hover{
+					color: $yellow;
+				}
 			}
 		}
 	}

@@ -179,6 +179,9 @@
 			text-align: right;
 			margin-bottom: 20px;
 			cursor: pointer;
+			&:hover{
+				color: $yellow;
+			}
 		}
 	}
 </style>
