@@ -24,12 +24,11 @@
 					secret : JSON.parse(localStorage.user).secret
 				}
 				var data = {
-					id:this.id
-//					cId:'',
-//					businessType:8
+					id:this.id,
+					cId:'',
+					businessType:8
 				}
 				pro.fetch("post","/user/ftrade/endtrade",data,headers).then((res)=>{
-					console.log(res)
 					if(res.success == true){
 						if(res.code == 1){
 							layer.msg("操作成功",{time:2000});
@@ -37,7 +36,6 @@
 						}
 					}
 				}).catch((err)=>{
-					console.log(err)
 					if(err.data.success == false){
 						switch (err.data.code){
 							case '-1':
