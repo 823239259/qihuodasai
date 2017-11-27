@@ -297,11 +297,15 @@
 		}
 	}
 	.getcode {
+		line-height: 32px;
+		display: inline-block;
+		height: 32px;
+		width: 70px;
 		position: relative;
 		left: -70px;
 		background-color: $highLight;
 		color: $white;
-		padding: 9px 8px;
 		top: 2px;
+		text-align: center;
 	}
 </style>
