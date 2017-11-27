@@ -116,7 +116,7 @@
 					},function(result){
 						document.getElementById('end_btn').removeAttribute('disabled');  //恢复按钮为非禁用
 						if(result.code==2){
-							mui.toast("系统处理繁忙，请稍后再试。如多次尝试失败，请联系客服处理。");
+							mui.toast("系统异常，结算失败");
 							return;
 						}else if(result.code==3){
 							mui.toast("已申请终结，不能重复申请！");
