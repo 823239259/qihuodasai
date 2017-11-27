@@ -528,7 +528,8 @@ export default new Vuex.Store({
 					},
 					axisLabel: {
 						inside: false,
-						margin: 4
+						margin: 3,
+						fontSize: 10
 					},
 					splitLine: {
 						show: true,
