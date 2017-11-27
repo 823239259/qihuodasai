@@ -175,7 +175,6 @@
 				}
 			},
 			isRefresh: function(n, o){
-				console.log(n);
 				if(n == 1){
 					window.location.reload();
 				}else if(n == ''){

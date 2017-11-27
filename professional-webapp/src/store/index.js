@@ -24,10 +24,11 @@ var isshow = {
 //账户信息
 var account = {
 	state: {
-		isRefresh: false,
-		isBack: false,
-		userName: '',
-		currentNav: 0,
+		isRefresh: false,  //判断是否刷新
+		isBack: false,   //判断是否退出交易账号并跳至首页
+		loginStatus: false,  //交易账号登录状态		
+		userName: '',   //平台账号
+		currentNav: 0,  //当前导航索引
 	}
 }
 
@@ -792,7 +793,7 @@ export default new Vuex.Store({
 				vol.push(e[6]);
 				time.push(e[0].split(' ')[1].split(':')[0] + ':' + e[0].split(' ')[1].split(':')[1]);
 				price.push(e[1]);
-			})
+			});
 			state.market.option1 = {
 				grid: {
 					x: 50,
@@ -1005,6 +1006,7 @@ export default new Vuex.Store({
 					//回复
 					if(parameters.Code == 0){
 						layer.msg('交易服务器连接成功',{time: 1000});
+						context.state.account.loginStatus = true;
 						//设置强平线
 						context.state.market.forceLine = parameters.ForceLine;
 						//初始资金
@@ -1026,11 +1028,11 @@ export default new Vuex.Store({
 						//启动交易心跳定时检查
 						context.dispatch('HeartBeatTimingCheck');
 					}else{
-						console.log('交易服务器连接失败');
-						layer.msg('交易服务器连接失败',{time: 1000});
+						layer.msg(parameters.Message,{time: 1000});
+						context.state.account.loginStatus = false;
 						context.state.tradeSocket.close();
-						//清空本地交易登录信息
-						localStorage.tradeUser = null;
+						context.state.tradeSocket = null;
+						localStorage.removeItem('tradeUser');
 					}
 					break;
 				case 'OnRspLogout': //登出回复
@@ -1039,13 +1041,12 @@ export default new Vuex.Store({
 						layer.msg('登出成功', {time: 1000});
 					}else{
 //						console.log('登出失败');
-						console.log(123);
 						layer.msg(parameters.Message, {time: 1000});
 						context.state.account.isBack = true;
 					}
 					break;
 				case 'OnRspQryHoldTotal': //查询持仓合计回复
-//					console.log('查询持仓合计回复');		
+//					console.log('查询持仓合计回复');	
 					if (parameters == null || typeof(parameters) == "undefined" || parameters.length == 0){
 						context.state.market.ifUpdateHoldProfit = true;//可以使用最新行情更新持仓盈亏
 					}else{
@@ -1181,6 +1182,11 @@ export default new Vuex.Store({
 					break;
 				default:
 					break;
+			}
+			//退出交易账号清除websocket
+			if(context.state.account.loginStatus == false){
+				context.state.tradeSocket.close();
+				context.state.tradeSocket = null;
 			}
 		},
 		//条件单处理
@@ -1991,6 +1997,9 @@ export default new Vuex.Store({
 			setInterval(heartBeatUpdate,15000);	
 			function heartBeatUpdate(){
 				if(context.state.market.HeartBeat.lastHeartBeatTimestamp == context.state.market.HeartBeat.oldHeartBeatTimestamp){
+					if(localStorage.tradeUser == undefined || localStorage.tradeUser == ''){
+						return;
+					}
 					if(context.state.isshow.warningShow == true) return;
 					context.state.isshow.warningType = 2;
 					context.state.isshow.warningShow = true;
@@ -2003,32 +2012,37 @@ export default new Vuex.Store({
 		},
 		//初始化交易
 		initTrade: function(context){
-			context.state.tradeSocket = new WebSocket(context.state.market.tradeConfig.url_real);
-			context.state.tradeSocket.onopen = function(evt){
-				//登录
-				if(context.state.tradeSocket.readyState == 1){ //连接已建立，可以进行通信。
-					if(localStorage.tradeUser && localStorage.tradeUser != 'null'){
-						context.state.tradeSocket.send('{"Method":"Login","Parameters":{"ClientNo":"'+JSON.parse(localStorage.getItem('tradeUser')).username+'","PassWord":"'+JSON.parse(localStorage.getItem('tradeUser')).password+'","IsMock":'+context.state.market.tradeConfig.model+',"Version":"'+context.state.market.tradeConfig.version+'","Source":"'+context.state.market.tradeConfig.client_source+'"}}');
-					}else{
-						if(context.state.market.tradeConfig.username!=''){
+			if(localStorage.tradeUser != '' && localStorage.tradeUser != undefined || context.state.market.tradeConfig.username != '' && context.state.market.tradeConfig.username != undefined){
+				context.state.tradeSocket = new WebSocket(context.state.market.tradeConfig.url_real);
+				context.state.tradeSocket.onopen = function(evt){
+					//登录
+//					console.log(JSON.parse(localStorage.tradeUser).password);
+					if(context.state.tradeSocket.readyState == 1){ //连接已建立，可以进行通信。
+						if(localStorage.tradeUser != '' && localStorage.tradeUser != undefined){
+							context.state.tradeSocket.send('{"Method":"Login","Parameters":{"ClientNo":"'+JSON.parse(localStorage.tradeUser).username+'","PassWord":"'+JSON.parse(localStorage.tradeUser).password+'","IsMock":'+context.state.market.tradeConfig.model+',"Version":"'+context.state.market.tradeConfig.version+'","Source":"'+context.state.market.tradeConfig.client_source+'"}}');
+						}else{
 							context.state.tradeSocket.send('{"Method":"Login","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'","PassWord":"'+context.state.market.tradeConfig.password+'","IsMock":'+context.state.market.tradeConfig.model+',"Version":"'+context.state.market.tradeConfig.version+'","Source":"'+context.state.market.tradeConfig.client_source+'"}}');
-						}	
+						}
 					}
-				}
-			};
-			context.state.tradeSocket.onclose = function(evt) {
-				console.log('tradeClose:');
-				if(context.state.isshow.warningShow == true) return;
-				context.state.isshow.warningType = 2;
-				context.state.isshow.warningShow = true;
-			};
-			context.state.tradeSocket.onerror = function(evt) {
-				console.log('tradeError');
-			};
-			context.state.tradeSocket.onmessage = function(evt) {
-				context.dispatch('handleTradeMessage',evt);
-			};
-			
+				};
+				context.state.tradeSocket.onclose = function(evt) {
+					console.log('tradeClose:');
+					if(context.state.account.loginStatus == true){
+						if(context.state.isshow.warningShow == true) return;
+						context.state.isshow.warningType = 2;
+						context.state.isshow.warningShow = true;
+					}else{
+						return;
+					}
+					
+				};
+				context.state.tradeSocket.onerror = function(evt) {
+					console.log('tradeError');
+				};
+				context.state.tradeSocket.onmessage = function(evt) {
+					context.dispatch('handleTradeMessage',evt);
+				};
+			}
 		},
 		//初始化行情
 		initQuoteClient: function(context) {

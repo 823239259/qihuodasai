@@ -422,8 +422,8 @@
 			forceLine(){
 				return this.$store.state.market.forceLine;
 			},
-			tradeUserName(){
-				return this.$store.state.market.tradeConfig.username;
+			loginStatus(){
+				return this.$store.state.account.loginStatus;
 			},
 			chartHeight(){
 				return this.$store.state.market.chartHeight;
@@ -451,7 +451,8 @@
 		},
 		watch: {
 			isBack: function(n, o){
-				if(n == true){
+				if(n && n == true){
+					console.log(1222);return;
 					localStorage.removeItem('tradeUser');
 					this.$router.push({path: '/index'});
 					this.$store.state.account.currentNav = 0;
@@ -561,12 +562,13 @@
 					this.defaultNum = 0;
 				}
 			},
-			tradeUserName: function(n, o){
-				if(n){
+			loginStatus: function(n, o){
+				if(n && n == true){
 					this.tradeLoginShow = false;
 					this.tradeDetailsShow = true;
 					this.$store.state.market.chartHeight = this.h - 50 - 30 - 45 - $(".trade_box").height();
-					this.tradeUser = n;
+					if(this.$store.state.market.tradeConfig.username == '') return;
+					this.tradeUser = this.$store.state.market.tradeConfig.username;
 				}
 			}
 		},
@@ -930,17 +932,14 @@
 				}
 			},
 			exitEvent: function(){
-				localStorage.tradeUser =  '';
+				localStorage.removeItem('tradeUser');
 				this.$store.state.market.tradeConfig.username = '';
 				this.$store.state.market.tradeConfig.password = '';
+				this.$store.state.account.loginStatus = false;
 				this.tradeLoginShow = true;
 				this.tradeDetailsShow = false;
 				this.$store.state.market.chartHeight = this.h - 50 - 30 - 45;
 				layer.msg('退出成功', {time: 1000});
-				setTimeout(function(){
-					this.$router.push({path: '/index'});
-					this.$store.state.account.isRefresh = 1;
-				}.bind(this),500);
 			},
 			toAddMoney: function(){
 				if(localStorage.tradeUser){
@@ -1033,6 +1032,7 @@
 				this.tradeDetailsShow = true;
 				this.$store.state.market.chartHeight = this.h - 50 - 30 - 45 - $(".trade_box").height();
 				this.tradeUser = tradeUser.username;
+				console.log(tradeUser.username);
 				if(tradeUser.fid == undefined){
 					this.openAccountTools = false;
 				}
