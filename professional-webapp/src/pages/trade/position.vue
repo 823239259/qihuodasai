@@ -70,7 +70,7 @@
 		watch: {
 			qryHoldTotalArr: function(n, o){
 				//获取持仓列表数据
-				this.operateData(this.qryHoldTotalArr);
+				this.operateData(n);
 			},
 			positionListCont: function(n, o){
 				if(n.length == 0){
