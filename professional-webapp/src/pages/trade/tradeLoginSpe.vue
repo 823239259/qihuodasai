@@ -56,45 +56,53 @@
 				$("#nav li").eq(3).addClass("current").siblings().removeClass("current");
 			},
 			loginEvent: function(user, pwd, fid){
+				this.$store.state.market.tradeConfig.username = user;
+				this.$store.state.market.tradeConfig.password = Base64.encode(pwd);
+				var userData = {'username': user, 'password': Base64.encode(pwd), 'fid': fid};  
+				localStorage.tradeUser = JSON.stringify(userData);
+				this.initTrade();
+				setTimeout(function(){
+					this.show = false;
+				}.bind(this));
 //				var data = {
 //					appVersions: this.$store.state.market.tradeConfig.version
 //				};
 //				pro.fetch('post', '/socket/config/getVersions', data, '').then(function(res){
 //					if(res.success == true && res.code == 1){
-						this.url_real = this.$store.state.market.tradeConfig.url_real;
-						this.$store.state.market.tradeSocket = new WebSocket(this.url_real);
-						this.$store.state.market.tradeSocket.onopen = function(evt){
-							//登录
-							if(this.$store.state.market.tradeSocket.readyState==1){ //连接已建立，可以进行通信。
-								this.$store.state.market.tradeSocket.send('{"Method":"Login","Parameters":{"ClientNo":"'+ user +'","PassWord":"'+ Base64.encode(pwd) +'","IsMock":'+this.tradeConfig.model+',"Version":"'+this.tradeConfig.version+'","Source":"'+this.tradeConfig.client_source+'"}}');
-							}
-						}.bind(this);
-						this.$store.state.market.tradeSocket.onmessage = function(evt) {
-							var data = JSON.parse(evt.data);
-							var parameters = data.Parameters;
-							switch (data.Method){
-								case 'OnRtnHeartBeat':
-									break;
-								case 'OnRspLogin'://登录回复
-									if(parameters.Code==0){
-										layer.msg('登录成功', {time: 1000});
-										this.$store.state.market.tradeConfig.username = user;
-										this.$store.state.market.tradeConfig.password = Base64.encode(pwd);
-										var userData = {'username': user, 'password': Base64.encode(pwd), 'fid': fid};  
-										localStorage.setItem("tradeUser", JSON.stringify(userData));
-										setTimeout(function(){
-											this.show = false;
-											this.$router.push({path: '/index'});
-											this.$store.state.account.isRefresh = 1;
-										}.bind(this),500);
-									}else{
-										layer.msg(parameters.Message, {time: 1000});
-									}
-									break;
-								default:
-									break;
-							}
-						}.bind(this);
+//						this.url_real = this.$store.state.market.tradeConfig.url_real;
+//						this.$store.state.market.tradeSocket = new WebSocket(this.url_real);
+//						this.$store.state.market.tradeSocket.onopen = function(evt){
+//							//登录
+//							if(this.$store.state.market.tradeSocket.readyState==1){ //连接已建立，可以进行通信。
+//								this.$store.state.market.tradeSocket.send('{"Method":"Login","Parameters":{"ClientNo":"'+ user +'","PassWord":"'+ Base64.encode(pwd) +'","IsMock":'+this.tradeConfig.model+',"Version":"'+this.tradeConfig.version+'","Source":"'+this.tradeConfig.client_source+'"}}');
+//							}
+//						}.bind(this);
+//						this.$store.state.market.tradeSocket.onmessage = function(evt) {
+//							var data = JSON.parse(evt.data);
+//							var parameters = data.Parameters;
+//							switch (data.Method){
+//								case 'OnRtnHeartBeat':
+//									break;
+//								case 'OnRspLogin'://登录回复
+//									if(parameters.Code==0){
+//										layer.msg('登录成功', {time: 1000});
+//										this.$store.state.market.tradeConfig.username = user;
+//										this.$store.state.market.tradeConfig.password = Base64.encode(pwd);
+//										var userData = {'username': user, 'password': Base64.encode(pwd), 'fid': fid};  
+//										localStorage.setItem("tradeUser", JSON.stringify(userData));
+//										setTimeout(function(){
+//											this.show = false;
+//											this.$router.push({path: '/index'});
+//											this.$store.state.account.isRefresh = 1;
+//										}.bind(this),500);
+//									}else{
+//										layer.msg(parameters.Message, {time: 1000});
+//									}
+//									break;
+//								default:
+//									break;
+//							}
+//						}.bind(this);
 //					}
 //				}.bind(this)).catch(function(err){
 //					var data = err.data;

@@ -68,6 +68,10 @@
 			},
 		},
 		watch: {
+			qryHoldTotalArr: function(n, o){
+				//获取持仓列表数据
+				this.operateData(this.qryHoldTotalArr);
+			},
 			positionListCont: function(n, o){
 				if(n.length == 0){
 					this.currentOrderID = '';
