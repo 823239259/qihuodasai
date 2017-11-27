@@ -31,12 +31,12 @@
 						<ul>
 							<li>
 								<span>可用资金</span><i class="ifont question" v-on:mouseenter="showHide" v-on:mouseleave="hide">&#xe66d;</i>
-								<p class="surveyMoney">￥{{balance}}</p>
+								<p class="surveyMoney"><i class="ifont icon_money">&#xe613;</i>{{balance}}</p>
 							</li>
 							<span class="showMoney" v-if="showmoney" >您可提现和开户的金额</span>
 							<li>
 								<span>冻结资金</span><i class="ifont question"  v-on:mouseenter="showHide1" v-on:mouseleave="hide1">&#xe66d;</i>
-								<p class="surveyMoney">￥{{frzBal}}</p>
+								<p class="surveyMoney"><i class="ifont icon_money">&#xe613;</i>{{frzBal}}</p>
 							</li>
 							<span class="showmoney1" v-if="showMoneyNo">您提现时被冻结的金额</span>
 						</ul>
@@ -757,6 +757,12 @@
 							font-weight: 700;
 							font-size: 20px;
 							margin-top: 5px;
+							.icon_money{
+								color: $white;
+								font-size: $fs16;
+								font-weight: 500;
+								display: inline-block;
+							}
 						}
 					}
 					.showMoney{
@@ -871,5 +877,6 @@
 				font-size: $fs18;
 				color: $blue;
 			}
+			
 		}
 </style>
