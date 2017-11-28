@@ -83,6 +83,7 @@
 					url:"../login/login.html"
 				}
 		  	mui.app_request("/user/coupon/list",{},function(result){
+		  		console.log(JSON.stringify(result))
 		  		if(!mui.isnull(result.data.couponList)){ 
 		  			c_list=result.data.couponList;
 		  			mui.each(c_list,function(i){
