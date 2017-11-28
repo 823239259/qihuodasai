@@ -24,16 +24,16 @@
 			    "tranLever":0,
 				"businessType":win.businessType
   			},function(result){
-  				console.log(JSON.stringify(result));
   				if(!mui.isnull(result.data)){
   					//读取详细数据
   					setconfirmInfo(result.data.confirmInfo);
   					//读取代金券
+  					var _coupons = result.data.voucherList;
+  					setVid(_coupons);
   				}
   				//比较余额是否充足
 	  			compares();
   			},function(result){
-  				console.log(JSON.stringify(result));
   				if(result.code==2){
   					mui.toast("申请失败");
   					return;
@@ -295,21 +295,23 @@
 			var paramUrl={
 				url:"../login/login.html"
 			}
-			var vid=-1;
+			//获取折扣劵选项
+			var _coupon_option_value = document.getElementById('coupon_list').value;
+			if(!_coupon_option_value){
+				_businessType = '';
+			}
     		mui.app_request("/user/ftrade/handle",{
-    			"vid":vid,
+    			"vid":_coupon_option_value,
 				"traderBond":win.traderBond,
 				"tranLever":0,
 				"businessType":win.businessType
     		},function(result){
-    			
     			var paycp=plus.webview.getWebviewById("paycp.html");
     			setTimeout(function(){
     				if(paycp){
 					paycp.close();
 				}
     			},1000);
-    			
     			mui.openWindow({
     				url:"futurePaySuc.html",
     				id:"futurePaySuc.html",
@@ -330,7 +332,20 @@
     			}
     		},paramUrl)
     	}
-    	}); 
+		//代金券
+		function setVid(_coupons){
+			if(!mui.isnull(_coupons)){  //判断是否有折扣劵
+				var _coupon_options = '<option value="">不使用代金劵</option>';
+				//获取折扣劵
+				mui.each(_coupons,function(i,item){
+					var _coupon_id = item.id;
+					var _coupon_money = item.money;
+					_coupon_options+= i == 0 ? '<option value="'+_coupon_id+'" selected="selected">'+_coupon_money+'代金券</option>' : '<option value="'+_coupon_id+'">'+_coupon_money+'代金券</option>';
+				});
+				document.getElementById('coupon_list').innerHTML=_coupon_options;
+			}
+		}
+    }); 
     </script>
 </head>
 <body>
@@ -383,6 +398,12 @@
 			<span id="traderBond">10,450元</span>
 			<b>操盘保证金</b>
 		</li>		
+		<li class="mui-table-view-cell">
+			<label>代金券(¥)：</label>
+			<select id="coupon_list" name="coupon_list" class="mui-btn mui-btn-block">
+				<option value="">无代金券</option>
+			</select>
+		</li>
 	</ul>	
 	<div class="ac_btn">
 		<button class="mui-btn mui-btn-block pay_btn" type="button" style="display: none;"  id="payto">确认支付</button>	
