@@ -15,7 +15,6 @@ var isshow = {
 		isfens: false,
 		iskline: false,
 		islight: false,
-		loadingShow: false,
 		warningShow: false,
 		warningType: '',
 	}
@@ -38,17 +37,18 @@ var market = {
 		quoteConfig:{
 			url_real: "ws://192.168.0.232:9002",  //测试地址
 //			url_real: "ws://quote.vs.com:9002",   //正式地址
-			userName:"13677622344",
-			passWord:"a123456"
+			userName: "13677622344",
+			passWord: "a123456"
 		},
 		tradeConfig:{
-			version : "3.3",	// 版本
-			url_real : "ws://192.168.0.232:6102",   //测试地址
-//			url_real : "ws://139.196.176.60:6101",  //正式地址
-			model : "1", // 实盘：0；	模拟盘：1
-			client_source : "N_WEB",	// 客户端渠道
-//			username : "00004",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)
-//			password : "YTEyMzQ1Ng==" 	// 密码：base64密文(明文：a123456——YTEyMzQ1Ng==     888888——ODg4ODg4	 74552102——NzQ1NTIxMDI=		123456=MTIzNDU2)
+			version: "3.3",	// 版本
+			url_real: '',
+//			url_real: "ws://192.168.0.232:6102",   //测试地址
+//			url_real: "ws://139.196.176.60:6101",  //正式地址
+			model: "1", // 实盘：0；	模拟盘：1
+			client_source: "N_WEB",	// 客户端渠道
+//			username: "00004",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)
+//			password: "YTEyMzQ1Ng==" 	// 密码：base64密文(明文：a123456——YTEyMzQ1Ng==     888888——ODg4ODg4	 74552102——NzQ1NTIxMDI=		123456=MTIzNDU2)
 			username:'',
 			password:''
 		},
@@ -84,7 +84,6 @@ var market = {
 				"Count": 102,
 				"Data": [
 					["2017-06-26 09:31:00", 43.38, 43.35, 43.34, 43.39, 548303, 634,0],
-					
 				],
 				"ExchangeNo": "NYMEX",
 				"HisQuoteType": 0
@@ -2073,7 +2072,6 @@ export default new Vuex.Store({
 				context.state.wsjsondata = JSON.parse(evt.data);
 				if(context.state.wsjsondata.Method == "OnRspLogin") { // 登录行情服务器
 					layer.msg('行情服务器连接成功',{time: 1000});
-					context.state.isshow.loadingShow = true;
 					// 查询服务器支持品种用于订阅
 					context.state.quoteSocket.send('{"Method":"QryCommodity","Parameters":{' + null + '}}');
 				} else if(context.state.wsjsondata.Method == "OnRspQryCommodity") { // 行情服务器支持的品种
