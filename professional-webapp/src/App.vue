@@ -16,8 +16,8 @@
 		<div class="container_top">
 			<div class="fl box"></div>
 			<div class="fl">
-				<i class="ifont zoom" @click="fullScreen">&#xe62e;</i>
-				<!--<i class="ifont zoom" @click="fullScreen" v-show="fullScreenCurrent">&#xe612;</i>-->
+				<i class="ifont zoom" @click="fullScreen" v-show="!fullScreenCurrent">&#xe62e;</i>
+				<i class="ifont zoom" @click="fullScreen" v-show="fullScreenCurrent">&#xe612;</i>
 				<div class="customer_service fl" :class="{current: csAddressCurrent}" @click="customerService">
 					<i class="ifont">&#xe68f;</i>
 					<span>在线客服</span>
@@ -222,18 +222,6 @@
 					    document.msExitFullscreen();
 					}
 				}
-				document.addEventListener("fullscreenchange", function () {  
-			        fullscreenState.innerHTML = (document.fullscreen) ? "" : "not ";  
-			    }, false);  
-			    document.addEventListener("mozfullscreenchange", function () {  
-			        fullscreenState.innerHTML = (document.mozFullScreen) ? "" : "not ";  
-			    }, false);  
-			    document.addEventListener("webkitfullscreenchange", function () {  
-			        fullscreenState.innerHTML = (document.webkitIsFullScreen) ? "" : "not ";  
-			    }, false);  
-			    document.addEventListener("msfullscreenchange", function () {  
-			        fullscreenState.innerHTML = (document.msFullscreenElement) ? "" : "not ";  
-			    }, false);  
 			},
 			toIndex: function(){
 				this.$router.push({path: '/index'});
@@ -325,6 +313,12 @@
 					layer.msg(data.message, {time: 1000});
 				});
 			},
+			checkFull: function(){
+				var isFull =  document.fullscreenEnabled || window.fullScreen || document.webkitIsFullScreen || document.msFullscreenEnabled;
+				//to fix : false || undefined == undefined
+				if(isFull === undefined) isFull = false;
+				return isFull;
+			}
 		},
 		mounted: function(){
 			//初始化行情
@@ -341,17 +335,17 @@
 			}
 			//获取客服热线
 			this.getHotLine();
+			//监听退出全屏
+			let that = this;
+			window.onresize = function(){
+				if(!that.checkFull()){
+					that.fullScreenCurrent = false;
+				}
+			}
 		},
 		activated: function(){
 			//获取平台账户登录信息
 			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
-			//监听退出全屏
-			document.onkeydown = function (e) {
-	        	e = e || event;
-	            if (e.keyCode == 27) {  //判断是否单击的esc按键
-	                this.fullScreenCurrent = false;
-	            }
-		 	}.bind(this);
 		}
 	}
 </script>
