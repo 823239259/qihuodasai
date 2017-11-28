@@ -236,19 +236,23 @@
 					case 0:
 						this.$router.push({path: '/index'});
 						this.$store.state.account.currentNav = 0;
+						localStorage.currentNav = 0;
 						break;
 					case 1:
 						this.$router.push({path: '/trade'});
 						this.$store.state.account.currentNav = 1;
+						localStorage.currentNav = 1;
 						break;
 					case 2:
 						this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
 						if(this.userInfo == ''){
 							this.$router.push({path: '/login'});
 							this.$store.state.account.currentNav = 3;
+							localStorage.currentNav = 3;
 						}else{
 							this.$router.push({path: '/openAccount'});
 							this.$store.state.account.currentNav = 2;
+							localStorage.currentNav = 2;
 						}
 						break;
 //					case 3:
@@ -271,6 +275,7 @@
 							this.$router.push({path: '/account'});
 						}
 						this.$store.state.account.currentNav = 3;
+						localStorage.currentNav = 3;
 						break;
 					default:
 						break;
@@ -293,6 +298,7 @@
 			confirm: function(){
 				localStorage.removeItem('user');
 				localStorage.removeItem('tradeUser');
+				localStorage.removeItem('currentNav');
 				this.$store.state.account.userName = '';
 				this.$store.state.account.isRefresh = 1;
 				this.$router.push({path: '/index'});
@@ -341,6 +347,10 @@
 				if(!that.checkFull()){
 					that.fullScreenCurrent = false;
 				}
+			}
+			//导航根据session添加选中样式
+			if(localStorage.currentNav != undefined){
+				this.$store.state.account.currentNav = localStorage.currentNav;
 			}
 		},
 		activated: function(){

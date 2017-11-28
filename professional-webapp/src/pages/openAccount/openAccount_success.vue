@@ -30,10 +30,12 @@
 			to_hq:function(){
 				this.$router.push({path:"/"});
 				this.$store.state.account.currentNav = 0;
+				localStorage.currentNav = 0;
 			},
 			to_trade:function(){
 				this.$router.push({path:"/trade"});
 				this.$store.state.account.currentNav = 1;
+				localStorage.currentNav = 1;
 			}
 		}
 	}

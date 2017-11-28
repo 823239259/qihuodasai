@@ -251,7 +251,7 @@
 							}else{
 								return parseFloat(o.OrderPrice).toFixed(this.orderTemplist[o.CommodityNo].DotSize);
 							}
-						}();
+						}.bind(this)();
 						data.delegateNum = o.OrderNum;
 						data.ApplyOrderNum = o.OrderNum-o.TradeNum;
 						data.InsertDateTime = o.InsertDateTime;

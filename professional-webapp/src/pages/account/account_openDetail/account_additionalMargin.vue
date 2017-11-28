@@ -66,10 +66,12 @@
 								if(this.type == 'trade'){
 									this.$router.push({path:'trade'});
 									this.$store.state.account.currentNav = 1;
+									localStorage.currentNav = 1;
 									return;
 								}
 								this.$router.push({path:'account_openDetail'});
 								this.$store.state.account.currentNav = 3;
+								localStorage.currentNav = 3;
 							}
 						}
 					}).catch((err)=>{
