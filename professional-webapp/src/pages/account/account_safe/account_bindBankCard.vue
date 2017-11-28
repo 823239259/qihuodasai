@@ -1,5 +1,5 @@
 <template>
-	<div id="account_bindBankCard">
+	<div id="account_bindBankCard" v-on:click="hide_div">
 		<div class="account_bindBankCard_top">
 			<ul>
 				<li>
@@ -21,12 +21,12 @@
 					<label  v-if="k.default !=true"></label>
 					<label  v-else="k.default==true">默认</label>
 					<em class="fr" @click="showTools(index)">管理</em>
-					<div class="hide_tools" v-if="k.default!=true">
+					<div class="hide_tools" v-if="k.default!=true" v-show="visible" ref="main">
 						<span @click="setDeaultBank(k.bankId)">设为默认</span>
 						<span @click="toAddBankCard">编辑</span>
 						<span @click="delBankCard(k.bankId)">删除</span>
 					</div>
-					<div class="hide_tools" v-if="k.default==true">
+					<div class="hide_tools" v-if="k.default==true" v-show="visible" ref="main">
 						<span @click="toAddBankCard">编辑</span>
 						<span @click="delBankCard(k.bankId)">删除</span>
 					</div>
@@ -48,16 +48,21 @@
 			return{
 				bindBankList : [],
 				bankId:'',
-				current1:0
+				current1:0,
+				visible:false
 			}
 		},
 		methods:{
+			hide_div:function(){
+				$(".hide_tools").hide();
+			},
 			showTools: function(a){
-					if($(".hide_tools").eq(a).css("display")=="none"){
-						$(".hide_tools").eq(a).show();
-					}else{
-						$(".hide_tools").eq(a).hide();
-					}
+				event.stopImmediatePropagation();
+				if($(".hide_tools").eq(a).css("display")=="none"){
+					$(".hide_tools").eq(a).show();
+				}else{
+					$(".hide_tools").eq(a).hide();
+				}
 			},
 			chooseBank:function(index){
 				this.current1 = index;

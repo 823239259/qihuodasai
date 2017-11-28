@@ -94,8 +94,8 @@
 						<tbody class="show_list">
 							<tr v-for="k in temp.contractList" class="show_list_td">
 								<td>{{k.tradeType | cnname}}</br><i> {{k.mainContract}}</i></td>
-								<!--<td>{{k.tradTime | change_time}}</td>-->
-								<td>{{k.tradTime}}</td>
+								<td>{{k.tradTime | change_time}}</td>
+								<!--<td>{{k.tradTime}}</td>-->
 								<td>{{k.shoushu | filtershoushu(chooseType)}}</td>
 								<td>{{k.price}}元/手</td>
 							</tr>
@@ -512,6 +512,7 @@
 							this.temp = data;
 							this.item = data.paramList;
 							this.$store.state.tempTradeapply = this.temp;
+							console.log(this.temp.contractList);
 							this.temp.contractList.forEach(function(o, i) {
 								switch(o.tradeType) {
 									case 0:   //return '富时A50'
@@ -673,17 +674,22 @@
 			
 		},
 		filters:{
-//			change_time:function(e){
-//				var a = e.split("，")
-//				console.log(a);
-//				if(a.length == 1){
-//					return a[0];
-//				}else if(a.length == 2){
-//					return a[0]+a[1];
-//				}else {
-//					return a[0]+a[1]+a[2];
-//				}
-//			},
+			change_time:function(e){
+				var a = e.split("，")
+				if(a.length == 1){
+					var b= a[0];
+//					console.log(b);
+					return b
+				}else if(a.length == 2){
+					var b = a[0]+a[1]
+//					console.log(b);
+					return b;
+				}else {
+					var b=a[0]+a[1]+a[2]
+//					console.log(b);
+					return b;
+				}
+			},
 			filtershoushu: function(arr,chooseType){
 				switch(chooseType){
 					case 3000:

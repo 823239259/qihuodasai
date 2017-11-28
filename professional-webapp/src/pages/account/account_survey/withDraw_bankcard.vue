@@ -1,5 +1,5 @@
 <template>
-	<div id="withDraw_bankcard">
+	<div id="withDraw_bankcard" v-on:click="hide_div">
 		<div class="withDraw_unboundBankCard" v-show="showUnboundCard">
 			<button class="btn yellow" v-on:click="toAddBankCard">绑定银行卡</button>
 			<p>（您还为绑定银行卡，暂不能进行提现操作）</p>	
@@ -95,13 +95,16 @@
 			}
 		},
 		methods:{
+			hide_div:function(){
+				$(".hide_tools").hide();
+			},
 			showTools: function(a){
-					console.log(a)
-					if($(".hide_tools").eq(a).css("display")=="none"){
-						$(".hide_tools").eq(a).show();
-					}else{
-						$(".hide_tools").eq(a).hide();
-					}
+				event.stopImmediatePropagation();
+				if($(".hide_tools").eq(a).css("display")=="none"){
+					$(".hide_tools").eq(a).show();
+				}else{
+					$(".hide_tools").eq(a).hide();
+				}
 			},
 			toWithRord:function(){
 				this.$router.push({path:'/account_survey'});
@@ -336,10 +339,12 @@
 			height: 40px;
 			width:100%;
 			li{
+				padding-left: 10px;
 				margin-right: 5px;
 				float: left;
 				line-height: 40px;
 				&:nth-child(5){
+					margin-right: 10px;
 					float: right;
 					&:hover{
 						color: $yellow;
