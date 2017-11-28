@@ -78,6 +78,8 @@
 					url:"../login/login.html"
 				}
 		  	mui.app_request("/user/coupon/list",{},function(result){
+		  		console.log(1111111111)
+		  		console.log(JSON.stringify(result))
 		  		if(!mui.isnull(result.data.couponList)){ 
 		  			c_list=result.data.couponList;
 		  			mui.each(c_list,function(i){
@@ -155,9 +157,16 @@
 		 		break;
 		 		case 3:
 		 		h3.innerHTML="折扣券";  
-		 		h4.innerHTML="<img src='../../images/acp_03.gif'><b>¥</b><span>"+couponList.money+"折</span>";
+		 		h4.innerHTML="<img src='../../images/acp_03.png'><b></b><span>"+couponList.money+"折</span>";
 		 		if(couponList.status==4||couponList.status==3){
-		 		h4.innerHTML="<img src='../../images/acp_06.gif'><b>¥</b><span>"+couponList.money+"折</span>";	
+		 		h4.innerHTML="<img src='../../images/acp_06.png'><b></b><span>"+couponList.money+"折</span>";	
+		 		}
+		 		break;
+		 		case 6:
+		 		h3.innerHTML="抵扣卷";  
+		 		h4.innerHTML="<img src='../../images/acp_07.png'><b>¥</b><span>"+couponList.money+"元</span>";
+		 		if(couponList.status==4||couponList.status==3){
+		 		h4.innerHTML="<img src='../../images/acp_08.png'><b>¥</b><span>"+couponList.money+"元</span>";	
 		 		}
 		 		break;
 		 		default:
