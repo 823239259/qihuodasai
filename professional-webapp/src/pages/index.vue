@@ -373,6 +373,19 @@
 						layer.msg(data.message, {time: 1000});
 					}
 				});
+			},
+			getTradeWsUrl: function(){
+				var data = {
+					appVersions: this.$store.state.market.tradeConfig.version
+				};
+				pro.fetch('post', '/socket/config/getVersions', data, '').then(function(res){
+					if(res.success == true && res.code == 1){
+						this.$store.state.market.tradeConfig.url_real = res.data.socketUrl;
+					}
+				}.bind(this)).catch(function(err){
+					var data = err.data;
+					if(data) layer.msg(data.message, {time: 1000});
+				});
 			}
 		},
 		mounted: function(){
@@ -400,6 +413,8 @@
 			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
 			//是否是自选合约
 			this.isSelectedOrder();
+			//获取交易ws地址
+			this.getTradeWsUrl();
 			$(window).resize(function(){
 				var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 				var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;

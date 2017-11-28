@@ -932,18 +932,6 @@
 						var data = err.data;
 						if(data) layer.msg(data.message, {time: 1000});
 					});
-					//获取交易ws地址
-					var data = {
-						appVersions: this.$store.state.market.tradeConfig.version
-					};
-					pro.fetch('post', '/socket/config/getVersions', data, '').then(function(res){
-						if(res.success == true && res.code == 1){
-							this.$store.state.market.tradeConfig.url_real = res.data.socketUrl;
-						}
-					}.bind(this)).catch(function(err){
-						var data = err.data;
-						if(data) layer.msg(data.message, {time: 1000});
-					});
 				}else{
 					layer.msg('请先登录平台账号', {time: 1000});
 				}

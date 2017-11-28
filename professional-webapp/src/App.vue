@@ -26,7 +26,7 @@
 				<div class="tel fl">
 					<i class="ifont">&#xe611;</i>
 					<span>客服热线：</span>
-					<em>400-852-8008</em>
+					<em>{{hotLine}}</em>
 				</div>
 			</div>
 			<div class="fr" v-show="!show_login">
@@ -94,6 +94,7 @@
 
 <script>
 	import { mapMutations,mapActions } from 'vuex'
+	import pro from './assets/js/common.js'
 	export default {
 		name: 'app',
 		data(){
@@ -107,6 +108,7 @@
 				show_login : false,
 				iconShow: true,
 				zoomShow: true,
+				hotLine: '',
 				navList: [{
 					name: '行情',
 					cs: 'icon_quote'
@@ -312,7 +314,17 @@
 			},
 			canal: function(){
 				this.isShow_exit = false;
-			}
+			},
+			getHotLine: function(){   //获取客服热线
+				pro.fetch('post', '/hotline', '', '').then(function(res){
+					if(res.success == true && res.code == 1){
+						this.hotLine = res.data.hotline;
+					}
+				}.bind(this)).catch(function(error){
+					var data = err.data;
+					layer.msg(data.message, {time: 1000});
+				});
+			},
 		},
 		mounted: function(){
 			//初始化行情
@@ -327,6 +339,8 @@
 			}else{
 				this.show_login = false;
 			}
+			//获取客服热线
+			this.getHotLine();
 		},
 		activated: function(){
 			//获取平台账户登录信息
