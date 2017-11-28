@@ -17,7 +17,7 @@ import findPwd from '../pages/account/findPwd.vue'
 import login from '../pages/account/login.vue'
 import register from '../pages/account/register.vue'
 import ac from '../pages/tradeapply/applycomplate.vue'
-import ad from '../pages/tradeapply/applydetail.vue'
+//import ad from '../pages/tradeapply/applydetail.vue'
 import pc from '../pages/tradeapply/payConfirm.vue'
 import agreement from '../pages/tradeapply/agreement.vue'
 import tradersRules from '../pages/tradeapply/tradersRules.vue'
@@ -245,10 +245,10 @@ const router = new Router({
 			path: '/applycomplate',
 			component: ac
 		},
-		{
-			path: '/applydetail',
-			component: ad
-		},
+//		{
+//			path: '/applydetail',
+//			component: ad
+//		},
 		{
 			path: '/payconfirm',
 			component: pc

@@ -24,7 +24,7 @@
 			</div>
 			<btn name="登　录" @tap.native="toLogin"></btn>
 		</div>
-		<p class="bottom_tips">如遇问题请拨打：400-852-8008</p>
+		<p class="bottom_tips">如遇问题请拨打：{{hotLine}}</p>
 		<codeDialog ref="codeDialog" type="findpwd"></codeDialog>
 	</div>
 </template>
@@ -73,6 +73,9 @@
 			},
 			environment(){
 				return this.$store.state.environment;
+			},
+			hotLine: function(){
+				return this.$store.state.account.hotLine;
 			}
 		},
 		methods: {
