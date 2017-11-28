@@ -32,9 +32,6 @@
 		computed: {
 			tradeConfig(){
 				return this.$store.state.market.tradeConfig;
-			},
-			tradeSocket(){
-				return this.$store.state.market.tradeSocket;
 			}
 		},
 		methods: {
@@ -51,65 +48,15 @@
 				}else if(this.pwd == ''){
 					layer.msg('请输入您的密码', {time: 1000});
 				}else{
-//					var data = {
-//						appVersions: this.$store.state.market.tradeConfig.version
-//					};
-//					pro.fetch('post', '/socket/config/getVersions', data, '').then(function(res){
-//						if(res.success == true && res.code == 1){
-							this.$store.state.market.tradeConfig.username = this.username;
-							this.$store.state.market.tradeConfig.password = Base64.encode(this.pwd);
-							var userData = {'username': this.username, 'password': Base64.encode(this.pwd)};  
-							localStorage.tradeUser = JSON.stringify(userData);
-							this.initTrade();
-							setTimeout(function(){
-								this.show = false;
-							}.bind(this));
-							
-
-//							if(this.tradeSocket == '' || this.tradeSocket == undefined || this.tradeSocket == null){
-//								this.url_real = this.tradeConfig.url_real;
-//								this.$store.state.market.tradeSocket = new WebSocket(this.url_real);
-//								this.$store.state.market.tradeSocket.onopen = function(evt){
-//									//登录
-//									if(this.$store.state.market.tradeSocket.readyState==1){ //连接已建立，可以进行通信。
-//										this.$store.state.market.tradeSocket.send('{"Method":"Login","Parameters":{"ClientNo":"'+ this.username +'","PassWord":"'+ Base64.encode(this.pwd) +'","IsMock":'+this.tradeConfig.model+',"Version":"'+this.tradeConfig.version+'","Source":"'+this.tradeConfig.client_source+'"}}');
-//									}
-//								}.bind(this);
-//								this.$store.state.market.tradeSocket.onmessage = function(evt) {
-//									var data = JSON.parse(evt.data);
-//									var parameters = data.Parameters;
-//									switch (data.Method){
-//										case 'OnRtnHeartBeat':
-//											break;
-//										case 'OnRspLogin'://登录回复
-//											if(parameters.Code==0){
-//												layer.msg('登录成功', {time: 1000});
-//												this.$store.state.market.tradeConfig.username = this.username;
-//												this.$store.state.market.tradeConfig.password = Base64.encode(this.pwd);
-//												var userData = {'username': this.username, 'password': Base64.encode(this.pwd)};  
-//												localStorage.tradeUser = JSON.stringify(userData);
-//												setTimeout(function(){
-//													this.show = false;
-////													this.$router.push({path: '/index'});
-////													this.$store.state.account.isRefresh = 1;
-//												}.bind(this),500);
-//											}else{
-//												layer.msg(parameters.Message, {time: 1000});
-//											}
-//											break;
-//										default:
-//											break;
-//									}
-//									this.handleTradeMessage(evt);
-//								}.bind(this);
-//							}
-//						}
-//					}.bind(this)).catch(function(err){
-//						var data = err.data;
-//						if(data){
-//							layer.msg(data.message, {time: 1000});
-//						}
-//					});
+					if(this.tradeConfig.url_real == '' || this.tradeConfig.url_real == undefined) return;		
+					this.$store.state.market.tradeConfig.username = this.username;
+					this.$store.state.market.tradeConfig.password = Base64.encode(this.pwd);
+					var userData = {'username': this.username, 'password': Base64.encode(this.pwd)};  
+					localStorage.tradeUser = JSON.stringify(userData);
+					this.initTrade();
+					setTimeout(function(){
+						this.show = false;
+					}.bind(this));
 				}
 			},
 			forgetPwd: function(){
