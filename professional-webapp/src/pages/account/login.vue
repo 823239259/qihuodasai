@@ -85,11 +85,12 @@
 								layer.msg('登录成功', {time: 1000});
 								this.token = res.data.token;
 								this.secret = res.data.secret;
-								var userData = {'username':this.phone,'password':this.pwd,'token':res.data.token,'secret':res.data.secret};
+								var userData = {'username':this.phone,'password':Base64.encode(this.pwd),'token':res.data.token,'secret':res.data.secret};
 								localStorage.setItem("user", JSON.stringify(userData));
 								this.$store.state.account.userName = this.phone;
 								this.$router.push({path: '/account'});
 								this.$store.state.account.currentNav = 3;
+								localStorage.currentNav = 3;
 							}
 						}
 					}.bind(this)).catch(function(err){
@@ -134,7 +135,9 @@
 				
 			},
 			close :function(){
-				this.$router.push({path:'/index'})
+				this.$router.push({path:'/index'});
+				this.$store.state.account.currentNav = 0;
+				localStorage.currentNav = 0;
 			}
 		}
 	}
