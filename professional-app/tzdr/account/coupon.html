@@ -19,7 +19,12 @@
 //		    }]
 			swipeBack: false
 		  });    
-		 
+		 mui.init({
+    		beforeback:function(){
+    			var reload = plus.webview.getWebviewById("account");
+    			reload.reload(true);
+    		}
+    	});
 		(function($) {
 			$('.mui-scroll-wrapper').scroll({
 				indicators: true //是否显示滚动条
