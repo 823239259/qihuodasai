@@ -3,7 +3,6 @@
 		<div class="order">
 			<div class="title">
 				<ul>
-					<template></template>
 					<li class="current">
 						<span>国际期货</span>
 					</li>
@@ -67,7 +66,7 @@
 			<div class="title">
 				<span class="fl">{{orderName}}</span>
 				<span class="fl">{{orderNum}}</span>
-				<div class="add fr" :class="{current: !addStar}" @click="addOptional">
+				<div class="add fr" :class="{current: !addStar}" @click="addOptional" @mouseover="overOptional" @mouseleave="leaveOptional">
 					<i class="ifont fl" v-show="addStar">&#xe754;</i>
 					<i class="ifont fl" v-show="!addStar">&#xe602;</i>
 					<span class="fl">{{optional}}</span>
@@ -288,6 +287,20 @@
 				this.$store.state.isshow.isfensshow = false;
 				this.$store.state.isshow.iskline = false;
 				localStorage.currentOrder = commodityNo;
+			},
+			overOptional: function(){
+				if(this.addStar == true){
+					this.addStar = false;
+				}else{
+					this.addStar = true;
+				}
+			},
+			leaveOptional: function(){
+				if(this.addStar == true){
+					this.addStar = false;
+				}else{
+					this.addStar = true;
+				}
 			},
 			addOptional: function(e){
 				//获取平台账户登录信息

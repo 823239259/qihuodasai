@@ -88,7 +88,7 @@
 						<div class="title">
 							<span class="fl">{{currentdetail.CommodityName}}</span>
 							<span class="fl">{{currentdetail.CommodityNo + currentdetail.MainContract}}</span>
-							<div class="add fr" :class="{current: !addStar}" @click="addOptional">
+							<div class="add fr" :class="{current: !addStar}" @click="addOptional" @mouseover="overOptional" @mouseleave="leaveOptional">
 								<i class="ifont fl" v-show="addStar">&#xe754;</i>
 								<i class="ifont fl" v-show="!addStar">&#xe602;</i>
 								<span class="fl">{{optional}}</span>
@@ -583,6 +583,20 @@
 					this.quoteShow = true;
 					//是否自选
 					this.isSelectedOrder();
+				}
+			},
+			overOptional: function(){
+				if(this.addStar == true){
+					this.addStar = false;
+				}else{
+					this.addStar = true;
+				}
+			},
+			leaveOptional: function(){
+				if(this.addStar == true){
+					this.addStar = false;
+				}else{
+					this.addStar = true;
 				}
 			},
 			addOptional: function(e){
