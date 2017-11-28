@@ -368,7 +368,7 @@ export default new Vuex.Store({
 					},
 					axisLabel: {
 						inside: false,
-						margin: 4,
+						margin: 3,
 					},
 					splitLine: {
 						show: true,
@@ -690,6 +690,7 @@ export default new Vuex.Store({
 					},
 					scale: true,
 					axisLabel: {
+						margin: 3,
 						formatter: function(a) {
 							a = +a;
 							return isFinite(a) ? echarts.format.addCommas(+a / 10000) : '';
@@ -840,6 +841,7 @@ export default new Vuex.Store({
 					},
 					scale: true,
 					axisLabel: {
+						margin: 3,
 						formatter: function(a) {
 							a = +a;
 							return isFinite(a) ?
@@ -939,7 +941,10 @@ export default new Vuex.Store({
 					},
 					axisLabel: {
 						inside: false,
-						margin: 4,
+						margin: 3,
+						textStyle: {
+							fontSize: 10
+						}
 					},
 					splitLine: {
 						show: true,
