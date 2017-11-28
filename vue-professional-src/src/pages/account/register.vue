@@ -25,7 +25,7 @@
 			<btn name="注　册" @tap.native="register"></btn>
 			<p class="jump_operate"><span>已有账户？</span><span class="yellow" @tap="toLogin">立即登录</span></p>
 		</div>
-		<p class="bottom_tips">如遇问题请拨打：400-852-8008</p>
+		<p class="bottom_tips">如遇问题请拨打：{{hotLine}}</p>
 		<codeDialog ref="codeDialog" type="register"></codeDialog>
 	</div>
 </template>
@@ -78,6 +78,9 @@
 			},
 			packChannel(){
 				return this.$store.state.account.packChannel;
+			},
+			hotLine: function(){
+				return this.$store.state.account.hotLine;
 			}
 		},
 		methods: {

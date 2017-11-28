@@ -30,14 +30,14 @@ pro.parseTwoFloat = function(num) {
  * @param {} 
  * 
  */
-pro.callService = function(){
+pro.callService = function(num){
 	mui.plusReady(function(){
-		plus.nativeUI.confirm("账户余额不足，请拨打400-852-8008索要模拟金。",function(e){
+		plus.nativeUI.confirm("账户余额不足，请拨打"+ num +"索要模拟金。",function(e){
 			if(e.index==1){
 				plus.device.dial("4008528008",false);
 			}
 		},
-		"400-852-8008",["取消","呼叫"]);
+		num,["取消","呼叫"]);
 	});
 };
 

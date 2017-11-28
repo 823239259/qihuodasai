@@ -586,7 +586,7 @@
 									break;
 								case '11':
 									this.$children[0].isShow = true;
-									this.msg = '方案结算失败，每个用户每天最多可结算一个未操盘方案，该方案你可在明天发起申请';
+									this.msg = data.message;
 									break;
 								case '20':
 									this.$children[0].isShow = true;

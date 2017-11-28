@@ -57,7 +57,7 @@
 					<img src="../assets/img/phone.png" />
 					<span>客服热线</span>
 					<img src="../assets/img/arrow.png" class="img_arrow"/>
-					<span>400-852-8008</span>
+					<span>{{hotLine}}</span>
 					</a>
 				</li>
 				<li>
@@ -109,6 +109,9 @@
 			},
 			PATH: function(){
 				return this.$store.getters.PATH;
+			},
+			hotLine: function(){
+				return this.$store.state.account.hotLine;
 			}
 		},
 		methods: {
@@ -187,11 +190,27 @@
 					this.$children[0].isShow = true;
 					this.msg = '网络不给力，请稍后再试！';
 				});
+			},
+			getHotLine: function(){
+				this.$http.post(this.PATH + '/hotline', {emulateJSON: true}, {
+					params: {},
+					timeout: 5000
+				}).then(function(e) {
+					var data = e.body;
+					if(data.success == true && data.code == 1){
+						this.$store.state.account.hotLine = data.data.hotline;
+					}
+				}.bind(this), function() {
+					this.$refs.dialog.isShow = true;
+					this.msg = '网络不给力，请稍后再试！'
+				});
 			}
 		},
 		mounted: function(){
 			//页面高度计算
 			$("#account").css("height",window.screen.height - 20 + "px");
+			//获取客服热线
+			this.getHotLine();
 		},
 		activated: function(){
 			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';

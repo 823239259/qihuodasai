@@ -20,7 +20,7 @@
 			<btn name="登　录" @tap.native='login'></btn>
 			<p class="jump_operate"><span @tap="toFindPwd">忘记密码</span>  /  <span class="yellow" @tap="toRegister">用户注册</span></p>
 		</div>
-		<p class="bottom_tips">如遇问题请拨打：400-852-8008</p>
+		<p class="bottom_tips">如遇问题请拨打：{{hotLine}}</p>
 		<codeDialog ref="codeDialog" :objstr="sendMsg" type="login"></codeDialog>
 	</div>
 </template>
@@ -68,6 +68,9 @@
 			},
 			sendMsg(){
 				if(this.str) return JSON.stringify(this.str);
+			},
+			hotLine: function(){
+				return this.$store.state.account.hotLine;
 			}
 		},
 		methods:{

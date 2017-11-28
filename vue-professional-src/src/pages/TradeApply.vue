@@ -166,7 +166,7 @@
 				<ul class="info">
 					<li class="fontgray">提交申请表示阅读并同意 <span class="fontwhite" @tap="toAgreement"> 《国际期货操盘合作协议》 </span> </li>
 					<li class="fontgray">
-						客服咨询： <span class="fontwhite"> 400-852-8008 </span>
+						客服咨询： <span class="fontwhite">{{hotLine}}</span>
 					</li>
 				</ul>
 			</div>
@@ -538,6 +538,9 @@
 			environment(){
 				return this.$store.state.environment;
 			},
+			hotLine: function(){
+				return this.$store.state.account.hotLine;
+			},
 			msgTips: function(){
 				return this.msg;
 			},
@@ -627,6 +630,9 @@
 					var data = e.body;
 					if(data.success == true){
 						if(data.code == 1){
+							if(data.data.bannerList == null || data.data.bannerList.length <= 0){
+								return;
+							}
 							this.bannerList = data.data.bannerList;
 							this.bannerList.forEach(function(o, i){
 								if(this.environment == 'test'){

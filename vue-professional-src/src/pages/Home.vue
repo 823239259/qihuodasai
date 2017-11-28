@@ -218,6 +218,20 @@
 					this.$refs.dialog.isShow = true;
 					this.msg = '网络不给力，请稍后再试！'
 				});
+			},
+			getHotLine: function(){
+				this.$http.post(this.PATH + '/hotline', {emulateJSON: true}, {
+					params: {},
+					timeout: 5000
+				}).then(function(e) {
+					var data = e.body;
+					if(data.success == true && data.code == 1){
+						this.$store.state.account.hotLine = data.data.hotline;
+					}
+				}.bind(this), function() {
+					this.$refs.dialog.isShow = true;
+					this.msg = '网络不给力，请稍后再试！'
+				});
 			}
 		},
 		mounted: function() {
@@ -227,6 +241,8 @@
 			this.initQuoteClient();
 			//取当前版本号
 			this.getVersion();
+			//获取客服热线
+			this.getHotLine();
 		},
 		beforeUpdate: function(){
 //			this.arr = this.Parameters;

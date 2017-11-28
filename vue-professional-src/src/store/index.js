@@ -43,7 +43,8 @@ var account = {
 		tempList: [],
 		//存合约列表
 		programList: [],
-		operateOrderLength: 0   //操盘中方案的条数
+		operateOrderLength: 0,   //操盘中方案的条数
+		hotLine: '',
 	}
 }
 
