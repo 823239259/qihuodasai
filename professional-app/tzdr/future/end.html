@@ -72,14 +72,18 @@
 		
 		//设置最新汇率
 		document.getElementById('rateRMB').innerHTML=_rate;
-		
 		if(!mui.isnull(_coupons)){  //判断是否有折扣劵
 			var _coupon_options = '<option value="">不使用折扣劵</option>';
 			//获取折扣劵
 			mui.each(_coupons,function(i,item){
 				var _coupon_id = item.id;
 				var _coupon_money = item.money;
-				_coupon_options+= i == 0 ? '<option value="'+_coupon_id+'" selected="selected">'+_coupon_money+'折折扣券</option>' : '<option value="'+_coupon_id+'">'+_coupon_money+'折折扣券</option>';
+				if(_coupons[i].type == 3){
+					_coupon_options+= i == 0 ? '<option value="'+_coupon_id+'" selected="selected">'+_coupon_money+'折折扣券</option>' : '<option value="'+_coupon_id+'">'+_coupon_money+'折折扣券</option>';
+				}else if(_coupons[i].type == 6){
+					_coupon_options+= i == 0 ? '<option value="'+_coupon_id+'" selected="selected">'+_coupon_money+'元抵扣券</option>' : '<option value="'+_coupon_id+'">'+_coupon_money+'元抵扣券</option>';
+				}
+//				_coupon_options+= i == 0 ? '<option value="'+_coupon_id+'" selected="selected">'+_coupon_money+'折折扣券</option>' : '<option value="'+_coupon_id+'">'+_coupon_money+'折折扣券</option>';
 			});
 			document.getElementById('coupon_list').innerHTML=_coupon_options;
 		}
