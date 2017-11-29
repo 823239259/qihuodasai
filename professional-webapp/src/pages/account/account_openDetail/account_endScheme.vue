@@ -36,6 +36,7 @@
 						}
 					}
 				}).catch((err)=>{
+					console.log(err);
 					if(err.data.success == false){
 						switch (err.data.code){
 							case '-1':
@@ -94,7 +95,6 @@
 		},
 		mounted:function(){
 			this.id = this.$route.query.id;
-			console.log(this.id);
 		},
 		actived:function(){
 			this.id = this.$route.query.id;
