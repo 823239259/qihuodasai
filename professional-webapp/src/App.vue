@@ -314,7 +314,7 @@
 					if(res.success == true && res.code == 1){
 						this.hotLine = res.data.hotline;
 					}
-				}.bind(this)).catch(function(error){
+				}.bind(this)).catch(function(err){
 					var data = err.data;
 					layer.msg(data.message, {time: 1000});
 				});
