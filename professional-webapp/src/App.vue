@@ -350,6 +350,7 @@
 			}
 			//导航根据session添加选中样式
 			if(localStorage.currentNav != undefined){
+				console.log(localStorage.currentNav);
 				this.$store.state.account.currentNav = localStorage.currentNav;
 			}
 		},
