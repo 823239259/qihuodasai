@@ -359,7 +359,6 @@
 			hasNostopLossList00: function(){
 				let orderTemplist = this.orderTemplist;
 				this.$store.state.market.hasNostopLossList = [];
-				console.log(this.stopLossList);
 				this.stopLossList.forEach(function(e,i){
 					let s={};
 					s.ClientNo = e.ClientNo;
@@ -403,8 +402,6 @@
 					})();
 					s.StopLossDiff = e.StopLossDiff;
 					s.StopLossNo = e.StopLossNo;
-					console.log(this.orderTemplist);
-					console.log(s.CommodityNo);
 					s.StopLossPrice = parseFloat(e.StopLossPrice).toFixed(this.orderTemplist[e.CommodityNo].DotSize);
 					s.StopLossType = (function(){
 						if(e.StopLossType==0)
@@ -420,7 +417,7 @@
 							return '触发价:'+parseFloat(e.StopLossPrice).toFixed(this.orderTemplist[e.CommodityNo].DotSize);
 						if(e.StopLossType==2)
 							return '动态价:'+parseFloat(e.StopLossDiff).toFixed(this.orderTemplist[e.CommodityNo].DotSize);
-					})();
+					}.bind(this))();
 					
 					s.entrustPrice=(function(){
 						if(e.OrderType==1){
