@@ -125,13 +125,30 @@
 					console.log(result.data);
 					document.getElementById("endtolist").removeAttribute("disabled");
 					//申请终结方案
-	    			mui.openWindow({
-	    				url:"end.html",
-	    				id:"end.html",
-	    				extras:{
-	    					did:win.did,rate:result.data.rate,coupons:result.data.coupons,businessType:8,businessPageId:'future/DetailCp.html'
-	    				}
-	    			});
+					mui.app_request('/user/coupon/list',{},function(res){
+							var coup = res.data.couponList
+							var coups = [];
+							var coupons = [];
+							//拿到全部折扣卷和抵扣卷
+							mui.each(coup,function(i){
+								if(coup[i].type == 3 || coup[i].type == 6){
+									coups.push(coup[i]);
+								}
+							});
+							//拿到为使用的折扣卷和抵扣卷
+							mui.each(coups,function(i){
+								if(coups[i].status == 2){
+									coupons.push(coups[i]);
+								}
+							})
+							mui.openWindow({
+			    				url:"end.html",
+			    				id:"end.html",
+			    				extras:{
+			    					did:win.did,rate:result.data.rate,coupons:coupons,businessType:8,businessPageId:'future/DetailCp.html'
+			    				}
+			    			});
+						},function(err){},{})
 				},function(result){
 					document.getElementById("endtolist").removeAttribute("disabled");
 					mui.toast("系统繁忙，请稍后再试！");
