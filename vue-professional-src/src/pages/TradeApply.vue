@@ -175,7 +175,7 @@
 					<template v-for="key in tradeList">
 						<li @tap="toDetails" :type="key.stateType" :id="key.id">
 							<div class="record_title">
-								<span :class="{yellow: key.stateType == 1, blue: key.stateType == 4, grey: key.stateType == 5, deepblue: key.stateType == 6}">{{key.stateType | operateState}}</span>
+								<span :class="{yellow: key.stateType == 1, red: key.stateType == 2, blue: key.stateType == 4, grey: key.stateType == 5, deepblue: key.stateType == 6}">{{key.stateType | operateState}}</span>
 								<i class="icon_arrow fr"></i>
 								<span class="fr">{{key.appTime | getTime('yyyy-MM-dd HH:mm')}}</span>
 							</div>
@@ -480,7 +480,7 @@
 						return "开户中";
 						break;
 					case 2:
-						return "申请结算";
+						return "结算中";
 						break;
 					case 3:
 						return "待结算";
@@ -1007,6 +1007,10 @@
 					&.grey{
 						background: #ddd;
 					}
+					&.red{
+						color: @white;
+						background: #ff5533;
+					}
 				}
 				.icon_arrow{
 					width: 24px;
@@ -1273,7 +1277,7 @@
 					&:first-child{
 						display: inline-block;
 						height: 22px*@ip6;
-						line-height: 22px*@ip6;
+						line-height: 22px;
 						padding: 0 15px*@ip6;
 						overflow: hidden;
 						font-size: @fs14*@ip6;
@@ -1293,6 +1297,10 @@
 					}
 					&.grey{
 						background: #ddd;
+					}
+					&.red{
+						color: @white;
+						background: #ff5533;
 					}
 				}
 				.icon_arrow{
@@ -1560,7 +1568,7 @@
 					&:first-child{
 						display: inline-block;
 						height: 22px*@ip5;
-						line-height: 22px*@ip5;
+						line-height: 18px;
 						padding: 0 15px*@ip5;
 						overflow: hidden;
 						font-size: @fs14*@ip5;
@@ -1580,6 +1588,10 @@
 					}
 					&.grey{
 						background: #ddd;
+					}
+					&.red{
+						color: @white;
+						background: #ff5533;
 					}
 				}
 				.icon_arrow{
@@ -1604,7 +1616,7 @@
 					span{
 						color: @white;
 						&.spe{
-							font-size: @fs14;
+							font-size: @fs12;
 							color: #7a7f99;
 						}
 					}
