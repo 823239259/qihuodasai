@@ -238,6 +238,11 @@
 			//初始化导航栏
 			tzdr.init.initHearListener();
 			mui.plusReady(function() {
+				//缓存客服热线
+				mui.app_request("/hotline",{},function(res){
+					var hotline = {"hotline":res.data.hotline};
+					localStorage.setItem("line_hot",JSON.stringify(hotline));
+				},function(err){},{})
 //				点击跳转到一分钟介绍页面
 				document.getElementById("toOneMin").addEventListener("tap",function(){
 					mui.openWindow({
