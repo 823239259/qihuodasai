@@ -529,7 +529,7 @@ export default new Vuex.Store({
 					axisLabel: {
 						inside: false,
 						margin: 3,
-						fontSize: 10
+						fontSize: 10,
 					},
 					splitLine: {
 						show: true,
@@ -643,7 +643,6 @@ export default new Vuex.Store({
 				}
 				price.push(e[1]);
 			});
-
 			//成交量设置
 			state.market.option4 = {
 				grid: {
@@ -724,6 +723,10 @@ export default new Vuex.Store({
 					data: vol
 				}]
 			};
+			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+			if(h < 950){
+				state.market.option4.yAxis[0].axisLabel.show = false
+			}
 		},
 		//画K线图
 		drawkline: function(state, x) {
@@ -849,7 +852,8 @@ export default new Vuex.Store({
 						},
 						textStyle: {
 							fontSize: 10
-						}
+						},
+						showMinLabel: null
 					},
 					splitLine: {
 						show: true,
@@ -877,6 +881,10 @@ export default new Vuex.Store({
 					data: vol
 				}]
 			};
+			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+			if(h < 950){
+				state.market.option1.yAxis[0].axisLabel.show = false
+			}
 			state.market.option2 = {
 				grid: {
 					x: 50,
