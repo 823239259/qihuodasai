@@ -94,8 +94,9 @@
 						<tbody class="show_list">
 							<tr v-for="k in temp.contractList" class="show_list_td">
 								<td>{{k.tradeType | cnname}}</br><i> {{k.mainContract}}</i></td>
-								<td>{{k.tradTime | change_time}}</td>
-								<!--<td>{{k.tradTime}}</td>-->
+								<td>
+									<p v-for="time in k.tradTime">{{time}}</p>
+								</td>
 								<td>{{k.shoushu | filtershoushu(chooseType)}}</td>
 								<td>{{k.price}}元/手</td>
 							</tr>
@@ -378,7 +379,7 @@
 				procedures: false,
 				proceduresR: false,
 				showAgreement: false,
-				showTradeRules: false,
+				showTradeRules: false
 			}
 		},
 		methods: {
@@ -512,7 +513,7 @@
 							this.temp = data;
 							this.item = data.paramList;
 							this.$store.state.tempTradeapply = this.temp;
-							console.log(this.temp.contractList);
+							
 							this.temp.contractList.forEach(function(o, i) {
 								switch(o.tradeType) {
 									case 0:   //return '富时A50'
@@ -639,6 +640,7 @@
 										}.bind(this));
 										break;
 								}
+								o.tradTime = o.tradTime.split("，");
 							}.bind(this));
 						}
 					}
@@ -1052,6 +1054,10 @@
 		td{
 			width: 25%;
 			float: left;
+			p{
+				line-height: 12px;
+				height: 33%;
+			}
 		}
 	}
 	.show_list_td{
