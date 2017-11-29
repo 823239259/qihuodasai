@@ -1210,7 +1210,7 @@ function appendStopLossData(param) {
 		'	<td class = "stoploss4">' + num + '</td>' +
 		'	<td class = "stoploss5" data-tion-price="' + stopLossPrice + '">' + stopLossPriceText + stopLossPrice + '</td>' +
 		'	<td class = "stoploss6" data-tion-orderType = "' + orderType + '">' + orderTypeText + '</td>' +
-		'	<td class = "stoploss9">当日有效</td>' +
+		'	<td class = "stoploss9">永久有效</td>' +
 		'	<td class = "stoploss7">' + insertTime + '</td>' +
 		'  <td class = "stoploss8" style = "display:none;">' + stopLossDiff + '</td>' +
 		'</tr>';
@@ -1359,7 +1359,7 @@ function appendCondition(param) {
 		'<td class = "condition2" data-tion-conditionType = "' + conditionType + '">' + conditionTypeText + '</td>' +
 		'<td class = "condition3" data-tion-compareType = "' + compareType + '">' + compareTypeText + '</td>' +
 		'<td class = "condition4">' + inserOrderText + '</td>' +
-		'<td class = "condition5">当日有效</td>' +
+		'<td class = "condition5">永久有效</td>' +
 //		'<td class = "condition6">' + insertTime + '</td>' +
 		'<td class = "condition6">' + nullOrInsertTime(insertTime,param.StatusMsg) + '</td>' +
 		'</tr>';
