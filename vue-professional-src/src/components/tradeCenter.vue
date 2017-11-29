@@ -1236,7 +1236,7 @@
 					height: 330px;
 					overflow-x: scroll;
 					li{
-						width: 560px;
+						width: 580px;
 						padding-left: 15px;
 						span{
 							&:nth-child(1){
