@@ -9,7 +9,7 @@
 				<p v-else="tradeSell !<0"><span>{{endAmount | fixNumTwo}}</span>元（结算金额）<span>={{traderBond | fixNumTwo}}元</span>（操盘保证金）+<span>{{appendTraderBond | fixNumTwo}}元</span>（追加保证金）<span >+{{tradeSell | fixNumTwo}}元</span>（交易盈亏）-<span>{{tranFeesTotal | fixNumTwo}}元</span>（手续费）</p>
 				<p><i>注意：</i>交易手续费= 合约手续费x交易手数</p>
 			</div>
-			<div class="handDetails"  v-if="showTreatyName1 == null" style="height: 120px;">
+			<div class="handDetails"  v-if="show_list" style="height: 120px;">
 				<p>交易明细手数</p>
 				<ul>
 					<li>合约名称</li>
@@ -20,7 +20,7 @@
 					<li v-for="key in showTreatyHandle">{{key}}</li>
 				</ul>
 			</div>
-			<div class="handDetails" v-if="showTreatyName1 != null" style="height: 220px;">
+			<div class="handDetails" v-if="show_list1" style="height: 220px;">
 				<p>交易明细手数</p>
 				<ul>
 					<li>合约名称</li>
@@ -149,6 +149,8 @@
 				tranFeesTotal:"",
 				tradeSell:'',
 				handList:{},
+				show_list:false,
+				show_list1:false,
 				showTreatyName:[],//合约名称1
 				showTreatyName1:[],//合约名称2
 				showTreatyHandle:[],//合约手数1
@@ -256,19 +258,23 @@
 							var showTreaty=[];
 							var showTreaty1=[];
 							for(var key in this.handList){
-								showTreaty.push(key);
-								showTreaty1.push(this.handList[key]);
+								if(this.handList[key]!=null){
+									showTreaty.push(key);
+									showTreaty1.push(this.handList[key]);
+								}
 							}
 							if(showTreaty.length>9){
 								this.showTreatyName = showTreaty.slice(0,9);
 								this.showTreatyName1 = showTreaty.slice(9,17);
 								this.showTreatyHandle = showTreaty1.slice(0,9);
 								this.showTreatyHandle1 = showTreaty1.slice(9,17);
+								this.show_list = false;
+								this.show_list1 = true;
 							}else{
 								this.showTreatyName = showTreaty;
 								this.showTreatyHandle = showTreaty1;
-								this.showTreatyName1 = null;
-								this.showTreatyHandle1 = null;
+								this.show_list = true;
+								this.show_list1 = false;
 							}
 						}
 					}
