@@ -470,6 +470,8 @@
 			var p = document.createElement("p");
 			p.setAttribute("class", "sc_statusfont");
 			var img = document.createElement("img");
+			console.log("----------------");
+			console.log(ftrade_list.stateType);
 			switch(ftrade_list.stateType) {
 				case 1:
 					li.setAttribute("class", "mui-table-view-cell sc_open");
@@ -483,7 +485,7 @@
 					break;
 				case 2:
 					li.setAttribute("class", "mui-table-view-cell sc_trade");
-					img.setAttribute("src", "../../images/status_03.png");
+					img.setAttribute("src", "../../images/status_05.png");
 
 					break;
 				case 3:
@@ -493,7 +495,7 @@
 					break;
 				case 5:
 					li.setAttribute("class", "mui-table-view-cell sc_fail");
-					img.setAttribute("src", "../../images/status_05.png");
+					img.setAttribute("src", "../../images/status_02.png");
 
 					break;
 				case 6:
