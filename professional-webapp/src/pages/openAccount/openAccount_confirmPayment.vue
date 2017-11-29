@@ -41,7 +41,7 @@
 			//充值
 			to_Recharge:function(){
 				if(this.accountMoney < this.payMoney){
-					this.$router.push({path:'/recharge',query:{"accountMoney":this.accountMoney}});
+					this.$router.push({path:'/recharge',query:{"accountMoney":this.accountMoney,"rechargeMoney":this.payMoney}});
 				}
 			},
 			//支付

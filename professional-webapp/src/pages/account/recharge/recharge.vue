@@ -61,7 +61,8 @@
 				recharge_money:'',
 				accountMoney:'',
 				totalMoney:0.00,
-				backto:""
+				backto:"",
+				rechargeMoney:''
 			}
 		},
 		watch: {
@@ -82,7 +83,7 @@
 				if(this.backto != undefined){
 					this.$router.push({path:'/account_survey'});
 				}else {
-					this.$router.push({path:'/confirmPayment'});
+					this.$router.push({path:'/confirmPayment',query:{"payMoney":this.rechargeMoney}});
 				}
 			},
 			nextStep:function(){
@@ -114,11 +115,15 @@
 			this.accountMoney = this.$route.query.accountMoney;
 			this.totalMoney = this.accountMoney;
 			this.backto = this.$route.query.backhere;
+			this.rechargeMoney = this.$route.query.rechargeMoney;
+			this.recharge_money = this.rechargeMoney;
 		},
 		activated:function(){
 			this.accountMoney = this.$route.query.accountMoney;
 			this.backto = this.$route.query.backhere;
-		}
+			this.rechargeMoney = this.$route.query.rechargeMoney;
+			this.recharge_money = this.rechargeMoney;
+		},
 	}
 </script>
 
