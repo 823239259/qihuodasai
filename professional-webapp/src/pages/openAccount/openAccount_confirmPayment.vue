@@ -2,7 +2,7 @@
 	<div id="confirmPayment">
 		<div class="bg"></div>
 		<div class="confirmPayment">
-			<p v-if="accountMoney-payMoney>0">确认支付<i class="ifont" v-on:click="close">&#xe624;</i></p>
+			<p v-if="accountMoney-payMoney>0 || accountMoney-payMoney==0">确认支付<i class="ifont" v-on:click="close">&#xe624;</i></p>
 			<p v-else="accountMoney-payMoney!>0">去充值<i class="ifont" v-on:click="close">&#xe624;</i></p>
 			<p>账户余额：<span>{{accountMoney}}</span>元</p>
 			<p>支付金额：<span>{{payMoney}}</span>元</p>
