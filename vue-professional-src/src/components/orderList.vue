@@ -228,7 +228,7 @@
 				overflow-y: scroll;
 			}
 			li{
-				width: 490px;
+				width: 510px;
 				background: @deepblue;
 				padding-left: 15px;
 				border-top: 1px solid @black;
@@ -301,7 +301,7 @@
 				overflow-y: scroll;
 			}
 			li{
-				width: 490px*@ip6;
+				width: 510px*@ip6;
 				background: @deepblue;
 				padding-left: 15px*@ip6;
 				border-top: 1px solid @black;
@@ -374,7 +374,7 @@
 				overflow-y: scroll;
 			}
 			li{
-				width: 540px*@ip5;
+				width: 550px*@ip5;
 				background: @deepblue;
 				padding-left: 15px*@ip5;
 				border-top: 1px solid @black;
