@@ -83,6 +83,12 @@
 								}, 1500)
 							};
 						} else if(result.message == "屏蔽") { // 显示主包
+							mui.app_request("/hotline",{},function(res){
+								var hotline = {"hotline":res.data.hotline};
+								localStorage.setItem("line_hot",JSON.stringify(hotline));
+//								JSON.parse(localStorage.line_hot).hotline
+							},function(err){
+							},{})
 							if(plus.storage.getItem("showGuide") != "false") { // 显示主包引导页
 								plus.storage.setItem("showGuide", "false");
 								setTimeout(function() {
