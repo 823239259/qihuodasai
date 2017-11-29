@@ -420,6 +420,9 @@
 					'overflow-x': 'scroll'
 				});
 			}
+			//默认进入行情页面
+			this.$store.state.account.currentNav = 0;
+			localStorage.currentNav = 0;
 		},
 		activated: function(){
 			//获取平台账户登录信息

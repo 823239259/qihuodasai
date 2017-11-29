@@ -234,19 +234,18 @@
 					<div class="down_order">
 						<div class="title">
 							<ul>
-								<li class="current">
-									<span>普通单</span>
-								</li>
-								<!--<li>
-									<span>条件单</span>
-								</li>-->
+								<template v-for="(v, index) in downOrderTab">
+									<li :class="{current: downOrderDefault == index}" @click="downOrderEvent(index)">
+										<span>{{v}}</span>
+									</li>
+								</template>
 							</ul>
 						</div>
 						<div class="cont">
-							<ul>
+							<ul v-show="downOrderShow">
 								<li>
 									<label>合约代码</label>
-									<div class="slt-box">
+									<div class="slt-box order-box">
 										<input type="text" class="slt" disabled="disabled" :selectVal="currentdetail.CommodityNo" :value="currentdetail.CommodityName"/>
 										<span class="tal-box"><span class="tal"></span></span>
 										<div class="slt-list">
@@ -276,6 +275,94 @@
 										<input type="text" class="fl" v-model="defaultNum" />
 										<i class="ifont fr" @click="add">&#xe601;</i>
 									</div>
+								</li>
+							</ul>
+							<ul v-show="!downOrderShow">
+								<li>
+									<label>合约代码</label>
+									<div class="slt-box order-box">
+										<input type="text" class="slt" disabled="disabled" :selectVal="currentdetail.CommodityNo" :value="currentdetail.CommodityName"/>
+										<span class="tal-box"><span class="tal"></span></span>
+										<div class="slt-list">
+											<ul>
+												<template v-for="v in Parameters">
+													<li :selectVal="v.CommodityNo">{{v.CommodityName + ' ' + v.CommodityNo + v.MainContract}}</li>
+												</template>
+											</ul>
+										</div>
+									</div>
+								</li>
+								<li>
+									<label>条件类型</label>
+									<div class="col">
+										<span :class="{current: priceShow == true}" @click="priceClick">价格条件</span>
+										<span :class="{current: !priceShow == true}" @click="priceClick">时间条件</span>
+									</div>
+								</li>
+								<li>
+									<label>触发时间</label>
+									<input type="text" class="ipt time-ipt" />
+									<label class="label-spe">附加价格</label>
+									<div class="slt-box price-box">
+										<input type="text" class="slt" disabled="disabled" selectVal="0" value=">="/>
+										<span class="tal-box"><span class="tal"></span></span>
+										<div class="slt-list">
+											<ul>
+												<li selectVal="0">></li>
+												<li selectVal="1">>=</li>
+												<li selectVal="2"><</li>
+												<li selectVal="3"><=</li>
+											</ul>
+										</div>
+									</div>
+									<input type="text" class="ipt price-ipt" />
+								</li>
+								<!--<li>
+									<label>触发价格</label>
+									<div class="slt-box price-box">
+										<input type="text" class="slt" disabled="disabled" selectVal="0" value=">"/>
+										<span class="tal-box"><span class="tal"></span></span>
+										<div class="slt-list">
+											<ul>
+												<li selectVal="0">></li>
+												<li selectVal="1">>=</li>
+												<li selectVal="2"><</li>
+												<li selectVal="3"><=</li>
+											</ul>
+										</div>
+									</div>
+									<input type="text" class="ipt price-ipt" />
+									<label class="label-spe">附加价格</label>
+									<div class="slt-box price-box">
+										<input type="text" class="slt" disabled="disabled" selectVal="0" value=">="/>
+										<span class="tal-box"><span class="tal"></span></span>
+										<div class="slt-list">
+											<ul>
+												<li selectVal="0">></li>
+												<li selectVal="1">>=</li>
+												<li selectVal="2"><</li>
+												<li selectVal="3"><=</li>
+											</ul>
+										</div>
+									</div>
+									<input type="text" class="ipt price-ipt" />
+								</li>-->
+								<li>
+									<label>委托价格</label>
+									<div class="col">
+										<span :class="{current: priceShow == true}" @click="priceClick">市价</span>
+										<span :class="{current: !priceShow == true}" @click="priceClick">对手价</span>
+									</div>
+								</li>
+								<li class="condition-box">
+									<label>委托数量</label>
+									<div class="col">
+										<i class="ifont fl" @click="reduce">&#xe6f2;</i>
+										<input type="text" class="fl" v-model="defaultNum" />
+										<i class="ifont fr" @click="add">&#xe601;</i>
+									</div>
+									<label class="effective-date">有限日期</label>
+									<span>当日有效</span>
 								</li>
 							</ul>
 							<div class="btn_box">
@@ -354,6 +441,10 @@
 				quoteTab: ['自选','行情'],
 				quoteDefault: 0,
 				quoteShow: true,
+//				downOrderTab: ['普通单','条件单'],
+				downOrderTab: ['普通单'],
+				downOrderDefault: 0,
+				downOrderShow: true,
 				currentQuote: 0,
 				currentQuoteAll: '',
 				currentCommodityName: '',
@@ -462,7 +553,7 @@
 				if(n && n>= 17){
 					this.isSelectedOrder();
 					//调用下拉框
-					$(".slt-box").each(function(i, o){
+					$(".order-box").each(function(i, o){
 						pro.selectEvent(o, function(data){
 							//移除行情列表选中样式
 							$(".quote .cont tr").removeClass("current");
@@ -584,6 +675,14 @@
 					this.quoteShow = true;
 					//是否自选
 					this.isSelectedOrder();
+				}
+			},
+			downOrderEvent: function(index){
+				this.downOrderDefault = index;
+				if(index == 1){
+					this.downOrderShow = false;
+				}else{
+					this.downOrderShow = true;
 				}
 			},
 			overOptional: function(){
@@ -1082,7 +1181,7 @@
 			this.tradePrices = parseFloat(this.currentdetail.LastQuotation.LastPrice).toFixed(this.currentdetail.DotSize);
 			//调用下拉框
 			if(this.length != 0){
-				$(".slt-box").each(function(i, o){
+				$(".order-box").each(function(i, o){
 					pro.selectEvent(o, function(data){
 						//移除行情列表选中样式
 						$(".quote .cont tr").removeClass("current");
@@ -1563,6 +1662,12 @@
 				.cont{
 					overflow: hidden;
 					background: $blue;
+					ul{
+						margin-bottom: 5px;
+						&:first-child{
+							margin-bottom: 40px;
+						}
+					}
 					li{
 						width: 100%;
 						height: 30px;
@@ -1577,6 +1682,10 @@
 						}
 						label{
 							width: 70px;
+							&.label-spe{
+								width: 60px;
+								margin-left: 5px;
+							}
 						}
 						p{
 							float: right;
@@ -1598,6 +1707,14 @@
 							border: 1px solid #474c66;
 							border-radius: 5px;
 							color: $white;
+							&.price-ipt{
+								float: left;
+								width: 50px;
+							}
+							&.time-ipt{
+								float: left;
+								width: 100px;
+							}
 						}
 						.col{
 							float: left;
@@ -1634,11 +1751,37 @@
 								font-size: $fs14;
 							}
 						}
+						.price-box{
+							float: left;
+							width: 60px;
+							margin-right: 5px;
+							.slt{
+								width: 58px;
+								padding-left: 0;
+							}
+						}
+						&.condition-box{
+							.col{
+								width: 120px;
+								input{
+									width: 58px;
+								}
+							}
+							.effective-date{
+								margin-left: 32px;
+							}
+							span{
+								height: 28px;
+								line-height: 28px;
+								border: 1px solid #474c66;
+								padding: 0 10px;
+								border-radius: 5px;
+							}
+						}
 					}
 					.btn_box{
 						width: 100%;
 						height: 30px;
-						margin-top: 40px;
 						button{
 							float: left;
 							width: 50%;

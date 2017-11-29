@@ -226,6 +226,7 @@
 			toIndex: function(){
 				this.$router.push({path: '/index'});
 				this.$store.state.account.currentNav = 0;
+				localStorage.currentNav = 0;
 			},
 			clickEvent: function(index){
 				this.$store.state.isshow.isfens = false;
@@ -348,9 +349,9 @@
 					that.fullScreenCurrent = false;
 				}
 			}
+			console.log(localStorage.currentNav);
 			//导航根据session添加选中样式
 			if(localStorage.currentNav != undefined){
-				console.log(localStorage.currentNav);
 				this.$store.state.account.currentNav = localStorage.currentNav;
 			}
 		},
