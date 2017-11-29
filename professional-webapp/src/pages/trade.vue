@@ -1043,6 +1043,19 @@
 					});
 					layer.close(index);
 				}.bind(this));
+			},
+			getTradeWsUrl: function(){
+				var data = {
+					appVersions: this.$store.state.market.tradeConfig.version
+				};
+				pro.fetch('post', '/socket/config/getVersions', data, '').then(function(res){
+					if(res.success == true && res.code == 1){
+						this.$store.state.market.tradeConfig.url_real = res.data.socketUrl;
+					}
+				}.bind(this)).catch(function(err){
+					var data = err.data;
+					if(data) layer.msg(data.message, {time: 1000});
+				});
 			}
 		},
 		mounted: function(){
@@ -1158,6 +1171,8 @@
 			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
 			//获取自选合约列表
 			this.isSelectedOrder();
+			//获取交易ws地址
+			this.getTradeWsUrl();
 			//初始化高度
 			$(window).resize(function(){
 				this.w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
