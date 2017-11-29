@@ -70,28 +70,39 @@
 				setTimeout(function(){
 					this.show = false;
 				}.bind(this));
+			},
+			getTradeAccount: function(){
+				if(this.userInfo){
+					var headers = {
+						token:  this.userInfo.token,
+						secret: this.userInfo.secret,
+						version: ''
+					};
+					pro.fetch('post', '/user/getTradeAccount', '', headers).then(function(res){
+						if(res.success == true && res.code == 1){
+							this.accountList = res.data;
+							console.log(res.data.length);
+							if(res.data.length <= 0){
+								this.show = false;
+								this.$parent.$refs.tradeLogin.show = true;
+							}
+						}
+					}.bind(this)).catch(function(err){
+						var data = err.data;
+						if(data) layer.msg(data.message, {time: 1000});
+					});
+				}
 			}
 		},
-		mounted: function(){},
+		mounted: function(){
+			//获取交易账户
+			this.getTradeAccount();
+		},
 		activated: function(){
 			//获取平台账户登录信息
 			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
 			//获取交易账户
-			if(this.userInfo){
-				var headers = {
-					token:  this.userInfo.token,
-					secret: this.userInfo.secret,
-					version: ''
-				};
-				pro.fetch('post', '/user/getTradeAccount', '', headers).then(function(res){
-					if(res.success == true && res.code == 1){
-						this.accountList = res.data;
-					}
-				}.bind(this)).catch(function(err){
-					var data = err.data;
-					if(data) layer.msg(data.message, {time: 1000});
-				});
-			}
+			this.getTradeAccount();
 		},
 	}
 </script>

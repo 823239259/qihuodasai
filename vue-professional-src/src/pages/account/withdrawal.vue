@@ -288,7 +288,7 @@
 									break;
 								case '5':
 									this.$children[0].isShow = true;
-									this.msg = '存在欠费无法提现';
+									this.msg = '你的账户已被限制提现，具体原因为：121212，请联系客服解除限制！';
 									break;
 								case '6':
 									this.$children[0].isShow = true;
