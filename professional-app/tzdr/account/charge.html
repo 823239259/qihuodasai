@@ -178,7 +178,7 @@
 									<p>2、充值前请注意您的银行卡充值限制，以免造成不便；</p>
 									<p>3、禁止洗钱、信用卡套现，虚假交易等行为，一经发现并确认，将终止该账户的使用；</p>
 									<p>4、为了您的资金安全，建议充值前进行实名认证，手机绑定、设置提现密码；</p>
-									<p>5、如果充值遇到任何问题，请联系客服：400-180-1860；</p>
+									<p>5、如果充值遇到任何问题，请联系客服：<i id="hotline"></i>；</p>
 								</div>
 							</div>
 						</div>
@@ -282,6 +282,8 @@
 			var pay_id = null;
 			var pays = {};
 			mui.plusReady(function() {
+				var a = JSON.parse(localStorage.line_hot).hotline;
+				document.getElementById("hotline").innerHTML = a
 				var wv = plus.webview.currentWebview();
 				document.getElementById("back").addEventListener("tap",function(){
 					 var backId = wv.backId;
