@@ -430,7 +430,7 @@
 				layer.open({
 					type: 1,
 					title: '国际期货操盘委托协议',
-					area: ['1000px','680px'],
+					area: ['1000px','600px'],
 					content: $("#agreement"),
 					cancel: function(){
 						this.showAgreement = false;
@@ -442,7 +442,7 @@
 				layer.open({
 					type: 1,
 					title: '国际期货操盘规则',
-					area: ['1000px','680px'],
+					area: ['1000px','600px'],
 					content: $("#trade_rules"),
 					cancel: function(){
 						this.showTradeRules = false;
