@@ -194,7 +194,8 @@
 					id:this.id
 				}
 				pro.fetch("post","/user/ftrade/details",data,headers).then((res)=>{
-					var data = res.data.details
+					var data = res.data.details;
+					console.log()
 					if(res.success == true){
 						if(res.code == 1){
 							this.endAmount = data.endAmount;
@@ -304,8 +305,6 @@
 				pro.fetch("post","/user/ftrade/getFstTradeDetail",data,headers).then((res)=>{
 					if(res.success == true){
 						if(res.code == ""){
-							console.log("-----------------");
-							console.log(res);
 							this.totalHistoryList = res.data;
 							this.pageCount = Math.ceil(this.totalHistoryList.length/5);
 							var curtotal=(this.currentPage-1)*this.eachPage;//上一页显示的最后一条
