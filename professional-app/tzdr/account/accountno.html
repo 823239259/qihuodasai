@@ -104,16 +104,18 @@
 					})
 				})
 				document.getElementById("webInfo").addEventListener("tap",function(){
-					mui.openWindow({
-						url : "contactUs.html",
-						id : "contactUs.html"
-					})
+					mui.openWindow("../../tzdr/news/newslist.html");
 				})
 				document.getElementById("coupon").addEventListener("tap",function(){
-					mui.openWindow({
-						url : "contactUs.html",
-						id : "contactUs.html"
-					})
+					var btnArray = ['否', '是'];
+	                mui.confirm('您还未登录，请您先登录', '登录提示', btnArray, function(e) {
+	                    if (e.index == 1) {
+	                        mui.openWindow({
+	                        	url:"../login/login.html",
+	                        	id : "login.html"
+	                        })
+	                    }
+	                })
 				})
 				//初始化监听头部和底部事件
 				var dataUrl = {
