@@ -131,8 +131,9 @@
 	@import "../../../assets/css/common.scss";
 	.recharge{
 		position: relative;
-		left: 170px;
+		/*left: 170px;*/
 		width: 1000px;
+		margin: auto;
 		h2{		
 			height: 40px;
 			color: $white;
