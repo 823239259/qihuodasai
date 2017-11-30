@@ -199,6 +199,7 @@
 			float: right;
 			margin-right: 10px;
 			color: $lightblue;
+			cursor: pointer;
 		}
 		.ifont_eye {
 			z-index: 2;
@@ -207,6 +208,7 @@
 			position: relative;
 			top: 22px;
 			right: 35px;
+			cursor: pointer;
 		}
 		.span_right {
 			text-align : right;
@@ -226,5 +228,9 @@
 		}
 		.span_white {
 			color: $white;
+			cursor: pointer; 
+			&:hover{
+				color: $yellow;
+			}
 		}
 </style>

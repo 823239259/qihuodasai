@@ -6,7 +6,7 @@
 			<div class="">
 				<input type="text" id="phone"  class="input_1" placeholder="请输入手机号" maxlength="11" v-model.trim="phone" autocomplete="off" />
 			</div>
-			<div class="">
+			<div class="row">
 				<input type="text" id="code"  class="input_1 input_4" style="display: none;" />
 				<input type="text" id="code" class="input_1 input_4" placeholder="验证码" v-model.trim="code" autocomplete="off" />
 				<i class="span_code" v-on:click="getCode">{{volid ? info : (time + '秒')}}</i>
@@ -38,7 +38,7 @@
 				code: '',
 				imgCode: '',
 				time: 0,
-				info:'获取短信验证码',
+				info:'获取验证码',
 				phoneReg: /^(((13[0-9])|(14[5-7])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/,
 				pwdReg: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,18}$/,
 				defaultOrder: [
@@ -204,6 +204,9 @@
 		background-color: $blue;
 		text-align : center;
 		color :$lightblue ;
+		.row{
+			position: relative;
+		}
 	}
 	p {
 		border-radius : 10px;
@@ -233,20 +236,21 @@
 			border: 1px solid $yellow;
 		}
 	}
-	.input_4 {
-		position: relative;
-		left: 30px;
-		/*top: 10px;*/
-	}
 	.span_code {
-		position: relative;
+		position: absolute;
 		right: 40px;
-		top: 16px;
+		top: 31px;
 		color: $white;
 		font-size: $fs12;
 		display: inline-block;
 		width: 60px;
-		height: 20px;
+		height: 42px;
+		line-height: 42px;
+		background: $bottom_color;
+		padding: 0 5px;
+		border-bottom-right-radius: 5px;
+		border-top-right-radius: 5px;
+		cursor: pointer;
 	}
 	.btn {
 		width : 320px;
@@ -256,6 +260,7 @@
 		float: right;
 		margin-right: 10px;
 		color: $lightblue;
+		cursor: pointer;
 	}
 	.ifont_eyes {
 		font-size: $fs20;
@@ -274,5 +279,9 @@
 	}
 	.span_white {
 		color: $white;
+		cursor: pointer;
+		&:hover{
+			color: $yellow;
+		}
 	}
 </style>
