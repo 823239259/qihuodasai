@@ -199,6 +199,20 @@
 			}
 		},
 		mounted : function(){
+			//初始化高度
+			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+			var _h = h - 80 - 47;
+			var contH = $("#account_bindBankCard").height();
+			if(contH > _h){
+				$("#account_bindBankCard").height(_h);
+			}
+			$(window).resize(function(){
+				var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+				var _h = h - 80 - 47;
+				if(contH > _h){
+					$("#account_bindBankCard").height(_h);
+				}
+			});
 			//获取已绑定的银行卡
 			this.bindBankList = [];
 			this.getBindBankList();
@@ -212,8 +226,12 @@
 <style lang="scss" scoped type="text/css">
 	@import "../../../assets/css/common.scss";
 	#account_bindBankCard {
+		overflow-y: auto;
+		float: left;
 		width: 100%;
-		.account_bindBankCard_top {
+		height: 1050px;
+	}
+	.account_bindBankCard_top {
 			height : 150px;
 			background-color : $blue;
 			border-bottom : 1px solid $bottom_color;
@@ -235,7 +253,7 @@
 				}
 			}
 		}
-		.account_bindBankCard_center {
+	.account_bindBankCard_center {
 			padding-top: 20px;
 			width: 100%;
 			background-color: $blue;
@@ -313,7 +331,7 @@
 				border-color:$yellow!important;
 			}
 		}
-		.account_bindBankCard_btm {
+	.account_bindBankCard_btm {
 			p {
 				width: 100%;
 				height: 40px;
@@ -323,7 +341,6 @@
 				line-height: 40px;
 			}
 		}
-	}
 	.ifont {
 		color: $yellow;
 		font-size: $fs16;

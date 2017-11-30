@@ -194,7 +194,8 @@
 					id:this.id
 				}
 				pro.fetch("post","/user/ftrade/details",data,headers).then((res)=>{
-					var data = res.data.details
+					var data = res.data.details;
+					console.log()
 					if(res.success == true){
 						if(res.code == 1){
 							this.endAmount = data.endAmount;
