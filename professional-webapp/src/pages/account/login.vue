@@ -148,7 +148,7 @@
 		height: 800px;
 	}
 	.login {
-		position: absolute;
+		position: fixed;
 		top: 50%;	
 		left: 50%;
 		width: 400px;

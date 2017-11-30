@@ -3,7 +3,7 @@
 		<div class="bg"></div>
 		<div class="trade_login">
 			<div class="title">
-				<h3>账户密码登录</h3>
+				<h3>交易账户密码登录</h3>
 				<i class="ifont" @click="closeEvent">&#xe624;</i>
 			</div>
 			<div class="cont">
@@ -27,6 +27,7 @@
 				username: '',
 				pwd: '',
 				url_real: '',
+				hotLine: '',
 			}
 		},
 		computed: {
@@ -59,13 +60,27 @@
 					}.bind(this));
 				}
 			},
+			getHotLine: function(){   //获取客服热线
+				pro.fetch('post', '/hotline', '', '').then(function(res){
+					if(res.success == true && res.code == 1){
+						this.hotLine = res.data.hotline;
+					}
+				}.bind(this)).catch(function(err){
+					var data = err.data;
+					layer.msg(data.message, {time: 1000});
+				});
+			},
 			forgetPwd: function(){
-				layer.confirm('如果您忘记密码请及时与我们取得联系；联系电话：400-852-8008',{
+				layer.confirm('如果您忘记密码请及时与我们取得联系；联系电话：'+ this.hotLine,{
 					btn: ['关闭']
 				}, function(index){
 					layer.close(index);
 				});
 			}
+		},
+		mounted: function(){
+			//获取客服热线
+			this.getHotLine();
 		}
 	}
 </script>
