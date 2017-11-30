@@ -7,7 +7,7 @@
 			<p>账户余额：<span>{{accountMoney}}</span>元</p>
 			<p>支付金额：<span>{{payMoney}}</span>元</p>
 			<p v-if="accountMoney-payMoney>0">您的账户余额<i>{{accountMoney}}</i>元，本次支付完毕剩余<i>{{accountMoney-payMoney | fixNumTwo}}</i>元</p>
-			<p v-else="accountMoney-payMoney!>0">您的账户余额<i>{{accountMoney}}</i>元，本次支付还差<i>{{Math.abs(accountMoney-payMoney)}}</i>元</p>
+			<p v-else="accountMoney-payMoney!>0">您的账户余额<i>{{accountMoney}}</i>元，本次支付还差<i>{{surplus}}</i>元</p>
 			<button class="btn yellow" v-on:click="to_payMoney" v-if="accountMoney-payMoney>0 || accountMoney-payMoney==0">确认支付</button>
 			<button class="btn yellow" v-on:click="to_Recharge" v-else="accountMoney!>0">去充值</button>
 			<button class="btn green" v-on:click="cancel">取消</button>
@@ -23,7 +23,8 @@
 			return{
 				accountMoney:'',
 				payMoney:'',
-				refresh:true
+				refresh:true,
+				surplus:''
 			}
 		},
 		filters:{
@@ -35,13 +36,19 @@
 			}
 		},
 		mounted:function(){
-			this.payMoney=this.$route.query.payMoney;
+//			this.payMoney=this.$route.query.payMoney;
+			if(this.$route.query.payMoney!=''){
+				this.payMoney = this.$route.query.payMoney;
+			}else {
+				this.surplus = this.$route.query.payMoney1;
+				this.payMoney = this.$route.query.payMoney1+this.accountMoney;
+			}
 		},
 		methods : {
 			//充值
 			to_Recharge:function(){
 				if(this.accountMoney < this.payMoney){
-					this.$router.push({path:'/recharge',query:{"accountMoney":this.accountMoney,"rechargeMoney":this.payMoney}});
+					this.$router.push({path:'/recharge',query:{"accountMoney":this.accountMoney,"rechargeMoney":this.surplus}});
 				}
 			},
 			//支付
@@ -107,6 +114,7 @@
 					if(res.success == true){
 						if(res.code == 1){
 							this.accountMoney = data.balance;
+							this.surplus =Math.abs(this.accountMoney-this.payMoney);
 						}
 					}
 				}).catch((err)=>{
@@ -129,7 +137,13 @@
 		activated: function() {
 			//获取用户账户信息
 			this.getUserMsg();
-			this.payMoney=this.$route.query.payMoney;
+			
+			if(this.$route.query.payMoney!=null){
+				this.payMoney = this.$route.query.payMoney;
+			}else {
+				this.surplus = this.$route.query.payMoney1;
+				this.payMoney = this.$route.query.payMoney1+this.accountMoney;
+			}
 		},
 	}
 </script>
