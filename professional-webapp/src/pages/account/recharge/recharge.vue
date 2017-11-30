@@ -83,7 +83,7 @@
 				if(this.backto != undefined){
 					this.$router.push({path:'/account_survey'});
 				}else {
-					this.$router.push({path:'/confirmPayment',query:{"payMoney":this.rechargeMoney}});
+					this.$router.push({path:'/confirmPayment',query:{"payMoney1":this.rechargeMoney}});
 				}
 			},
 			nextStep:function(){
