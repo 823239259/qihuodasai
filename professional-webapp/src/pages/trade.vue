@@ -1022,6 +1022,8 @@
 			toOpenAccount: function(){
 				if(this.userInfo != '' && this.userInfo != undefined){
 					this.$router.push({path: '/openAccount'});
+					this.$store.state.account.currentNav = 2;
+					localStorage.currentNav = 2;
 					this.$store.state.isshow.isfensshow = false;
 					this.$store.state.isshow.isklineshow = false;
 				}else{
