@@ -14,22 +14,24 @@
 				</tr>
 			</thead>
 			<tbody>
-				<!--<tr>
-					<td>条件单</td>
-					<td class="red">多</td>
-					<td>1</td>
-					<td>25289</td>
-					<td class="red">+100.00：USD</td>
-				</tr>-->
-				
+				<template></template>
+				<tr>
+					<td>合约名称</td>
+					<td>状态</td>
+					<td>多空</td>
+					<td>类型</td>
+					<td>条件</td>
+					<td>下单</td>
+					<td>有效日期</td>
+					<td>下单时间</td>
+				</tr>
 			</tbody>
 		</table>
-		<!--<div class="tools">
-			<button class="btn blue">全部平仓</button>
-			<button class="btn blue">平仓</button>
-			<button class="btn blue">反手</button>
-			<button class="btn blue">止损止盈</button>
-		</div>-->
+		<div class="tools">
+			<button class="btn blue">暂停</button>
+			<button class="btn blue">修改</button>
+			<button class="btn blue">删除</button>
+		</div>
 	</div>
 </template>
 
@@ -42,6 +44,10 @@
 
 <style lang="scss" scoped>
 	@import "../../assets/css/common.scss";
+	#trade_details{
+		height: 151px;
+		overflow: auto;
+	}
 	table{
 		thead tr{
 			height: 30px;
@@ -56,11 +62,22 @@
 		}
 	}
 	.tools{
-		margin: 15px 0 0 10px;
+		position: absolute;
+		bottom: 10px;
+		left: 10px;
+		z-index: 2;
 		.btn{
 			width: 90px;
 			height: 30px;
 			line-height: 30px;
+		}
+	}
+	@media only screen and (min-width: 1280px) and (max-width: 1366px) {
+		#trade_details{
+			width: 635px;
+			td{
+				font-size: $fs12;
+			}
 		}
 	}
 </style>
