@@ -224,6 +224,9 @@
 							layer.close(index);
 							this.showDialog = false;
 						}.bind(this),
+						btn2: function(){
+							this.showDialog = false;
+						}.bind(this),
 						cancel: function(){
 							this.showDialog = false;
 						}.bind(this)

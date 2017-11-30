@@ -32,7 +32,8 @@
 				</div>
 				<div class="row">
 					<div class="fl">
-						<label><i class="ifont">&#xe634;</i></label>
+						<!--<label><i class="ifont checkbox">&#xe634;</i></label>-->
+						<label><i class="ifont checkboxs">&#xe600;</i></label>
 						<span>动态追踪，价格回撤幅度</span>
 					</div>
 					<div class="fl">
@@ -157,6 +158,12 @@
 				border-radius: 4px;
 				color: $white;
 				text-align: center;
+			}
+			.checkbox{
+				color: #7a7f99;
+			}
+			.checkboxs{
+				color: $yellow;
 			}
 			.row_money_box{
 				width: 80px;
