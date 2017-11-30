@@ -2,6 +2,7 @@
 	<div id="trade">
 		<tradeLogin ref="tradeLogin"></tradeLogin>
 		<tradeLoginSpe ref="tradeLoginSpe"></tradeLoginSpe>
+		<stopMoney ref="stopMoney"></stopMoney>
 		<div class="quote">
 			<div class="title">
 				<ul>
@@ -419,10 +420,11 @@
 	import todayDeal from './trade/todayDeal.vue'
 	import histroyDeal from './trade/histroyDeal.vue'
 	import moneyDetail from './trade/moneyDetail.vue'
+	import stopMoney from './trade/stopMoney.vue'
 	export default{
 		name:'trade',
 		components: {tradeLogin, tradeLoginSpe, fens, light, klineOne, klineFive, klineFifteen, klineThirty, klineDay,
-			position, order, entrust, stopOrder, condition, todayDeal, histroyDeal, moneyDetail
+			position, order, entrust, stopOrder, condition, todayDeal, histroyDeal, moneyDetail, stopMoney
 		},
 		data(){
 			return{

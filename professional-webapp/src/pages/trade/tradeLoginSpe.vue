@@ -81,7 +81,6 @@
 					pro.fetch('post', '/user/getTradeAccount', '', headers).then(function(res){
 						if(res.success == true && res.code == 1){
 							this.accountList = res.data;
-							console.log(res.data.length);
 							if(res.data.length <= 0){
 								this.show = false;
 								this.$parent.$refs.tradeLogin.show = true;
