@@ -289,7 +289,7 @@
 				}
 				var info = {
 					page:page,
-					rows:'',
+					rows:100,
 					startTime:startT,
 					endTime:endT,
 					stateType:chooseType
@@ -298,7 +298,7 @@
 					if(res.success == true){
 						if(res.code == 1){
 							this.totalList = res.data.tradeList;
-							this.pageCount =Math.round(this.totalList.length/this.eachPage);
+							this.pageCount =Math.ceil(this.totalList.length/this.eachPage);
 							var curtotal=(this.currentPage-1)*this.eachPage;//上一页显示的最后一条
 				            var tiaoshu=this.currentPage*this.eachPage;//当前页显示的最后一条
 				            this.showList=this.totalList.slice(curtotal,tiaoshu); //当前页应显示的数据
@@ -610,6 +610,7 @@
 			color: $yellow
 		}
 		.pager{
+			margin-top: 5px;
 			margin-right: 60px;
 			float: right;
 			span{
