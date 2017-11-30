@@ -610,6 +610,86 @@
 						clearTimeout(netWorkTipsTimeout);
 					}
 				}
+				if(tzdr.cacheNews.getData(tzdr.cacheNews.load_news_date)==tzdr.dateUtil.getFormatDate()){
+				var cacheData = tzdr.cacheNews.getData(tzdr.cacheNews.news_data);
+				 var cacheJsonData = JSON.parse(cacheData);  
+				 mui.each(cacheJsonData,function(cacheIndex,cacheItem){
+							   	 		if (!tzdr.cacheNews.isread(cacheItem.nid)){
+							   	 			//TODO:新闻点亮 
+							   		  		document.getElementById("newsimg").setAttribute("src","images/newson.png");
+							   	 			return;
+							   	 		}
+				});
+							   	 	
+				return;
+			} 
+			else
+			{//加载信息
+				mui.app_request('news/list',{}, 
+						function(result){
+							var newsLen = result.data == null ? 0 : result.data.length;
+							if (newsLen > 0){
+								//alert(result.data);
+								//tzdr.cacheNews.clearData(tzdr.cacheNews.news_data);   
+							   //取出缓存中新闻列表  与 现有列表进行对比，如果有新的新闻则点亮新闻图标
+							   //取缓存新闻
+							   var cacheData = tzdr.cacheNews.getData(tzdr.cacheNews.news_data);
+							  //alert(cacheData);  
+							   if (mui.isnull(cacheData)){ 
+							   	 // 表示缓存中没有数据，则直接标志新闻点亮  并存储数据
+							  
+							   	  tzdr.cacheNews.setData(tzdr.cacheNews.news_data,JSON.stringify(result.data));  
+							   	  //TODO:新闻点亮
+							   	  document.getElementById("newsimg").setAttribute("src","images/newson.png");
+							   	 // 设置获取数据的时间
+							   	  tzdr.cacheNews.setData(tzdr.cacheNews.load_news_date,tzdr.dateUtil.getFormatDate());
+							   	  //alert(tzdr.cacheNews.getData(tzdr.cacheNews.news_data));  
+							   	  return;
+							   }  
+							   
+							   var cacheJsonData = JSON.parse(cacheData);  
+							   var sameDataLen  = 0; // 缓存中与数据库中存在的数据数量长度
+							   mui.each(result.data,function(index,item){
+							   	 	mui.each(cacheJsonData,function(cacheIndex,cacheItem){
+							   	 		if (item.nid==cacheItem.nid){
+							   	 			sameDataLen +=1;
+							   	 		}
+								
+							   	 	});
+							   });
+							   // 存储最新新闻
+							  // tzdr.cacheNews.clearData(tzdr.cacheNews.news_data);   
+							   tzdr.cacheNews.setData(tzdr.cacheNews.news_data,JSON.stringify(result.data));  
+							  
+							  //校验是否存在未读新闻
+							  var hasNoRead = false;
+							  mui.each(cacheJsonData,function(cacheIndex,cacheItem){
+							   	 		if (!tzdr.cacheNews.isread(cacheItem.nid)){
+							   	 			hasNoRead = true;
+							   	 			return;
+							   	 		}
+							   	 	});
+							   	 	
+							   	 	
+							   // 如果相同的数量 小于获取到的总数量则 有新新闻、
+							   if (sameDataLen<newsLen || hasNoRead){
+							   		//TODO:新闻点亮
+							   		  document.getElementById("newsimg").setAttribute("src","images/newson.png");
+							   }
+							   // 设置获取数据的时间
+							   tzdr.cacheNews.setData(tzdr.cacheNews.load_news_date,tzdr.dateUtil.getFormatDate());
+							}
+						},
+						function(){
+							
+						},paramUrl
+				);
+			}
+				
+				
+				
+				
+				
 			});
 			
 			var CacheQuoteBase03 = {
