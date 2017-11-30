@@ -177,12 +177,12 @@ mui.plusReady(function() {
 				var totalVolume = $("#volumePricesNumber").text()
 				if(commodityNo == quoteParam.Parameters.CommodityNo) {
 //					console.log(timez);   //打印时间差
-					if(timez==updateStart || timez>=3000){  //如果时间差大于XXX毫秒才执行更新
+					if(timez==updateStart || timez>=0){  //如果时间差大于XXX毫秒才执行更新
 //						console.log('我更新了');
 						dealOnRtnQuoteData(jsonData, totalVolume);     //更新图表
 					}else{
 						timeArr+=timez;   //如果时间差不满足大于xxx毫秒，就把差值加到一个容器变量中
-						if(timeArr>=3000){
+						if(timeArr>=0){
 //							console.log('我终于更新了');
 							dealOnRtnQuoteData(jsonData, totalVolume);
 							timeArr=0;
