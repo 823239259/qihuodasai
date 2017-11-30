@@ -66,7 +66,7 @@
 			<div class="title">
 				<span class="fl">{{orderName}}</span>
 				<span class="fl">{{orderNum}}</span>
-				<div class="add fr" :class="{current: !addStar}" @click="addOptional" @mouseover="overOptional" @mouseleave="leaveOptional">
+				<div class="add fr" :class="{current: !addStar}" @click="addOptional">
 					<i class="ifont fl" v-show="addStar">&#xe754;</i>
 					<i class="ifont fl" v-show="!addStar">&#xe602;</i>
 					<span class="fl">{{optional}}</span>
@@ -323,7 +323,7 @@
 									this.optional = '取消自选';
 								}
 							}
-						}.bind(this)).catch(function(error){
+						}.bind(this)).catch(function(err){
 							var data = err.data;
 							layer.msg(data.message, {time: 1000});
 						});
@@ -541,17 +541,17 @@
 				}
 				span{
 					font-size: $fs12;
-					color: $yellow;
+					color: #7a8199;
 					margin-left: 5px;
 				}
 				&.current{
-					span{
-						color: #7a8199;
-					}
 					.ifont{
 						font-size: 14px;
 						margin-top: 0;
 					}
+				}
+				&:hover span{
+					color: $yellow;
 				}
 			}
 		}
