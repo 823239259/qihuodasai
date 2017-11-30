@@ -378,7 +378,7 @@
 	
 				//--------------------------------------操盘方案------------------------------------------------------
 				//加载方案信息
-				mui.app_request("/user/ftrade/list", {}, function(result) {
+				mui.app_request("/user/ftrade/list", {rows:100}, function(result) {
 					if(!mui.isnull(result.data)) {
 						ftrade_list = result.data.tradeList;
 						mui.each(ftrade_list, function(i, item) {
