@@ -28,7 +28,7 @@
 			<button class="btn blue" @click="closePositionAll">全部平仓</button>
 			<button class="btn blue" @click="closePosition">平仓</button>
 			<button class="btn blue" @click="backTrade">反手</button>
-			<!--<button class="btn blue">止损止盈</button>-->
+			<button class="btn blue" @click="stopMoney">止损止盈</button>
 		</div>
 	</div>
 </template>
@@ -83,6 +83,9 @@
 			clickEvent: function(i, id){
 				this.selectedNum = i;
 				this.currentOrderID = id;
+			},
+			stopMoney: function(){
+				
 			},
 			closePositionAll: function(){
 				if(this.positionListCont.length > 0){

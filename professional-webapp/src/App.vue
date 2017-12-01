@@ -118,15 +118,15 @@
 				},{
 					name: '开户',
 					cs: 'icon_open'
-//				},{
-//					name: '直播',
-//					cs: 'icon_live'
-//				},{
-//					name: '日历',
-//					cs: 'icon_calendar'
-//				},{
-//					name: '下载',
-//					cs: 'icon_download'
+				},{
+					name: '直播',
+					cs: 'icon_live'
+				},{
+					name: '日历',
+					cs: 'icon_calendar'
+				},{
+					name: '下载',
+					cs: 'icon_download'
 				},{
 					name: '我的',
 					cs: 'icon_account'
@@ -248,35 +248,35 @@
 						this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
 						if(this.userInfo == ''){
 							this.$router.push({path: '/login'});
-							this.$store.state.account.currentNav = 3;
-							localStorage.currentNav = 3;
+							this.$store.state.account.currentNav = 6;
+							localStorage.currentNav = 6;
 						}else{
 							this.$router.push({path: '/openAccount'});
 							this.$store.state.account.currentNav = 2;
 							localStorage.currentNav = 2;
 						}
 						break;
-//					case 3:
-//						this.$router.push({path: '/liveStream'});
-//						this.$store.state.account.currentNav = 3;
-//						break;
-//					case 4:
-//						this.$router.push({path: '/calendar'});
-//						this.$store.state.account.currentNav = 4;
-//						break;
-//					case 5:
-//						this.$router.push({path: '/download'});
-//						this.$store.state.account.currentNav = 5;
-//						break;
 					case 3:
+						this.$router.push({path: '/liveStream'});
+						this.$store.state.account.currentNav = 6;
+						break;
+					case 4:
+						this.$router.push({path: '/calendar'});
+						this.$store.state.account.currentNav = 4;
+						break;
+					case 5:
+						this.$router.push({path: '/download'});
+						this.$store.state.account.currentNav = 5;
+						break;
+					case 6:
 						this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
 						if(this.userInfo == ''){
 							this.$router.push({path: '/login'});
 						}else{
 							this.$router.push({path: '/account'});
 						}
-						this.$store.state.account.currentNav = 3;
-						localStorage.currentNav = 3;
+						this.$store.state.account.currentNav = 6;
+						localStorage.currentNav = 6;
 						break;
 					default:
 						break;

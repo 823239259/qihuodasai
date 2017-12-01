@@ -89,8 +89,8 @@
 								localStorage.setItem("user", JSON.stringify(userData));
 								this.$store.state.account.userName = this.phone;
 								this.$router.push({path: '/account'});
-								this.$store.state.account.currentNav = 3;
-								localStorage.currentNav = 3;
+								this.$store.state.account.currentNav = 6;
+								localStorage.currentNav = 6;
 							}
 						}
 					}.bind(this)).catch(function(err){

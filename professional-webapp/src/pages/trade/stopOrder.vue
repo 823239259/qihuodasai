@@ -88,15 +88,51 @@
 			</div>
 		</div>
 		<div id="edit_profit_order" v-show="showDialog">
-			<div class="edit_order">
-				
+			<div class="edit_order cont">
+				<div class="row">
+					<div class="fl">
+						<label>合约名称:</label>
+						<span>HSI,恒指期货</span>
+					</div>
+					<div class="fl">
+						<label>最新:</label>
+						<span>56.12</span>
+					</div>
+				</div>
+				<div class="row">
+					<div class="fl">
+						<label>止损价:</label>
+						<input type="text" class="ipt" />
+					</div>
+					<div class="fl">
+						<input type="text" class="ipt" />
+						<label>手数</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="fl">
+						<label class="fl">止损委托价:</label>
+						<div class="slt-box row_money_box fl">
+							<input type="text" class="slt" disabled="disabled" selectVal="0" value="市价"/>
+							<span class="tal-box"><span class="tal"></span></span>
+							<div class="slt-list">
+								<ul>
+									<li selectVal="0">市价</li>
+									<li selectVal="1">限价</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<p>1.止损单在云端执行，软件关闭后扔然有效，云端自动确认结算单。</p>
+				<p>2.止损单在行情不活跃或快速发送变化下，不保证成交价为指定价。</p>
+				<p>3.止损单存在风险，云端系统、网络故障情况下失效等。</p>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
-	import { mapMutations,mapActions } from 'vuex'
 	export default{
 		name: 'trade_details',
 		data(){
@@ -112,9 +148,9 @@
 				this.showDialog = true;
 				layer.open({
 					type: 1,
-					title: '修改止损单',
+					title: '修改止盈单',
 					area: ['400px', 'auto'],
-					content: $("#edit_loss_order"),
+					content: $("#edit_profit_order"),
 					btn: ['确定','取消'],
 					btn1: function(index){
 						

@@ -443,8 +443,7 @@
 				quoteTab: ['自选','行情'],
 				quoteDefault: 0,
 				quoteShow: true,
-//				downOrderTab: ['普通单','条件单'],
-				downOrderTab: ['普通单'],
+				downOrderTab: ['普通单','条件单'],
 				downOrderDefault: 0,
 				downOrderShow: true,
 				currentQuote: 0,
@@ -462,8 +461,7 @@
 				priceShow: true,
 				defaultNum: 1,
 				tradePrices: 0,
-//				tradeDetailsList: ['持仓','挂单','委托','止损单','条件单','当日成交','历史成交','资金明细'],
-				tradeDetailsList: ['持仓','挂单','委托','当日成交','历史成交','资金明细'],
+				tradeDetailsList: ['持仓','挂单','委托','止损单','条件单','当日成交','历史成交','资金明细'],
 				selectedTradeDetails: 'position',
 				selectedNum: 0,
 				confirmText: '',
@@ -789,15 +787,15 @@
 					this.selectedTradeDetails = 'order';
 				}else if(index == 2){
 					this.selectedTradeDetails = 'entrust';
-//				}else if(index == 3){
-//					this.selectedTradeDetails = 'stopOrder';
-//				}else if(index == 4){
-//					this.selectedTradeDetails = 'condition';
 				}else if(index == 3){
-					this.selectedTradeDetails = 'todayDeal';
+					this.selectedTradeDetails = 'stopOrder';
 				}else if(index == 4){
-					this.selectedTradeDetails = 'histroyDeal';
+					this.selectedTradeDetails = 'condition';
 				}else if(index == 5){
+					this.selectedTradeDetails = 'todayDeal';
+				}else if(index == 6){
+					this.selectedTradeDetails = 'histroyDeal';
+				}else if(index == 7){
 					this.selectedTradeDetails = 'moneyDetail';
 				}
 			},
