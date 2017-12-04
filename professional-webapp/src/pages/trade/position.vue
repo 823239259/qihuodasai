@@ -30,18 +30,20 @@
 			<button class="btn blue" @click="backTrade">反手</button>
 			<button class="btn blue" @click="stopMoney">止损止盈</button>
 		</div>
+		<stopMoney ref="stopMoney" :value="selectedMsgs"></stopMoney>
 	</div>
 </template>
 
 <script>
-	import { mapMutations,mapActions } from 'vuex'
+	import stopMoney from './stopMoney.vue'
 	export default{
 		name: 'trade_details',
+		components: {stopMoney},
 		data(){
 			return{
 				selectedNum: -1,
 				currentOrderID: '',
-//				positionList: [],
+				selectedMsg: {},
 			}
 		},
 		computed: {
@@ -66,6 +68,9 @@
 			jCacheTotalAccount(){
 				return this.$store.state.market.CacheAccount.jCacheTotalAccount;
 			},
+			selectedMsgs(){
+				return JSON.stringify(this.selectedMsg);
+			}
 		},
 		watch: {
 			qryHoldTotalArr: function(n, o){
@@ -83,9 +88,6 @@
 			clickEvent: function(i, id){
 				this.selectedNum = i;
 				this.currentOrderID = id;
-			},
-			stopMoney: function(){
-				
 			},
 			closePositionAll: function(){
 				if(this.positionListCont.length > 0){
@@ -153,6 +155,8 @@
 								if(this.buyStatus == true) return;
 								this.$store.state.market.buyStatus = true;
 								this.tradeSocket.send(JSON.stringify(b));
+								this.currentOrderID = '';
+								this.selectedNum = -1;
 								layer.close(index);
 							}.bind(this));
 						}
@@ -198,9 +202,33 @@
 								this.tradeSocket.send(JSON.stringify(b));
 								setTimeout(function(){
 									this.tradeSocket.send(JSON.stringify(b));
+									this.currentOrderID = '';
+									this.selectedNum = -1;
 								}.bind(this), 500);
 								layer.close(index);
 							}.bind(this));
+						}
+					}.bind(this));
+				}else{
+					layer.msg('请选择一条数据', {time: 1000});
+				}
+			},
+			stopMoney: function(){
+				if(this.currentOrderID != ''){
+					this.$refs.stopMoney.show = true;
+					var dotSize;
+					this.qryHoldTotalArr.forEach(function(o, i){
+						if(this.currentOrderID == o.ContractCode){
+							dotSize = this.orderTemplist[o.CommodityNo].DotSize;
+							this.selectedMsg = {
+								CommodityNo: o.CommodityNo,
+								ContractCode: o.ContractCode,
+								CommodityName: this.orderTemplist[o.CommodityNo].CommodityName,
+								HoldNum: o.HoldNum,
+								stopPrice: parseFloat(o.OpenAvgPrice).toFixed(dotSize),
+								HoldAvgPrice: parseFloat(o.HoldAvgPrice).toFixed(dotSize)
+							}
+							o.Drection == 0 ? this.selectedMsg.Drection = '多' : this.selectedMsg.Drection = '空';
 						}
 					}.bind(this));
 				}else{

@@ -4,56 +4,48 @@
 		<div class="stopMoney">
 			<div class="title">
 				<ul>
-					<li class="current"><span>新增止损单</span></li>
-					<li><span>新增止盈单</span></li>
+					<template v-for="(v, index) in tabList">
+						<li :class="{current: currentNum == index}"  @click="clickEvent(index)"><span>{{v}}</span></li>
+					</template>
 				</ul>
-				<i class="ifont icon_close">&#xe624;</i>
+				<i class="ifont icon_close" @click="closeEvent">&#xe624;</i>
 			</div>
 			<div class="cont">
 				<div class="row">
 					<div class="fl">
 						<label>合约名称:</label>
-						<span>HSI,恒指期货</span>
+						<span>{{selectedMsg.ContractCode}},{{selectedMsg.CommodityName}}&nbsp;{{selectedMsg.Drection}}</span>
 					</div>
 					<div class="fl">
 						<label>最新:</label>
-						<span>56.12</span>
+						<span>{{lastPrice}}</span>
 					</div>
 				</div>
 				<div class="row">
 					<div class="fl">
-						<label>止损价:</label>
-						<input type="text" class="ipt" />
+						<label>{{stopName}}:</label>
+						<input type="text" class="ipt" v-model="stopPrice" />
 					</div>
 					<div class="fl">
-						<input type="text" class="ipt" />
+						<input type="text" class="ipt" v-model="stopNum" />
 						<label>手数</label>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row" v-show="tabShow">
 					<div class="fl">
-						<!--<label><i class="ifont checkbox">&#xe634;</i></label>-->
-						<label><i class="ifont checkboxs">&#xe600;</i></label>
-						<span>动态追踪，价格回撤幅度</span>
+						<!--<label class="select_box" v-show="checkBoxShow"><i class="ifont checkbox">&#xe634;</i></label>
+						<label class="select_box" v-show="!checkBoxShow"><i class="ifont checkboxs">&#xe600;</i></label>-->
+						<span class="dynamic">动态追踪，价格回撤幅度</span>
 					</div>
 					<div class="fl">
-						<input type="text" class="ipt" />
-						<label>HKD</label>
+						<input type="text" class="ipt range" disabled="disabled" v-model="range" />
+						<label>%</label>
 					</div>
 				</div>
 				<div class="row">
 					<div class="fl">
-						<label class="fl">止损委托价:</label>
-						<div class="slt-box row_money_box fl">
-							<input type="text" class="slt" disabled="disabled" selectVal="0" value="市价"/>
-							<span class="tal-box"><span class="tal"></span></span>
-							<div class="slt-list">
-								<ul>
-									<li selectVal="0">市价</li>
-									<li selectVal="1">限价</li>
-								</ul>
-							</div>
-						</div>
+						<label>止损委托价:</label>
+						<span>市价</span>
 					</div>
 				</div>
 				<p>1.止损单在云端执行，软件关闭后扔然有效，云端自动确认结算单。</p>
@@ -61,10 +53,10 @@
 				<p>3.止损单存在风险，云端系统、网络故障情况下失效等。</p>
 				<div class="btn_box">
 					<div class="fl">
-						<button class="btn yellow">确定</button>
+						<button class="btn yellow" @click="confirmEvent">确定</button>
 					</div>
 					<div class="fl">
-						<button class="btn blue">取消</button>
+						<button class="btn blue" @click="cancelEvent">取消</button>
 					</div>
 				</div>
 			</div>
@@ -73,15 +65,191 @@
 </template>
 
 <script>
+	import pro from '../../assets/js/common.js'
 	export default{
-		name: 'warning',
+		name: 'stopMoney',
 		data(){
 			return{
 				show: false,
-				
+				tabList: ['新增止损单','新增止盈单'],
+				currentNum: 0,
+				tabShow: true,
+				stopName: '止损价',
+				stopPrice: '',
+				stopNum: '',
+				range: '0.00',
+				lastPrice: '',
+				str: '',
 			}
 		},
-		computed: {},
+		props: ['value'],
+		computed: {
+			orderTemplist(){
+				return this.$store.state.market.orderTemplist;
+			},
+			parameters(){
+				return this.$store.state.market.Parameters;
+			},
+			tradeSocket() {
+				return this.$store.state.tradeSocket;
+			},
+			selectedMsg: function(){
+				if(this.value != undefined && this.value != ''){
+					var data = JSON.parse(this.value);
+					this.stopPrice = data.stopPrice;
+					this.stopNum = data.HoldNum;
+					return data;
+				}
+			},
+			miniTikeSize(){
+				return this.orderTemplist[this.selectedMsg.CommodityNo].MiniTikeSize;
+			}
+		},
+		watch: {
+			parameters: function(n,o){
+				if(this.selectedMsg.CommodityNo != undefined){
+					n.forEach(function(o, i){
+						if(this.selectedMsg.CommodityNo == o.CommodityNo){
+							this.lastPrice = this.orderTemplist[this.selectedMsg.CommodityNo].LastQuotation.LastPrice;
+							this.lastPrice = parseFloat(this.lastPrice).toFixed(this.orderTemplist[this.selectedMsg.CommodityNo].DotSize);
+						}
+					}.bind(this));
+				}
+			},
+		},
+		methods: {
+			clickEvent: function(index){
+				this.currentNum = index;
+				if(index == 1){
+					this.tabShow = false;
+					this.stopName = '止盈价';
+				}else{
+					this.tabShow = true;
+					this.stopName = '止损价';
+				}
+			},
+			confirmEvent: function(){
+				//公式（判断输入价格是否符合最小变动价）
+//				var a = 46.41;
+//				var b = 0.01;
+//				var c = a/b;
+//				var d = a%b;
+//				if (d < 0.000000001 || b-d < 0.0000000001){
+//					alert("yes");
+//				}
+				let a0, b0, d0, msg, drection;
+				if(!(this.stopPrice == '' || this.stopPrice == 0 || this.stopPrice == undefined)){
+					a0 = this.stopPrice;
+					b0 = this.miniTikeSize;
+					d0 = a0%b0;
+				}
+				if(this.selectedMsg.Drection == '多'){
+					drection = 0;
+				}else{
+					drection = 1;
+				}
+				if(this.currentNum == 0){
+					msg = '是否添加限价止损？';
+					if(this.stopPrice == '' || this.stopPrice == 0 || this.stopPrice == undefined){
+						layer.msg('请输入止损价', {time: 1000});return;
+					}else if(!(d0 < 0.000000001 || parseFloat(b0-d0) < 0.0000000001)){
+						//d0 >= 0.000000001 && parseFloat(b0-d0) >= 0.0000000001
+						layer.msg('输入价格不符合最小变动价，最小变动价为：' + b0, {time: 1000});return;
+					}else if(this.stopNum == '' || this.stopNum == 0 || this.stopNum == undefined){
+						layer.msg('请输入止损手数', {time: 1000});return;
+					}else{
+						if(drection == 0){
+							//if(this.inputPrice > this.templateListObj.LastPrice){
+							if(parseFloat(this.stopPrice) >= parseFloat(this.lastPrice)){	
+								layer.msg('输入价格应该低于最新价', {time: 1000});
+								return;
+							}
+						}
+						if(drection == 1){
+							//if(this.inputPrice < this.templateListObj.LastPrice){
+							if(parseFloat(this.stopPrice) <= parseFloat(this.lastPrice)){
+								layer.msg('输入价格应该高于最新价', {time: 1000});
+								return;
+							}
+						}
+						let b = {
+							"Method": 'InsertStopLoss',
+							"Parameters": {
+								"ExchangeNo": this.orderTemplist[this.selectedMsg.CommodityNo].ExchangeNo,
+								"CommodityNo": this.orderTemplist[this.selectedMsg.CommodityNo].CommodityNo,
+								"ContractNo": this.orderTemplist[this.selectedMsg.CommodityNo].MainContract,
+								"Num": parseInt(this.stopNum),
+								"StopLossType": 0,
+								"StopLossPrice": parseFloat(this.stopPrice),
+								"StopLossDiff": 0.00,
+								"HoldAvgPrice": parseFloat(this.selectedMsg.HoldAvgPrice),
+								"HoldDrection": drection,
+								"OrderType": 1,
+							}
+						};
+						this.str = b;
+					}
+				}else if(this.currentNum == 1){
+					msg = '是否添加限价止盈？';
+					if(this.stopPrice == '' || this.stopPrice == 0 || this.stopPrice == undefined){
+						layer.msg('请输入止盈价', {time: 1000});return;
+					}else if(this.stopNum == '' || this.stopNum == 0 || this.stopNum == undefined){
+						layer.msg('请输入止盈手数', {time: 1000});return;
+					}else if(d0 >= 0.000000001 && parseFloat(b0-d0) >= 0.0000000001){
+						layer.msg('输入价格不符合最小变动价，最小变动价为：' + b0, {time: 1000});return;
+					}else{
+						if(drection == 0){
+							//if(this.zhiYinInputPrice < this.templateListObj.LastPrice){
+							if(parseFloat(this.stopPrice) <= parseFloat(this.lastPrice)){	
+								layer.msg('输入价格应该高于最新价', {time: 1000});
+								return;
+							}
+						}
+						if(drection == 1){
+							//if(this.zhiYinInputPrice > this.templateListObj.LastPrice){
+							if(parseFloat(this.stopPrice) >= parseFloat(this.lastPrice)){	
+								layer.msg('输入价格应该低于最新价', {time: 1000});
+								return;
+							}
+						}
+						let b = {
+							"Method":'InsertStopLoss',
+							"Parameters":{
+								"ExchangeNo": this.orderTemplist[this.selectedMsg.CommodityNo].ExchangeNo,
+								"CommodityNo": this.orderTemplist[this.selectedMsg.CommodityNo].CommodityNo,
+								"ContractNo": this.orderTemplist[this.selectedMsg.CommodityNo].MainContract,
+								"Num": parseInt(this.stopNum),
+								"StopLossType": 1,
+								"StopLossPrice": parseFloat(this.stopPrice),
+								"StopLossDiff": 0.00,
+								"HoldAvgPrice": parseFloat(this.selectedMsg.HoldAvgPrice),
+								"HoldDrection": drection,
+								"OrderType": 1
+							}
+						};
+						this.str = b;
+					}
+				}
+				layer.confirm(msg, {
+					btn: ['确定','取消']
+				}, function(index){
+					this.tradeSocket.send(JSON.stringify(this.str));
+					this.$parent.currentOrderID = '';
+					this.$parent.selectedNum = -1;
+					this.show = false;
+					layer.close(index);
+				}.bind(this));
+			},
+			cancelEvent: function(){
+				this.show = false;
+			},
+			closeEvent: function(){
+				this.show = false;
+			}
+		},
+		mounted: function(){
+			
+		}
 	}
 </script>
 
@@ -89,11 +257,10 @@
 	@import "../../assets/css/common.scss";
 	.stopMoney{
 		width: 400px;
-		height: 380px;
 		overflow: hidden;
 		background: $blue;
 		border-radius: 5px;
-		position: absolute;
+		position: fixed;
 		top: 50%;
 		left: 50%;
 		z-index: 100;
@@ -136,9 +303,9 @@
 			height: 30px;
 			margin-bottom: 18px;
 			div:first-child{
-				width: 260px;
+				width: 270px;
 				label{
-					width: 85px;
+					width: 78px;
 					text-align: right;
 				}
 			}
@@ -151,13 +318,19 @@
 				line-height: 30px;
 			}
 			.ipt{
-				width: 78px;
+				width: 68px;
 				height: 26px;
 				line-height: 26px;
 				border: 1px solid #474c66;
 				border-radius: 4px;
 				color: $white;
 				text-align: center;
+			}
+			.dynamic{
+				opacity: 0;
+			}
+			.select_box{
+				cursor: pointer;
 			}
 			.checkbox{
 				color: #7a7f99;
@@ -174,6 +347,18 @@
 				}
 				span{
 					line-height: 54px;
+				}
+				.slt-list{
+					width: 80px;
+					height: auto;
+					li{
+						width: 80px;
+					}
+				}
+				&.current{
+					span{
+						line-height: 0.5;
+					}
 				}
 			}
 		}
