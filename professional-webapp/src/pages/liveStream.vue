@@ -3,7 +3,7 @@
 		<div class="title">
 			<ul>
 				<li>直播</li>
-				<li>{{latest | getYMD}}{{latest_hms | getHMS}}</li>
+				<li>({{latest | getYMD}}&nbsp;{{latest_hms | getHMS}})</li>
 			</ul>
 			<ul>
 				<li><i class="ifont ifont_click">&#xe600;</i>60</li>
@@ -56,19 +56,25 @@
 					keyword:''
 				}
 				pro.fetch('post','/crawler/getCrawler',data,{}).then((res)=>{
-					console.log(res);
 					if(res.success == true){
 						if(res.code == ''){
-							this.arrList = res.data.data;
 							var c = [];
-							console.log(this.arrList.length)
-							console.log(11111111111111)
+							this.arrList = res.data.data.slice(0,5);
+							this.latest_hms = res.data.data[0].createdAt;
+							this.latest = res.data.data[0].createdAt;
 							for (var a=0;a<this.arrList.length;a++){
 								var b= pro.getDate("y-m-d",this.arrList[a].createdAt*1000);
 								c.push(b)
 							}
-							console.log("------------");
-							console.log(c);
+							var d = [];
+							c.sort();
+							for(var i=0;i<c.length;i++){
+								if(c[i]!=c[i+1]){
+									if(i+1<c.length){
+										d.push(c[i+1]);
+									}
+								}
+							}
 						}
 					}
 				}).catch((err)=>{
@@ -84,7 +90,6 @@
 			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 			var _h = h - 47;
 			var contH = $("#liveStream").height();
-			console.log(contH)
 			if(contH > _h){
 				$("#liveStream").height(_h);
 			}
@@ -135,6 +140,7 @@
 					&:nth-child(1){
 						font-size: $fs16;
 						color: $white;
+						padding-right: 10px;
 					}
 				}
 			}
