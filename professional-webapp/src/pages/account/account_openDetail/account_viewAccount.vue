@@ -198,7 +198,7 @@
 				layer.open({
 					type: 1,
 					title: '国际综合操盘细则',
-					area: ['1000px','680px'],
+					area: ['1000px','600px'],
 					content: $("#agreement"),
 					cancel: function(){
 						this.show_tradersRules = false;
