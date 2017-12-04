@@ -9,7 +9,7 @@
 				<div class="calendar_center">
 					<div class="calendar_center1">
 						<ul>
-							<li><span>24</span></li>
+							<li><span class="span_white">24</span></li>
 							<li><span>25</span></li>
 							<li><span>26</span></li>
 							<li><span>27</span></li>
@@ -20,7 +20,7 @@
 					</div>
 					<div class="calendar_center2">
 						<ul>
-							<li><span>周一</span></li>
+							<li><span class="span_color">周一</span></li>
 							<li><span>周二</span></li>
 							<li><span>周三</span></li>
 							<li><span>周四</span></li>
@@ -162,6 +162,11 @@
 				height: 100px;
 				float: left;
 				cursor: pointer;
+				span{
+					&:nth-child(1){
+						font-weight: 800;
+					}
+				}
 			}
 			.calendar_center{
 				width: 500px;
@@ -171,7 +176,7 @@
 					width: 100%;
 					height: 50px;
 					li{
-						line-height: 50px;
+						line-height: 60px;
 						text-align: center;
 						width: 14.2%;
 						float: left;
@@ -202,8 +207,12 @@
 				width: 90px;
 				height: 100px;
 				float: right;
+				span{
+					&:nth-child(1){
+						font-weight: 800;
+					}
+				}
 			}
-			
 		}
 	}
 	.country{
@@ -212,8 +221,10 @@
 		background-color: $blue;
 		margin-top: 5px;
 		.ifont{
+			font-size: $fs12;
 			color: $lightblue;
 			padding-right: 10px;
+			cursor: pointer;
 		}
 		.country_top{
 			padding-left: 10px;
@@ -253,8 +264,10 @@
 		height: 100px;
 		background-color: $blue;
 		.ifont{
+			font-size: $fs12;
 			color: $lightblue;
 			padding-right: 10px;
+			cursor: pointer;
 		}
 		ul{
 			width: 100%;
@@ -370,5 +383,14 @@
 		background-color: $bottom_color;
 		padding-left: 10px;
 		color: $white;
+	}
+	.span_white{
+		border-radius:50%;
+		padding: 6px;
+		background-color: #ccd5ff;
+		color: $blue;
+	}
+	.span_color{
+		color: #ccd5ff;
 	}
 </style>

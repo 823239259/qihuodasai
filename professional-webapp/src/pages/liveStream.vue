@@ -3,7 +3,7 @@
 		<div class="title">
 			<ul>
 				<li>直播</li>
-				<li>（2017年07月05日 18:05:38）</li>
+				<li>{{latest | getYMD}}{{latest_hms | getHMS}}</li>
 			</ul>
 			<ul>
 				<li><i class="ifont ifont_click">&#xe600;</i>60</li>
@@ -12,18 +12,18 @@
 			</ul>
 		</div>
 		<div class="content">
-			<ul v-for="item in arrList">
-				<li>15:37</li>
-				<li>英国金融市场行为监督的什么东西我也不会到，但是还是要多打一点字来吧这个东西撑起来，所以还是要不同的打字打字</li>
+			<ul v-for="(item,index) in arrList">
+				<li>{{item.createdAt | showTime}}</li>
+				<li>{{item.liveTitle}}</li>
 			</ul>
-			<div class="content_timelist">
+			<!--<div class="content_timelist">
 				<i class="ifont ifont_time">&#xe752;</i>
 				<span>2017年07月07日</span>
-			</div>
-			<ul v-for="item in arrList1">
+			</div>-->
+			<!--<ul v-for="item in arrList1">
 				<li>15:37</li>
 				<li>英国金融市场行为监督的什么东西我也不会到，但是还是要多打一点字来吧这个东西撑起来，所以还是要不同的打字打字</li>
-			</ul>
+			</ul>-->
 			<div class="add_list">
 				<span>加载更多</span>
 			</div>
@@ -35,29 +35,75 @@
 </template>
 
 <script>
+	import pro from '../assets/js/common.js'
 	export default{
 		name:'liveStream',
 		data(){
 			return{
-				arrList:10,
-				arrList1:5
+				arrList:'',
+				arrList1:'',
+				latest:'',
+				latest_hms:''
+			}
+		},
+		methods:{
+			getInfoList:function(){
+				var data ={
+					pageIndex:1,
+					size:20,
+					minTime:'',
+					maxTime:'',
+					keyword:''
+				}
+				pro.fetch('post','/crawler/getCrawler',data,{}).then((res)=>{
+					console.log(res);
+					if(res.success == true){
+						if(res.code == ''){
+							this.arrList = res.data.data;
+							for (var a=0;a<this.arrList.length;a++){
+								var b= pro.getDate("y-m-d",this.arrList[a].createdAt*1000);
+//								console.log(b);
+							}
+						}
+					}
+				}).catch((err)=>{
+					console.log("-----------------");
+					console.log(err);
+				})
 			}
 		},
 		mounted:function(){
+			//获取初始数据
+			this.getInfoList();
 			//初始化高度
 			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-			var _h = h - 90;
+			var _h = h - 47;
 			var contH = $("#liveStream").height();
+			console.log(contH)
 			if(contH > _h){
 				$("#liveStream").height(_h);
 			}
 			$(window).resize(function(){
 				var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-				var _h = h - 80 - 47;
+				var _h = h - 47;
 				if(contH > _h){
 					$("#liveStream").height(_h);
 				}
 			});
+		},
+		filters:{
+			showTime:function(e){
+				var a = pro.getDate("h:m",e*1000);
+				return a;
+			},
+			getYMD:function(e){
+				var a = pro.getDate("yy-mm-dd",e*1000);
+				return a;
+			},
+			getHMS:function(e){
+				var a = pro.getDate("h:i:s",e*1000);
+				return a;
+			}
 		}
 	}
 </script>
@@ -116,7 +162,7 @@
 		background-color: $deepblue;
 		ul{
 			li{
-				height: 40px;
+				/*height: 40px;*/
 				border-bottom:1px solid $bottom_color;
 				border-left:1px solid $bottom_color;
 				border-right:1px solid $bottom_color;
@@ -125,8 +171,8 @@
 					font-size: $fs16;
 					width: 8%;
 					text-align: center;
-					line-height: 40px;
-					font-weight: 500;
+					/*line-height: 40px;*/
+					font-weight: 600;
 				}
 				&:nth-child(2){
 					font-size: $fs14;
