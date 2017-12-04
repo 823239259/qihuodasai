@@ -150,7 +150,7 @@ pro.getDate=function(d,time){
     var d2 = year + "-"+ month + "-" + day;
     var d3 = hour+":"+minu+":"+sec;
     var d4 = hour+":"+minu;
-    var d5 = year+"年"+month+"yue"+day+"日";
+    var d5 = year+"年"+month+"月"+day+"日";
     if(d == "y-m-d"){
         return d2;
     }else if(d == "y-m-d h:i:s"){

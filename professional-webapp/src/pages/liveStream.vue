@@ -60,15 +60,20 @@
 					if(res.success == true){
 						if(res.code == ''){
 							this.arrList = res.data.data;
+							var c = [];
+							console.log(this.arrList.length)
+							console.log(11111111111111)
 							for (var a=0;a<this.arrList.length;a++){
 								var b= pro.getDate("y-m-d",this.arrList[a].createdAt*1000);
-//								console.log(b);
+								c.push(b)
 							}
+							console.log("------------");
+							console.log(c);
 						}
 					}
 				}).catch((err)=>{
-					console.log("-----------------");
-					console.log(err);
+//					console.log("-----------------");
+//					console.log(err);
 				})
 			}
 		},
