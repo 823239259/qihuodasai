@@ -169,7 +169,7 @@
 								<td>天然气</td>
 								<td>纽约商业交易所</td>
 								<td>天然气</td>
-								<td>1个指数点（10美元）</td>
+								<td>0.001个指数点（10美元）</td>
 								<td>当涨跌幅+-10%和15%时，分别熔断10分钟，之后无涨跌幅限制</td>
 							</tr>
 						</table>
@@ -198,7 +198,7 @@
 				layer.open({
 					type: 1,
 					title: '国际综合操盘细则',
-					area: ['1000px','680px'],
+					area: ['1000px','600px'],
 					content: $("#agreement"),
 					cancel: function(){
 						this.show_tradersRules = false;

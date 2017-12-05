@@ -258,7 +258,7 @@
 						break;
 					case 3:
 						this.$router.push({path: '/liveStream'});
-						this.$store.state.account.currentNav = 6;
+						this.$store.state.account.currentNav = 3;
 						break;
 					case 4:
 						this.$router.push({path: '/calendar'});
