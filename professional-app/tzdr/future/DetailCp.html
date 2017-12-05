@@ -24,6 +24,8 @@
     	
     	mui.plusReady(function(){
     		win=plus.webview.currentWebview();
+    		console.log("----------------");
+    		console.log(win.did);
     		//初始化监听头部和底部事件
 			tzdr.init.initHearListener();
     		var paramUrl={
