@@ -3,7 +3,7 @@
 		<div class="title">
 			<ul>
 				<li>直播</li>
-				<li>({{latest | getYMD}}&nbsp;{{latest_hms | getHMS}})</li>
+				<li>({{showNowDay}}&nbsp;{{showNowTime}})</li>
 			</ul>
 			<ul>
 				<li><i class="ifont ifont_click" v-on:click="autoRefresh">&#xe600;</i>{{volid ? info : time}}</li>
@@ -55,7 +55,9 @@
 				show_beforeList:false,
 				colorState:false,
 				info:10,
-				time:10
+				time:10,
+				showNowTime:'',
+				showNowDay:''
 			}
 		},
 		computed:{
@@ -110,8 +112,6 @@
 					if(res.success == true){
 						if(res.code == ''){
 							this.arrList = res.data.data;
-							this.latest_hms = res.data.data[0].createdAt;
-							this.latest = res.data.data[0].createdAt;
 						}
 					}
 				}).catch((err)=>{
@@ -176,6 +176,21 @@
 			    }
 			    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate;
 			    return currentdate;
+			},
+			updateTime:function(){
+				var cd = new Date();
+			    this.showNowTime = this.zeroPadding(cd.getHours(), 2) + ':' + this.zeroPadding(cd.getMinutes(), 2) + ':' + this.zeroPadding(cd.getSeconds(), 2);
+			    this.showNowDay = this.zeroPadding(cd.getFullYear(), 4) + '-' + this.zeroPadding(cd.getMonth()+1, 2) + '-' + this.zeroPadding(cd.getDate(), 2);
+			},
+			zeroPadding:function(num, digit) {
+			    var zero = '';
+			    for(var i = 0; i < digit; i++) {
+			        zero += '0';
+			    }
+			    return (zero + num).slice(-digit);
+			},
+			timerID:function(){
+				setInterval(this.updateTime(),1000);
 			}
 		},
 		mounted:function(){
@@ -192,6 +207,8 @@
 					$("#liveStream").height(_h);
 				}
 			});
+			//时间
+			this.timerID();
 		},
 		filters:{
 			showTime:function(e){
