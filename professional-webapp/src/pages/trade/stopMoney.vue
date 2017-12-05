@@ -247,9 +247,7 @@
 				this.show = false;
 			}
 		},
-		mounted: function(){
-			
-		}
+		mounted: function(){}
 	}
 </script>
 

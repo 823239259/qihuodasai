@@ -1029,7 +1029,6 @@ export default new Vuex.Store({
 						//初始资金
 						context.state.market.initBalance = parameters.InitBalance;
 						//查询持仓合计 
-						console.log(context.state.market.tradeConfig.username);
 						context.state.tradeSocket.send('{"Method":"QryHoldTotal","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
 						//查询订单 
 						context.state.tradeSocket.send('{"Method":"QryOrder","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
