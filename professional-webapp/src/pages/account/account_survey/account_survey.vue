@@ -316,6 +316,8 @@
 						this.day = 0;
 						break;
 					case 1:
+					console.log("------------")
+						console.log(this.getWeekDate());
 						this.GetList('',this.getWeekDate(),this.getNowFormatDate(),this.query)
 						this.day = 1;
 						break;
@@ -433,7 +435,7 @@
 			    }
 			    if(strDate<7){
 			    	month--;
-			    	strDate = (30 + strDate - 7)
+			    	strDate = (30 + parseInt(strDate) - 7)
 			    }else{
 			    	strDate = strDate - 7
 			    }
@@ -456,7 +458,7 @@
 			    }
 			    if(strDate<15){
 			    	month--;
-			    	strDate = (30 + strDate - 15)
+			    	strDate = (30 + parseInt(strDate) - 15)
 			    }else{
 			    	strDate = strDate - 15
 			    }
