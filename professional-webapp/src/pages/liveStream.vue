@@ -6,26 +6,32 @@
 				<li>({{latest | getYMD}}&nbsp;{{latest_hms | getHMS}})</li>
 			</ul>
 			<ul>
-				<li><i class="ifont ifont_click">&#xe600;</i>60</li>
+				<li><i class="ifont ifont_click" v-on:click="autoRefresh">&#xe600;</i>{{volid ? info : time}}</li>
 				<li>秒后自动刷新</li>
-				<li><i class="ifont ifont_refresh">&#xe6d1;</i></li>
+				<li><i class="ifont ifont_refresh" v-on:click="handRefresh">&#xe6d1;</i></li>
 			</ul>
 		</div>
 		<div class="content">
-			<ul v-for="(item,index) in arrList">
+			<!--<ul v-for="(item,index) in arrList">
 				<li>{{item.createdAt | showTime}}</li>
 				<li>{{item.liveTitle}}</li>
-			</ul>
-			<!--<div class="content_timelist">
+			</ul>-->
+			<div v-for="(item,index) in arrList">
+				<p>
+					<i>{{item.createdAt | showTime}}</i>
+					<span>{{item.liveTitle}}</span>
+				</p>
+			</div>
+			<div class="content_timelist" v-show="showbeforeDay">
 				<i class="ifont ifont_time">&#xe752;</i>
 				<span>2017年07月07日</span>
-			</div>-->
-			<!--<ul v-for="item in arrList1">
+			</div>
+			<ul v-for="item in arrList1" v-show="show_beforeList">
 				<li>15:37</li>
 				<li>英国金融市场行为监督的什么东西我也不会到，但是还是要多打一点字来吧这个东西撑起来，所以还是要不同的打字打字</li>
-			</ul>-->
+			</ul>
 			<div class="add_list">
-				<span>加载更多</span>
+				<span v-on:click="getMore">加载更多</span>
 			</div>
 		</div>
 		<div class="btm">
@@ -43,44 +49,133 @@
 				arrList:'',
 				arrList1:'',
 				latest:'',
-				latest_hms:''
+				latest_hms:'',
+				counting:0,
+				showbeforeDay:false,
+				show_beforeList:false,
+				colorState:false,
+				info:10,
+				time:10
+			}
+		},
+		computed:{
+			volid: function(){
+				if(this.time <= 0){
+					return true
+				}else{
+					return false
+				}
 			}
 		},
 		methods:{
+			//手动刷新
+			handRefresh:function(){
+				layer.msg("正在为您刷新最新数据",{time:1000})
+				setTimeout(function(){
+					this.getInfoList();
+				}.bind(this),1000)
+			},
+			//自动刷新
+			autoRefresh:function(e){
+				var timing = setInterval(function(){
+					this.time--;
+					if(this.time <= 0){
+						clearInterval(timing);
+						//刷新数据
+						this.getInfoList();
+					}
+				}.bind(this),1000);
+				if(this.colorState == false){
+					this.colorState=true;
+					$(e.currentTarget).css("color","#ffd400");
+					this.time = 10;
+					timing();
+				}else if(this.colorState == true){
+					this.colorState=false;
+					$(e.currentTarget).css("color","#a3aacc");
+					this.time = 10;
+					clearInterval(timing);
+				}
+				
+			},
 			getInfoList:function(){
 				var data ={
-					pageIndex:1,
+					pageIndex:this.counting,
 					size:20,
-					minTime:'',
-					maxTime:'',
+					minTime:this.getNowFormatDate(),
+					maxTime:this.getNowFormatDate1(),
 					keyword:''
 				}
 				pro.fetch('post','/crawler/getCrawler',data,{}).then((res)=>{
 					if(res.success == true){
 						if(res.code == ''){
-							var c = [];
-							this.arrList = res.data.data.slice(0,5);
+							this.arrList = res.data.data;
 							this.latest_hms = res.data.data[0].createdAt;
 							this.latest = res.data.data[0].createdAt;
-							for (var a=0;a<this.arrList.length;a++){
-								var b= pro.getDate("y-m-d",this.arrList[a].createdAt*1000);
-								c.push(b)
-							}
-							var d = [];
-							c.sort();
-							for(var i=0;i<c.length;i++){
-								if(c[i]!=c[i+1]){
-									if(i+1<c.length){
-										d.push(c[i+1]);
-									}
-								}
-							}
 						}
 					}
 				}).catch((err)=>{
 //					console.log("-----------------");
 //					console.log(err);
 				})
+			},
+			//加载更多
+			getMore:function(){
+				this.counting += 1;
+				var data = {
+					pageIndex:this.counting,
+					size:20,
+					minTime:this.getNowFormatDate(),
+					maxTime:this.getNowFormatDate1(),
+					keyword:''
+				}
+				pro.fetch('post','/crawler/getCrawler',data,{}).then((res)=>{
+					if(res.success == true && res.code == ''){
+						var b = res.data.data;
+						for(var i = 0;i<b.length;i++){
+							this.arrList.push(b[i]);
+						}
+						$("#liveStream").css('height', 'auto');
+						var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+						var _h = h - 90;
+						var contH = $("#liveStream").height();
+						if(contH > _h){
+							$("#liveStream").height(_h);
+						}
+					}
+				}).catch((err)=>{
+					
+				})
+			},
+			//获取今天开始时间
+			getNowFormatDate:function(){
+			    var date = new Date();
+			    var seperator1 = "-";
+			    var month = date.getMonth() + 1;
+			    var strDate = date.getDate();
+			    if (month >= 1 && month <= 9) {
+			        month = "0" + month;
+			    }
+			    if (strDate >= 0 && strDate <= 9) {
+			        strDate = "0" + strDate;
+			    }
+			    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate;
+			    return currentdate;
+			},
+			//获取明天时间
+			getNowFormatDate1:function(){
+				var date = new Date();
+			    var seperator1 = "-";
+			    var month = date.getMonth() + 1;
+			    var strDate = date.getDate()+1;
+			    if (month >= 1 && month <= 9) {
+			        month = "0" + month;
+			    }
+			    if (strDate >= 0 && strDate <= 9) {
+			        strDate = "0" + strDate;
+			    }
+			    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate;
+			    return currentdate;
 			}
 		},
 		mounted:function(){
@@ -89,10 +184,7 @@
 			//初始化高度
 			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 			var _h = h - 47;
-			var contH = $("#liveStream").height();
-			if(contH > _h){
-				$("#liveStream").height(_h);
-			}
+			$("#liveStream").height(_h);
 			$(window).resize(function(){
 				var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 				var _h = h - 47;
@@ -156,12 +248,18 @@
 						color: $lightblue;
 						cursor: pointer;
 						padding:0 10px;
+						&:hover{
+							color: $yellow;
+						}
 					}
 					.ifont_refresh{
 						color: $lightblue;
 						margin-left: 20px;
 						font-size: $fs18;
 						cursor: pointer;
+						&:hover{
+							color: $yellow;
+						}
 					}
 				}
 			}
@@ -171,9 +269,26 @@
 		float: left;
 		width: 100%;
 		background-color: $deepblue;
+		p{
+			width: 100%;
+			line-height: 40px;
+			i{
+				text-align: center;
+				display: inline-block;
+				float: left;
+				width: 8%;
+				font-weight: 600;
+				font-size: $fs16;
+			}
+			span{
+				float: left;
+				width: 92%;
+				font-size: $fs14;
+				display: inline-block;
+			}
+		}
 		ul{
 			li{
-				/*height: 40px;*/
 				border-bottom:1px solid $bottom_color;
 				border-left:1px solid $bottom_color;
 				border-right:1px solid $bottom_color;
@@ -182,7 +297,7 @@
 					font-size: $fs16;
 					width: 8%;
 					text-align: center;
-					/*line-height: 40px;*/
+					line-height: 40px;
 					font-weight: 600;
 				}
 				&:nth-child(2){
@@ -235,5 +350,4 @@
 		text-align: center;
 		line-height: 40px;
 		font-size: $fs12;
-	}
-</style>
+	}</style>
