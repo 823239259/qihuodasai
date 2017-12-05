@@ -936,6 +936,8 @@ function addPostion(param) {
 		var currcls = "position-currency" + currencyNo;
 		var cls = "postion-index" + postionIndex;
 		var clspo = 'position-index' + postionIndex;
+		console.log()
+		console.log(floatP);
 		var html = '<li   class = "' + cls + ' ' + clspo + ' ' + currcls + ' tab_position PositionLi myLi"  data-index-position = "' + postionIndex + '" data-tion-position = "' + contractCode + '" id = "' + contractCode + '">' +
 			'<a class="mui-navigate-right" >' +
 			'		' +
