@@ -245,26 +245,26 @@ var market = {
 		
 		//切换后合约的名字
 		jContractFloatingProfitVO:{
-			currencyNo:'',
-			floatingProfit:0.0
+			currencyNo: '',
+			floatingProfit: 0.0
 		},
-		layer: null,
+//		layer: null,
+		
+		//止损止盈
+		stopLossList: [],   //未触发列表
+		hasNostopLossList: [],  //未触发列表（页面使用）
+		stopLossTriggeredList: [],    //已触发列表
+		hasYesstopLossList: [],  //已触发列表（页面使用）
+//		stopLossListSelectOneObj: {},
+		//条件单
+		conditionList: [],   //未触发列表
+		noListCont: [],    //未触发列表（页面使用）
+		triggerConditionList: [],   //已触发列表
+		yesListCont: [],    //已触发列表（页面使用）
+		
 		//判断是否可以进行交易操作
 		buyStatus: false,
 		cancelStatus: false,
-		
-		
-		//止损止盈
-		stopLossList: [],
-		hasNostopLossList: [],
-		stopLossTriggeredList: [],    //已触发列表
-		hasYesstopLossList: [],
-		stopLossListSelectOneObj: {},
-		//条件单
-		conditionList: [],   //条件单未触发列表
-		noListCont: [],
-		triggerConditionList: [],
-		yesListCont: [],
 	}
 }
 
@@ -1017,6 +1017,9 @@ export default new Vuex.Store({
 					context.state.market.HeartBeat.lastHeartBeatTimestamp = parameters.Ref; // 更新心跳最新时间戳
 					break;
 				case 'OnRspLogin':
+					if(context.state.market.tradeConfig.username == '' && localStorage.tradeUser != '' && localStorage.tradeUser != undefined){
+						context.state.market.tradeConfig.username = JSON.parse(localStorage.tradeUser).username;
+					}
 					//回复
 					if(parameters.Code == 0){
 						layer.msg('交易服务器连接成功',{time: 1000});
@@ -1026,6 +1029,7 @@ export default new Vuex.Store({
 						//初始资金
 						context.state.market.initBalance = parameters.InitBalance;
 						//查询持仓合计 
+						console.log(context.state.market.tradeConfig.username);
 						context.state.tradeSocket.send('{"Method":"QryHoldTotal","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
 						//查询订单 
 						context.state.tradeSocket.send('{"Method":"QryOrder","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
@@ -1034,7 +1038,7 @@ export default new Vuex.Store({
 						//查询账户信息 
 						context.state.tradeSocket.send('{"Method":"QryAccount","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
 						//查询止损单
-//						context.state.tradeSocket.send('{"Method":"QryStopLoss","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
+						context.state.tradeSocket.send('{"Method":"QryStopLoss","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
 						//查询条件单
 //						context.state.tradeSocket.send('{"Method":"QryCondition","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
 						//查询历史成交
@@ -1121,22 +1125,20 @@ export default new Vuex.Store({
 					context.dispatch('appendApply',parameters);
 					break;
 				case 'OnRtnHoldTotal':
-//					console.log('持仓合计变化推送通知');
 					context.dispatch('updateHold',parameters);
 					break;
 				case 'OnRtnOrderTraded':
-//					console.log('成交单通知');
-					if(parameters!=null){
+					if(parameters != null){
 						context.state.market.OnRspQryTradeDealListCont.unshift(parameters);
 					}
 					context.dispatch('layerOnRtnOrderTraded',parameters);
 					break;
-				
 				case 'OnRspQryStopLoss':
-					if(parameters!=null){
-						if(parameters.Status==0||parameters.Status==1){
+					if(parameters != null){
+						if(parameters.Status == 0 || parameters.Status == 1){
 							context.state.market.stopLossList.push(parameters);
-						}else if(parameters.Status==2||parameters.Status==3||parameters.Status==4||parameters.Status==5){
+//						}else if(parameters.Status == 2 || parameters.Status == 3 || parameters.Status == 4 || parameters.Status == 5){
+						}else if(parameters.Status >= 2){
 							context.state.market.stopLossTriggeredList.push(parameters);
 						}
 					}
@@ -1148,8 +1150,8 @@ export default new Vuex.Store({
 					context.dispatch('layerOnRspInsertStopLoss',parameters);
 					break;
 				case 'OnRspQryCondition':
-					if(parameters!=null){
-						if(parameters.Status<2){
+					if(parameters != null){
+						if(parameters.Status < 2){
 							context.state.market.conditionList.push(parameters);
 						}else{
 							context.state.market.triggerConditionList.push(parameters);
@@ -1541,13 +1543,11 @@ export default new Vuex.Store({
 			}
 		},
 		updateStopLoss:function(context,parameters){
-			context.state.market.layer='单号【'+ parameters.StopLossNo+'】,更新成功' + Math.floor(Math.random()*10);
+			layer.msg('单号【'+ parameters.StopLossNo +'】,更新成功', {time: 1000});
 			if(parameters.Status>2){
 				context.state.market.stopLossTriggeredList.push(parameters);
-				context.state.market.hasYesstopLossList.push(parameters);
-				context.state.market.hasNostopLossList.forEach(function(e,i){
-					if(e.StopLossNo==parameters.StopLossNo){
-						context.state.market.hasNostopLossList.splice(i,1);
+				context.state.market.stopLossList.forEach(function(o, i){
+					if(o.StopLossNo == parameters.StopLossNo){
 						context.state.market.stopLossList.splice(i,1);
 					}
 				});
@@ -1559,7 +1559,6 @@ export default new Vuex.Store({
 					}
 				});
 				context.state.market.stopLossTriggeredList.push(parameters);
-				
 			}else{
 				let hasExist = false;
 				context.state.market.stopLossList.forEach(function(e,i){
@@ -1577,11 +1576,9 @@ export default new Vuex.Store({
 						context.state.market.hasNostopLossList.splice(i,1,e);
 					}
 				});
-				
-				if(hasExist==false){
+				if(hasExist == false){
 					context.state.market.stopLossList.push(parameters);
 				}
-				
 			}
 		},
 		layerOnRspInsertStopLoss:function(context,parameters){
