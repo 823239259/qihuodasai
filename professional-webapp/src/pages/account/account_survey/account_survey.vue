@@ -316,8 +316,6 @@
 						this.day = 0;
 						break;
 					case 1:
-					console.log("------------")
-						console.log(this.getWeekDate());
 						this.GetList('',this.getWeekDate(),this.getNowFormatDate(),this.query)
 						this.day = 1;
 						break;
