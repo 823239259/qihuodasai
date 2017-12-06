@@ -10,7 +10,7 @@
 			</div>
 			<div class="ipt_row">
 				<label for="phone">手机号</label>
-				<input type="number" id="phone" placeholder="请输入您的手机号" v-model.trim="phone" />
+				<input type="number" id="phone" placeholder="请输入您的手机号" :disabled="phoneShow" v-model.trim="phone" />
 			</div>
 			<div class="ipt_row">
 				<label for="code">手机验证码</label>
@@ -53,6 +53,7 @@
 				phoneReg: /^(((13[0-9])|(14[5-7])|(15[0-9])|(17[0-9])|(18[0-9]))+\d{8})$/,
 				pwdReg: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,18}$/,
 				path: '',
+				phoneShow: false,
 			}
 		},
 		computed: {
