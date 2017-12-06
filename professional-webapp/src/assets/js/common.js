@@ -151,6 +151,7 @@ pro.getDate=function(d,time){
     var d3 = hour+":"+minu+":"+sec;
     var d4 = hour+":"+minu;
     var d5 = year+"年"+month+"月"+day+"日";
+    var d6 = day
     if(d == "y-m-d"){
         return d2;
     }else if(d == "y-m-d h:i:s"){
@@ -161,6 +162,8 @@ pro.getDate=function(d,time){
     	return d4;
     }else if(d == "yy-mm-dd"){
     	return d5;
+    }else if(d == "d"){
+    	return d6;
     }
 }
 export default pro
