@@ -9,24 +9,24 @@
 				<div class="calendar_center">
 					<div class="calendar_center1">
 						<ul>
-							<li><span class="span_white">24</span></li>
-							<li><span>25</span></li>
-							<li><span>26</span></li>
-							<li><span>27</span></li>
-							<li><span>28</span></li>
-							<li><span>29</span></li>
-							<li><span>30</span></li>
+							<li><span >{{lastdaythree.day}}</span></li>
+							<li><span>{{lastdaytwo.day}}</span></li>
+							<li><span>{{lastdayone.day}}</span></li>
+							<li><span class="span_white">{{day.day}}</span></li>
+							<li><span>{{predayone.day}}</span></li>
+							<li><span>{{predaytwo.day}}</span></li>
+							<li><span>{{predaythree.day}}</span></li>
 						</ul>
 					</div>
 					<div class="calendar_center2">
 						<ul>
-							<li><span class="span_color">周一</span></li>
-							<li><span>周二</span></li>
-							<li><span>周三</span></li>
-							<li><span>周四</span></li>
-							<li><span>周五</span></li>
-							<li><span>周六</span></li>
-							<li><span>周日</span></li>
+							<li><span >{{lastdaythree.weekday}}</span></li>
+							<li><span>{{lastdaytwo.weekday}}</span></li>
+							<li><span>{{lastdayone.weekday}}</span></li>
+							<li><span class="span_color">{{weekday}}</span></li>
+							<li><span>{{predayone.weekday}}</span></li>
+							<li><span>{{predaytwo.weekday}}</span></li>
+							<li><span>{{predaythree.weekday}}</span></li>
 						</ul>
 					</div>
 				</div>
@@ -109,18 +109,18 @@
 					<li>地区</li>
 					<li>事件</li>
 					<li>重要性</li>
-					<li>金值</li>
+					<li>今值</li>
 					<li>预期</li>
 					<li>前值</li>
 				</ul>
 				<ul class="list_details" v-for="k in list">
-					<li>17:22</li>
-					<li><img src="../assets/images/china.png" alt="" /></li>
-					<li>中国6月70成房价的变动</li>
-					<li>星星</li>
-					<li>3.3%</li>
-					<li>3.4%</li>
-					<li>3.6%</li>
+					<li>{{k.timestamp | getTime}}</li>
+					<li><img :src="k.flagUrl" /></li>
+					<li>{{k.title}}</li>
+					<li>{{k.importance}}</li>
+					<li>{{k.actual}}</li>
+					<li>{{k.forecast}}</li>
+					<li>{{k.previous}}</li>
 				</ul>
 			</div>
 		</div>
@@ -131,11 +131,222 @@
 </template>
 
 <script>
+	import pro from '../assets/js/common.js'
 	export default{
 		name:'calendar',
 		data(){
 			return{
-				list:5
+				list:5,
+				day: {
+					y: '2017',
+					m: '7',
+					day: '6',
+					D: '4'
+				},
+				timec:null,
+				time:null
+			}
+		},
+		methods:{
+			updateTime:function(){
+				this.sevenlist=[];
+				var time = this.startT;
+				this.timec = this.time.getTime();
+				this.timec = this.timec-(1 * 24 * 3600 * 1000);
+				var times=new Date(this.timec);
+				var year=times.getFullYear();
+				var month=times.getMonth()+1;
+				var day=times.getDate();
+				var today=year+'-'+month+'-'+day;
+				if((month.toString().length) < 2) {
+					month = '0' + month;
+				}
+				if(day.toString().length < 2) {
+					day = '0' + day
+				}
+				this.selectDate=today;
+				
+			},
+			selectday: function(e) {
+				var objstr = $(e.currentTarget).children('div').text();
+				var obj = JSON.parse(objstr);
+				var time = obj.y + '-' + obj.m + '-' + obj.day;
+				this.selectDate = time;
+				this.timec = this.time.getTime();
+			},
+			getdate: function() {
+				this.time = new Date();
+				this.timec = this.time.getTime();
+				this.day.y = this.time.getFullYear();
+				this.day.m = this.time.getMonth() + 1;
+				this.day.day = this.time.getDate();
+				this.day.D = this.time.getDay();
+				if((this.day.m.toString().length) < 2) {
+					this.day.m = '0' + this.day.m;
+				}
+				if(this.day.day.toString().length < 2) {
+					this.day.day = '0' + this.day.day
+				}
+				this.selectDate = this.day.y + '-' + this.day.m + '-' + this.day.day;
+			},
+			getInfoList:function(){
+				var data = {
+					pageIndex:'1',
+				    size:'20',
+					startTime:'2017-12-06',
+					endTime:'2017-12-07',
+					country:'',
+					importance:''
+				}
+				pro.fetch('post','/crawler/getCrawlerCalendar',data,"").then((res)=>{
+					console.log(res);
+					if(res.success == true && res.code == ''){
+						this.list = res.data.data.slice(0,5);
+					}
+				}).catch((err)=>{
+					console.log(err);
+				})
+			}
+		},
+		mounted:function(){
+			this.getInfoList();
+		},
+		filters:{
+			getTime:function(e){
+				var a = pro.getDate("h:m",e*1000);
+				return a;
+			}
+		},
+		computed:{
+			weekday: function() {
+				var arr = [];
+				arr[0] = "周日";
+				arr[1] = "周一";
+				arr[2] = "周二";
+				arr[3] = "周三";
+				arr[4] = "周四";
+				arr[5] = "周五";
+				arr[6] = "周六";
+				return arr[this.day.D]
+			},
+			lastdayone: function() {
+				var obj = {};
+				var date = new Date(this.timec - 1 * 24 * 3600 * 1000);
+				obj.y = date.getFullYear();
+				obj.m = date.getMonth() + 1;
+				obj.day = date.getDate();
+				obj.D = date.getDay();
+				var arr = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
+				obj.weekday = arr[obj.D];
+				if((obj.m.toString().length) < 2) {
+					obj.m = '0' + obj.m;
+				}
+				if(obj.day.toString().length < 2) {
+					obj.day = '0' + obj.day
+				}
+				return obj
+			},
+			lastdaytwo: function() {
+				var obj = {};
+				var date = new Date(this.timec - 2 * 24 * 3600 * 1000);
+				obj.y = date.getFullYear();
+				obj.m = date.getMonth() + 1;
+				obj.day = date.getDate();
+				obj.D = date.getDay();
+				var arr = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
+				obj.weekday = arr[obj.D];
+				if((obj.m.toString().length) < 2) {
+					obj.m = '0' + obj.m;
+				}
+				if(obj.day.toString().length < 2) {
+					obj.day = '0' + obj.day
+				}
+				return obj
+			},
+			lastdaythree: function() {
+				var obj = {};
+				var date = new Date(this.timec - 3 * 24 * 3600 * 1000);
+				obj.y = date.getFullYear();
+				obj.m = date.getMonth() + 1;
+				obj.day = date.getDate();
+				obj.D = date.getDay();
+				var arr = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
+				obj.weekday = arr[obj.D];
+				if((obj.m.toString().length) < 2) {
+					obj.m = '0' + obj.m;
+				}
+				if(obj.day.toString().length < 2) {
+					obj.day = '0' + obj.day
+				}
+				return obj
+			},
+			predayone: function() {
+				var obj = {};
+				var date = new Date(this.timec + 1 * 24 * 3600 * 1000);
+				obj.y = date.getFullYear();
+				obj.m = date.getMonth() + 1;
+				obj.day = date.getDate();
+				obj.D = date.getDay();
+				var arr = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
+				obj.weekday = arr[obj.D];
+				if((obj.m.toString().length) < 2) {
+					obj.m = '0' + obj.m;
+				}
+				if(obj.day.toString().length < 2) {
+					obj.day = '0' + obj.day
+				}
+				return obj
+			},
+			predaytwo: function() {
+				var obj = {};
+				var date = new Date(this.timec + 2 * 24 * 3600 * 1000);
+				obj.y = date.getFullYear();
+				obj.m = date.getMonth() + 1;
+				obj.day = date.getDate();
+				obj.D = date.getDay();
+				var arr = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
+				obj.weekday = arr[obj.D];
+				if((obj.m.toString().length) < 2) {
+					obj.m = '0' + obj.m;
+				}
+				if(obj.day.toString().length < 2) {
+					obj.day = '0' + obj.day
+				}
+				return obj
+			},
+			predaythree: function() {
+				var obj = {};
+				var date = new Date(this.timec + 3 * 24 * 3600 * 1000);
+				obj.y = date.getFullYear();
+				obj.m = date.getMonth() + 1;
+				obj.day = date.getDate();
+				obj.D = date.getDay();
+				var arr = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
+				obj.weekday = arr[obj.D];
+				if((obj.m.toString().length) < 2) {
+					obj.m = '0' + obj.m;
+				}
+				if(obj.day.toString().length < 2) {
+					obj.day = '0' + obj.day
+				}
+				return obj
+			}
+		},
+		watch:{
+			selectDate: function(n, o) {
+				var arr = n.split('-');
+				this.day.y = Number(arr[0]);
+				this.day.m = Number(arr[1]);
+				this.day.day = Number(arr[2]);
+				this.time = new Date(this.day.y, this.day.m - 1, this.day.day);
+				if((this.day.m.toString().length) < 2) {
+					this.day.m = '0' + this.day.m;
+				}
+				if(this.day.day.toString().length < 2) {
+					this.day.day = '0' + this.day.day
+				}
+				this.day.D = this.time.getDay();
+				this.timec = this.time.getTime();
 			}
 		}
 	}
@@ -360,6 +571,8 @@
 					width: 5%;
 				}
 				img{
+					width: 30px;
+					height: 20px;
 					position: relative;
 					top: 5px;
 				}
