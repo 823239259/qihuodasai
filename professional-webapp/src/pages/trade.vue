@@ -295,32 +295,14 @@
 								<li>
 									<label>条件类型</label>
 									<div class="col">
-										<span :class="{current: priceShow == true}" @click="priceClick">价格条件</span>
-										<span :class="{current: !priceShow == true}" @click="priceClick">时间条件</span>
+										<span :class="{current: conditionShow == true}" @click="conditionClick">价格条件</span>
+										<span :class="{current: !conditionShow == true}" @click="conditionClick">时间条件</span>
 									</div>
 								</li>
-								<li>
-									<label>触发时间</label>
-									<input type="text" class="ipt time-ipt" />
-									<label class="label-spe">附加价格</label>
-									<div class="slt-box price-box">
-										<input type="text" class="slt" disabled="disabled" selectVal="0" value=">="/>
-										<span class="tal-box"><span class="tal"></span></span>
-										<div class="slt-list">
-											<ul>
-												<li selectVal="0">></li>
-												<li selectVal="1">>=</li>
-												<li selectVal="2"><</li>
-												<li selectVal="3"><=</li>
-											</ul>
-										</div>
-									</div>
-									<input type="text" class="ipt price-ipt" />
-								</li>
-								<!--<li>
+								<li v-show="conditionShow">
 									<label>触发价格</label>
-									<div class="slt-box price-box">
-										<input type="text" class="slt" disabled="disabled" selectVal="0" value=">"/>
+									<div class="slt-box price-box" id="select_type">
+										<input type="text" class="slt" disabled="disabled" selectVal="0" value=">" />
 										<span class="tal-box"><span class="tal"></span></span>
 										<div class="slt-list">
 											<ul>
@@ -331,9 +313,27 @@
 											</ul>
 										</div>
 									</div>
-									<input type="text" class="ipt price-ipt" />
+									<input type="text" class="ipt price-ipt" v-model="conditionPrice" />
 									<label class="label-spe">附加价格</label>
-									<div class="slt-box price-box">
+									<div class="slt-box price-box" id="select_additional_type">
+										<input type="text" class="slt" disabled="disabled" selectVal="0" value=">=" />
+										<span class="tal-box"><span class="tal"></span></span>
+										<div class="slt-list">
+											<ul>
+												<li selectVal="0">></li>
+												<li selectVal="1">>=</li>
+												<li selectVal="2"><</li>
+												<li selectVal="3"><=</li>
+											</ul>
+										</div>
+									</div>
+									<input type="text" class="ipt price-ipt" v-model="conditionAdditionalPrice" />
+								</li>
+								<li v-show="!conditionShow">
+									<label>触发时间</label>
+									<input type="text" class="ipt time-ipt" readonly="readonly" />
+									<label class="label-spe">附加价格</label>
+									<div class="slt-box price-box" id="time_additional_type">
 										<input type="text" class="slt" disabled="disabled" selectVal="0" value=">="/>
 										<span class="tal-box"><span class="tal"></span></span>
 										<div class="slt-list">
@@ -346,13 +346,34 @@
 										</div>
 									</div>
 									<input type="text" class="ipt price-ipt" />
-								</li>-->
+								</li>
 								<li>
 									<label>委托价格</label>
-									<div class="col">
+									<div class="slt-box price-box slt-spe" id="entrust_price">
+										<input type="text" class="slt" disabled="disabled" selectVal="1" value="市价"/>
+										<span class="tal-box"><span class="tal"></span></span>
+										<div class="slt-list">
+											<ul>
+												<li selectVal="1">市价</li>
+												<li selectVal="2">对手价</li>
+											</ul>
+										</div>
+									</div>
+									<label class="operate_type">下单类型</label>
+									<div class="slt-box price-box slt-spe" id="order_type">
+										<input type="text" class="slt" disabled="disabled" selectVal="0" value="买入"/>
+										<span class="tal-box"><span class="tal"></span></span>
+										<div class="slt-list">
+											<ul>
+												<li selectVal="0">买入</li>
+												<li selectVal="1">卖出</li>
+											</ul>
+										</div>
+									</div>
+									<!--<div class="col">
 										<span :class="{current: priceShow == true}" @click="priceClick">市价</span>
 										<span :class="{current: !priceShow == true}" @click="priceClick">对手价</span>
-									</div>
+									</div>-->
 								</li>
 								<li class="condition-box">
 									<label>委托数量</label>
@@ -365,9 +386,12 @@
 									<span>当日有效</span>
 								</li>
 							</ul>
-							<div class="btn_box">
+							<div class="btn_box" v-show="downOrderShow">
 								<button class="red" @click="buy">买入/市价</button>
 								<button class="green" @click="sell">卖出/市价</button>
+							</div>
+							<div class="btn_box" v-show="!downOrderShow">
+								<button class="red condition_btn" @click="conditionConfirm">确认</button>
 							</div>
 						</div>
 					</div>
@@ -466,6 +490,15 @@
 				w: '',
 				h: '',
 				openAccountTools: true,
+				conditionShow: true,
+				conditionPrice: '',
+				conditionAdditionalPrice: '',
+				selectType: '0',
+				selectAdditionalType: '0',
+				timeAdditionalType: '0',
+				additionFlag: false,
+				entrustPrice: 1,
+				direction: 0,
 			}
 		},
 		computed: {
@@ -489,6 +522,9 @@
 			},
 			tradeParameters(){
 				return this.$store.state.market.tradeParameters;
+			},
+			orderTemplist(){
+				return	this.$store.state.market.orderTemplist;
 			},
 			currentdetail(){
 				if(this.$store.state.market.currentdetail.CommodityNo){
@@ -537,6 +573,13 @@
 			}
 		},
 		watch: {
+			conditionAdditionalPrice: function(n, o){
+				if(n != undefined && n != ''){
+					this.additionFlag = true;
+				}else{
+					this.additionFlag = false;
+				}
+			},
 			isBack: function(n, o){
 				if(n && n == true){
 					localStorage.removeItem('tradeUser');
@@ -570,6 +613,7 @@
 									this.$store.state.market.currentdetail = o;
 									this.$store.state.market.currentNo = o.CommodityNo;
 									this.tradePrices = o.LastQuotation.LastPrice;
+									this.conditionPrice = o.LastQuotation.LastPrice;
 									if(this.selected == 1 || this.selected == 0){
 										this.selected = 1;
 										this.selectView = 'fens';
@@ -802,6 +846,7 @@
 					if(commodityNo == o.CommodityNo){
 						this.$store.state.market.currentdetail = o;
 						this.tradePrices = o.LastQuotation.LastPrice;
+						this.conditionPrice = o.LastQuotation.LastPrice;
 					}
 				}.bind(this));
 				this.tradeParameters.forEach(function(o, i){
@@ -868,6 +913,14 @@
 					this.priceShow = true;
 				}else{
 					this.priceShow = false;
+				}
+			},
+			conditionClick: function(e){
+				var index = $(e.currentTarget).index();
+				if(index == 0){
+					this.conditionShow = true;
+				}else{
+					this.conditionShow = false;
 				}
 			},
 			add: function(){
@@ -977,6 +1030,91 @@
 					this.tradeSocket.send(JSON.stringify(b));
 					layer.close(index);
 				}.bind(this));
+			},
+			conditionConfirm: function(){
+				var miniTikeSize = this.orderTemplist[this.currentdetail.CommodityNo].MiniTikeSize;
+				var msg;
+				if(this.conditionShow == true){
+					if(this.conditionAdditionalPrice){
+						var d1 = this.conditionAdditionalPrice % miniTikeSize;
+						if(d1 >= 0.000000001 && parseFloat(miniTikeSize - d1) >= 0.0000000001){
+							layer.msg('输入附加价格不符合最小变动价，最小变动价为：' + miniTikeSize, {time: 1000});
+							return;
+						}
+						//判断价格与附加价格是否形成区间
+						switch (this.conditionPrice){
+							case 0:
+								if(this.conditionAdditionalPrice == 0 || this.conditionAdditionalPrice == 1 || this.conditionAdditionalPrice <= this.conditionPrice){
+									layer.msg('附加条件添加错误', {time: 1000});
+									return;
+								}
+								break;
+							case 1:
+								if(this.conditionAdditionalPrice == 0 || this.conditionAdditionalPrice == 1 || this.conditionAdditionalPrice <= this.conditionPrice){
+									layer.msg('附加条件添加错误', {time: 1000});
+									return;
+								}
+								break;
+							case 2:
+								if(this.conditionAdditionalPrice == 2 || this.conditionAdditionalPrice == 3 || this.conditionAdditionalPrice >= this.conditionPrice){
+									layer.msg('附加条件添加错误', {time: 1000});
+									return;
+								}
+								break;
+							case 3:
+								if(this.conditionAdditionalPrice == 2 || this.conditionAdditionalPrice == 3 || this.conditionAdditionalPrice >= this.conditionPrice){
+									layer.msg('附加条件添加错误', {time: 1000});
+									return;
+								}
+								break;
+							default:
+								break;
+						}
+					}
+					var d0 = this.conditionPrice % miniTikeSize;
+					if(this.conditionPrice == '' || this.conditionPrice == 0 || this.conditionPrice == undefined){
+						layer.msg('请输入价格', {time: 1000});
+					}else if(d0 >= 0.000000001 && parseFloat(miniTikeSize - d0) >= 0.0000000001){
+						layer.msg('输入价格不符合最小变动价，最小变动价为：' + miniTikeSize, {time: 1000});
+					}else if(this.defaultNum == '' || this.defaultNum == 0 || this.defaultNum == undefined){
+						layer.msg('请输入手数', {time: 1000});
+					}else{
+						msg = '是否添加价格条件单？';
+						console.log(this.currentdetail);
+						let b = {
+							"Method": 'InsertCondition',
+							"Parameters":{
+								'ExchangeNo': this.currentdetail.ExchangeNo,
+								'CommodityNo': this.currentdetail.CommodityNo,
+								'ContractNo': this.currentdetail.CurrencyNo,
+								'Num': parseInt(this.defaultNum),
+								'ConditionType': 0,
+								'PriceTriggerPonit': parseFloat(this.conditionPrice),
+								'CompareType': parseInt(this.selectType),
+								'TimeTriggerPoint': '',
+								'AB_BuyPoint': 0.0,
+								'AB_SellPoint': 0.0,
+								'OrderType': parseInt(this.entrustPrice),
+								'Drection': parseInt(this.direction),
+								'StopLossType': 5,
+								'StopLossDiff': 0.0,
+								'StopWinDiff': 0.0,
+								'AdditionFlag': this.additionFlag,
+								'AdditionType': parseInt(this.selectAdditionalType),
+								'AdditionPrice': this.conditionAdditionalPrice == '' ? 0 : parseFloat(this.conditionAdditionalPrice)
+							}
+						};
+						layer.confirm(msg, {
+							btn: ['确定','取消']
+						}, function(index){
+							this.tradeSocket.send(JSON.stringify(b));
+							
+							layer.close(index);
+						}.bind(this));
+					}
+				}else{
+					alert(2);
+				}
 			},
 			isSelectedOrder: function(){
 				if(!this.userInfo) return false;
@@ -1200,6 +1338,7 @@
 								this.$store.state.market.currentdetail = o;
 								this.$store.state.market.currentNo = o.CommodityNo;
 								this.tradePrices = o.LastQuotation.LastPrice;
+								this.conditionPrice = o.LastQuotation.LastPrice;
 								if(this.selected == 1 || this.selected == 0){
 									this.selected = 1;
 									this.selectView = 'fens';
@@ -1252,6 +1391,25 @@
 					}.bind(this));
 				}.bind(this));
 			}
+			pro.selectEvent('#select_type', function(data){
+				this.selectType = data;
+			}.bind(this));
+			pro.selectEvent('#select_additional_type', function(data){
+				this.selectAdditionalType = data;
+			}.bind(this));
+			pro.selectEvent('#time_additional_type', function(data){
+				this.timeAdditionalType = data;
+			}.bind(this));
+			pro.selectEvent('#entrust_price', function(data){
+				this.entrustPrice = data;
+			}.bind(this));
+			pro.selectEvent('#order_type', function(data){
+				this.direction = data;
+			}.bind(this));
+			//设置价格条件单价格
+			this.conditionPrice = parseFloat(this.currentdetail.LastQuotation.LastPrice).toFixed(this.currentdetail.DotSize);
+			//调用时间插件
+			dateEvent('.time-ipt', 'time');
 		},
 		activated: function(){
 			//获取平台账户登录信息
@@ -1702,6 +1860,7 @@
 							&.time-ipt{
 								float: left;
 								width: 100px;
+								cursor: pointer;
 							}
 						}
 						.col{
@@ -1747,6 +1906,40 @@
 								width: 58px;
 								padding-left: 0;
 							}
+							.slt-list{
+								width: 60px;
+								height: 96px;
+								overflow: hidden;
+								li{
+									width: 60px;
+									height: 24px;
+									line-height: 24px;
+								}
+							}
+							&.current{
+								span{
+									line-height: 0.5;
+								}
+							}
+						}
+						.slt-spe{
+							width: 110px;
+							.slt{
+								width: 108px;
+							}
+							.slt-list{
+								width: 110px;
+								height: 48px;
+								li{
+									width: 110px;
+								}
+							}
+							&:last-child{
+								margin: 0;
+							}
+						}
+						.operate_type{
+							margin-left: 4px;
 						}
 						&.condition-box{
 							.col{
@@ -1790,6 +1983,9 @@
 								&:hover{
 									background: $green;
 								}
+							}
+							&.condition_btn{
+								width: 390px;
 							}
 						}
 					}
