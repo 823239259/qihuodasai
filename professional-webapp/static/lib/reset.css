@@ -85,7 +85,6 @@ a {
 .slt-box{
 	position: relative;
 	float: left;
-	z-index: 2;
 	width: 300px;
 	height: 30px;
 	border: 1px solid #474c66;

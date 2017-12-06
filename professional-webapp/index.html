@@ -18,8 +18,12 @@
 		<link rel="bookmark" href="static/lib/images/logo.ico"/>
 		<script type="text/javascript">
 			//日历插件
-			function dateEvent(obj){
+			function dateEvent(obj, type){
 				$(obj).click(function(){
+					if(type == 'time'){
+						WdatePicker({dateFmt: 'HH:mm:ss'});
+						return;
+					}
 					WdatePicker();
 				});
 			}

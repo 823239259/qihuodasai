@@ -1,34 +1,70 @@
 <template>
 	<div id="trade_details">
-		<table>
-			<thead>
-				<tr>
-					<td>合约名称</td>
-					<td>状态</td>
-					<td>类型</td>
-					<td>条件</td>
-					<td>下单</td>
-					<td>有效日期</td>
-					<td>下单时间</td>
-				</tr>
-			</thead>
-			<tbody>
-				<template></template>
-				<tr>
-					<td>合约名称</td>
-					<td>状态</td>
-					<td>类型</td>
-					<td>条件</td>
-					<td>下单</td>
-					<td>有效日期</td>
-					<td>下单时间</td>
-				</tr>
-			</tbody>
-		</table>
-		<div class="tools">
-			<button class="btn blue">暂停</button>
-			<button class="btn blue" @click="editConditionOrder">修改</button>
-			<button class="btn blue">删除</button>
+		<div class="title">
+			<template v-for="(v, index) in tabList">
+				<span :class="{current: currentNum == index}" @click="tabEvent(index)">{{v}}</span>
+			</template>
+		</div>
+		<div class="cont_not" v-if="tabShow">
+			<table>
+				<thead>
+					<tr>
+						<td>合约名称</td>
+						<td>状态</td>
+						<td>类型</td>
+						<td>条件</td>
+						<td>下单</td>
+						<td>有效日期</td>
+						<td>下单时间</td>
+					</tr>
+				</thead>
+				<tbody>
+					<template v-for="(v, index) in conditionListCont">
+						<tr>
+							<td>{{v.name}}</td>
+							<td>{{v.status00}}</td>
+							<td>{{v.type}}</td>
+							<td>{{v.conditions}}</td>
+							<td>{{v.order}}</td>
+							<td>{{v.term}}</td>
+							<td>{{v.time}}</td>
+						</tr>
+					</template>
+				</tbody>
+			</table>
+			<div class="tools">
+				<button class="btn blue">暂停</button>
+				<button class="btn blue" @click="editConditionOrder">修改</button>
+				<button class="btn blue">删除</button>
+			</div>
+		</div>
+		<div class="cont_already" v-if="!tabShow">
+			<table>
+				<thead>
+					<tr>
+						<td>合约名称</td>
+						<td>状态</td>
+						<td>类型</td>
+						<td>条件</td>
+						<td>下单</td>
+						<td>有效日期</td>
+						<td>下单时间</td>
+					</tr>
+				</thead>
+				<tbody>
+					<template v-for="(v, index) in triggerConditionListCont">
+						<tr>
+							<td>{{v.name}}</td>
+							<td>{{v.status00}}</td>
+							<td>{{v.type}}</td>
+							<td>{{v.conditions}}</td>
+							<td>{{v.order}}</td>
+							<td>{{v.term}}</td>
+							<td>{{v.time}}</td>
+						</tr>
+					</template>
+				</tbody>
+			</table>
 		</div>
 		<div id="edit_price_order" v-show="showDialog">
 			<div class="edit_order cont">
@@ -183,12 +219,39 @@
 		data(){
 			return{
 				showDialog: false,
+				tabList: ['未触发列表','已触发列表'],
+				currentNum: 0,
+				tabShow: true,
+				conditionListCont: [],
+				triggerConditionListCont: [],
 			}
 		},
 		computed: {
-			
+			conditionList(){
+				return this.$store.state.market.conditionList;
+			},
+			triggerConditionList(){
+				return this.$store.state.market.triggerConditionList;
+			},
+			tradeSocket(){
+				return this.$store.state.tradeSocket;
+			},
+		},
+		watch: {
+			conditionList: function(n, o){
+				this.regroupConditionList();
+			}
 		},
 		methods: {
+			tabEvent: function(index){
+				this.currentNum = index;
+				if(index == 0){
+					this.tabShow = true;
+				}else{
+					this.tabShow = false;
+					this.regroupTriggerConditionList();
+				}
+			},
 			editConditionOrder: function(){
 				this.showDialog = true;
 				layer.open({
@@ -209,16 +272,344 @@
 						this.showDialog = false;
 					}.bind(this)
 				});
-			}
+			},
+			regroupConditionList:function(){
+				this.conditionListCont = [];
+				this.conditionList.forEach(function(o, i){
+					let obj = {};
+					obj.AB_BuyPoint = o.AB_BuyPoint;
+					obj.AB_SellPoint = o.AB_SellPoint;
+					obj.AdditionFlag=o.AdditionFlag;
+					obj.AdditionPrice = o.AdditionPrice;
+					obj.AdditionType = o.AdditionType;
+					obj.CommodityNo = o.CommodityNo;
+					obj.CompareType = o.CompareType;
+					obj.ConditionNo = o.ConditionNo;
+					obj.ConditionType = o.ConditionType;
+					obj.ContractNo = o.ContractNo;
+					obj.Drection = o.Drection;
+					obj.ExchangeNo = o.ExchangeNo;
+					obj.InsertDateTime = o.InsertDateTime;
+					obj.Num = o.Num;
+					obj.OrderType = o.OrderType;
+					obj.PriceTriggerPonit = o.PriceTriggerPonit;
+					obj.Status = o.Status;
+					obj.StatusMsg = o.StatusMsg;
+					obj.StopLossDiff = o.StopLossDiff;
+					obj.StopLossType = o.StopLossType;
+					obj.StopLossWin = o.StopLossWin;
+					obj.TimeTriggerPoint = o.TimeTriggerPoint;
+					obj.TriggedTime = o.TriggedTime;
+					obj.name=o.CommodityNo+o.ContractNo;
+					obj.status00 = (function(){
+									if(o.Status==0){
+										return '运行中';
+									}else if(o.Status==1){
+										return '暂停';
+									}else if(o.Status==2){
+										return '已触发';
+									}else if(o.Status==3){
+										return '已取消';
+									}else if(o.Status==4){
+										return '插入失败';
+									}else if(o.Status==5){
+										return '触发失败';
+									}
+								})();
+					obj.type = (function(){
+									if(o.ConditionType==0){
+										return '价格条件';
+									}else if(o.ConditionType==1){
+										return '时间条件';
+									}else if(o.ConditionType==2){
+										return 'AB单';
+									}
+								})();
+					obj.conditions = (function(){
+									if(o.AdditionFlag==0){ //没有附件条件
+										if(o.CompareType==0){
+											return '>'+o.PriceTriggerPonit;
+										}else if(o.CompareType==1){
+											return '<'+o.PriceTriggerPonit;
+										}else if(o.CompareType==2){
+											return '>='+o.PriceTriggerPonit;
+										}else if(o.CompareType==3){
+											return '<='+o.PriceTriggerPonit;
+										}else{
+											let s = o.TimeTriggerPoint.split(' ');
+											if(o.AdditionType==0){
+												return s[1]+' >'+o.AdditionPrice;
+											}else if(o.AdditionType==1){
+												return s[1]+' <'+o.AdditionPrice;
+											}else if(o.AdditionType==2){
+												return s[1]+' >='+o.AdditionPrice;
+											}else if(o.AdditionType==3){
+												return s[1]+' <='+o.AdditionPrice;
+											}else{
+												return s[1];
+											}
+										}
+									}else{ //有附加条件
+										if(o.CompareType==0){
+											if(o.AdditionType==0){
+												return '>'+o.PriceTriggerPonit+' >'+o.AdditionPrice;
+											}else if(o.AdditionType==1){
+												return '>'+o.PriceTriggerPonit+' <'+o.AdditionPrice;
+											}else if(o.AdditionType==2){
+												return '>'+o.PriceTriggerPonit+' >='+o.AdditionPrice;
+											}else if(o.AdditionType==3){
+												return '>'+o.PriceTriggerPonit+' <='+o.AdditionPrice;
+											}
+										}else if(o.CompareType==1){
+											if(o.AdditionType==0){
+												return '<'+o.PriceTriggerPonit+' >'+o.AdditionPrice;
+											}else if(o.AdditionType==1){
+												return '<'+o.PriceTriggerPonit+' <'+o.AdditionPrice;
+											}else if(o.AdditionType==2){
+												return '<'+o.PriceTriggerPonit+' >='+o.AdditionPrice;
+											}else if(o.AdditionType==3){
+												return '<'+o.PriceTriggerPonit+' <='+o.AdditionPrice;
+											}
+										}else if(o.CompareType==2){
+											if(o.AdditionType==0){
+												return '>='+o.PriceTriggerPonit+' >'+o.AdditionPrice;
+											}else if(o.AdditionType==1){
+												return '>='+o.PriceTriggerPonit+' <'+o.AdditionPrice;
+											}else if(o.AdditionType==2){
+												return '>='+o.PriceTriggerPonit+' >='+o.AdditionPrice;
+											}else if(o.AdditionType==3){
+												return '>='+o.PriceTriggerPonit+' <='+o.AdditionPrice;
+											}
+										}else if(o.CompareType==3){
+											if(o.AdditionType==0){
+												return '<='+o.PriceTriggerPonit+' >'+o.AdditionPrice;
+											}else if(o.AdditionType==1){
+												return '<='+o.PriceTriggerPonit+' <'+o.AdditionPrice;
+											}else if(o.AdditionType==2){
+												return '<='+o.PriceTriggerPonit+' >='+o.AdditionPrice;
+											}else if(o.AdditionType==3){
+												return '<='+o.PriceTriggerPonit+' <='+o.AdditionPrice;
+											}
+										}else{
+											let s = o.TimeTriggerPoint.split(' ');
+											if(o.AdditionType==0){
+												return s[1]+' >'+o.AdditionPrice;
+											}else if(o.AdditionType==1){
+												return s[1]+' <'+o.AdditionPrice;
+											}else if(o.AdditionType==2){
+												return s[1]+' >='+o.AdditionPrice;
+											}else if(o.AdditionType==3){
+												return s[1]+' <='+o.AdditionPrice;
+											}else{
+												return s[1];
+											}
+										}
+									}
+								})();
+					obj.order = (function(){
+								if(o.Drection == 0){ //买
+									if(o.OrderType==1){
+										return '买,市价,'+o.Num+'手'
+									}else{
+										return '买,对手价,'+o.Num+'手'
+									}
+								} else if(o.Drection == 1){//卖
+									if(o.OrderType==1){
+										return '卖,市价,'+o.Num+'手'
+									}else{
+										return '卖,对手价,'+o.Num+'手'
+									}
+								}
+							})();
+					obj.term = '当日有效';
+					obj.time = o.InsertDateTime;
+					this.conditionListCont.push(obj);
+					console.log(this.conditionListCont);
+				}.bind(this));
+			},
+			regroupTriggerConditionList: function(){
+				this.triggerConditionListCont = [];
+				this.triggerConditionList.forEach(function(o, i){
+					let obj = {};
+					obj.AB_BuyPoint = o.AB_BuyPoint;
+					obj.AB_SellPoint = o.AB_SellPoint;
+					obj.AdditionFlag=o.AdditionFlag;
+					obj.AdditionPrice = o.AdditionPrice;
+					obj.AdditionType = o.AdditionType;
+					obj.CommodityNo = o.CommodityNo;
+					obj.CompareType = o.CompareType;
+					obj.ConditionNo = o.ConditionNo;
+					obj.ConditionType = o.ConditionType;
+					obj.ContractNo = o.ContractNo;
+					obj.Drection = o.Drection;
+					obj.ExchangeNo = o.ExchangeNo;
+					obj.InsertDateTime = o.InsertDateTime;
+					obj.Num = o.Num;
+					obj.OrderType = o.OrderType;
+					obj.PriceTriggerPonit = o.PriceTriggerPonit;
+					obj.Status = o.Status;
+					obj.StatusMsg = o.StatusMsg;
+					obj.StopLossDiff = o.StopLossDiff;
+					obj.StopLossType = o.StopLossType;
+					obj.StopLossWin = o.StopLossWin;
+					obj.TimeTriggerPoint = o.TimeTriggerPoint;
+					obj.TriggedTime = o.TriggedTime;
+					obj.name=o.CommodityNo+o.ContractNo;
+					obj.status00 = (function(){
+									if(o.Status==0){
+										return '运行中';
+									}else if(o.Status==1){
+										return '暂停';
+									}else if(o.Status==2){
+										return '已触发';
+									}else if(o.Status==3){
+										return '已取消';
+									}else if(o.Status==4){
+										return '插入失败';
+									}else if(o.Status==5){
+										return '触发失败';
+									}
+								})();
+					obj.type = (function(){
+									if(o.ConditionType==0){
+										return '价格条件';
+									}else if(o.ConditionType==1){
+										return '时间条件';
+									}else if(o.ConditionType==2){
+										return 'AB单';
+									}
+								})();
+					obj.conditions = (function(){
+									if(o.AdditionFlag==0){ //没有附件条件
+										if(o.CompareType==0){
+											return '>'+o.PriceTriggerPonit;
+										}else if(o.CompareType==1){
+											return '<'+o.PriceTriggerPonit;
+										}else if(o.CompareType==2){
+											return '>='+o.PriceTriggerPonit;
+										}else if(o.CompareType==3){
+											return '<='+o.PriceTriggerPonit;
+										}else{
+											let s = o.TimeTriggerPoint.split(' ');
+											if(o.AdditionType==0){
+												return s[1]+' >'+o.AdditionPrice;
+											}else if(o.AdditionType==1){
+												return s[1]+' <'+o.AdditionPrice;
+											}else if(o.AdditionType==2){
+												return s[1]+' >='+o.AdditionPrice;
+											}else if(o.AdditionType==3){
+												return s[1]+' <='+o.AdditionPrice;
+											}else {
+												return s[1];
+											}
+										}
+									}else{ //有附加条件
+										if(o.CompareType==0){
+											if(o.AdditionType==0){
+												return '>'+o.PriceTriggerPonit+' >'+o.AdditionPrice;
+											}else if(o.AdditionType==1){
+												return '>'+o.PriceTriggerPonit+' <'+o.AdditionPrice;
+											}else if(o.AdditionType==2){
+												return '>'+o.PriceTriggerPonit+' >='+o.AdditionPrice;
+											}else if(o.AdditionType==3){
+												return '>'+o.PriceTriggerPonit+' <='+o.AdditionPrice;
+											}
+										}else if(o.CompareType==1){
+											if(o.AdditionType==0){
+												return '<'+o.PriceTriggerPonit+' >'+o.AdditionPrice;
+											}else if(o.AdditionType==1){
+												return '<'+o.PriceTriggerPonit+' <'+o.AdditionPrice;
+											}else if(o.AdditionType==2){
+												return '<'+o.PriceTriggerPonit+' >='+o.AdditionPrice;
+											}else if(o.AdditionType==3){
+												return '<'+o.PriceTriggerPonit+' <='+o.AdditionPrice;
+											}
+										}else if(o.CompareType==2){
+											if(o.AdditionType==0){
+												return '>='+o.PriceTriggerPonit+' >'+o.AdditionPrice;
+											}else if(o.AdditionType==1){
+												return '>='+o.PriceTriggerPonit+' <'+o.AdditionPrice;
+											}else if(o.AdditionType==2){
+												return '>='+o.PriceTriggerPonit+' >='+o.AdditionPrice;
+											}else if(o.AdditionType==3){
+												return '>='+o.PriceTriggerPonit+' <='+o.AdditionPrice;
+											}
+										}else if(o.CompareType==3){
+											if(o.AdditionType==0){
+												return '<='+o.PriceTriggerPonit+' >'+o.AdditionPrice;
+											}else if(o.AdditionType==1){
+												return '<='+o.PriceTriggerPonit+' <'+o.AdditionPrice;
+											}else if(o.AdditionType==2){
+												return '<='+o.PriceTriggerPonit+' >='+o.AdditionPrice;
+											}else if(o.AdditionType==3){
+												return '<='+o.PriceTriggerPonit+' <='+o.AdditionPrice;
+											}
+										}else{
+											let s = o.TimeTriggerPoint.split(' ');
+											if(o.AdditionType==0){
+												return s[1]+' >'+o.AdditionPrice;
+											}else if(o.AdditionType==1){
+												return s[1]+' <'+o.AdditionPrice;
+											}else if(o.AdditionType==2){
+												return s[1]+' >='+o.AdditionPrice;
+											}else if(o.AdditionType==3){
+												return s[1]+' <='+o.AdditionPrice;
+											}else {
+												return s[1];
+											}
+										}
+									}
+								})();
+					obj.order = (function(){
+								if(o.Drection == 0){ //买
+									if(o.OrderType==1){
+										return '买,市价,'+o.Num+'手'
+									}else{
+										return '买,对手价,'+o.Num+'手'
+									}
+								} else if(o.Drection == 1){//卖
+									if(o.OrderType==1){
+										return '卖,市价,'+o.Num+'手'
+									}else{
+										return '卖,对手价,'+o.Num+'手'
+									}
+								}
+							})();
+					obj.term = '当日有效';
+					obj.time = o.InsertDateTime;
+					this.triggerConditionListCont.push(obj);
+					console.log(this.triggerConditionListCont);
+				}.bind(this));
+			},
+		},
+		mounted: function(){
+			//重组数据
+			this.regroupConditionList();
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
 	@import "../../assets/css/common.scss";
-	#trade_details{
-		height: 151px;
+	.cont_not{
+		height: 111px;
 		overflow: auto;
+	}
+	.cont_already{
+		height: 170px;
+		overflow: auto;
+	}
+	.title{
+		width: 100%;
+		height: 40px;
+		line-height: 40px;
+		span{
+			margin: 0 10px;
+			cursor: pointer;
+			&.current, &:hover{
+				color: $yellow;
+			}
+		}
 	}
 	table{
 		thead tr{
@@ -244,7 +635,7 @@
 			line-height: 30px;
 		}
 	}
-	.cont{
+	.edit_order{
 		width: 400px;
 		overflow: hidden;
 		padding: 20px 10px 0 10px;
