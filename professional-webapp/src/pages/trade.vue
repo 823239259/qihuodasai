@@ -316,7 +316,7 @@
 									<input type="text" class="ipt price-ipt" v-model="conditionPrice" />
 									<label class="label-spe">附加价格</label>
 									<div class="slt-box price-box" id="select_additional_type">
-										<input type="text" class="slt" disabled="disabled" selectVal="0" value=">=" />
+										<input type="text" class="slt" disabled="disabled" selectVal="0" value=">" />
 										<span class="tal-box"><span class="tal"></span></span>
 										<div class="slt-list">
 											<ul>
@@ -331,10 +331,10 @@
 								</li>
 								<li v-show="!conditionShow">
 									<label>触发时间</label>
-									<input type="text" class="ipt time-ipt" readonly="readonly" />
+									<input type="text" class="ipt time-ipt" id="condition_time" readonly="readonly" />
 									<label class="label-spe">附加价格</label>
 									<div class="slt-box price-box" id="time_additional_type">
-										<input type="text" class="slt" disabled="disabled" selectVal="0" value=">="/>
+										<input type="text" class="slt" disabled="disabled" selectVal="0" value=">"/>
 										<span class="tal-box"><span class="tal"></span></span>
 										<div class="slt-list">
 											<ul>
@@ -345,7 +345,7 @@
 											</ul>
 										</div>
 									</div>
-									<input type="text" class="ipt price-ipt" />
+									<input type="text" class="ipt price-ipt" v-model="timeAddtionalPrice" />
 								</li>
 								<li>
 									<label>委托价格</label>
@@ -370,10 +370,6 @@
 											</ul>
 										</div>
 									</div>
-									<!--<div class="col">
-										<span :class="{current: priceShow == true}" @click="priceClick">市价</span>
-										<span :class="{current: !priceShow == true}" @click="priceClick">对手价</span>
-									</div>-->
 								</li>
 								<li class="condition-box">
 									<label>委托数量</label>
@@ -496,9 +492,11 @@
 				selectType: '0',
 				selectAdditionalType: '0',
 				timeAdditionalType: '0',
-				additionFlag: false,
+//				additionFlag: false,
 				entrustPrice: 1,
 				direction: 0,
+				timeAddtionalPrice: '',
+				conditionTime: '',
 			}
 		},
 		computed: {
@@ -573,13 +571,20 @@
 			}
 		},
 		watch: {
-			conditionAdditionalPrice: function(n, o){
-				if(n != undefined && n != ''){
-					this.additionFlag = true;
-				}else{
-					this.additionFlag = false;
-				}
-			},
+//			conditionAdditionalPrice: function(n, o){
+//				if(n != undefined && n != ''){
+//					this.additionFlag = true;
+//				}else{
+//					this.additionFlag = false;
+//				}
+//			},
+//			timeAddtionalPrice: function(n, o){
+//				if(n != undefined && n != ''){
+//					this.additionFlag = true;
+//				}else{
+//					this.additionFlag = false;
+//				}
+//			},
 			isBack: function(n, o){
 				if(n && n == true){
 					localStorage.removeItem('tradeUser');
@@ -921,6 +926,12 @@
 					this.conditionShow = true;
 				}else{
 					this.conditionShow = false;
+					let date = new Date();
+					let hour = date.getHours().toString().length > 1 ? date.getHours().toString() : '0' + date.getHours().toString();
+					let minutes = date.getMinutes().toString().length > 1 ? date.getMinutes().toString() : '0' + date.getMinutes().toString();
+					let second = date.getSeconds().toString().length > 1 ? date.getSeconds().toString() : '0' + date.getSeconds().toString();
+					this.conditionTime = hour + ':' + minutes + ':' + second;
+					$("#condition_time").val(this.conditionTime);
 				}
 			},
 			add: function(){
@@ -1042,27 +1053,27 @@
 							return;
 						}
 						//判断价格与附加价格是否形成区间
-						switch (this.conditionPrice){
-							case 0:
-								if(this.conditionAdditionalPrice == 0 || this.conditionAdditionalPrice == 1 || this.conditionAdditionalPrice <= this.conditionPrice){
+						switch (this.selectType){
+							case '0':
+								if(this.selectAdditionalType == '0' || this.selectAdditionalType == '1' || this.conditionAdditionalPrice <= this.conditionPrice){
 									layer.msg('附加条件添加错误', {time: 1000});
 									return;
 								}
 								break;
-							case 1:
-								if(this.conditionAdditionalPrice == 0 || this.conditionAdditionalPrice == 1 || this.conditionAdditionalPrice <= this.conditionPrice){
+							case '1':
+								if(this.selectAdditionalType == '0' || this.selectAdditionalType == '1' || this.conditionAdditionalPrice <= this.conditionPrice){
 									layer.msg('附加条件添加错误', {time: 1000});
 									return;
 								}
 								break;
-							case 2:
-								if(this.conditionAdditionalPrice == 2 || this.conditionAdditionalPrice == 3 || this.conditionAdditionalPrice >= this.conditionPrice){
+							case '2':
+								if(this.selectAdditionalType == '2' || this.selectAdditionalType == '3' || this.conditionAdditionalPrice >= this.conditionPrice){
 									layer.msg('附加条件添加错误', {time: 1000});
 									return;
 								}
 								break;
-							case 3:
-								if(this.conditionAdditionalPrice == 2 || this.conditionAdditionalPrice == 3 || this.conditionAdditionalPrice >= this.conditionPrice){
+							case '3':
+								if(this.selectAdditionalType == '2' || this.selectAdditionalType == '3' || this.conditionAdditionalPrice >= this.conditionPrice){
 									layer.msg('附加条件添加错误', {time: 1000});
 									return;
 								}
@@ -1080,13 +1091,12 @@
 						layer.msg('请输入手数', {time: 1000});
 					}else{
 						msg = '是否添加价格条件单？';
-						console.log(this.currentdetail);
 						let b = {
 							"Method": 'InsertCondition',
 							"Parameters":{
 								'ExchangeNo': this.currentdetail.ExchangeNo,
 								'CommodityNo': this.currentdetail.CommodityNo,
-								'ContractNo': this.currentdetail.CurrencyNo,
+								'ContractNo': this.currentdetail.LastQuotation.ContractNo,
 								'Num': parseInt(this.defaultNum),
 								'ConditionType': 0,
 								'PriceTriggerPonit': parseFloat(this.conditionPrice),
@@ -1099,7 +1109,7 @@
 								'StopLossType': 5,
 								'StopLossDiff': 0.0,
 								'StopWinDiff': 0.0,
-								'AdditionFlag': this.additionFlag,
+								'AdditionFlag': this.conditionAdditionalPrice == '' ? false :  true,
 								'AdditionType': parseInt(this.selectAdditionalType),
 								'AdditionPrice': this.conditionAdditionalPrice == '' ? 0 : parseFloat(this.conditionAdditionalPrice)
 							}
@@ -1108,13 +1118,68 @@
 							btn: ['确定','取消']
 						}, function(index){
 							this.tradeSocket.send(JSON.stringify(b));
-							
+							this.conditionAdditionalPrice = '';
 							layer.close(index);
 						}.bind(this));
 					}
 				}else{
-					alert(2);
+					this.conditionTime = this.getNowFormatDate() + ' ' + $("#condition_time").val();
+					if(this.timeAddtionalPrice){
+						var d2 = this.timeAddtionalPrice % miniTikeSize;
+						if(d2 >= 0.000000001 && parseFloat(miniTikeSize-d2) >= 0.0000000001){
+							layer.msg('输入附加价格不符合最小变动价，最小变动价为：' + miniTikeSize, {time: 1000});
+						}
+					}
+					if(this.defaultNum == '' || this.defaultNum == 0 || this.defaultNum == undefined){
+						layer.msg('请输入手数', {time: 1000});
+					}else{
+						msg = '是否添加时间条件单？';
+						let b = {
+							"Method": 'InsertCondition',
+							"Parameters":{
+								'ExchangeNo': this.currentdetail.ExchangeNo,
+								'CommodityNo': this.currentdetail.CommodityNo,
+								'ContractNo': this.currentdetail.LastQuotation.ContractNo,
+								'Num': parseInt(this.defaultNum),
+								'ConditionType': 1,
+								'PriceTriggerPonit': 0.0,
+								'CompareType': 5,
+								'TimeTriggerPoint': this.conditionTime,
+								'AB_BuyPoint': 0.0,
+								'AB_SellPoint': 0.0,
+								'OrderType': parseInt(this.entrustPrice),
+								'Drection': parseInt(this.direction),
+								'StopLossType': 5,
+								'StopLossDiff': 0.0,
+								'StopWinDiff': 0.0,
+								'AdditionFlag': this.timeAddtionalPrice == '' ? false : true,
+								'AdditionType': parseInt(this.selectAdditionalType),
+								'AdditionPrice': this.timeAddtionalPrice == '' ? 0 : parseFloat(this.timeAddtionalPrice)
+							}
+						};
+						layer.confirm(msg, {
+							btn: ['确定','取消']
+						}, function(index){
+							this.tradeSocket.send(JSON.stringify(b));
+							this.timeAddtionalPrice = '';
+							layer.close(index);
+						}.bind(this));
+					}
 				}
+			},
+			getNowFormatDate: function(){
+				let date = new Date();
+			    let seperator1 = "-";
+			    let month = date.getMonth() + 1;
+			    let strDate = date.getDate();
+			    if (month >= 1 && month <= 9) {
+			        month = "0" + month;
+			    }
+			    if (strDate >= 0 && strDate <= 9) {
+			        strDate = "0" + strDate;
+			    }
+			    let currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate;
+			    return currentdate;
 			},
 			isSelectedOrder: function(){
 				if(!this.userInfo) return false;
@@ -1819,6 +1884,7 @@
 						height: 30px;
 						padding: 0 10px;
 						margin-top: 5px;
+						position: relative;
 						label, span, p{
 							display: inline-block;
 							float: left;
