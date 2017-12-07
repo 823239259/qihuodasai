@@ -130,6 +130,7 @@
 									if(data.code == 1){
 										this.$refs.dialog.isShow = true;
 										this.msg = '发送成功';
+										this.$parent.phoneShow = true;
 										setTimeout(function(){
 											this.isshow = false;
 										}.bind(this),1000);
