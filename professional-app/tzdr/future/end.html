@@ -110,6 +110,7 @@
 					},function(result){
 						document.getElementById('end_btn').removeAttribute('disabled');  //恢复按钮为非禁用
 						mui.toast("申请成功，系统会尽快处理！");
+						mui.app_refresh("openingRecord.html");
 //						mui.app_back(win.businessPageId,true);   //放回businessPageId页面，并且刷新该页面信息
 						mui.openWindow({
 							url:"openingRecord.html",
