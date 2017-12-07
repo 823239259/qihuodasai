@@ -111,11 +111,15 @@
 			<p class="p_center">按重要性分类</p>
 			<div class="important_center">
 				<ul>
-					<li>
-						<i class="ifont">&#xe634;</i><span>全部</span>
+					<li >
+						<i class="ifont" v-on:click="chooseImportantAll" v-show="showImportantAll">&#xe634;</i>
+						<i class="ifont ifont_yellow" v-on:click="chooseImportantAll" v-show="showImportantAll1">&#xe600;</i>
+						<span>全部</span>
 					</li>
 					<li>
-						<i class="ifont">&#xe634;</i><span>重要</span>
+						<i class="ifont" v-on:click="chooseImportant" v-show="showImportant">&#xe634;</i>
+						<i class="ifont ifont_yellow" v-on:click="chooseImportant" v-show="showImportant1">&#xe600;</i>
+						<span>重要</span>
 					</li>
 				</ul>
 			</div>
@@ -142,7 +146,11 @@
 					<li>{{k.timestamp | getTime}}</li>
 					<li><img :src="k.flagUrl" /></li>
 					<li>{{k.title}}</li>
-					<li>{{k.importance}}</li>
+					<li v-if="k.importance != null">
+						<img src="../assets/images/calendar_star.png" v-for="a in parseFloat(k.importance)"/>
+						<img src="../assets/images/calendar_star1.png" v-for="a in (3-k.importance)"/>
+					</li>
+					<li v-else="k.importance == null">--</li>
 					<li>{{k.actual}}</li>
 					<li>{{k.forecast}}</li>
 					<li>{{k.previous}}</li>
@@ -169,10 +177,32 @@
 				importance:'',
 				current:3,
 				show_weekDay:'',
-				show_day:''
+				show_day:'',
+				showImportantAll:false,
+				showImportantAll1:true,
+				showImportant:true,
+				showImportant1:false
 			}
 		},
 		methods:{
+			chooseImportantAll:function(e){
+				if(this.showImportantAll1 == true){
+					this.showImportantAll = true;
+					this.showImportantAll1 = false;
+				}else if(this.showImportantAll1 == false) {
+					this.showImportantAll = false;
+					this.showImportantAll1 = true;
+				}
+			},
+			chooseImportant:function(){
+				if(this.showImportant1 == true){
+					this.showImportant = true;
+					this.showImportant1 = false;
+				}else if(this.showImportant1 == false) {
+					this.showImportant = false;
+					this.showImportant1 = true;
+				}
+			},
 //			updateTime:function(){
 //				this.sevenlist=[];
 //				var time = this.startT;
@@ -226,7 +256,7 @@
 				pro.fetch('post','/crawler/getCrawlerCalendar',data,"").then((res)=>{
 					console.log(res)
 					if(res.success == true && res.code == ''){
-						this.list = res.data.data.slice(0,5);
+						this.list = res.data.data;
 					}
 				}).catch((err)=>{
 					console.log(err);
@@ -234,8 +264,6 @@
 			},
 			getDayList:function(e){
 			    var timec = Date.parse(e)/1000;
-			    console.log("666666666666666666");
-			    console.log(timec);
 			    var today = pro.getDate("y-m-d",timec*1000);
 			    //1-3天前
 			    var todayBefore3 = pro.getDate("y-m-d",(timec-3*24*60*60)*1000);
@@ -278,7 +306,6 @@
 				this.show_weekDay = this.weekDayList[index].weekday;
 			},
 			lastWeek:function(){
-				console.log("000000000000000000");
 				var lastWeekDay =  pro.getDate("y-m-d",(Date.parse(this.startTime)/1000-7*24*60*60)*1000);
 				var lastWeekDay1 = pro.getDate("y-m-d",(Date.parse(lastWeekDay)/1000+24*60*60)*1000);
 				console.log(lastWeekDay);
@@ -287,7 +314,6 @@
 				this.getInfoList(lastWeekDay,lastWeekDay1,'','')
 			},
 			nextWeek:function(){
-				console.log("1111111111111111111");
 				var nextWeekDay = pro.getDate("y-m-d",(Date.parse(this.startTime)/1000+7*24*60*60)*1000);
 				var nextWeekDay1 = pro.getDate("y-m-d",(Date.parse(nextWeekDay)/1000+24*60*60)*1000);
 				console.log(nextWeekDay);
@@ -301,8 +327,18 @@
 			this.getInfoList(this.startTime,this.endTime,'','');
 			//获取当天的时间和星期
 			this.show_day = pro.getDate("yy-mm-dd",Date.parse(new Date()));
-			console.log(this.startTime);
 			this.getDayList(this.startTime);
+			//初始化高度
+			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+			var _h = h - 47;
+			$("#calendar").height(_h);
+			$(window).resize(function(){
+				var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+				var _h = h - 47;
+				if(contH > _h){
+					$("#calendar").height(_h);
+				}
+			});
 		},
 		filters:{
 			getTime:function(e){
@@ -455,7 +491,7 @@
 	#calendar{
 		width: 1000px;
 		margin: auto;
-		/*overflow-y: auto;*/
+		overflow-y: auto;
 	}
 	.calendar_container{
 		background-color: $blue;
@@ -583,12 +619,18 @@
 			padding-right: 10px;
 			cursor: pointer;
 		}
+		.ifont_yellow{
+			color: $yellow;
+		}
 		ul{
 			width: 100%;
 			height: 60px;
 			line-height: 55px;
 			li{
 				&:nth-child(1){
+					margin-left: 170px;
+				}
+				&:nth-child(2){
 					margin-left: 170px;
 				}
 				width: 160px;
@@ -646,7 +688,7 @@
 		}
 		.list_details{
 			font-size: $fs14;
-			line-height: 40px;
+			/*line-height: 40px;*/
 			text-indent: 10px;
 			height: 40px;
 			border-bottom: 1px solid $bottom_color;
@@ -657,12 +699,26 @@
 				}
 				&:nth-child(2){
 					width: 10%;
+					img{
+						width: 30px;
+						height: 20px;
+						position: relative;
+						top: 5px;
+					}
 				}
 				&:nth-child(3){
 					width: 45%;
 				}
 				&:nth-child(4){
 					width: 10%;
+					img{
+						float: left;
+						line-height: 40px;
+						margin-top: 12px;
+						&:nth-child(1){
+							margin-left: 10px;
+						}
+					}
 				}
 				&:nth-child(5){
 					width: 10%;
@@ -672,12 +728,6 @@
 				}
 				&:nth-child(7){
 					width: 5%;
-				}
-				img{
-					width: 30px;
-					height: 20px;
-					position: relative;
-					top: 5px;
 				}
 			}
 		}
