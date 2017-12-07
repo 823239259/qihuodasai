@@ -191,7 +191,7 @@
 		height: 800px;
 	}
 	.forgetPassword {
-		position : relative;
+		position : fixed;
 		left :50%;
 		top:50%;
 		width: 400px;
