@@ -121,8 +121,6 @@
 				mui.app_request("/user/getbalancerate",{
 					"businessType":2,'couponBusinessType':8
 				},function(result){
-					console.log(111111111)
-					console.log(result.data);
 					document.getElementById("endtolist").removeAttribute("disabled");
 					//申请终结方案
 					mui.app_request('/user/coupon/list',{},function(res){

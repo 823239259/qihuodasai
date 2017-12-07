@@ -409,14 +409,23 @@
 							}
 	
 							//点击跳转开户或开户失败方案详情页
-							mui.openWindow({
-								url: new_url,
-								id: new_url,
-								extras: {
-									did: id
-								}
-							});
-	
+							mui.app_refresh(new_url); 
+							setTimeout(function(){
+								mui.openWindow({
+									url: new_url,
+									id: new_url,
+									extras: {
+										did: id
+									}
+								});
+							},500)
+//							mui.openWindow({
+//								url: new_url,
+//								id: new_url,
+//								extras: {
+//									did: id
+//								}
+//							});
 						});
 	
 					}
