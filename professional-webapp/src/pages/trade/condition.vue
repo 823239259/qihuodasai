@@ -81,8 +81,8 @@
 				<div class="row">
 						<label>条件:</label>
 						<span>价格</span>
-						<div class="slt-box row_price_box">
-							<input type="text" class="slt" disabled="disabled" selectVal="0" value=">"/>
+						<div class="slt-box row_price_box" id="price_type">
+							<input type="text" class="slt" disabled="disabled" :selectVal="priceType" :value="priceTypeName"/>
 							<span class="tal-box"><span class="tal"></span></span>
 							<div class="slt-list">
 								<ul>
@@ -95,8 +95,8 @@
 						</div>
 						<input type="text" class="ipt" v-model="conditionPrice" />
 						<label>附加:</label>
-						<div class="slt-box row_price_box">
-							<input type="text" class="slt" disabled="disabled" selectVal="0" value=">"/>
+						<div class="slt-box row_price_box" id="additional_price_type">
+							<input type="text" class="slt" disabled="disabled" :selectVal="additionalPriceType" :value="additionalPriceTypeName"/>
 							<span class="tal-box"><span class="tal"></span></span>
 							<div class="slt-list">
 								<ul>
@@ -112,8 +112,8 @@
 				<div class="row">
 					<div class="fl">
 						<label>操作:</label>
-						<div class="slt-box row_money_box">
-							<input type="text" class="slt" disabled="disabled" selectVal="0" value="买入"/>
+						<div class="slt-box row_money_box" id="direction_type">
+							<input type="text" class="slt" disabled="disabled" :selectVal="directionType" :value="directionTypeName"/>
 							<span class="tal-box"><span class="tal"></span></span>
 							<div class="slt-list">
 								<ul>
@@ -122,13 +122,13 @@
 								</ul>
 							</div>
 						</div>
-						<div class="slt-box row_money_box">
-							<input type="text" class="slt" disabled="disabled" selectVal="0" value="市价"/>
+						<div class="slt-box row_money_box" id="condition_price_type">
+							<input type="text" class="slt" disabled="disabled" :selectVal="orderType" :value="orderTypeName"/>
 							<span class="tal-box"><span class="tal"></span></span>
 							<div class="slt-list">
 								<ul>
-									<li selectVal="0">市价</li>
-									<li selectVal="1">限价</li>
+									<li selectVal="1">市价</li>
+									<li selectVal="2">对价</li>
 								</ul>
 							</div>
 						</div>
@@ -214,6 +214,7 @@
 </template>
 
 <script>
+	import pro from '../../assets/js/common.js'
 	export default{
 		name: 'trade_details',
 		data(){
@@ -237,6 +238,14 @@
 				conditionPrice: '',
 				conditionTime: '',
 				additionPrice: '',
+				priceType: '0',
+				priceTypeName: '>',
+				additionalPriceType: '0',
+				additionalPriceTypeName: '>',
+				directionType: '0',
+				directionTypeName: '买入',
+				orderType: '1',
+				orderTypeName: '市价',
 			}
 		},
 		computed: {
@@ -310,10 +319,6 @@
 						this.currentConditionOrder = o;
 						console.log(this.currentConditionOrder);
 						this.conditionNum = o.Num;
-						o.PriceTriggerPonit == 0 ? this.conditionPrice = '' : this.conditionPrice = o.PriceTriggerPonit;
-						o.TimeTriggerPoint.split(' ')[1] == '00:00:00' ? this.conditionTime = '': this.conditionTime = o.TimeTriggerPoint.split(' ')[1];
-						console.log(this.conditionTime);
-						$(".time").val(this.conditionTime);
 						this.additionPrice = o.AdditionPrice;
 					}
 				}.bind(this));
@@ -400,14 +405,60 @@
 					layer.msg('运行中的条件单不能修改', {time: 1000});
 				}else{
 					var dialogObj, title;
-					if(this.conditionType == 0){
+					if(this.conditionType == 0){    //价格
 						dialogObj = $("#edit_price_order");
 						this.showPriceDialog = true;
 						title = '修改价格条件单';
-					}else{
+						this.currentConditionOrder.PriceTriggerPonit == 0 ? this.conditionPrice = '' : this.conditionPrice = this.currentConditionOrder.PriceTriggerPonit;
+						if(this.currentConditionOrder.CompareType == 0){
+							this.priceType = '0';
+							this.priceTypeName = '>';
+						}else if(this.currentConditionOrder.CompareType == 1){
+							this.priceType = '1';
+							this.priceTypeName = '>=';
+						}else if(this.currentConditionOrder.CompareType == 2){
+							this.priceType = '2';
+							this.priceTypeName = '<';
+						}else if(this.currentConditionOrder.CompareType == 3){
+							this.priceType = '3';
+							this.priceTypeName = '<=';
+						}
+					}else{   //时间
 						dialogObj = $("#edit_time_order");
 						this.showTimeDialog = true;
 						title = '修改时间条件单';
+						this.currentConditionOrder.TimeTriggerPoint.split(' ')[1] == '00:00:00' ? this.conditionTime = '': this.conditionTime = this.currentConditionOrder.TimeTriggerPoint.split(' ')[1];
+						$(".time").val(this.conditionTime);
+						
+					}
+					if(this.additionPrice != 0){
+						if(this.currentConditionOrder.AdditionType == 0){
+							this.additionalPriceType = '0';
+							this.additionalPriceTypeName = '>';
+						}else if(this.currentConditionOrder.AdditionType == 1){
+							this.additionalPriceType = '1';
+							this.additionalPriceTypeName = '>=';
+						}else if(this.currentConditionOrder.AdditionType == 2){
+							this.additionalPriceType = '2';
+							this.additionalPriceTypeName = '<';
+						}else if(this.currentConditionOrder.AdditionType == 3){
+							this.additionalPriceType = '3';
+							this.additionalPriceTypeName = '<=';
+						}
+					}
+					if(this.currentConditionOrder.OrderType == 1){
+						this.orderType = '1';
+						this.orderTypeName = '市价';
+					}else if(this.currentConditionOrder.OrderType == 2){
+						this.orderType = '2';
+						this.orderTypeName = '对价';
+					}
+					if(this.currentConditionOrder.Drection == 0){
+						this.directionType = '0';
+						this.directionTypeName = '买入';
+					}else if(this.currentConditionOrder.Drection == 1){
+						this.directionType = '1';
+						this.directionTypeName = '卖出';
 					}
 					layer.open({
 						type: 1,
@@ -776,12 +827,40 @@
 					console.log(this.triggerConditionListCont);
 				}.bind(this));
 			},
+			getType: function(num){
+				if(num == '0'){
+					return '>';
+				}else if(num == '1'){
+					return '>=';
+				}else if(num == '2'){
+					return '<';
+				}else if(num == '3'){
+					return '<=';
+				}
+			}
 		},
 		mounted: function(){
 			//重组数据
 			this.regroupConditionList();
 			//调用时间插件
 			dateEvent('.time', 'time');
+			//调用下拉框
+			pro.selectEvent('#price_type', function(data){
+				this.priceType = data;
+				this.priceTypeName = this.getType(data);
+			}.bind(this));
+			pro.selectEvent('#additional_price_type', function(data){
+				this.additionalPriceType = data;
+				this.additionalPriceTypeName = this.getType(data);
+			}.bind(this));
+			pro.selectEvent('#direction_type', function(data){
+				this.directionType = data;
+				data == '0' ? this.directionTypeName = '买入' : this.directionTypeName = '卖出';
+			}.bind(this));
+			pro.selectEvent('#condition_price_type', function(data){
+				this.orderType = data;
+				data == '1' ? this.orderTypeName = '市价' : this.orderTypeName = '对价';
+			}.bind(this));
 		}
 	}
 </script>
@@ -834,7 +913,6 @@
 	}
 	.edit_order{
 		width: 400px;
-		overflow: hidden;
 		padding: 20px 10px 0 10px;
 		.row{
 			height: 30px;
@@ -874,6 +952,16 @@
 					width: 78px;
 					padding-left: 0;
 				}
+				.slt-list{
+					width: 80px;
+					height: 48px;
+					overflow: hidden;
+					li{
+						width: 80px;
+						height: 24px;
+						line-height: 24px;
+					}
+				}
 				span{
 					line-height: 54px;
 				}
@@ -884,6 +972,13 @@
 				.slt{
 					width: 58px;
 					padding-left: 0;
+				}
+				.slt-list{
+					width: 60px;
+					height: 96px;
+					li{
+						width: 60px;
+					}
 				}
 			}
 		}
