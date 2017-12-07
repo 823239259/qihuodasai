@@ -20,7 +20,7 @@
 				</thead>
 				<tbody>
 					<template v-for="(v, index) in conditionListCont">
-						<tr>
+						<tr :class="{current: selectedNum == index}" @click="clickEvent(index, v.ConditionNo, v.Status, v.CompareType)">
 							<td>{{v.name}}</td>
 							<td>{{v.status00}}</td>
 							<td>{{v.type}}</td>
@@ -33,9 +33,9 @@
 				</tbody>
 			</table>
 			<div class="tools">
-				<button class="btn blue">暂停</button>
+				<button class="btn blue" @click="suspendConditionOrder">{{statusName}}</button>
 				<button class="btn blue" @click="editConditionOrder">修改</button>
-				<button class="btn blue">删除</button>
+				<button class="btn blue" @click="deleteConditionOrder">删除</button>
 			</div>
 		</div>
 		<div class="cont_already" v-if="!tabShow">
@@ -224,6 +224,10 @@
 				tabShow: true,
 				conditionListCont: [],
 				triggerConditionListCont: [],
+				selectedNum: -1,
+				currentId: '',
+				status: '',
+				statusName: '暂停',
 			}
 		},
 		computed: {
@@ -240,6 +244,9 @@
 		watch: {
 			conditionList: function(n, o){
 				this.regroupConditionList();
+			},
+			triggerConditionList: function(n, o){
+				this.regroupTriggerConditionList();
 			}
 		},
 		methods: {
@@ -251,6 +258,91 @@
 					this.tabShow = false;
 					this.regroupTriggerConditionList();
 				}
+			},
+			clickEvent: function(index, id, status, type){
+				if(this.selectedNum == index){
+					this.selectedNum = -1;
+					this.currentId = '';
+//					this.currentOrderList = '';
+					return;
+				}
+				this.selectedNum = index;
+				this.currentId = id;
+				this.status = status;
+//				this.stopLossType = type;
+				if(this.status == 0){
+					this.statusName = '暂停';
+				}else{
+					this.statusName = '启动';
+				}
+			},
+			suspendConditionOrder: function(){
+				if(this.currentId == '' || this.currentId == undefined){
+					layer.msg('请选择一条数据', {time: 1000});
+					return;
+				}
+				var b, msg;
+				this.conditionListCont.forEach(function(o,i){
+					if(this.currentId == o.ConditionNo){
+						if(o.Status == 0){    //如果处于运行中，则暂停
+							msg = '是否暂停条件单？';
+							b = {
+								"Method": 'ModifyCondition',
+								"Parameters": {
+									"ConditionNo": o.ConditionNo,
+									"ModifyFlag": 2, //暂停
+									"Num": o.Num,
+									"ConditionType": o.ConditionType,
+									"PriceTriggerPonit": o.PriceTriggerPonit,
+									"CompareType": o.CompareType,
+									"TimeTriggerPoint": o.TimeTriggerPoint,
+									"AB_BuyPoint": o.AB_BuyPoint,
+									"AB_SellPoint": o.AB_SellPoint,
+									"OrderType": o.OrderType,
+									"StopLossType": o.StopLossType,
+									"Direction": o.Drection,
+									"StopLossDiff": 0.0,
+									"StopWinDiff": 0.0,
+									"AdditionFlag": o.AdditionFlag,
+									"AdditionType": o.AdditionType,
+									"AdditionPrice": o.AdditionPrice
+								}
+							};
+						}else if(o.Status == 1){
+							msg = '是否启动条件单？';
+							b = {
+								"Method": 'ModifyCondition',
+								"Parameters": {
+									"ConditionNo": o.ConditionNo,
+									"ModifyFlag": 3, //启动
+									"Num": o.Num,
+									"ConditionType": o.ConditionType,
+									"PriceTriggerPonit": o.PriceTriggerPonit,
+									"CompareType": o.CompareType,
+									"TimeTriggerPoint": o.TimeTriggerPoint,
+									"AB_BuyPoint": o.AB_BuyPoint,
+									"AB_SellPoint": o.AB_SellPoint,
+									"OrderType": o.OrderType,
+									"StopLossType": o.StopLossType,
+									"Direction": o.Drection,
+									"StopLossDiff": 0.0,
+									"StopWinDiff": 0.0,
+									"AdditionFlag": o.AdditionFlag,
+									"AdditionType": o.AdditionType,
+									"AdditionPrice": o.AdditionPrice
+								}
+							};
+						}
+						layer.confirm(msg, {
+							btn: ['确定','取消']
+						}, function(index){
+							this.tradeSocket.send(JSON.stringify(b));
+							this.currentId = '';
+							this.selectedNum = -1;
+							layer.close(index);
+						}.bind(this));
+					}
+				}.bind(this));
 			},
 			editConditionOrder: function(){
 				this.showDialog = true;
@@ -272,6 +364,46 @@
 						this.showDialog = false;
 					}.bind(this)
 				});
+			},
+			deleteConditionOrder: function(){
+				if(this.currentId == '' || this.currentId == undefined){
+					layer.msg('请选择一条数据', {time: 1000});
+					return;
+				}
+				this.conditionListCont.forEach(function(o, i){
+					if(this.currentId == o.ConditionNo){
+						let b = {
+							"Method": 'ModifyCondition',
+							"Parameters": {
+								"ConditionNo": o.ConditionNo,
+								"ModifyFlag": 1, //删除
+								"Num": o.Num,
+								"ConditionType": o.ConditionType,
+								"PriceTriggerPonit": o.PriceTriggerPonit,
+								"CompareType": o.CompareType,
+								"TimeTriggerPoint": o.TimeTriggerPoint,
+								"AB_BuyPoint": o.AB_BuyPoint,
+								"AB_SellPoint": o.AB_SellPoint,
+								"OrderType": o.OrderType,
+								"StopLossType": o.StopLossType,
+								"Direction": o.Drection,
+								"StopLossDiff": 0.0,
+								"StopWinDiff": 0.0,
+								"AdditionFlag": o.AdditionFlag,
+								"AdditionType": o.AdditionType,
+								"AdditionPrice": o.AdditionPrice
+							}
+						};
+						layer.confirm('是否删除条件单？', {
+							btn: ['确定','取消']
+						}, function(index){
+							this.tradeSocket.send(JSON.stringify(b));
+							this.currentId = '';
+							this.selectedNum = -1;
+							layer.close(index);
+						}.bind(this));
+					}
+				}.bind(this));
 			},
 			regroupConditionList:function(){
 				this.conditionListCont = [];
@@ -424,7 +556,6 @@
 					obj.term = '当日有效';
 					obj.time = o.InsertDateTime;
 					this.conditionListCont.push(obj);
-					console.log(this.conditionListCont);
 				}.bind(this));
 			},
 			regroupTriggerConditionList: function(){

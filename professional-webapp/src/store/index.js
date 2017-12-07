@@ -1157,6 +1157,7 @@ export default new Vuex.Store({
 					}
 					break;
 				case "OnRspInsertCondition":
+					console.log(1111);
 					if(parameters.Status == 0){
 						layer.msg('设置条件单成功', {time: 1000});
 					}else{
@@ -1165,19 +1166,18 @@ export default new Vuex.Store({
 					context.dispatch('dealWithOnRspInsertCondition',parameters);
 					break;
 				case 'OnRtnConditionState':
-//					console.log(parameters);
-					if(parameters.Status==0){
-						context.state.market.layer='【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,改单后已运行' + Math.floor(Math.random()*10);
-					}else if(parameters.Status==1){
-						context.state.market.layer='【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,已暂停' + Math.floor(Math.random()*10);
-					}else if(parameters.Status==2){
-						context.state.market.layer='【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,已触发' + Math.floor(Math.random()*10);
-					}else if(parameters.Status==3){
-						context.state.market.layer='【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,已取消' + Math.floor(Math.random()*10);
-					}else if(parameters.Status==4){
-						context.state.market.layer='【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,插入失败' + Math.floor(Math.random()*10);
-					}else if(parameters.Status==5){
-						context.state.market.layer='【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,触发失败';
+					if(parameters.Status == 0){
+						layer.msg('【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,改单后已运行', {time: 1000});
+					}else if(parameters.Status == 1){
+						layer.msg('【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,已暂停', {time: 1000});
+					}else if(parameters.Status == 2){
+						layer.msg('【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,已触发', {time: 1000});
+					}else if(parameters.Status == 3){
+						layer.msg('【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,已取消', {time: 1000});
+					}else if(parameters.Status == 4){
+						layer.msg('【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,插入失败', {time: 1000});
+					}else if(parameters.Status == 5){
+						layer.msg('【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,触发失败', {time: 1000});
 					}
 					context.dispatch('dealWithOnRtnConditionState',parameters);
 					
@@ -1359,13 +1359,11 @@ export default new Vuex.Store({
 					})();
 					b.term = '当日有效';
 					b.time = e0.InsertDateTime;	
-					context.state.market.conditionList.splice(i,1,parameters);
-					if(parameters.Status<2){
-//						context.state.market.noListCont.splice(i,1,b);
+					if(parameters.Status < 2){
+						context.state.market.conditionList.splice(i,1,parameters);
 					}else{
-//						context.state.market.noListCont.splice(i,1);
+						context.state.market.conditionList.splice(i,1);
 						context.state.market.triggerConditionList.push(parameters);
-//						context.state.market.yesListCont.push(b);
 					}
 					
 				}

@@ -250,7 +250,6 @@
 						this.stopPrice = o.StopLossPrice;
 						var openAvgPrice = o.HoldAvgPrice;
 						this.percentLoss = parseFloat((this.stopPrice - openAvgPrice)/openAvgPrice*100).toFixed(2);
-						console.log(o);
 					}
 				}.bind(this));
 			},
