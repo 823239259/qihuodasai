@@ -20,7 +20,7 @@
 				</thead>
 				<tbody>
 					<template v-for="(v, index) in conditionListCont">
-						<tr :class="{current: selectedNum == index}" @click="clickEvent(index, v.ConditionNo, v.Status, v.CompareType)">
+						<tr :class="{current: selectedNum == index}" @click="clickEvent(index, v.ConditionNo, v.Status, v.ConditionType)">
 							<td>{{v.name}}</td>
 							<td>{{v.status00}}</td>
 							<td>{{v.type}}</td>
@@ -66,23 +66,23 @@
 				</tbody>
 			</table>
 		</div>
-		<div id="edit_price_order" v-show="showDialog">
+		<div id="edit_price_order" v-show="showPriceDialog">
 			<div class="edit_order cont">
 				<div class="row">
 					<div class="fl">
 						<label>合约:</label>
-						<span>HSI,恒指期货</span>
+						<span>{{currentConditionOrder.CommodityNo + currentConditionOrder.ContractNo}},{{orderTemplist[currentConditionOrder.CommodityNo] ? orderTemplist[currentConditionOrder.CommodityNo].CommodityName : ''}}</span>
 					</div>
 					<div class="fl">
 						<label>最新:</label>
-						<span>56.12</span>
+						<span>{{lastPrice}}</span>
 					</div>
 				</div>
 				<div class="row">
 						<label>条件:</label>
 						<span>价格</span>
-						<div class="slt-box row_price_box">
-							<input type="text" class="slt" disabled="disabled" selectVal="0" value=">="/>
+						<div class="slt-box row_price_box" id="price_type">
+							<input type="text" class="slt" disabled="disabled" :selectVal="priceType" :value="priceTypeName"/>
 							<span class="tal-box"><span class="tal"></span></span>
 							<div class="slt-list">
 								<ul>
@@ -93,10 +93,10 @@
 								</ul>
 							</div>
 						</div>
-						<input type="text" class="ipt" />
+						<input type="text" class="ipt" v-model="conditionPrice" />
 						<label>附加:</label>
-						<div class="slt-box row_price_box">
-							<input type="text" class="slt" disabled="disabled" selectVal="0" value=">="/>
+						<div class="slt-box row_price_box" id="additional_price_type">
+							<input type="text" class="slt" disabled="disabled" :selectVal="additionalPriceType" :value="additionalPriceTypeName"/>
 							<span class="tal-box"><span class="tal"></span></span>
 							<div class="slt-list">
 								<ul>
@@ -107,13 +107,13 @@
 								</ul>
 							</div>
 						</div>
-						<input type="text" class="ipt" />
+						<input type="text" class="ipt" v-model="additionPrice" />
 				</div>
 				<div class="row">
 					<div class="fl">
 						<label>操作:</label>
-						<div class="slt-box row_money_box">
-							<input type="text" class="slt" disabled="disabled" selectVal="0" value="买入"/>
+						<div class="slt-box row_money_box" id="direction_type">
+							<input type="text" class="slt" disabled="disabled" :selectVal="directionType" :value="directionTypeName"/>
 							<span class="tal-box"><span class="tal"></span></span>
 							<div class="slt-list">
 								<ul>
@@ -122,20 +122,20 @@
 								</ul>
 							</div>
 						</div>
-						<div class="slt-box row_money_box">
-							<input type="text" class="slt" disabled="disabled" selectVal="0" value="市价"/>
+						<div class="slt-box row_money_box" id="condition_price_type">
+							<input type="text" class="slt" disabled="disabled" :selectVal="orderType" :value="orderTypeName"/>
 							<span class="tal-box"><span class="tal"></span></span>
 							<div class="slt-list">
 								<ul>
-									<li selectVal="0">市价</li>
-									<li selectVal="1">限价</li>
+									<li selectVal="1">市价</li>
+									<li selectVal="2">对价</li>
 								</ul>
 							</div>
 						</div>
 					</div>
 					<div class="fl">
 						<label>手数:</label>
-						<input type="text" class="ipt" />
+						<input type="text" class="ipt" v-model="conditionNum" />
 					</div>
 				</div>
 			</div>
@@ -144,25 +144,25 @@
 			<p>2.止损单在行情不活跃或快速发送变化下，不保证成交价为指定价。</p>
 			<p>3.止损单存在风险，云端系统、网络故障情况下失效等。</p>
 		</div>
-		<div id="edit_time_order" v-show="showDialog">
+		<div id="edit_time_order" v-show="showTimeDialog">
 			<div class="edit_order cont">
 				<div class="row">
 					<div class="fl">
 						<label>合约:</label>
-						<span>HSI,恒指期货</span>
+						<span>{{currentConditionOrder.CommodityNo + currentConditionOrder.ContractNo}},{{orderTemplist[currentConditionOrder.CommodityNo] ? orderTemplist[currentConditionOrder.CommodityNo].CommodityName : ''}}</span>
 					</div>
 					<div class="fl">
 						<label>最新:</label>
-						<span>56.12</span>
+						<span>{{lastPrice}}</span>
 					</div>
 				</div>
 				<div class="row">
 						<label>条件:</label>
 						<span>时间</span>
-						<input type="text" class="ipt time" />
+						<input type="text" class="ipt time" readonly="readonly" />
 						<label>附加:</label>
 						<div class="slt-box row_price_box">
-							<input type="text" class="slt" disabled="disabled" selectVal="0" value=">="/>
+							<input type="text" class="slt" disabled="disabled" selectVal="0" value=">"/>
 							<span class="tal-box"><span class="tal"></span></span>
 							<div class="slt-list">
 								<ul>
@@ -173,7 +173,7 @@
 								</ul>
 							</div>
 						</div>
-						<input type="text" class="ipt" />
+						<input type="text" class="ipt" v-model="additionPrice" />
 				</div>
 				<div class="row">
 					<div class="fl">
@@ -201,7 +201,7 @@
 					</div>
 					<div class="fl">
 						<label>手数:</label>
-						<input type="text" class="ipt" />
+						<input type="text" class="ipt" v-model="conditionNum" />
 					</div>
 				</div>
 			</div>
@@ -214,6 +214,7 @@
 </template>
 
 <script>
+	import pro from '../../assets/js/common.js'
 	export default{
 		name: 'trade_details',
 		data(){
@@ -228,6 +229,23 @@
 				currentId: '',
 				status: '',
 				statusName: '暂停',
+				currentConditionOrder: '',
+				conditionType: '',
+				showPriceDialog: false,
+				showTimeDialog: false,
+				lastPrice: '',
+				conditionNum: '',
+				conditionPrice: '',
+				conditionTime: '',
+				additionPrice: '',
+				priceType: '0',
+				priceTypeName: '>',
+				additionalPriceType: '0',
+				additionalPriceTypeName: '>',
+				directionType: '0',
+				directionTypeName: '买入',
+				orderType: '1',
+				orderTypeName: '市价',
 			}
 		},
 		computed: {
@@ -240,13 +258,34 @@
 			tradeSocket(){
 				return this.$store.state.tradeSocket;
 			},
+			orderTemplist(){
+				return	this.$store.state.market.orderTemplist;
+			},
+			parameters(){
+				return this.$store.state.market.Parameters;
+			},
 		},
 		watch: {
+			parameters: function(n,o){
+				if(this.currentConditionOrder.CommodityNo != undefined){
+					n.forEach(function(o, i){
+						if(this.currentConditionOrder.CommodityNo == o.CommodityNo){
+							this.lastPrice = this.orderTemplist[this.currentConditionOrder.CommodityNo].LastQuotation.LastPrice;
+							this.lastPrice = parseFloat(this.lastPrice).toFixed(this.orderTemplist[this.currentConditionOrder.CommodityNo].DotSize);
+						}
+					}.bind(this));
+				}
+			},
 			conditionList: function(n, o){
 				this.regroupConditionList();
 			},
 			triggerConditionList: function(n, o){
 				this.regroupTriggerConditionList();
+			},
+			additionPrice: function(n, o){
+				if(n == 0){
+					this.additionPrice = '';
+				}
 			}
 		},
 		methods: {
@@ -263,18 +302,26 @@
 				if(this.selectedNum == index){
 					this.selectedNum = -1;
 					this.currentId = '';
-//					this.currentOrderList = '';
+					this.currentConditionOrder = '';
 					return;
 				}
 				this.selectedNum = index;
 				this.currentId = id;
 				this.status = status;
-//				this.stopLossType = type;
+				this.conditionType = type;
 				if(this.status == 0){
 					this.statusName = '暂停';
 				}else{
 					this.statusName = '启动';
 				}
+				this.conditionList.forEach(function(o, i){
+					if(this.currentId == o.ConditionNo){
+						this.currentConditionOrder = o;
+						console.log(this.currentConditionOrder);
+						this.conditionNum = o.Num;
+						this.additionPrice = o.AdditionPrice;
+					}
+				}.bind(this));
 			},
 			suspendConditionOrder: function(){
 				if(this.currentId == '' || this.currentId == undefined){
@@ -344,26 +391,220 @@
 					}
 				}.bind(this));
 			},
+			editConfirm: function(){
+				var miniTikeSize = this.orderTemplist[this.currentConditionOrder.CommodityNo].MiniTikeSize;
+				var msg, b;
+				if(this.conditionType == 0){
+					if(this.additionPrice){
+						var d1 = this.additionPrice % miniTikeSize;
+						if(d1 >= 0.000000001 && parseFloat(miniTikeSize - d1) >= 0.0000000001){
+							layer.msg('输入附加价格不符合最小变动价，最小变动价为：' + miniTikeSize, {time: 1000});
+							return;
+						}
+						//判断价格与附加价格是否形成区间
+						switch (this.priceType){
+							case '0':
+								if(this.additionalPriceType == '0' || this.additionalPriceType == '1' || this.additionPrice <= this.conditionPrice){
+									layer.msg('附加条件添加错误', {time: 1000});
+									return;
+								}
+								break;
+							case '1':
+								if(this.additionalPriceType == '0' || this.additionalPriceType == '1' || this.additionPrice <= this.conditionPrice){
+									layer.msg('附加条件添加错误', {time: 1000});
+									return;
+								}
+								break;
+							case '2':
+								if(this.additionalPriceType == '2' || this.additionalPriceType == '3' || this.additionPrice >= this.conditionPrice){
+									layer.msg('附加条件添加错误', {time: 1000});
+									return;
+								}
+								break;
+							case '3':
+								if(this.additionalPriceType == '2' || this.additionalPriceType == '3' || this.additionPrice >= this.conditionPrice){
+									layer.msg('附加条件添加错误', {time: 1000});
+									return;
+								}
+								break;
+							default:
+								break;
+						}
+					}
+					var d0 = this.conditionPrice % miniTikeSize;
+					if(this.conditionPrice == '' || this.conditionPrice == 0 || this.conditionPrice == undefined){
+						layer.msg('请输入价格', {time: 1000});
+					}else if(d0 >= 0.000000001 && parseFloat(miniTikeSize - d0) >= 0.0000000001){
+						layer.msg('输入价格不符合最小变动价，最小变动价为：' + miniTikeSize, {time: 1000});
+					}else if(this.conditionNum == '' || this.conditionNum == 0 || this.conditionNum == undefined){
+						layer.msg('请输入手数', {time: 1000});
+					}else{
+						msg = '是否修改价格条件单？';
+						b = {
+							"Method": 'ModifyCondition',
+							"Parameters":{
+								'ConditionNo': this.currentConditionOrder.ConditionNo,
+								'ModifyFlag': 0,
+								'Num': parseInt(this.comditionNum),
+								'ConditionType': 0,
+								'PriceTriggerPonit': parseFloat(this.conditionPrice),
+								'CompareType': parseInt(this.priceType),
+								'TimeTriggerPoint': '',
+								'AB_BuyPoint': 0.0,
+								'AB_SellPoint': 0.0,
+								'OrderType': parseInt(this.orderType),
+								'StopLossType': 5,
+								'Drection': parseInt(this.directionType),
+								'StopLossDiff': 0.0,
+								'StopWinDiff': 0.0,
+								'AdditionFlag':(function(){
+													if(this.additionPrice == '' || this.additionPrice == 0 || this.additionPrice == undefined){
+														return false;
+													}else{
+														return true;
+													}
+											}.bind(this))(),
+								'AdditionType': parseInt(this.additionalPriceType),
+								'AdditionPrice': parseFloat(this.additionPrice)
+							}
+						};
+						layer.confirm(msg, {
+							btn: ['确定','取消']
+						}, function(index){
+							this.tradeSocket.send(JSON.stringify(b));
+							layer.close(index);
+						}.bind(this));
+					}
+				}else{
+					this.conditionTime = this.getNowFormatDate() + ' ' + $(".time").val();
+					if(this.additionPrice){
+						var d2 = this.additionPrice % miniTikeSize;
+						if(d2 >= 0.000000001 && parseFloat(miniTikeSize-d2) >= 0.0000000001){
+							layer.msg('输入附加价格不符合最小变动价，最小变动价为：' + miniTikeSize, {time: 1000});
+						}
+					}
+					if(this.conditionNum == '' || this.conditionNum == 0 || this.conditionNum == undefined){
+						layer.msg('请输入手数', {time: 1000});
+					}else{
+						msg = '是否修改时间条件单？';
+						b = {
+							"Method": 'ModifyCondition',
+							"Parameters":{
+								'ConditionNo': this.currentConditionOrder.ConditionNo,
+								'ModifyFlag': 0,
+								'Num': parseInt(this.comditionNum),
+								'ConditionType': 1,
+								'PriceTriggerPonit': 0.00,
+								'CompareType': 5,
+								'TimeTriggerPoint': this.conditionTime,
+								'AB_BuyPoint': 0.0,
+								'AB_SellPoint': 0.0,
+								'OrderType': parseInt(this.orderType),
+								'StopLossType': 5,
+								'Drection': parseInt(this.directionType),
+								'StopLossDiff': 0.0,
+								'StopWinDiff': 0.0,
+								'AdditionFlag':(function(){
+													if(this.additionPrice == '' || this.additionPrice == 0 || this.additionPrice == undefined){
+														return false;
+													}else{
+														return true;
+													}
+											}.bind(this))(),
+								'AdditionType': parseInt(this.additionalPriceType),
+								'AdditionPrice': parseFloat(this.additionPrice)
+							}
+						};
+						layer.confirm(msg, {
+							btn: ['确定','取消']
+						}, function(index){
+							this.tradeSocket.send(JSON.stringify(b));
+							layer.close(index);
+						}.bind(this));
+					}
+				}
+			},
 			editConditionOrder: function(){
-				this.showDialog = true;
-				layer.open({
-					type: 1,
-					title: '修改价格条件单',
-					area: ['400px', 'auto'],
-					content: $("#edit_time_order"),
-					btn: ['确定','取消'],
-					btn1: function(index){
+				if(this.currentId == '' || this.currentId == undefined){
+					layer.msg('请选择一条数据', {time: 1000});
+				}else if(this.status == 0){
+					layer.msg('运行中的条件单不能修改', {time: 1000});
+				}else{
+					var dialogObj, title;
+					if(this.conditionType == 0){    //价格
+						dialogObj = $("#edit_price_order");
+						this.showPriceDialog = true;
+						title = '修改价格条件单';
+						this.currentConditionOrder.PriceTriggerPonit == 0 ? this.conditionPrice = '' : this.conditionPrice = this.currentConditionOrder.PriceTriggerPonit;
+						if(this.currentConditionOrder.CompareType == 0){
+							this.priceType = '0';
+							this.priceTypeName = '>';
+						}else if(this.currentConditionOrder.CompareType == 1){
+							this.priceType = '1';
+							this.priceTypeName = '>=';
+						}else if(this.currentConditionOrder.CompareType == 2){
+							this.priceType = '2';
+							this.priceTypeName = '<';
+						}else if(this.currentConditionOrder.CompareType == 3){
+							this.priceType = '3';
+							this.priceTypeName = '<=';
+						}
+					}else{   //时间
+						dialogObj = $("#edit_time_order");
+						this.showTimeDialog = true;
+						title = '修改时间条件单';
+						this.currentConditionOrder.TimeTriggerPoint.split(' ')[1] == '00:00:00' ? this.conditionTime = '': this.conditionTime = this.currentConditionOrder.TimeTriggerPoint.split(' ')[1];
+						$(".time").val(this.conditionTime);
 						
-						layer.close(index);
-						this.showDialog = false;
-					}.bind(this),
-					btn2: function(){
-						this.showDialog = false;
-					}.bind(this),
-					cancel: function(){
-						this.showDialog = false;
-					}.bind(this)
-				});
+					}
+					if(this.additionPrice != 0){
+						if(this.currentConditionOrder.AdditionType == 0){
+							this.additionalPriceType = '0';
+							this.additionalPriceTypeName = '>';
+						}else if(this.currentConditionOrder.AdditionType == 1){
+							this.additionalPriceType = '1';
+							this.additionalPriceTypeName = '>=';
+						}else if(this.currentConditionOrder.AdditionType == 2){
+							this.additionalPriceType = '2';
+							this.additionalPriceTypeName = '<';
+						}else if(this.currentConditionOrder.AdditionType == 3){
+							this.additionalPriceType = '3';
+							this.additionalPriceTypeName = '<=';
+						}
+					}
+					if(this.currentConditionOrder.OrderType == 1){
+						this.orderType = '1';
+						this.orderTypeName = '市价';
+					}else if(this.currentConditionOrder.OrderType == 2){
+						this.orderType = '2';
+						this.orderTypeName = '对价';
+					}
+					if(this.currentConditionOrder.Drection == 0){
+						this.directionType = '0';
+						this.directionTypeName = '买入';
+					}else if(this.currentConditionOrder.Drection == 1){
+						this.directionType = '1';
+						this.directionTypeName = '卖出';
+					}
+					layer.open({
+						type: 1,
+						title: title,
+						area: ['400px', 'auto'],
+						content: dialogObj,
+						btn: ['确定','取消'],
+						btn1: function(index){
+							this.editConfirm();
+						}.bind(this),
+						btn2: function(){
+							this.showPriceDialog = false;
+							this.showTimeDialog = false;
+						}.bind(this),
+						cancel: function(){
+							this.showPriceDialog = false;
+							this.showTimeDialog = false;
+						}.bind(this)
+					});
+				}
 			},
 			deleteConditionOrder: function(){
 				if(this.currentId == '' || this.currentId == undefined){
@@ -712,10 +953,54 @@
 					console.log(this.triggerConditionListCont);
 				}.bind(this));
 			},
+			getNowFormatDate: function(){
+				let date = new Date();
+			    let seperator1 = "-";
+			    let month = date.getMonth() + 1;
+			    let strDate = date.getDate();
+			    if (month >= 1 && month <= 9) {
+			        month = "0" + month;
+			    }
+			    if (strDate >= 0 && strDate <= 9) {
+			        strDate = "0" + strDate;
+			    }
+			    let currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate;
+			    return currentdate;
+			},
+			getType: function(num){
+				if(num == '0'){
+					return '>';
+				}else if(num == '1'){
+					return '>=';
+				}else if(num == '2'){
+					return '<';
+				}else if(num == '3'){
+					return '<=';
+				}
+			}
 		},
 		mounted: function(){
 			//重组数据
 			this.regroupConditionList();
+			//调用时间插件
+			dateEvent('.time', 'time');
+			//调用下拉框
+			pro.selectEvent('#price_type', function(data){
+				this.priceType = data;
+				this.priceTypeName = this.getType(data);
+			}.bind(this));
+			pro.selectEvent('#additional_price_type', function(data){
+				this.additionalPriceType = data;
+				this.additionalPriceTypeName = this.getType(data);
+			}.bind(this));
+			pro.selectEvent('#direction_type', function(data){
+				this.directionType = data;
+				data == '0' ? this.directionTypeName = '买入' : this.directionTypeName = '卖出';
+			}.bind(this));
+			pro.selectEvent('#condition_price_type', function(data){
+				this.orderType = data;
+				data == '1' ? this.orderTypeName = '市价' : this.orderTypeName = '对价';
+			}.bind(this));
 		}
 	}
 </script>
@@ -768,7 +1053,6 @@
 	}
 	.edit_order{
 		width: 400px;
-		overflow: hidden;
 		padding: 20px 10px 0 10px;
 		.row{
 			height: 30px;
@@ -808,6 +1092,16 @@
 					width: 78px;
 					padding-left: 0;
 				}
+				.slt-list{
+					width: 80px;
+					height: 48px;
+					overflow: hidden;
+					li{
+						width: 80px;
+						height: 24px;
+						line-height: 24px;
+					}
+				}
 				span{
 					line-height: 54px;
 				}
@@ -818,6 +1112,13 @@
 				.slt{
 					width: 58px;
 					padding-left: 0;
+				}
+				.slt-list{
+					width: 60px;
+					height: 96px;
+					li{
+						width: 60px;
+					}
 				}
 			}
 		}
