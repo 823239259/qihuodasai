@@ -248,18 +248,13 @@ var market = {
 			currencyNo: '',
 			floatingProfit: 0.0
 		},
-//		layer: null,
 		
 		//止损止盈
 		stopLossList: [],   //未触发列表
-//		hasNostopLossList: [],  //未触发列表（页面使用）
 		stopLossTriggeredList: [],    //已触发列表
-//		hasYesstopLossList: [],  //已触发列表（页面使用）
 		//条件单
 		conditionList: [],   //未触发列表
-//		noListCont: [],    //未触发列表（页面使用）
 		triggerConditionList: [],   //已触发列表
-//		yesListCont: [],    //已触发列表（页面使用）
 		
 		//判断是否可以进行交易操作
 		buyStatus: false,
