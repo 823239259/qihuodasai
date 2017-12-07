@@ -20,7 +20,7 @@
 				</thead>
 				<tbody>
 					<template v-for="(v, index) in conditionListCont">
-						<tr :class="{current: selectedNum == index}" @click="clickEvent(index, v.ConditionNo, v.Status, v.CompareType)">
+						<tr :class="{current: selectedNum == index}" @click="clickEvent(index, v.ConditionNo, v.Status, v.ConditionType)">
 							<td>{{v.name}}</td>
 							<td>{{v.status00}}</td>
 							<td>{{v.type}}</td>
@@ -66,23 +66,23 @@
 				</tbody>
 			</table>
 		</div>
-		<div id="edit_price_order" v-show="showDialog">
+		<div id="edit_price_order" v-show="showPriceDialog">
 			<div class="edit_order cont">
 				<div class="row">
 					<div class="fl">
 						<label>合约:</label>
-						<span>HSI,恒指期货</span>
+						<span>{{currentConditionOrder.CommodityNo + currentConditionOrder.ContractNo}},{{orderTemplist[currentConditionOrder.CommodityNo] ? orderTemplist[currentConditionOrder.CommodityNo].CommodityName : ''}}</span>
 					</div>
 					<div class="fl">
 						<label>最新:</label>
-						<span>56.12</span>
+						<span>{{lastPrice}}</span>
 					</div>
 				</div>
 				<div class="row">
 						<label>条件:</label>
 						<span>价格</span>
 						<div class="slt-box row_price_box">
-							<input type="text" class="slt" disabled="disabled" selectVal="0" value=">="/>
+							<input type="text" class="slt" disabled="disabled" selectVal="0" value=">"/>
 							<span class="tal-box"><span class="tal"></span></span>
 							<div class="slt-list">
 								<ul>
@@ -93,10 +93,10 @@
 								</ul>
 							</div>
 						</div>
-						<input type="text" class="ipt" />
+						<input type="text" class="ipt" v-model="conditionPrice" />
 						<label>附加:</label>
 						<div class="slt-box row_price_box">
-							<input type="text" class="slt" disabled="disabled" selectVal="0" value=">="/>
+							<input type="text" class="slt" disabled="disabled" selectVal="0" value=">"/>
 							<span class="tal-box"><span class="tal"></span></span>
 							<div class="slt-list">
 								<ul>
@@ -107,7 +107,7 @@
 								</ul>
 							</div>
 						</div>
-						<input type="text" class="ipt" />
+						<input type="text" class="ipt" v-model="additionPrice" />
 				</div>
 				<div class="row">
 					<div class="fl">
@@ -135,7 +135,7 @@
 					</div>
 					<div class="fl">
 						<label>手数:</label>
-						<input type="text" class="ipt" />
+						<input type="text" class="ipt" v-model="conditionNum" />
 					</div>
 				</div>
 			</div>
@@ -144,25 +144,25 @@
 			<p>2.止损单在行情不活跃或快速发送变化下，不保证成交价为指定价。</p>
 			<p>3.止损单存在风险，云端系统、网络故障情况下失效等。</p>
 		</div>
-		<div id="edit_time_order" v-show="showDialog">
+		<div id="edit_time_order" v-show="showTimeDialog">
 			<div class="edit_order cont">
 				<div class="row">
 					<div class="fl">
 						<label>合约:</label>
-						<span>HSI,恒指期货</span>
+						<span>{{currentConditionOrder.CommodityNo + currentConditionOrder.ContractNo}},{{orderTemplist[currentConditionOrder.CommodityNo] ? orderTemplist[currentConditionOrder.CommodityNo].CommodityName : ''}}</span>
 					</div>
 					<div class="fl">
 						<label>最新:</label>
-						<span>56.12</span>
+						<span>{{lastPrice}}</span>
 					</div>
 				</div>
 				<div class="row">
 						<label>条件:</label>
 						<span>时间</span>
-						<input type="text" class="ipt time" />
+						<input type="text" class="ipt time" readonly="readonly" />
 						<label>附加:</label>
 						<div class="slt-box row_price_box">
-							<input type="text" class="slt" disabled="disabled" selectVal="0" value=">="/>
+							<input type="text" class="slt" disabled="disabled" selectVal="0" value=">"/>
 							<span class="tal-box"><span class="tal"></span></span>
 							<div class="slt-list">
 								<ul>
@@ -173,7 +173,7 @@
 								</ul>
 							</div>
 						</div>
-						<input type="text" class="ipt" />
+						<input type="text" class="ipt" v-model="additionPrice" />
 				</div>
 				<div class="row">
 					<div class="fl">
@@ -201,7 +201,7 @@
 					</div>
 					<div class="fl">
 						<label>手数:</label>
-						<input type="text" class="ipt" />
+						<input type="text" class="ipt" v-model="conditionNum" />
 					</div>
 				</div>
 			</div>
@@ -228,6 +228,15 @@
 				currentId: '',
 				status: '',
 				statusName: '暂停',
+				currentConditionOrder: '',
+				conditionType: '',
+				showPriceDialog: false,
+				showTimeDialog: false,
+				lastPrice: '',
+				conditionNum: '',
+				conditionPrice: '',
+				conditionTime: '',
+				additionPrice: '',
 			}
 		},
 		computed: {
@@ -240,13 +249,34 @@
 			tradeSocket(){
 				return this.$store.state.tradeSocket;
 			},
+			orderTemplist(){
+				return	this.$store.state.market.orderTemplist;
+			},
+			parameters(){
+				return this.$store.state.market.Parameters;
+			},
 		},
 		watch: {
+			parameters: function(n,o){
+				if(this.currentConditionOrder.CommodityNo != undefined){
+					n.forEach(function(o, i){
+						if(this.currentConditionOrder.CommodityNo == o.CommodityNo){
+							this.lastPrice = this.orderTemplist[this.currentConditionOrder.CommodityNo].LastQuotation.LastPrice;
+							this.lastPrice = parseFloat(this.lastPrice).toFixed(this.orderTemplist[this.currentConditionOrder.CommodityNo].DotSize);
+						}
+					}.bind(this));
+				}
+			},
 			conditionList: function(n, o){
 				this.regroupConditionList();
 			},
 			triggerConditionList: function(n, o){
 				this.regroupTriggerConditionList();
+			},
+			additionPrice: function(n, o){
+				if(n == 0){
+					this.additionPrice = '';
+				}
 			}
 		},
 		methods: {
@@ -263,18 +293,30 @@
 				if(this.selectedNum == index){
 					this.selectedNum = -1;
 					this.currentId = '';
-//					this.currentOrderList = '';
+					this.currentConditionOrder = '';
 					return;
 				}
 				this.selectedNum = index;
 				this.currentId = id;
 				this.status = status;
-//				this.stopLossType = type;
+				this.conditionType = type;
 				if(this.status == 0){
 					this.statusName = '暂停';
 				}else{
 					this.statusName = '启动';
 				}
+				this.conditionList.forEach(function(o, i){
+					if(this.currentId == o.ConditionNo){
+						this.currentConditionOrder = o;
+						console.log(this.currentConditionOrder);
+						this.conditionNum = o.Num;
+						o.PriceTriggerPonit == 0 ? this.conditionPrice = '' : this.conditionPrice = o.PriceTriggerPonit;
+						o.TimeTriggerPoint.split(' ')[1] == '00:00:00' ? this.conditionTime = '': this.conditionTime = o.TimeTriggerPoint.split(' ')[1];
+						console.log(this.conditionTime);
+						$(".time").val(this.conditionTime);
+						this.additionPrice = o.AdditionPrice;
+					}
+				}.bind(this));
 			},
 			suspendConditionOrder: function(){
 				if(this.currentId == '' || this.currentId == undefined){
@@ -344,26 +386,48 @@
 					}
 				}.bind(this));
 			},
+			editConfirm: function(){
+//				if(this.conditionType == 0){
+//					
+//				}else{
+//					
+//				}
+			},
 			editConditionOrder: function(){
-				this.showDialog = true;
-				layer.open({
-					type: 1,
-					title: '修改价格条件单',
-					area: ['400px', 'auto'],
-					content: $("#edit_time_order"),
-					btn: ['确定','取消'],
-					btn1: function(index){
-						
-						layer.close(index);
-						this.showDialog = false;
-					}.bind(this),
-					btn2: function(){
-						this.showDialog = false;
-					}.bind(this),
-					cancel: function(){
-						this.showDialog = false;
-					}.bind(this)
-				});
+				if(this.currentId == '' || this.currentId == undefined){
+					layer.msg('请选择一条数据', {time: 1000});
+				}else if(this.status == 0){
+					layer.msg('运行中的条件单不能修改', {time: 1000});
+				}else{
+					var dialogObj, title;
+					if(this.conditionType == 0){
+						dialogObj = $("#edit_price_order");
+						this.showPriceDialog = true;
+						title = '修改价格条件单';
+					}else{
+						dialogObj = $("#edit_time_order");
+						this.showTimeDialog = true;
+						title = '修改时间条件单';
+					}
+					layer.open({
+						type: 1,
+						title: title,
+						area: ['400px', 'auto'],
+						content: dialogObj,
+						btn: ['确定','取消'],
+						btn1: function(index){
+							this.editConfirm();
+						}.bind(this),
+						btn2: function(){
+							this.showPriceDialog = false;
+							this.showTimeDialog = false;
+						}.bind(this),
+						cancel: function(){
+							this.showPriceDialog = false;
+							this.showTimeDialog = false;
+						}.bind(this)
+					});
+				}
 			},
 			deleteConditionOrder: function(){
 				if(this.currentId == '' || this.currentId == undefined){
@@ -716,6 +780,8 @@
 		mounted: function(){
 			//重组数据
 			this.regroupConditionList();
+			//调用时间插件
+			dateEvent('.time', 'time');
 		}
 	}
 </script>
