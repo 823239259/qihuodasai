@@ -392,11 +392,137 @@
 				}.bind(this));
 			},
 			editConfirm: function(){
-//				if(this.conditionType == 0){
-//					
-//				}else{
-//					
-//				}
+				var miniTikeSize = this.orderTemplist[this.currentConditionOrder.CommodityNo].MiniTikeSize;
+				var msg, b;
+				if(this.conditionType == 0){
+					if(this.additionPrice){
+						var d1 = this.additionPrice % miniTikeSize;
+						if(d1 >= 0.000000001 && parseFloat(miniTikeSize - d1) >= 0.0000000001){
+							layer.msg('输入附加价格不符合最小变动价，最小变动价为：' + miniTikeSize, {time: 1000});
+							return;
+						}
+						//判断价格与附加价格是否形成区间
+						switch (this.priceType){
+							case '0':
+								if(this.additionalPriceType == '0' || this.additionalPriceType == '1' || this.additionPrice <= this.conditionPrice){
+									layer.msg('附加条件添加错误', {time: 1000});
+									return;
+								}
+								break;
+							case '1':
+								if(this.additionalPriceType == '0' || this.additionalPriceType == '1' || this.additionPrice <= this.conditionPrice){
+									layer.msg('附加条件添加错误', {time: 1000});
+									return;
+								}
+								break;
+							case '2':
+								if(this.additionalPriceType == '2' || this.additionalPriceType == '3' || this.additionPrice >= this.conditionPrice){
+									layer.msg('附加条件添加错误', {time: 1000});
+									return;
+								}
+								break;
+							case '3':
+								if(this.additionalPriceType == '2' || this.additionalPriceType == '3' || this.additionPrice >= this.conditionPrice){
+									layer.msg('附加条件添加错误', {time: 1000});
+									return;
+								}
+								break;
+							default:
+								break;
+						}
+					}
+					var d0 = this.conditionPrice % miniTikeSize;
+					if(this.conditionPrice == '' || this.conditionPrice == 0 || this.conditionPrice == undefined){
+						layer.msg('请输入价格', {time: 1000});
+					}else if(d0 >= 0.000000001 && parseFloat(miniTikeSize - d0) >= 0.0000000001){
+						layer.msg('输入价格不符合最小变动价，最小变动价为：' + miniTikeSize, {time: 1000});
+					}else if(this.conditionNum == '' || this.conditionNum == 0 || this.conditionNum == undefined){
+						layer.msg('请输入手数', {time: 1000});
+					}else{
+						msg = '是否修改价格条件单？';
+						b = {
+							"Method": 'ModifyCondition',
+							"Parameters":{
+								'ConditionNo': this.currentConditionOrder.ConditionNo,
+								'ModifyFlag': 0,
+								'Num': parseInt(this.comditionNum),
+								'ConditionType': 0,
+								'PriceTriggerPonit': parseFloat(this.conditionPrice),
+								'CompareType': parseInt(this.priceType),
+								'TimeTriggerPoint': '',
+								'AB_BuyPoint': 0.0,
+								'AB_SellPoint': 0.0,
+								'OrderType': parseInt(this.orderType),
+								'StopLossType': 5,
+								'Drection': parseInt(this.directionType),
+								'StopLossDiff': 0.0,
+								'StopWinDiff': 0.0,
+								'AdditionFlag':(function(){
+													if(this.additionPrice == '' || this.additionPrice == 0 || this.additionPrice == undefined){
+														return false;
+													}else{
+														return true;
+													}
+											}.bind(this))(),
+								'AdditionType': parseInt(this.additionalPriceType),
+								'AdditionPrice': parseFloat(this.additionPrice)
+							}
+						};
+						layer.confirm(msg, {
+							btn: ['确定','取消']
+						}, function(index){
+							this.tradeSocket.send(JSON.stringify(b));
+							layer.close(index);
+						}.bind(this));
+					}
+				}else{
+					this.conditionTime = this.getNowFormatDate() + ' ' + $(".time").val();
+					if(this.additionPrice){
+						var d2 = this.additionPrice % miniTikeSize;
+						if(d2 >= 0.000000001 && parseFloat(miniTikeSize-d2) >= 0.0000000001){
+							layer.msg('输入附加价格不符合最小变动价，最小变动价为：' + miniTikeSize, {time: 1000});
+						}
+					}
+					if(this.conditionNum == '' || this.conditionNum == 0 || this.conditionNum == undefined){
+						layer.msg('请输入手数', {time: 1000});
+					}else{
+						msg = '是否修改时间条件单？';
+						b = {
+							"Method": 'ModifyCondition',
+							"Parameters":{
+								'ConditionNo': this.currentConditionOrder.ConditionNo,
+								'ModifyFlag': 0,
+								'Num': parseInt(this.comditionNum),
+								'ConditionType': 1,
+								'PriceTriggerPonit': 0.00,
+								'CompareType': 5,
+								'TimeTriggerPoint': this.conditionTime,
+								'AB_BuyPoint': 0.0,
+								'AB_SellPoint': 0.0,
+								'OrderType': parseInt(this.orderType),
+								'StopLossType': 5,
+								'Drection': parseInt(this.directionType),
+								'StopLossDiff': 0.0,
+								'StopWinDiff': 0.0,
+								'AdditionFlag':(function(){
+													if(this.additionPrice == '' || this.additionPrice == 0 || this.additionPrice == undefined){
+														return false;
+													}else{
+														return true;
+													}
+											}.bind(this))(),
+								'AdditionType': parseInt(this.additionalPriceType),
+								'AdditionPrice': parseFloat(this.additionPrice)
+							}
+						};
+						layer.confirm(msg, {
+							btn: ['确定','取消']
+						}, function(index){
+							this.tradeSocket.send(JSON.stringify(b));
+							layer.close(index);
+						}.bind(this));
+					}
+				}
 			},
 			editConditionOrder: function(){
 				if(this.currentId == '' || this.currentId == undefined){
@@ -826,6 +952,20 @@
 					this.triggerConditionListCont.push(obj);
 					console.log(this.triggerConditionListCont);
 				}.bind(this));
+			},
+			getNowFormatDate: function(){
+				let date = new Date();
+			    let seperator1 = "-";
+			    let month = date.getMonth() + 1;
+			    let strDate = date.getDate();
+			    if (month >= 1 && month <= 9) {
+			        month = "0" + month;
+			    }
+			    if (strDate >= 0 && strDate <= 9) {
+			        strDate = "0" + strDate;
+			    }
+			    let currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate;
+			    return currentdate;
 			},
 			getType: function(num){
 				if(num == '0'){
