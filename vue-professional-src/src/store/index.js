@@ -247,50 +247,50 @@ var market = {
 		jsonTow: {
 			"Method": "OnRtnQuote",
 			"Parameters": {
-				"AskPrice1": 44.92,
-				"AskPrice2": 44.93,
-				"AskPrice3": 44.94,
-				"AskPrice4": 44.95,
-				"AskPrice5": 44.96,
-				"AskQty1": 15,
-				"AskQty2": 37,
-				"AskQty3": 35,
-				"AskQty4": 33,
-				"AskQty5": 61,
+				"AskPrice1": 0,
+				"AskPrice2": 0,
+				"AskPrice3": 0,
+				"AskPrice4": 0,
+				"AskPrice5": 0,
+				"AskQty1": 0,
+				"AskQty2": 0,
+				"AskQty3": 0,
+				"AskQty4": 0,
+				"AskQty5": 0,
 				"AveragePrice": 0,
-				"BidPrice1": 44.91,
-				"BidPrice2": 44.9,
-				"BidPrice3": 44.89,
-				"BidPrice4": 44.88,
-				"BidPrice5": 44.87,
-				"BidQty1": 28,
-				"BidQty2": 47,
-				"BidQty3": 38,
-				"BidQty4": 90,
-				"BidQty5": 33,
-				"ChangeRate": 0.402324541797049,
-				"ChangeValue": 0.1799999999999997,
+				"BidPrice1": 0,
+				"BidPrice2": 0,
+				"BidPrice3": 0,
+				"BidPrice4": 0,
+				"BidPrice5": 0,
+				"BidQty1": 0,
+				"BidQty2": 0,
+				"BidQty3": 0,
+				"BidQty4": 0,
+				"BidQty5": 0,
+				"ChangeRate": 0,
+				"ChangeValue": 0,
 				"ClosingPrice": 0,
 				"CommodityNo": "CL",
 				"ContractNo": "1708",
 				"DateTimeStamp": "2017-06-29 11:40:36",
 				"ExchangeNo": "NYMEX",
-				"HighPrice": 45.03,
-				"LastPrice": 44.92,
-				"LastVolume": 1,
+				"HighPrice": 0,
+				"LastPrice": 0,
+				"LastVolume": 0,
 				"LimitDownPrice": 0,
 				"LimitUpPrice": 0,
-				"LowPrice": 44.75,
-				"OpenPrice": 44.89,
-				"Position": 541143,
+				"LowPrice": 0,
+				"OpenPrice": 0,
+				"Position": 0,
 				"PreClosingPrice": 0,
 				"PrePosition": 0,
-				"PreSettlePrice": 44.74,
+				"PreSettlePrice": 0,
 				"SettlePrice": 0,
 				"TotalAskQty": 0,
 				"TotalBidQty": 0,
 				"TotalTurnover": 0,
-				"TotalVolume": 26287
+				"TotalVolume": 0
 			}
 		},
 		//绘制分时的设置
@@ -2494,6 +2494,7 @@ export default new Vuex.Store({
 								}else if(context.state.market.CacheLastQuote.length<=1){
 									return ;
 								}
+								context.state.market.jsonTow = JSON.parse(evt.data);
 //								context.commit('updateTempdata', context.state.market.currentNo);
 								context.commit('setfensoptionsecond');
 								if(context.state.isshow.isfensshow == true) {
@@ -2537,7 +2538,6 @@ export default new Vuex.Store({
 									context.state.market.charttimems2 = context.state.market.charttimetime2.getTime();
 								}
 								if(context.state.isshow.islightshow == true) {
-									context.state.market.jsonTow = JSON.parse(evt.data);
 									context.commit('setlightDate');
 									context.commit('drawlight', 'lightcharts');
 								}
