@@ -7,18 +7,18 @@
 					<ul>
 						<li>
 							<div class="fontgray fl">
-								卖 <span class="fontred" :class="{red: Parameters.AskPrice1 - Parameters.PreSettlePrice > 0,green: Parameters.AskPrice1 - Parameters.PreSettlePrice < 0}">{{Parameters.AskPrice1 | fixNum4(detail.DotSize)}}</span>
+								卖 <span class="fontred" :class="{red: detail.LastQuotation.AskPrice1 - detail.LastQuotation.PreSettlePrice > 0,green: detail.LastQuotation.AskPrice1 - detail.LastQuotation.PreSettlePrice < 0}">{{detail.LastQuotation.AskPrice1 | fixNum4(detail.DotSize)}}</span>
 							</div>
 							<p class="fontwhite fr">
-								{{Parameters.AskQty1}}
+								{{detail.LastQuotation.AskQty1}}
 							</p>
 						</li>
 						<li>
 							<div class="fontgray fl">
-								买 <span class="fontred" :class="{red: Parameters.AskPrice1 - Parameters.PreSettlePrice > 0,green: Parameters.AskPrice1 - Parameters.PreSettlePrice < 0}">{{Parameters.BidPrice1 | fixNum4(detail.DotSize)}}</span>
+								买 <span class="fontred" :class="{red: detail.LastQuotation.BidPrice1 - detail.LastQuotation.PreSettlePrice > 0,green: detail.LastQuotation.BidPrice1 - detail.LastQuotation.PreSettlePrice < 0}">{{detail.LastQuotation.BidPrice1 | fixNum4(detail.DotSize)}}</span>
 							</div>
 							<p class="fontwhite fr">
-								{{Parameters.BidQty1}}
+								{{detail.LastQuotation.BidQty1}}
 							</p>
 						</li>
 						<li>
@@ -26,19 +26,19 @@
 								成交量
 							</div>
 							<div class="fontwhite fr">
-								{{Parameters.TotalVolume}}
+								{{detail.LastQuotation.TotalVolume}}
 							</div>
 						</li>
 					</ul>
 				</div>
 				<div class="fl">
 					<ul>
-						<li class="fontred" :class="{red: Parameters.AskPrice1 - Parameters.PreSettlePrice > 0,green: Parameters.AskPrice1 - Parameters.PreSettlePrice < 0}">
-							{{Parameters.LastPrice | fixNum2(detail.DotSize)}}
+						<li class="fontred" :class="{red: detail.LastQuotation.LastPrice - detail.LastQuotation.PreSettlePrice > 0,green: detail.LastQuotation.LastPrice - detail.LastQuotation.PreSettlePrice < 0}">
+							{{detail.LastQuotation.LastPrice | fixNum2(detail.DotSize)}}
 						</li>
 						<li class="fontred">
-							<span :class="{red: Parameters.ChangeValue > 0,green: Parameters.ChangeValue < 0}">{{Parameters.ChangeValue | fixNum2(detail.DotSize)}}</span>
-							<span :class="{red: Parameters.ChangeValue > 0,green: Parameters.ChangeValue < 0}">{{Parameters.ChangeRate | fixNum}}%</span>
+							<span :class="{red: detail.LastQuotation.ChangeValue > 0,green: detail.LastQuotation.ChangeValue < 0}">{{detail.LastQuotation.ChangeValue | fixNum2(detail.DotSize)}}</span>
+							<span :class="{red: detail.LastQuotation.ChangeValue > 0,green: detail.LastQuotation.ChangeValue < 0}">{{detail.LastQuotation.ChangeRate | fixNum}}%</span>
 						</li>
 					</ul>
 				</div>
@@ -127,9 +127,9 @@
 			detail(){
 				return this.$store.state.market.currentdetail;
 			},
-			Parameters(){
-				return this.$store.state.market.jsonTow.Parameters;
-			},
+//			Parameters(){
+//				return this.$store.state.market.jsonTow.Parameters;
+//			},
 			templateList(){
 				return this.$store.state.market.templateList;
 			},
@@ -259,7 +259,8 @@
 //					this.tradeSocket.send(JSON.stringify(b));
 				}
 			}
-		}
+		},
+		mounted: function(){}
 	}
 </script>
 
