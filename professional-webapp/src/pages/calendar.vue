@@ -142,9 +142,12 @@
 						<img src="../assets/images/calendar_star1.png" v-for="a in (3-k.importance)"/>
 					</li>
 					<li v-else="k.importance == null">--</li>
-					<li>{{k.actual}}</li>
-					<li>{{k.forecast}}</li>
-					<li>{{k.previous}}</li>
+					<li v-if="k.actual != ''">{{k.actual}}</li>
+					<li v-if="k.actual == ''">--</li>
+					<li v-if="k.forecast !=''">{{k.forecast}}</li>
+					<li v-if="k.forecast == ''">--</li>
+					<li v-if="k.previous != ''">{{k.previous}}</li>
+					<li v-if="k.previous == ''">--</li>
 				</ul>
 			</div>
 		</div>
@@ -641,10 +644,10 @@
 					width: 10%;
 				}
 				&:nth-child(6){
-					width: 10%;
+					width: 8%;
 				}
 				&:nth-child(7){
-					width: 5%;
+					width: 7%;
 				}
 			}
 		}
@@ -686,10 +689,10 @@
 					width: 10%;
 				}
 				&:nth-child(6){
-					width: 10%;
+					width: 8%;
 				}
 				&:nth-child(7){
-					width: 5%;
+					width: 7%;
 				}
 			}
 		}
