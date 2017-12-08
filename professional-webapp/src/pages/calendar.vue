@@ -66,43 +66,62 @@
 			<div class="country_top">
 				<ul>
 					<li>
-						<i class="ifont">&#xe634;</i><span>全部</span>
+						<i class="ifont ifont_yellow" v-on:click="countryAll" v-show="showCountryAll">&#xe600;</i><span>全部</span>
+						<i class="ifont" v-on:click="countryAll" v-show="NoCountryAll">&#xe634;</i>
+					</li>
+					<li v-for="c in countryArr.slice(0,4)" v-on:click="chooseCountry">
+						<i class="ifont">&#xe634;</i>
+						<img :src="c.country | countryUrl" />
+						<span>{{c.country}}</span>
+					</li>
+					<!--<li>
+						<i class="ifont">&#xe634;</i>
+						<img src="../assets/images/china.png" alt="" />
+						<span>中国</span>
 					</li>
 					<li>
-						<i class="ifont">&#xe634;</i><span>中国</span>
-						<img src="../assets/images/china.png" alt="" />
+						<i class="ifont">&#xe634;</i>
+						<img src="../assets/images/usa.png" alt="" />
+						<span>美国</span>
 					</li>
 					<li>
-						<i class="ifont">&#xe634;</i><span>美国</span>
-						<img src="../assets/images/china.png" alt="" />
+						<i class="ifont">&#xe634;</i>
+						<img src="../assets/images/Russia.png" alt="" />
+						<span>俄罗斯</span>
 					</li>
 					<li>
-						<i class="ifont">&#xe634;</i><span>俄罗斯</span>
-						<img src="../assets/images/china.png" alt="" />
-					</li>
-					<li>
-						<i class="ifont">&#xe634;</i><span>英国</span>
-						<img src="../assets/images/china.png" alt="" />
-					</li>
+						<i class="ifont">&#xe634;</i>
+						<img src="../assets/images/GreatBritain.png" alt="" />
+						<span>英国</span>
+					</li>-->
 				</ul>
 			</div>
 			<div class="country_btm">
 				<ul>
-					<li>
-						<i class="ifont">&#xe634;</i><span>法国</span>
-						<img src="../assets/images/china.png" alt="" />
+					<!--<li>
+						<i class="ifont">&#xe634;</i>
+						<img src="../assets/images/France.png" alt="" />
+						<span>法国</span>
 					</li>
 					<li>
-						<i class="ifont">&#xe634;</i><span>德国</span>
-						<img src="../assets/images/china.png" alt="" />
+						<i class="ifont">&#xe634;</i>
+						<img src="../assets/images/Germany.png" alt="" />
+						<span>德国</span>
 					</li>
 					<li>
-						<i class="ifont">&#xe634;</i><span>加拿大</span>
-						<img src="../assets/images/china.png" alt="" />
+						<i class="ifont">&#xe634;</i>
+						<img src="../assets/images/Canada.png" alt="" />
+						<span>加拿大</span>
 					</li>
 					<li>
-						<i class="ifont">&#xe634;</i><span>意大利</span>
-						<img src="../assets/images/china.png" alt="" />
+						<i class="ifont">&#xe634;</i>
+						<img src="../assets/images/Italy.png" alt="" />
+						<span>意大利</span>
+					</li>-->
+					<li v-for="c in countryArr.slice(4,8)">
+						<i class="ifont">&#xe634;</i>
+						<img :src="c.country | countryUrl" />
+						<span>{{c.country}}</span>
 					</li>
 				</ul>
 			</div>
@@ -112,13 +131,13 @@
 			<div class="important_center">
 				<ul>
 					<li >
-						<i class="ifont" v-on:click="chooseImportantAll" v-show="showImportantAll">&#xe634;</i>
-						<i class="ifont ifont_yellow" v-on:click="chooseImportantAll" v-show="showImportantAll1">&#xe600;</i>
+						<i class="ifont" v-on:click="chooseImportantall" v-show="show_01">&#xe634;</i>
+						<i class="ifont ifont_yellow" v-on:click="chooseImportantall" v-show="show_02">&#xe600;</i>
 						<span>全部</span>
 					</li>
 					<li>
-						<i class="ifont" v-on:click="chooseImportant" v-show="showImportant">&#xe634;</i>
-						<i class="ifont ifont_yellow" v-on:click="chooseImportant" v-show="showImportant1">&#xe600;</i>
+						<i class="ifont" v-on:click="chooseImportant" v-show="show_03">&#xe634;</i>
+						<i class="ifont ifont_yellow" v-on:click="chooseImportant" v-show="show_04">&#xe600;</i>
 						<span>重要</span>
 					</li>
 				</ul>
@@ -178,29 +197,81 @@
 				current:3,
 				show_weekDay:'',
 				show_day:'',
-				showImportantAll:false,
-				showImportantAll1:true,
-				showImportant:true,
-				showImportant1:false
+				show_01:false,
+				show_02:true,
+				show_03:true,
+				show_04:false,
+				showCountryAll:true,
+				NoCountryAll:false,
+				countryArr:[
+					{
+						country:'中国'
+					},
+					{
+						country:'美国'
+					},
+					{
+						country:'俄罗斯'
+					},
+					{
+						country:'英国'
+					},
+					{
+						country:'法国'
+					},
+					{
+						country:'德国'
+					},
+					{
+						country:'加拿大'
+					},
+					{
+						country:'意大利'
+					}
+				],
+				chooseCountryArr:[],
+				clickCountry:true
 			}
 		},
 		methods:{
-			chooseImportantAll:function(e){
-				if(this.showImportantAll1 == true){
-					this.showImportantAll = true;
-					this.showImportantAll1 = false;
-				}else if(this.showImportantAll1 == false) {
-					this.showImportantAll = false;
-					this.showImportantAll1 = true;
-				}
+			chooseCountry:function(e){
+				$(e.currentTarget).children().remove("i.ifont");
+//				var a = "<i class="ifont ifont_yellow">&#xe600;</i>";
+				var a = $("<i class='ifont ifont_yellow></i>").html("&#xe600;")
+//				var txt2=$("<p></p>").text("Text.");   // 以 jQuery 创建新元素
+				$(e.currentTarget).children().append(a);
+//				console.log($(e.currentTarget).children());
+				
+			},
+			countryAll:function(){
+				this.getInfoList(this.startTime,this.endTime,"",'');
 			},
 			chooseImportant:function(){
-				if(this.showImportant1 == true){
-					this.showImportant = true;
-					this.showImportant1 = false;
-				}else if(this.showImportant1 == false) {
-					this.showImportant = false;
-					this.showImportant1 = true;
+				if(this.show_03 == true){
+					this.show_03 = false;
+					this.show_04 = true;
+					this.show_01 = true;
+					this.show_02 = false;
+					this.getInfoList(this.startTime,this.endTime,"",3);
+				}else {
+					this.show_03 = true;
+					this.show_04 = false;
+					this.getInfoList(this.startTime,this.endTime,"",'');
+				}
+			},
+			chooseImportantall:function(){
+				if(this.show_02 == true){
+					this.show_02 = false;
+					this.show_01 = true;
+					this.show_03 = true;
+					this.show_04 = false;
+					this.getInfoList(this.startTime,this.endTime,"",'');
+				}else if(this.show_01 == true){
+					this.show_02 = true;
+					this.show_01 = false;
+					this.show_03 = true;
+					this.show_04 = false;
+					this.getInfoList(this.startTime,this.endTime,"",'');
 				}
 			},
 //			updateTime:function(){
@@ -349,6 +420,35 @@
 				var a = Date.parse(e)/1000;
 				a = pro.getDate("d",a*1000);
 				return a;
+			},
+			countryUrl:function(e){
+				switch (e){
+					case "中国":
+						return require("../assets/images/china.png");
+					break;
+					case "美国":
+						return require("../assets/images/usa.png");
+					break;
+					case "俄罗斯":
+						return require("../assets/images/Russia.png");
+					break;
+					case "英国":
+						return require("../assets/images/GreatBritain.png");
+					break;
+					case "法国":
+						return require("../assets/images/France.png");
+					break;
+					case "德国":
+						return require("../assets/images/Germany.png");
+					break;
+					case "加拿大":
+						return require("../assets/images/Canada.png");
+					break;
+					case "意大利":
+						return require("../assets/images/Italy.png");
+					break;
+					
+				}
 			}
 		},
 		computed:{
@@ -573,8 +673,10 @@
 		.ifont{
 			font-size: $fs12;
 			color: $lightblue;
-			padding-right: 10px;
 			cursor: pointer;
+		}
+		.ifont_yellow{
+			color: $yellow;
 		}
 		.country_top{
 			padding-left: 10px;
@@ -584,6 +686,11 @@
 			li{
 				width: 160px;
 				float: left;
+				&:nth-child(1){
+					span{
+						margin-left: 10px;
+					}
+				}
 				img{
 					position: relative;
 					top: 5px;
