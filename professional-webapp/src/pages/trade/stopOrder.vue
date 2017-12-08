@@ -400,37 +400,39 @@
 			editStopOrder: function(){
 				if(this.currentId == '' || this.currentId == undefined){
 					layer.msg('请选择一条数据', {time: 1000});
-					return;
-				}
-				var dialogObj, title;
-				if(this.stopLossType == 0){
-					dialogObj = $("#edit_loss_order");
-					this.showLossDialog = true;
-					title = '修改止损单';
+				}else if(this.status == 0){
+					layer.msg('运行中的止损单不能修改', {time: 1000});
 				}else{
-					dialogObj = $("#edit_profit_order");
-					this.showProfitDialog = true;
-					title = '修改止盈单';
+					var dialogObj, title;
+					if(this.stopLossType == 0){
+						dialogObj = $("#edit_loss_order");
+						this.showLossDialog = true;
+						title = '修改止损单';
+					}else{
+						dialogObj = $("#edit_profit_order");
+						this.showProfitDialog = true;
+						title = '修改止盈单';
+					}
+					this.showDialog = true;
+					layer.open({
+						type: 1,
+						title: title,
+						area: ['400px', 'auto'],
+						content: dialogObj,
+						btn: ['确定','取消'],
+						btn1: function(index){
+							this.editConfirm();
+						}.bind(this),
+						btn2: function(){
+							this.showLossDialog = false;
+							this.showProfitDialog = false;
+						}.bind(this),
+						cancel: function(){
+							this.showLossDialog = false;
+							this.showProfitDialog = false;
+						}.bind(this)
+					});
 				}
-				this.showDialog = true;
-				layer.open({
-					type: 1,
-					title: title,
-					area: ['400px', 'auto'],
-					content: dialogObj,
-					btn: ['确定','取消'],
-					btn1: function(index){
-						this.editConfirm();
-					}.bind(this),
-					btn2: function(){
-						this.showLossDialog = false;
-						this.showProfitDialog = false;
-					}.bind(this),
-					cancel: function(){
-						this.showLossDialog = false;
-						this.showProfitDialog = false;
-					}.bind(this)
-				});
 			},
 			deleteStopOrder: function(){
 				if(this.currentId != ''){
