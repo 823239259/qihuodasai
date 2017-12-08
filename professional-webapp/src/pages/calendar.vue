@@ -353,7 +353,7 @@
 		mounted:function(){
 			this.startTime = pro.getDate("y-m-d",Date.parse(new Date()));
 			this.endTime = pro.getDate("y-m-d",(Date.parse(new Date())/1000+24*60*60)*1000);
-//			this.getInfoList(this.startTime,this.endTime,"",'');
+			this.getInfoList(this.startTime,this.endTime,"",'');
 			//获取当天的时间和星期
 			this.show_day = pro.getDate("yy-mm-dd",Date.parse(new Date()));
 			this.getDayList(this.startTime);
