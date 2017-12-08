@@ -125,7 +125,7 @@
 				return this.$store.state.market.jsonData.Parameters.Data;
 			},
 			detail(){
-				return this.$store.state.market.	currentdetail
+				return this.$store.state.market.currentdetail;
 			},
 			Parameters(){
 				return this.$store.state.market.jsonTow.Parameters;
