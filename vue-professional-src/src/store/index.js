@@ -2496,13 +2496,35 @@ export default new Vuex.Store({
 								}
 //								context.commit('updateTempdata', context.state.market.currentNo);
 								context.commit('setfensoptionsecond');
-								context.state.market.jsonTow = JSON.parse(evt.data);
-								context.commit('setlightDate');
 								if(context.state.isshow.isfensshow == true) {
+									var arr = [], arr1, arr2, arr3, arr4;
 									context.state.market.charttimetime = new Date();
 									context.state.market.charttimems = context.state.market.charttimetime.getTime();
 									context.state.market.charttime = context.state.market.charttimems - context.state.market.charttimems2;
 									if(context.state.market.charttime >= 1000 || context.state.market.charttimetemp >= 1000) {
+										arr = [];
+										arr[0] = JSON.parse(evt.data).Parameters.DateTimeStamp;
+										arr[1] = JSON.parse(evt.data).Parameters.LastPrice;
+										arr[2] = JSON.parse(evt.data).Parameters.OpenPrice;
+										arr[3] = JSON.parse(evt.data).Parameters.LowPrice;
+										arr[4] = JSON.parse(evt.data).Parameters.HighPrice;
+										arr[5] = JSON.parse(evt.data).Parameters.Position;
+										arr[6] = JSON.parse(evt.data).Parameters.LastVolume;
+										arr1 = JSON.parse(evt.data).Parameters.DateTimeStamp.split(' ');
+										arr2 = arr1[1].split(':'); //最新时间
+										arr3 = context.state.market.jsonData.Parameters.Data[context.state.market.jsonData.Parameters.Data.length - 1][0].split(' ');
+										arr4 = arr3[1].split(':'); //历史时间
+										if(arr2[1] == arr4[1]) {
+											var time = context.state.market.jsonData.Parameters.Data[context.state.market.jsonData.Parameters.Data.length - 1][0];
+											var vol = parseInt(context.state.market.jsonData.Parameters.Data[context.state.market.jsonData.Parameters.Data.length - 1][6]) + parseInt(arr[6]);
+											context.state.market.jsonData.Parameters.Data[context.state.market.jsonData.Parameters.Data.length - 1] = arr;
+											context.state.market.jsonData.Parameters.Data[context.state.market.jsonData.Parameters.Data.length - 1][0] = time;
+											context.state.market.jsonData.Parameters.Data[context.state.market.jsonData.Parameters.Data.length - 1][6] = vol;
+										}else{
+//											context.state.market.jsonData.Parameters.Data.shift();
+											context.state.market.jsonData.Parameters.Data.push(arr);
+										}
+										context.commit('setfensoption');
 										context.commit('drawfens', {
 											id1: 'fens',
 											id2: 'volume'
@@ -2515,6 +2537,8 @@ export default new Vuex.Store({
 									context.state.market.charttimems2 = context.state.market.charttimetime2.getTime();
 								}
 								if(context.state.isshow.islightshow == true) {
+									context.state.market.jsonTow = JSON.parse(evt.data);
+									context.commit('setlightDate');
 									context.commit('drawlight', 'lightcharts');
 								}
 								if(context.state.isshow.isklineshow == true) {

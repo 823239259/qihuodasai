@@ -716,7 +716,7 @@
 			scrollEvent: function(){
 				if(this.show == true){
 					if(document.getElementById('margin_trade_static') != null){
-						var h = document.getElementById('margin_trade_static').scrollTop - document.body.scrollTop + $('#margin_trade_static').height();
+						var h = document.getElementById('margin_trade_static').scrollTop - document.body.scrollTop + $('#margin_trade_static').height() + 30;
 						if(h < 0){
 							this.bondShow = true;
 						}else{

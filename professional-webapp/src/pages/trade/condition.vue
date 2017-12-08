@@ -445,7 +445,7 @@
 							"Parameters":{
 								'ConditionNo': this.currentConditionOrder.ConditionNo,
 								'ModifyFlag': 0,
-								'Num': parseInt(this.comditionNum),
+								'Num': parseInt(this.conditionNum),
 								'ConditionType': 0,
 								'PriceTriggerPonit': parseFloat(this.conditionPrice),
 								'CompareType': parseInt(this.priceType),
@@ -468,11 +468,14 @@
 								'AdditionPrice': parseFloat(this.additionPrice)
 							}
 						};
+						
 						layer.confirm(msg, {
 							btn: ['确定','取消']
 						}, function(index){
 							this.tradeSocket.send(JSON.stringify(b));
-							layer.close(index);
+							layer.closeAll();
+							this.showPriceDialog = false;
+							this.showTimeDialog = false;
 						}.bind(this));
 					}
 				}else{
@@ -492,7 +495,7 @@
 							"Parameters":{
 								'ConditionNo': this.currentConditionOrder.ConditionNo,
 								'ModifyFlag': 0,
-								'Num': parseInt(this.comditionNum),
+								'Num': parseInt(this.conditionNum),
 								'ConditionType': 1,
 								'PriceTriggerPonit': 0.00,
 								'CompareType': 5,
@@ -519,7 +522,9 @@
 							btn: ['确定','取消']
 						}, function(index){
 							this.tradeSocket.send(JSON.stringify(b));
-							layer.close(index);
+							layer.closeAll();
+							this.showPriceDialog = false;
+							this.showTimeDialog = false;
 						}.bind(this));
 					}
 				}

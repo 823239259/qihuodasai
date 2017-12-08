@@ -159,7 +159,8 @@
 				lineLoss: 0,
 				balance: 0.00,
 				userInfo: '',
-				btnName: '确认支付'
+				btnName: '确认支付',
+				current: false,
 			}
 		},
 		computed: {
@@ -220,6 +221,8 @@
 			tocom: function(e) {
 				//资金足够的时候
 				if(this.enough) {
+					if(this.current == true) return;
+					this.current = true;
 					this.$http.post(
 						this.PATH + '/user/ftrade/handle', {emulateJSON: true}, {
 							headers:{
@@ -247,6 +250,9 @@
 										'isPay': data.data.stateType
 									}
 								});
+								setTimeout(function(){
+									this.current = false;
+								}.bind(this), 2000);
 							}
 						}else{
 							switch (data.code){
