@@ -214,7 +214,6 @@
 				this.NoCountryAll = true;
 				var judgeClass = $(e.currentTarget).hasClass("i_show");
 				var cou = $(e.currentTarget).parent().children("span").html();
-				console.log(cou);
 				if(judgeClass){
 					$(e.currentTarget).html("&#xe600;").css("color","#ffd400");
 					$(e.currentTarget).removeClass("i_show");
@@ -286,12 +285,17 @@
 					importance:importance
 				}
 				pro.fetch('post','/crawler/getCrawlerCalendar',data,"").then((res)=>{
-					console.log(res)
+//					console.log(res)
 					if(res.success == true && res.code == ''){
 						this.list = res.data.data;
 					}
 				}).catch((err)=>{
-					console.log(err);
+//					console.log(err);
+					if(err.success ==false ){
+						layer.msg(err.data.message,{time:2000});
+					}else{
+						layer.msg("网络不给力，请稍后再试",{time:2000});
+					}
 				})
 			},
 			getDayList:function(e){
@@ -340,17 +344,19 @@
 			lastWeek:function(){
 				var lastWeekDay =  pro.getDate("y-m-d",(Date.parse(this.startTime)/1000-7*24*60*60)*1000);
 				var lastWeekDay1 = pro.getDate("y-m-d",(Date.parse(lastWeekDay)/1000+24*60*60)*1000);
-				console.log(lastWeekDay);
-				console.log(lastWeekDay1);
+//				console.log(lastWeekDay);
+//				console.log(lastWeekDay1);
 				this.getDayList(lastWeekDay);
-				this.getInfoList(lastWeekDay,lastWeekDay1,'','')
+				this.getInfoList(lastWeekDay,lastWeekDay1,'','');
+				this.startTime = lastWeekDay;
 			},
 			nextWeek:function(){
+				
 				var nextWeekDay = pro.getDate("y-m-d",(Date.parse(this.startTime)/1000+7*24*60*60)*1000);
 				var nextWeekDay1 = pro.getDate("y-m-d",(Date.parse(nextWeekDay)/1000+24*60*60)*1000);
-				console.log(nextWeekDay);
 				this.getDayList(nextWeekDay);
-				this.getInfoList(nextWeekDay,nextWeekDay1,'','')
+				this.getInfoList(nextWeekDay,nextWeekDay1,'','');
+				this.startTime = nextWeekDay;
 			}
 		},
 		mounted:function(){
@@ -443,6 +449,9 @@
 					&:nth-child(1){
 						font-weight: 800;
 					}
+					&:hover{
+						color: $yellow;
+					}
 				}
 			}
 			.calendar_center{
@@ -492,6 +501,9 @@
 				span{
 					&:nth-child(1){
 						font-weight: 800;
+					}
+					&:hover{
+						color: $yellow;
 					}
 				}
 			}
