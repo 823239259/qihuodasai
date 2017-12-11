@@ -362,11 +362,11 @@
 			this.getDayList(this.startTime);
 			//初始化高度
 			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-			var _h = h - 47;
+			var _h = h -40-47;
 			$("#calendar").height(_h);
 			$(window).resize(function(){
 				var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-				var _h = h - 47;
+				var _h = h -40- 47;
 				if(contH > _h){
 					$("#calendar").height(_h);
 				}

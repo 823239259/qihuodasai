@@ -56,7 +56,7 @@
 				colorState:false,
 				time:60,
 				showNowTime:'',
-				showNowDay:'',
+				showNowDay:1,
 				timing:''
 			}
 		},
@@ -89,7 +89,6 @@
 					this.time = 60;
 					clearInterval(this.timing);
 				}
-				
 			},
 			getInfoList:function(){
 				var data ={
@@ -192,11 +191,11 @@
 			this.getInfoList();
 			//初始化高度
 			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-			var _h = h - 47;
+			var _h = h -40- 47;
 			$("#liveStream").height(_h);
 			$(window).resize(function(){
 				var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-				var _h = h - 47;
+				var _h = h -40- 47;
 				if(contH > _h){
 					$("#liveStream").height(_h);
 				}
@@ -303,7 +302,6 @@
 					display: inline-block;
 					border-top: 1px solid $bottom_color;
 					border-left: 1px solid $bottom_color;
-					border-right: 1px solid $bottom_color;
 				}
 			}
 		}
