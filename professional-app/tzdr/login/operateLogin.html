@@ -344,9 +344,7 @@
 									localStorage.setItem("trade_password", pwd);
 									localStorage.setItem("trade_endLoginAccount", account);
 									localStorage.setItem("trade_endLoginPassword", pwd);
-//									console.log("111111111111111");
-//									console.log(JSON.stringify(Transfer.backpageID));
-									if(Transfer.backpageID == "transactionDetails") {
+									if(Transfer.backpageID) {
 										backReload();
 										plus.nativeUI.closeWaiting();
 										mui.toast("登录成功");
