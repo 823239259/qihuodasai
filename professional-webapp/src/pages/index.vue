@@ -592,6 +592,8 @@
 			}
 		}
 		.cont{
+			height: 828px;
+			overflow-y: auto;
 			ul{
 				li{
 					min-width: 1290px;

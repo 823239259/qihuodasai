@@ -1152,7 +1152,6 @@ export default new Vuex.Store({
 					}
 					break;
 				case "OnRspInsertCondition":
-					console.log(1111);
 					if(parameters.Status == 0){
 						layer.msg('设置条件单成功', {time: 1000});
 					}else{
@@ -1175,7 +1174,6 @@ export default new Vuex.Store({
 						layer.msg('【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,触发失败', {time: 1000});
 					}
 					context.dispatch('dealWithOnRtnConditionState',parameters);
-					
 					break;	
 				case 'OnError':
 					if(parameters!=null){
