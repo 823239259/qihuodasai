@@ -68,7 +68,7 @@
 			handRefresh:function(){
 				layer.msg("正在为您刷新最新数据",{time:1000});
 				var data = {
-					pageIndex:1,
+					pageIndex:0,
 					size:20,
 					minTime:this.getNowFormatDate(),
 					maxTime:this.getNowFormatDate1(),
