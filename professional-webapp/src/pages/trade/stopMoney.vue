@@ -155,7 +155,7 @@
 					}else if(!(d0 < 0.000000001 || parseFloat(b0-d0) < 0.0000000001)){
 						//d0 >= 0.000000001 && parseFloat(b0-d0) >= 0.0000000001
 						layer.msg('输入价格不符合最小变动价，最小变动价为：' + b0, {time: 1000});return;
-					}else if(this.stopNum == '' || this.stopNum == 0 || this.stopNum == undefined){
+					}else if(this.stopNum == '' || this.stopNum <= 0 || this.stopNum == undefined){
 						layer.msg('请输入止损手数', {time: 1000});return;
 					}else{
 						if(drection == 0){
@@ -193,7 +193,7 @@
 					msg = '是否添加限价止盈？';
 					if(this.stopPrice == '' || this.stopPrice == 0 || this.stopPrice == undefined){
 						layer.msg('请输入止盈价', {time: 1000});return;
-					}else if(this.stopNum == '' || this.stopNum == 0 || this.stopNum == undefined){
+					}else if(this.stopNum == '' || this.stopNum <= 0 || this.stopNum == undefined){
 						layer.msg('请输入止盈手数', {time: 1000});return;
 					}else if(d0 >= 0.000000001 && parseFloat(b0-d0) >= 0.0000000001){
 						layer.msg('输入价格不符合最小变动价，最小变动价为：' + b0, {time: 1000});return;
