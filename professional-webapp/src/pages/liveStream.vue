@@ -16,7 +16,7 @@
 				<li>{{item.createdAt | showTime}}</li>
 				<li>{{item.liveTitle}}</li>
 			</ul>-->
-			<div v-for="(item,index) in arrList">
+			<div v-for="(item,index) in arrList" class="todayInfo">
 				<p>
 					<i>{{item.createdAt | showTime}}</i>
 					<span>{{item.liveTitle}}</span>
@@ -280,42 +280,30 @@
 		float: left;
 		width: 100%;
 		background-color: $deepblue;
-		p{
+		.todayInfo{
+			p{
+			border-left: 1px solid $lightblue;
 			width: 100%;
 			line-height: 40px;
-			i{
-				text-align: center;
-				display: inline-block;
-				float: left;
-				width: 8%;
-				font-weight: 600;
-				font-size: $fs16;
-			}
-			span{
-				float: left;
-				width: 92%;
-				font-size: $fs14;
-				display: inline-block;
-			}
-		}
-		ul{
-			li{
-				border-bottom:1px solid $bottom_color;
-				border-left:1px solid $bottom_color;
-				border-right:1px solid $bottom_color;
-				float: left;
-				&:nth-child(1){
-					font-size: $fs16;
-					width: 8%;
+				i{
 					text-align: center;
-					line-height: 40px;
+					display: inline-block;
+					float: left;
+					width: 8%;
 					font-weight: 600;
+					font-size: $fs16;
+					border-top: 1px solid $bottom_color;
 				}
-				&:nth-child(2){
-					font-size: $fs14;
-					width: 92%;
+				span{
 					padding-left: 10px;
-					line-height: 40px;
+					background-color: $blue;
+					float: left;
+					width: 90%;
+					font-size: $fs14;
+					display: inline-block;
+					border-top: 1px solid $bottom_color;
+					border-left: 1px solid $bottom_color;
+					border-right: 1px solid $bottom_color;
 				}
 			}
 		}
