@@ -66,11 +66,12 @@
 			<div class="country_top">
 				<ul>
 					<li>
-						<i class="ifont ifont_yellow" v-on:click="countryAll" v-show="showCountryAll">&#xe600;</i><span>全部</span>
+						<i class="ifont ifont_yellow" v-on:click="countryAll" v-show="showCountryAll">&#xe600;</i>
 						<i class="ifont" v-on:click="countryAll" v-show="NoCountryAll">&#xe634;</i>
+						<span>全部</span>
 					</li>
-					<li v-for="c in countryArr.slice(0,4)" v-on:click="chooseCountry">
-						<i class="ifont">&#xe634;</i>
+					<li v-for="(c,index) in countryArr" class="cant">
+						<i class="ifont i_show"  v-on:click="chooseCountry(index,$event)">&#xe634;</i>
 						<img :src="c.country | countryUrl" />
 						<span>{{c.country}}</span>
 					</li>
@@ -94,35 +95,6 @@
 						<img src="../assets/images/GreatBritain.png" alt="" />
 						<span>英国</span>
 					</li>-->
-				</ul>
-			</div>
-			<div class="country_btm">
-				<ul>
-					<!--<li>
-						<i class="ifont">&#xe634;</i>
-						<img src="../assets/images/France.png" alt="" />
-						<span>法国</span>
-					</li>
-					<li>
-						<i class="ifont">&#xe634;</i>
-						<img src="../assets/images/Germany.png" alt="" />
-						<span>德国</span>
-					</li>
-					<li>
-						<i class="ifont">&#xe634;</i>
-						<img src="../assets/images/Canada.png" alt="" />
-						<span>加拿大</span>
-					</li>
-					<li>
-						<i class="ifont">&#xe634;</i>
-						<img src="../assets/images/Italy.png" alt="" />
-						<span>意大利</span>
-					</li>-->
-					<li v-for="c in countryArr.slice(4,8)">
-						<i class="ifont">&#xe634;</i>
-						<img :src="c.country | countryUrl" />
-						<span>{{c.country}}</span>
-					</li>
 				</ul>
 			</div>
 		</div>
@@ -170,9 +142,12 @@
 						<img src="../assets/images/calendar_star1.png" v-for="a in (3-k.importance)"/>
 					</li>
 					<li v-else="k.importance == null">--</li>
-					<li>{{k.actual}}</li>
-					<li>{{k.forecast}}</li>
-					<li>{{k.previous}}</li>
+					<li v-if="k.actual != ''">{{k.actual}}</li>
+					<li v-if="k.actual == ''">--</li>
+					<li v-if="k.forecast !=''">{{k.forecast}}</li>
+					<li v-if="k.forecast == ''">--</li>
+					<li v-if="k.previous != ''">{{k.previous}}</li>
+					<li v-if="k.previous == ''">--</li>
 				</ul>
 			</div>
 		</div>
@@ -229,22 +204,49 @@
 						country:'意大利'
 					}
 				],
-				chooseCountryArr:[],
+				chooseCountryArr:'',
 				clickCountry:true
 			}
 		},
 		methods:{
-			chooseCountry:function(e){
-				$(e.currentTarget).children().remove("i.ifont");
-//				var a = "<i class="ifont ifont_yellow">&#xe600;</i>";
-				var a = $("<i class='ifont ifont_yellow></i>").html("&#xe600;")
-//				var txt2=$("<p></p>").text("Text.");   // 以 jQuery 创建新元素
-				$(e.currentTarget).children().append(a);
-//				console.log($(e.currentTarget).children());
-				
+			chooseCountry:function(index,e){
+				this.showCountryAll = false;
+				this.NoCountryAll = true;
+				var judgeClass = $(e.currentTarget).hasClass("i_show");
+				var cou = $(e.currentTarget).parent().children("span").html();
+				console.log(cou);
+				if(judgeClass){
+					$(e.currentTarget).html("&#xe600;").css("color","#ffd400");
+					$(e.currentTarget).removeClass("i_show");
+					if(this.chooseCountryArr == ''){
+						this.chooseCountryArr = cou ;
+					}else{
+						this.chooseCountryArr = this.chooseCountryArr+","+cou ;
+					}
+				}else if(judgeClass == false){
+					$(e.currentTarget).html("&#xe634;").css("color","#a3aacc");
+					$(e.currentTarget).addClass("i_show");
+					if(this.chooseCountryArr.split(",").length>1){
+						this.chooseCountryArr = this.chooseCountryArr.replace((","+cou),'');
+					}else{
+						this.chooseCountryArr = '';
+						this.showCountryAll = true;
+						this.NoCountryAll = false;
+					}
+				}
+				this.getInfoList(this.startTime,this.endTime,this.chooseCountryArr,'');
 			},
 			countryAll:function(){
-				this.getInfoList(this.startTime,this.endTime,"",'');
+				if(this.showCountryAll == true){
+					this.showCountryAll = false;
+					this.NoCountryAll = true;
+				}else{
+					this.showCountryAll = true;
+					this.NoCountryAll = false;
+					$(".cant>.ifont").html("&#xe634;").css("color","#a3aacc");
+					$(".cant>.ifont").addClass("i_show");
+					this.getInfoList(this.startTime,this.endTime,"",'');
+				}
 			},
 			chooseImportant:function(){
 				if(this.show_03 == true){
@@ -274,47 +276,6 @@
 					this.getInfoList(this.startTime,this.endTime,"",'');
 				}
 			},
-//			updateTime:function(){
-//				this.sevenlist=[];
-//				var time = this.startT;
-//				this.timec = this.time.getTime();
-//				this.timec = this.timec-(1 * 24 * 3600 * 1000);
-//				var times=new Date(this.timec);
-//				var year=times.getFullYear();
-//				var month=times.getMonth()+1;
-//				var day=times.getDate();
-//				var today=year+'-'+month+'-'+day;
-//				if((month.toString().length) < 2) {
-//					month = '0' + month;
-//				}
-//				if(day.toString().length < 2) {
-//					day = '0' + day
-//				}
-//				this.selectDate=today;
-//				
-//			},
-//			selectday: function(e) {
-//				var objstr = $(e.currentTarget).children('div').text();
-//				var obj = JSON.parse(objstr);
-//				var time = obj.y + '-' + obj.m + '-' + obj.day;
-//				this.selectDate = time;
-//				this.timec = this.time.getTime();
-//			},
-//			getdate: function() {
-//				this.time = new Date();
-//				this.timec = this.time.getTime();
-//				this.day.y = this.time.getFullYear();
-//				this.day.m = this.time.getMonth() + 1;
-//				this.day.day = this.time.getDate();
-//				this.day.D = this.time.getDay();
-//				if((this.day.m.toString().length) < 2) {
-//					this.day.m = '0' + this.day.m;
-//				}
-//				if(this.day.day.toString().length < 2) {
-//					this.day.day = '0' + this.day.day
-//				}
-//				this.selectDate = this.day.y + '-' + this.day.m + '-' + this.day.day;
-//			},
 			getInfoList:function(startTime,endTime,country,importance){
 				var data = {
 					pageIndex:'1',
@@ -395,7 +356,7 @@
 		mounted:function(){
 			this.startTime = pro.getDate("y-m-d",Date.parse(new Date()));
 			this.endTime = pro.getDate("y-m-d",(Date.parse(new Date())/1000+24*60*60)*1000);
-			this.getInfoList(this.startTime,this.endTime,'','');
+			this.getInfoList(this.startTime,this.endTime,"",'');
 			//获取当天的时间和星期
 			this.show_day = pro.getDate("yy-mm-dd",Date.parse(new Date()));
 			this.getDayList(this.startTime);
@@ -447,141 +408,12 @@
 					case "意大利":
 						return require("../assets/images/Italy.png");
 					break;
-					
 				}
 			}
 		},
 		computed:{
-//			weekday: function() {
-//				var arr = [];
-//				arr[0] = "周日";
-//				arr[1] = "周一";
-//				arr[2] = "周二";
-//				arr[3] = "周三";
-//				arr[4] = "周四";
-//				arr[5] = "周五";
-//				arr[6] = "周六";
-//				return arr[this.day.D]
-//			},
-//			lastdayone: function() {
-//				var obj = {};
-//				var date = new Date(this.timec - 1 * 24 * 3600 * 1000);
-//				obj.y = date.getFullYear();
-//				obj.m = date.getMonth() + 1;
-//				obj.day = date.getDate();
-//				obj.D = date.getDay();
-//				var arr = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
-//				obj.weekday = arr[obj.D];
-//				if((obj.m.toString().length) < 2) {
-//					obj.m = '0' + obj.m;
-//				}
-//				if(obj.day.toString().length < 2) {
-//					obj.day = '0' + obj.day
-//				}
-//				return obj
-//			},
-//			lastdaytwo: function() {
-//				var obj = {};
-//				var date = new Date(this.timec - 2 * 24 * 3600 * 1000);
-//				obj.y = date.getFullYear();
-//				obj.m = date.getMonth() + 1;
-//				obj.day = date.getDate();
-//				obj.D = date.getDay();
-//				var arr = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
-//				obj.weekday = arr[obj.D];
-//				if((obj.m.toString().length) < 2) {
-//					obj.m = '0' + obj.m;
-//				}
-//				if(obj.day.toString().length < 2) {
-//					obj.day = '0' + obj.day
-//				}
-//				return obj
-//			},
-//			lastdaythree: function() {
-//				var obj = {};
-//				var date = new Date(this.timec - 3 * 24 * 3600 * 1000);
-//				obj.y = date.getFullYear();
-//				obj.m = date.getMonth() + 1;
-//				obj.day = date.getDate();
-//				obj.D = date.getDay();
-//				var arr = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
-//				obj.weekday = arr[obj.D];
-//				if((obj.m.toString().length) < 2) {
-//					obj.m = '0' + obj.m;
-//				}
-//				if(obj.day.toString().length < 2) {
-//					obj.day = '0' + obj.day
-//				}
-//				return obj
-//			},
-//			predayone: function() {
-//				var obj = {};
-//				var date = new Date(this.timec + 1 * 24 * 3600 * 1000);
-//				obj.y = date.getFullYear();
-//				obj.m = date.getMonth() + 1;
-//				obj.day = date.getDate();
-//				obj.D = date.getDay();
-//				var arr = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
-//				obj.weekday = arr[obj.D];
-//				if((obj.m.toString().length) < 2) {
-//					obj.m = '0' + obj.m;
-//				}
-//				if(obj.day.toString().length < 2) {
-//					obj.day = '0' + obj.day
-//				}
-//				return obj
-//			},
-//			predaytwo: function() {
-//				var obj = {};
-//				var date = new Date(this.timec + 2 * 24 * 3600 * 1000);
-//				obj.y = date.getFullYear();
-//				obj.m = date.getMonth() + 1;
-//				obj.day = date.getDate();
-//				obj.D = date.getDay();
-//				var arr = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
-//				obj.weekday = arr[obj.D];
-//				if((obj.m.toString().length) < 2) {
-//					obj.m = '0' + obj.m;
-//				}
-//				if(obj.day.toString().length < 2) {
-//					obj.day = '0' + obj.day
-//				}
-//				return obj
-//			},
-//			predaythree: function() {
-//				var obj = {};
-//				var date = new Date(this.timec + 3 * 24 * 3600 * 1000);
-//				obj.y = date.getFullYear();
-//				obj.m = date.getMonth() + 1;
-//				obj.day = date.getDate();
-//				obj.D = date.getDay();
-//				var arr = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
-//				obj.weekday = arr[obj.D];
-//				if((obj.m.toString().length) < 2) {
-//					obj.m = '0' + obj.m;
-//				}
-//				if(obj.day.toString().length < 2) {
-//					obj.day = '0' + obj.day
-//				}
-//				return obj
-//			}
 		},
 		watch:{
-//			selectDate: function(n, o) {
-//				var arr = n.split('-');
-//				this.day.y = Number(arr[0]);
-//				this.day.m = Number(arr[1]);
-//				this.day.day = Number(arr[2]);
-//				this.time = new Date(this.day.y, this.day.m - 1, this.day.day);
-//				if((this.day.m.toString().length) < 2) {
-//					this.day.m = '0' + this.day.m;
-//				}
-//				if(this.day.day.toString().length < 2) {
-//					this.day.day = '0' + this.day.day
-//				}
-//				this.day.D = this.time.getDay();
-//				this.timec = this.time.getTime();
-//			}
 		}
 	}
 </script>
@@ -679,17 +511,43 @@
 			color: $yellow;
 		}
 		.country_top{
-			padding-left: 10px;
-			height: 60px;
+			height: 120px;
 			width: 100%;
 			line-height: 60px;
 			li{
-				width: 160px;
+				height: 60px;
 				float: left;
 				&:nth-child(1){
+					padding-left: 10px;
+					width: 17%;
 					span{
 						margin-left: 10px;
 					}
+				}
+				&:nth-child(2){
+					width: 16%;
+				}
+				&:nth-child(3){
+					width: 16%;
+				}
+				&:nth-child(4){
+					width: 16%;
+				}
+				&:nth-child(5){
+					width: 35%;
+				}
+				&:nth-child(6){
+					margin-left: 17%;
+					width: 16%;
+				}
+				&:nth-child(7){
+					width: 16%;
+				}
+				&:nth-child(8){
+					width: 16%;
+				}
+				&:nth-child(9){
+					width: 35%;
 				}
 				img{
 					position: relative;
@@ -697,7 +555,7 @@
 				}
 			}
 		}
-		.country_btm{
+		/*.country_btm{
 			padding-left: 10px;
 			width: 100%;
 			height: 60px;
@@ -713,7 +571,7 @@
 					top: 5px;
 				}
 			}
-		}
+		}*/
 	}
 	.important{
 		border-bottom: 1px solid $bottom_color;
@@ -786,10 +644,10 @@
 					width: 10%;
 				}
 				&:nth-child(6){
-					width: 10%;
+					width: 8%;
 				}
 				&:nth-child(7){
-					width: 5%;
+					width: 7%;
 				}
 			}
 		}
@@ -831,10 +689,10 @@
 					width: 10%;
 				}
 				&:nth-child(6){
-					width: 10%;
+					width: 8%;
 				}
 				&:nth-child(7){
-					width: 5%;
+					width: 7%;
 				}
 			}
 		}
