@@ -64,7 +64,6 @@ const webpackConfig = merge(baseWebpackConfig, {
 		  },
 		  // necessary to consistently work with multiple chunks via CommonsChunkPlugin
 		  chunksSortMode: 'dependency',
-		  chunks: ['manifest', 'vendor', 'app']
 		}),
     // keep module.id stable when vender modules does not change
     new webpack.HashedModuleIdsPlugin(),
