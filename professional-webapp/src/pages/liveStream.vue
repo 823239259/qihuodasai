@@ -6,7 +6,7 @@
 				<li>({{showNowDay}}&nbsp;{{showNowTime}})</li>
 			</ul>
 			<ul>
-				<li><i class="ifont ifont_click" v-on:click="autoRefresh">&#xe600;</i>{{volid ? info : time}}</li>
+				<li><i class="ifont ifont_click" v-on:click="autoRefresh">&#xe600;</i>{{time}}</li>
 				<li>秒后自动刷新</li>
 				<li><i class="ifont ifont_refresh" v-on:click="handRefresh">&#xe6d1;</i></li>
 			</ul>
@@ -16,7 +16,7 @@
 				<li>{{item.createdAt | showTime}}</li>
 				<li>{{item.liveTitle}}</li>
 			</ul>-->
-			<div v-for="(item,index) in arrList">
+			<div v-for="(item,index) in arrList" class="todayInfo">
 				<p>
 					<i>{{item.createdAt | showTime}}</i>
 					<span>{{item.liveTitle}}</span>
@@ -54,51 +54,61 @@
 				showbeforeDay:false,
 				show_beforeList:false,
 				colorState:false,
-				info:10,
-				time:10,
+				time:60,
 				showNowTime:'',
-				showNowDay:''
+				showNowDay:'',
+				timing:'',
+				nowtime:""
 			}
 		},
 		computed:{
-			volid: function(){
-				if(this.time <= 0){
-					return true
-				}else{
-					return false
-				}
-			}
 		},
 		methods:{
 			//手动刷新
 			handRefresh:function(){
-				layer.msg("正在为您刷新最新数据",{time:1000})
+				layer.msg("正在为您刷新最新数据",{time:1000});
+				var data = {
+					pageIndex:0,
+					size:20,
+					minTime:this.getNowFormatDate(),
+					maxTime:this.getNowFormatDate1(),
+					keyword:''
+				}
 				setTimeout(function(){
-					this.getInfoList();
+					pro.fetch("post",'/crawler/getCrawler',data,{}).then((res)=>{
+						if(res.success == true){
+							if(res.code == ''){
+								this.arrList = res.data.data;
+							}
+						}
+					}).catch((err)=>{
+						if(err.success ==false ){
+							layer.msg(err.data.message,{time:2000});
+						}else{
+							layer.msg("网络不给力，请稍后再试",{time:2000});
+						}
+					})
 				}.bind(this),1000)
 			},
 			//自动刷新
 			autoRefresh:function(e){
-				var timing = setInterval(function(){
-					this.time--;
-					if(this.time <= 0){
-						clearInterval(timing);
-						//刷新数据
-						this.getInfoList();
-					}
-				}.bind(this),1000);
 				if(this.colorState == false){
 					this.colorState=true;
 					$(e.currentTarget).css("color","#ffd400");
-					this.time = 10;
-					timing();
+					this.timing = setInterval(function(){
+						this.time--;
+						if(this.time <= 0){
+							this.time =60;
+							//刷新数据
+							this.getInfoList();
+						}
+					}.bind(this),1000);
 				}else if(this.colorState == true){
 					this.colorState=false;
 					$(e.currentTarget).css("color","#a3aacc");
-					this.time = 10;
-					clearInterval(timing);
+					this.time = 60;
+					clearInterval(this.timing);
 				}
-				
 			},
 			getInfoList:function(){
 				var data ={
@@ -115,8 +125,11 @@
 						}
 					}
 				}).catch((err)=>{
-//					console.log("-----------------");
-//					console.log(err);
+					if(err.success ==false ){
+						layer.msg(err.data.message,{time:2000});
+					}else{
+						layer.msg("网络不给力，请稍后再试",{time:2000});
+					}
 				})
 			},
 			//加载更多
@@ -177,38 +190,35 @@
 			    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate;
 			    return currentdate;
 			},
-			updateTime:function(){
-				var cd = new Date();
-			    this.showNowTime = this.zeroPadding(cd.getHours(), 2) + ':' + this.zeroPadding(cd.getMinutes(), 2) + ':' + this.zeroPadding(cd.getSeconds(), 2);
-			    this.showNowDay = this.zeroPadding(cd.getFullYear(), 4) + '-' + this.zeroPadding(cd.getMonth()+1, 2) + '-' + this.zeroPadding(cd.getDate(), 2);
-			},
-			zeroPadding:function(num, digit) {
-			    var zero = '';
-			    for(var i = 0; i < digit; i++) {
-			        zero += '0';
-			    }
-			    return (zero + num).slice(-digit);
-			},
-			timerID:function(){
-				setInterval(this.updateTime(),1000);
-			}
 		},
 		mounted:function(){
 			//获取初始数据
 			this.getInfoList();
 			//初始化高度
 			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-			var _h = h - 47;
+			var _h = h -40- 47;
 			$("#liveStream").height(_h);
 			$(window).resize(function(){
 				var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-				var _h = h - 47;
+				var _h = h -40- 47;
 				if(contH > _h){
 					$("#liveStream").height(_h);
 				}
 			});
 			//时间
-			this.timerID();
+			this.nowtime = setInterval(function(){
+				var cd = new Date();
+				function zeroPadding(num,digit){
+				    var zero = '';
+				    for(var i = 0; i < digit; i++) {
+				        zero += '0';
+				    }
+				    return (zero + num).slice(-digit);
+				}
+			    this.showNowTime = zeroPadding(cd.getHours(), 2) + ':' + zeroPadding(cd.getMinutes(), 2) + ':' + zeroPadding(cd.getSeconds(), 2);
+			    this.showNowDay = zeroPadding(cd.getFullYear(), 4) + '年' + zeroPadding(cd.getMonth()+1, 2) + '月' + zeroPadding(cd.getDate(), 2)+"日";
+			
+			}.bind(this),1000)
 		},
 		filters:{
 			showTime:function(e){
@@ -286,42 +296,29 @@
 		float: left;
 		width: 100%;
 		background-color: $deepblue;
-		p{
+		.todayInfo{
+			p{
+			border-left: 1px solid $lightblue;
 			width: 100%;
 			line-height: 40px;
-			i{
-				text-align: center;
-				display: inline-block;
-				float: left;
-				width: 8%;
-				font-weight: 600;
-				font-size: $fs16;
-			}
-			span{
-				float: left;
-				width: 92%;
-				font-size: $fs14;
-				display: inline-block;
-			}
-		}
-		ul{
-			li{
-				border-bottom:1px solid $bottom_color;
-				border-left:1px solid $bottom_color;
-				border-right:1px solid $bottom_color;
-				float: left;
-				&:nth-child(1){
-					font-size: $fs16;
-					width: 8%;
+				i{
 					text-align: center;
-					line-height: 40px;
+					display: inline-block;
+					float: left;
+					width: 8%;
 					font-weight: 600;
+					font-size: $fs16;
+					border-top: 1px solid $bottom_color;
 				}
-				&:nth-child(2){
-					font-size: $fs14;
-					width: 92%;
+				span{
 					padding-left: 10px;
-					line-height: 40px;
+					background-color: $blue;
+					float: left;
+					width: 90%;
+					font-size: $fs14;
+					display: inline-block;
+					border-top: 1px solid $bottom_color;
+					border-left: 1px solid $bottom_color;
 				}
 			}
 		}
