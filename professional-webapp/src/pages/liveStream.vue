@@ -66,9 +66,28 @@
 		methods:{
 			//手动刷新
 			handRefresh:function(){
-				layer.msg("正在为您刷新最新数据",{time:1000})
+				layer.msg("正在为您刷新最新数据",{time:1000});
+				var data = {
+					pageIndex:1,
+					size:20,
+					minTime:this.getNowFormatDate(),
+					maxTime:this.getNowFormatDate1(),
+					keyword:''
+				}
 				setTimeout(function(){
-					this.getInfoList();
+					pro.fetch("post",'/crawler/getCrawler',data,{}).then((res)=>{
+						if(res.success == true){
+							if(res.code == ''){
+								this.arrList = res.data.data;
+							}
+						}
+					}).catch((err)=>{
+						if(err.success ==false ){
+							layer.msg(err.data.message,{time:2000});
+						}else{
+							layer.msg("网络不给力，请稍后再试",{time:2000});
+						}
+					})
 				}.bind(this),1000)
 			},
 			//自动刷新
