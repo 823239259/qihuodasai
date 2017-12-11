@@ -346,7 +346,7 @@
 									localStorage.setItem("trade_endLoginPassword", pwd);
 //									console.log("111111111111111");
 //									console.log(JSON.stringify(Transfer.backpageID));
-//									if(Transfer.backpageID) {
+									if(Transfer.backpageID == "transactionDetails") {
 										backReload();
 										plus.nativeUI.closeWaiting();
 										mui.toast("登录成功");
@@ -354,20 +354,20 @@
 										islogin = true;
 										mui.back();
 //										mui.toast("111");
-//									} else {
-//										plus.nativeUI.closeWaiting();
-//										mui.toast("登录成功");
-//										localStorage.setItem("isMock", tradeWebSocketIsMock);
-//										islogin = true;
-//										mui.app_refresh("quotationMain");
-//										mui.openWindow({
-//											url: "../quotation/quotationMain.html",
-//											id: "quotationMain",
-//											extras: {
-//												Operation_content: "1"
-//											}
-//										});
-//									}
+									} else {
+										plus.nativeUI.closeWaiting();
+										mui.toast("登录成功");
+										localStorage.setItem("isMock", tradeWebSocketIsMock);
+										islogin = true;
+										mui.app_refresh("quotationMain");
+										mui.openWindow({
+											url: "../quotation/quotationMain.html",
+											id: "quotationMain",
+											extras: {
+												Operation_content: "1"
+											}
+										});
+									}
 								} else {
 									alertProtype(loginMessage, "提示", Btn.confirmed());
 									plus.nativeUI.closeWaiting();
