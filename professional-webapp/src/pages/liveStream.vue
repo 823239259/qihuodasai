@@ -6,7 +6,7 @@
 				<li>({{showNowDay}}&nbsp;{{showNowTime}})</li>
 			</ul>
 			<ul>
-				<li><i class="ifont ifont_click" v-on:click="autoRefresh">&#xe600;</i>{{volid ? info : time}}</li>
+				<li><i class="ifont ifont_click" v-on:click="autoRefresh">&#xe600;</i>{{time}}</li>
 				<li>秒后自动刷新</li>
 				<li><i class="ifont ifont_refresh" v-on:click="handRefresh">&#xe6d1;</i></li>
 			</ul>
@@ -54,20 +54,13 @@
 				showbeforeDay:false,
 				show_beforeList:false,
 				colorState:false,
-				info:10,
 				time:10,
 				showNowTime:'',
-				showNowDay:''
+				showNowDay:'',
+				timing:''
 			}
 		},
 		computed:{
-			volid: function(){
-				if(this.time <= 0){
-					return true
-				}else{
-					return false
-				}
-			}
 		},
 		methods:{
 			//手动刷新
@@ -79,24 +72,22 @@
 			},
 			//自动刷新
 			autoRefresh:function(e){
-				var timing = setInterval(function(){
-					this.time--;
-					if(this.time <= 0){
-						clearInterval(timing);
-						//刷新数据
-						this.getInfoList();
-					}
-				}.bind(this),1000);
 				if(this.colorState == false){
 					this.colorState=true;
 					$(e.currentTarget).css("color","#ffd400");
-					this.time = 10;
-					timing();
+					this.timing = setInterval(function(){
+						this.time--;
+						if(this.time <= 0){
+							this.time =10;
+							//刷新数据
+							this.getInfoList();
+						}
+					}.bind(this),1000);
 				}else if(this.colorState == true){
 					this.colorState=false;
 					$(e.currentTarget).css("color","#a3aacc");
 					this.time = 10;
-					clearInterval(timing);
+					clearInterval(this.timing);
 				}
 				
 			},
@@ -115,8 +106,11 @@
 						}
 					}
 				}).catch((err)=>{
-//					console.log("-----------------");
-//					console.log(err);
+					if(err.success ==false ){
+					layer.msg(err.data.message,{time:2000});
+					}else{
+						layer.msg("网络不给力，请稍后再试",{time:2000});
+					}
 				})
 			},
 			//加载更多
