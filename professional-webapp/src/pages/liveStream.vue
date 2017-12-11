@@ -56,8 +56,9 @@
 				colorState:false,
 				time:60,
 				showNowTime:'',
-				showNowDay:1,
-				timing:''
+				showNowDay:'',
+				timing:'',
+				nowtime:""
 			}
 		},
 		computed:{
@@ -170,21 +171,6 @@
 			    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate;
 			    return currentdate;
 			},
-			updateTime:function(){
-				var cd = new Date();
-			    this.showNowTime = this.zeroPadding(cd.getHours(), 2) + ':' + this.zeroPadding(cd.getMinutes(), 2) + ':' + this.zeroPadding(cd.getSeconds(), 2);
-			    this.showNowDay = this.zeroPadding(cd.getFullYear(), 4) + '-' + this.zeroPadding(cd.getMonth()+1, 2) + '-' + this.zeroPadding(cd.getDate(), 2);
-			},
-			zeroPadding:function(num, digit) {
-			    var zero = '';
-			    for(var i = 0; i < digit; i++) {
-			        zero += '0';
-			    }
-			    return (zero + num).slice(-digit);
-			},
-			timerID:function(){
-				setInterval(this.updateTime(),1000);
-			}
 		},
 		mounted:function(){
 			//获取初始数据
@@ -201,7 +187,19 @@
 				}
 			});
 			//时间
-			this.timerID();
+			this.nowtime = setInterval(function(){
+				var cd = new Date();
+				function zeroPadding(num,digit){
+				    var zero = '';
+				    for(var i = 0; i < digit; i++) {
+				        zero += '0';
+				    }
+				    return (zero + num).slice(-digit);
+				}
+			    this.showNowTime = zeroPadding(cd.getHours(), 2) + ':' + zeroPadding(cd.getMinutes(), 2) + ':' + zeroPadding(cd.getSeconds(), 2);
+			    this.showNowDay = zeroPadding(cd.getFullYear(), 4) + '年' + zeroPadding(cd.getMonth()+1, 2) + '月' + zeroPadding(cd.getDate(), 2)+"日";
+			
+			}.bind(this),1000)
 		},
 		filters:{
 			showTime:function(e){
