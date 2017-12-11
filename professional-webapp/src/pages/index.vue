@@ -393,7 +393,6 @@
 				};
 				pro.fetch('post', '/socket/config/getVersions', data, '').then(function(res){
 					if(res.success == true && res.code == 1){
-						console.log(res);
 						this.$store.state.market.tradeConfig.url_real = res.data.socketModelUrl;
 					}
 				}.bind(this)).catch(function(err){

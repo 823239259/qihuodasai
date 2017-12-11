@@ -309,7 +309,7 @@
 						layer.msg('请输入止损价', {time: 1000});
 					}else if(d0 >= 0.000000001 && parseFloat(miniTikeSize-d0) >= 0.0000000001){
 						layer.msg('输入价格不符合最小变动价，最小变动价为：' + miniTikeSize, {time: 1000});
-					}else if(this.stopNum == '' || this.stopNum == 0 || this.stopNum == undefined){
+					}else if(this.stopNum == '' || this.stopNum <= 0 || this.stopNum == undefined){
 						layer.msg('请输入止损手数', {time: 1000});
 					}else{
 						if(this.currentOrderList.HoldDrection == '多'){
@@ -357,7 +357,7 @@
 						layer.msg('请输入止盈价', {time: 1000});
 					}else if(d0 >= 0.000000001 && parseFloat(miniTikeSize-d0) >= 0.0000000001){
 						layer.msg('输入价格不符合最小变动价，最小变动价为：' + miniTikeSize, {time: 1000});
-					}else if(this.stopNum == '' || this.stopNum == 0 || this.stopNum == undefined){
+					}else if(this.stopNum == '' || this.stopNum <= 0 || this.stopNum == undefined){
 						layer.msg('请输入止盈手数', {time: 1000});
 					}else{
 						if(this.currentOrderList.HoldDrection == '多'){
