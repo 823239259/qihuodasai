@@ -54,7 +54,7 @@
 				showbeforeDay:false,
 				show_beforeList:false,
 				colorState:false,
-				time:10,
+				time:60,
 				showNowTime:'',
 				showNowDay:'',
 				timing:''
@@ -78,7 +78,7 @@
 					this.timing = setInterval(function(){
 						this.time--;
 						if(this.time <= 0){
-							this.time =10;
+							this.time =60;
 							//刷新数据
 							this.getInfoList();
 						}
@@ -86,7 +86,7 @@
 				}else if(this.colorState == true){
 					this.colorState=false;
 					$(e.currentTarget).css("color","#a3aacc");
-					this.time = 10;
+					this.time = 60;
 					clearInterval(this.timing);
 				}
 				
