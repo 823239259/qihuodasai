@@ -25,7 +25,14 @@
 		var SetDrawPwd=false;
 		var freeCashMoney = null;
 		mui.plusReady(function(){
-			  
+			document.getElementById("back").addEventListener("tap",function(){
+				console.log("22222222222222222");
+				mui.app_refresh("account");
+				mui.openWindow({
+					url:"account.html",
+					id:"account.html"
+				})
+			})
     		//初始化监听头部和底部事件
 			tzdr.init.initHearListener();
     		document.getElementById("bindBankCard").addEventListener("tap",function(){
