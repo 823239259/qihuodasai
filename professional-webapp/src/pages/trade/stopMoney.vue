@@ -49,7 +49,7 @@
 				</div>
 				<div class="row" v-show="!tabShow">
 					<div class="fl">
-						<label>止赢价:</label>
+						<label>止盈价:</label>
 						<input type="text" class="ipt" v-model="stopProfitPrice" />
 						<span>{{profitRange}}%</span>
 					</div>
