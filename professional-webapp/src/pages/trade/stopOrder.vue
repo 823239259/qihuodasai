@@ -562,7 +562,7 @@
 							return '对手价';
 						}
 					})();
-					obj.validity = '当日有效';
+					obj.validity = '永久有效';
 					obj.InsertDateTime = o.InsertDateTime;
 					this.notStopLossList.push(obj);
 				}.bind(this));
@@ -632,7 +632,7 @@
 							return '对手价';
 						}
 					})();
-					obj.validity = '当日有效';
+					obj.validity = '永久有效';
 					obj.InsertDateTime = o.InsertDateTime;
 					this.alreadyStopLossList.push(obj);
 				}.bind(this));

@@ -307,8 +307,8 @@
 										<div class="slt-list">
 											<ul>
 												<li selectVal="0">></li>
-												<li selectVal="1">>=</li>
-												<li selectVal="2"><</li>
+												<li selectVal="2">>=</li>
+												<li selectVal="1"><</li>
 												<li selectVal="3"><=</li>
 											</ul>
 										</div>
@@ -321,8 +321,8 @@
 										<div class="slt-list">
 											<ul>
 												<li selectVal="0">></li>
-												<li selectVal="1">>=</li>
-												<li selectVal="2"><</li>
+												<li selectVal="2">>=</li>
+												<li selectVal="1"><</li>
 												<li selectVal="3"><=</li>
 											</ul>
 										</div>
@@ -339,8 +339,8 @@
 										<div class="slt-list">
 											<ul>
 												<li selectVal="0">></li>
-												<li selectVal="1">>=</li>
-												<li selectVal="2"><</li>
+												<li selectVal="2">>=</li>
+												<li selectVal="1"><</li>
 												<li selectVal="3"><=</li>
 											</ul>
 										</div>
@@ -1067,25 +1067,25 @@
 						//判断价格与附加价格是否形成区间
 						switch (this.selectType){
 							case '0':
-								if(this.selectAdditionalType == '0' || this.selectAdditionalType == '1' || this.conditionAdditionalPrice <= this.conditionPrice){
-									layer.msg('附加条件添加错误', {time: 1000});
-									return;
-								}
-								break;
-							case '1':
-								if(this.selectAdditionalType == '0' || this.selectAdditionalType == '1' || this.conditionAdditionalPrice <= this.conditionPrice){
+								if(this.selectAdditionalType == '0' || this.selectAdditionalType == '2' || this.conditionAdditionalPrice <= this.conditionPrice){
 									layer.msg('附加条件添加错误', {time: 1000});
 									return;
 								}
 								break;
 							case '2':
-								if(this.selectAdditionalType == '2' || this.selectAdditionalType == '3' || this.conditionAdditionalPrice >= this.conditionPrice){
+								if(this.selectAdditionalType == '0' || this.selectAdditionalType == '2' || this.conditionAdditionalPrice <= this.conditionPrice){
+									layer.msg('附加条件添加错误', {time: 1000});
+									return;
+								}
+								break;
+							case '1':
+								if(this.selectAdditionalType == '1' || this.selectAdditionalType == '3' || this.conditionAdditionalPrice >= this.conditionPrice){
 									layer.msg('附加条件添加错误', {time: 1000});
 									return;
 								}
 								break;
 							case '3':
-								if(this.selectAdditionalType == '2' || this.selectAdditionalType == '3' || this.conditionAdditionalPrice >= this.conditionPrice){
+								if(this.selectAdditionalType == '1' || this.selectAdditionalType == '3' || this.conditionAdditionalPrice >= this.conditionPrice){
 									layer.msg('附加条件添加错误', {time: 1000});
 									return;
 								}
