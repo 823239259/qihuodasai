@@ -87,8 +87,8 @@
 							<div class="slt-list">
 								<ul>
 									<li selectVal="0">></li>
-									<li selectVal="1">>=</li>
-									<li selectVal="2"><</li>
+									<li selectVal="2">>=</li>
+									<li selectVal="1"><</li>
 									<li selectVal="3"><=</li>
 								</ul>
 							</div>
@@ -101,8 +101,8 @@
 							<div class="slt-list">
 								<ul>
 									<li selectVal="0">></li>
-									<li selectVal="1">>=</li>
-									<li selectVal="2"><</li>
+									<li selectVal="2">>=</li>
+									<li selectVal="1"><</li>
 									<li selectVal="3"><=</li>
 								</ul>
 							</div>
@@ -167,8 +167,8 @@
 							<div class="slt-list">
 								<ul>
 									<li selectVal="0">></li>
-									<li selectVal="1">>=</li>
-									<li selectVal="2"><</li>
+									<li selectVal="2">>=</li>
+									<li selectVal="1"><</li>
 									<li selectVal="3"><=</li>
 								</ul>
 							</div>
