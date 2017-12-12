@@ -191,18 +191,20 @@
 					}else if(this.stopNum == '' || this.stopNum <= 0 || this.stopNum == undefined){
 						layer.msg('请输入止损手数', {time: 1000});return;
 					}else{
-						if(drection == 0){
-							//if(this.inputPrice > this.templateListObj.LastPrice){
-							if(parseFloat(this.stopPrice) >= parseFloat(this.lastPrice)){	
-								layer.msg('输入价格应该低于最新价', {time: 1000});
-								return;
+						if(this.sotpType == '0'){
+							if(drection == 0){
+								//if(this.inputPrice > this.templateListObj.LastPrice){
+								if(parseFloat(this.stopPrice) >= parseFloat(this.lastPrice)){	
+									layer.msg('输入价格应该低于最新价', {time: 1000});
+									return;
+								}
 							}
-						}
-						if(drection == 1){
-							//if(this.inputPrice < this.templateListObj.LastPrice){
-							if(parseFloat(this.stopPrice) <= parseFloat(this.lastPrice)){
-								layer.msg('输入价格应该高于最新价', {time: 1000});
-								return;
+							if(drection == 1){
+								//if(this.inputPrice < this.templateListObj.LastPrice){
+								if(parseFloat(this.stopPrice) <= parseFloat(this.lastPrice)){
+									layer.msg('输入价格应该高于最新价', {time: 1000});
+									return;
+								}
 							}
 						}
 						let b = {
