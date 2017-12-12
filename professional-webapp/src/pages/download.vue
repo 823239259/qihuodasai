@@ -214,7 +214,6 @@
 	@import "../assets/css/common.scss";
 	#download{
 		width: 100%;
-		/*height: 920px;*/
 	}
 	.bg{
 		background-color: $white;
@@ -229,6 +228,7 @@
 		top: 0;
 		left: 0;
 	}
+	/*第一页*/
 	.page1{
 		width:100%;
 		height: 100%;
@@ -236,7 +236,6 @@
 			position: relative;
 			float: left;
 			width: 45%;
-			/*background-image: url(../assets/images/dowload_left_1.png);*/
 			height: 100%;
 			background-size: 100% 100%;
 			background-color: #242633;
@@ -397,6 +396,7 @@
 			
 		}
 	}
+	/*第二页*/
 	.page2{
 		width: 100%;
 		height: 100%;
@@ -565,6 +565,7 @@
 			}
 		}
 	}
+	/*第三页*/
 	.page3{
 		width:100%;
 		height: 100%;
@@ -733,6 +734,7 @@
 			}
 		}
 	}
+	/*第四页*/
 	.page4{
 		width: 100%;
 		height: 100%;
@@ -901,6 +903,7 @@
 			}
 		}
 	}
+	/*第五页*/
 	.page5{
 		width:100%;
 		height: 100%;
@@ -1069,6 +1072,7 @@
 			}
 		}
 	}
+	/*下一页*/
 	.nextPage{
 		width: 42px;
 		height: 40px;
@@ -1079,6 +1083,7 @@
 		background-image: url(../assets/images/download_next.png);
 		cursor: pointer;
 	}
+	/*进度*/
 	.progress{
 		width: 15px;
 		height: 100;
@@ -1097,6 +1102,7 @@
 			background-color: black;
 		}
 	}
+	/*三角形*/
 	.sanjiaox{
 		position: absolute;
 		top: 50%;
