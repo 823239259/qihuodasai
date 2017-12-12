@@ -90,7 +90,6 @@
 				tabList: ['新增止损单','新增止盈单'],
 				currentNum: 0,
 				tabShow: true,
-				stopName: '止损价',
 				stopPrice: '',
 				stopNum: '',
 				range: '0.00',
@@ -158,10 +157,8 @@
 				this.currentNum = index;
 				if(index == 1){
 					this.tabShow = false;
-					this.stopName = '止盈价';
 				}else{
 					this.tabShow = true;
-					this.stopName = '止损价';
 				}
 			},
 			confirmEvent: function(){
@@ -186,7 +183,7 @@
 				}
 				if(this.currentNum == 0){
 					msg = '是否添加限价止损？';
-					if(this.stopPrice == '' || this.stopPrice == 0 || this.stopPrice == undefined){
+					if(this.stopPrice == '' || this.stopPrice <= 0 || this.stopPrice == undefined){
 						layer.msg('请输入止损价', {time: 1000});return;
 					}else if(!(d0 < 0.000000001 || parseFloat(b0-d0) < 0.0000000001)){
 						//d0 >= 0.000000001 && parseFloat(b0-d0) >= 0.0000000001
@@ -227,7 +224,7 @@
 					}
 				}else if(this.currentNum == 1){
 					msg = '是否添加限价止盈？';
-					if(this.stopProfitPrice == '' || this.stopProfitPrice == 0 || this.stopProfitPrice == undefined){
+					if(this.stopProfitPrice == '' || this.stopProfitPrice <= 0 || this.stopProfitPrice == undefined){
 						layer.msg('请输入止盈价', {time: 1000});return;
 					}else if(this.stopProfitNum == '' || this.stopProfitNum <= 0 || this.stopProfitNum == undefined){
 						layer.msg('请输入止盈手数', {time: 1000});return;
