@@ -145,7 +145,13 @@
 					var openAvgPrice = this.selectedMsg.HoldAvgPrice;
 					this.range = parseFloat((this.stopPrice - openAvgPrice)/openAvgPrice*100).toFixed(2);
 				}
-			}
+			},
+			stopProfitPrice: function(n,o){
+				if(n && n != undefined){
+					var openAvgPrice = this.selectedMsg.HoldAvgPrice;
+					this.profitRange = parseFloat((this.stopProfitPrice - openAvgPrice)/openAvgPrice*100).toFixed(2);
+				}
+			},
 		},
 		methods: {
 			clickEvent: function(index){
