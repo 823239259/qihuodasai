@@ -127,8 +127,8 @@
 			<div class="progress">
 				<span v-for="(k,index) in 5" :class="{current:current == index}"></span>
 			</div>
+			<div class="sanjiaox" v-show="show_sanjiao"></div>
 		</div>
-		
 	</div>
 </template>
 
@@ -142,16 +142,18 @@
 				show_page2:false,
 				show_page4:false,
 				show_page3:false,
-				show_page5:false
+				show_page5:false,
+				show_sanjiao:true
 			}
 		},
 		methods:{
 			nextPage:function(){
 				if(this.current <4){
 					this.current++;
+					this.show_sanjiao =false
 				}else{
 					this.current =0;
-					
+					this.show_sanjiao = true
 				}
 				var a = parseInt(this.current%5);
 				if(a == 0){
@@ -1097,5 +1099,16 @@
 		.current{
 			background-color: black;
 		}
+	}
+	.sanjiaox{
+		position: absolute;
+		top: 50%;
+		left: 44.5%;
+		width: 0;
+	    height: 0;
+	    border-top: 10px solid transparent;
+	    border-right: 15px solid $white;
+	    border-bottom: 10px solid transparent;
+		z-index: 200;
 	}
 </style>
