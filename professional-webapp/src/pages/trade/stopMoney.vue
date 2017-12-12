@@ -182,7 +182,6 @@
 					drection = 1;
 				}
 				if(this.currentNum == 0){
-					msg = '是否添加限价止损？';
 					if(this.stopPrice == '' || this.stopPrice <= 0 || this.stopPrice == undefined){
 						layer.msg('请输入止损价', {time: 1000});return;
 					}else if(!(d0 < 0.000000001 || parseFloat(b0-d0) < 0.0000000001)){
@@ -191,7 +190,9 @@
 					}else if(this.stopNum == '' || this.stopNum <= 0 || this.stopNum == undefined){
 						layer.msg('请输入止损手数', {time: 1000});return;
 					}else{
-						if(this.sotpType == '0'){
+						console.log(this.sotpType);
+						if(this.stopType == '0'){
+							msg = '是否添加限价止损？';
 							if(drection == 0){
 								//if(this.inputPrice > this.templateListObj.LastPrice){
 								if(parseFloat(this.stopPrice) >= parseFloat(this.lastPrice)){	
@@ -206,6 +207,8 @@
 									return;
 								}
 							}
+						}else{
+							msg = '是否添加动态止损？';
 						}
 						let b = {
 							"Method": 'InsertStopLoss',
