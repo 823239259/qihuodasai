@@ -187,7 +187,6 @@
 					this.show_page4 = false;
 					this.show_page5 = true;
 				}
-				console.log(a)
 			}
 		},
 		mounted:function(){
@@ -204,10 +203,8 @@
 				$(".page3_container").css("top","2%")
 				$(".page4_container").css("top","2%").css("left","15%");
 				$(".page5_container").css("top","2%")
-				console.log("-------------")
 			}else if(screenWidth == 1920){
 				$("#download").css("height","920px");
-				console.log("1111111111111111111")
 			}
 		}
 	}
