@@ -30,12 +30,18 @@ new Vue({
 		}
 	},
 	mounted: function() {
-		var lg = localStorage.guideshow;
-		if(lg == undefined) {
-			this.$store.state.isshow.guideshow = true;
-		} else {
-			this.$store.state.isshow.guideshow = false;
+		if(localStorage.helpshow == '关闭'){
+			this.$store.state.isshow.helpshow = false;
 		}
+		if(this.$store.state.isshow.helpshow == true){
+			localStorage.helpshow = '关闭';
+		}
+//		var lg = localStorage.guideshow;
+//		if(lg == undefined) {
+//			this.$store.state.isshow.guideshow = true;
+//		} else {
+//			this.$store.state.isshow.guideshow = false;
+//		}
 
 		//		http://154w3c3370.iok.la:16433/vs-api
 //		this.$http.post(
