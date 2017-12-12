@@ -775,5 +775,9 @@
 				font-size: $fs12;
 			}
 		}
+		table tr td{
+			font-size: $fs12;
+			padding: 0 4px;
+		}
 	}
 </style>

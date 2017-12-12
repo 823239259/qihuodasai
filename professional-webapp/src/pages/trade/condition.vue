@@ -436,7 +436,7 @@
 						layer.msg('请输入价格', {time: 1000});
 					}else if(d0 >= 0.000000001 && parseFloat(miniTikeSize - d0) >= 0.0000000001){
 						layer.msg('输入价格不符合最小变动价，最小变动价为：' + miniTikeSize, {time: 1000});
-					}else if(this.conditionNum == '' || this.conditionNum == 0 || this.conditionNum == undefined){
+					}else if(this.conditionNum == '' || this.conditionNum <= 0 || this.conditionNum == undefined){
 						layer.msg('请输入手数', {time: 1000});
 					}else{
 						msg = '是否修改价格条件单？';
@@ -486,7 +486,7 @@
 							layer.msg('输入附加价格不符合最小变动价，最小变动价为：' + miniTikeSize, {time: 1000});
 						}
 					}
-					if(this.conditionNum == '' || this.conditionNum == 0 || this.conditionNum == undefined){
+					if(this.conditionNum == '' || this.conditionNum <= 0 || this.conditionNum == undefined){
 						layer.msg('请输入手数', {time: 1000});
 					}else{
 						msg = '是否修改时间条件单？';
