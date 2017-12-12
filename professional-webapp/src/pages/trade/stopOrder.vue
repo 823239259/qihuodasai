@@ -16,7 +16,7 @@
 						<td>手数</td>
 						<td>触发条件</td>
 						<td>委托价</td>
-						<td>有效期</td>
+						<td>有效日期</td>
 						<td>下单时间</td>
 					</tr>
 				</thead>
@@ -329,7 +329,7 @@
 			editConfirm: function(){
 				let miniTikeSize = this.orderTemplist[this.currentOrderList.CommodityNo].MiniTikeSize;
 				let d0 = this.stopPrice % miniTikeSize;
-				if(this.stopLossType == 0){
+				if(this.stopLossType == 0 || this.stopLossType == 2){
 					if(this.stopPrice == '' || this.stopPrice <= 0 || this.stopPrice == undefined){
 						layer.msg('请输入止损价', {time: 1000});
 					}else if(d0 >= 0.000000001 && parseFloat(miniTikeSize-d0) >= 0.0000000001){
@@ -337,6 +337,7 @@
 					}else if(this.stopNum == '' || this.stopNum <= 0 || this.stopNum == undefined){
 						layer.msg('请输入止损手数', {time: 1000});
 					}else{
+						console.log(this.stopType);
 						if(this.stopType == '0'){
 							if(this.currentOrderList.HoldDrection == '多'){
 								if(this.stopPrice > this.lastPrice){

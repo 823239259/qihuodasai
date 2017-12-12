@@ -378,8 +378,8 @@
 										<input type="text" class="fl" v-model="defaultNum" />
 										<i class="ifont fr" @click="add">&#xe601;</i>
 									</div>
-									<label class="effective-date">有限日期</label>
-									<span>当日有效</span>
+									<label class="effective-date">有效日期</label>
+									<span>永久有效</span>
 								</li>
 							</ul>
 							<div class="btn_box" v-show="downOrderShow">
