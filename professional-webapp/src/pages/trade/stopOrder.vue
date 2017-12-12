@@ -16,7 +16,7 @@
 						<td>手数</td>
 						<td>触发条件</td>
 						<td>委托价</td>
-						<td>有效期</td>
+						<td>有效日期</td>
 						<td>下单时间</td>
 					</tr>
 				</thead>
@@ -87,25 +87,30 @@
 						<span>{{lastPrice}}</span>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row" v-show="tabShow">
 					<div class="fl">
-						<label>止损价:</label>
-						<input type="text" class="ipt" v-model="stopPrice" />
-					</div>
-					<div class="fl">
-						<input type="text" class="ipt" v-model="stopNum" />
-						<label>手数</label>
+						<label class="fl">止损方式:</label>
+						<div class="slt-box row_money_box" id="stop_type">
+							<input type="text" class="slt" disabled="disabled" :selectVal="stopType" :value="stopTypeName"/>
+							<span class="tal-box"><span class="tal"></span></span>
+							<div class="slt-list">
+								<ul>
+									<li selectVal="0">止损价</li>
+									<li selectVal="2">动态价</li>
+								</ul>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="fl">
-						<!--<label><i class="ifont checkbox">&#xe634;</i></label>-->
-						<!--<label><i class="ifont checkboxs">&#xe600;</i></label>-->
-						<span class="dynamic">动态追踪，价格回撤幅度</span>
+						<label>{{stopTypeName}}:</label>
+						<input type="text" class="ipt" v-model="stopPrice" />
+						<span v-show="rangeShow">{{percentLoss}}%</span>
 					</div>
 					<div class="fl">
-						<input type="text" class="ipt" disabled="disabled" v-model="percentLoss" />
-						<label>%</label>
+						<input type="text" class="ipt" v-model="stopNum" />
+						<label>手数</label>
 					</div>
 				</div>
 				<div class="row">
@@ -133,11 +138,12 @@
 				</div>
 				<div class="row">
 					<div class="fl">
-						<label>止损价:</label>
-						<input type="text" class="ipt" v-model="stopPrice" />
+						<label>止盈价:</label>
+						<input type="text" class="ipt" v-model="stopProfitPrice" />
+						<span>{{profitRange}}%</span>
 					</div>
 					<div class="fl">
-						<input type="text" class="ipt" v-model="stopNum" />
+						<input type="text" class="ipt" v-model="stopProfitNum" />
 						<label>手数</label>
 					</div>
 				</div>
@@ -156,6 +162,7 @@
 </template>
 
 <script>
+	import pro from '../../assets/js/common.js'
 	export default{
 		name: 'trade_details',
 		data(){
@@ -177,6 +184,12 @@
 				stopPrice: '',
 				stopNum: '',
 				percentLoss: '0.00',
+				stopProfitPrice: '',
+				stopProfitNum: '',
+				profitRange: '0.00',
+				stopType: '0',
+				stopTypeName: '止损价',
+				rangeShow: '',
 			}
 		},
 		computed: {
@@ -247,9 +260,21 @@
 					if(o.StopLossNo == this.currentId){
 						this.currentOrderList = o;
 						this.stopNum = o.Num;
-						this.stopPrice = o.StopLossPrice;
+						if(o.StopLossType00 == 2){
+							this.stopPrice = parseFloat(o.StopLossDiff).toFixed(2);
+							this.rangeShow = false;
+						}else{
+							this.stopPrice = o.StopLossPrice;
+							this.rangeShow = true;
+						}
+						this.stopProfitNum = o.Num;
+						this.stopProfitPrice = o.StopLossPrice;
 						var openAvgPrice = o.HoldAvgPrice;
-						this.percentLoss = parseFloat((this.stopPrice - openAvgPrice)/openAvgPrice*100).toFixed(2);
+						if(this.stopLossType == 0){
+							this.percentLoss = parseFloat((this.stopPrice - openAvgPrice)/openAvgPrice*100).toFixed(2);
+						}else if(this.stopLossType == 1){
+							this.profitRange = parseFloat((this.stopProfitPrice - openAvgPrice)/openAvgPrice*100).toFixed(2);
+						}
 					}
 				}.bind(this));
 			},
@@ -304,24 +329,27 @@
 			editConfirm: function(){
 				let miniTikeSize = this.orderTemplist[this.currentOrderList.CommodityNo].MiniTikeSize;
 				let d0 = this.stopPrice % miniTikeSize;
-				if(this.stopLossType == 0){
-					if(this.stopPrice == '' || this.stopPrice == 0 || this.stopPrice == undefined){
+				if(this.stopLossType == 0 || this.stopLossType == 2){
+					if(this.stopPrice == '' || this.stopPrice <= 0 || this.stopPrice == undefined){
 						layer.msg('请输入止损价', {time: 1000});
 					}else if(d0 >= 0.000000001 && parseFloat(miniTikeSize-d0) >= 0.0000000001){
 						layer.msg('输入价格不符合最小变动价，最小变动价为：' + miniTikeSize, {time: 1000});
 					}else if(this.stopNum == '' || this.stopNum <= 0 || this.stopNum == undefined){
 						layer.msg('请输入止损手数', {time: 1000});
 					}else{
-						if(this.currentOrderList.HoldDrection == '多'){
-							if(this.stopPrice > this.lastPrice){
-								layer.msg('输入价格应该低于最新价', {time: 1000});
-								return;
+						console.log(this.stopType);
+						if(this.stopType == '0'){
+							if(this.currentOrderList.HoldDrection == '多'){
+								if(this.stopPrice > this.lastPrice){
+									layer.msg('输入价格应该低于最新价', {time: 1000});
+									return;
+								}
 							}
-						}
-						if(this.currentOrderList.HoldDrection == '空'){
-							if(this.stopPrice < this.lastPrice){
-								layer.msg('输入价格应该高于最新价', {time: 1000});
-								return;
+							if(this.currentOrderList.HoldDrection == '空'){
+								if(this.stopPrice < this.lastPrice){
+									layer.msg('输入价格应该高于最新价', {time: 1000});
+									return;
+								}
 							}
 						}
 						let b = {
@@ -330,15 +358,10 @@
 								'StopLossNo': this.currentOrderList.StopLossNo,
 								'ModifyFlag': 0,
 								'Num': parseInt(this.stopNum),
-								'StopLossType': parseInt(this.currentOrderList.StopLossType00),
+								'StopLossType': parseInt(this.stopType),
 								'OrderType': parseInt(this.currentOrderList.OrderType00),
-								'StopLossPrice': parseFloat(this.stopPrice),
-								'StopLossDiff': (function(){
-													if(parseInt(this.stopLossType)==0)
-														return 0;
-													if(parseInt(this.stopLossType)==2)
-														return parseFloat(this.stopPrice);
-												}.bind(this))()
+								'StopLossPrice': this.stopType == '0' ? parseFloat(this.stopPrice) : 0.00,
+								'StopLossDiff': this.stopType == '2' ? parseFloat(this.stopPrice) : 0.00,
 							}
 						};
 						layer.confirm('是否添加限价止损？', {
@@ -353,21 +376,21 @@
 						}.bind(this));
 					}
 				}else{
-					if(this.stopPrice == '' || this.stopPrice == 0 || this.stopPrice == undefined){
+					if(this.stopProfitPrice == '' || this.stopProfitPrice <= 0 || this.stopProfitPrice == undefined){
 						layer.msg('请输入止盈价', {time: 1000});
 					}else if(d0 >= 0.000000001 && parseFloat(miniTikeSize-d0) >= 0.0000000001){
 						layer.msg('输入价格不符合最小变动价，最小变动价为：' + miniTikeSize, {time: 1000});
-					}else if(this.stopNum == '' || this.stopNum <= 0 || this.stopNum == undefined){
+					}else if(this.stopProfitNum == '' || this.stopProfitNum <= 0 || this.stopProfitNum == undefined){
 						layer.msg('请输入止盈手数', {time: 1000});
 					}else{
 						if(this.currentOrderList.HoldDrection == '多'){
-							if(this.stopPrice < this.lastPrice){
+							if(this.stopProfitPrice < this.lastPrice){
 								layer.msg('输入价格应该高于最新价', {time: 1000});
 								return;
 							}
 						}
 						if(this.currentOrderList.HoldDrection == '空'){
-							if(this.stopPrice > this.lastPrice){
+							if(this.stopProfitPrice > this.lastPrice){
 								layer.msg('输入价格应该低于最新价', {time: 1000});
 								return;
 							}
@@ -380,7 +403,7 @@
 								'Num': parseInt(this.stopNum),
 								'StopLossType': parseInt(this.currentOrderList.StopLossType00),
 								'OrderType': parseInt(this.currentOrderList.OrderType00),
-								'StopLossPrice': parseFloat(this.stopPrice),
+								'StopLossPrice': parseFloat(this.stopProfitPrice),
 								'StopLossDiff': 0
 							}
 						};
@@ -408,10 +431,18 @@
 						dialogObj = $("#edit_loss_order");
 						this.showLossDialog = true;
 						title = '修改止损单';
-					}else{
+						this.stopType = '0';
+						this.stopTypeName = '止损价';
+					}else if(this.stopLossType == 1){
 						dialogObj = $("#edit_profit_order");
 						this.showProfitDialog = true;
 						title = '修改止盈单';
+					}else{
+						dialogObj = $("#edit_loss_order");
+						this.showLossDialog = true;
+						title = '修改止损单';
+						this.stopType = '2';
+						this.stopTypeName = '动态价';
 					}
 					this.showDialog = true;
 					layer.open({
@@ -612,6 +643,17 @@
 		mounted: function(){
 			//获取渲染页面所需数据
 			this.notStopLossListEvent();
+			//调用下拉框
+			pro.selectEvent('#stop_type', function(data){
+				this.stopType = data;
+				if(data == '0'){
+					this.stopTypeName = '止损价';
+					this.rangeShow = true;
+				}else{
+					this.stopTypeName = '动态价';
+					this.rangeShow = false;
+				}
+			}.bind(this));
 		},
 		activated: function(){}
 	}
@@ -696,6 +738,29 @@
 			}
 			.dynamic{
 				opacity: 0;
+			}
+			.row_money_box{
+				width: 100px;
+				margin-left: 5px;
+				.slt{
+					width: 98px;
+					padding-left: 0;
+				}
+				span{
+					line-height: 54px;
+				}
+				.slt-list{
+					width: 100px;
+					height: auto;
+					li{
+						width: 100px;
+					}
+				}
+				&.current{
+					span{
+						line-height: 0.5;
+					}
+				}
 			}
 		}
 		p{

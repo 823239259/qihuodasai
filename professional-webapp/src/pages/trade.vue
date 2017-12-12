@@ -378,8 +378,8 @@
 										<input type="text" class="fl" v-model="defaultNum" />
 										<i class="ifont fr" @click="add">&#xe601;</i>
 									</div>
-									<label class="effective-date">有限日期</label>
-									<span>当日有效</span>
+									<label class="effective-date">有效日期</label>
+									<span>永久有效</span>
 								</li>
 							</ul>
 							<div class="btn_box" v-show="downOrderShow">
@@ -959,20 +959,26 @@
 						}
 					};
 				}else{
-					b = {
-						"Method": 'InsertOrder',
-						"Parameters":{
-							"ExchangeNo": this.currentdetail.ExchangeNo,
-							"CommodityNo": this.currentdetail.CommodityNo,
-							"ContractNo": this.currentdetail.LastQuotation.ContractNo,
-							"OrderNum": this.defaultNum,
-							"Drection": 0,
-							"PriceType": 0,
-							"LimitPrice": parseFloat(this.tradePrices),
-							"TriggerPrice": 0,
-							"OrderRef": this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
-						}
-					};
+					if(this.tradePrices == '' || this.tradePrices <= 0 || this.tradePrices == undefined){
+						layer.msg('请输入限价', {time: 1000});
+					}else if(this.defaultNum == 0){
+						layer.msg('请输入手数', {time: 1000});
+					}else{
+						b = {
+							"Method": 'InsertOrder',
+							"Parameters":{
+								"ExchangeNo": this.currentdetail.ExchangeNo,
+								"CommodityNo": this.currentdetail.CommodityNo,
+								"ContractNo": this.currentdetail.LastQuotation.ContractNo,
+								"OrderNum": this.defaultNum,
+								"Drection": 0,
+								"PriceType": 0,
+								"LimitPrice": parseFloat(this.tradePrices),
+								"TriggerPrice": 0,
+								"OrderRef": this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+							}
+						};
+					}
 				}
 				//确定文案
 				var contract = b.Parameters.CommodityNo + b.Parameters.ContractNo;
@@ -1010,20 +1016,26 @@
 						}
 					};
 				}else{
-					b = {
-						"Method": 'InsertOrder',
-						"Parameters":{
-							"ExchangeNo": this.currentdetail.ExchangeNo,
-							"CommodityNo": this.currentdetail.CommodityNo,
-							"ContractNo": this.currentdetail.LastQuotation.ContractNo,
-							"OrderNum": this.defaultNum,
-							"Drection": 1,
-							"PriceType": 0,
-							"LimitPrice": parseFloat(this.tradePrices),
-							"TriggerPrice": 0,
-							"OrderRef": this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
-						}
-					};
+					if(this.tradePrices == '' || this.tradePrices <= 0 || this.tradePrices == undefined){
+						layer.msg('请输入限价', {time: 1000});
+					}else if(this.defaultNum == 0){
+						layer.msg('请输入手数', {time: 1000});
+					}else{
+						b = {
+							"Method": 'InsertOrder',
+							"Parameters":{
+								"ExchangeNo": this.currentdetail.ExchangeNo,
+								"CommodityNo": this.currentdetail.CommodityNo,
+								"ContractNo": this.currentdetail.LastQuotation.ContractNo,
+								"OrderNum": this.defaultNum,
+								"Drection": 1,
+								"PriceType": 0,
+								"LimitPrice": parseFloat(this.tradePrices),
+								"TriggerPrice": 0,
+								"OrderRef": this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+							}
+						};
+					}
 				}
 				//确定文案
 				var contract = b.Parameters.CommodityNo + b.Parameters.ContractNo;

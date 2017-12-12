@@ -21,25 +21,41 @@
 						<span>{{lastPrice}}</span>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row" v-show="tabShow">
 					<div class="fl">
-						<label>{{stopName}}:</label>
+						<label class="fl">止损方式:</label>
+						<div class="slt-box row_money_box" id="stop_type">
+							<input type="text" class="slt" disabled="disabled" :selectVal="stopType" :value="stopTypeName"/>
+							<span class="tal-box"><span class="tal"></span></span>
+							<div class="slt-list">
+								<ul>
+									<li selectVal="0">止损价</li>
+									<li selectVal="2">动态价</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row" v-show="tabShow">
+					<div class="fl">
+						<label>{{stopTypeName}}:</label>
 						<input type="text" class="ipt" v-model="stopPrice" />
+						<span v-show="rangeShow">{{range}}%</span>
 					</div>
 					<div class="fl">
 						<input type="text" class="ipt" v-model="stopNum" />
 						<label>手数</label>
 					</div>
 				</div>
-				<div class="row" v-show="tabShow">
+				<div class="row" v-show="!tabShow">
 					<div class="fl">
-						<!--<label class="select_box" v-show="checkBoxShow"><i class="ifont checkbox">&#xe634;</i></label>
-						<label class="select_box" v-show="!checkBoxShow"><i class="ifont checkboxs">&#xe600;</i></label>-->
-						<span class="dynamic">动态追踪，价格回撤幅度</span>
+						<label>止盈价:</label>
+						<input type="text" class="ipt" v-model="stopProfitPrice" />
+						<span>{{profitRange}}%</span>
 					</div>
 					<div class="fl">
-						<input type="text" class="ipt range" disabled="disabled" v-model="range" />
-						<label>%</label>
+						<input type="text" class="ipt" v-model="stopProfitNum" />
+						<label>手数</label>
 					</div>
 				</div>
 				<div class="row">
@@ -74,12 +90,17 @@
 				tabList: ['新增止损单','新增止盈单'],
 				currentNum: 0,
 				tabShow: true,
-				stopName: '止损价',
 				stopPrice: '',
 				stopNum: '',
 				range: '0.00',
+				stopProfitPrice: '',
+				stopProfitNum: '',
+				profitRange: '0.00',
 				lastPrice: '',
 				str: '',
+				stopType: '0',
+				stopTypeName: '止损价',
+				rangeShow: true,
 			}
 		},
 		props: ['value'],
@@ -98,6 +119,8 @@
 					var data = JSON.parse(this.value);
 					this.stopPrice = data.stopPrice;
 					this.stopNum = data.HoldNum;
+					this.stopProfitPrice = data.stopPrice;
+					this.stopProfitNum = data.HoldNum;
 					return data;
 				}
 			},
@@ -116,16 +139,26 @@
 					}.bind(this));
 				}
 			},
+			stopPrice: function(n,o){
+				if(n && n != undefined){
+					var openAvgPrice = this.selectedMsg.HoldAvgPrice;
+					this.range = parseFloat((this.stopPrice - openAvgPrice)/openAvgPrice*100).toFixed(2);
+				}
+			},
+			stopProfitPrice: function(n,o){
+				if(n && n != undefined){
+					var openAvgPrice = this.selectedMsg.HoldAvgPrice;
+					this.profitRange = parseFloat((this.stopProfitPrice - openAvgPrice)/openAvgPrice*100).toFixed(2);
+				}
+			},
 		},
 		methods: {
 			clickEvent: function(index){
 				this.currentNum = index;
 				if(index == 1){
 					this.tabShow = false;
-					this.stopName = '止盈价';
 				}else{
 					this.tabShow = true;
-					this.stopName = '止损价';
 				}
 			},
 			confirmEvent: function(){
@@ -150,26 +183,28 @@
 				}
 				if(this.currentNum == 0){
 					msg = '是否添加限价止损？';
-					if(this.stopPrice == '' || this.stopPrice == 0 || this.stopPrice == undefined){
+					if(this.stopPrice == '' || this.stopPrice <= 0 || this.stopPrice == undefined){
 						layer.msg('请输入止损价', {time: 1000});return;
 					}else if(!(d0 < 0.000000001 || parseFloat(b0-d0) < 0.0000000001)){
 						//d0 >= 0.000000001 && parseFloat(b0-d0) >= 0.0000000001
 						layer.msg('输入价格不符合最小变动价，最小变动价为：' + b0, {time: 1000});return;
-					}else if(this.stopNum == '' || this.stopNum == 0 || this.stopNum == undefined){
+					}else if(this.stopNum == '' || this.stopNum <= 0 || this.stopNum == undefined){
 						layer.msg('请输入止损手数', {time: 1000});return;
 					}else{
-						if(drection == 0){
-							//if(this.inputPrice > this.templateListObj.LastPrice){
-							if(parseFloat(this.stopPrice) >= parseFloat(this.lastPrice)){	
-								layer.msg('输入价格应该低于最新价', {time: 1000});
-								return;
+						if(this.sotpType == '0'){
+							if(drection == 0){
+								//if(this.inputPrice > this.templateListObj.LastPrice){
+								if(parseFloat(this.stopPrice) >= parseFloat(this.lastPrice)){	
+									layer.msg('输入价格应该低于最新价', {time: 1000});
+									return;
+								}
 							}
-						}
-						if(drection == 1){
-							//if(this.inputPrice < this.templateListObj.LastPrice){
-							if(parseFloat(this.stopPrice) <= parseFloat(this.lastPrice)){
-								layer.msg('输入价格应该高于最新价', {time: 1000});
-								return;
+							if(drection == 1){
+								//if(this.inputPrice < this.templateListObj.LastPrice){
+								if(parseFloat(this.stopPrice) <= parseFloat(this.lastPrice)){
+									layer.msg('输入价格应该高于最新价', {time: 1000});
+									return;
+								}
 							}
 						}
 						let b = {
@@ -179,9 +214,9 @@
 								"CommodityNo": this.orderTemplist[this.selectedMsg.CommodityNo].CommodityNo,
 								"ContractNo": this.orderTemplist[this.selectedMsg.CommodityNo].MainContract,
 								"Num": parseInt(this.stopNum),
-								"StopLossType": 0,
-								"StopLossPrice": parseFloat(this.stopPrice),
-								"StopLossDiff": 0.00,
+								"StopLossType": parseInt(this.stopType),
+								"StopLossPrice": this.stopType == '0' ? parseFloat(this.stopPrice) : 0.00,
+								"StopLossDiff": this.stopType == '2' ? parseFloat(this.stopPrice) : 0.00,
 								"HoldAvgPrice": parseFloat(this.selectedMsg.HoldAvgPrice),
 								"HoldDrection": drection,
 								"OrderType": 1,
@@ -191,23 +226,21 @@
 					}
 				}else if(this.currentNum == 1){
 					msg = '是否添加限价止盈？';
-					if(this.stopPrice == '' || this.stopPrice == 0 || this.stopPrice == undefined){
+					if(this.stopProfitPrice == '' || this.stopProfitPrice <= 0 || this.stopProfitPrice == undefined){
 						layer.msg('请输入止盈价', {time: 1000});return;
-					}else if(this.stopNum == '' || this.stopNum == 0 || this.stopNum == undefined){
+					}else if(this.stopProfitNum == '' || this.stopProfitNum <= 0 || this.stopProfitNum == undefined){
 						layer.msg('请输入止盈手数', {time: 1000});return;
 					}else if(d0 >= 0.000000001 && parseFloat(b0-d0) >= 0.0000000001){
 						layer.msg('输入价格不符合最小变动价，最小变动价为：' + b0, {time: 1000});return;
 					}else{
 						if(drection == 0){
-							//if(this.zhiYinInputPrice < this.templateListObj.LastPrice){
-							if(parseFloat(this.stopPrice) <= parseFloat(this.lastPrice)){	
+							if(parseFloat(this.stopProfitPrice) <= parseFloat(this.lastPrice)){	
 								layer.msg('输入价格应该高于最新价', {time: 1000});
 								return;
 							}
 						}
 						if(drection == 1){
-							//if(this.zhiYinInputPrice > this.templateListObj.LastPrice){
-							if(parseFloat(this.stopPrice) >= parseFloat(this.lastPrice)){	
+							if(parseFloat(this.stopProfitPrice) >= parseFloat(this.lastPrice)){	
 								layer.msg('输入价格应该低于最新价', {time: 1000});
 								return;
 							}
@@ -220,7 +253,7 @@
 								"ContractNo": this.orderTemplist[this.selectedMsg.CommodityNo].MainContract,
 								"Num": parseInt(this.stopNum),
 								"StopLossType": 1,
-								"StopLossPrice": parseFloat(this.stopPrice),
+								"StopLossPrice": parseFloat(this.stopProfitPrice),
 								"StopLossDiff": 0.00,
 								"HoldAvgPrice": parseFloat(this.selectedMsg.HoldAvgPrice),
 								"HoldDrection": drection,
@@ -247,7 +280,19 @@
 				this.show = false;
 			}
 		},
-		mounted: function(){}
+		mounted: function(){
+			//调用下拉框
+			pro.selectEvent('#stop_type', function(data){
+				this.stopType = data;
+				if(data == '0'){
+					this.stopTypeName = '止损价';
+					this.rangeShow = true;
+				}else{
+					this.stopTypeName = '动态价';
+					this.rangeShow = false;
+				}
+			}.bind(this));
+		}
 	}
 </script>
 
@@ -327,30 +372,21 @@
 			.dynamic{
 				opacity: 0;
 			}
-			.select_box{
-				cursor: pointer;
-			}
-			.checkbox{
-				color: #7a7f99;
-			}
-			.checkboxs{
-				color: $yellow;
-			}
 			.row_money_box{
-				width: 80px;
+				width: 100px;
 				margin-left: 5px;
 				.slt{
-					width: 78px;
+					width: 98px;
 					padding-left: 0;
 				}
 				span{
 					line-height: 54px;
 				}
 				.slt-list{
-					width: 80px;
+					width: 100px;
 					height: auto;
 					li{
-						width: 80px;
+						width: 100px;
 					}
 				}
 				&.current{
