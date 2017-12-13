@@ -447,7 +447,7 @@
 					layer.open({
 						type: 1,
 						title: title,
-						area: ['400px', 'auto'],
+						area: ['420px', 'auto'],
 						content: dialogObj,
 						btn: ['确定','取消'],
 						btn1: function(index){
@@ -706,13 +706,13 @@
 		}
 	}
 	.edit_order{
-		width: 400px;
+		width: 420px;
 		padding: 20px 10px 0 10px;
 		.row{
 			height: 30px;
 			margin-bottom: 18px;
 			div:first-child{
-				width: 270px;
+				width: 295px;
 				label{
 					width: 78px;
 					text-align: right;

@@ -1165,7 +1165,7 @@
 								'StopLossDiff': 0.0,
 								'StopWinDiff': 0.0,
 								'AdditionFlag': this.timeAddtionalPrice == '' ? false : true,
-								'AdditionType': parseInt(this.timeAdditionalType),
+								'AdditionType': this.timeAddtionalPrice == '' ? 5 : parseInt(this.timeAdditionalType),
 								'AdditionPrice': this.timeAddtionalPrice == '' ? 0 : parseFloat(this.timeAddtionalPrice)
 							}
 						};

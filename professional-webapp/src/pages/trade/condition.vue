@@ -704,7 +704,9 @@
 									}
 								})();
 					obj.conditions = (function(){
+									console.log(o.AdditionFlag);
 									if(o.AdditionFlag==0){ //没有附件条件
+										console.log(o.CompareType);
 										if(o.CompareType==0){
 											return '>'+o.PriceTriggerPonit;
 										}else if(o.CompareType==1){
@@ -715,6 +717,7 @@
 											return '<='+o.PriceTriggerPonit;
 										}else{
 											let s = o.TimeTriggerPoint.split(' ');
+											console.log(o.AdditionType);
 											if(o.AdditionType==0){
 												return s[1]+' >'+o.AdditionPrice;
 											}else if(o.AdditionType==1){

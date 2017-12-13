@@ -302,7 +302,7 @@
 <style lang="scss" scoped>
 	@import "../../assets/css/common.scss";
 	.stopMoney{
-		width: 400px;
+		width: 420px;
 		overflow: hidden;
 		background: $blue;
 		border-radius: 5px;
@@ -349,7 +349,7 @@
 			height: 30px;
 			margin-bottom: 18px;
 			div:first-child{
-				width: 270px;
+				width: 295px;
 				label{
 					width: 78px;
 					text-align: right;
