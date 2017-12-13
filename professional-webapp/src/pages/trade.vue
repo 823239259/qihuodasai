@@ -552,6 +552,9 @@
 			buyStatus(){
 				return this.$store.state.market.buyStatus;
 			},
+			conditionStatus(){
+				return this.$store.state.market.conditionStatus
+			},
 			length(){
 				return this.Parameters.length;
 			},
@@ -1145,6 +1148,8 @@
 						layer.confirm(msg, {
 							btn: ['确定','取消']
 						}, function(index){
+							if(this.conditionStatus == true) return;
+							this.$store.state.market.conditionStatus = true;
 							this.tradeSocket.send(JSON.stringify(b));
 							this.conditionAdditionalPrice = '';
 							layer.close(index);
@@ -1188,6 +1193,8 @@
 						layer.confirm(msg, {
 							btn: ['确定','取消']
 						}, function(index){
+							if(this.conditionStatus == true) return;
+							this.$store.state.market.conditionStatus = true;
 							this.tradeSocket.send(JSON.stringify(b));
 							this.timeAddtionalPrice = '';
 							layer.close(index);

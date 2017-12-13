@@ -65,6 +65,9 @@
 			buyStatus(){
 				return this.$store.state.market.buyStatus;
 			},
+			stopStatus(){
+				return this.$store.state.market.stopStatus;
+			}
 			jCacheTotalAccount(){
 				return this.$store.state.market.CacheAccount.jCacheTotalAccount;
 			},

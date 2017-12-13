@@ -267,6 +267,8 @@
 				layer.confirm(msg, {
 					btn: ['确定','取消']
 				}, function(index){
+					if(this.stopStatus == true) return;
+					this.$store.state.market.stopStatus = true;
 					this.tradeSocket.send(JSON.stringify(this.str));
 					this.$parent.currentOrderID = '';
 					this.$parent.selectedNum = -1;

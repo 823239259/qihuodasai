@@ -260,6 +260,8 @@ var market = {
 		//判断是否可以进行交易操作
 		buyStatus: false,
 		cancelStatus: false,
+		stopStatus: false,
+		conditionStatus: false,
 	}
 }
 
@@ -1160,6 +1162,9 @@ export default new Vuex.Store({
 					}else{
 						layer.msg('设置条件单失败，原因:【'+parameters.StatusMsg+'】', {time: 1000});
 					}
+					setTimeout(function(){
+						context.state.market.conditionStatus = false;
+					}, 1000);
 					context.dispatch('dealWithOnRspInsertCondition',parameters);
 					break;
 				case 'OnRtnConditionState':
@@ -1176,6 +1181,9 @@ export default new Vuex.Store({
 					}else if(parameters.Status == 5){
 						layer.msg('【'+parameters.CommodityNo+parameters.ContractNo+'】条件单【'+ parameters.ConditionNo+'】,触发失败', {time: 1000});
 					}
+					setTimeout(function(){
+						context.state.market.conditionStatus = false;
+					}, 1000);
 					context.dispatch('dealWithOnRtnConditionState',parameters);
 					break;	
 				case 'OnError':
@@ -1569,6 +1577,9 @@ export default new Vuex.Store({
 			}else{
 				layer.msg('提交失败,原因:【'+parameters.StatusMsg+'】', {time: 2000});
 			}
+			setTimeout(function(){
+				context.state.market.stopStatus = false;
+			}, 1000);
 		},
 		qryHisTrade:function(context){
 			var date = new Date(); 
