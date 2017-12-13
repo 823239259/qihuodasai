@@ -190,7 +190,6 @@
 					}else if(this.stopNum == '' || this.stopNum <= 0 || this.stopNum == undefined){
 						layer.msg('请输入止损手数', {time: 1000});return;
 					}else{
-						console.log(this.sotpType);
 						if(this.stopType == '0'){
 							msg = '是否添加限价止损？';
 							if(drection == 0){
