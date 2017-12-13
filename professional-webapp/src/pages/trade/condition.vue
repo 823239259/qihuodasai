@@ -87,8 +87,8 @@
 							<div class="slt-list">
 								<ul>
 									<li selectVal="0">></li>
-									<li selectVal="1">>=</li>
-									<li selectVal="2"><</li>
+									<li selectVal="2">>=</li>
+									<li selectVal="1"><</li>
 									<li selectVal="3"><=</li>
 								</ul>
 							</div>
@@ -101,8 +101,8 @@
 							<div class="slt-list">
 								<ul>
 									<li selectVal="0">></li>
-									<li selectVal="1">>=</li>
-									<li selectVal="2"><</li>
+									<li selectVal="2">>=</li>
+									<li selectVal="1"><</li>
 									<li selectVal="3"><=</li>
 								</ul>
 							</div>
@@ -167,8 +167,8 @@
 							<div class="slt-list">
 								<ul>
 									<li selectVal="0">></li>
-									<li selectVal="1">>=</li>
-									<li selectVal="2"><</li>
+									<li selectVal="2">>=</li>
+									<li selectVal="1"><</li>
 									<li selectVal="3"><=</li>
 								</ul>
 							</div>
@@ -404,25 +404,25 @@
 						//判断价格与附加价格是否形成区间
 						switch (this.priceType){
 							case '0':
-								if(this.additionalPriceType == '0' || this.additionalPriceType == '1' || this.additionPrice <= this.conditionPrice){
+								if(this.additionalPriceType == '0' || this.additionalPriceType == '2' || this.additionPrice <= this.conditionPrice){
 									layer.msg('附加条件添加错误', {time: 1000});
 									return;
 								}
 								break;
 							case '1':
-								if(this.additionalPriceType == '0' || this.additionalPriceType == '1' || this.additionPrice <= this.conditionPrice){
+								if(this.additionalPriceType == '0' || this.additionalPriceType == '2' || this.additionPrice <= this.conditionPrice){
 									layer.msg('附加条件添加错误', {time: 1000});
 									return;
 								}
 								break;
-							case '2':
-								if(this.additionalPriceType == '2' || this.additionalPriceType == '3' || this.additionPrice >= this.conditionPrice){
+							case '1':
+								if(this.additionalPriceType == '1' || this.additionalPriceType == '3' || this.additionPrice >= this.conditionPrice){
 									layer.msg('附加条件添加错误', {time: 1000});
 									return;
 								}
 								break;
-							case '3':
-								if(this.additionalPriceType == '2' || this.additionalPriceType == '3' || this.additionPrice >= this.conditionPrice){
+							case '1':
+								if(this.additionalPriceType == '1' || this.additionalPriceType == '3' || this.additionPrice >= this.conditionPrice){
 									layer.msg('附加条件添加错误', {time: 1000});
 									return;
 								}
@@ -436,7 +436,7 @@
 						layer.msg('请输入价格', {time: 1000});
 					}else if(d0 >= 0.000000001 && parseFloat(miniTikeSize - d0) >= 0.0000000001){
 						layer.msg('输入价格不符合最小变动价，最小变动价为：' + miniTikeSize, {time: 1000});
-					}else if(this.conditionNum == '' || this.conditionNum == 0 || this.conditionNum == undefined){
+					}else if(this.conditionNum == '' || this.conditionNum <= 0 || this.conditionNum == undefined){
 						layer.msg('请输入手数', {time: 1000});
 					}else{
 						msg = '是否修改价格条件单？';
@@ -486,7 +486,7 @@
 							layer.msg('输入附加价格不符合最小变动价，最小变动价为：' + miniTikeSize, {time: 1000});
 						}
 					}
-					if(this.conditionNum == '' || this.conditionNum == 0 || this.conditionNum == undefined){
+					if(this.conditionNum == '' || this.conditionNum <= 0 || this.conditionNum == undefined){
 						layer.msg('请输入手数', {time: 1000});
 					}else{
 						msg = '是否修改时间条件单？';
@@ -546,10 +546,10 @@
 							this.priceTypeName = '>';
 						}else if(this.currentConditionOrder.CompareType == 1){
 							this.priceType = '1';
-							this.priceTypeName = '>=';
+							this.priceTypeName = '<';
 						}else if(this.currentConditionOrder.CompareType == 2){
 							this.priceType = '2';
-							this.priceTypeName = '<';
+							this.priceTypeName = '>=';
 						}else if(this.currentConditionOrder.CompareType == 3){
 							this.priceType = '3';
 							this.priceTypeName = '<=';
@@ -568,10 +568,10 @@
 							this.additionalPriceTypeName = '>';
 						}else if(this.currentConditionOrder.AdditionType == 1){
 							this.additionalPriceType = '1';
-							this.additionalPriceTypeName = '>=';
+							this.additionalPriceTypeName = '<';
 						}else if(this.currentConditionOrder.AdditionType == 2){
 							this.additionalPriceType = '2';
-							this.additionalPriceTypeName = '<';
+							this.additionalPriceTypeName = '>=';
 						}else if(this.currentConditionOrder.AdditionType == 3){
 							this.additionalPriceType = '3';
 							this.additionalPriceTypeName = '<=';
@@ -799,7 +799,7 @@
 									}
 								}
 							})();
-					obj.term = '当日有效';
+					obj.term = '永久有效';
 					obj.time = o.InsertDateTime;
 					this.conditionListCont.push(obj);
 				}.bind(this));
@@ -952,7 +952,7 @@
 									}
 								}
 							})();
-					obj.term = '当日有效';
+					obj.term = '永久有效';
 					obj.time = o.InsertDateTime;
 					this.triggerConditionListCont.push(obj);
 					console.log(this.triggerConditionListCont);
@@ -976,9 +976,9 @@
 				if(num == '0'){
 					return '>';
 				}else if(num == '1'){
-					return '>=';
-				}else if(num == '2'){
 					return '<';
+				}else if(num == '2'){
+					return '>=';
 				}else if(num == '3'){
 					return '<=';
 				}

@@ -307,8 +307,8 @@
 										<div class="slt-list">
 											<ul>
 												<li selectVal="0">></li>
-												<li selectVal="1">>=</li>
-												<li selectVal="2"><</li>
+												<li selectVal="2">>=</li>
+												<li selectVal="1"><</li>
 												<li selectVal="3"><=</li>
 											</ul>
 										</div>
@@ -321,8 +321,8 @@
 										<div class="slt-list">
 											<ul>
 												<li selectVal="0">></li>
-												<li selectVal="1">>=</li>
-												<li selectVal="2"><</li>
+												<li selectVal="2">>=</li>
+												<li selectVal="1"><</li>
 												<li selectVal="3"><=</li>
 											</ul>
 										</div>
@@ -339,8 +339,8 @@
 										<div class="slt-list">
 											<ul>
 												<li selectVal="0">></li>
-												<li selectVal="1">>=</li>
-												<li selectVal="2"><</li>
+												<li selectVal="2">>=</li>
+												<li selectVal="1"><</li>
 												<li selectVal="3"><=</li>
 											</ul>
 										</div>
@@ -1067,25 +1067,25 @@
 						//判断价格与附加价格是否形成区间
 						switch (this.selectType){
 							case '0':
-								if(this.selectAdditionalType == '0' || this.selectAdditionalType == '1' || this.conditionAdditionalPrice <= this.conditionPrice){
-									layer.msg('附加条件添加错误', {time: 1000});
-									return;
-								}
-								break;
-							case '1':
-								if(this.selectAdditionalType == '0' || this.selectAdditionalType == '1' || this.conditionAdditionalPrice <= this.conditionPrice){
+								if(this.selectAdditionalType == '0' || this.selectAdditionalType == '2' || this.conditionAdditionalPrice <= this.conditionPrice){
 									layer.msg('附加条件添加错误', {time: 1000});
 									return;
 								}
 								break;
 							case '2':
-								if(this.selectAdditionalType == '2' || this.selectAdditionalType == '3' || this.conditionAdditionalPrice >= this.conditionPrice){
+								if(this.selectAdditionalType == '0' || this.selectAdditionalType == '2' || this.conditionAdditionalPrice <= this.conditionPrice){
+									layer.msg('附加条件添加错误', {time: 1000});
+									return;
+								}
+								break;
+							case '1':
+								if(this.selectAdditionalType == '1' || this.selectAdditionalType == '3' || this.conditionAdditionalPrice >= this.conditionPrice){
 									layer.msg('附加条件添加错误', {time: 1000});
 									return;
 								}
 								break;
 							case '3':
-								if(this.selectAdditionalType == '2' || this.selectAdditionalType == '3' || this.conditionAdditionalPrice >= this.conditionPrice){
+								if(this.selectAdditionalType == '1' || this.selectAdditionalType == '3' || this.conditionAdditionalPrice >= this.conditionPrice){
 									layer.msg('附加条件添加错误', {time: 1000});
 									return;
 								}
@@ -1099,7 +1099,7 @@
 						layer.msg('请输入价格', {time: 1000});
 					}else if(d0 >= 0.000000001 && parseFloat(miniTikeSize - d0) >= 0.0000000001){
 						layer.msg('输入价格不符合最小变动价，最小变动价为：' + miniTikeSize, {time: 1000});
-					}else if(this.defaultNum == '' || this.defaultNum == 0 || this.defaultNum == undefined){
+					}else if(this.defaultNum == '' || this.defaultNum <= 0 || this.defaultNum == undefined){
 						layer.msg('请输入手数', {time: 1000});
 					}else{
 						msg = '是否添加价格条件单？';
@@ -1142,7 +1142,7 @@
 							layer.msg('输入附加价格不符合最小变动价，最小变动价为：' + miniTikeSize, {time: 1000});
 						}
 					}
-					if(this.defaultNum == '' || this.defaultNum == 0 || this.defaultNum == undefined){
+					if(this.defaultNum == '' || this.defaultNum <= 0 || this.defaultNum == undefined){
 						layer.msg('请输入手数', {time: 1000});
 					}else{
 						msg = '是否添加时间条件单？';
@@ -1165,7 +1165,7 @@
 								'StopLossDiff': 0.0,
 								'StopWinDiff': 0.0,
 								'AdditionFlag': this.timeAddtionalPrice == '' ? false : true,
-								'AdditionType': parseInt(this.selectAdditionalType),
+								'AdditionType': parseInt(this.timeAdditionalType),
 								'AdditionPrice': this.timeAddtionalPrice == '' ? 0 : parseFloat(this.timeAddtionalPrice)
 							}
 						};

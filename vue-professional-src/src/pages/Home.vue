@@ -109,9 +109,9 @@
 				return this.$store.state.isshow.guideshow;
 			},
 			helpshow(){
-				if(this.$store.state.isshow.helpshow == true){
-					$("body").css({'overflow': 'hidden'});
-				}
+//				if(this.$store.state.isshow.helpshow == true){
+//					$("body").css({'overflow': 'hidden'});
+//				}
 				return this.$store.state.isshow.helpshow;
 			},
 			quoteConnectedMsg(){
