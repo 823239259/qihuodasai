@@ -475,6 +475,7 @@
 					font-size: $fs56;
 					color: #242633;
 					margin-top: 50px;
+					font-weight: 600;
 				}
 				p{
 					color: #3e4049;
@@ -590,6 +591,7 @@
 					font-size: $fs56;
 					color: black;
 					margin-top: 50px;
+					font-weight: 600;
 				}
 				p{
 					color: #242633;
@@ -813,6 +815,7 @@
 					font-size: $fs56;
 					color: #242633;
 					margin-top: 50px;
+					font-weight: 600;
 				}
 				p{
 					color: #3e4049;
@@ -928,6 +931,7 @@
 					font-size: $fs56;
 					color: black;
 					margin-top: 50px;
+					font-weight: 600;
 				}
 				p{
 					color: #242633;
