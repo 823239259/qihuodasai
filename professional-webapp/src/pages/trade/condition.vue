@@ -128,7 +128,7 @@
 							<div class="slt-list">
 								<ul>
 									<li selectVal="1">市价</li>
-									<li selectVal="2">对价</li>
+									<li selectVal="2">对手价</li>
 								</ul>
 							</div>
 						</div>
@@ -317,7 +317,6 @@
 				this.conditionList.forEach(function(o, i){
 					if(this.currentId == o.ConditionNo){
 						this.currentConditionOrder = o;
-						console.log(this.currentConditionOrder);
 						this.conditionNum = o.Num;
 						this.additionPrice = o.AdditionPrice;
 					}
@@ -582,7 +581,7 @@
 						this.orderTypeName = '市价';
 					}else if(this.currentConditionOrder.OrderType == 2){
 						this.orderType = '2';
-						this.orderTypeName = '对价';
+						this.orderTypeName = '对手价';
 					}
 					if(this.currentConditionOrder.Drection == 0){
 						this.directionType = '0';
@@ -704,9 +703,7 @@
 									}
 								})();
 					obj.conditions = (function(){
-									console.log(o.AdditionFlag);
 									if(o.AdditionFlag==0){ //没有附件条件
-										console.log(o.CompareType);
 										if(o.CompareType==0){
 											return '>'+o.PriceTriggerPonit;
 										}else if(o.CompareType==1){
@@ -717,7 +714,6 @@
 											return '<='+o.PriceTriggerPonit;
 										}else{
 											let s = o.TimeTriggerPoint.split(' ');
-											console.log(o.AdditionType);
 											if(o.AdditionType==0){
 												return s[1]+' >'+o.AdditionPrice;
 											}else if(o.AdditionType==1){
@@ -1007,7 +1003,7 @@
 			}.bind(this));
 			pro.selectEvent('#condition_price_type', function(data){
 				this.orderType = data;
-				data == '1' ? this.orderTypeName = '市价' : this.orderTypeName = '对价';
+				data == '1' ? this.orderTypeName = '市价' : this.orderTypeName = '对手价';
 			}.bind(this));
 		}
 	}

@@ -338,6 +338,7 @@
 			editConfirm: function(){
 				let miniTikeSize = this.orderTemplist[this.currentOrderList.CommodityNo].MiniTikeSize;
 				let d0 = this.stopPrice % miniTikeSize;
+				let d1 = this.stopProfitPrice % miniTikeSize;
 				let msg;
 				if(this.stopLossType == 0 || this.stopLossType == 2){
 					if(this.stopPrice == '' || this.stopPrice <= 0 || this.stopPrice == undefined){
@@ -390,7 +391,7 @@
 				}else{
 					if(this.stopProfitPrice == '' || this.stopProfitPrice <= 0 || this.stopProfitPrice == undefined){
 						layer.msg('请输入止盈价', {time: 1000});
-					}else if(d0 >= 0.000000001 && parseFloat(miniTikeSize-d0) >= 0.0000000001){
+					}else if(d1 >= 0.000000001 && parseFloat(miniTikeSize-d1) >= 0.0000000001){
 						layer.msg('输入价格不符合最小变动价，最小变动价为：' + miniTikeSize, {time: 1000});
 					}else if(this.stopProfitNum == '' || this.stopProfitNum <= 0 || this.stopProfitNum == undefined){
 						layer.msg('请输入止盈手数', {time: 1000});
