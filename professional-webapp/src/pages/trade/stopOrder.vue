@@ -471,10 +471,14 @@
 						btn2: function(){
 							this.showLossDialog = false;
 							this.showProfitDialog = false;
+							this.currentId = '';
+							this.selectedNum = -1;
 						}.bind(this),
 						cancel: function(){
 							this.showLossDialog = false;
 							this.showProfitDialog = false;
+							this.currentId = '';
+							this.selectedNum = -1;
 						}.bind(this)
 					});
 				}
@@ -659,8 +663,6 @@
 			this.notStopLossListEvent();
 			//调用下拉框
 			pro.selectEvent('#stop_type', function(data){
-				console.log(data);
-				console.log(typeof data);
 				this.stopType = data;
 				if(data == '0'){
 					this.stopTypeName = '止损价';
