@@ -610,6 +610,16 @@
 					this.$store.state.market.stopLossTriggeredList = [];
 					this.$store.state.market.conditionList = [];
 					this.$store.state.market.triggerConditionList = [];
+					console.log(this.$store.state.market.CacheAccount.jCacheTotalAccount);
+					this.$store.state.market.CacheAccount.jCacheTotalAccount.TodayBalance = 0.0;
+					this.$store.state.market.CacheAccount.jCacheTotalAccount.TodayCanUse = 0.0;
+					this.$store.state.market.CacheAccount.jCacheTotalAccount.FloatingProfit = 0.0;
+					this.$store.state.market.CacheAccount.jCacheTotalAccount.CloseProfit = 0.0;
+					this.$store.state.market.CacheAccount.jCacheTotalAccount.FrozenMoney = 0.0;
+					this.$store.state.market.CacheAccount.jCacheTotalAccount.Deposit = 0.0;
+					this.$store.state.market.CacheAccount.jCacheTotalAccount.CounterFee = 0.0;
+					this.$store.state.market.CacheAccount.jCacheTotalAccount.RiskRate = 0.0;
+					this.$store.state.market.CacheAccount.jCacheTotalAccount.RiskDegree = 0.0;
 				}
 			},
 			isBack: function(n, o){
