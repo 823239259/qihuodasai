@@ -126,6 +126,9 @@
 			},
 			miniTikeSize(){
 				return this.orderTemplist[this.selectedMsg.CommodityNo].MiniTikeSize;
+			},
+			stopStatus(){
+				return this.$store.state.market.stopStatus;
 			}
 		},
 		watch: {
