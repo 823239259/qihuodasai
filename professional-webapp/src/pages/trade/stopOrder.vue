@@ -446,6 +446,7 @@
 						title = '修改止损单';
 						this.stopType = '0';
 						this.stopTypeName = '止损价';
+						this.rangeShow = true;
 					}else if(this.stopLossType == 1){
 						dialogObj = $("#edit_profit_order");
 						this.showProfitDialog = true;
@@ -456,8 +457,8 @@
 						title = '修改止损单';
 						this.stopType = '2';
 						this.stopTypeName = '动态价';
+						this.rangeShow = false;
 					}
-					this.showDialog = true;
 					layer.open({
 						type: 1,
 						title: title,
@@ -658,6 +659,8 @@
 			this.notStopLossListEvent();
 			//调用下拉框
 			pro.selectEvent('#stop_type', function(data){
+				console.log(data);
+				console.log(typeof data);
 				this.stopType = data;
 				if(data == '0'){
 					this.stopTypeName = '止损价';
