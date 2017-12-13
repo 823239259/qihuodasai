@@ -1283,6 +1283,10 @@
 				this.$store.state.market.OnRspQryTradeDealListCont = [];
 				this.$store.state.market.queryHisList = [];
 				this.$store.state.market.CacheAccount.moneyDetail = [];
+				this.$store.state.market.stopLossList = [];
+				this.$store.state.market.stopLossTriggeredList = [];
+				this.$store.state.market.conditionList = [];
+				this.$store.state.market.triggerConditionList = [];
 			},
 			toAddMoney: function(){
 				if(localStorage.tradeUser){
