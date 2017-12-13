@@ -481,7 +481,7 @@
 					color: #3e4049;
 					font-size: $fs28;
 					margin-top: 50px;
-					letter-spacing:12px;
+					letter-spacing:10px;
 				}
 				ul{
 					margin-top: 50px;
@@ -597,7 +597,7 @@
 					color: #242633;
 					font-size: $fs28;
 					margin-top: 50px;
-					letter-spacing:20px;
+					letter-spacing:10px;
 				}
 				ul{
 					margin-top: 50px;
@@ -821,7 +821,7 @@
 					color: #3e4049;
 					font-size: $fs28;
 					margin-top: 50px;
-					letter-spacing:12px;
+					letter-spacing:10px;
 				}
 				ul{
 					margin-top: 50px;
@@ -937,7 +937,7 @@
 					color: #242633;
 					font-size: $fs28;
 					margin-top: 50px;
-					letter-spacing:20px;
+					letter-spacing:10px;
 				}
 				ul{
 					margin-top: 50px;
