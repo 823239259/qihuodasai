@@ -329,6 +329,7 @@
 			editConfirm: function(){
 				let miniTikeSize = this.orderTemplist[this.currentOrderList.CommodityNo].MiniTikeSize;
 				let d0 = this.stopPrice % miniTikeSize;
+				let msg;
 				if(this.stopLossType == 0 || this.stopLossType == 2){
 					if(this.stopPrice == '' || this.stopPrice <= 0 || this.stopPrice == undefined){
 						layer.msg('请输入止损价', {time: 1000});
@@ -338,6 +339,7 @@
 						layer.msg('请输入止损手数', {time: 1000});
 					}else{
 						if(this.stopType == '0'){
+							msg = '是否添加限价止损？';
 							if(this.currentOrderList.HoldDrection == '多'){
 								if(parseFloat(this.stopPrice) > parseFloat(this.lastPrice)){
 									layer.msg('输入价格应该低于最新价', {time: 1000});
@@ -350,6 +352,8 @@
 									return;
 								}
 							}
+						}else{
+							msg = '是否添加动态止损？';
 						}
 						let b = {
 							"Method":'ModifyStopLoss',
@@ -363,7 +367,7 @@
 								'StopLossDiff': this.stopType == '2' ? parseFloat(this.stopPrice) : 0.00,
 							}
 						};
-						layer.confirm('是否添加限价止损？', {
+						layer.confirm(msg, {
 							btn: ['确定','取消']
 						}, function(index){
 							this.tradeSocket.send(JSON.stringify(b));
