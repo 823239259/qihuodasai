@@ -213,6 +213,9 @@
 			stopLossList: function(n, o){
 				this.notStopLossListEvent();
 			},
+			stopLossTriggeredList: function(n, o){
+				this.alreadyStopLossListEvent();
+			},
 			parameters: function(n,o){
 				if(this.currentOrderList.CommodityNo != undefined){
 					n.forEach(function(o, i){
@@ -227,6 +230,12 @@
 				if(n != undefined){
 					let openAvgPrice = this.currentOrderList.HoldAvgPrice;
 					this.percentLoss = parseFloat((n - openAvgPrice)/openAvgPrice*100).toFixed(2);
+				}
+			},
+			stopProfitPrice: function(n, o){
+				if(n != undefined){
+					let openAvgPrice = this.currentOrderList.HoldAvgPrice;
+					this.profitRange = parseFloat((n - openAvgPrice)/openAvgPrice*100).toFixed(2);
 				}
 			}
 		},
