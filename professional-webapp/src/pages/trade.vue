@@ -560,6 +560,9 @@
 			},
 			isBack(){
 				return this.$store.state.account.isBack;
+			},
+			exitStatus(){
+				return this.$store.state.account.exitStatus;
 			}
 		},
 		filters:{
@@ -571,20 +574,30 @@
 			}
 		},
 		watch: {
-//			conditionAdditionalPrice: function(n, o){
-//				if(n != undefined && n != ''){
-//					this.additionFlag = true;
-//				}else{
-//					this.additionFlag = false;
-//				}
-//			},
-//			timeAddtionalPrice: function(n, o){
-//				if(n != undefined && n != ''){
-//					this.additionFlag = true;
-//				}else{
-//					this.additionFlag = false;
-//				}
-//			},
+			exitStatus: function(n, o){
+				if(n && n == true){
+					localStorage.removeItem('tradeUser');
+					this.$store.state.market.tradeConfig.username = '';
+					this.$store.state.market.tradeConfig.password = '';
+					this.$store.state.account.loginStatus = false;
+					this.tradeLoginShow = true;
+					this.tradeDetailsShow = false;
+					this.$store.state.market.chartHeight = this.h - 50 - 30 - 45;
+					
+					this.$store.state.market.qryHoldTotalArr = [];
+					this.$store.state.market.positionListCont = [];
+					this.$store.state.market.OnRspOrderInsertEntrustCont = [];
+					this.$store.state.market.OnRspOrderInsertOrderListCont = [];
+					this.$store.state.market.orderListCont = [];
+					this.$store.state.market.OnRspQryTradeDealListCont = [];
+					this.$store.state.market.queryHisList = [];
+					this.$store.state.market.CacheAccount.moneyDetail = [];
+					this.$store.state.market.stopLossList = [];
+					this.$store.state.market.stopLossTriggeredList = [];
+					this.$store.state.market.conditionList = [];
+					this.$store.state.market.triggerConditionList = [];
+				}
+			},
 			isBack: function(n, o){
 				if(n && n == true){
 					localStorage.removeItem('tradeUser');
@@ -1266,27 +1279,7 @@
 				}
 			},
 			exitEvent: function(){
-				localStorage.removeItem('tradeUser');
-				this.$store.state.market.tradeConfig.username = '';
-				this.$store.state.market.tradeConfig.password = '';
-				this.$store.state.account.loginStatus = false;
-				this.tradeLoginShow = true;
-				this.tradeDetailsShow = false;
-				this.$store.state.market.chartHeight = this.h - 50 - 30 - 45;
-				layer.msg('退出成功', {time: 1000});
-				
-				this.$store.state.market.qryHoldTotalArr = [];
-				this.$store.state.market.positionListCont = [];
-				this.$store.state.market.OnRspOrderInsertEntrustCont = [];
-				this.$store.state.market.OnRspOrderInsertOrderListCont = [];
-				this.$store.state.market.orderListCont = [];
-				this.$store.state.market.OnRspQryTradeDealListCont = [];
-				this.$store.state.market.queryHisList = [];
-				this.$store.state.market.CacheAccount.moneyDetail = [];
-				this.$store.state.market.stopLossList = [];
-				this.$store.state.market.stopLossTriggeredList = [];
-				this.$store.state.market.conditionList = [];
-				this.$store.state.market.triggerConditionList = [];
+				this.tradeSocket.send('{"Method":"Logout","Parameters":{"ClientNo":"'+ JSON.parse(localStorage.tradeUser).username +'"}}');
 			},
 			toAddMoney: function(){
 				if(localStorage.tradeUser){

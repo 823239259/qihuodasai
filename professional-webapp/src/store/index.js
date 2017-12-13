@@ -25,7 +25,8 @@ var account = {
 	state: {
 		isRefresh: false,  //判断是否刷新
 		isBack: false,   //判断是否退出交易账号并跳至首页
-		loginStatus: false,  //交易账号登录状态		
+		loginStatus: false,  //交易账号登录状态	
+		exitStatus: false,   //交易账号退出状态
 		userName: '',   //平台账号
 		currentNav: 0,  //当前导航索引
 	}
@@ -1018,6 +1019,7 @@ export default new Vuex.Store({
 					if(parameters.Code == 0){
 						layer.msg('交易服务器连接成功',{time: 1000});
 						context.state.account.loginStatus = true;
+						context.state.account.exitStatus = false;
 						//设置强平线
 						context.state.market.forceLine = parameters.ForceLine;
 						//初始资金
@@ -1049,7 +1051,8 @@ export default new Vuex.Store({
 				case 'OnRspLogout': //登出回复
 					if(parameters.Code == 0){
 //						console.log('登出成功');
-						layer.msg('登出成功', {time: 1000});
+						layer.msg('退出成功', {time: 1000});
+						context.state.account.exitStatus = true;
 					}else{
 //						console.log('登出失败');
 						layer.msg(parameters.Message, {time: 1000});
