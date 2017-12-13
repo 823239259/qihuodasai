@@ -566,6 +566,9 @@
 			},
 			exitStatus(){
 				return this.$store.state.account.exitStatus;
+			},
+			warningShow(){
+				return this.$store.state.isshow.warningShow;
 			}
 		},
 		filters:{
@@ -577,6 +580,14 @@
 			}
 		},
 		watch: {
+			warningShow: function(n, o){
+				if(n && n == true){
+					this.$refs.warning.show = true;
+					this.$store.state.account.exitStatus = true;
+				}else{
+					this.$refs.warning.show = false;
+				}
+			},
 			exitStatus: function(n, o){
 				if(n && n == true){
 					localStorage.removeItem('tradeUser');
@@ -725,6 +736,8 @@
 					this.tradeUser = this.$store.state.market.tradeConfig.username;
 					if(JSON.parse(localStorage.tradeUser).fid == undefined){
 						this.openAccountTools = false;
+					}else{
+						this.openAccountTools = true;
 					}
 				}
 			}
