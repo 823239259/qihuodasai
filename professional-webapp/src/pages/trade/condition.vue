@@ -404,25 +404,25 @@
 						switch (this.priceType){
 							case '0':
 								if(this.additionalPriceType == '0' || this.additionalPriceType == '2' || this.additionPrice <= this.conditionPrice){
-									layer.msg('附加条件添加错误', {time: 1000});
+									layer.msg('输入的条件不能形成区间', {time: 1000});
 									return;
 								}
 								break;
 							case '1':
 								if(this.additionalPriceType == '0' || this.additionalPriceType == '2' || this.additionPrice <= this.conditionPrice){
-									layer.msg('附加条件添加错误', {time: 1000});
+									layer.msg('输入的条件不能形成区间', {time: 1000});
 									return;
 								}
 								break;
 							case '1':
 								if(this.additionalPriceType == '1' || this.additionalPriceType == '3' || this.additionPrice >= this.conditionPrice){
-									layer.msg('附加条件添加错误', {time: 1000});
+									layer.msg('输入的条件不能形成区间', {time: 1000});
 									return;
 								}
 								break;
 							case '1':
 								if(this.additionalPriceType == '1' || this.additionalPriceType == '3' || this.additionPrice >= this.conditionPrice){
-									layer.msg('附加条件添加错误', {time: 1000});
+									layer.msg('输入的条件不能形成区间', {time: 1000});
 									return;
 								}
 								break;

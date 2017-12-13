@@ -720,6 +720,9 @@
 					this.$store.state.market.chartHeight = this.h - 50 - 30 - 45 - $(".trade_box").height();
 					if(this.$store.state.market.tradeConfig.username == '') return;
 					this.tradeUser = this.$store.state.market.tradeConfig.username;
+					if(JSON.parse(localStorage.tradeUser).fid == undefined){
+						this.openAccountTools = false;
+					}
 				}
 			}
 		},
@@ -1081,25 +1084,25 @@
 						switch (this.selectType){
 							case '0':
 								if(this.selectAdditionalType == '0' || this.selectAdditionalType == '2' || this.conditionAdditionalPrice <= this.conditionPrice){
-									layer.msg('附加条件添加错误', {time: 1000});
+									layer.msg('输入的条件不能形成区间', {time: 1000});
 									return;
 								}
 								break;
 							case '2':
 								if(this.selectAdditionalType == '0' || this.selectAdditionalType == '2' || this.conditionAdditionalPrice <= this.conditionPrice){
-									layer.msg('附加条件添加错误', {time: 1000});
+									layer.msg('输入的条件不能形成区间', {time: 1000});
 									return;
 								}
 								break;
 							case '1':
 								if(this.selectAdditionalType == '1' || this.selectAdditionalType == '3' || this.conditionAdditionalPrice >= this.conditionPrice){
-									layer.msg('附加条件添加错误', {time: 1000});
+									layer.msg('输入的条件不能形成区间', {time: 1000});
 									return;
 								}
 								break;
 							case '3':
 								if(this.selectAdditionalType == '1' || this.selectAdditionalType == '3' || this.conditionAdditionalPrice >= this.conditionPrice){
-									layer.msg('附加条件添加错误', {time: 1000});
+									layer.msg('输入的条件不能形成区间', {time: 1000});
 									return;
 								}
 								break;
