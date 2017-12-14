@@ -552,6 +552,9 @@
 			buyStatus(){
 				return this.$store.state.market.buyStatus;
 			},
+			conditionStatus(){
+				return this.$store.state.market.conditionStatus
+			},
 			length(){
 				return this.Parameters.length;
 			},
@@ -560,6 +563,12 @@
 			},
 			isBack(){
 				return this.$store.state.account.isBack;
+			},
+			exitStatus(){
+				return this.$store.state.account.exitStatus;
+			},
+			warningShow(){
+				return this.$store.state.isshow.warningShow;
 			}
 		},
 		filters:{
@@ -571,20 +580,48 @@
 			}
 		},
 		watch: {
-//			conditionAdditionalPrice: function(n, o){
-//				if(n != undefined && n != ''){
-//					this.additionFlag = true;
-//				}else{
-//					this.additionFlag = false;
-//				}
-//			},
-//			timeAddtionalPrice: function(n, o){
-//				if(n != undefined && n != ''){
-//					this.additionFlag = true;
-//				}else{
-//					this.additionFlag = false;
-//				}
-//			},
+			warningShow: function(n, o){
+				if(n && n == true){
+					this.$refs.warning.show = true;
+					this.$store.state.account.exitStatus = true;
+				}else{
+					this.$refs.warning.show = false;
+				}
+			},
+			exitStatus: function(n, o){
+				if(n && n == true){
+					localStorage.removeItem('tradeUser');
+					this.$store.state.market.tradeConfig.username = '';
+					this.$store.state.market.tradeConfig.password = '';
+					this.$store.state.account.loginStatus = false;
+					this.tradeLoginShow = true;
+					this.tradeDetailsShow = false;
+					this.$store.state.market.chartHeight = this.h - 50 - 30 - 45;
+					
+					this.$store.state.market.qryHoldTotalArr = [];
+					this.$store.state.market.positionListCont = [];
+					this.$store.state.market.OnRspOrderInsertEntrustCont = [];
+					this.$store.state.market.OnRspOrderInsertOrderListCont = [];
+					this.$store.state.market.orderListCont = [];
+					this.$store.state.market.OnRspQryTradeDealListCont = [];
+					this.$store.state.market.queryHisList = [];
+					this.$store.state.market.CacheAccount.moneyDetail = [];
+					this.$store.state.market.stopLossList = [];
+					this.$store.state.market.stopLossTriggeredList = [];
+					this.$store.state.market.conditionList = [];
+					this.$store.state.market.triggerConditionList = [];
+					console.log(this.$store.state.market.CacheAccount.jCacheTotalAccount);
+					this.$store.state.market.CacheAccount.jCacheTotalAccount.TodayBalance = 0.0;
+					this.$store.state.market.CacheAccount.jCacheTotalAccount.TodayCanUse = 0.0;
+					this.$store.state.market.CacheAccount.jCacheTotalAccount.FloatingProfit = 0.0;
+					this.$store.state.market.CacheAccount.jCacheTotalAccount.CloseProfit = 0.0;
+					this.$store.state.market.CacheAccount.jCacheTotalAccount.FrozenMoney = 0.0;
+					this.$store.state.market.CacheAccount.jCacheTotalAccount.Deposit = 0.0;
+					this.$store.state.market.CacheAccount.jCacheTotalAccount.CounterFee = 0.0;
+					this.$store.state.market.CacheAccount.jCacheTotalAccount.RiskRate = 0.0;
+					this.$store.state.market.CacheAccount.jCacheTotalAccount.RiskDegree = 0.0;
+				}
+			},
 			isBack: function(n, o){
 				if(n && n == true){
 					localStorage.removeItem('tradeUser');
@@ -707,6 +744,11 @@
 					this.$store.state.market.chartHeight = this.h - 50 - 30 - 45 - $(".trade_box").height();
 					if(this.$store.state.market.tradeConfig.username == '') return;
 					this.tradeUser = this.$store.state.market.tradeConfig.username;
+					if(JSON.parse(localStorage.tradeUser).fid == undefined){
+						this.openAccountTools = false;
+					}else{
+						this.openAccountTools = true;
+					}
 				}
 			}
 		},
@@ -1068,25 +1110,25 @@
 						switch (this.selectType){
 							case '0':
 								if(this.selectAdditionalType == '0' || this.selectAdditionalType == '2' || this.conditionAdditionalPrice <= this.conditionPrice){
-									layer.msg('附加条件添加错误', {time: 1000});
+									layer.msg('输入的条件不能形成区间', {time: 1000});
 									return;
 								}
 								break;
 							case '2':
 								if(this.selectAdditionalType == '0' || this.selectAdditionalType == '2' || this.conditionAdditionalPrice <= this.conditionPrice){
-									layer.msg('附加条件添加错误', {time: 1000});
+									layer.msg('输入的条件不能形成区间', {time: 1000});
 									return;
 								}
 								break;
 							case '1':
 								if(this.selectAdditionalType == '1' || this.selectAdditionalType == '3' || this.conditionAdditionalPrice >= this.conditionPrice){
-									layer.msg('附加条件添加错误', {time: 1000});
+									layer.msg('输入的条件不能形成区间', {time: 1000});
 									return;
 								}
 								break;
 							case '3':
 								if(this.selectAdditionalType == '1' || this.selectAdditionalType == '3' || this.conditionAdditionalPrice >= this.conditionPrice){
-									layer.msg('附加条件添加错误', {time: 1000});
+									layer.msg('输入的条件不能形成区间', {time: 1000});
 									return;
 								}
 								break;
@@ -1129,6 +1171,8 @@
 						layer.confirm(msg, {
 							btn: ['确定','取消']
 						}, function(index){
+							if(this.conditionStatus == true) return;
+							this.$store.state.market.conditionStatus = true;
 							this.tradeSocket.send(JSON.stringify(b));
 							this.conditionAdditionalPrice = '';
 							layer.close(index);
@@ -1165,13 +1209,15 @@
 								'StopLossDiff': 0.0,
 								'StopWinDiff': 0.0,
 								'AdditionFlag': this.timeAddtionalPrice == '' ? false : true,
-								'AdditionType': parseInt(this.timeAdditionalType),
+								'AdditionType': this.timeAddtionalPrice == '' ? 5 : parseInt(this.timeAdditionalType),
 								'AdditionPrice': this.timeAddtionalPrice == '' ? 0 : parseFloat(this.timeAddtionalPrice)
 							}
 						};
 						layer.confirm(msg, {
 							btn: ['确定','取消']
 						}, function(index){
+							if(this.conditionStatus == true) return;
+							this.$store.state.market.conditionStatus = true;
 							this.tradeSocket.send(JSON.stringify(b));
 							this.timeAddtionalPrice = '';
 							layer.close(index);
@@ -1266,23 +1312,7 @@
 				}
 			},
 			exitEvent: function(){
-				localStorage.removeItem('tradeUser');
-				this.$store.state.market.tradeConfig.username = '';
-				this.$store.state.market.tradeConfig.password = '';
-				this.$store.state.account.loginStatus = false;
-				this.tradeLoginShow = true;
-				this.tradeDetailsShow = false;
-				this.$store.state.market.chartHeight = this.h - 50 - 30 - 45;
-				layer.msg('退出成功', {time: 1000});
-				
-				this.$store.state.market.qryHoldTotalArr = [];
-				this.$store.state.market.positionListCont = [];
-				this.$store.state.market.OnRspOrderInsertEntrustCont = [];
-				this.$store.state.market.OnRspOrderInsertOrderListCont = [];
-				this.$store.state.market.orderListCont = [];
-				this.$store.state.market.OnRspQryTradeDealListCont = [];
-				this.$store.state.market.queryHisList = [];
-				this.$store.state.market.CacheAccount.moneyDetail = [];
+				this.tradeSocket.send('{"Method":"Logout","Parameters":{"ClientNo":"'+ JSON.parse(localStorage.tradeUser).username +'"}}');
 			},
 			toAddMoney: function(){
 				if(localStorage.tradeUser){

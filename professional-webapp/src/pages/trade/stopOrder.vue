@@ -213,6 +213,9 @@
 			stopLossList: function(n, o){
 				this.notStopLossListEvent();
 			},
+			stopLossTriggeredList: function(n, o){
+				this.alreadyStopLossListEvent();
+			},
 			parameters: function(n,o){
 				if(this.currentOrderList.CommodityNo != undefined){
 					n.forEach(function(o, i){
@@ -227,6 +230,12 @@
 				if(n != undefined){
 					let openAvgPrice = this.currentOrderList.HoldAvgPrice;
 					this.percentLoss = parseFloat((n - openAvgPrice)/openAvgPrice*100).toFixed(2);
+				}
+			},
+			stopProfitPrice: function(n, o){
+				if(n != undefined){
+					let openAvgPrice = this.currentOrderList.HoldAvgPrice;
+					this.profitRange = parseFloat((n - openAvgPrice)/openAvgPrice*100).toFixed(2);
 				}
 			}
 		},
@@ -329,6 +338,8 @@
 			editConfirm: function(){
 				let miniTikeSize = this.orderTemplist[this.currentOrderList.CommodityNo].MiniTikeSize;
 				let d0 = this.stopPrice % miniTikeSize;
+				let d1 = this.stopProfitPrice % miniTikeSize;
+				let msg;
 				if(this.stopLossType == 0 || this.stopLossType == 2){
 					if(this.stopPrice == '' || this.stopPrice <= 0 || this.stopPrice == undefined){
 						layer.msg('请输入止损价', {time: 1000});
@@ -338,6 +349,7 @@
 						layer.msg('请输入止损手数', {time: 1000});
 					}else{
 						if(this.stopType == '0'){
+							msg = '是否添加限价止损？';
 							if(this.currentOrderList.HoldDrection == '多'){
 								if(parseFloat(this.stopPrice) > parseFloat(this.lastPrice)){
 									layer.msg('输入价格应该低于最新价', {time: 1000});
@@ -350,6 +362,8 @@
 									return;
 								}
 							}
+						}else{
+							msg = '是否添加动态止损？';
 						}
 						let b = {
 							"Method":'ModifyStopLoss',
@@ -363,7 +377,7 @@
 								'StopLossDiff': this.stopType == '2' ? parseFloat(this.stopPrice) : 0.00,
 							}
 						};
-						layer.confirm('是否添加限价止损？', {
+						layer.confirm(msg, {
 							btn: ['确定','取消']
 						}, function(index){
 							this.tradeSocket.send(JSON.stringify(b));
@@ -377,7 +391,7 @@
 				}else{
 					if(this.stopProfitPrice == '' || this.stopProfitPrice <= 0 || this.stopProfitPrice == undefined){
 						layer.msg('请输入止盈价', {time: 1000});
-					}else if(d0 >= 0.000000001 && parseFloat(miniTikeSize-d0) >= 0.0000000001){
+					}else if(d1 >= 0.000000001 && parseFloat(miniTikeSize-d1) >= 0.0000000001){
 						layer.msg('输入价格不符合最小变动价，最小变动价为：' + miniTikeSize, {time: 1000});
 					}else if(this.stopProfitNum == '' || this.stopProfitNum <= 0 || this.stopProfitNum == undefined){
 						layer.msg('请输入止盈手数', {time: 1000});
@@ -432,6 +446,7 @@
 						title = '修改止损单';
 						this.stopType = '0';
 						this.stopTypeName = '止损价';
+						this.rangeShow = true;
 					}else if(this.stopLossType == 1){
 						dialogObj = $("#edit_profit_order");
 						this.showProfitDialog = true;
@@ -442,12 +457,12 @@
 						title = '修改止损单';
 						this.stopType = '2';
 						this.stopTypeName = '动态价';
+						this.rangeShow = false;
 					}
-					this.showDialog = true;
 					layer.open({
 						type: 1,
 						title: title,
-						area: ['400px', 'auto'],
+						area: ['420px', 'auto'],
 						content: dialogObj,
 						btn: ['确定','取消'],
 						btn1: function(index){
@@ -456,10 +471,14 @@
 						btn2: function(){
 							this.showLossDialog = false;
 							this.showProfitDialog = false;
+							this.currentId = '';
+							this.selectedNum = -1;
 						}.bind(this),
 						cancel: function(){
 							this.showLossDialog = false;
 							this.showProfitDialog = false;
+							this.currentId = '';
+							this.selectedNum = -1;
 						}.bind(this)
 					});
 				}
@@ -706,13 +725,13 @@
 		}
 	}
 	.edit_order{
-		width: 400px;
+		width: 420px;
 		padding: 20px 10px 0 10px;
 		.row{
 			height: 30px;
 			margin-bottom: 18px;
 			div:first-child{
-				width: 270px;
+				width: 295px;
 				label{
 					width: 78px;
 					text-align: right;

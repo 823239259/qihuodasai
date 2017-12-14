@@ -128,7 +128,7 @@
 							<div class="slt-list">
 								<ul>
 									<li selectVal="1">市价</li>
-									<li selectVal="2">对价</li>
+									<li selectVal="2">对手价</li>
 								</ul>
 							</div>
 						</div>
@@ -139,7 +139,7 @@
 					</div>
 				</div>
 			</div>
-			<h6>当日有效</h6>
+			<h6>永久有效</h6>
 			<p>1.止损单在云端执行，软件关闭后扔然有效，云端自动确认结算单。</p>
 			<p>2.止损单在行情不活跃或快速发送变化下，不保证成交价为指定价。</p>
 			<p>3.止损单存在风险，云端系统、网络故障情况下失效等。</p>
@@ -205,7 +205,7 @@
 					</div>
 				</div>
 			</div>
-			<h6>当日有效</h6>
+			<h6>永久有效</h6>
 			<p>1.止损单在云端执行，软件关闭后扔然有效，云端自动确认结算单。</p>
 			<p>2.止损单在行情不活跃或快速发送变化下，不保证成交价为指定价。</p>
 			<p>3.止损单存在风险，云端系统、网络故障情况下失效等。</p>
@@ -317,7 +317,6 @@
 				this.conditionList.forEach(function(o, i){
 					if(this.currentId == o.ConditionNo){
 						this.currentConditionOrder = o;
-						console.log(this.currentConditionOrder);
 						this.conditionNum = o.Num;
 						this.additionPrice = o.AdditionPrice;
 					}
@@ -405,25 +404,25 @@
 						switch (this.priceType){
 							case '0':
 								if(this.additionalPriceType == '0' || this.additionalPriceType == '2' || this.additionPrice <= this.conditionPrice){
-									layer.msg('附加条件添加错误', {time: 1000});
+									layer.msg('输入的条件不能形成区间', {time: 1000});
 									return;
 								}
 								break;
 							case '1':
 								if(this.additionalPriceType == '0' || this.additionalPriceType == '2' || this.additionPrice <= this.conditionPrice){
-									layer.msg('附加条件添加错误', {time: 1000});
+									layer.msg('输入的条件不能形成区间', {time: 1000});
 									return;
 								}
 								break;
 							case '1':
 								if(this.additionalPriceType == '1' || this.additionalPriceType == '3' || this.additionPrice >= this.conditionPrice){
-									layer.msg('附加条件添加错误', {time: 1000});
+									layer.msg('输入的条件不能形成区间', {time: 1000});
 									return;
 								}
 								break;
 							case '1':
 								if(this.additionalPriceType == '1' || this.additionalPriceType == '3' || this.additionPrice >= this.conditionPrice){
-									layer.msg('附加条件添加错误', {time: 1000});
+									layer.msg('输入的条件不能形成区间', {time: 1000});
 									return;
 								}
 								break;
@@ -582,7 +581,7 @@
 						this.orderTypeName = '市价';
 					}else if(this.currentConditionOrder.OrderType == 2){
 						this.orderType = '2';
-						this.orderTypeName = '对价';
+						this.orderTypeName = '对手价';
 					}
 					if(this.currentConditionOrder.Drection == 0){
 						this.directionType = '0';
@@ -1004,7 +1003,7 @@
 			}.bind(this));
 			pro.selectEvent('#condition_price_type', function(data){
 				this.orderType = data;
-				data == '1' ? this.orderTypeName = '市价' : this.orderTypeName = '对价';
+				data == '1' ? this.orderTypeName = '市价' : this.orderTypeName = '对手价';
 			}.bind(this));
 		}
 	}

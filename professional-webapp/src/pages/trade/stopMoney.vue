@@ -126,6 +126,9 @@
 			},
 			miniTikeSize(){
 				return this.orderTemplist[this.selectedMsg.CommodityNo].MiniTikeSize;
+			},
+			stopStatus(){
+				return this.$store.state.market.stopStatus;
 			}
 		},
 		watch: {
@@ -170,11 +173,13 @@
 //				if (d < 0.000000001 || b-d < 0.0000000001){
 //					alert("yes");
 //				}
-				let a0, b0, d0, msg, drection;
+				let d0, d1, msg, drection;
+				this.miniTikeSize;
 				if(!(this.stopPrice == '' || this.stopPrice == 0 || this.stopPrice == undefined)){
-					a0 = this.stopPrice;
-					b0 = this.miniTikeSize;
-					d0 = a0%b0;
+					d0 = this.stopPrice % this.miniTikeSize;
+				}
+				if(!(this.stopProfitPrice == '' || this.stopProfitPrice == 0 || this.stopProfitPrice == undefined)){
+					d1 = this.stopProfitPrice % this.miniTikeSize;
 				}
 				if(this.selectedMsg.Drection == '多'){
 					drection = 0;
@@ -184,24 +189,20 @@
 				if(this.currentNum == 0){
 					if(this.stopPrice == '' || this.stopPrice <= 0 || this.stopPrice == undefined){
 						layer.msg('请输入止损价', {time: 1000});return;
-					}else if(!(d0 < 0.000000001 || parseFloat(b0-d0) < 0.0000000001)){
-						//d0 >= 0.000000001 && parseFloat(b0-d0) >= 0.0000000001
-						layer.msg('输入价格不符合最小变动价，最小变动价为：' + b0, {time: 1000});return;
+					}else if(!(d0 < 0.000000001 || parseFloat(this.miniTikeSize-d0) < 0.0000000001)){
+						layer.msg('输入价格不符合最小变动价，最小变动价为：' + this.miniTikeSize, {time: 2000});return;
 					}else if(this.stopNum == '' || this.stopNum <= 0 || this.stopNum == undefined){
 						layer.msg('请输入止损手数', {time: 1000});return;
 					}else{
-						console.log(this.sotpType);
 						if(this.stopType == '0'){
 							msg = '是否添加限价止损？';
 							if(drection == 0){
-								//if(this.inputPrice > this.templateListObj.LastPrice){
 								if(parseFloat(this.stopPrice) >= parseFloat(this.lastPrice)){	
 									layer.msg('输入价格应该低于最新价', {time: 1000});
 									return;
 								}
 							}
 							if(drection == 1){
-								//if(this.inputPrice < this.templateListObj.LastPrice){
 								if(parseFloat(this.stopPrice) <= parseFloat(this.lastPrice)){
 									layer.msg('输入价格应该高于最新价', {time: 1000});
 									return;
@@ -233,8 +234,8 @@
 						layer.msg('请输入止盈价', {time: 1000});return;
 					}else if(this.stopProfitNum == '' || this.stopProfitNum <= 0 || this.stopProfitNum == undefined){
 						layer.msg('请输入止盈手数', {time: 1000});return;
-					}else if(d0 >= 0.000000001 && parseFloat(b0-d0) >= 0.0000000001){
-						layer.msg('输入价格不符合最小变动价，最小变动价为：' + b0, {time: 1000});return;
+					}else if(d1 >= 0.000000001 && parseFloat(this.miniTikeSize-d1) >= 0.0000000001){
+						layer.msg('输入价格不符合最小变动价，最小变动价为：' + this.miniTikeSize, {time: 1000});return;
 					}else{
 						if(drection == 0){
 							if(parseFloat(this.stopProfitPrice) <= parseFloat(this.lastPrice)){	
@@ -269,6 +270,8 @@
 				layer.confirm(msg, {
 					btn: ['确定','取消']
 				}, function(index){
+					if(this.stopStatus == true) return;
+					this.$store.state.market.stopStatus = true;
 					this.tradeSocket.send(JSON.stringify(this.str));
 					this.$parent.currentOrderID = '';
 					this.$parent.selectedNum = -1;
@@ -302,7 +305,7 @@
 <style lang="scss" scoped>
 	@import "../../assets/css/common.scss";
 	.stopMoney{
-		width: 400px;
+		width: 420px;
 		overflow: hidden;
 		background: $blue;
 		border-radius: 5px;
@@ -349,7 +352,7 @@
 			height: 30px;
 			margin-bottom: 18px;
 			div:first-child{
-				width: 270px;
+				width: 295px;
 				label{
 					width: 78px;
 					text-align: right;

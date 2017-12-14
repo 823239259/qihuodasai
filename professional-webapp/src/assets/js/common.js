@@ -25,7 +25,6 @@ function select(obj,ipt,fun){
 		var that = $(this);
 		var val = that.attr("selectVal");
 		var texts = that.text();
-//			if(that.hasClass("charts-auto")) return false;
 		ipt.val(texts);
 		ipt.attr("selectVal",val);
 		that.addClass("selectedLi").siblings().removeClass("selectedLi");
@@ -33,10 +32,12 @@ function select(obj,ipt,fun){
 		ipt.focus().blur();
 		if(typeof(fun) == 'undefined'){
 			return true;
-		}else if(ipt.attr("selectVal") == ipt.attr("prev_value")){
-			return true;
-		} 
-		ipt.attr("prev_value",ipt.attr("selectVal"));
+		}
+//		else if(ipt.attr("selectVal") == ipt.attr("prev_value")){
+//			console.log('aaaa');
+//			return true;
+//		} 
+//		ipt.attr("prev_value",ipt.attr("selectVal"));
 		fun(val, ipt); //回调函数
 	})
 };
