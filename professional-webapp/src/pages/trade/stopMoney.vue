@@ -174,7 +174,6 @@
 //					alert("yes");
 //				}
 				let d0, d1, msg, drection;
-				this.miniTikeSize;
 				if(!(this.stopPrice == '' || this.stopPrice == 0 || this.stopPrice == undefined)){
 					d0 = this.stopPrice % this.miniTikeSize;
 				}
@@ -293,9 +292,11 @@
 				if(data == '0'){
 					this.stopTypeName = '止损价';
 					this.rangeShow = true;
+					this.stopPrice = this.selectedMsg.stopPrice;
 				}else{
 					this.stopTypeName = '动态价';
 					this.rangeShow = false;
+					this.stopPrice = this.miniTikeSize;
 				}
 			}.bind(this));
 		}

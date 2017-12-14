@@ -182,6 +182,7 @@
 				stopLossType: '',
 				lastPrice: '',
 				stopPrice: '',
+				inputPrice: '',
 				stopNum: '',
 				percentLoss: '0.00',
 				stopProfitPrice: '',
@@ -272,9 +273,11 @@
 						if(o.StopLossType00 == 2){
 							this.stopPrice = parseFloat(o.StopLossDiff).toFixed(2);
 							this.rangeShow = false;
+							this.inputPrice = parseFloat(o.StopLossDiff).toFixed(2);
 						}else{
 							this.stopPrice = o.StopLossPrice;
 							this.rangeShow = true;
+							this.inputPrice = o.StopLossPrice; 
 						}
 						this.stopProfitNum = o.Num;
 						this.stopProfitPrice = o.StopLossPrice;
@@ -659,17 +662,28 @@
 			
 		},
 		mounted: function(){
+			
 			//获取渲染页面所需数据
 			this.notStopLossListEvent();
 			//调用下拉框
 			pro.selectEvent('#stop_type', function(data){
+				let miniTikeSize = this.orderTemplist[this.currentOrderList.CommodityNo].MiniTikeSize;
 				this.stopType = data;
 				if(data == '0'){
 					this.stopTypeName = '止损价';
 					this.rangeShow = true;
+					this.stopPrice = this.inputPrice;
+					if(this.stopLossType == 2){
+						this.stopPrice = this.lastPrice;
+					}
 				}else{
 					this.stopTypeName = '动态价';
 					this.rangeShow = false;
+					if(this.stopLossType == 0){
+						this.stopPrice = miniTikeSize;
+					}else if(this.stopLossType == 2){
+						this.stopPrice = this.inputPrice;
+					}
 				}
 			}.bind(this));
 		},
