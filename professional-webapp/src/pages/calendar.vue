@@ -275,7 +275,7 @@
 					this.show_01 = false;
 					this.show_03 = true;
 					this.show_04 = false;
-					this.importance = 3;
+					this.importance = '';
 					this.getInfoList(this.startTime,this.endTime,this.chooseCountryArr,this.importance);
 				}
 			},
