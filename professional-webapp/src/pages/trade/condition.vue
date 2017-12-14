@@ -506,15 +506,9 @@
 								'Drection': parseInt(this.directionType),
 								'StopLossDiff': 0.0,
 								'StopWinDiff': 0.0,
-								'AdditionFlag':(function(){
-													if(this.additionPrice == '' || this.additionPrice == 0 || this.additionPrice == undefined){
-														return false;
-													}else{
-														return true;
-													}
-											}.bind(this))(),
-								'AdditionType': parseInt(this.additionalPriceType),
-								'AdditionPrice': parseFloat(this.additionPrice)
+								'AdditionFlag': this.additionPrice == '' ? false : true,
+								'AdditionType': this.additionPrice == '' ? 5 : parseInt(this.additionalPriceType),
+								'AdditionPrice': this.additionPrice == '' ? 0 : parseFloat(this.additionPrice)
 							}
 						};
 						layer.confirm(msg, {

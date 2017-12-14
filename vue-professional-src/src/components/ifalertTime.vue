@@ -226,7 +226,7 @@
 						return;
 					}
 				}
-				if(this.timeHoldNum == '' || this.timeHoldNum == 0 || this.timeHoldNum == undefined){
+				if(this.timeHoldNum == '' || this.timeHoldNum <= 0 || this.timeHoldNum == undefined){
 					this.$refs.dialog.isShow = true;
 					this.msg = '请输入手数';
 					return;

@@ -241,14 +241,14 @@
 						 d0 = a0%b0;
 					}
 					
-					if(this.inputPrice == '' || this.inputPrice == 0 || this.inputPrice == undefined){
+					if(this.inputPrice == '' || this.inputPrice <= 0 || this.inputPrice == undefined){
 						this.$refs.dialog.isShow = true;
 						this.msg = '请输入止损价';
 					}else if(!(d0 < 0.000000001 || parseFloat(b0-d0) < 0.0000000001)){
 						//d0 >= 0.000000001 && parseFloat(b0-d0) >= 0.0000000001
 						this.$refs.dialog.isShow = true;
 						this.msg = '输入价格不符合最小变动价，最小变动价为：' + b0;
-					}else if(this.Num == '' || this.Num == 0 || this.Num == undefined){
+					}else if(this.Num == '' || this.Num <= 0 || this.Num == undefined){
 						this.$refs.dialog.isShow = true;
 						this.msg = '请输入止损手数';
 					}else{
@@ -309,10 +309,10 @@
 						 d0 = a0%b0;
 					}
 					
-					if(this.zhiYinInputPrice == '' || this.zhiYinInputPrice == 0 || this.zhiYinInputPrice == undefined){
+					if(this.zhiYinInputPrice == '' || this.zhiYinInputPrice <= 0 || this.zhiYinInputPrice == undefined){
 						this.$refs.dialog.isShow = true;
 						this.msg = '请输入止盈价';
-					}else if(this.zhiYinNum == '' || this.zhiYinNum == 0 || this.zhiYinNum == undefined){
+					}else if(this.zhiYinNum == '' || this.zhiYinNum <= 0 || this.zhiYinNum == undefined){
 						this.$refs.dialog.isShow = true;
 						this.msg = '请输入止盈手数';
 					}else if(d0 >= 0.000000001 && parseFloat(b0-d0) >= 0.0000000001){

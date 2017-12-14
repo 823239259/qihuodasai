@@ -264,13 +264,13 @@
 						break;
 				}
 				var d0 = this.inputPrice % this.miniTikeSize;
-				if(this.inputPrice == '' || this.inputPrice == 0 || this.inputPrice == undefined){
+				if(this.inputPrice == '' || this.inputPrice <= 0 || this.inputPrice == undefined){
 					this.$refs.dialog.isShow = true;
 					this.msg = '请输入价格';
 				}else if(d0 >= 0.000000001 && parseFloat(this.miniTikeSize-d0) >= 0.0000000001){
 					this.$refs.dialog.isShow = true;
 					this.msg = '输入价格不符合最小变动价，最小变动价为：' + this.miniTikeSize;
-				}else if(this.holdNum == '' || this.holdNum == 0 || this.holdNum == undefined){
+				}else if(this.holdNum == '' || this.holdNum <= 0 || this.holdNum == undefined){
 					this.$refs.dialog.isShow = true;
 					this.msg = '请输入手数';
 				}else{
