@@ -1056,7 +1056,7 @@ export default new Vuex.Store({
 						layer.msg('退出成功', {time: 1000});
 						context.state.account.exitStatus = true;
 					}else{
-//						console.log('登出失败');
+						console.log('登出失败');
 						layer.msg(parameters.Message, {time: 1000});
 						context.state.account.isBack = true;
 					}
@@ -2033,14 +2033,13 @@ export default new Vuex.Store({
 				context.state.tradeSocket.onclose = function(evt) {
 					console.log('tradeClose:');
 					clearInterval(context.state.market.HeartBeatTiming);
-//					if(context.state.account.loginStatus == true){
+					if(context.state.account.loginStatus == true){
 //						if(context.state.isshow.warningShow == true) return;
 						context.state.isshow.warningType = 2;
 						context.state.isshow.warningShow = true;
-						context.state.account.isBack = true;
-//					}else{
-//						return;
-//					}
+					}else{
+						return;
+					}
 					
 				};
 				context.state.tradeSocket.onerror = function(evt) {
