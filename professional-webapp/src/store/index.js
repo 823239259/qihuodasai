@@ -2033,13 +2033,14 @@ export default new Vuex.Store({
 				context.state.tradeSocket.onclose = function(evt) {
 					console.log('tradeClose:');
 					clearInterval(context.state.market.HeartBeatTiming);
-					if(context.state.account.loginStatus == true){
-						if(context.state.isshow.warningShow == true) return;
+//					if(context.state.account.loginStatus == true){
+//						if(context.state.isshow.warningShow == true) return;
 						context.state.isshow.warningType = 2;
 						context.state.isshow.warningShow = true;
-					}else{
-						return;
-					}
+						context.state.account.isBack = true;
+//					}else{
+//						return;
+//					}
 					
 				};
 				context.state.tradeSocket.onerror = function(evt) {
