@@ -267,8 +267,9 @@
 						this.$store.state.account.currentNav = 4;
 						break;
 					case 5:
-					this.$router.push({path: '/download'});
-						this.$store.state.account.currentNav = 5;
+						window.open('http://139.196.232.43/');
+//					this.$router.push({path: 'http://139.196.232.43/',_target:"_blank"});
+//						this.$store.state.account.currentNav = 5;
 						break;
 					case 6:
 						this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
