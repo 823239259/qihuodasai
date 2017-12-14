@@ -71,7 +71,7 @@
 						<span>全部</span>
 					</li>
 					<li v-for="(c,index) in countryArr" class="cant">
-						<i class="ifont i_show"  v-on:click="chooseCountry(index,$event)">&#xe634;</i>
+						<i class="ifont"  v-on:click="chooseCountry(index,$event)">&#xe634;</i>
 						<img :src="c.country | countryUrl" />
 						<span>{{c.country}}</span>
 					</li>
@@ -210,28 +210,39 @@
 		},
 		methods:{
 			chooseCountry:function(index,e){
-				this.showCountryAll = false;
-				this.NoCountryAll = true;
 				var judgeClass = $(e.currentTarget).hasClass("i_show");
 				var cou = $(e.currentTarget).parent().children("span").html();
 				if(judgeClass){
-					$(e.currentTarget).html("&#xe600;").css("color","#ffd400");
+					$(e.currentTarget).html("&#xe634;").css("color","#a3aacc");
 					$(e.currentTarget).removeClass("i_show");
+					if(this.chooseCountryArr.split(",").length>1){
+//						console.log(this.chooseCountryArr.split(","));
+						var couLenrth = this.chooseCountryArr.split(",").length;
+						if(this.chooseCountryArr.split(",")[couLenrth-1] == cou){
+							this.chooseCountryArr = this.chooseCountryArr.replace((","+cou),'');
+						}else{
+							this.chooseCountryArr = this.chooseCountryArr.replace((cou+","),'');
+						}
+					}else{
+						this.chooseCountryArr = '';
+					}
+				}else if(judgeClass == false){
+					$(e.currentTarget).html("&#xe600;").css("color","#ffd400");
+					$(e.currentTarget).addClass("i_show");
 					if(this.chooseCountryArr == ''){
-						this.chooseCountryArr = cou ;
+						this.chooseCountryArr = cou;
 					}else{
 						this.chooseCountryArr = this.chooseCountryArr+","+cou ;
 					}
-				}else if(judgeClass == false){
-					$(e.currentTarget).html("&#xe634;").css("color","#a3aacc");
-					$(e.currentTarget).addClass("i_show");
-					if(this.chooseCountryArr.split(",").length>1){
-						this.chooseCountryArr = this.chooseCountryArr.replace((","+cou),'');
-					}else{
-						this.chooseCountryArr = '';
-						this.showCountryAll = true;
-						this.NoCountryAll = false;
-					}
+				}
+				//判断全部选中
+				var judgeClass1 = $(".cant").children().hasClass("i_show");
+				if(judgeClass1){
+					this.showCountryAll = false;
+					this.NoCountryAll = true;
+				}else{
+					this.showCountryAll = true;
+					this.NoCountryAll = false;
 				}
 				this.getInfoList(this.startTime,this.endTime,this.chooseCountryArr,this.importance);
 			},
