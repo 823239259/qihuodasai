@@ -20,8 +20,15 @@
 			}
 		},
 		computed: {
+			PAY:function(){
+				if(this.$store.state.environment == "test"){
+					return "http://test.pay.duokongtai.cn"
+				}else{
+					return "http://pay.duokongtai.cn"
+				}
+			},
 			iframe(){
-				return 'http://pay.duokongtai.cn/app/appPayinfo?mobile='+ this.$route.query.username +'&money='+ this.$route.query.money;
+				return this.PAY+'/app/appPayinfo?mobile='+ this.$route.query.username +'&money='+ this.$route.query.money;
 			}
 		},
 		methods:{
