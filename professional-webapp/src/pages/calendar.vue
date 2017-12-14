@@ -251,12 +251,15 @@
 				if(this.showCountryAll == true){
 					this.showCountryAll = false;
 					this.NoCountryAll = true;
+					this.chooseCountryArr = '';
+					this.getInfoList(this.startTime,this.endTime,this.chooseCountryArr,this.importance);
 				}else{
 					this.showCountryAll = true;
 					this.NoCountryAll = false;
 					$(".cant>.ifont").html("&#xe634;").css("color","#a3aacc");
 					$(".cant>.ifont").addClass("i_show");
-					this.getInfoList(this.startTime,this.endTime,"",this.importance);
+					this.chooseCountryArr = '';
+					this.getInfoList(this.startTime,this.endTime,this.chooseCountryArr,this.importance);
 				}
 			},
 			chooseImportant:function(){
