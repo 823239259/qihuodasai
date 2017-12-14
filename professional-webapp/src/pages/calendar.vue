@@ -233,7 +233,7 @@
 						this.NoCountryAll = false;
 					}
 				}
-				this.getInfoList(this.startTime,this.endTime,this.chooseCountryArr,'');
+				this.getInfoList(this.startTime,this.endTime,this.chooseCountryArr,this.importance);
 			},
 			countryAll:function(){
 				if(this.showCountryAll == true){
@@ -253,11 +253,13 @@
 					this.show_04 = true;
 					this.show_01 = true;
 					this.show_02 = false;
-					this.getInfoList(this.startTime,this.endTime,"",3);
+					this.importance = 3;
+					this.getInfoList(this.startTime,this.endTime,this.chooseCountryArr,this.importance);
 				}else {
 					this.show_03 = true;
 					this.show_04 = false;
-					this.getInfoList(this.startTime,this.endTime,"",'');
+					this.importance = '';
+					this.getInfoList(this.startTime,this.endTime,this.chooseCountryArr,this.importance);
 				}
 			},
 			chooseImportantall:function(){
@@ -266,18 +268,20 @@
 					this.show_01 = true;
 					this.show_03 = true;
 					this.show_04 = false;
-					this.getInfoList(this.startTime,this.endTime,"",'');
+					this.importance = '';
+					this.getInfoList(this.startTime,this.endTime,this.chooseCountryArr,this.importance);
 				}else if(this.show_01 == true){
 					this.show_02 = true;
 					this.show_01 = false;
 					this.show_03 = true;
 					this.show_04 = false;
-					this.getInfoList(this.startTime,this.endTime,"",'');
+					this.importance = 3;
+					this.getInfoList(this.startTime,this.endTime,this.chooseCountryArr,this.importance);
 				}
 			},
 			getInfoList:function(startTime,endTime,country,importance){
 				var data = {
-					pageIndex:'1',
+					pageIndex:0,
 				    size:'20',
 					startTime:startTime,
 					endTime:endTime,
@@ -299,8 +303,6 @@
 				})
 			},
 			getDayList:function(e){
-				console.log("---------------");
-				console.log(e);
 			    var timec = Date.parse(e)/1000;
 			    var today = pro.getDate("y-m-d",timec*1000);
 			    //1-3天前
@@ -342,8 +344,6 @@
 				this.getInfoList(this.startTime,this.endTime,'','');
 				this.show_day = pro.getDate("yy-mm-dd",Date.parse(this.weekDayList[index].day))
 				this.show_weekDay = this.weekDayList[index].weekday;
-				console.log("2222222222200");
-				console.log(this.startTime);
 			},
 			lastWeek:function(){
 				var lastWeekDay =  pro.getDate("y-m-d",(Date.parse(this.startTime)/1000-7*24*60*60)*1000);
@@ -355,14 +355,11 @@
 				this.startTime = lastWeekDay;
 			},
 			nextWeek:function(){
-				console.log("11111111111111")
-				console.log(this.startTime);
 				var nextWeekDay = pro.getDate("y-m-d",(Date.parse(this.startTime)/1000+7*24*60*60)*1000);
 				var nextWeekDay1 = pro.getDate("y-m-d",(Date.parse(nextWeekDay)/1000+24*60*60)*1000);
 				this.getDayList(nextWeekDay);
 				this.getInfoList(nextWeekDay,nextWeekDay1,'','');
 				this.startTime = nextWeekDay;
-				console.log(this.startTime)
 			}
 		},
 		mounted:function(){
