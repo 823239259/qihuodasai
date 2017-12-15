@@ -145,11 +145,11 @@
 					</li>
 					<li v-else="k.importance == null">--</li>
 					<li v-if="k.actual != ''">{{k.actual}}</li>
-					<li v-if="k.actual == ''">--</li>
+					<li v-else-if="k.actual == ''">--</li>
 					<li v-if="k.forecast !=''">{{k.forecast}}</li>
-					<li v-if="k.forecast == ''">--</li>
+					<li v-else-if="k.forecast == ''">--</li>
 					<li v-if="k.previous != ''">{{k.previous}}</li>
-					<li v-if="k.previous == ''">--</li>
+					<li v-else-if="k.previous == ''">--</li>
 				</ul>
 			</div>
 		</div>
@@ -299,7 +299,7 @@
 			getInfoList:function(startTime,endTime,country,importance){
 				var data = {
 					pageIndex:0,
-				    size:'30',
+				    size:'100',
 					startTime:startTime,
 					endTime:endTime,
 					country:country,
