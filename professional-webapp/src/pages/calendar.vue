@@ -118,7 +118,7 @@
 		<div class="infoList">
 			<div class="list_title">
 				<ul>
-					<li>日历图标</li>
+					<li><i></i></li>
 					<li>{{show_weekDay}}</li>
 					<li>{{show_day}}</li>
 				</ul>
@@ -127,6 +127,7 @@
 				<ul class="list_container">
 					<li>时间</li>
 					<li>地区</li>
+					<li>国家</li>
 					<li>事件</li>
 					<li>重要性</li>
 					<li>今值</li>
@@ -136,6 +137,7 @@
 				<ul class="list_details" v-for="k in list">
 					<li>{{k.timestamp | getTime}}</li>
 					<li><img :src="k.flagUrl" /></li>
+					<li>{{k.country}}</li>
 					<li>{{k.title}}</li>
 					<li v-if="k.importance != null">
 						<img src="../assets/images/calendar_star.png" v-for="a in parseFloat(k.importance)"/>
@@ -297,7 +299,7 @@
 			getInfoList:function(startTime,endTime,country,importance){
 				var data = {
 					pageIndex:0,
-				    size:'20',
+				    size:'30',
 					startTime:startTime,
 					endTime:endTime,
 					country:country,
@@ -306,6 +308,7 @@
 				pro.fetch('post','/crawler/getCrawlerCalendar',data,"").then((res)=>{
 					if(res.success == true && res.code == ''){
 						this.list = res.data.data;
+						console.log(this.list)
 					}
 				}).catch((err)=>{
 					if(err.success ==false ){
@@ -385,13 +388,6 @@
 			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 			var _h = h -40-47;
 			$("#calendar").height(_h);
-			$(window).resize(function(){
-				var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-				var _h = h -40- 47;
-				if(contH > _h){
-					$("#calendar").height(_h);
-				}
-			});
 		},
 		filters:{
 			getTime:function(e){
@@ -632,18 +628,31 @@
 		
 	}
 	.infoList{
+		overflow:hidden;
 		width: 100%;
 		background-color:$blue;
 		.list_title{
 			padding-left: 10px;
 			height: 40px;
-			line-height: 40px;
 			li{
 				float: left;
 				font-size: $fs12;
+				&:nth-child(1){
+					i{
+						background-image: url(../assets/images/calander_icon.png);
+						width: 20px;
+						height: 20px;
+						display: inline-block;
+						margin-top: 10px;
+					}
+				}
 				&:nth-child(2){
+					line-height: 40px;
 					color: $white;
 					padding: 0 10px;
+				}
+				&:nth-child(3){
+					line-height: 40px;
 				}
 			}
 		}
@@ -662,30 +671,34 @@
 					width: 10%;
 				}
 				&:nth-child(3){
-					width: 45%;
+					width: 10%;
 				}
 				&:nth-child(4){
-					width: 10%;
+					width: 35%;
 				}
 				&:nth-child(5){
 					width: 10%;
 				}
 				&:nth-child(6){
-					width: 8%;
+					width: 10%;
 				}
 				&:nth-child(7){
+					width: 8%;
+				}
+				&:nth-child(8){
 					width: 7%;
 				}
 			}
 		}
 		.list_details{
 			font-size: $fs14;
-			/*line-height: 40px;*/
-			text-indent: 10px;
-			height: 40px;
 			border-bottom: 1px solid $bottom_color;
+			clear: both;
 			li{
+				padding-left: 10px;
+				line-height: 40px;
 				float: left;
+				display: iinline-block;
 				&:nth-child(1){
 					width: 10%;
 				}
@@ -699,38 +712,39 @@
 					}
 				}
 				&:nth-child(3){
-					width: 45%;
+					width: 10%;
 				}
 				&:nth-child(4){
+					width: 35%;
+				}
+				&:nth-child(5){
 					width: 10%;
 					img{
 						float: left;
 						line-height: 40px;
 						margin-top: 12px;
-						&:nth-child(1){
-							margin-left: 10px;
-						}
 					}
 				}
-				&:nth-child(5){
+				&:nth-child(6){
 					width: 10%;
 				}
-				&:nth-child(6){
+				&:nth-child(7){
 					width: 8%;
 				}
-				&:nth-child(7){
+				&:nth-child(8){
 					width: 7%;
 				}
 			}
 		}
 	}
 	.btm{
-		margin-top: 5px;
-		height: 40px;
-		line-height: 40px;
 		text-align: center;
 		background-color: $blue;
 		p{
+			width: 100%;
+			margin-top: 5px;
+			height: 40px;
+			line-height: 40px;
 			font-size: $fs12;
 		}
 	}
