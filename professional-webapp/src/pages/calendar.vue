@@ -118,7 +118,7 @@
 		<div class="infoList">
 			<div class="list_title">
 				<ul>
-					<li>日历图标</li>
+					<li><i></i></li>
 					<li>{{show_weekDay}}</li>
 					<li>{{show_day}}</li>
 				</ul>
@@ -137,6 +137,7 @@
 					<li>{{k.timestamp | getTime}}</li>
 					<li><img :src="k.flagUrl" /></li>
 					<li>{{k.title}}</li>
+					<!--<li>哈啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</li>-->
 					<li v-if="k.importance != null">
 						<img src="../assets/images/calendar_star.png" v-for="a in parseFloat(k.importance)"/>
 						<img src="../assets/images/calendar_star1.png" v-for="a in (3-k.importance)"/>
@@ -297,7 +298,7 @@
 			getInfoList:function(startTime,endTime,country,importance){
 				var data = {
 					pageIndex:0,
-				    size:'20',
+				    size:'30',
 					startTime:startTime,
 					endTime:endTime,
 					country:country,
@@ -385,13 +386,6 @@
 			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 			var _h = h -40-47;
 			$("#calendar").height(_h);
-			$(window).resize(function(){
-				var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-				var _h = h -40- 47;
-				if(contH > _h){
-					$("#calendar").height(_h);
-				}
-			});
 		},
 		filters:{
 			getTime:function(e){
@@ -632,18 +626,31 @@
 		
 	}
 	.infoList{
+		overflow:hidden;
 		width: 100%;
 		background-color:$blue;
 		.list_title{
 			padding-left: 10px;
 			height: 40px;
-			line-height: 40px;
 			li{
 				float: left;
 				font-size: $fs12;
+				&:nth-child(1){
+					i{
+						background-image: url(../assets/images/calander_icon.png);
+						width: 20px;
+						height: 20px;
+						display: inline-block;
+						margin-top: 10px;
+					}
+				}
 				&:nth-child(2){
+					line-height: 40px;
 					color: $white;
 					padding: 0 10px;
+				}
+				&:nth-child(3){
+					line-height: 40px;
 				}
 			}
 		}
@@ -680,12 +687,13 @@
 		}
 		.list_details{
 			font-size: $fs14;
-			/*line-height: 40px;*/
-			text-indent: 10px;
-			height: 40px;
 			border-bottom: 1px solid $bottom_color;
+			clear: both;
 			li{
+				padding-left: 10px;
+				line-height: 40px;
 				float: left;
+				display: iinline-block;
 				&:nth-child(1){
 					width: 10%;
 				}
@@ -725,12 +733,13 @@
 		}
 	}
 	.btm{
-		margin-top: 5px;
-		height: 40px;
-		line-height: 40px;
 		text-align: center;
 		background-color: $blue;
 		p{
+			width: 100%;
+			margin-top: 5px;
+			height: 40px;
+			line-height: 40px;
 			font-size: $fs12;
 		}
 	}
