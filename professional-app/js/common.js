@@ -276,7 +276,7 @@ var tzdr = {
 	// 系统常量
 	constants: {
 		api_domain: "http://test.api.duokongtai.cn/",
-		api_recharge: "http://www.duokongtai.cn/",	//充值
+		api_recharge: "http://test.pay.duokongtai.cn/",	//充值
 		//图片地址
 		base_images_url: 'http://manage.duokongtai.cn/',
 		//token
