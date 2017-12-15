@@ -502,7 +502,7 @@
 					if(this.additionPrice){
 						var d2 = this.additionPrice % miniTikeSize;
 						if(d2 >= 0.000000001 && parseFloat(miniTikeSize-d2) >= 0.0000000001){
-							layer.msg('输入附加价格不符合最小变动价，最小变动价为：' + miniTikeSize, {time: 1000});
+							layer.msg('输入附加价格不符合最小变动价，最小变动价为：' + miniTikeSize, {time: 1000});return;
 						}
 					}
 					if(this.conditionNum == '' || this.conditionNum <= 0 || this.conditionNum == undefined){
