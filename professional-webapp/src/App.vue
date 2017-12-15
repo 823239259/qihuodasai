@@ -64,13 +64,21 @@
 				<i class="ifont" v-show="parameters[1].LastQuotation.LastPrice < parameters[1].LastQuotation.PreSettlePrice" :class="{red: parameters[1].LastQuotation.LastPrice > parameters[1].LastQuotation.PreSettlePrice, green: parameters[1].LastQuotation.LastPrice < parameters[1].LastQuotation.PreSettlePrice}">&#xe76a;</i>
 				<i class="ifont" v-show="parameters[1].LastQuotation.LastPrice >= parameters[1].LastQuotation.PreSettlePrice" :class="{red: parameters[1].LastQuotation.LastPrice > parameters[1].LastQuotation.PreSettlePrice, green: parameters[1].LastQuotation.LastPrice < parameters[1].LastQuotation.PreSettlePrice}">&#xe761;</i>
 			</p>
+			<p class="net net_yes" v-show="iconTradeShow">
+				<i class="icon icon_yes"></i>
+				<span>交易已连接</span>
+			</p>
+			<p class="net net_no" v-show="!iconTradeShow">
+				<i class="icon icon_no"></i>
+				<span>交易已断开</span>
+			</p>
 			<p class="net net_yes" v-show="iconShow">
 				<i class="icon icon_yes"></i>
-				<span>已连接</span>
+				<span>行情已连接</span>
 			</p>
 			<p class="net net_no" v-show="!iconShow">
 				<i class="icon icon_no"></i>
-				<span>已断开</span>
+				<span>行情已断开</span>
 			</p>
 		</div>
 		<div class="container">
@@ -107,6 +115,7 @@
 				isShow_exit : false,
 				show_login : false,
 				iconShow: true,
+				iconTradeShow: true,
 				zoomShow: true,
 				hotLine: '',
 				downloadUrl: 'javascript: void(0)',
@@ -148,6 +157,12 @@
 			isRefresh(){
 				return this.$store.state.account.isRefresh;
 			},
+			warningShow(){
+				return this.$store.state.isshow.warningShow;
+			},
+			warningType(){
+				return this.$store.state.isshow.warningType;
+			},
 			userName(){
 				if(this.$store.state.account.userName){
 					var user = this.$store.state.account.userName;
@@ -164,11 +179,17 @@
 			},
 		},
 		watch: {
-			showWarning: function(n, o){
+			warningShow: function(n, o){
 				if(n && n == true){
-					this.iconShow = false;
+					this.iconTradeShow = false;
+					if(this.warningType == 1){
+						this.iconShow = false;
+					}else if(this.warningType == 2){
+						this.iconShow = true;
+					}
 				}else{
 					this.iconShow = true;
+					this.iconTradeShow = true;
 				}
 			},
 			userName: function(n, o){

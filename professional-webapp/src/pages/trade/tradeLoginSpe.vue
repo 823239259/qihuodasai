@@ -42,6 +42,9 @@
 		computed: {
 			tradeConfig(){
 				return this.$store.state.market.tradeConfig;
+			},
+			warningShow(){
+				return this.$store.state.isshow.warningShow;
 			}
 		},
 		methods: {
@@ -61,6 +64,10 @@
 				$("#nav li").eq(3).addClass("current").siblings().removeClass("current");
 			},
 			loginEvent: function(user, pwd, fid){
+				if(this.warningShow == true){
+					layer.msg('交易连接失败', {time: 2000});
+					return;
+				}
 				if(this.tradeConfig.url_real == '' || this.tradeConfig.url_real == undefined) return;	
 				this.$store.state.market.tradeConfig.username = user;
 				this.$store.state.market.tradeConfig.password = Base64.encode(pwd);

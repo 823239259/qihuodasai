@@ -540,6 +540,7 @@
 				return this.$store.state.market.currentdetail.DotSize;
 			},
 			jCacheTotalAccount(){
+				console.log(this.$store.state.market.CacheAccount.jCacheTotalAccount);
 				return this.$store.state.market.CacheAccount.jCacheTotalAccount;
 			},
 			forceLine(){
@@ -571,7 +572,10 @@
 			},
 			warningShow(){
 				return this.$store.state.isshow.warningShow;
-			}
+			},
+			isRefresh(){
+				return this.$store.state.account.isRefresh;
+			},
 		},
 		filters:{
 			fixNumTwo: function(num){
@@ -583,15 +587,30 @@
 		},
 		watch: {
 			warningShow: function(n, o){
+				console.log(n);
 				if(n && n == true){
 					this.$refs.warning.show = true;
-					this.$store.state.account.exitStatus = true;
+					localStorage.removeItem('tradeUser');
+					this.$store.state.market.tradeConfig.username = '';
+					this.$store.state.market.tradeConfig.password = '';
+					this.$store.state.account.loginStatus = false;
+					this.tradeLoginShow = true;
+					this.tradeDetailsShow = false;
+					this.$store.state.market.chartHeight = this.h - 50 - 30 - 45;
 				}else{
 					this.$refs.warning.show = false;
 				}
 			},
+			isRefresh: function(n, o){
+				if(n == 1){
+					window.location.reload();
+				}else if(n == ''){
+					this.$store.state.account.isRefresh = '';
+				}
+			},
 			exitStatus: function(n, o){
 				if(n && n == true){
+					console.log(111);
 					localStorage.removeItem('tradeUser');
 					this.$store.state.market.tradeConfig.username = '';
 					this.$store.state.market.tradeConfig.password = '';
@@ -612,15 +631,15 @@
 					this.$store.state.market.stopLossTriggeredList = [];
 					this.$store.state.market.conditionList = [];
 					this.$store.state.market.triggerConditionList = [];
-					this.$store.state.market.CacheAccount.jCacheTotalAccount.TodayBalance = 0.0;
-					this.$store.state.market.CacheAccount.jCacheTotalAccount.TodayCanUse = 0.0;
-					this.$store.state.market.CacheAccount.jCacheTotalAccount.FloatingProfit = 0.0;
-					this.$store.state.market.CacheAccount.jCacheTotalAccount.CloseProfit = 0.0;
-					this.$store.state.market.CacheAccount.jCacheTotalAccount.FrozenMoney = 0.0;
-					this.$store.state.market.CacheAccount.jCacheTotalAccount.Deposit = 0.0;
-					this.$store.state.market.CacheAccount.jCacheTotalAccount.CounterFee = 0.0;
-					this.$store.state.market.CacheAccount.jCacheTotalAccount.RiskRate = 0.0;
-					this.$store.state.market.CacheAccount.jCacheTotalAccount.RiskDegree = 0.0;
+//					this.$store.state.market.CacheAccount.jCacheTotalAccount.TodayBalance = 0.0;
+//					this.$store.state.market.CacheAccount.jCacheTotalAccount.TodayCanUse = 0.0;
+//					this.$store.state.market.CacheAccount.jCacheTotalAccount.FloatingProfit = 0.0;
+//					this.$store.state.market.CacheAccount.jCacheTotalAccount.CloseProfit = 0.0;
+//					this.$store.state.market.CacheAccount.jCacheTotalAccount.FrozenMoney = 0.0;
+//					this.$store.state.market.CacheAccount.jCacheTotalAccount.Deposit = 0.0;
+//					this.$store.state.market.CacheAccount.jCacheTotalAccount.CounterFee = 0.0;
+//					this.$store.state.market.CacheAccount.jCacheTotalAccount.RiskRate = 0.0;
+//					this.$store.state.market.CacheAccount.jCacheTotalAccount.RiskDegree = 0.0;
 				}
 			},
 			isBack: function(n, o){
