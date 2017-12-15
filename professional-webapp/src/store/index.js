@@ -1943,7 +1943,6 @@ export default new Vuex.Store({
 						var floatingProfit=tmpFloatingProfit+':'+context.state.market.orderTemplist[parameters.CommodityNo].CurrencyNo;
 						currentPositionListContObj.total = floatingProfit;
 						context.state.market.positionListCont.splice(currentPositionListContObjIndex,1,currentPositionListContObj);
-						context.state.market.CacheHoldFloatingProfit.jHoldFloatingProfit = {};
 						context.state.market.CacheHoldFloatingProfit.jHoldFloatingProfit[parameters.CommodityNo+parameters.ContractNo] 
 							= {"currencyNo" : context.state.market.orderTemplist[parameters.CommodityNo].CurrencyNo, "floatingProfit" : tmpFloatingProfit};
 						//更新账户资金盈亏
