@@ -540,7 +540,6 @@
 				return this.$store.state.market.currentdetail.DotSize;
 			},
 			jCacheTotalAccount(){
-				console.log(this.$store.state.market.CacheAccount.jCacheTotalAccount);
 				return this.$store.state.market.CacheAccount.jCacheTotalAccount;
 			},
 			forceLine(){

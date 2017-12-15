@@ -2040,10 +2040,12 @@ export default new Vuex.Store({
 						context.state.isshow.warningShow = true;
 						sessionStorage.tradeStatus = false;
 					}else{
-						layer.msg('交易连接失败', {time: 1500});
-						localStorage.removeItem('tradeUser');
-						context.state.market.tradeConfig.username = '';
-						context.state.market.tradeConfig.password = '';
+						if(sessionStorage.tradeStatus == 'false'){
+							layer.msg('交易连接失败', {time: 1500});
+							localStorage.removeItem('tradeUser');
+							context.state.market.tradeConfig.username = '';
+							context.state.market.tradeConfig.password = '';
+						}
 					}
 					
 				};
