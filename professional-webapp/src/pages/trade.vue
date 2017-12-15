@@ -416,6 +416,7 @@
 				</div>
 			</div>
 		</div>
+		<warning ref="warning"></warning>
 	</div>
 </template>
 
@@ -439,10 +440,11 @@
 	import todayDeal from './trade/todayDeal.vue'
 	import histroyDeal from './trade/histroyDeal.vue'
 	import moneyDetail from './trade/moneyDetail.vue'
+	import warning from "./trade/warning.vue"
 	export default{
 		name:'trade',
 		components: {tradeLogin, tradeLoginSpe, fens, light, klineOne, klineFive, klineFifteen, klineThirty, klineDay,
-			position, order, entrust, stopOrder, condition, todayDeal, histroyDeal, moneyDetail,
+			position, order, entrust, stopOrder, condition, todayDeal, histroyDeal, moneyDetail, warning
 		},
 		data(){
 			return{
@@ -567,9 +569,9 @@
 			exitStatus(){
 				return this.$store.state.account.exitStatus;
 			},
-//			warningShow(){
-//				return this.$store.state.isshow.warningShow;
-//			}
+			warningShow(){
+				return this.$store.state.isshow.warningShow;
+			}
 		},
 		filters:{
 			fixNumTwo: function(num){
@@ -580,14 +582,14 @@
 			}
 		},
 		watch: {
-//			warningShow: function(n, o){
-//				if(n && n == true){
-//					this.$refs.warning.show = true;
-//					this.$store.state.account.exitStatus = true;
-//				}else{
-//					this.$refs.warning.show = false;
-//				}
-//			},
+			warningShow: function(n, o){
+				if(n && n == true){
+					this.$refs.warning.show = true;
+					this.$store.state.account.exitStatus = true;
+				}else{
+					this.$refs.warning.show = false;
+				}
+			},
 			exitStatus: function(n, o){
 				if(n && n == true){
 					localStorage.removeItem('tradeUser');
@@ -610,7 +612,6 @@
 					this.$store.state.market.stopLossTriggeredList = [];
 					this.$store.state.market.conditionList = [];
 					this.$store.state.market.triggerConditionList = [];
-					console.log(this.$store.state.market.CacheAccount.jCacheTotalAccount);
 					this.$store.state.market.CacheAccount.jCacheTotalAccount.TodayBalance = 0.0;
 					this.$store.state.market.CacheAccount.jCacheTotalAccount.TodayCanUse = 0.0;
 					this.$store.state.market.CacheAccount.jCacheTotalAccount.FloatingProfit = 0.0;
@@ -1098,6 +1099,7 @@
 			},
 			conditionConfirm: function(){
 				var miniTikeSize = this.orderTemplist[this.currentdetail.CommodityNo].MiniTikeSize;
+				var dotSize = this.orderTemplist[this.currentdetail.CommodityNo].DotSize;
 				var msg;
 				if(this.conditionShow == true){
 					if(this.conditionAdditionalPrice){
@@ -1108,7 +1110,8 @@
 						}
 						//判断价格与附加价格是否形成区间
 						var conditionAdditionalPrice = this.conditionAdditionalPrice - miniTikeSize;
-						var conditionAdditionalPrice00 = parseFloat(this.conditionAdditionalPrice) + miniTikeSize;
+						var conditionAdditionalPrice00 = Number(this.conditionAdditionalPrice) + Number(miniTikeSize);
+						conditionAdditionalPrice00 = conditionAdditionalPrice00.toFixed(dotSize);
 						switch (this.selectType){
 							case '0':
 								if(this.selectAdditionalType == '0' || this.selectAdditionalType == '2' || this.selectAdditionalType == '1' && conditionAdditionalPrice <= this.conditionPrice){
