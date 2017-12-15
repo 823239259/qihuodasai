@@ -33,6 +33,9 @@
 		computed: {
 			tradeConfig(){
 				return this.$store.state.market.tradeConfig;
+			},
+			warningShow(){
+				return this.$store.state.isshow.warningShow;
 			}
 		},
 		methods: {
@@ -49,6 +52,10 @@
 				}else if(this.pwd == ''){
 					layer.msg('请输入您的密码', {time: 1000});
 				}else{
+					if(this.warningShow == true){
+						layer.msg('交易连接失败', {time: 2000});
+						return;
+					}
 					if(this.tradeConfig.url_real == '' || this.tradeConfig.url_real == undefined) return;		
 					this.$store.state.market.tradeConfig.username = this.username;
 					this.$store.state.market.tradeConfig.password = Base64.encode(this.pwd);
