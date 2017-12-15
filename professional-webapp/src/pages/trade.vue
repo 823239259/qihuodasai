@@ -540,7 +540,6 @@
 				return this.$store.state.market.currentdetail.DotSize;
 			},
 			jCacheTotalAccount(){
-				console.log(this.$store.state.market.CacheAccount.jCacheTotalAccount);
 				return this.$store.state.market.CacheAccount.jCacheTotalAccount;
 			},
 			forceLine(){
@@ -620,6 +619,7 @@
 					this.$store.state.market.stopLossTriggeredList = [];
 					this.$store.state.market.conditionList = [];
 					this.$store.state.market.triggerConditionList = [];
+					this.$store.state.market.CacheHoldFloatingProfit.jHoldFloatingProfit = {};
 //					this.$store.state.market.CacheAccount.jCacheTotalAccount.TodayBalance = 0.0;
 //					this.$store.state.market.CacheAccount.jCacheTotalAccount.TodayCanUse = 0.0;
 //					this.$store.state.market.CacheAccount.jCacheTotalAccount.FloatingProfit = 0.0;

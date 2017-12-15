@@ -1943,7 +1943,6 @@ export default new Vuex.Store({
 						var floatingProfit=tmpFloatingProfit+':'+context.state.market.orderTemplist[parameters.CommodityNo].CurrencyNo;
 						currentPositionListContObj.total = floatingProfit;
 						context.state.market.positionListCont.splice(currentPositionListContObjIndex,1,currentPositionListContObj);
-						context.state.market.CacheHoldFloatingProfit.jHoldFloatingProfit = {};
 						context.state.market.CacheHoldFloatingProfit.jHoldFloatingProfit[parameters.CommodityNo+parameters.ContractNo] 
 							= {"currencyNo" : context.state.market.orderTemplist[parameters.CommodityNo].CurrencyNo, "floatingProfit" : tmpFloatingProfit};
 						//更新账户资金盈亏
@@ -2041,10 +2040,12 @@ export default new Vuex.Store({
 						context.state.isshow.warningShow = true;
 						sessionStorage.tradeStatus = false;
 					}else{
-						layer.msg('交易连接失败', {time: 1500});
-						localStorage.removeItem('tradeUser');
-						context.state.market.tradeConfig.username = '';
-						context.state.market.tradeConfig.password = '';
+						if(sessionStorage.tradeStatus == 'false'){
+							layer.msg('交易连接失败', {time: 1500});
+							localStorage.removeItem('tradeUser');
+							context.state.market.tradeConfig.username = '';
+							context.state.market.tradeConfig.password = '';
+						}
 					}
 					
 				};
