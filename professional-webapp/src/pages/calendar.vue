@@ -308,7 +308,6 @@
 				pro.fetch('post','/crawler/getCrawlerCalendar',data,"").then((res)=>{
 					if(res.success == true && res.code == ''){
 						this.list = res.data.data;
-						console.log(this.list)
 					}
 				}).catch((err)=>{
 					if(err.success ==false ){
