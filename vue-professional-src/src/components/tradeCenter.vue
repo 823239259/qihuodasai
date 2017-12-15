@@ -625,6 +625,10 @@
 						this.$children[7].isShow = true;
 						this.$children[8].isShow = true;
 						this.msg = '手数不能为0或空';
+					}else if(parseFloat(this.tradePrices) <= 0){
+						this.$children[7].isShow = true;
+						this.$children[8].isShow = true;
+						this.msg = '限价价格格式错误';
 					}else{
 						this.$children[1].isshow = true;
 						var buildIndex=0;
@@ -683,6 +687,10 @@
 						this.$children[7].isShow = true;
 						this.$children[8].isShow = true;
 						this.msg = '手数不能为0或空';
+					}else if(parseFloat(this.tradePrices) <= 0){
+						this.$children[7].isShow = true;
+						this.$children[8].isShow = true;
+						this.msg = '限价价格格式错误';
 					}else{
 						this.$children[1].isshow = true;
 						var buildIndex=0;
