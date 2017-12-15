@@ -112,12 +112,13 @@
 			},
 			getInfoList:function(){
 				var data ={
-					pageIndex:this.counting,
+					pageIndex:0,
 					size:20,
 					minTime:this.getNowFormatDate(),
 					maxTime:this.getNowFormatDate1(),
 					keyword:''
 				}
+				console.log(data)
 				pro.fetch('post','/crawler/getCrawler',data,{}).then((res)=>{
 					if(res.success == true){
 						if(res.code == ''){
