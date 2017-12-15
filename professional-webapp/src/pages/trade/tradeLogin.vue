@@ -34,6 +34,17 @@
 			tradeConfig(){
 				return this.$store.state.market.tradeConfig;
 			},
+			loginStatus(){
+				return this.$store.state.account.loginStatus;
+			},
+		},
+		watch: {
+			loginStatus: function(n, o){
+				if(n == true){
+					var userData = {'username': this.username, 'password': Base64.encode(this.pwd), 'fid': fid};  
+					localStorage.tradeUser = JSON.stringify(userData);
+				}
+			}
 		},
 		methods: {
 			...mapActions([

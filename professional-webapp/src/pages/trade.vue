@@ -1317,10 +1317,6 @@
 				}
 			},
 			toTradeLogin: function(){
-				if(this.tradeStatus == false){
-					layer.msg('交易连接失败', {time: 2000});
-					return;
-				}
 				if(this.userInfo){
 					//判断显示快捷登录or账号登录
 					var headers = {

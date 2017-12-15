@@ -2033,8 +2033,10 @@ export default new Vuex.Store({
 					}
 				};
 				context.state.tradeSocket.onclose = function(evt) {
+					layer.msg('交易连接失败', {time: 1500});
 					console.log('tradeClose:');
 					clearInterval(context.state.market.HeartBeatTiming);
+					context.state.account.loginStatus = false;
 					if(context.state.account.loginStatus == true){
 //						if(context.state.isshow.warningShow == true) return;
 						context.state.isshow.warningType = 2;
