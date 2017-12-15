@@ -1020,6 +1020,7 @@ export default new Vuex.Store({
 					//回复
 					if(parameters.Code == 0){
 						layer.msg('交易服务器连接成功',{time: 1000});
+						sessionStorage.tradeStatus = true;
 						context.state.account.loginStatus = true;
 						context.state.account.exitStatus = false;
 						//设置强平线
@@ -2073,6 +2074,7 @@ export default new Vuex.Store({
 				context.state.wsjsondata = JSON.parse(evt.data);
 				if(context.state.wsjsondata.Method == "OnRspLogin") { // 登录行情服务器
 					layer.msg('行情服务器连接成功',{time: 1000});
+					sessionStorage.quoteStatus = true;
 					// 查询服务器支持品种用于订阅
 					context.state.quoteSocket.send('{"Method":"QryCommodity","Parameters":{' + null + '}}');
 				} else if(context.state.wsjsondata.Method == "OnRspQryCommodity") { // 行情服务器支持的品种
