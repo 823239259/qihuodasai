@@ -37,25 +37,12 @@
 			return{
 				show: false,
 				accountList: [],
-				user: '',
-				pwd: '',
 			}
 		},
 		computed: {
 			tradeConfig(){
 				return this.$store.state.market.tradeConfig;
 			},
-			loginStatus(){
-				return this.$store.state.account.loginStatus;
-			},
-		},
-		watch: {
-			loginStatus: function(n, o){
-				if(n == true){
-					var userData = {'username': this.user, 'password': Base64.encode(this.pwd), 'fid': fid};  
-					localStorage.tradeUser = JSON.stringify(userData);
-				}
-			}
 		},
 		methods: {
 			...mapActions([
@@ -75,10 +62,10 @@
 			},
 			loginEvent: function(user, pwd, fid){
 				if(this.tradeConfig.url_real == '' || this.tradeConfig.url_real == undefined) return;
-				this.user = user;
-				this.pwd = pwd;
 				this.$store.state.market.tradeConfig.username = user;
 				this.$store.state.market.tradeConfig.password = Base64.encode(pwd);
+				var userData = {'username': user, 'password': Base64.encode(pwd), 'fid': fid};  
+				localStorage.tradeUser = JSON.stringify(userData);
 				this.initTrade();
 				setTimeout(function(){
 					this.show = false;
