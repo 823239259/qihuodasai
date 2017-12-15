@@ -163,6 +163,9 @@
 			warningType(){
 				return this.$store.state.isshow.warningType;
 			},
+			quoteStatus(){
+				if(sessionStorage.quoteStatus) return JSON.parse(sessionStorage.quoteStatus);
+			},
 			tradeStatus(){
 				if(sessionStorage.tradeStatus) return JSON.parse(sessionStorage.tradeStatus);
 			},
@@ -385,7 +388,10 @@
 			if(localStorage.currentNav != undefined){
 				this.$store.state.account.currentNav = localStorage.currentNav;
 			}
-			//根据session判断交易是否已连接
+			//根据session判断行情交易是否已连接
+			if(this.quoteStatus == false){
+				this.iconShow = false;
+			}
 			if(this.tradeStatus == false){
 				this.iconTradeShow = false;
 			}

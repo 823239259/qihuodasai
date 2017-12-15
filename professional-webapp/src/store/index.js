@@ -2063,6 +2063,7 @@ export default new Vuex.Store({
 				console.log('close');
 				context.state.isshow.warningType = 1;
 				context.state.isshow.warningShow = true;
+				sessionStorage.quoteStatus = false;
 			};
 			context.state.quoteSocket.onerror = function(evt) {
 //				console.log('error');
