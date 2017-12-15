@@ -1210,9 +1210,10 @@
 				}else{
 					this.conditionTime = this.getNowFormatDate() + ' ' + $("#condition_time").val();
 					if(this.timeAddtionalPrice){
+						console.log(this.timeAddtionalPrice);
 						var d2 = this.timeAddtionalPrice % miniTikeSize;
 						if(d2 >= 0.000000001 && parseFloat(miniTikeSize-d2) >= 0.0000000001){
-							layer.msg('输入附加价格不符合最小变动价，最小变动价为：' + miniTikeSize, {time: 1000});
+							layer.msg('输入附加价格不符合最小变动价，最小变动价为：' + miniTikeSize, {time: 1000});return;
 						}
 					}
 					if(this.defaultNum == '' || this.defaultNum <= 0 || this.defaultNum == undefined){
@@ -1317,10 +1318,6 @@
 				}
 			},
 			toTradeLogin: function(){
-				if(this.tradeStatus == false){
-					layer.msg('交易连接失败', {time: 2000});
-					return;
-				}
 				if(this.userInfo){
 					//判断显示快捷登录or账号登录
 					var headers = {

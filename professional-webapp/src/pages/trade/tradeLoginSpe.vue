@@ -61,7 +61,7 @@
 				$("#nav li").eq(3).addClass("current").siblings().removeClass("current");
 			},
 			loginEvent: function(user, pwd, fid){
-				if(this.tradeConfig.url_real == '' || this.tradeConfig.url_real == undefined) return;	
+				if(this.tradeConfig.url_real == '' || this.tradeConfig.url_real == undefined) return;
 				this.$store.state.market.tradeConfig.username = user;
 				this.$store.state.market.tradeConfig.password = Base64.encode(pwd);
 				var userData = {'username': user, 'password': Base64.encode(pwd), 'fid': fid};  
@@ -74,7 +74,7 @@
 			getTradeAccount: function(){
 				if(this.userInfo){
 					var headers = {
-						token:  this.userInfo.token,
+						token: this.userInfo.token,
 						secret: this.userInfo.secret,
 						version: ''
 					};

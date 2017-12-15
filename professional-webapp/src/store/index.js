@@ -2034,6 +2034,11 @@ export default new Vuex.Store({
 				};
 				context.state.tradeSocket.onclose = function(evt) {
 					console.log('tradeClose:');
+					layer.msg('交易连接失败', {time: 1500});
+					localStorage.removeItem('tradeUser');
+					context.state.market.tradeConfig.username = '';
+					context.state.market.tradeConfig.password = '';
+					context.state.account.loginStatus = false;
 					clearInterval(context.state.market.HeartBeatTiming);
 					if(context.state.account.loginStatus == true){
 //						if(context.state.isshow.warningShow == true) return;
