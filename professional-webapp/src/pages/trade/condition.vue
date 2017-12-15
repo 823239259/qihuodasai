@@ -392,6 +392,7 @@
 			},
 			editConfirm: function(){
 				var miniTikeSize = this.orderTemplist[this.currentConditionOrder.CommodityNo].MiniTikeSize;
+				var dotSize = this.orderTemplist[this.currentConditionOrder.CommodityNo].DotSize;
 				var msg, b;
 				if(this.conditionType == 0){
 					if(this.additionPrice){
@@ -402,27 +403,45 @@
 						}
 						//判断价格与附加价格是否形成区间
 						var additionPrice = this.additionPrice - miniTikeSize;
+						var additionPrice00 = Number(this.additionPrice) + Number(miniTikeSize);
+						additionPrice00 = additionPrice00.toFixed(dotSize);
 						switch (this.priceType){
 							case '0':
-								if(this.additionalPriceType == '0' || this.additionalPriceType == '2' || additionPrice <= this.conditionPrice){
+								if(this.additionalPriceType == '0' || this.additionalPriceType == '2' || this.additionalPriceType == '1' && additionPrice <= this.conditionPrice){
+									layer.msg('输入的条件不能形成区间', {time: 1000});
+									return;
+								}
+								if(this.additionalPriceType == '3' && additionPrice < this.conditionPrice){
+									layer.msg('输入的条件不能形成区间', {time: 1000});
+									return;
+								}
+								break;
+							case '2':
+								if(this.additionalPriceType == '0' || this.additionalPriceType == '2' || this.additionalPriceType == '1' &&  additionPrice < this.conditionPrice){
+									layer.msg('输入的条件不能形成区间', {time: 1000});
+									return;
+								}
+								if(this.additionalPriceType == '3' && this.additionPrice < this.conditionPrice){
 									layer.msg('输入的条件不能形成区间', {time: 1000});
 									return;
 								}
 								break;
 							case '1':
-								if(this.additionalPriceType == '0' || this.additionalPriceType == '2' || additionPrice <= this.conditionPrice){
+								if(this.additionalPriceType == '1' || this.additionalPriceType == '3' ||  this.additionalPriceType == '0' &&  additionPrice00 >= this.conditionPrice){
+									layer.msg('输入的条件不能形成区间', {time: 1000});
+									return;
+								}
+								if(this.additionalPriceType == '2' && additionPrice00 > this.conditionPrice){
 									layer.msg('输入的条件不能形成区间', {time: 1000});
 									return;
 								}
 								break;
-							case '1':
-								if(this.additionalPriceType == '1' || this.additionalPriceType == '3' || additionPrice >= this.conditionPrice){
+							case '3':
+								if(this.additionalPriceType == '1' || this.additionalPriceType == '3' || this.additionalPriceType == '0' &&   additionPrice00 > this.conditionPrice){
 									layer.msg('输入的条件不能形成区间', {time: 1000});
 									return;
 								}
-								break;
-							case '1':
-								if(this.additionalPriceType == '1' || this.additionalPriceType == '3' || additionPrice >= this.conditionPrice){
+								if(this.additionalPriceType == '2' && this.additionPrice > this.conditionPrice){
 									layer.msg('输入的条件不能形成区间', {time: 1000});
 									return;
 								}

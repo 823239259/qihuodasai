@@ -79,7 +79,7 @@
 						this.statusShow = false;
 						setTimeout(function(){
 							this.show = false;
-							this.$router.push({path: '/index'});
+//							this.$router.push({path: '/index'});
 							this.$store.state.account.isRefresh = 1;
 						}.bind(this), 2000);
 					}
