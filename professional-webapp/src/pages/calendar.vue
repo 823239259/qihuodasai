@@ -257,7 +257,6 @@
 					this.showCountryAll = true;
 					this.NoCountryAll = false;
 					$(".cant>.ifont").html("&#xe634;").css("color","#a3aacc");
-					$(".cant>.ifont").addClass("i_show");
 					this.chooseCountryArr = '';
 					this.getInfoList(this.startTime,this.endTime,this.chooseCountryArr,this.importance);
 				}
@@ -303,6 +302,7 @@
 					country:country,
 					importance:importance
 				}
+				console.log(data);
 				pro.fetch('post','/crawler/getCrawlerCalendar',data,"").then((res)=>{
 					if(res.success == true && res.code == ''){
 						this.list = res.data.data;
