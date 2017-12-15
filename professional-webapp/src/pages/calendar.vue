@@ -302,7 +302,6 @@
 					country:country,
 					importance:importance
 				}
-				console.log(data);
 				pro.fetch('post','/crawler/getCrawlerCalendar',data,"").then((res)=>{
 					if(res.success == true && res.code == ''){
 						this.list = res.data.data;
