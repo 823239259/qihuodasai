@@ -2008,6 +2008,7 @@ export default new Vuex.Store({
 					if(context.state.isshow.warningShow == true) return;
 					context.state.isshow.warningType = 2;
 					context.state.isshow.warningShow = true;
+					sessionStorage.tradeStatus = false;
 					console.log('交易服务器断开，正在重连');
 				}else{
 					context.state.market.HeartBeat.oldHeartBeatTimestamp = context.state.market.HeartBeat.lastHeartBeatTimestamp; // 更新上次心跳时间
@@ -2037,6 +2038,7 @@ export default new Vuex.Store({
 //						if(context.state.isshow.warningShow == true) return;
 						context.state.isshow.warningType = 2;
 						context.state.isshow.warningShow = true;
+						sessionStorage.tradeStatus = false;
 					}else{
 						return;
 					}

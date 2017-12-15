@@ -573,9 +573,9 @@
 			warningShow(){
 				return this.$store.state.isshow.warningShow;
 			},
-			isRefresh(){
-				return this.$store.state.account.isRefresh;
-			},
+			tradeStatus(){
+				if(sessionStorage.tradeStatus) return JSON.parse(sessionStorage.tradeStatus);
+			}
 		},
 		filters:{
 			fixNumTwo: function(num){
@@ -587,8 +587,7 @@
 		},
 		watch: {
 			warningShow: function(n, o){
-				console.log(n);
-				if(n && n == true){
+				if(n == true){
 					this.$refs.warning.show = true;
 					localStorage.removeItem('tradeUser');
 					this.$store.state.market.tradeConfig.username = '';
@@ -597,20 +596,10 @@
 					this.tradeLoginShow = true;
 					this.tradeDetailsShow = false;
 					this.$store.state.market.chartHeight = this.h - 50 - 30 - 45;
-				}else{
-					this.$refs.warning.show = false;
-				}
-			},
-			isRefresh: function(n, o){
-				if(n == 1){
-					window.location.reload();
-				}else if(n == ''){
-					this.$store.state.account.isRefresh = '';
 				}
 			},
 			exitStatus: function(n, o){
 				if(n && n == true){
-					console.log(111);
 					localStorage.removeItem('tradeUser');
 					this.$store.state.market.tradeConfig.username = '';
 					this.$store.state.market.tradeConfig.password = '';
@@ -1328,6 +1317,10 @@
 				}
 			},
 			toTradeLogin: function(){
+				if(this.tradeStatus == false){
+					layer.msg('交易连接失败', {time: 2000});
+					return;
+				}
 				if(this.userInfo){
 					//判断显示快捷登录or账号登录
 					var headers = {

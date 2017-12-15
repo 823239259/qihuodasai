@@ -163,6 +163,9 @@
 			warningType(){
 				return this.$store.state.isshow.warningType;
 			},
+			tradeStatus(){
+				if(sessionStorage.tradeStatus) return JSON.parse(sessionStorage.tradeStatus);
+			},
 			userName(){
 				if(this.$store.state.account.userName){
 					var user = this.$store.state.account.userName;
@@ -179,6 +182,11 @@
 			},
 		},
 		watch: {
+			tradeStatus: function(n, o){
+				if(n == false){
+					this.iconTradeShow = false;
+				}
+			},
 			warningShow: function(n, o){
 				if(n && n == true){
 					this.iconTradeShow = false;
@@ -376,6 +384,10 @@
 			//导航根据session添加选中样式
 			if(localStorage.currentNav != undefined){
 				this.$store.state.account.currentNav = localStorage.currentNav;
+			}
+			//根据session判断交易是否已连接
+			if(this.tradeStatus == false){
+				this.iconTradeShow = false;
 			}
 		},
 		activated: function(){
