@@ -248,6 +248,8 @@
 				this.getInfoList(this.startTime,this.endTime,this.chooseCountryArr,this.importance);
 			},
 			countryAll:function(){
+					$(".cant>.ifont").html("&#xe634;").css("color","#a3aacc");
+					$(".cant>.ifont").removeClass("i_show");
 				if(this.showCountryAll == true){
 					this.showCountryAll = false;
 					this.NoCountryAll = true;
@@ -256,8 +258,6 @@
 				}else{
 					this.showCountryAll = true;
 					this.NoCountryAll = false;
-					$(".cant>.ifont").html("&#xe634;").css("color","#a3aacc");
-					$(".cant>.ifont").addClass("i_show");
 					this.chooseCountryArr = '';
 					this.getInfoList(this.startTime,this.endTime,this.chooseCountryArr,this.importance);
 				}
