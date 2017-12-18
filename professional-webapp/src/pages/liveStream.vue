@@ -6,7 +6,7 @@
 				<li>({{showNowDay}}&nbsp;{{showNowTime}})</li>
 			</ul>
 			<ul>
-				<li><i class="ifont ifont_click" v-on:click="autoRefresh">&#xe600;</i>{{time}}</li>
+				<li><i class="ifont ifont_click" v-on:click="autoRefresh">&#xe634;</i>{{time}}</li>
 				<li>秒后自动刷新</li>
 				<li><i class="ifont ifont_refresh" v-on:click="handRefresh">&#xe6d1;</i></li>
 			</ul>
@@ -92,9 +92,13 @@
 			},
 			//自动刷新
 			autoRefresh:function(e){
-				if(this.colorState == false){
-					this.colorState=true;
-					$(e.currentTarget).css("color","#ffd400");
+				var juage = $(e.currentTarget).hasClass("ifont_click1");
+				if(juage){
+					$(e.currentTarget).removeClass("ifont_click1").html("&#xe634;").css("color","#a3aacc");
+					this.time = 60;
+					clearInterval(this.timing);
+				}else{
+					$(e.currentTarget).addClass("ifont_click1").html("&#xe600;").css("color","#ffd400");
 					this.timing = setInterval(function(){
 						this.time--;
 						if(this.time <= 0){
@@ -103,11 +107,6 @@
 							this.getInfoList();
 						}
 					}.bind(this),1000);
-				}else if(this.colorState == true){
-					this.colorState=false;
-					$(e.currentTarget).css("color","#a3aacc");
-					this.time = 60;
-					clearInterval(this.timing);
 				}
 			},
 			getInfoList:function(){
@@ -118,7 +117,6 @@
 					maxTime:this.getNowFormatDate1(),
 					keyword:''
 				}
-				console.log(data)
 				pro.fetch('post','/crawler/getCrawler',data,{}).then((res)=>{
 					if(res.success == true){
 						if(res.code == ''){
