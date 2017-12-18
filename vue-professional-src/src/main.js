@@ -49,7 +49,7 @@ new Vue({
 		if(param != '' && param != undefined){
 			param = param.split('=');
 			if(param[0] == 'channel'){
-				this.$store.state.account.packChannel = param[1];
+				this.$store.state.account.packChannel = param[1].slice(0, -2);
 			}
 		}
 	}
