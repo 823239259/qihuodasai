@@ -43,24 +43,14 @@ new Vue({
 //			this.$store.state.isshow.guideshow = false;
 //		}
 
-		//		http://154w3c3370.iok.la:16433/vs-api
-//		this.$http.post(
-//			'/nat/vs-api/crawler/getCrawler', {
-//				emulateJSON: true
-//			}, {
-//				params: {
-//					pageIndex: 1,
-//					size: 20,
-//					minTime: '2017-07-10',
-//					maxTime: '2017-07-21'
-//				},
-//				timeout: 5000
-//			}
-//
-//		).then(function(e) {
-//			console.log(e.body);
-//		}, function(e) {
-//			console.log(e);
-//		});
+		//取URL地址
+		var _url = window.location.href;
+		var param = _url.split('?')[1];
+		if(param != '' && param != undefined){
+			param = param.split('=');
+			if(param[0] == 'channel'){
+				this.$store.state.account.packChannel = param[1];
+			}
+		}
 	}
 })

@@ -177,6 +177,7 @@
 		},
 		mounted: function(){
 			//页面高度计算
+			console.log(this.packChannel);
 			var h = window.screen.height - 20 - $("#topbar").height();
 			$("#register").height(h);
 		},
