@@ -403,6 +403,7 @@
 						}
 						//判断价格与附加价格是否形成区间
 						var additionPrice = this.additionPrice - miniTikeSize;
+						additionPrice = additionPrice.toFixed(dotSize);
 						var additionPrice00 = Number(this.additionPrice) + Number(miniTikeSize);
 						additionPrice00 = additionPrice00.toFixed(dotSize);
 						switch (this.priceType){
