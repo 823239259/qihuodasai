@@ -411,7 +411,7 @@
 							switch(data.code) {
 								case '-1':
 									this.$children[0].isShow = true;
-									this.msg = '认证失败';
+									this.msg = '账号已变更，请重新重新登录';
 									break;
 								default:
 									break;
@@ -508,7 +508,7 @@
 						switch(data.code) {
 							case '-1':
 								this.$children[0].isShow = true;
-								this.msg = '认证失败';
+								this.msg = '账号已变更，请重新重新登录';
 								break;
 							default:
 								break;
@@ -546,7 +546,7 @@
 							switch (data.code){
 								case '-1':
 									this.$children[0].isShow = true;
-									this.msg = '认证失败';
+									this.msg = '账号已变更，请重新重新登录';
 									break;
 								case '2':
 									this.$children[0].isShow = true;
