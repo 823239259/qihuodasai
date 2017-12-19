@@ -1118,6 +1118,7 @@
 						}
 						//判断价格与附加价格是否形成区间
 						var conditionAdditionalPrice = this.conditionAdditionalPrice - miniTikeSize;
+						conditionAdditionalPrice = conditionAdditionalPrice.toFixed(dotSize);
 						var conditionAdditionalPrice00 = Number(this.conditionAdditionalPrice) + Number(miniTikeSize);
 						conditionAdditionalPrice00 = conditionAdditionalPrice00.toFixed(dotSize);
 						switch (this.selectType){
@@ -1361,7 +1362,8 @@
 						secret: this.userInfo.secret
 					}
 					var data = {
-						id: fid
+						id: fid,
+						businessType: 8
 					}
 					pro.fetch("post", "/user/ftrade/endtrade", data, headers).then((res)=>{
 						if(res.success == true){

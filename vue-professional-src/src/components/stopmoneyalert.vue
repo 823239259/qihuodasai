@@ -184,7 +184,7 @@
 						this.percentLoss = '0.00';
 						return;
 					}
-					var openAvgPrice = JSON.parse(this.val).OpenAvgPrice;
+					var openAvgPrice = JSON.parse(this.val).HoldAvgPrice;
 //					this.inputPrice = openAvgPrice.toFixed(this.orderTemplistDotSize);
 					if(n.toString().split('.')[1] && n.toString().split('.')[1].length > this.orderTemplistDotSize){
 						this.inputPrice = openAvgPrice;
@@ -194,7 +194,7 @@
 			},
 			zhiYinInputPrice: function(n, o){
 				if(n != undefined){
-					var openAvgPrice = JSON.parse(this.val).OpenAvgPrice;
+					var openAvgPrice = JSON.parse(this.val).HoldAvgPrice;
 					if(n.toString().split('.')[1] && n.toString().split('.')[1].length > this.orderTemplistDotSize){
 						this.zhiYinInputPrice = openAvgPrice;
 					}

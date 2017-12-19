@@ -34,7 +34,7 @@
 				<div class="fl">
 					<ul>
 						<li class="fontred" :class="{red: detail.LastQuotation.LastPrice - detail.LastQuotation.PreSettlePrice > 0,green: detail.LastQuotation.LastPrice - detail.LastQuotation.PreSettlePrice < 0}">
-							{{detail.LastQuotation.LastPrice | fixNum2(detail.DotSize)}}
+							{{lastPrice}}
 						</li>
 						<li class="fontred">
 							<span :class="{red: detail.LastQuotation.ChangeValue > 0,green: detail.LastQuotation.ChangeValue < 0}">{{detail.LastQuotation.ChangeValue | fixNum2(detail.DotSize)}}</span>
@@ -107,7 +107,8 @@
 				numReg: /^[0-9]*$/,
 				buyText: {},
 				promptMsg: '',
-				confirmName: ''
+				confirmName: '',
+				lastPrice: '',
 			}
 		},
 		computed:{
@@ -133,8 +134,11 @@
 			templateList(){
 				return this.$store.state.market.templateList;
 			},
-			detail(){
-				return this.$store.state.market.currentdetail
+			orderTemplist(){
+				return	this.$store.state.market.orderTemplist;
+			},
+			parameters(){
+				return this.$store.state.market.Parameters;
 			},
 			tradeSocket() {
 				return this.$store.state.tradeSocket;
@@ -167,6 +171,16 @@
 			},
 		},
 		watch:{
+			parameters: function(n, o){
+				if(this.detail != undefined){
+					n.forEach(function(o, i){
+						if(this.detail.CommodityNo == o.CommodityNo){
+							this.lastPrice = this.orderTemplist[this.detail.CommodityNo].LastQuotation.LastPrice;
+							this.lastPrice = parseFloat(this.lastPrice).toFixed(this.orderTemplist[this.detail.CommodityNo].DotSize);
+						}
+					}.bind(this));
+				}
+			},
 			layer: function(n, o){
 				setTimeout(function(){
 					this.$children[4].isShow = true;
@@ -260,7 +274,9 @@
 				}
 			}
 		},
-		mounted: function(){}
+		mounted: function(){
+			
+		}
 	}
 </script>
 
