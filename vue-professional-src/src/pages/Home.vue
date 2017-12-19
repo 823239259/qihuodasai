@@ -249,7 +249,7 @@
 		},
 		updated: function(){
 			//判断网络
-			pro.netIsconnected(function(){
+			pro.netIsconnected(function(){    //手机
 				this.isconnected = true;
 				setTimeout(function(){
 					this.isconnected = false;
@@ -262,6 +262,25 @@
 				//刷新页面
 				window.location.reload();
 			}.bind(this));
+			
+			var EventUtil = { 
+				addHandler: function (element, type, handler) { 
+					if (element.addEventListener) { 
+						element.addEventListener(type, handler, false); 
+					}else if(element.attachEvent) { 
+						element.attachEvent("on" + type, handler); 
+					}else{ 
+						element["on" + type] = handler; 
+					} 
+				} 
+			}; 
+			EventUtil.addHandler(window, "online", function () { 
+				window.location.reload();
+			}); 
+			EventUtil.addHandler(window, "offline", function () { 
+				//alert("Offline"); 
+				console.log('网络已断开');
+			}); 
 		},
 		activated:function(){
 			this.$store.state.market.currentNo='';
