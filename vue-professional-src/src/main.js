@@ -2,7 +2,8 @@ import Vue from 'vue'
 import navbar from './components/NavBar.vue'
 import router from './router'
 import store from './store'
-import VueResource from 'vue-resource';
+import VueResource from 'vue-resource'
+import tipsDialog from './components/tipsDialog.vue'
 Vue.use(VueResource);
 
 Vue.config.productionTip = false
@@ -18,15 +19,36 @@ new Vue({
 			</keep-alive>
 				<router-view v-if="$route.meta.notKeepAlive"></router-view>
      		<navbar v-show="navbarshow"></navbar>
-     	</div>	
+     		<tipsDialog :msg="msgTips" ref="dialog"></tipsDialog>
+     	</div>
   `,
-	components: {navbar},
+  	data(){
+  		return{
+  			msg: '',
+  		}
+  	},
+	components: {navbar, tipsDialog},
 	computed: {
 		navbarshow() {
 			return this.$store.state.isshow.navBarShow
 		},
 		islogin() {
 			return this.$store.state.account.islogin
+		},
+		msgTips: function(){
+			return this.msg;
+		},
+		errorMsg(){
+			return this.$store.state.market.errorMsg;
+		}
+	},
+	watch: {
+		errorMsg: function(n, o){
+//			console.log(n);
+			setTimeout(function(){
+				this.$refs.dialog.isShow = true;
+				this.msg = n.slice(0,-1);
+			}.bind(this), 1000);
 		}
 	},
 	mounted: function() {

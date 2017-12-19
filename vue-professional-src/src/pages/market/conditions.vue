@@ -99,8 +99,8 @@
 				addConditionsShow: true,
 				tabList: [{nav:'未触发列表'},{nav:'已触发列表'}],
 				orderListId:'',
-//				noListCont:[],
-//				yesListCont:[],
+				noListCont:[],
+				yesListCont:[],
 				orderStatus: '',
 				statusName: '暂停',
 				orderType: '',
@@ -122,12 +122,12 @@
 			triggerConditionList(){
 				return this.$store.state.market.triggerConditionList;
 			},
-			noListCont(){
-				return this.$store.state.market.noListCont;
-			},
-			yesListCont(){
-				return this.$store.state.market.yesListCont;
-			},
+//			noListCont(){
+//				return this.$store.state.market.noListCont;
+//			},
+//			yesListCont(){
+//				return this.$store.state.market.yesListCont;
+//			},
 			tradeSocket(){
 				return this.$store.state.tradeSocket;
 			},
@@ -152,6 +152,12 @@
 				this.$refs.dialog.isShow = true;
 				this.msg = n.slice(0,-1);
 			},
+			conditionList: function(n, o){
+				this.regroupConditionList();
+			},
+			triggerConditionList: function(n, o){
+				this.regroupTriggerConditionList();
+			},
 		},
 		methods: {
 			modify:function(){
@@ -167,7 +173,7 @@
 					}else{
 						this.$refs.ifalertPrice.isshow = true;
 					}
-					this.noListCont.forEach(function(e,i){
+					this.conditionList.forEach(function(e,i){
 						if(this.orderListId == e.ConditionNo){
 							this.sendMsg = e;
 							this.$store.state.market.noObj = e;
@@ -319,6 +325,7 @@
 				if(this.$refs.ifalert.isshow == false) this.$refs.ifalert.isshow = true;
 			},
 			regroupConditionList:function(){
+				this.noListCont = [];
 				this.conditionList.forEach(function(e,i){
 					let b={};
 					b.AB_BuyPoint = e.AB_BuyPoint;
@@ -483,6 +490,7 @@
 				}.bind(this));
 			},
 			regroupTriggerConditionList:function(){
+				this.yesListCont = [];
 				this.triggerConditionList.forEach(function(e,i){
 					let b={};
 					b.AB_BuyPoint = e.AB_BuyPoint;

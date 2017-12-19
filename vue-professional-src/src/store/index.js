@@ -148,6 +148,7 @@ var market = {
 		openChangealertCurrentObj:null,
 		
 		layer:null,
+		errorMsg: '',
 		
 		queryHisList:[],
 		
@@ -181,10 +182,10 @@ var market = {
 		conditionList:[],//条件单未触发列表
 		conditionTriggeredList:[],//条件单已触发列表
 		noObj:'',
-		noListCont:[],
+//		noListCont:[],
 		
 		triggerConditionList:[],
-		yesListCont:[],
+//		yesListCont:[],
 		
 		
 		//选择K线时候的值
@@ -1381,7 +1382,9 @@ export default new Vuex.Store({
 						context.state.market.layer='登出成功'+Math.floor(Math.random()*10);
 					}else{
 //						console.log('登出失败');
-						context.state.market.layer=parameters.Message+Math.floor(Math.random()*10);
+						context.state.market.layer = parameters.Message+Math.floor(Math.random()*10);
+						context.state.market.errorMsg = parameters.Message + Math.floor(Math.random()*10);
+						localStorage.removeItem('tradeUser');
 					}
 					break;
 				case 'OnRspQryHoldTotal': //查询持仓合计回复
@@ -1706,14 +1709,14 @@ export default new Vuex.Store({
 							})();
 							b.term = '当日有效';
 							b.time = e0.InsertDateTime;	
-							context.state.market.conditionList.splice(i,1,parameters);
+							
 							if(parameters.Status<2){
-								context.state.market.noListCont.splice(i,1,b);
+//								context.state.market.noListCont.splice(i,1,b);
+								context.state.market.conditionList.splice(i,1,parameters);
 							}else{
-								context.state.market.noListCont.splice(i,1);
-								
+								context.state.market.conditionList.splice(i,1);
 								context.state.market.triggerConditionList.push(parameters);
-								context.state.market.yesListCont.push(b);
+//								context.state.market.yesListCont.push(b);
 							}
 							
 						}
@@ -1879,7 +1882,7 @@ export default new Vuex.Store({
 			b.time = e0.InsertDateTime;	
 			if(e0.Status<2){
 				context.state.market.conditionList.push(parameters);
-				context.state.market.noListCont.push(b);
+//				context.state.market.noListCont.push(b);
 			}else{
 				context.state.market.triggerConditionList.push(parameters);
 //				context.state.market.yesListCont.push(b);
