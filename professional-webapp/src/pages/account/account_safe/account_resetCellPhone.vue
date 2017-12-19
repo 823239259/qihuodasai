@@ -79,7 +79,7 @@
 					layer.msg('请输入新手机号码',{time:1000});
 				}else if(this.newCode == ''){
 					layer.msg('请输入新手机验证码',{time:1000});
-				}else if(phoneReg.test(this.newMobile) == false){
+				}else if(this.phoneReg.test(this.newMobile) == false){
 					layer.msg('手机格式错误',{time:1000});
 				}else {
 					var headers = {
@@ -93,9 +93,9 @@
 					}
 					pro.fetch("post",'/user/security/upphone',data,headers).then((res)=>{
 						if(res.success == true){
-							if(res.code == 1){
-								layer.msg('设置成功',{time:1000})
-								this.$router.path({path:'/account_safe'})
+							if(res.code == '1'){
+								layer.msg('设置成功',{time:1000});
+								this.$router.push({path: '/login'});
 							}
 						}
 					}).catch((err)=>{
@@ -135,7 +135,7 @@
 				pro.fetch("post","/user/security/send_sms",data,headers).then((res)=>{
 					console.log(res)
 					if(res.success == true){
-						if(res.code == 1){
+						if(res.code == '1'){
 							if($(e.target).hasClass('current')) return false;
 									//页面效果
 									$(e.target).addClass('current');
@@ -151,7 +151,6 @@
 						}
 					}
 				}).catch((err)=>{
-					console.log(err)
 					if(err.data.success == false){
 						switch (err.data.code){
 							case '2':
