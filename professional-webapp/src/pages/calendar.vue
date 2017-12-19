@@ -367,7 +367,7 @@
 				var lastWeekDay =  pro.getDate("y-m-d",(Date.parse(this.weekToday)/1000-7*24*60*60)*1000);
 				var lastWeekDay1 = pro.getDate("y-m-d",(Date.parse(lastWeekDay)/1000+24*60*60)*1000);
 				this.getDayList(lastWeekDay);
-				this.getInfoList(lastWeekDay,lastWeekDay1,'',this.importance);
+				this.getInfoList(lastWeekDay,lastWeekDay1,this.chooseCountryArr,this.importance);
 				this.startTime = lastWeekDay;
 				let aaaa =this.show_day.replace("年","-").replace("月","-").replace("日","");
 				this.show_day = pro.getDate("yy-mm-dd",(Date.parse(aaaa)/1000-7*24*60*60)*1000);
@@ -379,7 +379,7 @@
 				var nextWeekDay = pro.getDate("y-m-d",(Date.parse(this.weekToday)/1000+7*24*60*60)*1000);
 				var nextWeekDay1 = pro.getDate("y-m-d",(Date.parse(nextWeekDay)/1000+24*60*60)*1000);
 				this.getDayList(nextWeekDay);
-				this.getInfoList(nextWeekDay,nextWeekDay1,'',this.importance);
+				this.getInfoList(nextWeekDay,nextWeekDay1,this.chooseCountryArr,this.importance);
 				this.startTime = nextWeekDay;
 				let aaaa =this.show_day.replace("年","-").replace("月","-").replace("日","");
 				this.show_day = pro.getDate("yy-mm-dd",(Date.parse(aaaa)/1000+7*24*60*60)*1000);
