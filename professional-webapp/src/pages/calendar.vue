@@ -208,7 +208,8 @@
 				],
 				chooseCountryArr:'',
 				clickCountry:true,
-				weekToday:''
+				weekToday:'',
+				show_weekDay1:''
 			}
 		},
 		methods:{
@@ -360,6 +361,7 @@
 				this.getInfoList(this.startTime,this.endTime,'','');
 				this.show_day = pro.getDate("yy-mm-dd",Date.parse(this.weekDayList[index].day))
 				this.show_weekDay = this.weekDayList[index].weekday;
+				this.show_weekDay1 = this.show_weekDay;
 			},
 			lastWeek:function(){
 				var lastWeekDay =  pro.getDate("y-m-d",(Date.parse(this.weekToday)/1000-7*24*60*60)*1000);
@@ -367,6 +369,11 @@
 				this.getDayList(lastWeekDay);
 				this.getInfoList(lastWeekDay,lastWeekDay1,'','');
 				this.startTime = lastWeekDay;
+				let aaaa =this.show_day.replace("年","-").replace("月","-").replace("日","");
+				this.show_day = pro.getDate("yy-mm-dd",(Date.parse(aaaa)/1000-7*24*60*60)*1000);
+				if(this.show_weekDay1 != ''){
+					this.show_weekDay = this.show_weekDay1;
+				}
 			},
 			nextWeek:function(){
 				var nextWeekDay = pro.getDate("y-m-d",(Date.parse(this.weekToday)/1000+7*24*60*60)*1000);
@@ -374,6 +381,11 @@
 				this.getDayList(nextWeekDay);
 				this.getInfoList(nextWeekDay,nextWeekDay1,'','');
 				this.startTime = nextWeekDay;
+				let aaaa =this.show_day.replace("年","-").replace("月","-").replace("日","");
+				this.show_day = pro.getDate("yy-mm-dd",(Date.parse(aaaa)/1000+7*24*60*60)*1000);
+				if(this.show_weekDay1 != ''){
+					this.show_weekDay = this.show_weekDay1;
+				}
 			}
 		},
 		mounted:function(){
