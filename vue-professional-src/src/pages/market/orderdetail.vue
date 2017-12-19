@@ -122,9 +122,15 @@
 			},
 			jshow(){
 				return this.$store.state.isshow.bottomshow;
+			},
+			errorMsg(){
+				return this.$store.state.market.errorMsg;
 			}
 		},
 		watch: {
+			errorMsg: function(n, o){
+				this.$router.push({path: '/index', query: {isBack: 1}});
+			},
 			layerOnRtnOrder: function(n, o){
 				this.$children[0].isShow = true;
 				this.msg = n.slice(0, -1);
