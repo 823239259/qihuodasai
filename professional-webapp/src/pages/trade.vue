@@ -1362,7 +1362,8 @@
 						secret: this.userInfo.secret
 					}
 					var data = {
-						id: fid
+						id: fid,
+						businessType: 8
 					}
 					pro.fetch("post", "/user/ftrade/endtrade", data, headers).then((res)=>{
 						if(res.success == true){
