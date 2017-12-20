@@ -1059,7 +1059,10 @@ export default new Vuex.Store({
 					}else{
 						console.log('登出失败');
 						layer.msg(parameters.Message, {time: 1000});
-						context.state.account.isBack = true;
+						context.state.account.loginStatus = false;
+						setTimeout(function(){
+							context.state.account.isBack = true;
+						}, 1000);
 					}
 					break;
 				case 'OnRspQryHoldTotal': //查询持仓合计回复
@@ -2035,7 +2038,6 @@ export default new Vuex.Store({
 					console.log('tradeClose:');
 					clearInterval(context.state.market.HeartBeatTiming);
 					if(context.state.account.loginStatus == true){
-//						if(context.state.isshow.warningShow == true) return;
 						context.state.isshow.warningType = 2;
 						context.state.isshow.warningShow = true;
 						sessionStorage.tradeStatus = false;
@@ -2047,7 +2049,6 @@ export default new Vuex.Store({
 							context.state.market.tradeConfig.password = '';
 						}
 					}
-					
 				};
 				context.state.tradeSocket.onerror = function(evt) {
 					console.log('tradeError');

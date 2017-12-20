@@ -585,18 +585,6 @@
 			}
 		},
 		watch: {
-			warningShow: function(n, o){
-				if(n == true){
-					this.$refs.warning.show = true;
-					localStorage.removeItem('tradeUser');
-					this.$store.state.market.tradeConfig.username = '';
-					this.$store.state.market.tradeConfig.password = '';
-					this.$store.state.account.loginStatus = false;
-					this.tradeLoginShow = true;
-					this.tradeDetailsShow = false;
-					this.$store.state.market.chartHeight = this.h - 50 - 30 - 45;
-				}
-			},
 			exitStatus: function(n, o){
 				if(n && n == true){
 					localStorage.removeItem('tradeUser');
@@ -639,6 +627,18 @@
 					localStorage.currentNav = 0;
 					this.$store.state.account.isRefresh = 1;
 					this.$store.state.account.isBack = false;
+				}
+			},
+			warningShow: function(n, o){
+				if(n == true){
+					this.$refs.warning.show = true;
+					localStorage.removeItem('tradeUser');
+					this.$store.state.market.tradeConfig.username = '';
+					this.$store.state.market.tradeConfig.password = '';
+					this.$store.state.account.loginStatus = false;
+					this.tradeLoginShow = true;
+					this.tradeDetailsShow = false;
+					this.$store.state.market.chartHeight = this.h - 50 - 30 - 45;
 				}
 			},
 			length: function(n, o){
