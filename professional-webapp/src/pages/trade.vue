@@ -1330,7 +1330,7 @@
 						if(res.success == true && res.code == 1){
 							if(res.data.length > 0){
 								this.$refs.tradeLoginSpe.show = true;
-								this.refs.tradeLoginSpe.accountList = res.data;
+//								this.refs.tradeLoginSpe.accountList = res.data;
 							}else{
 								this.$refs.tradeLogin.show = true;
 							}
