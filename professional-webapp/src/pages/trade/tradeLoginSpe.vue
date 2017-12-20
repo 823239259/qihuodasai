@@ -72,6 +72,7 @@
 				}.bind(this));
 			},
 			getTradeAccount: function(){
+				this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
 				if(this.userInfo){
 					var headers = {
 						token: this.userInfo.token,
@@ -93,15 +94,13 @@
 				}
 			}
 		},
-		mounted: function(){
+		beforeMount: function(){
 			//获取交易账户
 			this.getTradeAccount();
 		},
-		activated: function(){
-			//获取平台账户登录信息
-			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
+		mounted: function(){
 			//获取交易账户
-			this.getTradeAccount();
+//			this.getTradeAccount();
 		},
 	}
 </script>

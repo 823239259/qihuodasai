@@ -188,6 +188,8 @@
 			tradeStatus: function(n, o){
 				if(n == false){
 					this.iconTradeShow = false;
+				}else if(n == true){
+					this.iconTradeShow = true;
 				}
 			},
 			warningShow: function(n, o){
