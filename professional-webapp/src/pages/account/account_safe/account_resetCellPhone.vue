@@ -95,6 +95,9 @@
 						if(res.success == true){
 							if(res.code == '1'){
 								layer.msg('设置成功',{time:1000});
+								localStorage.removeItem('user');
+//								this.$store.state.account.currentNav = 0;
+//								localStorage.currentNav = 0;
 								this.$router.push({path: '/login'});
 							}
 						}

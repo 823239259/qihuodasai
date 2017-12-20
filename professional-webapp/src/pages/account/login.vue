@@ -136,8 +136,7 @@
 			},
 			close :function(){
 				this.$router.push({path:'/index'});
-				this.$store.state.account.currentNav = 0;
-				localStorage.currentNav = 0;
+				this.$store.state.account.isRefresh = 1;
 			}
 		}
 	}
