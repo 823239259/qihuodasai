@@ -102,12 +102,6 @@
 			//获取交易账户
 //			this.getTradeAccount();
 		},
-		activated: function(){
-			//获取平台账户登录信息
-//			this.userInfo = localStorage.user ? JSON.parse(localStorage.user) : '';
-			//获取交易账户
-//			this.getTradeAccount();
-		},
 	}
 </script>
 
