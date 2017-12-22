@@ -302,10 +302,12 @@
 					case 3:
 						this.$router.push({path: '/liveStream'});
 						this.$store.state.account.currentNav = 3;
+						localStorage.currentNav = 3;
 						break;
 					case 4:
 						this.$router.push({path: '/calendar'});
 						this.$store.state.account.currentNav = 4;
+						localStorage.currentNav = 4;
 						break;
 					case 5:
 						window.open('http://139.196.232.43/');
