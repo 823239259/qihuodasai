@@ -185,6 +185,13 @@
 			},
 		},
 		watch: {
+			quoteStatus: function(n, o){
+				if(n == true){
+					this.iconShow = true;
+				}else if(n == false){
+					this.iconShow = false;
+				}
+			},
 			tradeStatus: function(n, o){
 				if(n == false){
 					this.iconTradeShow = false;
