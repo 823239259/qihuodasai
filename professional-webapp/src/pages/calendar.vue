@@ -358,7 +358,7 @@
 				this.current = index;
 				this.startTime = this.weekDayList[index].day;
 				this.endTime = pro.getDate("y-m-d",(Date.parse(this.startTime)/1000+24*60*60)*1000);
-				this.getInfoList(this.startTime,this.endTime,'','');
+				this.getInfoList(this.startTime,this.endTime,this.chooseCountryArr,this.importance);
 				this.show_day = pro.getDate("yy-mm-dd",Date.parse(this.weekDayList[index].day))
 				this.show_weekDay = this.weekDayList[index].weekday;
 				this.show_weekDay1 = this.show_weekDay;
