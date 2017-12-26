@@ -98,9 +98,9 @@
 			//获取交易账户
 			this.getTradeAccount();
 		},
-		mounted: function(){
+		activated: function(){
 			//获取交易账户
-//			this.getTradeAccount();
+			this.getTradeAccount();
 		},
 	}
 </script>
