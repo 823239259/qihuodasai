@@ -572,7 +572,6 @@ mui.app_request('banner/list', {
 		"type": 9
 	},
 	function(result) {
-		console.log(JSON.stringify(result))
 		var bannerLen = result.data.bannerList == null ? 0 : result.data.bannerList.length;
 		if(bannerLen > 0) {
 			var banner_content = '';

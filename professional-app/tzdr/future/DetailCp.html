@@ -15,10 +15,10 @@
     <script src="../../js/jquery-1.11.3.js"></script>
     <script>
     	mui.init({
-    		beforeback:function(){
-    			var reload = plus.webview.getWebviewById("openingRecord");
-    			reload.reload(true);
-    		}
+//  		beforeback:function(){
+//  			var reload = plus.webview.getWebviewById("openingRecord");
+//  			reload.reload(true);
+//  		}
     	});
     	var win=null;
     	
@@ -139,13 +139,17 @@
 									coupons.push(coups[i]);
 								}
 							})
-							mui.openWindow({
-			    				url:"end.html",
-			    				id:"end.html",
-			    				extras:{
-			    					did:win.did,rate:result.data.rate,coupons:coupons,businessType:8,businessPageId:'future/DetailCp.html'
-			    				}
-			    			});
+							plus.webview.close("end.html");
+							setTimeout(function(){
+								mui.openWindow({
+				    				url:"end.html",
+				    				id:"end.html",
+				    				extras:{
+				    					did:win.did,rate:result.data.rate,coupons:coupons,businessType:8,businessPageId:'future/DetailCp.html'
+				    				},
+				    				creatnew:true
+				    			});
+							},500);
 						},function(err){},{})
 				},function(result){
 					document.getElementById("endtolist").removeAttribute("disabled");
