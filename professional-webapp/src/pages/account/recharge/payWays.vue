@@ -20,11 +20,14 @@
 			}
 		},
 		computed: {
+			currentUrlHead(){
+				return this.$store.state.account.currentUrlHead;
+			},
 			PAY:function(){
 				if(this.$store.state.environment == "test"){
-					return "http://test.pay.duokongtai.cn"
+					return this.currentUrlHead + "//test.pay.duokongtai.cn"
 				}else{
-					return "http://pay.duokongtai.cn"
+					return this.currentUrlHead + "//pay.duokongtai.cn"
 				}
 			},
 			iframe(){

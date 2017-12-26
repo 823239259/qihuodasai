@@ -142,6 +142,7 @@
 					name: '我的',
 					cs: 'icon_account'
 				}],
+				_url: '',
 			}
 		},
 		computed: {
@@ -174,6 +175,9 @@
 					var user = this.$store.state.account.userName;
 					return user.substr(0, 3) + '****' + user.substr(7); 
 				}
+			},
+			currentUrlHead(){
+				return this.$store.state.account.currentUrlHead;
 			}
 		},
 		filters:{
@@ -310,7 +314,7 @@
 						localStorage.currentNav = 4;
 						break;
 					case 5:
-						window.open('http://139.196.232.43/');
+						window.open(this.currentUrlHead + '//139.196.232.43/');
 //					this.$router.push({path: '/download'});
 //						this.$store.state.account.currentNav = 5;
 						break;
@@ -374,6 +378,8 @@
 			}
 		},
 		mounted: function(){
+			this._url = window.location.href.split('//')[0];
+			this.$store.state.account.currentUrlHead = this._url;
 			//初始化行情
 			if(this.quoteInitStatus == false){
 				this.initQuoteClient();

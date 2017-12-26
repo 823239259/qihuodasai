@@ -29,6 +29,7 @@ var account = {
 		exitStatus: false,   //交易账号退出状态
 		userName: '',   //平台账号
 		currentNav: 0,  //当前导航索引
+		currentUrlHead: 'http:', //http or https
 	}
 }
 
@@ -285,12 +286,12 @@ export default new Vuex.Store({
 	getters: {
 		PATH: function(state) {
 			if(state.setting == 'dev') {
-				return 'http://test.api.duokongtai.cn';
+				return state.account.currentUrlHead + '//test.api.duokongtai.cn';
 			} else if(state.setting == 'build'){
 				if(state.environment == 'test'){
-					return 'http://test.api.duokongtai.cn';
+					return state.account.currentUrlHead + '//test.api.duokongtai.cn';
 				}else{
-					return 'http://api.duokongtai.cn';
+					return state.account.currentUrlHead + '//api.duokongtai.cn';
 				}
 			} else if(state.setting == 'nat') {
 				return '/nat/vs-api';
