@@ -1825,14 +1825,14 @@
 				}
 				.deal_details{
 					.title, li{
-						padding: 0 20px 0 10px;
+						padding: 0 10px 0 5px;
 						span{
 							display: inline-block; 
 							&:nth-child(1){
-								width: 70px;
+								width: 95px;
 							}
 							&:nth-child(2){
-								width: 50px;
+								width: 40px;
 							}
 							&:nth-child(3){
 								float: right;
