@@ -36,7 +36,10 @@
 						mui.openWindow({url:"DetailHsi.html",id:"DetailHsi.html",extras:{did:win.vid}});
 						break;
 					case 8:
-						mui.openWindow({url:"DetailCp.html",id:"DetailCp.html",extras:{did:win.vid}});
+						plus.webview.close("DetailCp.html");
+						setTimeout(function(){
+							mui.openWindow({url:"DetailCp.html",id:"DetailCp.html",extras:{did:win.vid},creatnew:true});
+						},500)
 						break;
 					case 9:
 						mui.openWindow({url:"DetailLhsi.html",id:"DetailLhsi.html",extras:{did:win.vid}});
