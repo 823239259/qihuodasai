@@ -594,7 +594,7 @@
 					this.tradeLoginShow = true;
 					this.tradeDetailsShow = false;
 					this.$store.state.market.chartHeight = this.h - 50 - 30 - 45;
-					console.log(1111);
+					
 					this.$store.state.market.qryHoldTotalArr = [];
 					this.$store.state.market.positionListCont = [];
 					this.$store.state.market.OnRspOrderInsertEntrustCont = [];
