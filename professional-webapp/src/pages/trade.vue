@@ -594,7 +594,7 @@
 					this.tradeLoginShow = true;
 					this.tradeDetailsShow = false;
 					this.$store.state.market.chartHeight = this.h - 50 - 30 - 45;
-					
+					console.log(1111);
 					this.$store.state.market.qryHoldTotalArr = [];
 					this.$store.state.market.positionListCont = [];
 					this.$store.state.market.OnRspOrderInsertEntrustCont = [];
@@ -1370,9 +1370,10 @@
 						if(res.success == true){
 							if(res.code == 1){
 								layer.msg("操作成功",{time: 1000});
-								this.$refs.tradeLoginSpe.show = false;
-								this.$refs.tradeLogin.show = false;
-								this.$router.push({path:'/openDetail_billingDetails',query:{"id": fid}})
+								this.$store.state.account.exitStatus = true;
+								setTimeout(function(){
+									this.$router.push({path:'/openDetail_billingDetails',query:{"id": fid}})
+								}.bind(this), 1000);
 							}
 						}
 					}.bind(this)).catch(function(err){
