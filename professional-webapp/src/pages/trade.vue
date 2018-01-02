@@ -1366,14 +1366,17 @@
 						id: fid,
 						businessType: 8
 					}
-					pro.fetch("post", "/user/ftrade/endtrade", data, headers).then((res)=>{
+					pro.fetch("post", "/user/ftrade/endtrade", data, headers).then(function(res){
 						if(res.success == true){
 							if(res.code == 1){
 								layer.msg("操作成功",{time: 1000});
-								this.$router.push({path:'/openDetail_billingDetails',query:{"id": fid}})
+								this.$store.state.account.exitStatus = true;
+								setTimeout(function(){
+									this.$router.push({path:'/openDetail_billingDetails',query:{"id": fid}})
+								}.bind(this), 1000);
 							}
 						}
-					}).catch((err)=>{
+					}.bind(this)).catch(function(err){
 						switch (err.data.code){
 							case '-1':
 								layer.msg("认证失败",{time: 1000});

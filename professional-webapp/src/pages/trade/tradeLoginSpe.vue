@@ -84,7 +84,7 @@
 							this.accountList = res.data;
 							if(res.data.length <= 0){
 								this.show = false;
-								this.$parent.$refs.tradeLogin.show = true;
+//								this.$parent.$refs.tradeLogin.show = true;
 							}
 						}
 					}.bind(this)).catch(function(err){
