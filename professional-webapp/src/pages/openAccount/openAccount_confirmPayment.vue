@@ -114,7 +114,7 @@
 					if(res.success == true){
 						if(res.code == 1){
 							this.accountMoney = data.balance;
-							this.surplus =Math.abs(this.accountMoney-this.payMoney);
+							this.surplus =Math.abs(this.accountMoney-this.payMoney).toFixed(2);
 						}
 					}
 				}).catch((err)=>{
