@@ -62,7 +62,8 @@
 				accountMoney:'',
 				totalMoney:0.00,
 				backto:"",
-				rechargeMoney:''
+				rechargeMoney:'',
+				floatReg: /^[0-9]+([.][0-9]+)?$/
 			}
 		},
 		watch: {
@@ -87,10 +88,12 @@
 				}
 			},
 			nextStep:function(){
-				if(this.recharge_money == ''){
+				if(this.recharge_money == undefined){
 					layer.msg("请输入充值金额",{time:2000});
 				}else if(this.recharge_money < 10 ){
 					layer.msg("充值金额需要大于10元哦~",{time:2000});
+				}else if(this.floatReg.test(this.recharge_money)==false){
+					layer.msg("输入充值金额格式有误，请重新输入",{time:2000});
 				}else {
 					this.$router.push({path:'/payWays',query:{username:JSON.parse(localStorage.user).username,money:this.recharge_money,accountMoney:this.accountMoney}});
 				}

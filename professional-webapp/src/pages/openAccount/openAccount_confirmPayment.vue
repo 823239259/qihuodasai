@@ -30,18 +30,14 @@
 		filters:{
 			fixNumTwo: function(num){
 				return num.toFixed(2);
-			},
-			fixNum: function(num, dotsize){
-				return num.toFixed(dotsize);
 			}
 		},
 		mounted:function(){
-//			this.payMoney=this.$route.query.payMoney;
-			if(this.$route.query.payMoney!=''){
+			if(this.$route.query.payMoney!=null){
 				this.payMoney = this.$route.query.payMoney;
 			}else {
 				this.surplus = this.$route.query.payMoney1;
-				this.payMoney = this.$route.query.payMoney1+this.accountMoney;
+				this.payMoney = parseFloat(this.$route.query.payMoney1)+parseFloat(this.accountMoney);
 			}
 		},
 		methods : {
@@ -134,15 +130,13 @@
 				})
 			}
 		},
-		activated: function() {
-			//获取用户账户信息
+		activated: function(){
 			this.getUserMsg();
-			
 			if(this.$route.query.payMoney!=null){
 				this.payMoney = this.$route.query.payMoney;
 			}else {
 				this.surplus = this.$route.query.payMoney1;
-				this.payMoney = this.$route.query.payMoney1+this.accountMoney;
+				this.payMoney = parseFloat(this.$route.query.payMoney1)+parseFloat(this.accountMoney);
 			}
 		},
 	}
