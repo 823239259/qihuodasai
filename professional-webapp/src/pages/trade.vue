@@ -1369,11 +1369,30 @@
 					pro.fetch("post", "/user/ftrade/endtrade", data, headers).then(function(res){
 						if(res.success == true){
 							if(res.code == 1){
-								layer.msg("操作成功",{time: 1000});
-								this.$store.state.account.exitStatus = true;
-								setTimeout(function(){
-									this.$router.push({path:'/openDetail_billingDetails',query:{"id": fid}})
-								}.bind(this), 1000);
+								pro.fetch("post",'/ user/ftrade/details',{id: fid},headers).then((res)=>{
+									if(res.success == true && res.code == 1){
+										if(res.data.details.stateType == 2){
+											layer.msg("申请结算成功，系统会尽快处理");
+											this.$store.state.account.exitStatus = true;
+											setTimeout(function(){
+												this.$router.push({path:'/account_openDetail'});
+												this.$store.state.account.currentNav = 6;
+												localStorage.currentNav = 6;
+											}.bind(this), 1000);
+										}else if(res.data.details.stateType == 6){
+											layer.msg("操作成功",{time:2000});
+											this.$store.state.account.exitStatus = true;
+											setTimeout(function(){
+												this.$router.push({path:'/openDetail_billingDetails',query:{"id": fid}})
+											}.bind(this), 1000);
+										}
+									}
+								}).catch((err)=>{});
+//								layer.msg("操作成功",{time: 1000});
+//								this.$store.state.account.exitStatus = true;
+//								setTimeout(function(){
+//									this.$router.push({path:'/openDetail_billingDetails',query:{"id": fid}})
+//								}.bind(this), 1000);
 							}
 						}
 					}.bind(this)).catch(function(err){
