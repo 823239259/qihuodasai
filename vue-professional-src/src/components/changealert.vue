@@ -7,11 +7,11 @@
 				<li>
 					<div>
 						<label for="price" class="fontgray">委托价格</label>
-						<input type="number" id='price' class="fontwhite" :value="priceFun" v-model="p" />
+						<input type="number" id='price' class="fontwhite" v-model="p" />
 					</div>
 					<div>
 						<label for="num" class="fontgray">委托数量</label>
-						<input type="number" id="num" class="fontwhite" :value="numFun" v-model="entrustNum" />
+						<input type="number" id="num" class="fontwhite" v-model="entrustNum" />
 					</div>
 				</li>
 				<li>
