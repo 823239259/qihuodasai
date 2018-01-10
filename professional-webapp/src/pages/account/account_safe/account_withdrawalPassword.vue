@@ -66,7 +66,7 @@
 				//获取验证码
 				var data = {
 					mobile: this.username,
-					type: 1
+					type: 2
 				}
 				var headers = {
 					token : JSON.parse(localStorage.user).token,
