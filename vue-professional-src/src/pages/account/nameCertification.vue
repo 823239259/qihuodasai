@@ -80,14 +80,15 @@
 								this.$router.replace({path: '/account'});
 							}
 						}else{
+							
 							switch (data.code){
 								case '-1':
 									this.$children[0].isShow = true;
-									this.msg = '账号已变更，请重新重新登录';
+									this.msg = '系统异常';
 									break;
 								case '2':
 									this.$children[0].isShow = true;
-									this.msg = '账号已变更，请重新重新登录';
+									this.msg = '实名验证失败';
 									break;
 								case '3':
 									this.$children[0].isShow = true;
