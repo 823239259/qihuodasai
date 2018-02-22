@@ -406,18 +406,21 @@
 			var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 			$(".order").height(h - 50 - 30);
-			var body_height = h - 125;
+			var body_height = h - 123;
 			var body_width = w - 480;
-			if(body_height < 748){
+			$(".cont").css({
+				'height': body_height,
+				'overflow-y': 'scroll'
+			});
+//			if(body_height < 748){
+//				$(".cont").css({
+//					'height': body_height,
+//					'overflow-y': 'scroll'
+//				});
+//			}
+			if(body_width < 750){
 				$(".cont").css({
-					'height': body_height,
-					'overflow-y': 'scroll'
-				});
-			}
-			if(body_width < 1290){
-				$(".cont").css({
-					'width': body_width,
-					'overflow-x': 'scroll'
+					'width': 730 + 'px',    //最小800px
 				});
 			}
 			//默认进入行情页面
@@ -435,18 +438,25 @@
 				var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 				var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 				$(".order").height(h - 50 - 30);
-				var body_height = h - 125;
+				var body_height = h - 123;
 				var body_width = w - 480;
-				if(body_height < 748){
+				$(".cont").css({
+					'height': body_height,
+					'overflow-y': 'scroll'
+				});
+//				if(body_height < 748){
+//					$(".cont").css({
+//						'height': body_height,
+//						'overflow-y': 'scroll'
+//					});
+//				}
+				$(".cont").css({
+					'width': body_width,
+					'overflow-x': 'scroll'
+				});
+				if(body_width < 750){
 					$(".cont").css({
-						'height': body_height,
-						'overflow-y': 'scroll'
-					});
-				}
-				if(body_width < 1290){
-					$(".cont").css({
-						'width': body_width,
-						'overflow-x': 'scroll'
+						'width': 730 + 'px',    //最小800px
 					});
 				}
 			});
