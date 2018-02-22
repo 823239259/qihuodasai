@@ -271,7 +271,11 @@
 							}
 						}
 						this.$refs.alert.isshow = true;
-						this.tipsMsg = '是否添加限价止损？';
+						if(this.selectStopLossType00 == 0){
+							this.tipsMsg = '是否添加限价止损？';
+						}else{
+							this.tipsMsg = '是否添加动态止损？';
+						}
 						let b={
 							"Method":'InsertStopLoss',
 							"Parameters":{

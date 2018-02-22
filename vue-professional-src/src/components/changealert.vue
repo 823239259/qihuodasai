@@ -59,6 +59,16 @@
 			},
 		},
 		watch: {
+			price: function(n, o){
+				if(n && n != undefined){
+					this.p = n;
+				}
+			},
+			num: function(n, o){
+				if(n && n != undefined){
+					this.entrustNum = n;
+				}
+			},
 			entrustNum: function(n, o){
 				this.entrustNum = Number(n);
 				if(n == '' || n < 1){

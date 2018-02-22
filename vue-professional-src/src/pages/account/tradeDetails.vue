@@ -150,7 +150,7 @@
 							<span>{{key.commodityNo}}</span>
 							<span>{{key.buyNum}}</span>
 							<span>{{key.sellNum}}</span>
-							<span>{{key.tradePrice}}</span>
+							<span>{{key.tradePrice | fixNum2(orderTemplist[key.commodityNo.slice(0, -4)].DotSize)}}</span>
 							<span>{{key.hedgeProfit}}</span>
 							<span>{{key.free | getTwoNumber}}</span>
 							<!--<span :class="{red: key.type_color == 'red', green: key.type_color == 'green'}">{{key.type}}</span>-->
@@ -191,6 +191,9 @@
 			}
 		},
 		filters: {
+			fixNum2:function(num,dotsize){
+				return parseFloat(num).toFixed(dotsize);
+			},
 			varieties: function(e) {
 				switch(e) {
 					case 0:
@@ -373,7 +376,10 @@
 				} else {
 					return false
 				}
-			}
+			},
+			orderTemplist(){
+				return	this.$store.state.market.orderTemplist;
+			},
 		},
 		methods: {
 			toTradeLogin: function(){

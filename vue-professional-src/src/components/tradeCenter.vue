@@ -563,7 +563,7 @@
 				}
 			},
 			openChangealert: function(){
-				var orderListId= this.orderListId;
+				var orderListId = this.orderListId;
 				var isExist = false;
 				var i = 0;
 				this.$store.state.market.orderListCont.forEach(function(e){
