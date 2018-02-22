@@ -65,7 +65,7 @@
 					<ol>
 						<li class="fontgray">有效</li>
 						<li class="fontwhite today">
-							当日有效
+							永久有效
 						</li>
 					</ol>
 				</li>
