@@ -2,7 +2,7 @@
 	<div id="withdrawal">
 		<tipsDialog :msg="msgTips"></tipsDialog>
 		<topbar title="我要提现"></topbar>
-		<back :title="isJumpEvent"></back>
+		<back></back>
 		<cs title="客服"></cs>
 		<div class="page_cont">
 			<div class="bind_bank" @tap="toBindCard">
@@ -78,10 +78,10 @@
 			}
 		},
 		computed: {
-			isJumpEvent: function(){
-				this.isJump = this.$route.query.isJump;
-				if(this.isJump == 1)  return true;
-			},
+//			isJumpEvent: function(){
+//				this.isJump = this.$route.query.isJump;
+//				if(this.isJump == 1)  return true;
+//			},
 			msgTips: function(){
 				return this.msg;
 			},
