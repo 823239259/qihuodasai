@@ -83,15 +83,57 @@
 					InMoney = {title: '入金', val: []},
 					OutMoney = {title: '出金', val: []};
 				n.forEach(function(o, i){
-					OldAmount.val.push(parseFloat(o.OldAmount).toFixed(2)); // 昨结存
-					TodayBalance.val.push(parseFloat(o.TodayBalance).toFixed(2)==0?parseFloat(o.TodayAmount+o.FloatingProfit).toFixed(2) : parseFloat(o.TodayBalance).toFixed(2));//今权益
-					TodayCanUse.val.push(parseFloat(o.TodayCanUse).toFixed(2)==0?parseFloat(o.TodayAmount+o.FloatingProfit-o.Deposit-o.FrozenMoney).toFixed(2):parseFloat(o.TodayCanUse).toFixed(2));//今可用
-					Deposit.val.push(parseFloat(o.Deposit).toFixed(2));//保证金
-					FrozenMoney.val.push(parseFloat(o.FrozenMoney).toFixed(2));//冻结资金
-					FloatingProfit.val.push(parseFloat(o.FloatingProfit).toFixed(2));//逐笔浮盈
-					CloseProfit.val.push(parseFloat(o.CloseProfit).toFixed(2));//平仓盈亏
-					InMoney.val.push(parseFloat(o.InMoney).toFixed(2)); //入金
-					OutMoney.val.push(parseFloat(o.OutMoney).toFixed(2));//出金
+					if(o.AccountNo == 'USD'){
+						OldAmount.val[0] = parseFloat(o.OldAmount).toFixed(2);
+						TodayBalance.val[0] = parseFloat(o.TodayBalance).toFixed(2)==0?parseFloat(o.TodayAmount+o.FloatingProfit).toFixed(2) : parseFloat(o.TodayBalance).toFixed(2);//今权益
+						TodayCanUse.val[0] = parseFloat(o.TodayCanUse).toFixed(2)==0?parseFloat(o.TodayAmount+o.FloatingProfit-o.Deposit-o.FrozenMoney).toFixed(2):parseFloat(o.TodayCanUse).toFixed(2);//今可用
+						Deposit.val[0] = parseFloat(o.Deposit).toFixed(2);//保证金
+						FrozenMoney.val[0] = parseFloat(o.FrozenMoney).toFixed(2);//冻结资金
+						FloatingProfit.val[0] = parseFloat(o.FloatingProfit).toFixed(2);//逐笔浮盈
+						CloseProfit.val[0] = parseFloat(o.CloseProfit).toFixed(2);//平仓盈亏
+						InMoney.val[0] = parseFloat(o.InMoney).toFixed(2); //入金
+						OutMoney.val[0] = parseFloat(o.OutMoney).toFixed(2);//出金
+					}else if(o.AccountNo == 'HKD-HKFE'){
+						OldAmount.val[1] = parseFloat(o.OldAmount).toFixed(2);
+						TodayBalance.val[1] = parseFloat(o.TodayBalance).toFixed(2)==0?parseFloat(o.TodayAmount+o.FloatingProfit).toFixed(2) : parseFloat(o.TodayBalance).toFixed(2);//今权益
+						TodayCanUse.val[1] = parseFloat(o.TodayCanUse).toFixed(2)==0?parseFloat(o.TodayAmount+o.FloatingProfit-o.Deposit-o.FrozenMoney).toFixed(2):parseFloat(o.TodayCanUse).toFixed(2);//今可用
+						Deposit.val[1] = parseFloat(o.Deposit).toFixed(2);//保证金
+						FrozenMoney.val[1] = parseFloat(o.FrozenMoney).toFixed(2);//冻结资金
+						FloatingProfit.val[1] = parseFloat(o.FloatingProfit).toFixed(2);//逐笔浮盈
+						CloseProfit.val[1] = parseFloat(o.CloseProfit).toFixed(2);//平仓盈亏
+						InMoney.val[1] = parseFloat(o.InMoney).toFixed(2); //入金
+						OutMoney.val[1] = parseFloat(o.OutMoney).toFixed(2);//出金
+					}else if(o.AccountNo == 'EUR'){
+						OldAmount.val[2] = parseFloat(o.OldAmount).toFixed(2);
+						TodayBalance.val[2] = parseFloat(o.TodayBalance).toFixed(2)==0?parseFloat(o.TodayAmount+o.FloatingProfit).toFixed(2) : parseFloat(o.TodayBalance).toFixed(2);//今权益
+						TodayCanUse.val[2] = parseFloat(o.TodayCanUse).toFixed(2)==0?parseFloat(o.TodayAmount+o.FloatingProfit-o.Deposit-o.FrozenMoney).toFixed(2):parseFloat(o.TodayCanUse).toFixed(2);//今可用
+						Deposit.val[2] = parseFloat(o.Deposit).toFixed(2);//保证金
+						FrozenMoney.val[2] = parseFloat(o.FrozenMoney).toFixed(2);//冻结资金
+						FloatingProfit.val[2] = parseFloat(o.FloatingProfit).toFixed(2);//逐笔浮盈
+						CloseProfit.val[2] = parseFloat(o.CloseProfit).toFixed(2);//平仓盈亏
+						InMoney.val[2] = parseFloat(o.InMoney).toFixed(2); //入金
+						OutMoney.val[2] = parseFloat(o.OutMoney).toFixed(2);//出金
+					}else if(o.AccountNo == 'JPY'){
+						OldAmount.val[3] = parseFloat(o.OldAmount).toFixed(2);
+						TodayBalance.val[3] = parseFloat(o.TodayBalance).toFixed(2)==0?parseFloat(o.TodayAmount+o.FloatingProfit).toFixed(2) : parseFloat(o.TodayBalance).toFixed(2);//今权益
+						TodayCanUse.val[3] = parseFloat(o.TodayCanUse).toFixed(2)==0?parseFloat(o.TodayAmount+o.FloatingProfit-o.Deposit-o.FrozenMoney).toFixed(2):parseFloat(o.TodayCanUse).toFixed(2);//今可用
+						Deposit.val[3] = parseFloat(o.Deposit).toFixed(2);//保证金
+						FrozenMoney.val[3] = parseFloat(o.FrozenMoney).toFixed(2);//冻结资金
+						FloatingProfit.val[3] = parseFloat(o.FloatingProfit).toFixed(2);//逐笔浮盈
+						CloseProfit.val[3] = parseFloat(o.CloseProfit).toFixed(2);//平仓盈亏
+						InMoney.val[3] = parseFloat(o.InMoney).toFixed(2); //入金
+						OutMoney.val[3] = parseFloat(o.OutMoney).toFixed(2);//出金
+					}else if(o.AccountNo == 'CNY'){
+						OldAmount.val[4] = parseFloat(o.OldAmount).toFixed(2);
+						TodayBalance.val[4] = parseFloat(o.TodayBalance).toFixed(2)==0?parseFloat(o.TodayAmount+o.FloatingProfit).toFixed(2) : parseFloat(o.TodayBalance).toFixed(2);//今权益
+						TodayCanUse.val[4] = parseFloat(o.TodayCanUse).toFixed(2)==0?parseFloat(o.TodayAmount+o.FloatingProfit-o.Deposit-o.FrozenMoney).toFixed(2):parseFloat(o.TodayCanUse).toFixed(2);//今可用
+						Deposit.val[4] = parseFloat(o.Deposit).toFixed(2);//保证金
+						FrozenMoney.val[4] = parseFloat(o.FrozenMoney).toFixed(2);//冻结资金
+						FloatingProfit.val[4] = parseFloat(o.FloatingProfit).toFixed(2);//逐笔浮盈
+						CloseProfit.val[4] = parseFloat(o.CloseProfit).toFixed(2);//平仓盈亏
+						InMoney.val[4] = parseFloat(o.InMoney).toFixed(2); //入金
+						OutMoney.val[4] = parseFloat(o.OutMoney).toFixed(2);//出金
+					}
 				}.bind(this));
 				this.moneyDetailList.push(OldAmount);
 				this.moneyDetailList.push(TodayBalance);
@@ -122,7 +164,6 @@
 				this.moneyDetailList.push({title: '平仓盈亏', val: [parseFloat(this.jCacheAccount['USD'].CloseProfit).toFixed(2),parseFloat(this.jCacheAccount['HKD-HKFE'].CloseProfit).toFixed(2),parseFloat(this.jCacheAccount['EUR'].CloseProfit).toFixed(2),parseFloat(this.jCacheAccount['JPY'].CloseProfit).toFixed(2),parseFloat(this.jCacheAccount['CNY'].CloseProfit).toFixed(2)]});
 				this.moneyDetailList.push({title: '入金', val: [parseFloat(this.jCacheAccount['USD'].InMoney).toFixed(2),parseFloat(this.jCacheAccount['HKD-HKFE'].InMoney).toFixed(2),parseFloat(this.jCacheAccount['EUR'].InMoney).toFixed(2),parseFloat(this.jCacheAccount['JPY'].InMoney).toFixed(2),parseFloat(this.jCacheAccount['CNY'].InMoney).toFixed(2)]});
 				this.moneyDetailList.push({title: '出金', val: [parseFloat(this.jCacheAccount['USD'].OutMoney).toFixed(2),parseFloat(this.jCacheAccount['HKD-HKFE'].OutMoney).toFixed(2),parseFloat(this.jCacheAccount['EUR'].OutMoney).toFixed(2),parseFloat(this.jCacheAccount['JPY'].OutMoney).toFixed(2),parseFloat(this.jCacheAccount['CNY'].OutMoney).toFixed(2)]});
-			
 			}
 		},
 		activated: function(){
