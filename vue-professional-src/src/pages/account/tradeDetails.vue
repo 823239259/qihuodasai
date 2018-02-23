@@ -613,31 +613,32 @@
 			}
 		},
 		activated: function() {
+			
 			this.userInfo = JSON.parse(localStorage.user);
 			this.isShow = true;
 			//获取操盘明细
 			this.getTradeDetails();
-			this.type = this.$route.query.type;
+			this.type = Number(this.$route.query.type);
 			switch(this.type) {
-				case '1':
+				case 1:
 					this.openShow = true;
 					this.operateShow = false;
 					this.settlementShow = false;
 					this.errorShow = false;
 					break;
-				case '4':
+				case 4:
 					this.openShow = false;
 					this.operateShow = true;
 					this.settlementShow = false;
 					this.errorShow = false;
 					break;
-				case '5':
+				case 5:
 					this.errorShow = true;
 					this.openShow = false;
 					this.operateShow = false;
 					this.settlementShow = false;
 					break;
-				case '6':
+				case 6:
 					this.openShow = false;
 					this.operateShow = false;
 					this.settlementShow = true;
