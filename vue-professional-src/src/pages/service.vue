@@ -1,7 +1,7 @@
 <template>
 	<div id="service">
 		<topbar title="在线客服"></topbar>
-		<back @tap.native="goBack"></back>
+		<back></back>
 		<iframe :src="iframe"></iframe>
 	</div>
 </template>
@@ -27,11 +27,7 @@
 				return  /*this.PATH + */'http://www.vs.com/topic/consistentBeauty/consistentbeauty.html?phone=' + this.$store.state.account.phone + '&userName=' + this.$store.state.account.username;
 			}
 		},
-		methods: {
-			goBack: function(){
-				this.$router.go(-2);
-			}
-		}
+		methods: {}
 	}
 </script>
 <style scoped lang="less">
