@@ -344,7 +344,7 @@
 			},
 			toRecharge:function(){
 				this.accountMoney = this.balance;
-				this.$router.push({path:"/recharge",query:{"accountMoney":this.accountMoney,"backhere":1}});
+				this.$router.push({path:"/recharge",query:{"accountMoney":this.accountMoney,"backhere":2}});
 			},
 			//获取数据
 			GetList:function(page,startT,endT,chooseType){

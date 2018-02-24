@@ -36,7 +36,7 @@
 		},
 		methods:{
 			back:function(){
-				this.$router.push({path:'/recharge',query:{accountMoney:this.accountMoney}});
+				this.$router.push({path:'/recharge',query:{accountMoney:this.accountMoney,"backhere":this.$route.query.backhere}});
 			}
 		},
 		mounted:function(){
