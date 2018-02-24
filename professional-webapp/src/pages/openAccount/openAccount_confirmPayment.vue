@@ -8,7 +8,7 @@
 			<p>支付金额：<span>{{payMoney}}</span>元</p>
 			<p v-if="accountMoney-payMoney>0">您的账户余额<i>{{accountMoney}}</i>元，本次支付完毕剩余<i>{{accountMoney-payMoney | fixNumTwo}}</i>元</p>
 			<p v-else="accountMoney-payMoney!>0">您的账户余额<i>{{accountMoney}}</i>元，本次支付还差<i>{{surplus}}</i>元</p>
-			<button class="btn yellow" v-on:click="to_payMoney" v-if="accountMoney-payMoney>0 || accountMoney-payMoney==0">确认支付</button>
+			<button class="btn yellow" id="btn_yellow" v-on:click="to_payMoney" v-if="accountMoney-payMoney>0 || accountMoney-payMoney==0">确认支付</button>
 			<button class="btn yellow" v-on:click="to_Recharge" v-else="accountMoney!>0">去充值</button>
 			<button class="btn green" v-on:click="cancel">取消</button>
 		</div>
@@ -48,7 +48,8 @@
 				}
 			},
 			//支付
-			to_payMoney :function(){
+			to_payMoney :function(e){
+				$("#btn_yellow").attr("disabled","disabled")
 				var data = {
 					vid:'',
 					"traderBond":this.payMoney,
@@ -64,6 +65,7 @@
 					if(res.success == true){
 						if(res.code == 1){
 							this.$router.push({path:'/openAccount_success'});
+							$("#btn_yellow").removeAttr("disabled");
 						}
 					}
 				}).catch((err)=>{
@@ -71,15 +73,19 @@
 						switch (err.data.code){
 							case "-1":
 							layer.msg("认证失败",{time:2000});
+							$("#btn_yellow").removeAttr("disabled");
 								break;
 							case "0":
 							layer.msg("系统异常，请稍后重试",{time:2000});
+							$("#btn_yellow").removeAttr("disabled");
 								break;
 							case "2":
 							layer.msg("传的参数错误，没有获取到配置方案",{time:2000});
+							$("#btn_yellow").removeAttr("disabled");
 								break;
 							case "3":
 							layer.msg("用户余额不足",{time:2000});
+							$("#btn_yellow").removeAttr("disabled");
 								break;
 							default:
 								break;
