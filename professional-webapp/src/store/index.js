@@ -37,7 +37,7 @@ var account = {
 var market = {
 	state: {
 		quoteConfig:{
-			url_real: "ws://192.168.0.232:9002",  //测试地址
+			url_real: "ws://192.168.0.232:19002",  //测试地址
 //			url_real: "ws://quote.vs.com:9002",   //正式地址
 			userName: "13677622344",
 			passWord: "a123456"

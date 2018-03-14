@@ -969,6 +969,7 @@
 					this.priceShow = true;
 				}else{
 					this.priceShow = false;
+					this.tradePrices = parseFloat(this.currentdetail.LastQuotation.LastPrice).toFixed(this.currentdetail.DotSize);
 				}
 			},
 			conditionClick: function(e){
@@ -1589,6 +1590,7 @@
 				$(".trade_list, #trade_details").width(this.w - $("#nav").width() - $(".quote").width() - $(".operate").width() - 30);
 			});
 			this.chartShow = true;
+			this.priceShow = true;
 		}
 	}
 </script>
