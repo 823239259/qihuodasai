@@ -81,10 +81,10 @@
 		},
 		methods:{
 			back:function(){
-				if(this.backto != undefined){
-					this.$router.push({path:'/account_survey'});
-				}else {
+				if(this.backto == "1"){
 					this.$router.push({path:'/confirmPayment',query:{"payMoney1":this.rechargeMoney}});
+				}else {
+					this.$router.push({path:'/account_survey'});
 				}
 			},
 			nextStep:function(){
@@ -95,7 +95,7 @@
 				}else if(this.floatReg.test(this.recharge_money)==false){
 					layer.msg("输入充值金额格式有误，请重新输入",{time:2000});
 				}else {
-					this.$router.push({path:'/payWays',query:{username:JSON.parse(localStorage.user).username,money:this.recharge_money,accountMoney:this.accountMoney}});
+					this.$router.push({path:'/payWays',query:{username:JSON.parse(localStorage.user).username,money:this.recharge_money,accountMoney:this.accountMoney,"backhere":this.$route.query.backhere}});
 				}
 			}
 		},

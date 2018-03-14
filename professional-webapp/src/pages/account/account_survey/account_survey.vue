@@ -344,7 +344,7 @@
 			},
 			toRecharge:function(){
 				this.accountMoney = this.balance;
-				this.$router.push({path:"/recharge",query:{"accountMoney":this.accountMoney,"backhere":1}});
+				this.$router.push({path:"/recharge",query:{"accountMoney":this.accountMoney,"backhere":2}});
 			},
 			//获取数据
 			GetList:function(page,startT,endT,chooseType){
@@ -535,7 +535,7 @@
 				}
 			});
 			//获取默认
-			this.GetList('',this.getNowDate(),this.getNowFormatDate(),2);
+//			this.GetList('',this.getNowDate(),this.getNowFormatDate(),2);
 			this.day = 0;
 			this.query = 2;
 			//获取实名和提现密码
@@ -547,6 +547,9 @@
 			var time = pro.getDate("y-m-d", date.getTime()).split(' ')[0];
 			this.startTime = time;
 			this.endTime = time;
+		},
+		activated:function(){
+			this.GetList('',this.getNowDate(),this.getNowFormatDate(),2);
 		},
 		computed:{
 			pages:function(){
