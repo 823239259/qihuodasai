@@ -535,7 +535,7 @@
 				}
 			});
 			//获取默认
-//			this.GetList('',this.getNowDate(),this.getNowFormatDate(),2);
+			this.GetList('',this.getNowDate(),this.getNowFormatDate(),2);
 			this.day = 0;
 			this.query = 2;
 			//获取实名和提现密码
