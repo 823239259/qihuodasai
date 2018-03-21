@@ -148,8 +148,15 @@
 //				})
 				user_mobile=mui.cacheUser.get("user_mobile");
 				plus.nativeUI.showWaiting( "正在加载..." );
-				var window=plus.webview.create(tzdr.constants.api_recharge+"app/appPayinfo?mobile="+user_mobile+"&money="+money+"","index",{top:"40px",bottom:"0px"});
-				window.show();
+//				var window=plus.webview.create(tzdr.constants.api_recharge+"app/appPayinfo?mobile="+user_mobile+"&money="+money+"","index",{top:"40px",bottom:"0px"});
+//				window.show();
+				plus.runtime.openURL(tzdr.constants.api_recharge+"app/appPayinfo?mobile="+user_mobile+"&money="+money);
+				mui.confirm("是否充值完成","充值状态",["已完成","已取消"],function(e){
+					if (e.index != 1) {
+                        mui.app_refresh("account");
+						mui.back();
+                    }
+				})
 				setTimeout(function(){
 					plus.nativeUI.closeWaiting();
 				},1000);
