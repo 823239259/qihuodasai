@@ -238,7 +238,7 @@
 			customerService: function(){
 				if(this.csAddressCurrent == false){
 					this.csAddressCurrent = true;
-					this.csAddress = 'http://www.vs.com/topic/consistentBeauty/consistentbeauty.html?phone='+ this.userInfo.username +'&userName=aaa';
+					this.csAddress = 'http://www.vs.com/topic/consistentBeauty/qiw_quoteApp_service.html?phone='+ this.userInfo.username +'&userName=aaa';
 				}else{
 					this.csAddressCurrent = false;
 					this.csAddress = '';
