@@ -29,7 +29,7 @@ var account = {
 		exitStatus: false,   //交易账号退出状态
 		userName: '',   //平台账号
 		currentNav: 0,  //当前导航索引
-		currentUrlHead: 'http:', //http or https
+		currentUrlHead: 'https:', //http or https
 	}
 }
 
