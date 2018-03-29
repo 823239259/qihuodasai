@@ -45,6 +45,7 @@ var account = {
 		programList: [],
 		operateOrderLength: 0,   //操盘中方案的条数
 		hotLine: '',
+		currentUrlHead: 'https:', //http or https
 	}
 }
 
@@ -356,9 +357,9 @@ export default new Vuex.Store({
 				return '/api';
 			} else if(state.setting == 'build') {
 				if(state.environment == 'test'){
-					return 'http://test.api.duokongtai.cn';
+					return state.account.currentUrlHead + '//test.api.duokongtai.cn';
 				}else{
-					return 'http://api.duokongtai.cn';
+					return state.account.currentUrlHead + '//api.duokongtai.cn';
 				}
 			} else if(state.setting == 'nat') {
 				return '/nat/vs-api';
