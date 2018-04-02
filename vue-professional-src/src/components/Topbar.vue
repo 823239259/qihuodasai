@@ -21,6 +21,9 @@
 <style scoped lang="less">
 	@import url("../assets/css/main.less");
 	@import url("../assets/css/base.less");
+	h3{
+		font-family: @yh;
+	}
 	/*使用该组件的时候，请在挂载的页面ID样式加上padding-top:50px*/
 	/*ip5*/
 	@media(max-width:370px) {
