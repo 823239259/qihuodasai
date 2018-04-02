@@ -42,7 +42,7 @@
 		}
 		#topbar h3 {
 			color: #fff;
-			font-size: 17px*@ip5;
+			font-size: 14px;
 			font-weight: bold;
 			height: 50px*@ip5;
 			line-height: 50px*@ip5;
@@ -65,7 +65,7 @@
 		}
 		#topbar h3 {
 			color: #fff;
-			font-size: 17px*@ip6;
+			font-size: 16px;
 			font-weight: bold;
 			height: 50px*@ip6;
 			line-height: 50px*@ip6;
@@ -88,7 +88,7 @@
 		}
 		#topbar h3 {
 			color: #fff;
-			font-size: 17px;
+			font-size: 16px;
 			font-weight: bold;
 			height: 50px;
 			line-height: 50px;
