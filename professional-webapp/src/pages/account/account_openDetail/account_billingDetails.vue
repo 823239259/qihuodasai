@@ -69,7 +69,7 @@
 							<td v-else="item.buyNum==''">0</td>
 							<td v-if="item.sellNum!=''">{{item.sellNum}}</td>
 							<td v-else="item.sellNum==''">0</td>
-							<td>{{item.tradePrice}}</td>
+							<td>{{item.tradePrice | fixNumTwo}}</td>
 							<td>{{item.hedgeProfit}}</td>
 							<td>{{item.free | fixNumTwo}}</td>
 						</tr>
