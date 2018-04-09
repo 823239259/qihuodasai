@@ -381,7 +381,14 @@
 						}
 					}
 				}).catch((err)=>{
-					layer.msg('网络不给力，请稍后再试', {time: 1000});
+					var data = err.data;
+					if(data == undefined || data == "" || data == null){
+						layer.msg('网络不给力，请稍后再试', {time: 1000});
+					}else if(data.code == "2"){
+						layer.msg('传的参数错误，没有获取到配置方案', {time: 1000});
+					}else if(data.code == "3"){
+						layer.msg('用户信息不存在', {time: 1000});
+					}
 				})
 			},
 			//获取结束时间

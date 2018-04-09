@@ -673,11 +673,14 @@
 					}
 				}
 			}).catch((err)=>{
-				if(err.success ==false ){
-					layer.msg(err.data.message,{time:2000});
-				}else{
-					layer.msg("网络不给力，请稍后再试",{time:2000});
-				}
+				var data = err.data;
+					if(data == undefined || data == "" || data == null){
+						layer.msg('网络不给力，请稍后再试', {time: 1000});
+					}else if(data.code == "-1"){
+						layer.msg('您的用户名或密码错误，请联系客服', {time: 1000});
+					}else if(data.code == "-3"){
+						layer.msg('用户信息不存在，请重新登录', {time: 1000});
+					}
 			})
 			//获取数据列表
 			

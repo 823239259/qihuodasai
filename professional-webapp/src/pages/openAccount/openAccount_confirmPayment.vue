@@ -69,29 +69,15 @@
 						}
 					}
 				}).catch((err)=>{
-					if(err.data.success == false){
-						switch (err.data.code){
-							case "-1":
-							layer.msg("认证失败",{time:2000});
-							$("#btn_yellow").removeAttr("disabled");
-								break;
-							case "0":
-							layer.msg("系统异常，请稍后重试",{time:2000});
-							$("#btn_yellow").removeAttr("disabled");
-								break;
-							case "2":
-							layer.msg("传的参数错误，没有获取到配置方案",{time:2000});
-							$("#btn_yellow").removeAttr("disabled");
-								break;
-							case "3":
-							layer.msg("用户余额不足",{time:2000});
-							$("#btn_yellow").removeAttr("disabled");
-								break;
-							default:
-								break;
-						}
-					}else{
-						layer.msg("网络不给力，请稍后再试",{time:2000})
+					var data = err.data;
+					if(data == undefined || data == "" || data == null){
+						layer.msg('网络不给力，请稍后再试', {time: 1000});
+					}else if(data.code == "2"){
+						layer.msg('传的参数错误，没有获取到配置方案', {time: 1000});
+					}else if(data.code == "3"){
+						layer.msg('用户余额不足', {time: 1000});
+					}else if(data.code == "0"){
+						layer.msg('系统异常，请稍后再试', {time: 1000});
 					}
 				})
 			},
@@ -120,18 +106,13 @@
 						}
 					}
 				}).catch((err)=>{
-					if(err.data.success == false){
-						switch (err.data.code){
-							case "3":
-							layer.msg("用户信息不存在",{time:2000});
-								break;
-							case "-1":
-							layer.msg("认证失败",{time:2000});
-							default:
-								break;
-						}
-					}else{
-						layer.msg("网络不给力，请稍后再试",{time:2000})
+					var data = err.data;
+					if(data == undefined || data == "" || data == null){
+						layer.msg('网络不给力，请稍后再试', {time: 1000});
+					}else if(data.code == "-1"){
+						layer.msg('您的用户名或密码错误，请联系客服', {time: 1000});
+					}else if(data.code == "-3"){
+						layer.msg('用户信息不存在，请重新登录', {time: 1000});
 					}
 				})
 			}
