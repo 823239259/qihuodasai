@@ -727,6 +727,7 @@
 			}
 		},
 		mounted: function() {
+			
 			//初始化页面高度
 			var h = window.screen.height - $("#topbar").height() - $("#navbar").height() - 20;
 //			$(".main").height(h);
@@ -746,6 +747,7 @@
 //			}.bind(this), false);
 		},
 		activated: function() {
+			this.bondShow = false;
 			//初始化页面显示申请开户
 			this.isselected = 0;
 			this.show = true;
