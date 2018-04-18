@@ -10,10 +10,10 @@
 					</div>
 				</div>
 				<div class="acount_safe_btm">
-					<p>您设置了<span>{{project}}</span>个保护，还有<span>{{5-project}}</span>保护项可设置</p>
+					<p>您设置了<span>{{project}}</span>个保护，还有<span>{{4-project}}</span>保护项可设置</p>
 					<table>
 						<tbody>
-							<tr>
+							<!--<tr>
 								<td><i class="icon icon_realname" :class="{current: realName != null}"></i></td>
 								<td>实名认证</td>
 								<td v-if="realName == null">未认证</td>
@@ -22,7 +22,7 @@
 								<td v-else="realName!=null">认证信息：{{username}}</td>
 								<td v-on:click="toCertification" v-if="realName == null" class="chang_color">去认证</td>
 								<td v-else="realName != null"></td>
-							</tr>
+							</tr>-->
 							<tr>
 								<td><i class="icon icon_pwd" :class="{current: isWithdrawPwd == true}"></i></td>
 								<td>提现密码</td>

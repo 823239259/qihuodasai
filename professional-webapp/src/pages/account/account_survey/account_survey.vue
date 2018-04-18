@@ -211,7 +211,7 @@
 	        },
 			//实名
 			toCertification:function(){
-				this.$router.push({path:'/safe_certification'});
+//				this.$router.push({path:'/safe_certification'});
 			},
 			//设置提现密码
 			towWithDrawlPassword:function(){
