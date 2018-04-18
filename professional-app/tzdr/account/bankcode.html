@@ -78,8 +78,8 @@
     				return; 
     			}else{ 
     				document.getElementById("user_name").value="";
-    				mui.toast("请先实名认证！");
-    				mui.openWindow("verified.html");
+//  				mui.toast("请先实名认证！");
+//  				mui.openWindow("verified.html");
     				return;
     			}
     			return;
@@ -226,7 +226,13 @@
 				location.reload(true);
 				return;
 			},function(result){
-				mui.toast(result.message);
+				console.log(JSON.stringify(result));
+				if(result.code == 5){
+					mui.toast("提现中，不能删除该银行卡！！");
+				}else{
+					mui.toast(result.message);
+				}
+				
 				return;
 			},paramUrl)
 		};
@@ -242,11 +248,15 @@
 			card=document.getElementById("card").value;
 			var showCityPicker=document.getElementById("showCityPicker").value;
 			detailedAddress=document.getElementById("detailedAddress").value;
-			if(mui.isnull(username)){
-				mui.toast("请先实名认证！");
-				mui.openWindow("verified.html");
+//			if(mui.isnull(username)){
+//				mui.toast("请先实名认证！");
+//				mui.openWindow("verified.html");
+//				return;
+//			} 
+			if(document.getElementById("user_name").value == ""){
+				mui.toast("请输入开户名");
 				return;
-			} 
+			}
 			if(bank_list==-1){
 				mui.toast("请选择开户银行！");
 				return;
@@ -263,6 +273,7 @@
 				mui.toast("银行卡号不能为空且不能输入非法字符！");
 				return;
 			}
+			
 			
 			mui.each(bankList,function(i){
 				if(bankList[i].abbreviation==bank_list){
@@ -405,7 +416,8 @@
 		<ul class="mui-table-view aw_bc_bank">
 			<li class="mui-table-view-cell">
 				<label>开户姓名</label>
-				<input id="user_name" type="text" disabled="disabled" class="mui-input-clear" placeholder="" data-input-clear="5">
+				<input id="user_name" type="text" class="mui-input-clear" placeholder="输入开户名" data-input-clear="5">
+				
 			</li>			
 			<li class="mui-table-view-cell">
 				<label>开户银行</label>							

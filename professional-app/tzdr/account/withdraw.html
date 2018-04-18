@@ -73,46 +73,46 @@
     			}
     		},paramUrl);
     		//去后台接口校验是否实名认证
-			mui.app_request("/user/getbalancerate",{
-				"businessType":4 
-			},function(result){
-				balance=document.getElementById("balance");
-				drawHandleFee=document.getElementById("drawHandleFee");
-				freeCashMoney = document.getElementById("freeCashMoney");
-				//是否实名
-				if(result.data.isCertification){
-					Certification=true;
-				}
-				if(!mui.isnull(result.data.balance)){
-					balance.innerHTML=result.data.balance;
-				}else{
-					balance.innerHTML="0.00";
-				}
-				
-				if(!mui.isnull(result.data.drawHandleFee)){
-//					drawHandleFee.innerHTML=result.data.drawHandleFee;
-				}else{
-					drawHandleFee.innerHTML="0.00";
-				}
-				if(!mui.isnull(result.data.operateMoney)){
-					freeCashMoney.innerHTML=result.data.operateMoney;
-				}else{
-					freeCashMoney.innerHTML="0.00";
-				}
-				//是否设置了提现密码
-				if(result.data.isSetDrawPwd){
-					SetDrawPwd=true;
-					document.getElementById("drawpassword").placeholder="输入密码";
-					document.getElementById("drawpassword").removeAttribute("readonly");
-					$("#modifyPassword").css("display","block");
-				}else{
-					$("#modifyPassword").css("display","block");
-					document.getElementById("drawpassword").placeholder="未设置提现密码";
-					document.getElementById("drawpassword").setAttribute("readonly","readonly");
-				}
-			},function(result){
-				return;
-			});
+//			mui.app_request("/user/getbalancerate",{
+//				"businessType":4 
+//			},function(result){
+//				balance=document.getElementById("balance");
+//				drawHandleFee=document.getElementById("drawHandleFee");
+//				freeCashMoney = document.getElementById("freeCashMoney");
+//				//是否实名
+//				if(result.data.isCertification){
+//					Certification=true;
+//				}
+//				if(!mui.isnull(result.data.balance)){
+//					balance.innerHTML=result.data.balance;
+//				}else{
+//					balance.innerHTML="0.00";
+//				}
+//				
+//				if(!mui.isnull(result.data.drawHandleFee)){
+////					drawHandleFee.innerHTML=result.data.drawHandleFee;
+//				}else{
+//					drawHandleFee.innerHTML="0.00";
+//				}
+//				if(!mui.isnull(result.data.operateMoney)){
+//					freeCashMoney.innerHTML=result.data.operateMoney;
+//				}else{
+//					freeCashMoney.innerHTML="0.00";
+//				}
+//				//是否设置了提现密码
+//				if(result.data.isSetDrawPwd){
+//					SetDrawPwd=true;
+//					document.getElementById("drawpassword").placeholder="输入密码";
+//					document.getElementById("drawpassword").removeAttribute("readonly");
+//					$("#modifyPassword").css("display","block");
+//				}else{
+//					$("#modifyPassword").css("display","block");
+//					document.getElementById("drawpassword").placeholder="未设置提现密码";
+//					document.getElementById("drawpassword").setAttribute("readonly","readonly");
+//				}
+//			},function(result){
+//				return;
+//			});
 		});
 		
 		
@@ -203,16 +203,16 @@
 
 		function bindBankcard(){
 			
-			if(!Certification){
-				plus.nativeUI.confirm("请先进行实名认证",function(e){
-					if(e.index==1){
-						mui.openWindow({url:"verified.html",id:"verified",extras:{backPage:'withdraw'}});
-					}else if(e.index==0){
-						mui.openWindow("withdraw.html","withdraw");
-					}
-				},"提示",['取消','去认证']);
-			return;
-			}
+//			if(!Certification){
+//				plus.nativeUI.confirm("请先进行实名认证",function(e){
+//					if(e.index==1){
+//						mui.openWindow({url:"verified.html",id:"verified",extras:{backPage:'withdraw'}});
+//					}else if(e.index==0){
+//						mui.openWindow("withdraw.html","withdraw");
+//					}
+//				},"提示",['取消','去认证']);
+//			return;
+//			}
 			
 			//去绑定银行卡
 			mui.openWindow("bankcode.html","bankcode");
