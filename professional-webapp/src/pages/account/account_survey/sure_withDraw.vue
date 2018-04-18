@@ -165,19 +165,23 @@
 					if(res.success == true){
 						if(res.code == 1){
 							var phoneNumber = res.data.tname;
-							this.username = '*' + phoneNumber.substr(1,5);
+							this.username = "";
 							this.bankName = res.data.abbreviation;
 							this.bankChnName = res.data.bankName;
 							var card = res.data.card;
-							this.bankCrad = "**** **** **** "+card.substr(15,20);
+							this.bankCrad = "**** **** **** "+card.substring(15,20);
 							this.bankCardShow = res.data.card;
 						}
 					}
 				}).catch((err)=>{
-					if(err.data.success == false){
-						
+					console.log(err)
+					var data = err.data;
+					if(data == undefined || data == ""){
+						layer.msg("网络不给力，请稍后再试",{time:2000})
+					}else{
+						layer.msg(data.message,{time:2000})
 					}
-					layer.msg("网络不给力，请稍后再试",{time:2000})
+					
 				})
 			}
 		},
