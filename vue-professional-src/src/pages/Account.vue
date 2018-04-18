@@ -30,12 +30,12 @@
 					<img src="../assets/img/arrow.png" class="img_arrow"/>
 					<span></span>
 				</li>
-				<li @tap='toidentify'>
+				<!--<li @tap='toidentify'>
 					<img src="../assets/img/relname.png" />
 					<span>实名认证</span>
 					<img src="../assets/img/arrow.png" class="img_arrow"/>
 					<span>{{isCertification ? '已认证' : '未认证'}}</span>
-				</li>
+				</li>-->
 				<li @tap='editPhone'>
 					<img src="../assets/img/phone_bind.png" />
 					<span>手机绑定</span>
