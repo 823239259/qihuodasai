@@ -172,17 +172,17 @@
 	                    }
 	                })
 				})
-				document.getElementById("toCertification").addEventListener("tap",function(){
-					var btnArray = ['否', '是'];
-	                mui.confirm('您还未登录，请您先登录', '登录提示', btnArray, function(e) {
-	                    if (e.index == 1) {
-	                        mui.openWindow({
-	                        	url:"../login/login.html",
-	                        	id : "login.html"
-	                        })
-	                    }
-	                })
-				})
+//				document.getElementById("toCertification").addEventListener("tap",function(){
+//					var btnArray = ['否', '是'];
+//	                mui.confirm('您还未登录，请您先登录', '登录提示', btnArray, function(e) {
+//	                    if (e.index == 1) {
+//	                        mui.openWindow({
+//	                        	url:"../login/login.html",
+//	                        	id : "login.html"
+//	                        })
+//	                    }
+//	                })
+//				})
 				document.getElementById("to_bindphone").addEventListener("tap",function(){
 					var btnArray = ['否', '是'];
 	                mui.confirm('您还未登录，请您先登录', '登录提示', btnArray, function(e) {
@@ -344,14 +344,14 @@
 						</div>
 					</div>
 				</li>
-				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="user_verified">
+				<!--<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="user_verified">
 					<div class="find_tab_div">
 						<img src="../../images/ac_04.png">
 						<div id="toCertification">
 							实名认证<br/><span id="Certification" style="color: #ff4c4c;">未认证</span>
 						</div>
 					</div>
-				</li>
+				</li>-->
 				<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-6" id="telPhone">
 					<div class="find_tab_div">
 						<img src="../../images/ac_05.png">
