@@ -97,55 +97,11 @@
 							}
 						}
 					}).catch((err)=>{
-						if(err.data.success == false){
-							switch (err.data.code){
-								case '-1':
-									layer.msg("认证失败",{time:2000});
-									break;
-								case '0':
-									layer.msg("token失效",{time:2000});
-									break;
-								case '2':
-									layer.msg("此账户暂未绑定银行卡",{time:2000});
-									break;
-								case '3':
-									layer.msg("用户信息不存在",{time:2000});
-									break;
-								case '4':
-									layer.msg("银行卡卡号不存在",{time:2000});
-									break;
-								case '5':
-									layer.msg("存在欠费无法提现",{time:2000});
-									break;
-								case '6':
-									layer.msg("系统升级期间无法提现",{time:2000});
-									break;
-								case '7':
-									layer.msg("余额不足不能提现",{time:2000});
-									break;
-								case '8':
-									layer.msg("当天取款次数不能超过5次",{time:2000});
-									break;
-								case '9':
-									layer.msg("每次提现金额不能小于10元",{time:2000});
-									break;
-								case '10':
-									layer.msg("提现密码错误",{time:2000});
-									break;
-								case '11':
-									layer.msg("暂不支持此银行提现",{time:2000});
-									break;
-								case '12':
-									layer.msg("单笔提现金额不能超过5万元",{time:2000});
-									break;
-								case '15':
-									layer.msg("提现渠道设置参数错误",{time:2000});
-									break;
-								default:
-									break;
-							}
-						}else{
+						var data = err.data ;
+						if(data == undefined || data == ""){
 							layer.msg("网络不给力，请稍后再试",{time:2000})
+						}else{
+							layer.msg(data.message,{time:2000})
 						}
 					})
 				}
