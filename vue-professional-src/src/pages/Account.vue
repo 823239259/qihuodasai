@@ -173,7 +173,7 @@
 						if(data.code == 1){
 							this.username = this.userInfo.username;
 							this.isCertification = data.data.isCertification;
-							if(this.isCertification == true) this.username = data.data.username;
+//							if(this.isCertification == true) this.username = data.data.username;
 							this.balance = pro.parseTwoFloat(data.data.balance);
 						}
 					}else{
