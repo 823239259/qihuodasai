@@ -33,19 +33,20 @@
 				<ul>
 					<li>
 						<span>新</span>
-						<span :class="{red: detail.LastQuotation.LastPrice - detail.LastQuotation.PreSettlePrice >=0, green: detail.LastQuotation.LastPrice - detail.LastQuotation.PreSettlePrice < 0}">{{detail.LastQuotation.LastPrice | fixNum2(orderTemplist[detail.LastQuotation.CommodityNo].DotSize)}}</span>
-						<span>{{detail.LastQuotation.TotalVolume}}</span>
+						<span :class="{red: showNewPrice.LastPrice - showNewPrice.PreSettlePrice >=0, green: showNewPrice.LastPrice - showNewPrice.PreSettlePrice < 0}">{{showNewPrice.LastPrice}}</span>
+						<span>{{showNewPrice.TotalVolume}}</span>
 					</li>
 					<li>
 						<span>卖</span>
-						<span :class="{red: detail.LastQuotation.AskPrice1 - detail.LastQuotation.PreSettlePrice >=0, green: detail.LastQuotation.AskPrice1 - detail.LastQuotation.PreSettlePrice < 0}">{{detail.LastQuotation.AskPrice1 | fixNum2(orderTemplist[detail.LastQuotation.CommodityNo].DotSize)}}</span>
-						<span>{{detail.LastQuotation.AskQty1}}</span>
+						<span :class="{red: showNewPrice.AskPrice1 - showNewPrice.PreSettlePrice >=0, green: showNewPrice.AskPrice1 - showNewPrice.PreSettlePrice < 0}">{{showNewPrice.AskPrice1}}</span>
+						<span>{{showNewPrice.AskQty1}}</span>
 					</li>
 					<li>
 						<span>买</span>
-						<span :class="{red: detail.LastQuotation.BidPrice1 - detail.LastQuotation.PreSettlePrice >=0, green: detail.LastQuotation.BidPrice1 - detail.LastQuotation.PreSettlePrice < 0}">{{detail.LastQuotation.BidPrice1 | fixNum2(orderTemplist[detail.LastQuotation.CommodityNo].DotSize)}}</span>
-						<span>{{detail.LastQuotation.BidQty1}}</span>
+						<span :class="{red: showNewPrice.BidPrice1 - showNewPrice.PreSettlePrice >=0, green: showNewPrice.BidPrice1 - showNewPrice.PreSettlePrice < 0}">{{showNewPrice.BidPrice1}}</span>
+						<span>{{showNewPrice.BidQty1}}</span>
 					</li>
+					 <!--| fixNum2(orderTemplist[showNewPrice.CommodityNo].DotSize)-->
 				</ul>
 			</div>
 		</div>
@@ -223,7 +224,8 @@
 				obj: [],
 				numReg: /^[0-9]*$/,
 				moneyReg: /^(([1-9]\d*)|0)(\.\d*)?$/,
-				dotSize: ''
+				dotSize: '',
+				showNewPrice:{}
 			}
 		},
 		filters:{
@@ -380,6 +382,11 @@
 					this.msg = n.slice(0,-1);
 				}.bind(this), 1000);
 			},
+			Parameters:function(n,o){
+				if(n.CommodityNo == this.$store.state.market.currentNo){
+					this.showNewPrice = n
+				}
+			},
 			selectId:function(n,o){
 				if(n != undefined){
 					var arr = n.split('&');
@@ -474,7 +481,7 @@
 					this.$store.state.market.dealListCont.unshift(obj);
 					
 				}.bind(this));
-			}
+			},
 		},
 		methods: {
 			showSelect: function(){
@@ -788,6 +795,7 @@
 			}
 		},
 		mounted: function(){
+			this.showNewPrice = this.Parameters;
 			//取小数点保留位数、改变正则
 			this.dotSize = this.orderTemplist[this.$store.state.market.currentdetail.LastQuotation.CommodityNo].DotSize;
 			//tab默认选中第一个
