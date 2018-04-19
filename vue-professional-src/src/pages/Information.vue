@@ -638,7 +638,8 @@
 					$(e.target).html('收起');
 					$(e.target).prev().css({
 						'overflow': 'visible',
-						'height': 'auto'
+						'height': 'auto',
+						'line-height':"20px"
 					});
 				} else {
 					$(e.target).html('展开');
