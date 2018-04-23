@@ -276,7 +276,7 @@
 									break;
 								case '2':
 									this.$children[0].isShow = true;
-									this.msg = '此账户暂未绑定银行卡';
+									this.msg = '提现失败，请联系客服';
 									break;
 								case '3':
 									this.$children[0].isShow = true;
