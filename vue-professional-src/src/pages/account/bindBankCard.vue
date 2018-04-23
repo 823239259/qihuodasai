@@ -254,7 +254,8 @@
 							card: this.card,
 							prov: this.province,
 							city: this.city,
-							address: this.address
+							address: this.address,
+							realName:this.username
 						},
 						timeout: 5000
 					}).then(function(e){
