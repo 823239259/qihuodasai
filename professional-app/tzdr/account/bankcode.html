@@ -242,12 +242,14 @@
 		var city;
 		var detailCity;
 		var detailedAddress;
+		var realname;
 		function add_bank(){
 			var username=document.getElementById("user_name").value;
 			bank_list=document.getElementById("bank_list").value;
 			card=document.getElementById("card").value;
 			var showCityPicker=document.getElementById("showCityPicker").value;
 			detailedAddress=document.getElementById("detailedAddress").value;
+			realname = document.getElementById("user_name").value;
 //			if(mui.isnull(username)){
 //				mui.toast("请先实名认证！");
 //				mui.openWindow("verified.html");
@@ -307,7 +309,8 @@
 				"prov":city,
 				"city":detailCity,
 				"address":detailedAddress,
-				"card":card
+				"card":card,
+				"realName":realname
 			},function(result){
 				mui.toast("添加成功！");
 				location.reload(true);
