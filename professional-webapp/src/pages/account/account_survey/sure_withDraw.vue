@@ -82,7 +82,6 @@
 				    money:this.withMoney,
 				    withdrawPwd:this.withdrawPwd
 				}
-				console.log(data)
 				if(this.withdrawPwd==''){
 					layer.msg("请输入提现密码");
 				}else if(pwdReg.test(this.withdrawPwd)==false){

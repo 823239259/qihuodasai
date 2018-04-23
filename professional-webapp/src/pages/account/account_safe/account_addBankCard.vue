@@ -113,7 +113,8 @@
 						card:this.bankId,
 						prov:this.province,
 						city:this.city,
-						address: this.address
+						address: this.address,
+						realName:this.username
 					};
 					var headers = {
 						token : JSON.parse(localStorage.user).token,
@@ -133,57 +134,11 @@
 							}
 						}
 					}).catch((err)=>{
-						console.log(err)
-						if(err.data.success == false){
-							switch (err.data.code){
-								case '-1':
-									this.bank ='';
-									this.bankId='';
-									this.province='';
-									this.city='';
-									this.address='';
-									layer.msg("认证失败",{time:2000})
-									break;
-								case '2':
-									this.bank ='';
-									this.bankId='';
-									this.province='';
-									this.city='';
-									this.address='';
-									layer.msg("设置失败",{time:2000})
-									break;
-								case '3':
-									this.bank ='';
-									this.bankId='';
-									this.province='';
-									this.city='';
-									this.address='';
-									layer.msg("用户信息不存在",{time:2000})
-									break;
-								case '4':
-									this.bank ='';
-									this.bankId='';
-									this.province='';
-									this.city='';
-									this.address='';
-									layer.msg("银行卡号已经存在",{time:2000})
-									break;
-								case '5':
-									this.bank ='';
-									this.bankId='';
-									this.province='';
-									this.city='';
-									this.address='';
-									layer.msg("请先实名，方可添加银行卡",{time:2000})
-									break;
-							}
+						var data = err.data;
+						if(data == undefined || data == ""){
+							layer.msg("网络不给力，请稍后再试",{time:2000});
 						}else{
-							this.bank ='';
-							this.bankId='';
-							this.province='';
-							this.city='';
-							this.address='';
-							layer.msg("网络不给力，请稍后再试",{time:2000})
+							layer.msg(data.message,{time:2000});
 						}
 					});
 				}
