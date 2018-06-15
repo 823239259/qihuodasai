@@ -334,9 +334,9 @@ export default new Vuex.Store({
 	},
 	state: {
 		//test 测试环境，online 正式环境
-		environment: 'test',
+		environment: 'onoline',
 		//打包的时候，值为 build ，开发的时候，值为 dev
-		setting: 'dev',
+		setting: 'build',
 		//请求的操盘参数数据
 		tempTradeapply: {},
 		quoteSocket: {},
@@ -1398,8 +1398,6 @@ export default new Vuex.Store({
 						context.state.market.qryHoldTotalArr.push(parameters);
 						context.state.market.qryHoldTotalKV[parameters.CommodityNo] = parameters;
 						//初始化持仓列表中的浮动盈亏
-						context.dispatch('updateHoldFloatingProfit',parameters);
-						
 						var obj={};
 						obj.name=context.state.market.orderTemplist[parameters.CommodityNo].CommodityName;
 						obj.type=function(){
@@ -1423,7 +1421,7 @@ export default new Vuex.Store({
 						obj.total_color='green';
 						obj.commodityNocontractNo = context.state.market.orderTemplist[parameters.CommodityNo].LastQuotation.CommodityNo
 													+context.state.market.orderTemplist[parameters.CommodityNo].LastQuotation.ContractNo;
-						
+						obj.Drection = parameters.Drection;
 						context.state.market.positionListCont.unshift(obj);
 					}
 					
@@ -2101,6 +2099,7 @@ export default new Vuex.Store({
 				obj.total_color='green';
 				obj.commodityNocontractNo = context.state.market.orderTemplist[parameters.CommodityNo].LastQuotation.CommodityNo
 											+context.state.market.orderTemplist[parameters.CommodityNo].LastQuotation.ContractNo;
+				obj.Drection = parameters.Drection;
 				
 				if(parameters.HoldNum!=0){
 					context.state.market.positionListCont.unshift(obj);	
@@ -2123,7 +2122,7 @@ export default new Vuex.Store({
 						
 						positionListContCurrent.price = parseFloat(parameters.OpenAvgPrice)
 															.toFixed(context.state.market.orderTemplist[parameters.CommodityNo].DotSize);
-															
+						positionListContCurrent.Drection = parameters.Drection;									
 						context.state.market.positionListCont.splice(positionListContCurrentIndex,1,positionListContCurrent);
 						
 //						context.state.market.qryHoldTotalArr[context.state.market.qryHoldTotalArr.length-1-positionListContCurrentIndex].HoldNum = parameters.HoldNum;

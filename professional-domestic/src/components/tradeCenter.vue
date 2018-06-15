@@ -1617,6 +1617,20 @@
 					bottom: 5px*@ip6;
 					right: 6px*@ip6;
 				}
+				.backPosition{
+					position: absolute;
+					background-color: #36394d;
+					top: 40px;
+					left: 0;
+					span{
+						color: #ccd4ff;
+						width: 100%;
+						border-bottom: 1px solid black;
+						&:last-child{
+							border: none;
+						}
+					}
+				}
 			}
 			span{
 				font-size: @fs14*@ip6;
@@ -2011,6 +2025,20 @@
 					position: absolute;
 					bottom: 5px*@ip5;
 					right: 6px*@ip5;
+				}
+				.backPosition{
+					position: absolute;
+					background-color: #36394d;
+					top: 40px;
+					left: 0;
+					span{
+						color: #ccd4ff;
+						width: 100%;
+						border-bottom: 1px solid black;
+						&:last-child{
+							border: none;
+						}
+					}
 				}
 			}
 			span{
