@@ -334,9 +334,9 @@ export default new Vuex.Store({
 	},
 	state: {
 		//test 测试环境，online 正式环境
-		environment: 'onoline',
+		environment: 'test',
 		//打包的时候，值为 build ，开发的时候，值为 dev
-		setting: 'build',
+		setting: 'dev',
 		//请求的操盘参数数据
 		tempTradeapply: {},
 		quoteSocket: {},
@@ -2070,8 +2070,8 @@ export default new Vuex.Store({
 			var positionListContCurrentIndex=0;
 			context.state.market.positionListCont.forEach(function(e,i){
 				if(e.commodityNocontractNo==parameters.ContractCode && e.Drection == parameters.Drection){
-					positionListContCurrent = e;
-					positionListContCurrentIndex = i;
+					positionListContCurrent= e;
+					positionListContCurrentIndex=i;
 					isExist = true;
 				}
 			});

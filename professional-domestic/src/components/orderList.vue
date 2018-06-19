@@ -11,7 +11,7 @@
 				<span>浮动盈利</span>
 			</li>
 			<template v-for="k in datas">
-				<li @tap="listTap" :id="k.commodityNocontractNo">
+				<li @tap="listTap($event,k.Drection)" :id="k.commodityNocontractNo">
 					<div :class="[list_cont,{current:k.showbar}]">
 						<span>{{k.name}}</span>
 						<span :class="{red: k.type_color == 'red', green: k.type_color == 'green'}">{{k.type}}</span>
@@ -47,7 +47,8 @@
 				datas: '',
 				orderListId: '',
 				tempText:{},
-				selectedOrderList: ''
+				selectedOrderList: '',
+				drection:''
 			}
 		},
 		computed: {
@@ -100,14 +101,17 @@
 			},
 		},
 		methods: {
-			listTap: function(obj){
+			listTap: function(obj,id){
 				if(!$(obj.currentTarget).hasClass("current")){
 					$(obj.currentTarget).addClass("current");
 					$(obj.currentTarget).siblings().removeClass("current");
 					this.orderListId = $(obj.currentTarget).attr("id");
+					this.drection = parseFloat(id);
+					
 				}else{
 					$(obj.currentTarget).removeClass("current");
 					this.orderListId =null;
+					this.drection = null;
 				}
 			},
 			closeAllOut:function(){
@@ -174,7 +178,7 @@
 				var length= this.qryHoldTotalArr.length;
 				var qryHoldTotalArr = this.qryHoldTotalArr;
 				for(positionCurrent in this.positionListCont){
-					if(this.orderListId == qryHoldTotalArr[length-1-positionCurrent].ContractCode){
+					if(this.orderListId == qryHoldTotalArr[length-1-positionCurrent].ContractCode && this.drection ==  qryHoldTotalArr[length-1-positionCurrent].Drection){
 						i++;
 						this.$children[1].isshow = true;
 						var buildIndex=0;
