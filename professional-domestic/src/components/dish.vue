@@ -367,7 +367,7 @@
 							"LimitPrice":0.00,
 							"TriggerPrice":0,
 							"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++),
-							"OpenCloseType":2
+							"OpenCloseType":1
 						}
 					};
 					this.buyText = b;
