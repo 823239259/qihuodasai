@@ -1125,10 +1125,10 @@
 			.limit_cont{
 				.limit_cont_col{
 					float: left;
-					width: 120px;
+					width: 90px;
 					height: 45px;
 					line-height: 45px;
-					padding: 0 10px;
+					padding-left: 10px;
 					background: @black;
 					border: 1px solid #12121a;
 					border-radius: 5px;
@@ -1137,7 +1137,7 @@
 					}
 					.ipt{
 						float: left;
-						width: 50px;
+						width: 30px;
 						height: 45px;
 						text-align: left;
 						padding: 5px;
@@ -1148,9 +1148,10 @@
 						color: @white;
 					}
 					&:last-child{
+						width: 150px;
 						margin-left: 13px;
 						.ipt{
-							width: 55px;
+							width: 90px;
 						}
 						span:last-child{
 							float: right;
@@ -1967,10 +1968,10 @@
 			.limit_cont{
 				.limit_cont_col{
 					float: left;
-					width: 120px*@ip5;
+					width: 90px*@ip5;
 					height: 45px*@ip5;
 					line-height: 45px*@ip5;
-					padding: 0 10px*@ip5;
+					padding-left:10px*@ip5;
 					background: @black;
 					border: 1px solid #12121a;
 					border-radius: 5px*@ip5;
@@ -1979,7 +1980,7 @@
 					}
 					.ipt{
 						float: left;
-						width: 50px*@ip5;
+						width: 30px*@ip5;
 						height: 45px*@ip5;
 						text-align: left;
 						padding: 5px*@ip5;
@@ -1991,8 +1992,9 @@
 					}
 					&:last-child{
 						margin-left: 13px*@ip5;
+						width: 110px;
 						.ipt{
-							width: 55px*@ip5;
+							width: 75px*@ip5;
 						}
 						span:last-child{
 							float: right;
