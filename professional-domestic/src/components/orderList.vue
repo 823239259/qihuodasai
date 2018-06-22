@@ -156,7 +156,7 @@
 				var qryHoldTotalArr = this.qryHoldTotalArr;
 				var dotSize;
 				for(positionCurrent in this.positionListCont){
-					if(this.orderListId == qryHoldTotalArr[length-1-positionCurrent].ContractCode){
+					if(this.orderListId == qryHoldTotalArr[length-1-positionCurrent].ContractCode && this.drection ==  qryHoldTotalArr[length-1-positionCurrent].Drection){
 						i++;
 						this.$refs.stopmoneyalert.isshow = true;
 						this.selectedOrderList = qryHoldTotalArr[length-1-positionCurrent];
