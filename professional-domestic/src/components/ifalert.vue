@@ -59,10 +59,15 @@
 									<option value="1">市价</option>
 									<option value="2">对手价</option>
 								</select>
+								<select class="fontwhite selectshort" v-model="OpenCloseType">
+									<option value="1">开仓</option>
+									<option value="2">平仓</option>
+									<option value="3">平今</option>
+								</select>
 							</li>
 							<li>
 								<span class="fontgray lot">手数</span>
-								<input type="number"  v-model="holdNum" class="fontwhite" />
+								<input type="number"  v-model="holdNum" class="fontwhite ipt30" />
 							</li>
 						</ol>
 					</li>
@@ -126,10 +131,15 @@
 									<option value="1">市价</option>
 									<option value="2">对手价</option>
 								</select>
+								<select class="fontwhite selectshort" v-model="OpenCloseType">
+									<option value="1">开仓</option>
+									<option value="2">平仓</option>
+									<option value="3">平今</option>
+								</select>
 								<span class="fontgray lot">手数</span>
 							</li>
 							<li>
-								<input type="text" v-model="timeHoldNum" class="fontwhite" />
+								<input type="text" v-model="timeHoldNum" class="fontwhite ipt30" />
 							</li>
 						</ol>
 					</li>
@@ -191,7 +201,8 @@
 				tipsMsg: '',
 				str: '',
 				msg: '',
-				moneyReg: /^(([1-9]\d*)|0)(\.\d*)?$/
+				moneyReg: /^(([1-9]\d*)|0)(\.\d*)?$/,
+				OpenCloseType:''
 			}
 		},
 		components: {alert, tipsDialog},
@@ -427,7 +438,8 @@
 													}else{
 														return parseFloat(this.inputAdditionalPrice);
 													}
-												}.bind(this))()
+												}.bind(this))(),
+								'OpenCloseType':this.OpenCloseType
 							}
 						};
 	//					this.tradeSocket.send(JSON.stringify(b));
@@ -475,7 +487,8 @@
 												}else{
 													return parseFloat(this.timeAddtionPrice);
 												}
-											}.bind(this))()
+											}.bind(this))(),
+							'OpenCloseType':this.OpenCloseType
 						}
 					};
 //					this.tradeSocket.send(JSON.stringify(b));	
@@ -503,7 +516,7 @@
 			
 			this.selectBuyOrSell = 0;
 			this.selectMarketOrLimited=1;
-			
+			this.OpenCloseType = 1;
 			
 			//-------------------时间条件------------------------
 			this.additionValue = 5;
@@ -644,6 +657,18 @@
 		padding: 0;
 		border-radius: 3px;
 	}
+	.ipt30{
+		width: 30px;
+		height: 32px;
+		background-color: #1b1b26;
+		color: white;
+		font-size: 16px;
+		text-align: center;
+		margin-left: 5px;
+		margin-bottom: 0;
+		padding: 0;
+		border-radius: 3px;
+	}
 	.today {
 		width: 275px;
 		text-align: center;
@@ -657,7 +682,7 @@
 		padding-left: 8px;
 	}
 	.lot {
-		margin-left: 20px;
+		margin-left: 5px;
 	}
 	.do {
 		border-bottom-left-radius: 5px;
@@ -806,6 +831,18 @@
 		padding: 0;
 		border-radius: 3px*@ip6;
 	}
+	.ipt30{
+		width: 30px;
+		height: 32px;
+		background-color: #1b1b26;
+		color: white;
+		font-size: 16px;
+		text-align: center;
+		margin-left: 5px;
+		margin-bottom: 0;
+		padding: 0;
+		border-radius: 3px;
+	}
 	.today {
 		width: 275px*@ip6;
 		text-align: center;
@@ -819,7 +856,7 @@
 		padding-left: 8px*@ip6;
 	}
 	.lot {
-		margin-left: 20px*@ip6;
+		margin-left: 5px*@ip6;
 	}
 	.do {
 		border-bottom-left-radius: 5px*@ip6;
@@ -968,6 +1005,18 @@
 		padding: 0;
 		border-radius: 3px*@ip5;
 	}
+	.ipt30{
+		width: 25px;
+		height: 32px;
+		background-color: #1b1b26;
+		color: white;
+		font-size: 16px;
+		text-align: center;
+		margin-left: 5px;
+		margin-bottom: 0;
+		padding: 0;
+		border-radius: 3px;
+	}
 	.today {
 		width: 275px*@ip5;
 		text-align: center;
@@ -981,7 +1030,7 @@
 		padding-left: 8px*@ip6;
 	}
 	.lot {
-		margin-left: 20px*@ip5;
+		margin-left: 3px*@ip5;
 	}
 	.do {
 		border-bottom-left-radius: 5px*@ip5;
