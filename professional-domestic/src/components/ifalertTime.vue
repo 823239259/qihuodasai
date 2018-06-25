@@ -54,6 +54,11 @@
 								<option value="1">市价</option>
 								<option value="2">对手价</option>
 							</select>
+							<select class="fontwhite selectshort" v-model="OpenCloseType">
+								<option value="1">开仓</option>
+								<option value="2">平仓</option>
+								<option value="3">平今</option>
+							</select>
 							<span class="fontgray lot">手数</span>
 						</li>
 						<li>
@@ -117,7 +122,8 @@
 				tipsMsg: '',
 				str: '',
 				msg: '',
-				moneyReg: /^(([1-9]\d*)|0)(\.\d*)?$/
+				moneyReg: /^(([1-9]\d*)|0)(\.\d*)?$/,
+				OpenCloseType:''
 			}
 		},
 		props: ['objstr'],
@@ -275,7 +281,8 @@
 												}
 										}.bind(this))(),
 							'AdditionType':parseInt(this.additionValue),
-							'AdditionPrice':parseFloat(this.timeAddtionPrice)
+							'AdditionPrice':parseFloat(this.timeAddtionPrice),
+							'OpenCloseType':parseInt(this.OpenCloseType)
 							
 						}
 					};
@@ -284,7 +291,7 @@
 			}
 		},
 		mounted:function(){
-			
+			this.OpenCloseType = 1;
 		}
 	}
 </script>
