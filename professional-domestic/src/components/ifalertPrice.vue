@@ -759,7 +759,7 @@
 		background-color: #242633;
 	}
 	.selectshort {
-		width: 52px*@ip5;
+		width: 50px*@ip5;
 		height: 32px*@ip5;
 		background-color: #1b1b26;
 		transform: translateY(-1.5px);
@@ -817,7 +817,7 @@
 		padding-left: 8px*@ip5;
 	}
 	.lot {
-		margin-left: 3px*@ip5;
+		margin-left: 1px;
 	}
 	.do {
 		border-bottom-left-radius: 5px*@ip5;

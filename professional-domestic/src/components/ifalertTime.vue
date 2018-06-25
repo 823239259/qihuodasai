@@ -434,7 +434,7 @@
 		padding-left: 8px;
 	}
 	.lot {
-		margin-left: 20px;
+		margin-left: 5px;
 	}
 	.do {
 		border-bottom-left-radius: 5px;
@@ -586,7 +586,7 @@
 		padding-left: 8px*@ip6;
 	}
 	.lot {
-		margin-left: 20px*@ip6;
+		margin-left: 5px*@ip6;
 	}
 	.do {
 		border-bottom-left-radius: 5px*@ip6;
@@ -738,7 +738,7 @@
 		padding-left: 8px*@ip5;
 	}
 	.lot {
-		margin-left: 20px*@ip5;
+		margin-left: 5px*@ip5;
 	}
 	.do {
 		border-bottom-left-radius: 5px*@ip5;
