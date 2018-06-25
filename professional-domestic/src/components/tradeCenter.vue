@@ -1584,7 +1584,7 @@
 					&:last-child{
 						margin-left: 13px*@ip6;
 						.ipt{
-							width: 55px*@ip6;
+							width: 50px*@ip6;
 						}
 						span:last-child{
 							float: right;
