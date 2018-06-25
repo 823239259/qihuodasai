@@ -439,7 +439,7 @@
 														return parseFloat(this.inputAdditionalPrice);
 													}
 												}.bind(this))(),
-								'OpenCloseType':this.OpenCloseType
+								'OpenCloseType':parseInt(this.OpenCloseType)
 							}
 						};
 	//					this.tradeSocket.send(JSON.stringify(b));
@@ -488,7 +488,7 @@
 													return parseFloat(this.timeAddtionPrice);
 												}
 											}.bind(this))(),
-							'OpenCloseType':this.OpenCloseType
+							'OpenCloseType':parseInt(this.OpenCloseType)
 						}
 					};
 //					this.tradeSocket.send(JSON.stringify(b));	
