@@ -173,6 +173,7 @@
 				}
 			},
 			closeOut:function(obj){
+				console.log("yyyyyyyyyyyyyyyyy");
 				var i = 0;
 				var positionCurrent=0;
 				var length= this.qryHoldTotalArr.length;

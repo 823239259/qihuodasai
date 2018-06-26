@@ -81,6 +81,8 @@
 				this.isshow=false
 			},
 			confirm: function() {
+//				console.log('gaidan');
+//				console.log('this.$store.state.market.openChangealertCurrentObj========='+JSON.stringify(this.$store.state.market.openChangealertCurrentObj))
 				/*
 				 * 确认并提交数据到后台
 				 * @param {String} a '提交到后台的地址';{String} b '提交到后台的对象字符串'
@@ -89,23 +91,24 @@
 				var b={
 					"Method":'ModifyOrder',
 					"Parameters":{
-						"OrderSysID":'',
+//						"OrderSysID":'',
 						"OrderID":this.$store.state.market.openChangealertCurrentObj.OrderID,
-						"ExchangeNo":this.templateList[Contract].ExchangeNo,
-						"CommodityNo":this.templateList[Contract].CommodityNo,
-						"ContractNo":this.templateList[Contract].ContractNo,
+//						"ExchangeNo":this.templateList[Contract].ExchangeNo,
+//						"CommodityNo":this.templateList[Contract].CommodityNo,
+//						"ContractNo":this.templateList[Contract].ContractNo,
 						"OrderNum":parseFloat(this.entrustNum),
-						"Direction":function(){
-										if(this.$store.state.market.openChangealertCurrentObj.buyOrSell=='买'){
-											return 0;
-										}else{
-											return 1;
-										}
-									},
+//						"Direction":function(){
+//										if(this.$store.state.market.openChangealertCurrentObj.buyOrSell=='买'){
+//											return 0;
+//										}else{
+//											return 1;
+//										}
+//									},
 						"OrderPrice":parseFloat(this.p),
-						"TriggerPrice":0
+//						"TriggerPrice":0
 					}
 				};
+//				console.log("bbbbb========="+JSON.stringify(b))
 				this.tradeSocket.send(JSON.stringify(b));
 				this.isshow = false;
 				

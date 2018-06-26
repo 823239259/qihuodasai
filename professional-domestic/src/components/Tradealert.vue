@@ -56,6 +56,7 @@
 //					this.$parent.stopLossList.splice(i,1);
 				}else{
 					if(this.objstr){
+						console.log(this.objstr)
 						this.tradeSocket.send(this.objstr);
 					}
 				}

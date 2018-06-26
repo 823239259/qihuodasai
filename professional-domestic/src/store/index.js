@@ -2021,9 +2021,11 @@ export default new Vuex.Store({
 			if(parameters.OrderStatus < 3 ){
 //				context.state.market.OnRspOrderInsertOrderListCont.push(parameters);
 				if(isExist==true){
+					console.log("mmmmmmmmmmmmmmm")
 					currentObj.delegatePrice = parameters.OrderPrice;
 					currentObj.delegateNum = parameters.OrderNum;
 					currentObj.ApplyOrderNum = parameters.OrderNum- parameters.TradeNum;
+					currentObj.ContractCode = parameters.ContractCode;
 					context.state.market.orderListCont.splice(index,1,currentObj);
 					
 					context.state.market.OnRspOrderInsertOrderListCont[context.state.market.OnRspOrderInsertOrderListCont.length-index-1].OrderPrice
