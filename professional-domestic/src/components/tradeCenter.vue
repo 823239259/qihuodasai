@@ -102,7 +102,7 @@
 					<span>挂单时间</span>
 				</li>
 				<template v-for="k in orderListCont">
-					<li @tap="listTap" :class="[{current:k.showbar}]" :id="k.OrderID">
+					<li @tap="listTap($event,k.OrderID)" :class="[{current:k.showbar}]" :id="k.OrderID">
 						<span>{{k.commodityName}}</span>
 						<span>{{k.buyOrSell}}</span>
 						<span>{{k.delegatePrice}}</span>
@@ -295,6 +295,7 @@
 			},
 			objst: function(){
 				if(this.buyText){
+//					console.log('this.buyText============='+JSON.stringify(this.buyText));
 					return JSON.stringify(this.buyText);
 				}
 			},
@@ -349,6 +350,7 @@
 				return this.$store.state.market.OnRspOrderInsertOrderListCont;
 			},
 			orderListCont(){
+//				console.log("this.$store.state.market.orderListCont========="+JSON.stringify(this.$store.state.market.orderListCont));
 				return this.$store.state.market.orderListCont;
 			},
 			OnRspOrderInsertEntrustCont(){
@@ -582,6 +584,7 @@
 					}
 				}.bind(this));
 				if(isExist==true){
+//					console.log("CurrentObj======="+JSON.stringify(CurrentObj));
 					var Contract = CurrentObj.ContractCode.substring(0,CurrentObj.ContractCode.length-4);
 					var b={
 						"Method":'CancelOrder',
@@ -629,11 +632,12 @@
 				if(isExist==true){}
 				
 			},
-			listTap: function(obj){
+			listTap: function(obj,id){
 				if(!$(obj.currentTarget).hasClass("current")){
 					$(obj.currentTarget).addClass("current");
 					$(obj.currentTarget).siblings().removeClass("current");
-					this.orderListId = $(obj.currentTarget).attr("id");
+					this.orderListId = id;
+//					console.log("id=========="+id);
 				}else{
 					$(obj.currentTarget).removeClass("current");
 				}

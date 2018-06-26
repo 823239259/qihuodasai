@@ -2018,14 +2018,15 @@ export default new Vuex.Store({
 					currentObj = e;
 				}
 			});
+//			console.log("currentObjcurrentObjcurrentObj++++++++++++"+JSON.stringify(currentObj))
 			if(parameters.OrderStatus < 3 ){
 //				context.state.market.OnRspOrderInsertOrderListCont.push(parameters);
 				if(isExist==true){
-					console.log("mmmmmmmmmmmmmmm")
+//					console.log("mmmmmmmmmmmmmmm")
 					currentObj.delegatePrice = parameters.OrderPrice;
 					currentObj.delegateNum = parameters.OrderNum;
 					currentObj.ApplyOrderNum = parameters.OrderNum- parameters.TradeNum;
-					currentObj.ContractCode = parameters.ContractCode;
+					currentObj.ContractCode = (parameters.CommodityNo+parameters.ContractNo);
 					context.state.market.orderListCont.splice(index,1,currentObj);
 					
 					context.state.market.OnRspOrderInsertOrderListCont[context.state.market.OnRspOrderInsertOrderListCont.length-index-1].OrderPrice
@@ -2039,6 +2040,10 @@ export default new Vuex.Store({
 				return true;
 			}else{
 				if(isExist==true){
+//					console.log("8988989898999898");
+//					console.log("context.state.market.orderListCont========="+JSON.stringify(context.state.market.orderListCont));
+//					console.log("index========"+index);
+//					console.log("context.state.market.orderListCont.splice(index,1)========"+JSON.stringify(context.state.market.orderListCont.splice(index,1)))
 					context.state.market.orderListCont.splice(index,1);
 					context.state.market.OnRspOrderInsertOrderListCont.splice(context.state.market.OnRspOrderInsertOrderListCont.length-index-1,1);
 					context.state.market.layer = parameters.StatusMsg + ':合约【'+ parameters.ContractCode +'】,订单号:【'+ parameters.OrderID +'】' + + Math.floor(Math.random()*10);
@@ -2047,6 +2052,7 @@ export default new Vuex.Store({
 		},
 		appendApply:function(context,parameters){
 			if( parameters.OrderStatus < 3 ) { // 订单已提交、排队中、部分成交 显示到挂单列表
+//				parameters.ContractCode = (parameters.CommodityNo+parameters.ContractNo);
 				context.state.market.OnRspOrderInsertOrderListCont.push(parameters);
 			}
 		},
