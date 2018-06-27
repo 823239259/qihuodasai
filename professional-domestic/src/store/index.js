@@ -2027,6 +2027,7 @@ export default new Vuex.Store({
 					currentObj.delegateNum = parameters.OrderNum;
 					currentObj.ApplyOrderNum = parameters.OrderNum- parameters.TradeNum;
 					currentObj.ContractCode = (parameters.CommodityNo+parameters.ContractNo);
+					console.log("parameters.CommodityNo+parameters.ContractNo========="+(parameters.CommodityNo+parameters.ContractNo))
 					context.state.market.orderListCont.splice(index,1,currentObj);
 					
 					context.state.market.OnRspOrderInsertOrderListCont[context.state.market.OnRspOrderInsertOrderListCont.length-index-1].OrderPrice
@@ -2040,7 +2041,7 @@ export default new Vuex.Store({
 				return true;
 			}else{
 				if(isExist==true){
-//					console.log("8988989898999898");
+					console.log("8988989898999898");
 //					console.log("context.state.market.orderListCont========="+JSON.stringify(context.state.market.orderListCont));
 //					console.log("index========"+index);
 //					console.log("context.state.market.orderListCont.splice(index,1)========"+JSON.stringify(context.state.market.orderListCont.splice(index,1)))
@@ -2052,7 +2053,7 @@ export default new Vuex.Store({
 		},
 		appendApply:function(context,parameters){
 			if( parameters.OrderStatus < 3 ) { // 订单已提交、排队中、部分成交 显示到挂单列表
-//				parameters.ContractCode = (parameters.CommodityNo+parameters.ContractNo);
+				parameters.ContractCode = (parameters.CommodityNo+parameters.ContractNo);
 				context.state.market.OnRspOrderInsertOrderListCont.push(parameters);
 			}
 		},
@@ -2419,15 +2420,14 @@ export default new Vuex.Store({
 		initQuoteClient: function(context) {
 			context.state.quoteSocket = new WebSocket(context.state.market.quoteConfig.url_real);
 			context.state.quoteSocket.onopen = function(evt) {
-//				console.log('open');
 				context.state.quoteSocket.send('{"Method":"Login","Parameters":{"UserName":"'+context.state.market.quoteConfig.userName+'","PassWord":"'+context.state.market.quoteConfig.passWord+'"}}');
 
 			};
 			context.state.quoteSocket.onclose = function(evt) {
-//				console.log('close');
+				console.log('close');
 			};
 			context.state.quoteSocket.onerror = function(evt) {
-//				console.log('error');
+				console.log('error');
 			};
 			context.state.quoteSocket.onmessage = function(evt) {
 				context.state.wsjsondata = JSON.parse(evt.data);
