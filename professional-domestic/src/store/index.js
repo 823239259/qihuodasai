@@ -2027,7 +2027,6 @@ export default new Vuex.Store({
 					currentObj.delegateNum = parameters.OrderNum;
 					currentObj.ApplyOrderNum = parameters.OrderNum- parameters.TradeNum;
 					currentObj.ContractCode = (parameters.CommodityNo+parameters.ContractNo);
-					console.log("parameters.CommodityNo+parameters.ContractNo========="+(parameters.CommodityNo+parameters.ContractNo))
 					context.state.market.orderListCont.splice(index,1,currentObj);
 					
 					context.state.market.OnRspOrderInsertOrderListCont[context.state.market.OnRspOrderInsertOrderListCont.length-index-1].OrderPrice
@@ -2041,7 +2040,7 @@ export default new Vuex.Store({
 				return true;
 			}else{
 				if(isExist==true){
-					console.log("8988989898999898");
+//					console.log("8988989898999898");
 //					console.log("context.state.market.orderListCont========="+JSON.stringify(context.state.market.orderListCont));
 //					console.log("index========"+index);
 //					console.log("context.state.market.orderListCont.splice(index,1)========"+JSON.stringify(context.state.market.orderListCont.splice(index,1)))

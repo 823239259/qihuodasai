@@ -350,7 +350,6 @@
 				return this.$store.state.market.OnRspOrderInsertOrderListCont;
 			},
 			orderListCont(){
-				console.log("this.$store.state.market.orderListCont========="+JSON.stringify(this.$store.state.market.orderListCont));
 				return this.$store.state.market.orderListCont;
 			},
 			OnRspOrderInsertEntrustCont(){
