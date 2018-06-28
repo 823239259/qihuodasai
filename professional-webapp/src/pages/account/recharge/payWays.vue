@@ -31,7 +31,7 @@
 				}
 			},
 			iframe(){
-				return "http://test.pay.duokongtai.cn"+'/app/appPayinfo?mobile='+ this.$route.query.username +'&money='+ this.$route.query.money;
+				return "http://pay.duokongtai.cn"+'/app/appPayinfo?mobile='+ this.$route.query.username +'&money='+ this.$route.query.money;
 			}
 		},
 		methods:{
