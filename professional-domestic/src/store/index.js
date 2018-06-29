@@ -2188,12 +2188,14 @@ export default new Vuex.Store({
 					context.state.market.CacheAccount.jCacheAccount[currencyNo].TodayCanUse=todayCanUse;
 					
 					context.state.market.CacheAccount.moneyDetail.forEach(function(e,i){
+//						console.log("88888")
 						if(e.AccountNo == currencyNo){
 							e.FloatingProfit = floatingProfit;
 							e.TodayBalance = todayBalance;
 							e.TodayCanUse = todayCanUse;
 							
 							context.state.market.CacheAccount.moneyDetail.splice(i,1,e);
+//							console.log(JSON.stringify(context.state.market.CacheAccount.moneyDetail))
 						}
 					});
 					

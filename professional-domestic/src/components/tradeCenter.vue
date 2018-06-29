@@ -295,7 +295,6 @@
 			},
 			objst: function(){
 				if(this.buyText){
-//					console.log('this.buyText============='+JSON.stringify(this.buyText));
 					return JSON.stringify(this.buyText);
 				}
 			},
@@ -583,7 +582,6 @@
 					}
 				}.bind(this));
 				if(isExist==true){
-//					console.log("CurrentObj======="+JSON.stringify(CurrentObj));
 					var Contract = CurrentObj.ContractCode.substring(0,CurrentObj.ContractCode.length-4);
 					var b={
 						"Method":'CancelOrder',
@@ -636,7 +634,6 @@
 					$(obj.currentTarget).addClass("current");
 					$(obj.currentTarget).siblings().removeClass("current");
 					this.orderListId = id;
-//					console.log("id=========="+id);
 				}else{
 					$(obj.currentTarget).removeClass("current");
 				}
@@ -1312,7 +1309,7 @@
 			&.list_order{
 				ul{
 					width: 100%;
-					padding: 0;
+					padding-bottom: 50px;
 					height: 330px;
 					overflow-x: scroll;
 					li{
@@ -1745,7 +1742,7 @@
 			&.list_order{
 				ul{
 					width: 100%;
-					padding: 0;
+					padding-bottom: 50px;
 					height: 330px*@ip6;
 					overflow-x: scroll;
 					li{
@@ -2155,7 +2152,7 @@
 			&.list_order{
 				ul{
 					width: 100%;
-					padding: 0;
+					padding-bottom: 50px;
 					height: 330px*@ip5;
 					overflow-x: scroll;
 					li{

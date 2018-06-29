@@ -173,7 +173,6 @@
 				}
 			},
 			closeOut:function(obj){
-				console.log("yyyyyyyyyyyyyyyyy");
 				var i = 0;
 				var positionCurrent=0;
 				var length= this.qryHoldTotalArr.length;
@@ -231,7 +230,7 @@
 		.list{
 			ul{
 				width: 100%;
-				padding: 0;
+				padding-bottom: 50px;
 				overflow-y: scroll;
 			}
 			li{
@@ -304,7 +303,7 @@
 		.list{
 			ul{
 				width: 100%;
-				padding: 0;
+				padding-bottom: 50px;
 				overflow-y: scroll;
 			}
 			li{
@@ -377,7 +376,7 @@
 		.list{
 			ul{
 				width: 100%;
-				padding: 0;
+				padding-bottom: 50px;
 				overflow-y: scroll;
 			}
 			li{
