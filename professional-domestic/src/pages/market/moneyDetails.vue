@@ -36,7 +36,7 @@
 					<template v-for="key in moneyDetailList">
 						<li>
 							<!--<span>{{key.val[0]}}</span>-->
-							<span>{{key.val[4]}}</span>
+							<span>{{key.val[0]}}</span>
 							<!--<span>{{key.val[2]}}</span>-->
 							<!--<span>{{key.val[1]}}</span>-->
 							<!--<span>{{key.val[3]}}</span>-->
