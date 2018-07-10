@@ -233,11 +233,12 @@
 								"vid":-1,
 								"traderBond":this.chooseType,
 								"tranLever":0,
-								"businessType":8
+								"businessType":0
 							},
 							timeout: 5000
 						}
 					).then(function(e) {
+						console.log(e)
 						var data = e.body;
 						if(data.success == true){
 							if(data.code == 1){
@@ -256,6 +257,10 @@
 							}
 						}else{
 							switch (data.code){
+								case '0':
+									this.$children[0].isShow = true;
+									this.msg = '网络不给力，请刷新后重试';
+									break;
 								case '-1':
 									this.$children[0].isShow = true;
 									this.msg = '账号已变更，请重新重新登录';
