@@ -342,8 +342,8 @@ export default new Vuex.Store({
 		quoteSocket: {},
 		tradeSocket: null,
 		webuser: {
-			username: '13677622344',
-			password: 'a123456'
+			username: '',
+			password: ''
 		},
 		wsjsondata: {},
 		//连接提示语
