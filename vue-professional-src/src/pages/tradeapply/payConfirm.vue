@@ -233,12 +233,11 @@
 								"vid":-1,
 								"traderBond":this.chooseType,
 								"tranLever":0,
-								"businessType":0
+								"businessType":8
 							},
 							timeout: 5000
 						}
 					).then(function(e) {
-						console.log(e)
 						var data = e.body;
 						if(data.success == true){
 							if(data.code == 1){
