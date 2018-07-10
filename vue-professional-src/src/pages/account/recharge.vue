@@ -62,14 +62,14 @@
 				}
 			},
 			toChoosePay: function(){
-//				if(this.money == ''){
-//					this.$children[0].isShow = true;
-//					this.msg = '请输入充值金额';
-//				}else{
-//					this.$router.push({path: '/payWays', query: {username: this.userInfo.username, money: this.money}});
-//				}
-				this.$children[0].isShow = true;
-				this.msg = '功能暂未开放，敬请期待';
+				if(this.money == ''){
+					this.$children[0].isShow = true;
+					this.msg = '请输入充值金额';
+				}else{
+					this.$router.push({path: '/payWays', query: {username: this.userInfo.username, money: this.money}});
+				}
+//				this.$children[0].isShow = true;
+//				this.msg = '功能暂未开放，敬请期待';
 			},
 			getUserMsg: function(){
 				this.$http.post(this.PATH + '/user/getbalancerate', {emulateJSON: true},{

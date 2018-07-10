@@ -426,7 +426,7 @@
 					li{
 						float: left;
 						width: 100%;
-						height: 60px;
+						height: 80px;
 						overflow: hidden;
 						padding: 0 15px;
 						background: @deepblue;
@@ -642,7 +642,7 @@
 					li{
 						float: left;
 						width: 100%;
-						height: 60px*@ip6;
+						height: 70px*@ip6;
 						overflow: hidden;
 						padding: 0 15px*@ip6;
 						background: @deepblue;
@@ -858,7 +858,7 @@
 					li{
 						float: left;
 						width: 100%;
-						height: 60px*@ip5;
+						height: 75px*@ip5;
 						overflow: hidden;
 						padding: 0 15px*@ip5;
 						background: @deepblue;

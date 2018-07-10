@@ -5,9 +5,9 @@
 		<back></back>
 		<cs title="客服"></cs>
 		<div class="page_cont">
-			<div class="logo">
+			<!--<div class="logo">
 				<img src="../../assets/img/logo.png"/>
-			</div>
+			</div>-->
 			<div class="ipt_row">
 				<label for="phone">手机号</label>
 				<input type="number" id="phone" placeholder="请输入您的手机号" :disabled="phoneShow" v-model.trim="phone" />

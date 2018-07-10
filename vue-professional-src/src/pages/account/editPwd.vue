@@ -137,7 +137,7 @@
 					this.msg = '新密码与旧密码一样';
 				}else if(this.pwdReg.test(this.pwd) == false || this.pwdReg.test(this.newPwd) == false){
 					this.$children[0].isShow = true;
-					this.msg = '密码格式错误';
+					this.msg = '请输入6-18位数字加字母';
 				}else if(this.pwd != this.newPwd){
 					this.$children[0].isShow = true;
 					this.msg = '两次密码输入不一致';
@@ -189,7 +189,7 @@
 									break;
 								case '4':
 									this.$children[0].isShow = true;
-									this.msg = '密码格式错误';
+									this.msg = '请输入6-18位数字加字母';
 									break;
 								case '5':
 									this.$children[0].isShow = true;

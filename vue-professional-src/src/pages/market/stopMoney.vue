@@ -351,7 +351,7 @@
 							return '对手价';
 						}
 					})();
-					s.validity = '当日有效';
+					s.validity = '永久有效';
 					s.InsertDateTime = e.InsertDateTime;
 					this.hasYesstopLossList.push(s);
 				}.bind(this));
@@ -426,7 +426,7 @@
 							return '对手价';
 						}
 					})();
-					s.validity = '当日有效';
+					s.validity = '永久有效';
 					s.InsertDateTime = e.InsertDateTime;
 					this.hasNostopLossList.push(s);
 				}.bind(this));

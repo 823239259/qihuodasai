@@ -154,7 +154,7 @@
 					this.msg = '请确认新密码';
 				}else if(this.pwdReg.test(this.pwd) == false || this.pwdReg.test(this.newPwd) == false){
 					this.$refs.dialog.isShow = true;
-					this.msg = '密码格式错误';
+					this.msg = '请输入6-18位数字加字母';
 				}else if(this.pwd != this.newPwd){
 					this.$refs.dialog.isShow = true;
 					this.msg = '两次密码输入不一致';

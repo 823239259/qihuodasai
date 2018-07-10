@@ -482,7 +482,7 @@
 								
 								
 							})();
-					b.term = '当日有效';
+					b.term = '永久有效';
 					b.time = e.InsertDateTime;
 					
 					this.noListCont.push(b);
@@ -645,7 +645,7 @@
 								
 								
 							})();
-					b.term = '当日有效';
+					b.term = '永久有效';
 					b.time = e.InsertDateTime;
 					
 					this.yesListCont.push(b);
