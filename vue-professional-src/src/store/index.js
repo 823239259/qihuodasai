@@ -46,6 +46,7 @@ var account = {
 		operateOrderLength: 0,   //操盘中方案的条数
 		hotLine: '',
 		currentUrlHead: 'https:', //http or https
+		realName: ''
 	}
 }
 
@@ -1330,6 +1331,10 @@ export default new Vuex.Store({
 				time = time[0] + ' ' + arr4[0] + ':00:00';
 				state.market.jsonData.Parameters.Data[state.market.jsonData.Parameters.Data.length - 1][0] = time;
 			}
+		},
+		//保存真实姓名
+		setRealName (state,payload) {
+			state.account.realName = payload
 		}
 	},
 	actions: {

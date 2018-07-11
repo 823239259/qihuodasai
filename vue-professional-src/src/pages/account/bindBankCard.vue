@@ -22,7 +22,7 @@
 			<div class="fm_box mt10">
 				<div class="ipt_row">
 					<label for="name">开户姓名</label>
-					<input type="text" id="name" placeholder="请输入开户姓名" v-model.trim="username" />
+					<input type="text" id="name" placeholder="请输入开户姓名" v-model.trim="username"  :disabled="realName?'disabled':''"/>
 				</div>
 				<div class="ipt_row">
 					<label>开户银行</label>
@@ -116,6 +116,9 @@
 			},
 			PATH: function(){
 				return this.$store.getters.PATH;
+			},
+			realName () {
+				return this.$store.state.account.realName
 			}
 		},
 		methods: {
@@ -376,6 +379,7 @@
 			//获取已绑定的银行卡
 			this.bindBankList = [];
 			this.getBindBankList();
+			this.username = this.realName
 		}
 		
 	}

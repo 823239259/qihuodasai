@@ -89,6 +89,7 @@
 	import cs from '../components/customerService.vue'
 	import tipsDialog from '../components/tipsDialog.vue'
 	import pro from '../assets/common.js'
+	import { mapMutations } from "vuex"
 	export default{
 		name: 'account',
 		components: {topbar, cs, tipsDialog},
@@ -157,6 +158,7 @@
 			cancel: function(){
 				this.isexit = false;
 			},
+			...mapMutations(['setRealName']),
 			getUserMsg: function(){
 				this.$http.post(this.PATH + '/user/getbalancerate', {emulateJSON: true},{
 					headers: {
@@ -175,6 +177,8 @@
 							this.isCertification = data.data.isCertification;
 //							if(this.isCertification == true) this.username = data.data.username;
 							this.balance = pro.parseTwoFloat(data.data.balance);
+							console.log(data.data.username)
+							this.setRealName(data.data.username)
 						}
 					}else{
 						switch (data.code){
