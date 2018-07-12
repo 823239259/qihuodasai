@@ -118,6 +118,19 @@
 		},
 		activated: function(){
 			this.userInfo = JSON.parse(localStorage.user);
+		},
+		beforeRouteEnter (to, from, next) {
+			// ...
+			next(vm => {
+				// 通过 `vm` 访问组件实例
+				if (!vm.$route.query.realName) {
+					vm.$children[0].isShow = true;
+					vm.msg = '需实名认证后方可绑定银行卡'
+				}
+				
+
+				
+			})
 		}
 	}
 </script>

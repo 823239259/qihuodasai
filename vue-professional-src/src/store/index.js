@@ -46,7 +46,8 @@ var account = {
 		operateOrderLength: 0,   //操盘中方案的条数
 		hotLine: '',
 		currentUrlHead: 'https:', //http or https
-		realName: ''
+		realName: '',
+		userVerified: false,
 	}
 }
 
@@ -335,9 +336,9 @@ export default new Vuex.Store({
 	},
 	state: {
 		//test 测试环境，online 正式环境
-		environment: 'online',
+		environment: 'test',
 		//打包的时候，值为 build ，开发的时候，值为 dev
-		setting: 'build',
+		setting: 'dev',
 		//请求的操盘参数数据
 		tempTradeapply: {},
 		quoteSocket: {},
@@ -1334,7 +1335,8 @@ export default new Vuex.Store({
 		},
 		//保存真实姓名
 		setRealName (state,payload) {
-			state.account.realName = payload
+			state.account.realName = payload.realName
+			state.account.userVerified = payload.userVerified
 		}
 	},
 	actions: {

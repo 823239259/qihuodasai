@@ -178,7 +178,11 @@
 //							if(this.isCertification == true) this.username = data.data.username;
 							this.balance = pro.parseTwoFloat(data.data.balance);
 							console.log(data.data.username)
-							this.setRealName(data.data.username)
+                            this.setRealName({
+                                realName: data.data.username,
+                                userVerified: data.data.userVerified,
+                            })
+                            
 						}
 					}else{
 						switch (data.code){

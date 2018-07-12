@@ -22,7 +22,7 @@
 			<div class="fm_box mt10">
 				<div class="ipt_row">
 					<label for="name">开户姓名</label>
-					<input type="text" id="name" placeholder="请输入开户姓名" v-model.trim="username"  :disabled="realName?'disabled':''"/>
+					<input type="text" id="name" placeholder="请输入开户姓名" v-model.trim="username" :disabled="userVerified=='true'&&realName"/>
 				</div>
 				<div class="ipt_row">
 					<label>开户银行</label>
@@ -102,7 +102,7 @@
 				provinceData.forEach(function(o, i){
 					if(o.text == n) this.cityList = o.children;
  				}.bind(this));
-			}
+			},
 		},
 		filters: {
 			cardEvent: function(e){
@@ -119,7 +119,11 @@
 			},
 			realName () {
 				return this.$store.state.account.realName
+			},
+			userVerified () {
+				return this.$store.state.account.userVerified
 			}
+			
 		},
 		methods: {
 			setDefault: function(e){
@@ -380,6 +384,17 @@
 			this.bindBankList = [];
 			this.getBindBankList();
 			this.username = this.realName
+		},
+		beforeRouteEnter (to, from, next) {
+			// ...
+			next(vm => {
+				// 通过 `vm` 访问组件实例
+				if (vm.$store.state.account.userVerified=='true'&&!vm.realName) {
+						vm.$router.replace({path:'/nameCertification',query:{realName:false}})
+					
+					
+				}
+			})
 		}
 		
 	}
