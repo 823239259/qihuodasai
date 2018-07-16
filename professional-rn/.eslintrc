@@ -1,0 +1,13 @@
+{		
+    "extends": "rallycoding",		
+    "rules":{		
+        "global-require": 0, // require使用		
+        "import/no-extraneous-dependencies": 0, // 用絕對路徑抓assets		
+        "arrow-body-style": 0, // () => {} 常常會只是return JSX，他建議拿掉return		
+        "max-len": 0, // 當寫太長時會出現紅線		
+        "no-underscore-dangle" : 0, // _fn() 不允許開頭用_命名		
+        "react/jsx-boolean-value": 0, // xxx={true} 時不需要寫true，但我覺得寫也挺好的 也比較容易改成false
+        "no-unused-expressions": [2, { "allowShortCircuit": true }],
+        "no-return-assign": 0
+    }		
+} 

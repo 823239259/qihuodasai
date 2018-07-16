@@ -1,0 +1,21 @@
+### Test
+GET https://facebook.github.io/react-native/movies.json
+### news list
+POST http://api.incentm.com/news/list
+content-type: application/json
+### news detail
+POST http://api.incentm.com/news/detail
+content-type: application/json
+
+{
+    "nid": 1023
+}
+### banner list - 获取banner图片
+POST http://api.incentm.com/banner/list
+content-type: application/json
+
+{
+    "type": 9
+}
+### 資訊直播 7*24 /crawler/getCrawlerByChannelLiveContent - with parameters - data: { size: 30, channelset: 1, pageIndex: 0 }
+POST http://api.incentm.com/crawler/getCrawlerByChannelLiveContent?size=30&channelset=1&pageIndex=0
