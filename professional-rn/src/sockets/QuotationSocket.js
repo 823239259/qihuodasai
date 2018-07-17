@@ -42,17 +42,17 @@ export default class QuotationSocket {
             this.socket.onmessage = (evt) => {
                 const data = evt.data;
                 const jsonData = JSON.parse(data);
-                if (!jsonData.Parameters) {
+                if (!jsonData.data) {
                     return;
                 }
-                const method = jsonData.Method;
+                const method = jsonData.method;
                 // this.logger.info(`onmessage - method ${method}`);
 
-                if (method === 'OnRspLogin') {
+                if (method === 'on_rsp_login') {
                     this.sendQryCommodity(false);
                     this.reconnectStartDetail();
                     resolve('QuotationSocket Login Success');
-                } else if (method === 'OnRspQryCommodity') { // 返回品種
+                } else if (method === 'on_rsp_commodity_list') { // 返回品種
                     if (this.isQryCommodityForheartBeat) {
                         this.isQryCommodityForheartBeat = false;
                         this.isHeartBeating = true;
@@ -60,22 +60,23 @@ export default class QuotationSocket {
                     }
                     // 訂閱合約
                     this.onRspQryCommodity(jsonData);
-                } else if (method === 'OnRspSubscribe') {
+                } else if (method === 'on_rsp_subscribe') {
+                    //订阅成功
                     // quotation
-                    const moreData = JSON.parse(evt.data).Parameters.LastQuotation;
-                    this.quotationStore.insertData(moreData);
-                } else if (method === 'OnRspQryHistory') {
+                    // const moreData = JSON.parse(evt.data).Parameters.LastQuotation;
+                    // this.quotationStore.insertData(moreData);
+                } else if (method === 'on_rsp_history_data') {//查询k线
                     // detail
                     this.quotationDetailStore.setChartHistory(jsonData);
-                } else if (method === 'OnRtnQuote') { // 行情推送接口
+                } else if (method === 'on_rtn_quote') { // 行情推送接口
                     this.isHeartBeating = true;
                     // this.logger.info(`OnRtnQuote - isHeartBeating: ${this.isHeartBeating}`);
-                    this.quotationStore.insertData(jsonData.Parameters);
+                    this.quotationStore.insertData(jsonData.data);
                     
                     if (this.quotationDetailStore.isDetailMounted) {
-                        const param = jsonData.Parameters;
+                        const param = jsonData.data;
                         // 更新每一筆筆持倉的浮动盈亏
-                        Variables.trade.isLogged && this.tradeStore.updateFloatProfitAndRisk(param);
+                        // Variables.trade.isLogged && this.tradeStore.updateFloatProfitAndRisk(param);
                         if (this.isQuotationEqual(param)) {
                             this.quotationDetailStore.updateChart(param);
                             // 更新選擇到的合約最新資料
@@ -127,7 +128,7 @@ export default class QuotationSocket {
     }
     // 返回品種
     onRspQryCommodity(jsonData) {
-        const commoditys = jsonData.Parameters;
+        const commoditys = jsonData.data.commodity_list;
         
         for (let i = 0; i < commoditys.length; i++) {
             if (commoditys[i].IsUsed !== 0) {
@@ -143,7 +144,7 @@ export default class QuotationSocket {
     isQuotationEqual(data) {
         let isQuotationEqual = false;
         const { commodityNo, contractNo } = this.quotationDetailStore.product;
-        if (data.CommodityNo === commodityNo && data.ContractNo === contractNo) {
+        if (data.contract_info.commodity_no === commodityNo && data.contract_info.contract_no === contractNo) {
             isQuotationEqual = true;
         }
         return isQuotationEqual;
@@ -161,25 +162,49 @@ export default class QuotationSocket {
         if (!this.quotationDetailStore.product) {
             return;
         }
+        // to do ...
+        let type = '';
+        switch(num){
+            case 0: type = 'TIME_SHARING';
+            break;
+            case 1: type = 'KLINE_1MIN';
+            break;
+            case 5: type = 'KLINE_5MIN';
+            break;
+            case 15: type = 'KLINE_15MIN';
+            break;
+            case 30: type = 'KLINE_30MIN';
+            break;
+            case 1440: type = 'KLINE_1DAY';
+            break;
+        }
         const { exchangeNo, commodityNo, contractNo } = this.quotationDetailStore.product;
-        const qryHistoryParam = `{"ExchangeNo":"${exchangeNo}","CommodityNo":"${commodityNo}","ContractNo":"${contractNo}","HisQuoteType":${num} }`;
-		this.sendMessage('QryHistory', qryHistoryParam);
+        const qryHistoryParam = `{"contract_info":{"security_type":"FUT_IN","exchange_no":"${exchangeNo}","commodity_no":"${commodityNo}","contract_no":"${contractNo}"},"period":"${type}","count":1000}`;//`{"ExchangeNo":"${exchangeNo}","CommodityNo":"${commodityNo}","ContractNo":"${contractNo}","HisQuoteType":${num} }`;
+		this.sendMessage('req_history_data', qryHistoryParam);
     }
     sendSubscribe(commodity) {
-        this.sendMessage('Subscribe', `{"ExchangeNo":"${commodity.ExchangeNo}","CommodityNo":"${commodity.CommodityNo}","ContractNo":"${commodity.MainContract}"}`);
+        let mainContract = null;
+        let contractList = commodity.contract_no_list;
+        for(key in contractList){
+          if(contractList[key].flags == 1){
+            mainContract = contractList[key].contract_no;
+            break;
+          }
+        }
+        this.sendMessage('req_subscribe', `{"security_type":"FUT_IN","exchange_no":"${commodity.exchange_no}","commodity_no":"${commodity.commodity_no}","contract_no":"${mainContract}"}`);
     }
     // 其實行情傳入的UserName & PassWord都是''
     sendLogin() {
-        this.sendMessage('Login', `{"UserName":"${Variables.user}", "PassWord":" ${Variables.pwd}"}`);
+        this.sendMessage('req_login', `{"user_name":"${Variables.user}", "password":" ${Variables.pwd}", "protoc_version":"6.2"}`);
     }
     // 查詢品種接口 QryCommodity 並且用來測試heartbeat，因為OnRtnQuote可能頻率不高
     sendQryCommodity(isQryCommodityForheartBeat) {
         this.isQryCommodityForheartBeat = isQryCommodityForheartBeat;
-        this.sendMessage('QryCommodity', null);
+        this.sendMessage('req_commodity_list', '{"security_type":"FUT_IN"}');
     }
     sendMessage(method, parameters) {
         try {
-            this.socket.send(`{"Method":"${method}","Parameters":${parameters}}`);
+            this.socket.send(`{"method":"${method}","data":${parameters}}`);
         } catch (err) {
             this.logger.error(`quotationSocket sendMessage: ${err}`);
         }

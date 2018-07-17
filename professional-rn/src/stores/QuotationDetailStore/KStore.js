@@ -288,9 +288,9 @@ export default class KStore {
         const dataSent = param;
         const oldestDateTimeString = this.data.times[this.data.times.length - 1];
         const oldTime = Math.round(moment(oldestDateTimeString).valueOf() / 1000);
-        const newTime = this.getRangeTime(dataSent.DateTimeStamp);
+        const newTime = this.getRangeTime(dataSent.time_flag);
         
-        const lastPrice = _.toNumber(dataSent.LastPrice.toFixed(this.dotSize));
+        const lastPrice = _.toNumber(dataSent.last.toFixed(this.dotSize));
         if (oldTime === newTime) {
             const length = this.data.prices.length;
             let shadowH = this.data.prices[length - 1].shadowH;
@@ -304,7 +304,7 @@ export default class KStore {
                 shadowL = lastPrice;
             }
             this.data.prices[length - 1] = { shadowH, shadowL, open, close };
-            this.data.volumns[this.data.volumns.length - 1] += this.getVolumn(dataSent.TotalVolume);
+            this.data.volumns[this.data.volumns.length - 1] += this.getVolumn(dataSent.volume);
         } else {
             // 2017-09-01 10:30:00('YYYY-MM-DD HH:mm:ss') -> 不需要ss
             const dateTimeString = moment.unix(newTime).format('YYYY-MM-DD HH:mm');
@@ -320,7 +320,7 @@ export default class KStore {
             this.data.dateLabels.push(dateTimeArr[0]);
             this.data.timeLabels.push(dateTimeArr[1]);
             this.data.prices.push({ shadowH: lastPrice, shadowL: lastPrice, open: lastPrice, close: lastPrice });
-            this.data.volumns.push(this.getVolumn(dataSent.TotalVolume));
+            this.data.volumns.push(this.getVolumn(dataSent.volume));
         }
     }
     @action handleSelect(entry) {

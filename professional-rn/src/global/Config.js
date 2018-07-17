@@ -1,4 +1,3 @@
-
 const domainName = 'qhinom';    // oldest: incentm, older: qhinom new:vs
 const quoteDomainName = 'vs';
 const tradeDomainName = 'duokongtai';
@@ -31,7 +30,7 @@ export default {
         appChannelId: '5a966705f43e48152b000143'    // android
     },
     /********************** url **********************/
-    marketSocketUrl: `ws://quote.${quoteDomainName}.com:9002`,                          //指向内部数据，由domainName 修改为quoteDomainName          by zihaoWang 18.6.8
+    marketSocketUrl: 'ws://192.168.0.232:9102',//`ws://quote.${quoteDomainName}.com:9002`,                          //指向内部数据，由domainName 修改为quoteDomainName          by zihaoWang 18.6.8
     tradeSocket: {
         url: `ws://trade.${tradeDomainName}.cn:6101`,                                   //指向内部数据  old:'ws://trade.${domainName}.com:6102'   by zihaoWang 18.6.8
         isMock: 1,

@@ -105,12 +105,12 @@ export default class QuotationDetailStore {
         }
     }
     setChartHistory(jsonData) {
-        this.setChartDataConfig(jsonData.Parameters.ColumNames);
+        this.setChartDataConfig(['time_flag','open','close','high','low','volume']);//to do ...约定好的
         let dotSize = 2;
         if (this.product) {
             dotSize = this.product.dotSize;
         }
-        if (jsonData.Parameters.HisQuoteType === 0) {
+        if (jsonData.data.period === "TIME_SHARING") {
             //分時圖
             this.timeStore.start(jsonData, dotSize);
         } else {
@@ -124,17 +124,17 @@ export default class QuotationDetailStore {
             return;
         }
         for (let i = 0; i <= data.length - 1; i++) {
-            if (data[i] === 'DateTimeStamp') {
+            if (data[i] === 'time_flag') {
                 Enum.chartDataColumns.DateTimeStampIndex = i;
-            } else if (data[i] === 'LastPrice') {
+            } else if (data[i] === 'close') {
                 Enum.chartDataColumns.LastPriceIndex = i;
-            } else if (data[i] === 'OpenPrice') {
+            } else if (data[i] === 'open') {
                 Enum.chartDataColumns.OpenPriceIndex = i;
-            } else if (data[i] === 'LowPrice') {
+            } else if (data[i] === 'low') {
                 Enum.chartDataColumns.LowPriceIndex = i;
-            } else if (data[i] === 'HighPrice') {
+            } else if (data[i] === 'high') {
                 Enum.chartDataColumns.HighPriceIndex = i;
-            } else if (data[i] === 'Volume') {
+            } else if (data[i] === 'volume') {
                 Enum.chartDataColumns.VolumeIndex = i;
             }
         }

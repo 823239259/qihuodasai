@@ -397,7 +397,7 @@ export default class TradeStore {
         return this.quotationStore.getProduct(this.getProductName(param));
     }
     getProductName(param) {
-        return `${param.CommodityNo}${param.ContractNo}`;
+        return `${param.contract_info.commodity_no}${param.contract_info.contract_no}`;
     }
     // 計算浮动盈亏, lastPrice 最新价, holdAvgPrice 均价, contractSize 每手乘数, miniTikeSize 最小变动单位, holdNum 订单量(手數), drection 买卖方向（0-买，1-买), currencyNo 幣別
     getFloatProfit(lastPrice, holdAvgPrice, contractSize, miniTikeSize, holdNum, direction, currencyNo) {
@@ -441,23 +441,24 @@ export default class TradeStore {
     }
     // 第一次 由TradeStore自己發出，因為OnRtnQuote不一定隨時馬上更新
     @action updateTradeQuotation(param) {
-        if (!param || !this.product || isNaN(param.LastPrice) || isNaN(param.AskPrice1) || isNaN(param.BidPrice1)) {
-            return;
-        }
+        //to do ....
+        // if (!param || !this.product || isNaN(param.last) || isNaN(param.ask) || isNaN(param.bid)) {
+        //     return;
+        // }
         const dotSize = this.product.dotSize;
-        this.preSettlePrice = param.PreSettlePrice;
+        this.preSettlePrice = param.pre_settle;
 
-        this.lastPrice = param.LastPrice.toFixed(dotSize);
-        this.totalVolumn = param.TotalVolume;
+        this.lastPrice = param.last.toFixed(dotSize);
+        this.totalVolumn = param.volume;
         
-        this.changeValue = param.ChangeValue;
-        this.changeRate = `${param.ChangeRate.toFixed(2)}%`;
+        this.changeValue = param.change_value;
+        this.changeRate = `${param.change_rate.toFixed(2)}%`;
 
-        this.sellLastPrice = param.AskPrice1.toFixed(dotSize);
-        this.askQty = param.AskQty1;
+        this.sellLastPrice = param.ask[0][0].toFixed(dotSize);
+        this.askQty = param.ask[0][1];
 
-        this.buyLastPrice = param.BidPrice1.toFixed(dotSize);
-        this.bidQty = param.BidQty1;
+        this.buyLastPrice = param.bid[0][0].toFixed(dotSize);
+        this.bidQty = param.bid[0][1];
 
 
     }

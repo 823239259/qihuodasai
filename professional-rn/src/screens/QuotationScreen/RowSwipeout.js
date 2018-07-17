@@ -59,7 +59,7 @@ export default class RowSwipeout extends Component {
   toQuotationDetail = () => {
     const { product } = this.props;
     // 表示當前選擇的合約，抓到的資料會有問題
-    if (!product.LastPrice && !product.AskPrice1 && !product.BidPrice1) {
+    if (!product.last && !product.ask && !product.bid) {
       return;
     }
     this.props.navigator.push({

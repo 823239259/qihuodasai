@@ -37,17 +37,24 @@ class Product {
   @observable changeRate;     //漲幅
   @observable changeRateIsUp;
   
-  constructor({ CommodityName, CommodityNo, MainContract, DotSize, ExchangeNo, MiniTikeSize, ContractSize, CurrencyNo }, sectionID, rowID) {
-    this.commodityName = CommodityName;
-    this.commodityNo = CommodityNo;  // MCH
-    this.contractNo = MainContract; // 1710
+  constructor({ commodity_name, commodity_no, contract_no_list, dot_size, exchange_no, mini_tiker_size, contract_size, currency_no }, sectionID, rowID) {
+    this.commodityName = commodity_name;
+    this.commodityNo = commodity_no;  // MCH
+
+    for(key in contract_no_list){
+      if(contract_no_list[key].flags == 1){
+        this.contractNo = contract_no_list[key].contract_no;
+        break;
+      }
+    }
+
     this.productName = this.commodityNo + this.contractNo;  // MCH1710
 
-    this.dotSize = DotSize;
-    this.exchangeNo = ExchangeNo;
-    this.miniTikeSize = MiniTikeSize;
-    this.contractSize = ContractSize;
-    this.currencyNo = CurrencyNo;
+    this.dotSize = dot_size;
+    this.exchangeNo = exchange_no;
+    this.miniTikeSize = mini_tiker_size;
+    this.contractSize = contract_size;
+    this.currencyNo = currency_no;
 
     this.sectionID = sectionID;
     this.rowID = rowID;
@@ -145,7 +152,15 @@ export default class QuotationStore {
   }
   // commodity起始資料，有DotSize, 為 盤口，閃電圖的 起始 最新資料，
   @action addProduct(commodity) {
-    const productName = commodity.CommodityNo + commodity.MainContract;
+    let mainContract = null;
+    let contractList = commodity.contract_no_list;
+    for(key in contractList){
+      if(contractList[key].flags == 1){
+        mainContract = contractList[key].contract_no;
+        break;
+      }
+    }
+    const productName = commodity.commodity_no + mainContract;
     let isExist = false;
     for (const product of this.products) {
         if (product.productName === productName) {
@@ -168,14 +183,14 @@ export default class QuotationStore {
   @action insertData(MoreData) {
     const products = this.products;
     const moreData = MoreData;
-    const { CommodityNo, LastPrice, TotalVolume, ChangeRate, PreSettlePrice } = moreData;
+    const { contract_info, last, volume, change_rate, pre_settle } = moreData;
     for (let i = 0; i < products.length; i++) {
       const product = products[i];
-      if (CommodityNo === product.commodityNo) {
+      if (contract_info.commodity_no === product.commodityNo) {
         _.assign(product, moreData);  // 3支sockets 減少為2支Socket後，讓product 保持拿到最新資料
-        product.setLastPrice(LastPrice.toFixed(product.dotSize), Number(LastPrice) - Number(PreSettlePrice) < 0);
-        product.setTotalVolume(TotalVolume);
-        product.setChangeRate(ChangeRate.toFixed(2), Number(ChangeRate) < 0);
+        product.setLastPrice(last.toFixed(product.dotSize), Number(last) - Number(pre_settle) < 0);
+        product.setTotalVolume(volume);
+        product.setChangeRate(change_rate.toFixed(2), Number(change_rate) < 0);
         break;
       }
     }

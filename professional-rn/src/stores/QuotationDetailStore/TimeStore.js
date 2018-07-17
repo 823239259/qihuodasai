@@ -258,7 +258,7 @@ export default class TimeStore {
     // 畫出所有的點 - 資料可能會穿過兩日 - 畫圖的方式 其實只是照著給的資料順序
     @action start(jsonData, dotSize) {
         this.dotSize = dotSize;
-        const dataSent = jsonData.Parameters.Data;
+        const dataSent = jsonData.data.Lines;
         // 不取超出observableArrLimited個
         let startIndex = 0;
         if (dataSent.length >= Config.observableArrLimited) {
@@ -292,23 +292,23 @@ export default class TimeStore {
         }
         const dataSent = param;
         // remove second, millisecond
-        const newDateTimeString = moment(dataSent.DateTimeStamp).seconds(0).milliseconds(0).format('YYYY-MM-DD HH:mm:ss');
+        const newDateTimeString = moment(dataSent.time_flag).seconds(0).milliseconds(0).format('YYYY-MM-DD HH:mm:ss');
         // 最後bar的時間
         const oldDateTimeString = this.data.times[this.data.times.length - 1];
 
-        const lastPrice = _.toNumber(dataSent.LastPrice.toFixed(this.dotSize));
+        const lastPrice = _.toNumber(dataSent.last.toFixed(this.dotSize));
         if (oldDateTimeString === newDateTimeString) {
             this.data.prices[this.data.prices.length - 1] = lastPrice;
-            this.data.volumns[this.data.volumns.length - 1] += this.getVolumn(dataSent.TotalVolume);
+            this.data.volumns[this.data.volumns.length - 1] += this.getVolumn(dataSent.volume);
         } else {
             this.data.prices.push(lastPrice);
-            this.data.volumns.push(this.getVolumn(dataSent.TotalVolume));
+            this.data.volumns.push(this.getVolumn(dataSent.volume));
             this.data.times.push(newDateTimeString);
             this.data.timeLabels.push(this.getHourMin(newDateTimeString));
         }
         // 用來計算最新點的顏色
-        this.preSettlePrice = dataSent.PreSettlePrice;
-        // console.log(`TimeStore - add() price: ${lastPrice}, volumn: ${this.getVolumn(dataSent.TotalVolume)}, time: ${newDateTimeString}, timeLabel: ${this.getHourMin(newDateTimeString)}`);
+        this.preSettlePrice = dataSent.pre_settle;
+        // console.log(`TimeStore - add() price: ${lastPrice}, volumn: ${this.getVolumn(dataSent.volume)}, time: ${newDateTimeString}, timeLabel: ${this.getHourMin(newDateTimeString)}`);
     }
     @action handleSelect(entry) {
         this.xIndexSelected = entry.x;

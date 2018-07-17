@@ -38,7 +38,7 @@ export default class HandicapTradeStore {
         this.data = product;
         this.productName = product.productName;
         this.dotSize = product.dotSize;
-        this.preSettlePrice = product.PreSettlePrice;
+        this.preSettlePrice = product.pre_settle;
     }
     @action update(param, product) {
         this.data = param;
@@ -49,61 +49,61 @@ export default class HandicapTradeStore {
     // TradeLastView
     // 卖
     @computed get buyPrices() {
-        if (_.isEmpty(this.data) || isNaN(this.data.AskPrice1)) {
+        if (_.isEmpty(this.data) || isNaN(this.data.ask[0][0])) {
             return 0;
         }
-        return this.data.AskPrice1.toFixed(this.dotSize);   
+        return this.data.ask[0][0].toFixed(this.dotSize);   
     }
     @computed get buyPricesNumber() {
         if (_.isEmpty(this.data)) {
             return 0;
         }
-        return this.data.AskQty1;
+        return this.data.ask[0][1];
     }
     @computed get buyPricesColor() {
-        return Colors.getColorText(this.data.AskPrice1 - this.data.PreSettlePrice);
+        return Colors.getColorText(this.data.ask[0][0] - this.data.pre_settle);
     }
     // 买
     @computed get sellPrices() {
-        if (_.isEmpty(this.data) || isNaN(this.data.BidPrice1)) {
+        if (_.isEmpty(this.data) || isNaN(this.data.bid[0][0])) {
             return 0;
         }
-        return this.data.BidPrice1.toFixed(this.dotSize);   // 為了保留後面的0，不轉成number
+        return this.data.bid[0][0].toFixed(this.dotSize);   // 為了保留後面的0，不轉成number
     }
     @computed get sellPricesNumber() {
         if (_.isEmpty(this.data)) {
             return 0;
         }
-        return this.data.BidQty1;
+        return this.data.bid[0][1];
     }
     @computed get sellPricesColor() {
-        return Colors.getColorText(this.data.BidPrice1 - this.data.PreSettlePrice);
+        return Colors.getColorText(this.data.bid[0][0] - this.data.pre_settle);
     }
     // 成交量
     @computed get volumePricesNumber() {
         if (_.isEmpty(this.data)) {
             return 0;
         }
-        return this.data.TotalVolume;
+        return this.data.volume;
     }
     // 右邊的大圖 - 最新價
     // fresh
     @computed get freshPrices() {
-        if (_.isEmpty(this.data) || isNaN(this.data.LastPrice)) {
+        if (_.isEmpty(this.data) || isNaN(this.data.last)) {
             return 0;
         }
-        return this.data.LastPrice.toFixed(this.dotSize);
+        return this.data.last.toFixed(this.dotSize);
     }
     @computed get freshPricesColor() {
-        return Colors.getColorText(this.data.LastPrice - this.data.PreSettlePrice);
+        return Colors.getColorText(this.data.last - this.data.pre_settle);
     }
     // change value
     @computed get changeValue() {
         let changeValue;
-        if (_.isEmpty(this.data) || isNaN(this.data.ChangeValue)) {
+        if (_.isEmpty(this.data) || isNaN(this.data.change_value)) {
             changeValue = 0;
         } else {
-            changeValue = this.data.ChangeValue;
+            changeValue = this.data.change_value;
         }
         return {
             content: `${changeValue.toFixed(this.dotSize)}`,
@@ -113,10 +113,10 @@ export default class HandicapTradeStore {
     // change rate
     @computed get changeRate() {
         let changeRate;
-        if (_.isEmpty(this.data) || isNaN(this.data.ChangeRate)) {
+        if (_.isEmpty(this.data) || isNaN(this.data.change_rate)) {
             changeRate = 0;
         } else {
-            changeRate = this.data.ChangeRate;
+            changeRate = this.data.change_rate;
         }
         return {
             content: `${changeRate.toFixed(2)}%`,
@@ -133,7 +133,7 @@ export default class HandicapTradeStore {
         }
         return comparer.default(old, new_);
     }) get pkLastPrice() {
-        return this.getContentColor('LastPrice');//最新价
+        return this.getContentColor('last');//最新价
     }
     // 開盤
     @computed.equals((old, new_) => {
@@ -142,7 +142,7 @@ export default class HandicapTradeStore {
         }
         return comparer.default(old, new_);
     }) get pkOpenPrice() {
-        return this.getContentColor('OpenPrice');//开仓价
+        return this.getContentColor('open');//开仓价
     }
     // 最高
     @computed.equals((old, new_) => {
@@ -151,7 +151,7 @@ export default class HandicapTradeStore {
         }
         return comparer.default(old, new_);
     }) get pkHightPrice() {
-        return this.getContentColor('HighPrice');//最高价
+        return this.getContentColor('high');//最高价
     }
     // 最低
     @computed.equals((old, new_) => {
@@ -160,7 +160,7 @@ export default class HandicapTradeStore {
         }
         return comparer.default(old, new_);
     }) get pkLowPrice() {
-        return this.getContentColor('LowPrice');//最低价
+        return this.getContentColor('low');//最低价
     }
     // 漲跌
     @computed.equals((old, new_) => {
@@ -171,12 +171,12 @@ export default class HandicapTradeStore {
     }) get pkzd() {
         let pkzd;
         let content;
-        if (_.isEmpty(this.data) || isNaN(this.data.ChangeValue) || isNaN(this.data.ChangeRate)) {
+        if (_.isEmpty(this.data) || isNaN(this.data.change_value) || isNaN(this.data.change_rate)) {
             pkzd = 0;
             content = '';
         } else {
-            pkzd = this.data.ChangeValue;
-            content = `${this.data.ChangeValue.toFixed(this.dotSize)}/${this.data.ChangeRate.toFixed(2)}%`;
+            pkzd = this.data.change_value;
+            content = `${this.data.change_value.toFixed(this.dotSize)}/${this.data.change_rate.toFixed(2)}%`;
         }
         return {
             content,
@@ -193,7 +193,7 @@ export default class HandicapTradeStore {
         if (_.isEmpty(this.data)) {
             return 0;
         }
-        return this.data.TotalVolume;
+        return this.data.volume;
     }
     // 持倉量
     @computed.equals((old, new_) => {
@@ -205,7 +205,7 @@ export default class HandicapTradeStore {
         if (_.isEmpty(this.data)) {
             return 0;
         }
-        return this.data.Position;
+        return this.data.position;
     }
     // 昨結
     @computed.equals((old, new_) => {
@@ -214,10 +214,10 @@ export default class HandicapTradeStore {
         }
         return comparer.default(old, new_);
     }) get pkzj() {
-        if (_.isEmpty(this.data) || isNaN(this.data.PreSettlePrice)) {
+        if (_.isEmpty(this.data) || isNaN(this.data.pre_settle)) {
             return 0;
         }
-        return this.data.PreSettlePrice.toFixed(this.dotSize);
+        return this.data.pre_settle.toFixed(this.dotSize);
     }
     // end handicap
 
@@ -228,7 +228,7 @@ export default class HandicapTradeStore {
         }
         return comparer.default(old, new_);
     }) get bid1() {
-        return this.getFiveMarket('BidPrice1', 'BidQty1');
+        return this.getFiveMarket('bid', 0);
     }
     @computed.equals((old, new_) => {
         if (!isActive) {
@@ -236,7 +236,7 @@ export default class HandicapTradeStore {
         }
         return comparer.default(old, new_);
     }) get bid2() {
-        return this.getFiveMarket('BidPrice2', 'BidQty2');
+        return this.getFiveMarket('bid', 1);
     }
     @computed.equals((old, new_) => {
         if (!isActive) {
@@ -244,7 +244,7 @@ export default class HandicapTradeStore {
         }
         return comparer.default(old, new_);
     }) get bid3() {
-        return this.getFiveMarket('BidPrice3', 'BidQty3');
+        return this.getFiveMarket('bid', 2);
     }
     @computed.equals((old, new_) => {
         if (!isActive) {
@@ -252,7 +252,7 @@ export default class HandicapTradeStore {
         }
         return comparer.default(old, new_);
     }) get bid4() {
-        return this.getFiveMarket('BidPrice4', 'BidQty4');
+        return this.getFiveMarket('bid', 3);
     }
     @computed.equals((old, new_) => {
         if (!isActive) {
@@ -260,7 +260,7 @@ export default class HandicapTradeStore {
         }
         return comparer.default(old, new_);
     }) get bid5() {
-        return this.getFiveMarket('BidPrice5', 'BidQty5');
+        return this.getFiveMarket('bid', 4);
     }
     @computed.equals((old, new_) => {
         if (!isActive) {
@@ -268,7 +268,7 @@ export default class HandicapTradeStore {
         }
         return comparer.default(old, new_);
     }) get ask1() {
-        return this.getFiveMarket('AskPrice1', 'AskQty1');
+        return this.getFiveMarket('ask', 0);
     }
     @computed.equals((old, new_) => {
         if (!isActive) {
@@ -276,7 +276,7 @@ export default class HandicapTradeStore {
         }
         return comparer.default(old, new_);
     }) get ask2() {
-        return this.getFiveMarket('AskPrice2', 'AskQty2');
+        return this.getFiveMarket('ask', 1);
     }
     @computed.equals((old, new_) => {
         if (!isActive) {
@@ -284,7 +284,7 @@ export default class HandicapTradeStore {
         }
         return comparer.default(old, new_);
     }) get ask3() {
-        return this.getFiveMarket('AskPrice3', 'AskQty3');
+        return this.getFiveMarket('ask', 2);
     }
     @computed.equals((old, new_) => {
         if (!isActive) {
@@ -292,7 +292,7 @@ export default class HandicapTradeStore {
         }
         return comparer.default(old, new_);
     }) get ask4() {
-        return this.getFiveMarket('AskPrice4', 'AskQty4');
+        return this.getFiveMarket('ask', 3);
     }
     @computed.equals((old, new_) => {
         if (!isActive) {
@@ -300,19 +300,28 @@ export default class HandicapTradeStore {
         }
         return comparer.default(old, new_);
     }) get ask5() {
-        return this.getFiveMarket('AskPrice5', 'AskQty5');
+        return this.getFiveMarket('ask', 4);
     }
-    getFiveMarket(price, qty) {
+    getFiveMarket(AskBid, level) {
+        let body;
         let tempPrice;
         if (_.isEmpty(this.data)) {
             tempPrice = 0;
         } else {
-            tempPrice = this.data[price];
+            switch(AskBid){
+                case 'ask':
+                body = this.data.ask;
+                break;
+                case 'bid':
+                body = this.data.bid;
+            }
+            tempPrice = body[0][0];// to do ...只有一档数据？
+
         }
         return {
             price: tempPrice.toFixed(this.dotSize),
             color: Colors.getColorText(tempPrice - this.preSettlePrice),
-            qty: this.data[qty]
+            qty: body[0][1]
         };
     }
     getContentColor(name) {
@@ -324,7 +333,7 @@ export default class HandicapTradeStore {
         }
         return {
             content: temp.toFixed(this.dotSize),
-            color: Colors.getColorText(temp - this.data.PreSettlePrice)
+            color: Colors.getColorText(temp - this.data.pre_settle)
         };
     }
 }
