@@ -11,6 +11,7 @@ export default class QuotationDetailHeader extends Component {
     const { QuotationDetailStore } = this.props;
     let title = '行情圖表';
     if (QuotationDetailStore.product) {
+      console.log(QuotationDetailStore.product)
       title = `${QuotationDetailStore.product.commodityName} ${QuotationDetailStore.product.productName}`;
     }
     return title;
@@ -19,7 +20,8 @@ export default class QuotationDetailHeader extends Component {
     const { QuotationDetailStore } = this.props;
     return (
 
-      <View style={[styles.container, { marginLeft: Layout.quotationDetailHeaderMargin }]}>
+      // <View style={[styles.container, { marginLeft: Layout.quotationDetailHeaderMargin }]}>
+      <View style={[styles.container]}>
         <View style={styles.viewForPosition}>
           <TouchableOpacity 
               style={styles.button} onPress={() => {
@@ -27,15 +29,24 @@ export default class QuotationDetailHeader extends Component {
             }
           }
           >
-            <Text style={{ color: Colors.quotationDetailHeaderTextColor, textAlign: 'center', fontSize: Layout.quotationDetailHeaderFontSize }}>{this._getTitle()}</Text>
+            <Text style={{ color: Colors.quotationDetailHeaderTextColor, textAlign: 'center',marginLeft: 30, fontSize: Layout.quotationDetailHeaderFontSize }}>{this._getTitle()}</Text>
+            {/* <Text style={{textAlign: 'center'}}>{this._getTitle()}</Text> */}
+           
           </TouchableOpacity>
           <Icon
             name="caret-down" 
             size={16} 
             color={Colors.kCaretColor}
-            style={{ position: 'absolute', bottom: -5, left: -2, transform: [{ rotate: '45deg' }] }} 
+            style={{ position: 'absolute', bottom: -5, left: -1, transform: [{ rotate: '45deg' }] }} 
           />
+          
         </View>
+
+        <View style = {styles.viewRight}>
+          <Text style = {styles.typeIcon}>外</Text>
+        </View>
+        
+        
       </View>
     );
   }
@@ -45,19 +56,42 @@ const paddingMarginVertical = 5;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'row',
     ...Layout.center
   },
   viewForPosition: {
     position: 'relative',
+    flex: 4,
+    //marginRight: 10,
     ...Layout.center
   },
+  viewRight: {
+    flex: 0,
+    width: 20,
+    height: 20,
+    marginLeft: 40,
+    borderRadius: 3,
+    backgroundColor: "#d47fff",
+    ...Layout.center
+  },
+  typeIcon: {
+    
+    color: "#222d3e",
+    
+    fontSize: 12,
+    
+  },  
+  // typeIcon: {
+  //   width: 15,
+  //   height: Layout.navBarHeight - (paddingMarginVertical * 2),
+    
+  // },  
   button: {
-    width: Layout.screenWidth / 2,
+    width: Layout.screenWidth/2,
     height: Layout.navBarHeight - (paddingMarginVertical * 2),
     alignSelf: 'center',
     backgroundColor: Colors.quotationDetailHeaderBackgroundColor,
     borderRadius: 2,
-
     ...Layout.center
   }
 });

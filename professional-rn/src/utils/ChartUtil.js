@@ -54,7 +54,7 @@ export default {
     },
     setNumOfLastestLine,
     getValueFormatter(dotSize) {
-        console.log(`dotSize: ${dotSize}`);
+        //console.log(`dotSize: ${dotSize}`);
         let valueFormatter = '##';
         if (dotSize) {
             valueFormatter = `${valueFormatter}.`;
@@ -62,7 +62,7 @@ export default {
         for (let i = 0; i < dotSize; i++) {
             valueFormatter = `${valueFormatter}0`;
         }
-        console.log(`getValueFormatter ${valueFormatter}`);
+        //console.log(`getValueFormatter ${valueFormatter}`);
         return valueFormatter;
     },
     getVolumnValueFormatter() {

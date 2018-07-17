@@ -16,6 +16,7 @@
     "base-64": "^0.1.0",
     "bugsnag-react-native": "^2.7.3",
     "color": "^2.0.0",
+    "global": "^4.3.2",
     "jcore-react-native": "^1.2.5",
     "jpush-react-native": "^2.1.11",
     "lodash": "^4.17.4",
@@ -25,15 +26,17 @@
     "moment": "^2.18.1",
     "prop-types": "^15.6.0",
     "react": "16.0.0",
+    "react-devtools": "^3.2.3",
     "react-native": "0.51.0",
     "react-native-charts-wrapper": "^0.4.1",
     "react-native-navigation": "^1.1.340",
     "react-native-refreshable-flatlist": "^0.1.1",
+    "react-native-scrollable-tab-view": "git@github.com:skv-headless/react-native-scrollable-tab-view.git",
     "react-native-simple-radio-button": "^2.7.1",
     "react-native-splash-screen": "^3.0.6",
     "react-native-swipeout": "^2.3.3",
     "react-native-vector-icons": "^4.4.3",
-    "react-native-scrollable-tab-view": "git@github.com:skv-headless/react-native-scrollable-tab-view.git"
+    "yarn": "^1.7.0"
   },
   "devDependencies": {
     "babel-jest": "20.0.3",

@@ -1,3 +1,4 @@
+
 const domainName = 'qhinom';    // oldest: incentm, older: qhinom new:vs
 const quoteDomainName = 'vs';
 const tradeDomainName = 'duokongtai';
