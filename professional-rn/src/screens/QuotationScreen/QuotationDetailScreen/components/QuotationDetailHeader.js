@@ -9,15 +9,20 @@ export default class QuotationDetailHeader extends Component {
 
   _getTitle() {
     const { QuotationDetailStore } = this.props;
+    console.log(this.props)
+    console.log(QuotationDetailStore);
     let title = '行情圖表';
+   
     if (QuotationDetailStore.product) {
-      console.log(QuotationDetailStore.product)
+      
       title = `${QuotationDetailStore.product.commodityName} ${QuotationDetailStore.product.productName}`;
     }
     return title;
   }
   render() {
     const { QuotationDetailStore } = this.props;
+    const securityType = 0?styles.viewIn:styles.viewOut
+    const typeName = 0?'内':'外'
     return (
 
       // <View style={[styles.container, { marginLeft: Layout.quotationDetailHeaderMargin }]}>
@@ -42,8 +47,8 @@ export default class QuotationDetailHeader extends Component {
           
         </View>
 
-        <View style = {styles.viewRight}>
-          <Text style = {styles.typeIcon}>外</Text>
+        <View style = {[styles.viewRight,securityType]}>
+          <Text style = {styles.typeIcon}>{typeName}</Text>
         </View>
         
         
@@ -71,16 +76,21 @@ const styles = StyleSheet.create({
     height: 20,
     marginLeft: 40,
     borderRadius: 3,
-    backgroundColor: "#d47fff",
     ...Layout.center
   },
+  viewOut: {
+    backgroundColor: "#d47fff",
+  },
+  viewIn: {
+    backgroundColor: '#f2d230'
+  },
   typeIcon: {
-    
     color: "#222d3e",
-    
     fontSize: 12,
-    
-  },  
+  },
+  
+
+
   // typeIcon: {
   //   width: 15,
   //   height: Layout.navBarHeight - (paddingMarginVertical * 2),

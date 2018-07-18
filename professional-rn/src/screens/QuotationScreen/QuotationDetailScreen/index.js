@@ -111,5 +111,6 @@ coQuotationDetailScreen.navigatorStyle = {
   ...NavigatorStyle.screenInnerStyle,
   navBarCustomView: 'quotation.QuotationDetailHeader',
   navBarComponentAlignment: 'center',
+  
 };
 export default coQuotationDetailScreen;
