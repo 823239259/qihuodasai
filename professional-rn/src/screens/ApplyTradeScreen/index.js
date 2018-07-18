@@ -5,11 +5,12 @@ import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import { inject, observer } from 'mobx-react/native';
-import { TabBarDropdown } from '../../components';
+import { TabBarDropdown,TaBarCommodityType } from '../../components';
 import { Layout, Enum } from '../../global';
 import ApplyNew from './ApplyNew';
 import ApplyRecord from './ApplyRecord';
 import { Logger } from '../../utils';
+
 
 @inject('ApplyTradeStore') @observer
 export default class ApplyTradeScreen extends Component {
@@ -24,13 +25,17 @@ export default class ApplyTradeScreen extends Component {
   }
   render() {
     const { ApplyTradeStore } = this.props;
+    const typeArr = ['国际期货开户','国内期货开户']
     return (
       <View style={styles.container}>
+        <TaBarCommodityType typeArr = {typeArr} />
         <ScrollableTabView
           style={{ flex: 1 }}
           locked={true}
           scrollWithoutAnimation={true}
-          renderTabBar={() => <TabBarDropdown textStyle={Layout.fontBold} />}
+          renderTabBar={() => 
+            <TabBarDropdown textStyle={Layout.fontBold} />
+          }
           ref={(tabView) => { this.tabView = tabView; }}
           onChangeTab={(currentTab) => {
             if (currentTab.i === Enum.applyTradeTabView.applyRecord.index) {

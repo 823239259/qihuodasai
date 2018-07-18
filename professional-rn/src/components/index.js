@@ -35,6 +35,8 @@ import IndicatorPullToRefresh from './IndicatorPullToRefresh';
 import TouchableSort from './TouchableSort';
 import SearchInputField from './SearchInputField';
 
+import TaBarCommodityType from './tabBar/TaBarCommodityType'
+
 export {
   Dialog,
   ToastRoot,
@@ -71,5 +73,6 @@ export {
   ConnectionStatus,
   IndicatorPullToRefresh,
   TouchableSort,
-  SearchInputField
+  SearchInputField,
+  TaBarCommodityType
 };

@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
-import { Loading, SearchInputField } from '../../components';
+import { Loading, SearchInputField,TaBarCommodityType } from '../../components';
 import RowSwipeoutContainer from './RowSwipeoutContainer';
 import FocusedGridContainer from './FocusedGridContainer';
 import HeaderSort from './HeaderSort';
@@ -74,11 +74,13 @@ class QuotationScreen extends Component {
   }
   _renderContent() {
     const { QuotationStore, navigator } = this.props;
+    const typeArr = ['国际期货','国内期货']
     if (QuotationStore.isLoading) {
       return <Loading />;
     }
     return (
       <View style={{ flex: 1 }}>
+          <TaBarCommodityType typeArr = {typeArr} />
           <FocusedGridContainer navigator={navigator} />
           { this.state.isSearch && <SearchInputField placeHolder={'合约名称/代码'} store={QuotationStore.searchStore} style={{ margin: Layout.inset }} /> }
           <HeaderSort />
