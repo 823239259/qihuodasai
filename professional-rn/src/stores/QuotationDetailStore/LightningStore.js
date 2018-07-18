@@ -222,9 +222,9 @@ export default class LightningStore {
             this.data.prices.shift();
             this.data.times.shift();
         }
-        if (param.DateTimeStamp) {
-            this.data.prices.push(param.LastPrice);
-            this.data.times.push((param.DateTimeStamp).split(' ')[1]);
+        if (param.time_flag) {
+            this.data.prices.push(param.last);
+            this.data.times.push((param.time_flag).split(' ')[1]);
         }
     }
 }
