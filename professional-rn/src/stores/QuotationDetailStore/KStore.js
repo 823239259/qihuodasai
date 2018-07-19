@@ -250,10 +250,10 @@ export default class KStore {
     @action start(jsonData, dotSize) {
         this.reset();
         this.dotSize = dotSize;
-        const dataSent = jsonData.Parameters.Data;
+        const dataSent = jsonData.data.Lines;
         // 只取最新的chartDataLimited筆資料 -> 修改原本的寫法 xxArr.slice(): 1.他要把全部資料全跑完 2.再另外取出最新的40筆 
         // 確定資料是照順序排，那只要取最後chartDataLimited筆資料就好了
-        this.klineType = jsonData.Parameters.HisQuoteType;
+        this.klineType = jsonData.data.period;
         // 日K資料不多
         let startIndex = 0;
         if (dataSent.length >= Config.chartDataLimited) {
@@ -289,7 +289,6 @@ export default class KStore {
         const oldestDateTimeString = this.data.times[this.data.times.length - 1];
         const oldTime = Math.round(moment(oldestDateTimeString).valueOf() / 1000);
         const newTime = this.getRangeTime(dataSent.time_flag);
-        
         const lastPrice = _.toNumber(dataSent.last.toFixed(this.dotSize));
         if (oldTime === newTime) {
             const length = this.data.prices.length;
@@ -305,6 +304,7 @@ export default class KStore {
             }
             this.data.prices[length - 1] = { shadowH, shadowL, open, close };
             this.data.volumns[this.data.volumns.length - 1] += this.getVolumn(dataSent.volume);
+
         } else {
             // 2017-09-01 10:30:00('YYYY-MM-DD HH:mm:ss') -> 不需要ss
             const dateTimeString = moment.unix(newTime).format('YYYY-MM-DD HH:mm');
@@ -348,13 +348,28 @@ export default class KStore {
     }
     // 消除range以下的數字，回傳是seconds
     getRangeTime(dateTimeString) {
-        const range = this.klineType; // 1, 5, 15, 30
+        let range = ''
+        switch(this.klineType){
+            case 'TIME_SHARING': range = 0;
+            break;
+            case 'KLINE_1MIN': range = 1;
+            break;
+            case 'KLINE_5MIN': range = 5;
+            break;
+            case 'KLINE_15MIN': range = 15;
+            break;
+            case 'KLINE_30MIN': range = 30;
+            break;
+            case 'KLINE_1DAY': range = 1440;
+            break;
+        }
         const milliseconds = moment(dateTimeString).valueOf();
         const onlySeconds = Math.round(milliseconds / 1000);
         // 先除以 (60 * range)
         const timeFractionRemoved = parseInt(onlySeconds / (60 * range));
         return timeFractionRemoved * 60 * range;
     }
+    
     // 每一個candle點，包含自己 往前加到maNo 再取平均
     calculateMa(maNo, pricesArr) {
         const values = [];
