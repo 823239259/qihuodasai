@@ -221,6 +221,9 @@ export default {
         { index: 20, commodityName: '小原油', key: 'smaActualLever', actual: 'smallCrudeOilMarketLever', commodityNo: 'QM', productName: null },
         { index: 21, commodityName: '迷你德国DAX指数', key: 'daxtranMinActualLever', actual: 'daxtranMinActualLever', commodityNo: 'FDXM', productName: null },
         { index: 22, commodityName: '天然气指数', key: 'naturalGasActualLever', actual: 'naturalGasActualLever', commodityNo: 'NG', productName: null },
+        { index: 98, commodityName: '沪深300指数', key: 'hs300', actual: 'hs300', commodityNo: 'IF', productName: null },
+        { index: 97, commodityName: '上证50指数', key: 'sz50', actual: 'sz50', commodityNo: 'IH', productName: null },
+        { index: 96, commodityName: '中国原油', key: 'sc', actual: 'SC', commodityNo: 'SC', productName: null },
     ],
     validateReg: {
         tenNumber: /^1\d{10}$/,

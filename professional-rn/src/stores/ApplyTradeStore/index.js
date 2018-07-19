@@ -106,6 +106,7 @@ export default class ApplyTradeStore {
         this.depositParams = result.data.paramList.map(param => {
             return new DepositParam(param);
         });
+        //this.depositParams = [new DepositParam(result.data.paramList[0])];// to fix 
         // 預設一開始選擇保證金3000
         this.chooseDeposit = this.depositParams[0].traderBond;
         // 將傳來的contractList，多給予一個commodityName
@@ -191,7 +192,7 @@ export default class ApplyTradeStore {
     // 但是 commodityNo 一定一致
     getCommodityNameAndSetProductName(mainContract) {
         const mainContractArr = mainContract.split(/([A-Za-z]+)([0-9]+)/);
-        const commodityNo = mainContractArr[1];
+        const commodityNo = mainContractArr[0];
 
         const productTradeType = Enum.productTradeType.find(product => {
             return commodityNo === product.commodityNo;

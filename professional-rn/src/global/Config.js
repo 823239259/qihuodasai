@@ -32,12 +32,12 @@ export default {
     /********************** url **********************/
     marketSocketUrl: 'ws://192.168.0.232:9102',//`ws://quote.${quoteDomainName}.com:9002`,                          //指向内部数据，由domainName 修改为quoteDomainName          by zihaoWang 18.6.8
     tradeSocket: {
-        url: `ws://trade.${tradeDomainName}.cn:6101`,                                   //指向内部数据  old:'ws://trade.${domainName}.com:6102'   by zihaoWang 18.6.8
+        url: 'ws://192.168.0.227:6999',//`ws://trade.${tradeDomainName}.cn:6101`,                                   //指向内部数据  old:'ws://trade.${domainName}.com:6102'   by zihaoWang 18.6.8
         isMock: 1,
         version: 3.3,
         source: 'xn_app' // app
     },
-    api_domain: `http://api.${apiDomainName}.cn`,                                       //指向内部数据  old:`http://api.${domainName}.com`        by zihaoWang 18.6.8
+    api_domain: `http://test.api.${apiDomainName}.cn`,                                       //指向内部数据  old:`http://api.${domainName}.com`        by zihaoWang 18.6.8
     base_images_url: `http://manage.${domainName}.com`, //图片地址                       //暂未指向新url  by zihaoWang 18.6.8
     customer_service_url: `http://api.${apiDomainName}.cn/consistentbeauty.html`,      //old:`http://api.${domainName}.com/consistentbeauty.html`  by zihaoWang 18.6.8
     api_recharge_url: `http://pay.${domainName}.com`,                                  //暂未指向新url  by zihaoWang 18.6.8

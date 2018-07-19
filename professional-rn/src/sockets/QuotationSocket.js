@@ -179,8 +179,8 @@ export default class QuotationSocket {
             break;
         }
         const { exchangeNo, commodityNo, contractNo } = this.quotationDetailStore.product;
-        const qryHistoryParamSharing = `{"contract_info":{"security_type":"FUT_OUT","exchange_no":"${exchangeNo}","commodity_no":"${commodityNo}","contract_no":"${contractNo}"},"period":"${type}"}`;//`{"ExchangeNo":"${exchangeNo}","CommodityNo":"${commodityNo}","ContractNo":"${contractNo}","HisQuoteType":${num} }`;
-        const qryHistoryParamKline = `{"contract_info":{"security_type":"FUT_OUT","exchange_no":"${exchangeNo}","commodity_no":"${commodityNo}","contract_no":"${contractNo}"},"period":"${type}","count":40}`;//`{"ExchangeNo":"${exchangeNo}","CommodityNo":"${commodityNo}","ContractNo":"${contractNo}","HisQuoteType":${num} }`;
+        const qryHistoryParamSharing = `{"contract_info":{"security_type":"FUT_IN","exchange_no":"${exchangeNo}","commodity_no":"${commodityNo}","contract_no":"${contractNo}"},"period":"${type}"}`;//`{"ExchangeNo":"${exchangeNo}","CommodityNo":"${commodityNo}","ContractNo":"${contractNo}","HisQuoteType":${num} }`;
+        const qryHistoryParamKline = `{"contract_info":{"security_type":"FUT_IN","exchange_no":"${exchangeNo}","commodity_no":"${commodityNo}","contract_no":"${contractNo}"},"period":"${type}","count":40}`;//`{"ExchangeNo":"${exchangeNo}","CommodityNo":"${commodityNo}","ContractNo":"${contractNo}","HisQuoteType":${num} }`;
         const qryHistoryParam = type == 'TIME_SHARING' ? qryHistoryParamSharing : qryHistoryParamKline ;
         this.sendMessage('req_history_data', qryHistoryParam);
     }
@@ -193,7 +193,7 @@ export default class QuotationSocket {
             break;
           }
         }
-        this.sendMessage('req_subscribe', `{"security_type":"FUT_OUT","exchange_no":"${commodity.exchange_no}","commodity_no":"${commodity.commodity_no}","contract_no":"${mainContract}"}`);
+        this.sendMessage('req_subscribe', `{"security_type":"FUT_IN","exchange_no":"${commodity.exchange_no}","commodity_no":"${commodity.commodity_no}","contract_no":"${mainContract}"}`);
     }
     // 其實行情傳入的UserName & PassWord都是''
     sendLogin() {
@@ -202,7 +202,7 @@ export default class QuotationSocket {
     // 查詢品種接口 QryCommodity 並且用來測試heartbeat，因為OnRtnQuote可能頻率不高
     sendQryCommodity(isQryCommodityForheartBeat) {
         this.isQryCommodityForheartBeat = isQryCommodityForheartBeat;
-        this.sendMessage('req_commodity_list', '{"security_type":"FUT_OUT"}');
+        this.sendMessage('req_commodity_list', '{"security_type":"FUT_IN"}');
     }
     sendMessage(method, parameters) {
         try {

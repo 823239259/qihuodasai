@@ -22,11 +22,33 @@ export default class DepositParam {
     @observable smaActualLever;         // 小原油
     @observable daxtranMinActualLever;  // 迷你德国DAX指数
     @observable naturalGasActualLever;  // 天然气指数
+    @observable hs300;  // 沪深300指数
+    @observable sz50;  // 上证50指数指数
+    @observable SC;  // 中国原油
 
-    constructor({ traderBond, traderTotal, lineLoss, tranLever, crudeTranLever, hsiTranLever, mdtranLever, mntranLever, mbtranLever, daxtranLever, nikkeiTranLever, lhsiTranActualLever, agTranActualLever, hIndexActualLever, xhIndexActualLever, aCopperActualLever, aSilverActualLever, smaActualLever, daxtranMinActualLever, naturalGasActualLever }) {
+    constructor({ traderBond, traderTotal, lineLoss, inMultiple, tranLever, crudeTranLever, hsiTranLever, mdtranLever, mntranLever, mbtranLever, daxtranLever, nikkeiTranLever, lhsiTranActualLever, agTranActualLever, hIndexActualLever, xhIndexActualLever, aCopperActualLever, aSilverActualLever, smaActualLever, daxtranMinActualLever, naturalGasActualLever }) {
         this.traderBond = traderBond;
         this.traderTotal = traderTotal;
         this.lineLoss = lineLoss;
+        if(inMultiple){
+            let jsonData = JSON.parse(inMultiple);
+            jsonData.map((obj)=>{
+                let that = this;
+                switch (obj.commodityNo) {
+                    case 'IF':
+                    that.hs300 = obj.initialAmount;                       
+                    break;   
+                    case 'IH':
+                    that.sz50 = obj.initialAmount;                       
+                    break;
+                    case 'sc':
+                    that.SC = obj.initialAmount;                       
+                    break;              
+                    default:
+                    break;
+                }
+            })
+        }else{
         this.tranLever = tranLever;
         this.crudeTranLever = crudeTranLever;
         this.hsiTranLever = hsiTranLever;
@@ -45,5 +67,6 @@ export default class DepositParam {
         this.smaActualLever = smaActualLever;
         this.daxtranMinActualLever = daxtranMinActualLever;
         this.naturalGasActualLever = naturalGasActualLever;
+        }
     }
 }
