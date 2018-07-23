@@ -106,7 +106,6 @@ export default class ApplyTradeStore {
         this.depositParams = result.data.paramList.map(param => {
             return new DepositParam(param);
         });
-        //this.depositParams = [new DepositParam(result.data.paramList[0])];// to fix 
         // 預設一開始選擇保證金3000
         this.chooseDeposit = this.depositParams[0].traderBond;
         // 將傳來的contractList，多給予一個commodityName

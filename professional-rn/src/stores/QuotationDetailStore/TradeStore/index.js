@@ -28,6 +28,7 @@ import { ToastRoot } from '../../../components';
 import { Logger, I18n, TradeUtil, ArrayUtil } from '../../../utils';
 
 export default class TradeStore {
+    type = true; //to fix ... true 内盘 false 外盘
     logger = null;
     // store
     quotationStore = null;
@@ -192,11 +193,12 @@ export default class TradeStore {
         this.logger.warn(`manageHold - productName: ${product.productName}`);
         // 手數
         const holdNum = param.HoldNum;
+        const productName = this.type ? `${product.productName}${param.Drection}`:product.productName;
         if (holdNum === 0) {
-            this.deleteHold(product.productName);
+            this.deleteHold(productName);
             return;
         }
-        if (this.holdPositions.has(product.productName)) {
+        if (this.holdPositions.has(productName)) {
             this.logger.debug(`has: productName: ${product.productName}`);
             this.updateHold(product, param);
         } else {
@@ -228,11 +230,13 @@ export default class TradeStore {
         return this.holdPositions.get(this.getProductName(param));
     }
     @action updateHold(product, param) {
-        const holdPosition = this.holdPositions.get(product.productName);
+        const productName = this.type ? `${product.productName}${param.Drection}`:product.productName;
+        const holdPosition = this.holdPositions.get(productName);
         holdPosition.update(this.setHoldPosition(product, param));
     }
     @action addHold(product, param) {
-        this.holdPositions.set(product.productName, new HoldPosition(this.setHoldPosition(product, param)));
+        const productName = this.type ? `${product.productName}${param.Drection}`:product.productName;
+        this.holdPositions.set(productName, new HoldPosition(this.setHoldPosition(product, param)));
     }
     @action deleteHold(productName) {
         this.holdPositions.delete(productName);
@@ -364,6 +368,9 @@ export default class TradeStore {
         const order = this.orders.find((o) => {
             return o.orderId === orderId;
         });
+        // if(order == undefined){
+        //     return;//to fix ...条件单也会触发order？？？
+        // }
         if (order.orderPrice !== Enum.priceType.market.text) {
             order.orderPrice = orderPrice.toFixed(product.dotSize);
         }

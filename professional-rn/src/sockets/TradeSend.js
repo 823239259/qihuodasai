@@ -128,14 +128,14 @@ export default class TradeSend {
                     orderType, direction, stopLossType, stopLossDiff, stopWinDiff, additionFlag, additionType, additionPrice) {
         const param = `{"ExchangeNo":"${exchangeNo}", "CommodityNo":"${commodityNo}", "ContractNo":"${contractNo}", "Num":${num},`
         + ` "ConditionType":${conditionType}, "PriceTriggerPonit":${triggerPrice}, "CompareType":${compareType}, "TimeTriggerPoint":"${triggerTime}", "AB_BuyPoint":${abBuyPoint}, "AB_SellPoint":${abSellPoint},`
-        + ` "OrderType":${orderType}, "Drection":${direction}, "StopLossType":${stopLossType}, "StopLossDiff":${stopLossDiff}, "StopWinDiff":${stopWinDiff}, "AdditionFlag":${additionFlag}, "AdditionType": ${additionType}, "AdditionPrice": ${additionPrice}}`;
+        + ` "OrderType":${orderType}, "Drection":${direction}, "StopLossType":${stopLossType}, "StopLossDiff":${stopLossDiff}, "StopWinDiff":${stopWinDiff}, "AdditionFlag":${additionFlag}, "AdditionType": ${additionType}, "AdditionPrice": ${additionPrice}, "OpenCloseType":1}`;// to fix ...条件单默认开仓
         this.sendMessage('InsertCondition', param);
     }
     modifyCondition(modifyFlag, conditionNo, num, conditionType, triggerPrice, compareType, triggerTime, abBuyPoint, abSellPoint, 
                     orderType, direction, stopLossType, stopLossDiff, stopWinDiff, additionFlag, additionType, additionPrice) {
         const param = `{"ConditionNo":"${conditionNo}", "ModifyFlag":${modifyFlag}, "Num":${num},`
         + ` "ConditionType":${conditionType}, "PriceTriggerPonit":${triggerPrice}, "CompareType":${compareType}, "TimeTriggerPoint":"${triggerTime}", "AB_BuyPoint":${abBuyPoint}, "AB_SellPoint":${abSellPoint},`
-        + ` "OrderType":${orderType}, "Drection":${direction}, "StopLossType":${stopLossType}, "StopLossDiff":${stopLossDiff}, "StopWinDiff":${stopWinDiff}, "AdditionFlag":${additionFlag}, "AdditionType": ${additionType}, "AdditionPrice": ${additionPrice}}`;
+        + ` "OrderType":${orderType}, "Drection":${direction}, "StopLossType":${stopLossType}, "StopLossDiff":${stopLossDiff}, "StopWinDiff":${stopWinDiff}, "AdditionFlag":${additionFlag}, "AdditionType": ${additionType}, "AdditionPrice": ${additionPrice}, "OpenCloseType":1}`;// to fix ...条件单默认开仓
         this.sendMessage('ModifyCondition', param);
     }
     // 查询历史成交记录

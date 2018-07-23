@@ -12,7 +12,7 @@ import { Config, Enum, Variables } from '../../../global';
 import { Logger, TradeUtil, I18n } from '../../../utils';
 
 export default class TradeHoldPositionStore {
-    
+    type = true; //to fix ... true 内盘 false 外盘
     navigator = null;
     // store
     quotationStore = null;
@@ -192,7 +192,7 @@ export default class TradeHoldPositionStore {
     confirmCloseHoldDialog(holdPosition) {
         const product = this.quotationStore.getProduct(holdPosition.productName);
         const price = TradeUtil.getMarketPrice(product.lastPrice, product.miniTikeSize, holdPosition.direction.value, product.dotSize);
-        this.tradeSend.insertOrder(product.exchangeNo, product.commodityNo, product.contractNo, holdPosition.holdNum, this.getReverseDirection(holdPosition.direction), Enum.priceType.market.value, price, 0, TradeUtil.getOrderRef());
+        this.tradeSend.insertOrder(product.exchangeNo, product.commodityNo, product.contractNo, holdPosition.holdNum, this.getReverseDirection(holdPosition.direction), Enum.priceType.market.value, price, 0, TradeUtil.getOrderRef(),2);
         this.setIsCloseHoldDialogVisbile(false);
     }
     cancelCloseHoldDialog() {
@@ -232,7 +232,12 @@ export default class TradeHoldPositionStore {
     confirmReverseHoldDialog(holdPosition) {
         const product = this.quotationStore.getProduct(holdPosition.productName);
         const price = TradeUtil.getMarketPrice(product.lastPrice, product.miniTikeSize, holdPosition.direction.value, product.dotSize);
+        if(this.type){
+        this.tradeSend.insertOrder(product.exchangeNo, product.commodityNo, product.contractNo, holdPosition.holdNum, this.getReverseDirection(holdPosition.direction), Enum.priceType.market.value, price, 0, TradeUtil.getOrderRef(),2);
+        this.tradeSend.insertOrder(product.exchangeNo, product.commodityNo, product.contractNo, holdPosition.holdNum, this.getReverseDirection(holdPosition.direction), Enum.priceType.market.value, price, 0, TradeUtil.getOrderRef(),1);
+        }else{
         this.tradeSend.insertOrder(product.exchangeNo, product.commodityNo, product.contractNo, holdPosition.holdNum * 2, this.getReverseDirection(holdPosition.direction), Enum.priceType.market.value, price, 0, TradeUtil.getOrderRef());
+        }
         this.setIsReverseHoldDialogVisbile(false);
     }
     cancelReverseHoldDialog() {
