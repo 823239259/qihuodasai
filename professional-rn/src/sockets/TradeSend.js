@@ -61,9 +61,9 @@ export default class TradeSend {
      * 
      * -> OnRspOrderInsert
      */ 
-    insertOrder(exchangeNo, commodeityNo, contractNo, orderNum, drection, priceType, limitPrice, triggerPrice, orderRef) {
+    insertOrder(exchangeNo, commodeityNo, contractNo, orderNum, drection, priceType, limitPrice, triggerPrice, orderRef, openCloseType) {
         const param = `{"ExchangeNo":"${exchangeNo}", "CommodityNo":"${commodeityNo}", "ContractNo":"${contractNo}", "OrderNum":${_.toNumber(orderNum)},`
-                    + ` "Drection":${drection}, "PriceType":${priceType}, "LimitPrice":${_.toNumber(limitPrice)}, "TriggerPrice":${triggerPrice}, "OrderRef":"${orderRef}"}`;                 
+                    + ` "Drection":${drection}, "PriceType":${priceType}, "LimitPrice":${_.toNumber(limitPrice)}, "TriggerPrice":${triggerPrice}, "OrderRef":"${orderRef}", "OpenCloseType":${openCloseType}`;                 
         this.sendMessage('InsertOrder', param);
     }
     /**

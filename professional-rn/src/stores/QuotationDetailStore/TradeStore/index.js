@@ -397,7 +397,7 @@ export default class TradeStore {
         return this.quotationStore.getProduct(this.getProductName(param));
     }
     getProductName(param) {
-        return `${param.contract_info.commodity_no}${param.contract_info.contract_no}`;
+        return `${param.CommodityNo}${param.ContractNo}`;
     }
     // 計算浮动盈亏, lastPrice 最新价, holdAvgPrice 均价, contractSize 每手乘数, miniTikeSize 最小变动单位, holdNum 订单量(手數), drection 买卖方向（0-买，1-买), currencyNo 幣別
     getFloatProfit(lastPrice, holdAvgPrice, contractSize, miniTikeSize, holdNum, direction, currencyNo) {

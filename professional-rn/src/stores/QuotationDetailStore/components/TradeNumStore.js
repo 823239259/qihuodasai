@@ -40,7 +40,7 @@ export default class TradeNumStore {
         this.setIsTradeSubmitDialogVisbile(true);
    }
    confirmTradeSubmitDialog() {
-        this.tradeSend.insertOrder(this.product.exchangeNo, this.product.commodityNo, this.product.contractNo, this.num, this.direction.value, Enum.priceType.market.value, this.buyOrderPrice, 0, TradeUtil.getOrderRef());
+        this.tradeSend.insertOrder(this.product.exchangeNo, this.product.commodityNo, this.product.contractNo, this.num, this.direction.value, Enum.priceType.market.value, this.buyOrderPrice, 0, TradeUtil.getOrderRef(),1);// to fix ... 1改为变量
         this.setIsTradeSubmitDialogVisbile(false);
    }
    cancelTradeSubmitDialog() {
