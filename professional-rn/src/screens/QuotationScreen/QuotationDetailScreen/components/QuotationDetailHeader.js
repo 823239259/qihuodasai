@@ -4,7 +4,7 @@ import { inject, observer } from 'mobx-react/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Layout, Colors, Variables } from '../../../../global';
 
-@inject('QuotationDetailStore') @observer
+@inject('QuotationDetailStore','FutureTypeStore') @observer
 export default class QuotationDetailHeader extends Component {
 
   _getTitle() {
@@ -20,9 +20,9 @@ export default class QuotationDetailHeader extends Component {
     return title;
   }
   render() {
-    const { QuotationDetailStore } = this.props;
-    const securityType = 0?styles.viewIn:styles.viewOut
-    const typeName = 0?'内':'外'
+    const { QuotationDetailStore, FutureTypeStore } = this.props;
+    const securityType = FutureTypeStore.isFutIn?styles.viewIn:styles.viewOut
+    const typeName = FutureTypeStore.isFutIn?'内':'外'
     return (
 
       // <View style={[styles.container, { marginLeft: Layout.quotationDetailHeaderMargin }]}>

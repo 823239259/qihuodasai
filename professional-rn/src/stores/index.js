@@ -32,6 +32,7 @@ import InformationStore from './InformationStore';
 import ApplyTradeStore from './ApplyTradeStore';
 import DrawerTradeStore from './DrawerStore/DrawerTradeStore';
 
+import FutureTypeStore from './FutureTypeStore';
 import { Logger, PromiseTestUtil } from '../utils';
 
 class StoreManager {
@@ -94,11 +95,15 @@ class StoreManager {
         const accountWithdrawPwdStore = new AccountWithdrawPwdStore(accountStore);
 
         const tradeLoginModalStore = new TradeLoginModalStore();
-  
-        const quotationSocket = new QuotationSocket(quotationStore, quotationDetailStore, tradeStore);
+
+        // 内外盘标识store
+        const  futureTypeStore = new FutureTypeStore();
+        //const quotationSocket = new QuotationSocket(quotationStore, quotationDetailStore, tradeStore);
+        const quotationSocket = new QuotationSocket(quotationStore, quotationDetailStore, tradeStore, futureTypeStore);
         const tradeSocket = new TradeSocket(tradeStore, tradeSend, workbenchDetailStore, quotationDetailStore, stopLossStore, historyTradeStore, conditionStore, tradeLoginModalStore);
         const connectionScreenStore = new ConnectionScreenStore();
         const socketManager = new SocketManager(quotationSocket, tradeSocket, quotationDetailStore, tradeLoginModalStore, connectionScreenStore, tradeSend);
+
 
         resolve({
           QuotationStore: quotationStore,
@@ -136,7 +141,9 @@ class StoreManager {
           QuotationSocket: quotationSocket,
           TradeSocket: tradeSocket,
 
-          DrawerTradeStore: drawerTradeStore
+          DrawerTradeStore: drawerTradeStore,
+          //内外盘store
+          FutureTypeStore: futureTypeStore
         });
     });
   }

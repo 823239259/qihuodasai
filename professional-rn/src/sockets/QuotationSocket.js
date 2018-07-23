@@ -1,4 +1,4 @@
-import { action } from 'mobx';
+import { action,autorun } from 'mobx';
 import { Config, Variables, Enum } from '../global';
 import { Logger, I18n } from '../utils';
 import { ToastRoot } from '../components';
@@ -13,23 +13,37 @@ export default class QuotationSocket {
     quotationStore = null;
     quotationDetailStore = null;
     tradeStore = null;
-    
-    constructor(quotationStore, quotationDetailStore, tradeStore) {
+    futureTypeStore = null;
+    constructor(quotationStore, quotationDetailStore, tradeStore, futureTypeStore) {
         this.logger = new Logger(QuotationSocket);
         
         this.quotationStore = quotationStore;
         this.quotationDetailStore = quotationDetailStore;
         this.tradeStore = tradeStore;
+        this.futureTypeStore = futureTypeStore
+        
+
     }
+    
+    //ss
+
+    ss () {
+        this.socket.close()
+    }
+
     setEventEmitter(eventEmitter) {
         this.eventEmitter = eventEmitter;
     }
+    
+
     connectSocket() {
         return new Promise((resolve, reject) => {
             this.socket = new WebSocket(Config.marketSocketUrl);
             this.socket.onopen = () => {
                 // this.logger.info('onopen');
                 // 登入接口 Login
+                console.log('登录成功');
+                
                 this.sendLogin();
             };
             // websocket中斷的話 就再連一次
@@ -47,12 +61,21 @@ export default class QuotationSocket {
                 }
                 const method = jsonData.method;
                 // this.logger.info(`onmessage - method ${method}`);
-
+                //console.log(this.futureTypeStore);
+                
                 if (method === 'on_rsp_login') {
+                    
+                    // autorun(() => {
+                    //     console.log(this.futureTypeStore.isFutIn)
+                    //     this.sendQryCommodity(false);
+                    // });
                     this.sendQryCommodity(false);
                     this.reconnectStartDetail();
                     resolve('QuotationSocket Login Success');
                 } else if (method === 'on_rsp_commodity_list') { // 返回品種
+                    //console.log(12313);
+                    
+                    
                     if (this.isQryCommodityForheartBeat) {
                         this.isQryCommodityForheartBeat = false;
                         this.isHeartBeating = true;
@@ -61,14 +84,17 @@ export default class QuotationSocket {
                     // 訂閱合約
                     this.onRspQryCommodity(jsonData);
                 } else if (method === 'on_rsp_subscribe') {
+                   
+                    
                     //订阅成功
                     // quotation
-                    // const moreData = JSON.parse(evt.data).Parameters.LastQuotation;
-                    // this.quotationStore.insertData(moreData);
+                    //const moreData = JSON.parse(evt.data).Parameters.LastQuotation;
+                    //this.quotationStore.insertData(jsonData.data);
                 } else if (method === 'on_rsp_history_data') {//查询k线
                     // detail
                     this.quotationDetailStore.setChartHistory(jsonData);
                 } else if (method === 'on_rtn_quote') { // 行情推送接口
+                  
                     this.isHeartBeating = true;
                     // this.logger.info(`OnRtnQuote - isHeartBeating: ${this.isHeartBeating}`);
                     this.quotationStore.insertData(jsonData.data);
@@ -78,6 +104,7 @@ export default class QuotationSocket {
                         // 更新每一筆筆持倉的浮动盈亏
                         // Variables.trade.isLogged && this.tradeStore.updateFloatProfitAndRisk(param);
                         if (this.isQuotationEqual(param)) {
+                            
                             this.quotationDetailStore.updateChart(param);
                             // 更新選擇到的合約最新資料
                             Variables.trade.isLogged && this.tradeStore.updateTradeQuotation(param);
@@ -128,7 +155,9 @@ export default class QuotationSocket {
     }
     // 返回品種
     onRspQryCommodity(jsonData) {
+        
         const commoditys = jsonData.data.commodity_list;
+        console.log(commoditys);
         
         for (let i = 0; i < commoditys.length; i++) {
             if (commoditys[i].IsUsed !== 0) {
@@ -179,8 +208,10 @@ export default class QuotationSocket {
             break;
         }
         const { exchangeNo, commodityNo, contractNo } = this.quotationDetailStore.product;
-        const qryHistoryParamSharing = `{"contract_info":{"security_type":"FUT_IN","exchange_no":"${exchangeNo}","commodity_no":"${commodityNo}","contract_no":"${contractNo}"},"period":"${type}"}`;//`{"ExchangeNo":"${exchangeNo}","CommodityNo":"${commodityNo}","ContractNo":"${contractNo}","HisQuoteType":${num} }`;
-        const qryHistoryParamKline = `{"contract_info":{"security_type":"FUT_IN","exchange_no":"${exchangeNo}","commodity_no":"${commodityNo}","contract_no":"${contractNo}"},"period":"${type}","count":40}`;//`{"ExchangeNo":"${exchangeNo}","CommodityNo":"${commodityNo}","ContractNo":"${contractNo}","HisQuoteType":${num} }`;
+        const qryHistoryParamSharing = `{"contract_info":{"security_type":"${this.futureTypeStore.Futstring}","exchange_no":"${exchangeNo}","commodity_no":"${commodityNo}","contract_no":"${contractNo}"},"period":"${type}"}`;//`{"ExchangeNo":"${exchangeNo}","CommodityNo":"${commodityNo}","ContractNo":"${contractNo}","HisQuoteType":${num} }`;
+        //const qryHistoryParamKline = `{"contract_info":{"security_type":"FUT_IN","exchange_no":"${exchangeNo}","commodity_no":"${commodityNo}","contract_no":"${contractNo}"},"period":"${type}","count":40}`;//`{"ExchangeNo":"${exchangeNo}","CommodityNo":"${commodityNo}","ContractNo":"${contractNo}","HisQuoteType":${num} }`;
+        
+        
         const qryHistoryParam = type == 'TIME_SHARING' ? qryHistoryParamSharing : qryHistoryParamKline ;
         this.sendMessage('req_history_data', qryHistoryParam);
     }
@@ -193,7 +224,8 @@ export default class QuotationSocket {
             break;
           }
         }
-        this.sendMessage('req_subscribe', `{"security_type":"FUT_IN","exchange_no":"${commodity.exchange_no}","commodity_no":"${commodity.commodity_no}","contract_no":"${mainContract}"}`);
+        this.sendMessage('req_subscribe', `{"security_type":"${this.futureTypeStore.Futstring}","exchange_no":"${commodity.exchange_no}","commodity_no":"${commodity.commodity_no}","contract_no":"${mainContract}"}`);
+        //this.sendMessage('req_subscribe', `{"security_type":"FUT_IN","exchange_no":"${commodity.exchange_no}","commodity_no":"${commodity.commodity_no}","contract_no":"${mainContract}"}`);
     }
     // 其實行情傳入的UserName & PassWord都是''
     sendLogin() {
@@ -201,10 +233,16 @@ export default class QuotationSocket {
     }
     // 查詢品種接口 QryCommodity 並且用來測試heartbeat，因為OnRtnQuote可能頻率不高
     sendQryCommodity(isQryCommodityForheartBeat) {
+        console.log(123);
+        
         this.isQryCommodityForheartBeat = isQryCommodityForheartBeat;
-        this.sendMessage('req_commodity_list', '{"security_type":"FUT_IN"}');
+        //this.sendMessage('req_commodity_list', `{}`);
+        this.sendMessage('req_commodity_list', `{"security_type":"${this.futureTypeStore.Futstring}"}`);
+        //this.sendMessage('req_commodity_list', '{"security_type":"FUT_IN"}');
     }
     sendMessage(method, parameters) {
+        // console.log(parameters);
+        
         try {
             this.socket.send(`{"method":"${method}","data":${parameters}}`);
         } catch (err) {

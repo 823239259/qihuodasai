@@ -157,6 +157,7 @@ export default class SocketManager {
             }
         });
         this.quotationHeartbeat();
+        
     }
     // 失敗就再次重連
     connectQuotationSocketError(msg) {

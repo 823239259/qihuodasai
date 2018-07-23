@@ -58,6 +58,8 @@ class Product {
 
     this.sectionID = sectionID;
     this.rowID = rowID;
+
+    
   }
   setLastPrice(LastPrice, LastPriceIsUp) {
     this.lastPrice = LastPrice;
@@ -152,6 +154,8 @@ export default class QuotationStore {
   }
   // commodity起始資料，有DotSize, 為 盤口，閃電圖的 起始 最新資料，
   @action addProduct(commodity) {
+    //console.log(this.products);
+    
     let mainContract = null;
     let contractList = commodity.contract_no_list;
     for(key in contractList){
@@ -184,6 +188,8 @@ export default class QuotationStore {
     const products = this.products;
     const moreData = MoreData;
     const { contract_info, last, volume, change_rate, pre_settle } = moreData;
+    //console.log(products);
+    
     for (let i = 0; i < products.length; i++) {
       const product = products[i];
       if (contract_info.commodity_no === product.commodityNo) {
@@ -195,7 +201,7 @@ export default class QuotationStore {
       }
     }
   }
-  @action clearData() {
+  @action.bound clearData() {
     this.products.clear();
   }
   @action sort(sortKey, sortType) {
