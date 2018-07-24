@@ -114,7 +114,7 @@ class Api {
     }
     // 获取支付申请数据
     getApplyTradeInfo(traderBond, onSuccess) {//申请操盘
-        this.request('/user/ftrade/handle', { traderBond, businessType: this.futureTypeStore.changebusinessType, tranLever: 0, vid:"" }, onSuccess);
+        this.request('/user/ftrade/apply', { traderBond, businessType: this.futureTypeStore.changebusinessType, tranLever: 0, vid:"" }, onSuccess);
     }
     endApplyTrade(id, cId, onSuccess, onError) {
         if (Config.mock) {

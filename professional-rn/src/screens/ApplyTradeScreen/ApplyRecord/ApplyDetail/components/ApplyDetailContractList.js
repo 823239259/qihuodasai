@@ -49,7 +49,7 @@ export default class ApplyDetailContractList extends Component {
         return (
             <View>
                 <View style={[{ margin: 10, marginTop: 20 }]}>
-                    <Text style={{ color: Colors.titleTextColor }}>{'可交易17种期货商品'}</Text>
+                    <Text style={{ color: Colors.titleTextColor }}>{'可交易期货商品'}</Text>
                 </View>
                 <View style={[{ flexDirection: 'row', justifyContent: 'center' }]}>
                     {this._renderLeft(leftOutDiskVoList)}
