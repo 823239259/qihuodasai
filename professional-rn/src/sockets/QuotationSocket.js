@@ -209,7 +209,7 @@ export default class QuotationSocket {
         }
         const { exchangeNo, commodityNo, contractNo } = this.quotationDetailStore.product;
         const qryHistoryParamSharing = `{"contract_info":{"security_type":"${this.futureTypeStore.Futstring}","exchange_no":"${exchangeNo}","commodity_no":"${commodityNo}","contract_no":"${contractNo}"},"period":"${type}"}`;//`{"ExchangeNo":"${exchangeNo}","CommodityNo":"${commodityNo}","ContractNo":"${contractNo}","HisQuoteType":${num} }`;
-        //const qryHistoryParamKline = `{"contract_info":{"security_type":"FUT_IN","exchange_no":"${exchangeNo}","commodity_no":"${commodityNo}","contract_no":"${contractNo}"},"period":"${type}","count":40}`;//`{"ExchangeNo":"${exchangeNo}","CommodityNo":"${commodityNo}","ContractNo":"${contractNo}","HisQuoteType":${num} }`;
+        const qryHistoryParamKline = `{"contract_info":{"security_type":"FUT_IN","exchange_no":"${exchangeNo}","commodity_no":"${commodityNo}","contract_no":"${contractNo}"},"period":"${type}","count":40}`;//`{"ExchangeNo":"${exchangeNo}","CommodityNo":"${commodityNo}","ContractNo":"${contractNo}","HisQuoteType":${num} }`;
         
         
         const qryHistoryParam = type == 'TIME_SHARING' ? qryHistoryParamSharing : qryHistoryParamKline ;
