@@ -32,7 +32,7 @@ import InformationStore from './InformationStore';
 import ApplyTradeStore from './ApplyTradeStore';
 import DrawerTradeStore from './DrawerStore/DrawerTradeStore';
 
-import FutureTypeStore from './FutureTypeStore';
+import futureTypeStore from './FutureTypeStore';
 import { Logger, PromiseTestUtil } from '../utils';
 
 class StoreManager {
@@ -97,7 +97,7 @@ class StoreManager {
         const tradeLoginModalStore = new TradeLoginModalStore();
 
         // 内外盘标识store
-        const  futureTypeStore = new FutureTypeStore();
+        //const  futureTypeStore = new FutureTypeStore();
         //const quotationSocket = new QuotationSocket(quotationStore, quotationDetailStore, tradeStore);
         const quotationSocket = new QuotationSocket(quotationStore, quotationDetailStore, tradeStore, futureTypeStore);
         const tradeSocket = new TradeSocket(tradeStore, tradeSend, workbenchDetailStore, quotationDetailStore, stopLossStore, historyTradeStore, conditionStore, tradeLoginModalStore);

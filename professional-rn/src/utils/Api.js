@@ -3,8 +3,9 @@ import { toJS, action } from 'mobx';
 import { ToastRoot } from '../components';
 import { Config, Variables, Enum } from '../global';
 import Logger from '../utils/Logger';
+ 
+import futureTypeStore from '../stores/FutureTypeStore'
 
-const business_Type = 99;
 class Api {
     logger = null;
     // for mock
@@ -12,6 +13,7 @@ class Api {
 
     constructor() {
         this.logger = new Logger('Api');
+        this.futureTypeStore = futureTypeStore;
     }
     _onError(url, e) {
         // ToastRoot.show(e.message);
@@ -91,7 +93,7 @@ class Api {
     }
     // 獲取交易帳號
     getTradeAccountList(onSuccess) {//开户记录
-        this.request('user/ftrade/list', {businessType:business_Type}, onSuccess);
+        this.request('user/ftrade/list', {businessType:this.futureTypeStore.changebusinessType}, onSuccess);
     }
     // 获取当前方案信息 方案id
     getTradeAccountDetail(id, onSuccess) {
@@ -107,18 +109,19 @@ class Api {
     }
     // 獲取 開戶申請 資料 
     getTradeParams(onSuccess) {//获取期货操盘参数
-        this.request('ftrade/params', { businessType: business_Type }, onSuccess);
+        this.request('ftrade/params', { businessType: this.futureTypeStore.changebusinessType }, onSuccess);
+
     }
     // 获取支付申请数据
     getApplyTradeInfo(traderBond, onSuccess) {//申请操盘
-        this.request('/user/ftrade/handle', { traderBond, businessType: business_Type, tranLever: 0, vid:"" }, onSuccess);
+        this.request('/user/ftrade/handle', { traderBond, businessType: this.futureTypeStore.changebusinessType, tranLever: 0, vid:"" }, onSuccess);
     }
     endApplyTrade(id, cId, onSuccess, onError) {
         if (Config.mock) {
             onSuccess();
             return;
         }
-        this.request('user/ftrade/endtrade', { id, cId, businessType: business_Type }, onSuccess, onError);
+        this.request('user/ftrade/endtrade', { id, cId, businessType: this.futureTypeStore.changebusinessType }, onSuccess, onError);
     }
     getLiveInformation(pageIndex, onSuccess) {
         this.request('crawler/getCrawler', { size: 10, pageIndex }, onSuccess);
@@ -129,7 +132,7 @@ class Api {
             onSuccess({ data: { id: 'ff8080816063f3e1016068e00a6e00d1', stateType: 4 } });
             return;
         }//支付确认
-        this.request('user/ftrade/handle', { traderBond, vid: -1, businessType: business_Type, tranLever: 0 }, onSuccess, onError);
+        this.request('user/ftrade/handle', { traderBond, vid: -1, businessType: this.futureTypeStore.changebusinessType, tranLever: 0 }, onSuccess, onError);
     }
     // 追加保证金
     addBond(vid, appendFund, onSuccess, onError) {

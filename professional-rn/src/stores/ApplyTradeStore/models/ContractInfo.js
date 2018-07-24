@@ -12,20 +12,24 @@ export default class ContractInfo {
 
     constructor({ tradeType, mainContract, price, tradTime, dosize }, commodityName) {
         //to do ...此处是没有tradeType的过渡办法，tradeType加入后需注销
-        switch (mainContract) {
-            case "IF":
-                this.tradeType = 98;
-                break;
-                case "IH":
-                this.tradeType = 97;
-                break;
-                case "SC":
-                this.tradeType = 96;
-                break;
-            default:
-                break;
+        
+        if(tradeType !== null && tradeType !== undefined) {
+            this.tradeType = tradeType;
+        }else{
+             switch (mainContract) {
+                    case "IF":
+                        this.tradeType = 98;
+                        break;
+                        case "IH":
+                        this.tradeType = 97;
+                        break;
+                        case "SC":
+                        this.tradeType = 96;
+                        break;
+                    default:
+                        break;
+                }
         }
-        //this.tradeType = tradeType;
         this.mainContract = mainContract;
         this.price = price;
         this.tradTime = tradTime;

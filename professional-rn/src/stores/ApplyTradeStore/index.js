@@ -100,7 +100,9 @@ export default class ApplyTradeStore {
     }
     @action getTradeParams() {
         this.logger.info('獲取保證金選項');
-        Api.getTradeParams((result) => this.getTradeParamsSuccess(result));
+        Api.getTradeParams((result) => {
+            this.getTradeParamsSuccess(result)
+        });
     }
     @action.bound getTradeParamsSuccess(result) {
         this.depositParams = result.data.paramList.map(param => {
@@ -191,8 +193,12 @@ export default class ApplyTradeStore {
     // 但是 commodityNo 一定一致
     getCommodityNameAndSetProductName(mainContract) {
         const mainContractArr = mainContract.split(/([A-Za-z]+)([0-9]+)/);
-        const commodityNo = mainContractArr[0];
-
+        let commodityNo = ''
+        if(mainContractArr.length > 1){
+             commodityNo = mainContractArr[1];
+        }else{
+             commodityNo = mainContractArr[0];
+        }
         const productTradeType = Enum.productTradeType.find(product => {
             return commodityNo === product.commodityNo;
         });

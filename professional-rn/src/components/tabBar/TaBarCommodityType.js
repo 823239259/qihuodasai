@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import PropTypes from 'prop-types'
 
-@inject('QuotationStore','FutureTypeStore','QuotationSocket') @observer
+@inject('QuotationStore','FutureTypeStore','QuotationSocket','ApplyTradeStore') @observer
 //@inject('FutureTypeStore') @observer
 export default class TaBarCommodityType extends Component {
     constructor(props) {
@@ -23,24 +23,23 @@ export default class TaBarCommodityType extends Component {
     
     _changeType = (index,key)=> currentClass = index ? styles[key] : styles[key+'Nomal'];
     _changeCurrentTab= (index)=>{
-        const {types} = this.props;
+        const {FutureTypeStore,QuotationStore,QuotationSocket,types,ApplyTradeStore} = this.props;
         let {currentIndex} = this.state;
         if (currentIndex == index) return;
         currentIndex = index;
         this.setState({
             currentIndex
-        })
-        console.log(types);
+        })       
         if (types === 0) {
-            this._changeFutTypes()
+            FutureTypeStore.changeFutIn()
+            QuotationStore.clearData()
+            QuotationSocket.ss()
+            QuotationSocket.connectSocket()
+        }else if(types === 1){
+            FutureTypeStore.changebusinessType1();
+            ApplyTradeStore.contractList = [];
+            ApplyTradeStore.getTradeParams();
         }
-    }
-    _changeFutTypes = () => {
-        const {FutureTypeStore,QuotationStore,QuotationSocket} = this.props;
-        FutureTypeStore.changeFutIn()
-        QuotationStore.clearData()
-        QuotationSocket.ss()
-        QuotationSocket.connectSocket()
     }
     render() {
     return (
