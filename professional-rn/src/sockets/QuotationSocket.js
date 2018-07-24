@@ -138,8 +138,13 @@ export default class QuotationSocket {
     // Picker selected product 
     @action changeDetail(productName) {
         const selectedProduct = this.quotationStore.getProduct(productName);
+        console.log(this.quotationStore.products);
+        
+        console.log(selectedProduct);
+        
         // 表示當前選擇的合約，抓到的資料會有問題
-        if (!selectedProduct.LastPrice && !selectedProduct.AskPrice1 && !selectedProduct.BidPrice1) {
+        //if (!selectedProduct.LastPrice && !selectedProduct.AskPrice1 && !selectedProduct.BidPrice1) {
+        if (!selectedProduct.LastPrice && !selectedProduct.ask[0] && !selectedProduct.bid[0]) {
             ToastRoot.show(`${selectedProduct.productName}無行情`);
             return;
         }

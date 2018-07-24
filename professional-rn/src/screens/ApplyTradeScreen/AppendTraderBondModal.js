@@ -85,7 +85,7 @@ class AppendTraderBondModalStore {
     }
 }
 
-@inject('ApplyTradeStore') @observer
+@inject('ApplyTradeStore','FutureTypeStore') @observer
 class AppendTraderBondModal extends Component {
     constructor(props) {
         super(props);
@@ -115,10 +115,9 @@ class AppendTraderBondModal extends Component {
                 <FieldProvider form={this.store}>
                     <View style={{ marginHorizontal: Layout.fieldHorizontalMargin, flex: 1 }}>
                         <DisplayUnderline label='' isButton={true} buttonText={'去充值'} isButtomBorder={false} isBottomMargin={false} onButtonPress={() => this._toAccountDeposit()} />
-                        <InputFieldEnhanced name='appendFund' type='int' label='追加金额' skin='underline' isErrorMsg={false} />
-                        <DisplayUnderline label='换算汇率' text={`¥ ${this.store.rate} = $ 1`} />
-                        <DisplayUnderline label='换算美元' text={`$ ${this.store.toDollar}`} />
-                        
+                        <InputFieldEnhanced name='appendFund' type='int' label='追加金额' skin='underline' isErrorMsg={false} />                                            
+                             {!this.props.FutureTypeStore.business_Type && <DisplayUnderline label='换算汇率' text={`¥ ${this.store.rate} = $ 1`} />}
+                             {!this.props.FutureTypeStore.business_Type && <DisplayUnderline label='换算美元' text={`$ ${this.store.toDollar}`} />}
                         <Submit text={'立即追加'} onSubmit={() => this.store.submit()} />
                     </View>
                 </FieldProvider>

@@ -9,8 +9,6 @@ export default class QuotationDetailHeader extends Component {
 
   _getTitle() {
     const { QuotationDetailStore } = this.props;
-    console.log(this.props)
-    console.log(QuotationDetailStore);
     let title = '行情圖表';
    
     if (QuotationDetailStore.product) {

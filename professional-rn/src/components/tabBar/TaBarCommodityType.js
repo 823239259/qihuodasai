@@ -39,6 +39,7 @@ export default class TaBarCommodityType extends Component {
             FutureTypeStore.changebusinessType1();
             ApplyTradeStore.contractList = [];
             ApplyTradeStore.getTradeParams();
+            ApplyTradeStore.getTradeAccountList();
         }
     }
     render() {
