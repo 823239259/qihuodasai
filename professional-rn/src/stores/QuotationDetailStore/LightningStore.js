@@ -212,7 +212,7 @@ export default class LightningStore {
         this.dotSize = product.dotSize;
         if (product.time_flag) {
             this.data.prices.push(product.last);
-            this.data.times.push((product.time_flag).split(' ')[1]);
+            this.data.times.push((product.time_flag).split(/[' '|'.']/)[1]);
         }
     }
     @action add(param, product) {
