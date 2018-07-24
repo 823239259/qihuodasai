@@ -10,7 +10,7 @@ import FiveMarketRow from './FiveMarketRow';
 import { Layout, Colors } from '../../../../global';
 import { I18n } from '../../../../utils';
 
-@inject('HandicapTradeStore') @observer
+@inject('HandicapTradeStore','FutureTypeStore') @observer
 export default class HandicapView extends Component {
     _renderHeader(text) {
         return (
@@ -39,8 +39,12 @@ export default class HandicapView extends Component {
         });
     }
     _renderFiveMarketRow() {
-        const { HandicapTradeStore } = this.props;
-        const fiveMarketData = [ 
+        const { HandicapTradeStore,FutureTypeStore } = this.props;
+        const typeIn = [
+            { text: I18n.term('ask1'), ...HandicapTradeStore.ask1 },
+            { text: I18n.term('bid1'), ...HandicapTradeStore.bid1 },
+        ];
+        const typeOut = [
             { text: I18n.term('ask5'), ...HandicapTradeStore.ask5 },
             { text: I18n.term('ask4'), ...HandicapTradeStore.ask4 },
             { text: I18n.term('ask3'), ...HandicapTradeStore.ask3 },
@@ -51,7 +55,8 @@ export default class HandicapView extends Component {
             { text: I18n.term('bid3'), ...HandicapTradeStore.bid3 },
             { text: I18n.term('bid4'), ...HandicapTradeStore.bid4 },
             { text: I18n.term('bid5'), ...HandicapTradeStore.bid5 },
-        ];
+        ]
+        const fiveMarketData = FutureTypeStore.isFutIn ? typeIn : typeOut;
         return fiveMarketData.map((data, index) => {
             return (
                 <FiveMarketRow key={`fiveMarket${index}`} data={data} index={index} lastIndex={fiveMarketData.length - 1} />
