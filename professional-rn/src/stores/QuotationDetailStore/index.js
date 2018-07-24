@@ -105,7 +105,7 @@ export default class QuotationDetailStore {
         }
     }
     setChartHistory(jsonData) {
-        this.setChartDataConfig(['time_flag','open','close','high','low','volume']);//to do ...约定好的
+        this.setChartDataConfig(['time_flag','close','open','low','high','volume']);//to do ...约定好的
         let dotSize = 2;
         if (this.product) {
             dotSize = this.product.dotSize;
