@@ -202,6 +202,7 @@ export default class QuotationStore {
     }
   }
   @action.bound clearData() {
+    this.focusedProductNames.clear()
     this.products.clear();
   }
   @action sort(sortKey, sortType) {
