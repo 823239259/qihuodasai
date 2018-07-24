@@ -74,6 +74,7 @@ export default class QuotationSocket {
                     resolve('QuotationSocket Login Success');
                 } else if (method === 'on_rsp_commodity_list') { // 返回品種
                     //console.log(12313);
+                    //console.log(jsonData);
                     
                     
                     if (this.isQryCommodityForheartBeat) {
@@ -92,7 +93,7 @@ export default class QuotationSocket {
                     // detail
                     this.quotationDetailStore.setChartHistory(jsonData);
                 } else if (method === 'on_rtn_quote') { // 行情推送接口
-                    console.log(jsonData);
+                    // console.log(jsonData);
                     this.isHeartBeating = true;
                     // this.logger.info(`OnRtnQuote - isHeartBeating: ${this.isHeartBeating}`);
                     this.quotationStore.insertData(jsonData.data);
@@ -207,7 +208,7 @@ export default class QuotationSocket {
         }
         const { exchangeNo, commodityNo, contractNo } = this.quotationDetailStore.product;
         const qryHistoryParamSharing = `{"contract_info":{"security_type":"${this.futureTypeStore.Futstring}","exchange_no":"${exchangeNo}","commodity_no":"${commodityNo}","contract_no":"${contractNo}"},"period":"${type}"}`;//`{"ExchangeNo":"${exchangeNo}","CommodityNo":"${commodityNo}","ContractNo":"${contractNo}","HisQuoteType":${num} }`;
-        //const qryHistoryParamKline = `{"contract_info":{"security_type":"FUT_IN","exchange_no":"${exchangeNo}","commodity_no":"${commodityNo}","contract_no":"${contractNo}"},"period":"${type}","count":40}`;//`{"ExchangeNo":"${exchangeNo}","CommodityNo":"${commodityNo}","ContractNo":"${contractNo}","HisQuoteType":${num} }`;
+        const qryHistoryParamKline = `{"contract_info":{"security_type":"${this.futureTypeStore.Futstring}","exchange_no":"${exchangeNo}","commodity_no":"${commodityNo}","contract_no":"${contractNo}"},"period":"${type}","count":40}`;//`{"ExchangeNo":"${exchangeNo}","CommodityNo":"${commodityNo}","ContractNo":"${contractNo}","HisQuoteType":${num} }`;
         
         
         const qryHistoryParam = type == 'TIME_SHARING' ? qryHistoryParamSharing : qryHistoryParamKline ;

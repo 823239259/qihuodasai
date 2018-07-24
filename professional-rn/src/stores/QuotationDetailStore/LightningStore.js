@@ -224,7 +224,7 @@ export default class LightningStore {
         }
         if (param.time_flag) {
             this.data.prices.push(param.last);
-            this.data.times.push((param.time_flag).split(' ')[1]);
+            this.data.times.push((param.time_flag).split(/[' '|'.']/)[1]);
         }
     }
 }
