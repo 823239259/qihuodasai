@@ -28,7 +28,7 @@ export default class ApplyTradeScreen extends Component {
     const typeArr = ['国际期货开户','国内期货开户']
     return (
       <View style={styles.container}>
-        <TaBarCommodityType typeArr = {typeArr} />
+        <TaBarCommodityType typeArr = {typeArr}  types = {1}/>
         <ScrollableTabView
           style={{ flex: 1 }}
           locked={true}

@@ -1,7 +1,7 @@
 import { observable, computed, action } from 'mobx';
 
 export default class FutureTypeStore {
-    @observable isFutIn = true // 内外盘的标识
+    @observable isFutIn = false // 内外盘的标识
 
     @computed get Futstring () {
         return this.isFutIn?"FUT_IN":"FUT_OUT"

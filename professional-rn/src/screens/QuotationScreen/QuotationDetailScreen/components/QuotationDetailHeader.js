@@ -34,7 +34,7 @@ export default class QuotationDetailHeader extends Component {
             }
           }
           >
-            <Text style={{ color: Colors.quotationDetailHeaderTextColor, textAlign: 'center',marginLeft: 30, fontSize: Layout.quotationDetailHeaderFontSize }}>{this._getTitle()}</Text>
+            <Text style={{ color: Colors.quotationDetailHeaderTextColor, textAlign: 'center',marginLeft: (Platform.OS === 'ios') ? 0 : 30, fontSize: Layout.quotationDetailHeaderFontSize }}>{this._getTitle()}</Text>
             {/* <Text style={{textAlign: 'center'}}>{this._getTitle()}</Text> */}
            
           </TouchableOpacity>
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     flex: 0,
     width: 20,
     height: 20,
-    marginLeft: 40,
+    marginLeft: (Platform.OS === 'ios') ? 10 : 40,
     borderRadius: 3,
     ...Layout.center
   },

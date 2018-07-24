@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
+import PropTypes from 'prop-types'
 
 @inject('QuotationStore','FutureTypeStore','QuotationSocket') @observer
 //@inject('FutureTypeStore') @observer
@@ -9,23 +10,34 @@ export default class TaBarCommodityType extends Component {
         super(props);
         // this.typeArr = ['国际期货','国内期货'];
         this.state = {
-            currentIndex : 1
+            currentIndex : 0
         }
     }
+    static propTypes = {
+        types: PropTypes.number,
+        typeArr: PropTypes.array.isRequired,
+    }
+    static defaultProps = {
+        types: 0
+    }
+    
     _changeType = (index,key)=> currentClass = index ? styles[key] : styles[key+'Nomal'];
     _changeCurrentTab= (index)=>{
-        const {FutureTypeStore,QuotationStore,QuotationSocket} = this.props;
+        const {FutureTypeStore,QuotationStore,QuotationSocket,types} = this.props;
         let {currentIndex} = this.state;
         if (currentIndex == index) return;
         currentIndex = index;
         this.setState({
             currentIndex
         })
-        FutureTypeStore.changeFutIn()
-        //QuotationStore.products = []
-        QuotationStore.clearData()
-        QuotationSocket.ss()
-        QuotationSocket.connectSocket()
+        console.log(types);
+        
+        if (types === 0) {
+            FutureTypeStore.changeFutIn()
+            QuotationStore.clearData()
+            QuotationSocket.ss()
+            QuotationSocket.connectSocket()
+        }
     }
     render() {
     return (

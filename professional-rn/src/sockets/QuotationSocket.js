@@ -84,8 +84,6 @@ export default class QuotationSocket {
                     // 訂閱合約
                     this.onRspQryCommodity(jsonData);
                 } else if (method === 'on_rsp_subscribe') {
-                   
-                    
                     //订阅成功
                     // quotation
                     //const moreData = JSON.parse(evt.data).Parameters.LastQuotation;
@@ -94,7 +92,7 @@ export default class QuotationSocket {
                     // detail
                     this.quotationDetailStore.setChartHistory(jsonData);
                 } else if (method === 'on_rtn_quote') { // 行情推送接口
-                  
+                    console.log(jsonData);
                     this.isHeartBeating = true;
                     // this.logger.info(`OnRtnQuote - isHeartBeating: ${this.isHeartBeating}`);
                     this.quotationStore.insertData(jsonData.data);
@@ -157,7 +155,7 @@ export default class QuotationSocket {
     onRspQryCommodity(jsonData) {
         
         const commoditys = jsonData.data.commodity_list;
-        console.log(commoditys);
+        //console.log(commoditys);
         
         for (let i = 0; i < commoditys.length; i++) {
             if (commoditys[i].IsUsed !== 0) {
@@ -233,8 +231,6 @@ export default class QuotationSocket {
     }
     // 查詢品種接口 QryCommodity 並且用來測試heartbeat，因為OnRtnQuote可能頻率不高
     sendQryCommodity(isQryCommodityForheartBeat) {
-        console.log(123);
-        
         this.isQryCommodityForheartBeat = isQryCommodityForheartBeat;
         //this.sendMessage('req_commodity_list', `{}`);
         this.sendMessage('req_commodity_list', `{"security_type":"${this.futureTypeStore.Futstring}"}`);
