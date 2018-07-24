@@ -259,6 +259,7 @@ export default class TimeStore {
     @action start(jsonData, dotSize) {
         this.dotSize = dotSize;
         const dataSent = jsonData.data.Lines;
+        if(!dataSent) return;
         // 不取超出observableArrLimited個
         let startIndex = 0;
         if (dataSent.length >= Config.observableArrLimited) {

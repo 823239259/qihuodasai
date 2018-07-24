@@ -23,7 +23,7 @@ export default class TaBarCommodityType extends Component {
     
     _changeType = (index,key)=> currentClass = index ? styles[key] : styles[key+'Nomal'];
     _changeCurrentTab= (index)=>{
-        const {FutureTypeStore,QuotationStore,QuotationSocket,types} = this.props;
+        const {types} = this.props;
         let {currentIndex} = this.state;
         if (currentIndex == index) return;
         currentIndex = index;
@@ -31,13 +31,16 @@ export default class TaBarCommodityType extends Component {
             currentIndex
         })
         console.log(types);
-        
         if (types === 0) {
-            FutureTypeStore.changeFutIn()
-            QuotationStore.clearData()
-            QuotationSocket.ss()
-            QuotationSocket.connectSocket()
+            this._changeFutTypes()
         }
+    }
+    _changeFutTypes = () => {
+        const {FutureTypeStore,QuotationStore,QuotationSocket} = this.props;
+        FutureTypeStore.changeFutIn()
+        QuotationStore.clearData()
+        QuotationSocket.ss()
+        QuotationSocket.connectSocket()
     }
     render() {
     return (
