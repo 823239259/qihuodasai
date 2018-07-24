@@ -15,7 +15,7 @@ export default class ApplyTradeContractList extends Component {
         return (
             <View style={{ height: Layout.screenHeight / 2 }}>
                 <View style={[{ margin: 10, marginTop: 20 }]}>
-                    <Text style={{ color: Colors.titleTextColor }}>{'可交易17种期货商品'}</Text>
+                    <Text style={{ color: Colors.titleTextColor }}>{`可交易${contractListWithParam.length}种期货商品`}</Text>
                 </View>
                 <Accordion
                     headers={[

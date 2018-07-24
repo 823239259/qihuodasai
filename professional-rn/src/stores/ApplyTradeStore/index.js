@@ -101,6 +101,7 @@ export default class ApplyTradeStore {
     @action getTradeParams() {
         this.logger.info('獲取保證金選項');
         Api.getTradeParams((result) => {
+            //console.log(result);
             this.getTradeParamsSuccess(result)
         });
     }

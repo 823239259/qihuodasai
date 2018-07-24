@@ -223,7 +223,7 @@ export default {
         { index: 22, commodityName: '天然气指数', key: 'naturalGasActualLever', actual: 'naturalGasActualLever', commodityNo: 'NG', productName: null },
         { index: 98, commodityName: '沪深300指数', key: 'hs300', actual: 'hs300', commodityNo: 'IF', productName: null },
         { index: 97, commodityName: '上证50指数', key: 'sz50', actual: 'sz50', commodityNo: 'IH', productName: null },
-        { index: 96, commodityName: '中国原油', key: 'sc', actual: 'SC', commodityNo: 'SC', productName: null },
+        { index: 96, commodityName: '中国原油', key: 'sc', actual: 'sc', commodityNo: 'sc', productName: null },
     ],
     validateReg: {
         tenNumber: /^1\d{10}$/,
