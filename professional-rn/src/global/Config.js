@@ -1,4 +1,4 @@
-const domainName = 'qhinom';    // oldest: incentm, older: qhinom new:vs
+const domainName = 'duokongtai';    // oldest: incentm, older: qhinom new:vs
 const quoteDomainName = 'vs';
 const tradeDomainName = 'duokongtai';
 const apiDomainName = 'duokongtai';
@@ -39,7 +39,7 @@ export default {
         source: 'xn_app' // app
     },
     api_domain: `http://test.api.${apiDomainName}.cn`,                                       //指向内部数据  old:`http://api.${domainName}.com`        by zihaoWang 18.6.8
-    base_images_url: `http://manage.${domainName}.com`, //图片地址                       //暂未指向新url  by zihaoWang 18.6.8
+    base_images_url: `http://test.manage.${domainName}.cn`, //图片地址                       //暂未指向新url  by zihaoWang 18.6.8
     customer_service_url: `http://api.${apiDomainName}.cn/consistentbeauty.html`,      //old:`http://api.${domainName}.com/consistentbeauty.html`  by zihaoWang 18.6.8
     api_recharge_url: `http://pay.${domainName}.com`,                                  //暂未指向新url  by zihaoWang 18.6.8
     /********************** input **********************/
