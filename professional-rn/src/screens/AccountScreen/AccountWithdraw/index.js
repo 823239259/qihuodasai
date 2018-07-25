@@ -139,9 +139,9 @@ class AccountWithdraw extends Component {
         if (bankCards.length === 0) {
             return (
                 <DisplayUnderline
-                    label={'銀行卡'} 
+                    label={'银行卡'} 
                     isButton={true}
-                    buttonText={isCertification ? '未设置' : '请进行實名認證'} 
+                    buttonText={isCertification ? '未设置' : '请进行实名认证'} 
                     onButtonPress={() => this._onBankPress()} 
                     style={{ marginTop: Layout.fieldMargin }}
                 />
@@ -158,7 +158,7 @@ class AccountWithdraw extends Component {
             ToastRoot.show('请绑定银行卡');
             return;
         } else if (!isCertification) {
-            ToastRoot.show('请进行實名認證');
+            ToastRoot.show('请进行实名认证');
             return;
         }
         const selectedBankCard = bankCards.find((bc) => {

@@ -11,7 +11,7 @@ import RootNavi from './../../../app/RootNavi';
 export default class DrawerTrade extends Component {
     constructor(props) {
         super(props);
-        this.loggedTrueArr = ['切换帐号', '条件单', '止盈止損單', '历史成交', '开户'];
+        this.loggedTrueArr = ['切换帐号', '条件单', '止盈止损单', '历史成交', '开户'];
         this.loggedFalseArr = ['登录交易账户', '开户'];
     }
     _toggleDrawer() {
@@ -30,7 +30,7 @@ export default class DrawerTrade extends Component {
             WorkbenchDetailStore.toTradeLogin();
         } else if (text === '开户') {
             this._toAbout();
-        } else if (text === '止盈止損單') {
+        } else if (text === '止盈止损单') {
             this._toStopLossList();
         } else if (text === '历史成交') {
             this._toHistoryTrade();
@@ -92,7 +92,7 @@ export default class DrawerTrade extends Component {
     _toStopLossList() {
         this.props.navigator.showModal({
             screen: 'trade.StopLossListModal',
-            title: '止盈止損單',
+            title: '止盈止损单',
             navigatorButtons: {
             leftButtons: [
                 {
