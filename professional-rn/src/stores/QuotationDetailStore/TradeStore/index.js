@@ -449,9 +449,9 @@ export default class TradeStore {
     // 第一次 由TradeStore自己發出，因為OnRtnQuote不一定隨時馬上更新
     @action updateTradeQuotation(param) {
         //to do ....
-        // if (!param || !this.product || isNaN(param.last) || isNaN(param.ask) || isNaN(param.bid)) {
-        //     return;
-        // }
+        if (!param || !this.product || isNaN(param.last) || isNaN(param.ask) || isNaN(param.bid)) {
+            return;
+        }
         const dotSize = this.product.dotSize;
         this.preSettlePrice = param.pre_settle;
 

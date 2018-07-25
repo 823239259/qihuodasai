@@ -34,7 +34,8 @@ export default {
     tradeSocket: {
         url: 'ws://192.168.0.227:6999',//`ws://trade.${tradeDomainName}.cn:6101`,                                   //指向内部数据  old:'ws://trade.${domainName}.com:6102'   by zihaoWang 18.6.8
         isMock: 1,
-        version: 3.3,
+        //version: 3.3,
+        version: 6.1,
         source: 'xn_app' // app
     },
     api_domain: `http://test.api.${apiDomainName}.cn`,                                       //指向内部数据  old:`http://api.${domainName}.com`        by zihaoWang 18.6.8
