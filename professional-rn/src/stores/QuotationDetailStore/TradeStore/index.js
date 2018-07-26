@@ -282,7 +282,11 @@ export default class TradeStore {
             ToastRoot.show(`撤单成功:合约【${param.ContractCode}】,订单号【${orderId}】`);
         } else if (orderStatus === 5) {
             this.deleteDesignate(orderId);
-            ToastRoot.show(`交易失败:合约【${param.ContractCode}】,原因【${param.StatusMsg}】`);
+            if(param.ContractCode == undefined){
+                ToastRoot.show(`交易失败:合约【${param.ContractCode}】,原因【${param.StatusMsg}】`);
+            }else{
+                ToastRoot.show(`交易失败:原因【${param.StatusMsg}】`);
+            }
         }
     }
     @action deleteDesignate(param) {
