@@ -4,7 +4,7 @@ import { inject, observer } from 'mobx-react/native';
 import { Accordion, AccordionItem, DisplayWithButtonApply } from '../../../../../components';
 import { Colors, Layout, Enum } from '../../../../../global';
 
-@inject('ApplyTradeStore') @observer
+@inject('ApplyTradeStore','FutureTypeStore') @observer
 export default class ApplyDetailEnd extends Component {
     _renderAccoridon() {
         const headerWidth = Layout.screenWidth / 3;
@@ -64,7 +64,9 @@ export default class ApplyDetailEnd extends Component {
                     <Text style={{ color: Colors.titleTextColor }}>{'方案结算'}</Text>
                 </View>
                 <DisplayWithButtonApply label={'方案结算时间  '} text={ApplyTradeStore.endTimeString} />
-                <DisplayWithButtonApply label={'美元结算汇率  '} text={ApplyTradeStore.parity} />
+                {
+                	!this.props.FutureTypeStore.business_Type && <DisplayWithButtonApply label={'美元结算汇率  '} text={ApplyTradeStore.parity} />
+                }
                 <DisplayWithButtonApply label={'交易盈亏  '} text={ApplyTradeStore.profitLossString} textStyle={{ color: (ApplyTradeStore.profitLossString >= 0) ? Colors.red : Colors.green }} />
             </View>
         );
