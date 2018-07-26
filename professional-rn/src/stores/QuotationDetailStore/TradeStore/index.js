@@ -252,7 +252,11 @@ export default class TradeStore {
     addDesignateAndOrderMessage(param) {
         const orderStatus = param.OrderStatus;
         if (orderStatus === 5) {
-            ToastRoot.show(`交易失败:合约【${param.ContractCode}】,原因【${param.StatusMsg}】`);
+            if(param.ContractCode == undefined){
+                ToastRoot.show(`交易失败:原因【${param.StatusMsg}】`);
+            }else{
+                ToastRoot.show(`交易失败:合约【${param.ContractCode}】,原因【${param.StatusMsg}】`);
+            }
         } else {
             ToastRoot.show(I18n.message('submit_order_success'));
         }

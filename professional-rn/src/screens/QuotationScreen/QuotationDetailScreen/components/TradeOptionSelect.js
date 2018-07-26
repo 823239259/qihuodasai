@@ -7,7 +7,7 @@ import { Colors, Layout, Enum } from '../../../../global';
 import { TradeTextInput } from '../../../../components';
 import { Logger, I18n } from '../../../../utils';
 
-@inject('TradeOptionStore') @observer
+@inject('TradeOptionStore','FutureTypeStore') @observer
 export default class TradeOptionSelect extends Component {
 
     static propTypes = {
@@ -50,46 +50,90 @@ export default class TradeOptionSelect extends Component {
         );
     }
     _renderRadio() {
-        const { TradeOptionStore } = this.props;
+        const { TradeOptionStore, FutureTypeStore } = this.props;
+        let style = FutureTypeStore.isFutIn ? {display:'flex', flexDirection:'row', justifyContent: 'space-around'}:{display:'flex'};
         return (
-            <RadioForm 
-                formHorizontal={true} 
-                style={{ justifyContent: 'space-around', marginVertical: Layout.radioMargin }}
-            >
-            {TradeOptionStore.radioOptions.map((obj, i) => {
-                return (
-                    <RadioButton 
-                        labelHorizontal={true} 
-                        key={i}
-                        animation={true}
-                    >
-                        {/*  You can set RadioButtonLabel before RadioButtonInput */}
-                        <RadioButtonInput
-                        obj={obj}
-                        index={i}
-                        isSelected={TradeOptionStore.radioIndex === i}
-                        onPress={(value, index) => TradeOptionStore.onRadioPress(value, index)}
-                        
-                        buttonInnerColor={Colors.radioActiveColor}
-                        buttonOuterColor={TradeOptionStore.radioIndex === i ? Colors.radioActiveColor : Colors.radioNonActiveColor}
-                        
-                        buttonSize={10}
-                        buttonOuterSize={20}
-
-                        buttonStyle={{}}
-                        buttonWrapStyle={{ marginLeft: Layout.radioMargin }}
-                        />
-                        <RadioButtonLabel
-                        obj={obj}
-                        index={i}
-                        onPress={(value, index) => TradeOptionStore.onRadioPress(value, index)}
-                        labelStyle={{ fontWeight: 'bold', color: Colors.greyText, marginLeft: 10, fontSize: Layout.radioLabelFontSize }}
-                        labelWrapStyle={{}}
-                        />
-                    </RadioButton>
-                );
-            })}
-            </RadioForm>
+            <View style={style}>
+            {
+                            <RadioForm 
+                            formHorizontal={true} 
+                            style={{ justifyContent: 'space-around', marginVertical: Layout.radioMargin }}
+                        >
+                        {TradeOptionStore.radioOptions.map((obj, i) => {
+                            return (
+                                <RadioButton 
+                                    labelHorizontal={true} 
+                                    key={i}
+                                    animation={true}
+                                >
+                                    {/*  You can set RadioButtonLabel before RadioButtonInput */}
+                                    <RadioButtonInput
+                                    obj={obj}
+                                    index={i}
+                                    isSelected={TradeOptionStore.radioIndex === i}
+                                    onPress={(value, index) => TradeOptionStore.onRadioPress(value, index)}
+                                    
+                                    buttonInnerColor={Colors.radioActiveColor}
+                                    buttonOuterColor={TradeOptionStore.radioIndex === i ? Colors.radioActiveColor : Colors.radioNonActiveColor}
+                                    
+                                    buttonSize={10}
+                                    buttonOuterSize={20}
+            
+                                    buttonStyle={{}}
+                                    buttonWrapStyle={{ marginLeft: Layout.radioMargin }}
+                                    />
+                                    <RadioButtonLabel
+                                    obj={obj}
+                                    index={i}
+                                    onPress={(value, index) => TradeOptionStore.onRadioPress(value, index)}
+                                    labelStyle={{ fontWeight: 'bold', color: Colors.greyText, marginLeft: 10, fontSize: Layout.radioLabelFontSize }}
+                                    labelWrapStyle={{}}
+                                    />
+                                </RadioButton>
+                            );
+                        })}
+                        </RadioForm>
+            }
+            {FutureTypeStore.isFutIn &&
+                            <RadioForm 
+                            formHorizontal={true} 
+                            style={{ justifyContent: 'space-around', marginVertical: Layout.radioMargin }}
+                        >
+                        {TradeOptionStore.openCloseOptions.map((obj, i) => {
+                            return (
+                                <RadioButton 
+                                    labelHorizontal={true} 
+                                    key={i}
+                                    animation={true}
+                                >
+                                    <RadioButtonInput
+                                    obj={obj}
+                                    index={i}
+                                    isSelected={TradeOptionStore.openCloseIndex === i}
+                                    onPress={(value, index) => TradeOptionStore.onOpenClosePress(value, index)}
+                                    
+                                    buttonInnerColor={Colors.radioActiveColor}
+                                    buttonOuterColor={TradeOptionStore.openCloseIndex === i ? Colors.radioActiveColor : Colors.radioNonActiveColor}
+                                    
+                                    buttonSize={10}
+                                    buttonOuterSize={20}
+            
+                                    buttonStyle={{}}
+                                    buttonWrapStyle={{ marginLeft: Layout.radioMargin }}
+                                    />
+                                    <RadioButtonLabel
+                                    obj={obj}
+                                    index={i}
+                                    onPress={(value, index) => TradeOptionStore.onOpenClosePress(value, index)}
+                                    labelStyle={{ fontWeight: 'bold', color: Colors.greyText, marginLeft: 10, fontSize: Layout.radioLabelFontSize }}
+                                    labelWrapStyle={{}}
+                                    />
+                                </RadioButton>
+                            );
+                        })}
+                        </RadioForm>
+            }
+            </View>
         );
     }
     render() {

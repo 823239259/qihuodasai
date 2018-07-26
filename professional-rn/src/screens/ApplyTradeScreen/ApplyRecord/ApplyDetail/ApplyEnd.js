@@ -92,7 +92,7 @@ export default class ApplyEnd extends Component {
                     <Text style={{ color: Colors.titleTextColor }}>{'方案终结'}</Text>
                 </View>
                 {
-                	!this.props.FutureTypeStore.businessType && <DisplayWithButtonApply label={'当前汇率  '} text={this.store.parity} />
+                	!this.props.FutureTypeStore.business_Type && <DisplayWithButtonApply label={'当前汇率  '} text={this.store.parity} />
                 }
                 
                 <DisplayWithButtonApply label={'折扣卷  '} text={'无折扣卷'} />

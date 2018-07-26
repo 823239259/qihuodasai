@@ -146,6 +146,11 @@ export default {
         market: { value: 1, text: '市价' },
         stopLoss: { value: 2, text: '止损' }
     },
+      // 开平类型
+    openCloseType: {
+        open: { value: 1, text: '开仓' },
+        close: { value: 2, text: '平仓' },
+    },
     /********************** StopLoss **********************/
     // 止損方式
     stopLossType: {
@@ -177,7 +182,7 @@ export default {
         modify: { value: 0, text: '修改' },
         delete: { value: 1, text: '删除' },
         pause: { value: 2, text: '暂停' },
-        start: { value: 4, text: '启动' }
+        start: { value: 3, text: '启动' }
     },
     orderType: {
         market: { value: 1, text: '市价' },

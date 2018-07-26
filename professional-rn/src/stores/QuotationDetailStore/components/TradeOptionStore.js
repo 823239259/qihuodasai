@@ -15,13 +15,20 @@ export default class TradeOptionStore {
 
     @observable price = null;                   // 市场价
     priceType = Enum.priceType.market.value;  // 价格类型:限价0，市价1，止损2
+    openCloseType = Enum.openCloseType.open.value; //开平类型:开仓1，平仓2
 
     radioOptions = [
         { label: Enum.priceType.market.text, value: Enum.priceType.market.value },
         { label: Enum.priceType.limit.text, value: Enum.priceType.limit.value }
     ];
+    openCloseOptions = [
+        { label: Enum.openCloseType.open.text, value: Enum.openCloseType.open.value },
+        { label: Enum.openCloseType.close.text, value: Enum.openCloseType.close.value }
+    ];
     @observable radioValue = Enum.priceType.market.value;
+    @observable openCloseValue = Enum.openCloseType.open.value;
     @observable radioIndex = 0;
+    @observable openCloseIndex = 0;
 
     @observable isTradeSubmitDialogVisible = false;
     
@@ -48,6 +55,15 @@ export default class TradeOptionStore {
             this.priceType = Enum.priceType.limit.value;
         }
    }
+   @action onOpenClosePress(value, index) {
+    this.openCloseValue = value;
+    this.openCloseIndex = index;
+    if (this.openCloseValue === Enum.openCloseType.open.value) {
+        this.openCloseType = Enum.openCloseType.open.value;
+    } else {
+        this.openCloseType = Enum.openCloseType.close.value;
+    }
+}
    @action onNumChange(text) {
         this.num = text;
    }
@@ -76,7 +92,7 @@ export default class TradeOptionStore {
         this.setIsTradeSubmitDialogVisbile(true);
    }
    confirmTradeSubmitDialog() {
-    this.tradeSend.insertOrder(this.product.exchangeNo, this.product.commodityNo, this.product.contractNo, this.num, this.direction.value, this.priceType, this.buyOrderPrice, 0, TradeUtil.getOrderRef(), 1);//to fix ...1改为变量
+    this.tradeSend.insertOrder(this.product.exchangeNo, this.product.commodityNo, this.product.contractNo, this.num, this.direction.value, this.priceType, this.buyOrderPrice, 0, TradeUtil.getOrderRef(), this.openCloseType);//to fix ...1改为变量
     this.setIsTradeSubmitDialogVisbile(false);
    }
    cancelTradeSubmitDialog() {
