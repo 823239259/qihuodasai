@@ -120,7 +120,7 @@ export default class TradeHoldPositionStore {
             this.stopLossDiff = this.stopLossSelected.stopLossDiff;
 
             this.tradeStore.holdPositions.forEach((value, key, map) => {
-                if (value.productName === this.stopLossSelected.productName) {
+                if (value.direction.value === this.stopLossSelected.direction) {
                     this.stopHoldPosition = value;
                 }
             });
