@@ -76,7 +76,7 @@ class ApplyEndStore {
         }
     }
 }
-@inject('ApplyTradeStore', 'AccountStore') @observer
+@inject('ApplyTradeStore', 'AccountStore','FutureTypeStore') @observer
 export default class ApplyEnd extends Component {
     constructor(props) {
         super(props);
@@ -91,7 +91,10 @@ export default class ApplyEnd extends Component {
                 <View style={[{ margin: 10, marginTop: 20 }]}>
                     <Text style={{ color: Colors.titleTextColor }}>{'方案终结'}</Text>
                 </View>
-                <DisplayWithButtonApply label={'当前汇率  '} text={this.store.parity} />
+                {
+                	!this.props.FutureTypeStore.businessType && <DisplayWithButtonApply label={'当前汇率  '} text={this.store.parity} />
+                }
+                
                 <DisplayWithButtonApply label={'折扣卷  '} text={'无折扣卷'} />
                 <View style={{ margin: 10, marginTop: 20 }}>
                     <Text style={{ color: Colors.titleTextColor }}>{'提示'}</Text>
