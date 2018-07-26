@@ -37,7 +37,7 @@ class Product {
   @observable changeRate;     //漲幅
   @observable changeRateIsUp;
   
-  constructor({ commodity_name, commodity_no, contract_no_list, dot_size, exchange_no, mini_tiker_size, contract_size, currency_no }, sectionID, rowID) {
+  constructor({ commodity_name, commodity_no, contract_no_list, dot_size, exchange_no, mini_ticker_size, contract_size, currency_no }, sectionID, rowID) {
     this.commodityName = commodity_name;
     this.commodityNo = commodity_no;  // MCH
 
@@ -52,7 +52,7 @@ class Product {
 
     this.dotSize = dot_size;
     this.exchangeNo = exchange_no;
-    this.miniTikeSize = mini_tiker_size;
+    this.miniTikeSize = mini_ticker_size;
     this.contractSize = contract_size;
     this.currencyNo = currency_no;
 

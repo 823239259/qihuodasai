@@ -302,11 +302,9 @@ export default class HandicapTradeStore {
     }) get ask5() {
         return this.getFiveMarket('ask', 4);
     }
-    getFiveMarket(AskBid, level) {
-        
+    getFiveMarket(AskBid, level) {       
         let body;
         let tempPrice;
-        let qty;
         if (_.isEmpty(this.data)) {
             tempPrice = 0;
         } else {
@@ -317,20 +315,12 @@ export default class HandicapTradeStore {
                 case 'bid':
                 body = this.data.bid;
             }
-            if (body[level]){
-                tempPrice = body[level][0];
-                qty = body[level][1];
-            }else{
-                tempPrice = body[0][0] // to do ...国际五档数据显示 , 如果(回推5挡不全时) 待处理
-                qty = body[0][1]
-            }
-            // console.log(body);
-            // console.log(qty);
+            tempPrice = body[0][0];// to do ...只有一档数据？
         }
         return {
             price: tempPrice.toFixed(this.dotSize),
             color: Colors.getColorText(tempPrice - this.preSettlePrice),
-            qty: qty
+            qty: body[0][1]
         };
     }
     getContentColor(name) {

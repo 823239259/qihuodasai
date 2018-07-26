@@ -151,12 +151,10 @@ export default class TradeStore {
         const currencyNo = param.CurrencyNo;  // 幣別 : USD, EUR, JPY, CNY, HKD-HKFE
         const currencyRate = param.CurrencyRate;  // 匯率
         const todayAmount = param.TodayAmount;
-        const unExpiredProfit = param.UnExpiredProfit;
-        const unAccountProfit = param.UnAccountProfit;
         const deposit = param.Deposit;
         const frozenMoney = param.FrozenMoney;
 
-        const balance = todayAmount + unExpiredProfit + unAccountProfit;
+        const balance = todayAmount;
         const canUse = balance - deposit - frozenMoney;
         // 有時候後端傳回來的資料會有undefined, null...，這時候放棄此筆資料
         // this.logger.warn(`updateAccountMoney - balance: ${balance}, canUse: ${canUse}, deposit: ${deposit}`);
@@ -449,9 +447,9 @@ export default class TradeStore {
     // 第一次 由TradeStore自己發出，因為OnRtnQuote不一定隨時馬上更新
     @action updateTradeQuotation(param) {
         //to do ....
-        if (!param || !this.product || isNaN(param.last) || isNaN(param.ask) || isNaN(param.bid)) {
-            return;
-        }
+        // if (!param || !this.product || isNaN(param.last) || isNaN(param.ask) || isNaN(param.bid)) {
+        //     return;
+        // }
         const dotSize = this.product.dotSize;
         this.preSettlePrice = param.pre_settle;
 
