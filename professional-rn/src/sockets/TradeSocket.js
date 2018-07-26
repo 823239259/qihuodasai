@@ -76,7 +76,7 @@ export default class TradeSocket {
                     } else if (method === 'OnRspQryOrder') {    // qryOrder
                         this.tradeStore.addDesignateAndOrder(parameters, false);
                     } else if (method === 'OnRspQryTrade') {    // qryTrade
-                        this.tradeStore.addDeal(parameters);
+                        this.tradeStore.addDeal(parameters,false);
                     } else if (method === 'OnRspQryHisTrade') {
                         this.historyTradeStore.manageHistoryTrade(parameters);
                     } else if (method === 'OnRspQryAccount') {  // qryAccount
@@ -88,8 +88,10 @@ export default class TradeSocket {
                         this.tradeStore.addDesignateAndOrder(parameters, true);
                         this.tradeStore.addDesignateAndOrderMessage(parameters);
                     } else if (method === 'OnRtnOrderTraded') {  // 订单成交通知
-                        this.tradeStore.addDeal(parameters);
-                        ToastRoot.show(I18n.message('trade_success_info', parameters.ContractCode, parameters.TradeNum, parameters.TradePrice));
+                        this.tradeStore.addDeal(parameters,true);
+                        const {dotSize} = this.tradeStore.product
+                        //parameters.TradePrice.toFixed(2) 保留两位小数
+                        ToastRoot.show(I18n.message('trade_success_info', parameters.ContractCode, parameters.TradeNum, parameters.TradePrice.toFixed(dotSize)));
                     } else if (method === 'OnRtnOrderState') {   // 订单状态通知(處理掛單)
                         this.tradeStore.manageDesignateAndOrder(parameters);
                     } else if (method === 'OnRtnMoney') {        // 资金变化通知

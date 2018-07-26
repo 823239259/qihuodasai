@@ -19,6 +19,10 @@ export default class DealView extends Component {
     render() {
         const { TradeStore } = this.props;
         const padColumnSize = Layout.screenWidth / 5;
+        // console.log('成交');
+        
+        // console.log(TradeStore.deals);
+        
         return (
             <Accordion
                 headers={[

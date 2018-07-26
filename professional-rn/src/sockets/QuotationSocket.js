@@ -62,13 +62,7 @@ export default class QuotationSocket {
                 const method = jsonData.method;
                 // this.logger.info(`onmessage - method ${method}`);
                 //console.log(this.futureTypeStore);
-                
                 if (method === 'on_rsp_login') {
-                    
-                    // autorun(() => {
-                    //     console.log(this.futureTypeStore.isFutIn)
-                    //     this.sendQryCommodity(false);
-                    // });
                     this.sendQryCommodity(false);
                     this.reconnectStartDetail();
                     resolve('QuotationSocket Login Success');

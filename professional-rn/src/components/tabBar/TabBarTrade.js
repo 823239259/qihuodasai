@@ -76,6 +76,8 @@ export default class TabBarTrade extends Component {
     //   inputRange: [0, 1],
     //   outputRange: [0,  containerWidth / numberOfTabs],
     // });
+    console.log(this.props.tabs);
+    
     return (
       <View style={[styles.tabs, {backgroundColor: this.props.backgroundColor, }, this.props.style, ]}>
         {this.props.tabs.map((name, page) => {

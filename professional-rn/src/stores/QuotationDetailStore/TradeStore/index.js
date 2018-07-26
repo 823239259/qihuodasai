@@ -385,12 +385,18 @@ export default class TradeStore {
     }
     // --------------------- 成交 Deal -----------------------
     // appendTradeSuccess
-    @action addDeal(param) {
+    @action addDeal(param,isInsert) {
         const product = this.getProduct(param);
         const directionObj = Enum.direction[param.Drection];
         let tradePrice = param.TradePrice;
         tradePrice = tradePrice.toFixed(product.dotSize);
-        this.deals.push(new Deal(param.ContractCode, directionObj, tradePrice, param.TradeNum, param.TradeDateTime, param.OrderID));
+        if (isInsert) {
+            this.deals.unshift(new Deal(param.ContractCode, directionObj, tradePrice, param.TradeNum, param.TradeDateTime, param.OrderID));
+        } else {
+            this.deals.push(new Deal(param.ContractCode, directionObj, tradePrice, param.TradeNum, param.TradeDateTime, param.OrderID));
+        }
+        //this.deals.push(new Deal(param.ContractCode, directionObj, tradePrice, param.TradeNum, param.TradeDateTime, param.OrderID));
+        //this.deals.unshift(new Deal(param.ContractCode, directionObj, tradePrice, param.TradeNum, param.TradeDateTime, param.OrderID));
     }
     getOrderPriceText(param, dotSize) {
         let orderPriceText = param.OrderPrice.toFixed(dotSize);

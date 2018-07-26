@@ -20,6 +20,10 @@ export default class OrderView extends Component {
         const { TradeStore } = this.props;
         const padColumnSize = Layout.screenWidth / 8;
         const padTimeColumnSize = Layout.screenWidth - ((padColumnSize * 3) + (60 * 4));
+        // console.log('委托');
+        
+        // console.log(TradeStore.orders);
+        
         return (
             <Accordion
                 headers={[
