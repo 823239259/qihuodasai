@@ -3,8 +3,8 @@ import { Config } from '../global';
 
 export default {
     getFloat(text) {
-        if (text.length === 0 || text.charAt(0) === '0') { // 過濾掉 098
-            return '';
+        if (text.charAt(0) === '0'&& text.charAt(1) !== '.' && text.length >1) {
+            return text.charAt(1)
         }
         // 狀況：2.00.0
         if (isNaN(text)) {
