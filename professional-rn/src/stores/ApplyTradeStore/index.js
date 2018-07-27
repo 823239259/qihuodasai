@@ -4,6 +4,7 @@ import moment from 'moment';
 import { Variables, Enum } from '../../global';
 import { ApplyTrade, DepositParam, ContractInfo, ContractDetail, ContractEnd, ContractHistory } from './models';
 import { Logger, Api, TradeUtil } from '../../utils';
+import FutureTypeStore from '../../stores/FutureTypeStore'
 
 export default class ApplyTradeStore {
     tabView = null;
@@ -60,8 +61,11 @@ export default class ApplyTradeStore {
         return moment(this.contractEnd.endTime * 1000).format('YYYY-MM-DD HH:mm');
     }
     @computed get profitLossString() {
-        return `¥ ${TradeUtil.formatCurrency(this.contractEnd.tranProfitLoss * this.contractEnd.endParities)} ($ ${TradeUtil.formatCurrency(this.contractEnd.tranProfitLoss)})`;
+        let typeIn = `¥ ${TradeUtil.formatCurrency(this.contractEnd.tranProfitLoss)}`;
+        let typeOut = `¥ ${TradeUtil.formatCurrency(this.contractEnd.tranProfitLoss * this.contractEnd.endParities)} ($ ${TradeUtil.formatCurrency(this.contractEnd.tranProfitLoss)})`
+        return this.FutureTypeStore.business_Type ? typeIn : typeOut;
     }
+
     @computed get parity() {
         return `$ 1 = ¥ ${this.contractEnd.endParities}`;
     }
@@ -72,6 +76,7 @@ export default class ApplyTradeStore {
         this.eventEmitter.addListener('accountStore', this.handleAccountStore.bind(this));
 
         this.accountStore.setEventEmitterbetweenApplyTradeStore(this.eventEmitter);
+        this.FutureTypeStore = FutureTypeStore
     }
     init(tabView) {
         this.tabView = tabView;
