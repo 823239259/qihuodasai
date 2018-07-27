@@ -69,6 +69,7 @@ export default class ConditionStore {
         triggerPrice: '0',
 
         additionType: Enum.compareType.addition.value,
+        openCloseType: Enum.openCloseType.open.value,
         additionPrice: '0',
 
         direction: Enum.direction[0].value,
@@ -97,7 +98,7 @@ export default class ConditionStore {
     @observable timeForm = {
         productTime: null, // 為了跟Picker 比對
         triggerTime: moment().format('YYYY-MM-DD HH:mm:ss'),
-
+        openCloseType: Enum.openCloseType.open.value,
         additionType: Enum.compareType.addition.value,
         additionPrice: '0',
 
@@ -258,23 +259,23 @@ export default class ConditionStore {
         const exchangeNo = this.productPriceSelected.exchangeNo;
         const commodityNo = this.productPriceSelected.commodityNo;
         const contractNo = this.productPriceSelected.contractNo;
-        const { num, triggerPrice, compareType, orderType, direction, additionType, additionPrice } = this.priceForm;
+        const { num, triggerPrice, compareType, orderType, direction, additionType, openCloseType, additionPrice } = this.priceForm;
         const conditionType = Enum.conditionType.price.value;
-        this.tradeSend.insertCondition(exchangeNo, commodityNo, contractNo, num, conditionType, triggerPrice, compareType, '', 0, 0, orderType, direction, 0, 0, 0, this.getFlag(additionType), additionType, additionPrice);
+        this.tradeSend.insertCondition(exchangeNo, commodityNo, contractNo, num, conditionType, triggerPrice, compareType, '', 0, 0, orderType, direction, 0, 0, 0, this.getFlag(additionType), additionType, additionPrice, openCloseType);
     }
     insertTimeCondition() {
         const exchangeNo = this.productTimeSelected.exchangeNo;
         const commodityNo = this.productTimeSelected.commodityNo;
         const contractNo = this.productTimeSelected.contractNo;
-        const { num, orderType, direction, additionType, additionPrice, triggerTime } = this.timeForm;
+        const { num, orderType, direction, additionType, additionPrice, triggerTime, openCloseType } = this.timeForm;
         const conditionType = Enum.conditionType.time.value;
 
-        this.tradeSend.insertCondition(exchangeNo, commodityNo, contractNo, num, conditionType, 0, 0, triggerTime, 0, 0, orderType, direction, 0, 0, 0, this.getFlag(additionType), additionType, additionPrice);
+        this.tradeSend.insertCondition(exchangeNo, commodityNo, contractNo, num, conditionType, 0, 0, triggerTime, 0, 0, orderType, direction, 0, 0, 0, this.getFlag(additionType), additionType, additionPrice, openCloseType);
     }
     modifyPriceCondition() {
         const { conditionNo, conditionType } = this.operatingCondition;
-        const { num, triggerPrice, compareType, orderType, direction, additionType, additionPrice } = this.priceForm;
-        this.tradeSend.modifyCondition(Enum.accordionItemButtonType.modify.value, conditionNo, num, conditionType, triggerPrice, compareType, '', 0, 0, orderType, direction, 0, 0, 0, this.getFlag(additionType), additionType, additionPrice);
+        const { num, triggerPrice, compareType, orderType, direction, additionType, openCloseType, additionPrice } = this.priceForm;
+        this.tradeSend.modifyCondition(Enum.accordionItemButtonType.modify.value, conditionNo, num, conditionType, triggerPrice, compareType, '', 0, 0, orderType, direction, 0, 0, 0, this.getFlag(additionType), additionType, additionPrice, openCloseType);
     }
     modifyTimeCondition() {
         const { conditionNo, conditionType } = this.operatingCondition;

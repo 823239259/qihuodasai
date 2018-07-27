@@ -15,9 +15,19 @@ function popToRoot() {
   });
 }
 
+function switchToTab(index) {
+  if (!_navigator) {
+    return;
+  }
+  _navigator.switchToTab({
+    tabIndex:index,
+  });
+}
+
 // add other navigation functions that you need and export them
 
 export default {
   setRootNavi,
   popToRoot,
+  switchToTab,
 };

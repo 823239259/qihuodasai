@@ -4,7 +4,7 @@ import { inject, observer } from 'mobx-react/native';
 import { StopLossConditionStyle, Enum } from '../../../../../global';
 import { FieldProvider, InputField, SelectField } from '../../../../../components';
 
-@inject('ConditionStore') @observer
+@inject('ConditionStore', 'FutureTypeStore') @observer
 export default class PriceConditionTab extends Component {
     _renderAdditionPrice() {
         if (this.props.ConditionStore.priceForm.additionType !== Enum.compareType.addition.value) {
@@ -12,7 +12,7 @@ export default class PriceConditionTab extends Component {
         }
     }
     render() {
-        const { ConditionStore } = this.props;
+        const { ConditionStore, FutureTypeStore } = this.props;
         return (
             <View style={StopLossConditionStyle.container}>
                 <FieldProvider form={ConditionStore.priceForm}>
@@ -45,6 +45,16 @@ export default class PriceConditionTab extends Component {
                                 { this._renderAdditionPrice() }
                             </View>
                         </View>
+                        {FutureTypeStore.isFutIn &&
+                            <View style={StopLossConditionStyle.row}>
+                                <View style={StopLossConditionStyle.columnFirst}>
+                                    <Text style={StopLossConditionStyle.label}>{'开平'}</Text>
+                                </View>
+                                <View style={StopLossConditionStyle.column}>
+                                    <SelectField name={'openCloseType'} options={[Enum.openCloseType.open, Enum.openCloseType.close]} />
+                                </View>
+                            </View>
+                        }
                         <View style={StopLossConditionStyle.row}>
                             <View style={StopLossConditionStyle.columnFirst}>
                                 <Text style={StopLossConditionStyle.label}>{'操作'}</Text>

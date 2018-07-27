@@ -76,6 +76,7 @@ export default class DrawerTrade extends Component {
     }
     _toAbout() {
         RootNavi.popToRoot();
+        RootNavi.switchToTab(1);
         // this.props.navigator.showModal({
         //     screen: 'quotation.QuotationAboutModal',
         //     title: '关于',
