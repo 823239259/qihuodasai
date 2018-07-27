@@ -126,7 +126,9 @@ export default class TradeSocket {
                         this.conditionStore.updateCondition(parameters);
                     } else if (method === 'OnError') {
                         // 掛單-改單時 出現餘額不足的狀況
-                        if (parameters.Code === 2129931) {
+                        // todo...  后续码表优化
+                        console.log(parameters);
+                        if (parameters.Method === 'ModifyOrder') {
                             ToastRoot.show(parameters.Message);
                             return;
                         }
