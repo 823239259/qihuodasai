@@ -95,7 +95,7 @@ export default class QuotationSocket {
                     if (this.quotationDetailStore.isDetailMounted) {
                         const param = jsonData.data;
                         // 更新每一筆筆持倉的浮动盈亏
-                        // Variables.trade.isLogged && this.tradeStore.updateFloatProfitAndRisk(param);
+                        Variables.trade.isLogged && this.tradeStore.updateFloatProfitAndRisk(param);
                         if (this.isQuotationEqual(param)) {
                             
                             this.quotationDetailStore.updateChart(param);

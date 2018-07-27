@@ -204,37 +204,20 @@ export default class TradeStore {
             this.addHold(product, param);
         }
     }
-    setHoldPosition(product, param) {
-        const holdNum = param.HoldNum;
-        // 持仓方向
-        const direction = param.Drection;
-        const directionObj = Enum.direction[param.Drection];
-        const holdAvgPrice = _.toNumber(param.HoldAvgPrice.toFixed(product.dotSize));
-        // 浮动盈亏
-        const floatProfit = this.getFloatProfit(product.lastPrice, holdAvgPrice, product.contractSize, product.miniTikeSize, holdNum, direction, product.currencyNo);
 
-        return {
-            productName: product.productName,
-            direction: directionObj,
-            holdNum,
-            holdAvgPrice,
-            floatProfit,
-            //不顯示
-            dotSize: product.dotSize,
-            currencyNo: product.currencyNo
-        };
-    }
     getHoldPosition(param) {
         return this.holdPositions.get(this.getProductName(param));
     }
     @action updateHold(product, param) {
         const productName = this.type ? `${product.productName}${param.Drection}`:product.productName;
         const holdPosition = this.holdPositions.get(productName);
-        holdPosition.update(this.setHoldPosition(product, param));
+        // holdPosition.update(this.setHoldPosition(product, param));
+        holdPosition.update(product, param);
     }
     @action addHold(product, param) {
         const productName = this.type ? `${product.productName}${param.Drection}`:product.productName;
-        this.holdPositions.set(productName, new HoldPosition(this.setHoldPosition(product, param)));
+        // this.holdPositions.set(productName, new HoldPosition(this.setHoldPosition(product, param)));
+        this.holdPositions.set(productName, new HoldPosition(product, param));
     }
     @action deleteHold(productName) {
         this.holdPositions.delete(productName);
