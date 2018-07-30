@@ -76,7 +76,7 @@ export default class HoldPosition {
 
     getFloatProfit(lastPrice, holdAvgPrice, contractSize, miniTikeSize, holdNum, direction, currencyNo) {
         let price = 0;
-        if (direction === 0) {
+        if (direction.value === 0) {
             price = lastPrice - holdAvgPrice;
         } else {
             price = holdAvgPrice - lastPrice;
