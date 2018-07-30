@@ -270,6 +270,7 @@
 					&:nth-child(3){
 						height: 80px;
 						color: $white;
+						line-height: 30px;
 					}
 				}
 			}
