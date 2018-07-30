@@ -28,6 +28,7 @@ export default class DealView extends Component {
                 headers={[
                     { text: '合约', style: { width: Layout.deviceSize === Enum.deviceSize.pad ? padColumnSize : 80 } },   // style 設定個別column 寬度
                     { text: '买卖', style: { width: Layout.deviceSize === Enum.deviceSize.pad ? padColumnSize : 60 } },
+                    { text: '开平', style: { width: Layout.deviceSize === Enum.deviceSize.pad ? padColumnSize : 60 } },//to do ...
                     { text: '成交价', style: { width: Layout.deviceSize === Enum.deviceSize.pad ? padColumnSize : 60 } },
                     { text: '成交量', style: { width: Layout.deviceSize === Enum.deviceSize.pad ? padColumnSize : 60 } },
                     { text: '成交时间', style: { width: Layout.deviceSize === Enum.deviceSize.pad ? padColumnSize : 150 } }
@@ -41,6 +42,7 @@ export default class DealView extends Component {
                             keys={[
                                 { name: 'productName' }, 
                                 { name: 'directionText', color: 'directionColor' },
+                                { name: 'openCloseType' },
                                 { name: 'tradePrice' },
                                 { name: 'tradeNum' },
                                 { name: 'tradeTime' }

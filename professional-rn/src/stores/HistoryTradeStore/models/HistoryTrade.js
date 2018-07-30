@@ -17,6 +17,7 @@ export default class HistoryTrade {
     tradeNum;                    // 成交量
     tradeFee;                    // 手续费
     tradeDateTime;               // 成交时间
+    openCloseType;
 
     @computed get directionText() {
         return Enum.direction[this.direction].text;
@@ -25,7 +26,7 @@ export default class HistoryTrade {
         return Enum.direction[this.direction].color;
     }
 
-    constructor(productName, exchangeNo, currencyNo, direction, tradePrice, tradeNum, tradeFee, tradeDateTime) {
+    constructor(productName, exchangeNo, currencyNo, direction, tradePrice, tradeNum, tradeFee, tradeDateTime, openCloseType) {
         this.logger = new Logger(HistoryTrade);
     
         this.productName = productName;
@@ -36,6 +37,22 @@ export default class HistoryTrade {
         this.tradeNum = tradeNum;
         this.tradeFee = tradeFee;
         this.tradeDateTime = tradeDateTime;
+        switch(openCloseType){
+            case 0 :
+                this.openCloseType = 'N/A';
+                break;
+            case 1 :
+                this.openCloseType = '开仓';
+                break;
+            case 2 :
+                this.openCloseType = '平仓';
+                break;
+            case 3 :
+                this.openCloseType = '平今';
+                break;
+            default:
+                this.openCloseType = 'N/A';
+        }
     }
     setSerialNo(serialNo) {
         this.serialNo = serialNo;

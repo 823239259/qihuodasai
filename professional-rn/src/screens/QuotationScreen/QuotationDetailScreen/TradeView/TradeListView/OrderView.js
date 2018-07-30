@@ -30,6 +30,7 @@ export default class OrderView extends Component {
                     { text: '合约', style: { width: Layout.deviceSize === Enum.deviceSize.pad ? padColumnSize : 80 } },   // style 設定個別column 寬度
                     { text: '状态', style: { width: Layout.deviceSize === Enum.deviceSize.pad ? padColumnSize : 80 } },
                     { text: '买卖', style: { width: 60 } },
+                    { text: '开平', style: { width: 60 } },//to do ... 国际取消开平类型
                     { text: '委托价', style: { width: Layout.deviceSize === Enum.deviceSize.pad ? padColumnSize : 80 } },
                     { text: '委托量', style: { width: 60 } },
                     { text: '已成交', style: { width: 60 } },
@@ -46,6 +47,7 @@ export default class OrderView extends Component {
                                 { name: 'productName' }, 
                                 { name: 'orderStatus' },
                                 { name: 'directionText', color: 'directionColor' },
+                                { name: 'openCloseType' },//to do ... 国际取消开平类型
                                 { name: 'orderPrice' },
                                 { name: 'orderNum' },
                                 { name: 'tradeNum' },

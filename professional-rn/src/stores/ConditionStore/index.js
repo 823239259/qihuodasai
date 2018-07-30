@@ -187,6 +187,7 @@ export default class ConditionStore {
             additionPrice: param.AdditionPrice,
 
             direction: param.Drection,
+            openCloseType: param.OpenCloseType,//to do ...添加开平类型
             orderType: param.OrderType,
             num: param.Num,
 
@@ -279,8 +280,8 @@ export default class ConditionStore {
     }
     modifyTimeCondition() {
         const { conditionNo, conditionType } = this.operatingCondition;
-        const { num, triggerTime, orderType, direction, additionType, additionPrice } = this.timeForm;
-        this.tradeSend.modifyCondition(Enum.accordionItemButtonType.modify.value, conditionNo, num, conditionType, 0, 0, triggerTime, 0, 0, orderType, direction, 0, 0, 0, this.getFlag(additionType), additionType, additionPrice);
+        const { num, triggerTime, orderType, direction, additionType, additionPrice, openCloseType } = this.timeForm;
+        this.tradeSend.modifyCondition(Enum.accordionItemButtonType.modify.value, conditionNo, num, conditionType, 0, 0, triggerTime, 0, 0, orderType, direction, 0, 0, 0, this.getFlag(additionType), additionType, additionPrice, openCloseType);
     }
     //1-有附加条件，0-没有附加条件
     getFlag(additionType) {

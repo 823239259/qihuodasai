@@ -26,6 +26,7 @@ export default class Condition {
     @observable direction;      //下单
     @observable orderType;
     @observable num;
+    openCloseType;
 
     expiration;                 //有效期
     
@@ -99,7 +100,7 @@ export default class Condition {
         });
         return additionTypeText;
     }
-    constructor(productName, { conditionNo, conditionType, status, compareType, triggerPrice, triggerTime, additionFlag, additionType, additionPrice, direction, orderType, num, insertTime, statusMsg }) {    
+    constructor(productName, { conditionNo, conditionType, status, compareType, triggerPrice, triggerTime, additionFlag, additionType, additionPrice, direction, openCloseType, orderType, num, insertTime, statusMsg }) {    
         this.productName = productName;
         this.conditionNo = conditionNo;
         this.conditionType = conditionType;
@@ -116,8 +117,25 @@ export default class Condition {
         this.insertTime = insertTime;
         this.statusMsg = statusMsg;
         this.expiration = Enum.stopLossExpiration;
+        
+        switch(openCloseType){
+            case 0 :
+                this.openCloseType = 'N/A';
+                break;
+            case 1 :
+                this.openCloseType = '开仓';
+                break;
+            case 2 :
+                this.openCloseType = '平仓';
+                break;
+            case 3 :
+                this.openCloseType = '平今';
+                break;
+            default:
+                this.openCloseType = 'N/A';
+        }
     }
-    @action update({ status, direction, conditionType, num, orderType, compareType, triggerPrice, triggerTime, additionFlag, additionType, additionPrice, insertTime, statusMsg }) {
+    @action update({ status, direction, openCloseType, conditionType, num, orderType, compareType, triggerPrice, triggerTime, additionFlag, additionType, additionPrice, insertTime, statusMsg }) {
         this.status = status;
         this.direction = direction;
         this.conditionType = conditionType;
@@ -133,5 +151,22 @@ export default class Condition {
 
         this.insertTime = insertTime;
         this.statusMsg = statusMsg;
+
+        switch(openCloseType){
+            case 0 :
+                this.openCloseType = 'N/A';
+                break;
+            case 1 :
+                this.openCloseType = '开仓';
+                break;
+            case 2 :
+                this.openCloseType = '平仓';
+                break;
+            case 3 :
+                this.openCloseType = '平今';
+                break;
+            default:
+                this.openCloseType = 'N/A';
+        }
     }
 }

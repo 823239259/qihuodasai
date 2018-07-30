@@ -34,6 +34,7 @@ export default class ConditionList extends Component {
                     { text: '类型', style: { width: 80 } },
                     { text: '条件', style: { width: 150 } },
                     { text: '多空', style: { width: 60 } },
+                    { text: '开平', style: { width: 60 } },// to do ... 
                     { text: '下单', style: { width: 120 } },
                     { text: '有效期', style: { width: 80 } },
                     { text: '触发时间', style: { width: 150 } } 
@@ -51,6 +52,7 @@ export default class ConditionList extends Component {
                                 { name: 'conditionTypeText' },
                                 { name: 'compareTypeText' },
                                 { name: 'directionText', color: 'directionColor' },
+                                { name: 'openCloseType' },// to do ... 
                                 { name: 'insertOrderText' },
                                 { name: 'expiration' },
                                 { name: 'insertTimeText' }
