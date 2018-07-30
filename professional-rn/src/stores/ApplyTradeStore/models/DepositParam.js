@@ -24,7 +24,7 @@ export default class DepositParam {
     @observable naturalGasActualLever;  // 天然气指数
     @observable hs300;  // 沪深300指数
     @observable sz50;  // 上证50指数指数
-    @observable SC;  // 中国原油
+    @observable sc;  // 中国原油
 
     constructor({ traderBond, traderTotal, lineLoss, inMultiple, tranLever, crudeTranLever, hsiTranLever, mdtranLever, mntranLever, mbtranLever, daxtranLever, nikkeiTranLever, lhsiTranActualLever, agTranActualLever, hIndexActualLever, xhIndexActualLever, aCopperActualLever, aSilverActualLever, smaActualLever, daxtranMinActualLever, naturalGasActualLever }) {
         this.traderBond = traderBond;
@@ -42,7 +42,7 @@ export default class DepositParam {
                     that.sz50 = obj.initialAmount;                       
                     break;
                     case 'sc':
-                    that.SC = obj.initialAmount;                       
+                    that.sc = obj.initialAmount;                       
                     break;              
                     default:
                     break;

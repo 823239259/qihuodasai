@@ -23,31 +23,29 @@ export default class TaBarCommodityType extends Component {
     
     _changeType = (index,key)=> currentClass = index ? styles[key] : styles[key+'Nomal'];
     _changeCurrentTab= (index)=>{
-        const {FutureTypeStore,QuotationStore,QuotationSocket,types,ApplyTradeStore} = this.props;
-        let {currentIndex} = this.state;
-        if (currentIndex == index) return;
-        currentIndex = index;
+        const {FutureTypeStore,QuotationStore,QuotationSocket,ApplyTradeStore} = this.props;
+        if (FutureTypeStore.isFutIn == index) return;
+        currentIndex = index
         this.setState({
             currentIndex
         })       
-        if (types === 0) {
-            FutureTypeStore.changeFutIn()
-            QuotationStore.clearData()
-            QuotationSocket.ss()
-            QuotationSocket.connectSocket()
-        }else if(types === 1){
-            FutureTypeStore.changebusinessType1();
-            ApplyTradeStore.contractList = [];
-            ApplyTradeStore.getTradeParams();
-            ApplyTradeStore.getTradeAccountList();
-        }
+        FutureTypeStore.changeFutIn()
+        QuotationStore.clearData()
+        QuotationSocket.ss()
+        QuotationSocket.connectSocket()
+        FutureTypeStore.changebusinessType1();
+        ApplyTradeStore.contractList = [];
+        ApplyTradeStore.getTradeParams();
+        ApplyTradeStore.getTradeAccountList();
+      
     }
+    
     render() {
     return (
         <View style={styles.container} >
             {
                 this.props.typeArr.map((k,index)=>{
-                    const iscurrent = index == 1 ? this.state.currentIndex : !this.state.currentIndex ;
+                    const iscurrent = index == 1? this.props.FutureTypeStore.isFutIn : !this.props.FutureTypeStore.isFutIn ;
                     const isright = index == 0 ? styles.titleLeft : styles.titleRight;
                     return(
                         <TouchableOpacity style={[styles.title,isright,this._changeType(iscurrent,'current')]} key= {index} 
