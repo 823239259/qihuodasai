@@ -63,7 +63,7 @@ export default class Condition {
             compareTypeFullText = moment(this.triggerTime).format('HH:mm:ss');
         }
         let additionTypeText = '';
-        if (this.additionFlag === 1) {
+        if (this.additionFlag === true) {
             additionTypeText = ` ${this.getAdditionalTypeText()}  ${this.additionPrice}`;
         }
         compareTypeFullText += additionTypeText;
