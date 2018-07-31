@@ -57,7 +57,8 @@ export default class HistoryTradeStore {
         const tradeNum = param.TradeNum;
         const tradeFee = param.TradeFee;
         const tradeDateTime = param.TradeDateTime;
-        const historyTrade = new HistoryTrade(productName, exchangeNo, currencyNo, direction, tradePrice, tradeNum, tradeFee, tradeDateTime);
+        const openCloseType = param.OpenCloseType;
+        const historyTrade = new HistoryTrade(productName, exchangeNo, currencyNo, direction, tradePrice, tradeNum, tradeFee, tradeDateTime, openCloseType);
         
         historyTrade.setSerialNo(this.historyData.length + 1);
         this.historyData.push(historyTrade);

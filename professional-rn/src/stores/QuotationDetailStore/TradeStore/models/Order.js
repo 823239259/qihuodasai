@@ -12,6 +12,7 @@ export default class Order {
     @observable tradeNum;       //已成交
     @observable cdNum;          //已撤單
     insertDateTime; //下單時間
+    openCloseType;
     // 不顯示
     orderId;        //需要OrderId的原因是，委託、掛單可能會出現重複的productName
 
@@ -22,7 +23,7 @@ export default class Order {
         return this.direction.color;
     }
     
-    constructor(productName, orderStatus, direction, orderPrice, orderNum, tradeNum, cdNum, insertDateTime, orderId) {
+    constructor(productName, orderStatus, direction, orderPrice, orderNum, tradeNum, cdNum, insertDateTime, orderId, openCloseType) {
         this.productName = productName;
         this.orderStatus = orderStatus;
         this.direction = direction;
@@ -31,6 +32,22 @@ export default class Order {
         this.tradeNum = tradeNum;
         this.cdNum = cdNum;
         this.insertDateTime = insertDateTime;
+        switch(openCloseType){
+            case 0 :
+                this.openCloseType = 'N/A';
+                break;
+            case 1 :
+                this.openCloseType = '开仓';
+                break;
+            case 2 :
+                this.openCloseType = '平仓';
+                break;
+            case 3 :
+                this.openCloseType = '平今';
+                break;
+            default:
+                this.openCloseType = 'N/A';
+        }
 
         this.orderId = orderId;
     }

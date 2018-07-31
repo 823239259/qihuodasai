@@ -312,14 +312,15 @@ export default class TradeStore {
     @action addDesignate(param, isInsert) {
         const product = this.getProduct(param);
         const directionObj = Enum.direction[param.Drection];
+        const openCloseType = param.OpenCloseType;
         const orderPriceText = this.getOrderPriceText(param, product.dotSize);
         const orderNum = param.OrderNum;          // 委託量
         const tradeNum = param.TradeNum;          // 已成交
         const designateNum = orderNum - tradeNum; // 掛單量
         if (isInsert) {
-            this.designates.unshift(new Designate(product.productName, directionObj, orderPriceText, orderNum, designateNum, param.InsertDateTime, param.OrderID, param.OrderSysID, param.TriggerPrice));
+            this.designates.unshift(new Designate(product.productName, directionObj, orderPriceText, orderNum, designateNum, param.InsertDateTime, param.OrderID, param.OrderSysID, param.TriggerPrice, openCloseType));
         } else {
-            this.designates.push(new Designate(product.productName, directionObj, orderPriceText, orderNum, designateNum, param.InsertDateTime, param.OrderID, param.OrderSysID, param.TriggerPrice));
+            this.designates.push(new Designate(product.productName, directionObj, orderPriceText, orderNum, designateNum, param.InsertDateTime, param.OrderID, param.OrderSysID, param.TriggerPrice, openCloseType));
         }
     }
     // --------------------- 委託 Order -----------------------
@@ -330,6 +331,7 @@ export default class TradeStore {
             return;
         }
         const directionObj = Enum.direction[param.Drection];
+        const openCloseType = param.OpenCloseType;
         const orderPriceText = this.getOrderPriceText(param, product.dotSize);
         const orderStatus = param.OrderStatus;
         const ordreStatusText = TradeUtil.getOrderStatusText(orderStatus);
@@ -340,9 +342,9 @@ export default class TradeStore {
             cdNum = orderNum - tradeNum;
         }
         if (isInsert) {
-            this.orders.unshift(new Order(product.productName, ordreStatusText, directionObj, orderPriceText, orderNum, tradeNum, cdNum, param.InsertDateTime, param.OrderID));
+            this.orders.unshift(new Order(product.productName, ordreStatusText, directionObj, orderPriceText, orderNum, tradeNum, cdNum, param.InsertDateTime, param.OrderID, openCloseType));
         } else {
-            this.orders.push(new Order(product.productName, ordreStatusText, directionObj, orderPriceText, orderNum, tradeNum, cdNum, param.InsertDateTime, param.OrderID));
+            this.orders.push(new Order(product.productName, ordreStatusText, directionObj, orderPriceText, orderNum, tradeNum, cdNum, param.InsertDateTime, param.OrderID, openCloseType));
         }
     }
     @action updateOrder(param) {
@@ -377,10 +379,11 @@ export default class TradeStore {
         const directionObj = Enum.direction[param.Drection];
         let tradePrice = param.TradePrice;
         tradePrice = tradePrice.toFixed(product.dotSize);
+        const openCloseType = param.OpenCloseType;
         if (isInsert) {
-            this.deals.unshift(new Deal(param.ContractCode, directionObj, tradePrice, param.TradeNum, param.TradeDateTime, param.OrderID));
+            this.deals.unshift(new Deal(param.ContractCode, directionObj, tradePrice, param.TradeNum, param.TradeDateTime, param.OrderID, openCloseType));
         } else {
-            this.deals.push(new Deal(param.ContractCode, directionObj, tradePrice, param.TradeNum, param.TradeDateTime, param.OrderID));
+            this.deals.push(new Deal(param.ContractCode, directionObj, tradePrice, param.TradeNum, param.TradeDateTime, param.OrderID, openCloseType));
         }
         //this.deals.push(new Deal(param.ContractCode, directionObj, tradePrice, param.TradeNum, param.TradeDateTime, param.OrderID));
         //this.deals.unshift(new Deal(param.ContractCode, directionObj, tradePrice, param.TradeNum, param.TradeDateTime, param.OrderID));

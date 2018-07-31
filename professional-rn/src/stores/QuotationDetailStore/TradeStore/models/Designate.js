@@ -10,6 +10,7 @@ export default class Designate {
     @observable orderNum;       //委託量
     @observable designateNum;   //掛單量
     insertDateTime; //下單時間
+    openCloseType;
     // 不顯示
     orderId;        //需要OrderId的原因是，委託、掛單可能會出現重複的productName
     orderSysID;     //都傳""，可能是以前留著要擴充功能之類的
@@ -23,13 +24,29 @@ export default class Designate {
         return this.direction.color;
     }
 
-    constructor(productName, direction, orderPrice, orderNum, designateNum, insertDateTime, orderId, orderSysID, triggerPrice) {
+    constructor(productName, direction, orderPrice, orderNum, designateNum, insertDateTime, orderId, orderSysID, triggerPrice, openCloseType) {
         this.productName = productName;
         this.direction = direction;
         this.orderPrice = orderPrice;
         this.orderNum = orderNum;
         this.designateNum = designateNum;
         this.insertDateTime = insertDateTime;
+        switch(openCloseType){
+            case 0 :
+                this.openCloseType = 'N/A';
+                break;
+            case 1 :
+                this.openCloseType = '开仓';
+                break;
+            case 2 :
+                this.openCloseType = '平仓';
+                break;
+            case 3 :
+                this.openCloseType = '平今';
+                break;
+            default:
+                this.openCloseType = 'N/A';
+        }
 
         this.orderId = orderId;
         this.orderSysID = orderSysID;
