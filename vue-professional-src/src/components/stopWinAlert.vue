@@ -174,7 +174,7 @@
 						"Parameters":{
 							'StopLossNo':this.stopLossListSelectOneObj.StopLossNo,
 							'ModifyFlag':0,
-							'Num':parseInt(this.Num),
+							'Num':parseInt(this.zhiYinNum),
 							'StopLossType':1,
 							'OrderType':parseInt(this.zhiYinorderType),
 							'StopLossPrice':parseFloat(this.zhiYinInputPrice),
