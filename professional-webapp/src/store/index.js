@@ -29,7 +29,7 @@ var account = {
 		exitStatus: false,   //交易账号退出状态
 		userName: '',   //平台账号
 		currentNav: 0,  //当前导航索引
-		currentUrlHead: 'https:', //http or https
+		currentUrlHead: 'http:', //http or https
 	}
 }
 
@@ -37,8 +37,8 @@ var account = {
 var market = {
 	state: {
 		quoteConfig:{
-			url_real: "ws://192.168.0.232:19002",  //测试地址
-//			url_real: "ws://quote.vs.com:9002",   //正式地址
+//			url_real: "ws://192.168.0.232:19002",  //测试地址
+			url_real: "ws://quote.vs.com:9002",   //正式地址
 			userName: "13677622344",
 			passWord: "a123456"
 		},
@@ -282,7 +282,7 @@ export default new Vuex.Store({
 		//交易websocket
 		tradeSocket: {},
 		//test 测试环境，online 正式环境
-		environment: 'test',
+		environment: 'online',
 		//打包的时候，值为 build ，开发的时候，值为 dev
 		setting: 'dev',
 	},

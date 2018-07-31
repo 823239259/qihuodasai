@@ -416,7 +416,7 @@
 							"Parameters":{
 								'StopLossNo': this.currentOrderList.StopLossNo,
 								'ModifyFlag': 0,
-								'Num': parseInt(this.stopNum),
+								'Num': parseInt(this.stopProfitNum),
 								'StopLossType': parseInt(this.currentOrderList.StopLossType00),
 								'OrderType': parseInt(this.currentOrderList.OrderType00),
 								'StopLossPrice': parseFloat(this.stopProfitPrice),
