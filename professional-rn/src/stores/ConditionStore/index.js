@@ -214,7 +214,7 @@ export default class ConditionStore {
     }
     // ConditionEdit
     @action confirmConditionEdit() {
-        if (!this.validate()) {
+        if (!this.validate(this.isPriceTab)) {
             return;
         }
         if (this.isPriceTab) {
@@ -310,7 +310,7 @@ export default class ConditionStore {
         } else {
             const { additionPrice, additionType, num } = this.timeForm;
             if (additionType !== Enum.compareType.addition.value) {
-                if (!TradeUtil.validatePrice(additionPrice, this.productPriceSelected, '附加触发价格')) {
+                if (!TradeUtil.validatePrice(additionPrice, this.productTimeSelected, '附加触发价格')) {
                     return false;
                 }
             }

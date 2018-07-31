@@ -69,7 +69,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  [JPUSHService setupWithOption:launchOptions appKey:@"12345678"
+  [JPUSHService setupWithOption:launchOptions appKey:@"b96d00786c574c55b521ae55"
                         channel:nil apsForProduction:nil];
 
   [BugsnagReactNative start];

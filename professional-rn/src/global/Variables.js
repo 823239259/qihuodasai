@@ -6,8 +6,8 @@ export default {
     //ipa_download_url: '',                          //企业ipa下载地址
     
     // 帳戶 Account
-    user: 'zihao',
-    pwd: '12345',
+    user: 'fut_game_inner',
+    pwd: 'a123456',
     // AsyncStorage - 平台登入
     account: {
         isLogged: false,

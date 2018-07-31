@@ -943,7 +943,7 @@
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 2279YW8L58;
+						DevelopmentTeam = AHKN5RLZ3M;
 						LastSwiftMigration = 900;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -1479,7 +1479,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = 2279YW8L58;
+				DEVELOPMENT_TEAM = AHKN5RLZ3M;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
@@ -1501,7 +1501,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.supermap.wzh;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qhdsnpb.ws;
 				PRODUCT_NAME = incentfxRN;
 				SWIFT_OBJC_BRIDGING_HEADER = "incentfxRN-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1520,7 +1520,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2279YW8L58;
+				DEVELOPMENT_TEAM = AHKN5RLZ3M;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
@@ -1542,7 +1542,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.supermap.wzh;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qhdsnpb.ws;
 				PRODUCT_NAME = incentfxRN;
 				SWIFT_OBJC_BRIDGING_HEADER = "incentfxRN-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
