@@ -25,7 +25,7 @@ export default class QuotationSocket {
 
     }
     
-    //ss
+    //关闭socket
 
     ss () {
         this.socket.close()
@@ -40,13 +40,15 @@ export default class QuotationSocket {
         return new Promise((resolve, reject) => {
             this.socket = new WebSocket(Config.marketSocketUrl);
             this.socket.onopen = () => {
+<<<<<<< HEAD
+=======
                 // this.logger.info('onopen');
+>>>>>>> update
                 // 登入接口 Login                
                 this.sendLogin();
             };
             // websocket中斷的話 就再連一次
             this.socket.onclose = (e) => {
-                // this.logger.error(`onclose - code: ${e.code}, reason: ${e.reason}, readyState: ${Enum.socketState[this.socket.readyState]}`);
                 const reason = e.reason ? e.reason : 'QuotationSocket Login Fail';
                 reject(reason);
                 // this.emitClose(); // 強制一直再次連線，先留著
@@ -58,7 +60,10 @@ export default class QuotationSocket {
                     return;
                 }
                 const method = jsonData.method;
+<<<<<<< HEAD
+=======
                 // this.logger.info(`onmessage - method ${method}`);
+>>>>>>> update
                 if (method === 'on_rsp_login') {
                     this.sendQryCommodity();
                     this.reconnectStartDetail();
@@ -67,9 +72,17 @@ export default class QuotationSocket {
                     // 訂閱合約
                     this.onRspQryCommodity(jsonData);
                 } else if (method === 'on_rsp_subscribe') {
+<<<<<<< HEAD
+                    /*
+                        订阅成功 新版本该接口不包含原始行情暂时不做处理
+                        const moreData = JSON.parse(evt.data).Parameters.LastQuotation;
+                        this.quotationStore.insertData(jsonData.data);
+                    */
+=======
                     //订阅成功 新版本该接口不包含原始行情暂时不做处理
                     //const moreData = JSON.parse(evt.data).Parameters.LastQuotation;
                     //this.quotationStore.insertData(jsonData.data);
+>>>>>>> update
                 } else if (method === 'on_rsp_history_data') {//查询k线
                     // detail
                     this.quotationDetailStore.setChartHistory(jsonData);
@@ -124,7 +137,6 @@ export default class QuotationSocket {
         console.log(selectedProduct);
         
         // 表示當前選擇的合約，抓到的資料會有問題
-        //if (!selectedProduct.LastPrice && !selectedProduct.AskPrice1 && !selectedProduct.BidPrice1) {
         if (!selectedProduct.LastPrice && !selectedProduct.ask[0] && !selectedProduct.bid[0]) {
             ToastRoot.show(`${selectedProduct.productName}無行情`);
             return;
@@ -142,16 +154,25 @@ export default class QuotationSocket {
     onRspQryCommodity(jsonData) {
         
         const commoditys = jsonData.data.commodity_list;
-        //console.log(commoditys);
-        
+        let commodityObjs = [];
         for (let i = 0; i < commoditys.length; i++) {
-            if (commoditys[i].IsUsed !== 0) {
                 const commodity = commoditys[i];
-                this.quotationStore.addProduct(commodity);                
-                // 訂閱合約 - 告訴WebSocket server 我要訂閱Subscribe -> server response -> OnRspSubscribe
-                this.sendSubscribe(commodity);
-            }
+                this.quotationStore.addProduct(commodity); 
+                //提取主力合约，构建行情api合约结构
+                let mainContract = null;
+                let contractList = commodity.contract_no_list;
+                for(key in contractList){
+                  if(contractList[key].flags == 1){
+                    mainContract = contractList[key].contract_no;
+                    break;
+                  }
+                }
+                
+                commodityObjs.push({security_type:this.futureTypeStore.Futstring, exchange_no: commodity.exchange_no, commodity_no:commodity.commodity_no, contract_no:mainContract});
         }
+         // 批量订阅合约 - 告訴WebSocket server 我要訂閱Subscribe -> server response -> OnRspSubscribe
+         this.sendSubscribe(JSON.stringify(commodityObjs));
+
         this.quotationStore.setLoading(false);
     }
     // 是否為當前選取的合約
@@ -200,17 +221,8 @@ export default class QuotationSocket {
         const qryHistoryParam = type == 'TIME_SHARING' ? qryHistoryParamSharing : qryHistoryParamKline ;
         this.sendMessage('req_history_data', qryHistoryParam);
     }
-    sendSubscribe(commodity) {
-        let mainContract = null;
-        let contractList = commodity.contract_no_list;
-        for(key in contractList){
-          if(contractList[key].flags == 1){
-            mainContract = contractList[key].contract_no;
-            break;
-          }
-        }
-        this.sendMessage('req_subscribe', `{"security_type":"${this.futureTypeStore.Futstring}","exchange_no":"${commodity.exchange_no}","commodity_no":"${commodity.commodity_no}","contract_no":"${mainContract}"}`);
-        //this.sendMessage('req_subscribe', `{"security_type":"FUT_IN","exchange_no":"${commodity.exchange_no}","commodity_no":"${commodity.commodity_no}","contract_no":"${mainContract}"}`);
+    sendSubscribe(param) {
+        this.sendMessage('req_subscribe', param);
     }
     // 其實行情傳入的UserName & PassWord都是''
     sendLogin() {
@@ -225,8 +237,6 @@ export default class QuotationSocket {
         this.sendMessage('req_heartbeat', `{"ref":"heartBeat"}`);
     }
     sendMessage(method, parameters) {
-        // console.log(parameters);
-        
         try {
             this.socket.send(`{"method":"${method}","data":${parameters}}`);
         } catch (err) {
