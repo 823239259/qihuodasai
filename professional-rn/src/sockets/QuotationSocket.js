@@ -40,10 +40,6 @@ export default class QuotationSocket {
         return new Promise((resolve, reject) => {
             this.socket = new WebSocket(Config.marketSocketUrl);
             this.socket.onopen = () => {
-<<<<<<< HEAD
-=======
-                // this.logger.info('onopen');
->>>>>>> update
                 // 登入接口 Login                
                 this.sendLogin();
             };
@@ -60,10 +56,6 @@ export default class QuotationSocket {
                     return;
                 }
                 const method = jsonData.method;
-<<<<<<< HEAD
-=======
-                // this.logger.info(`onmessage - method ${method}`);
->>>>>>> update
                 if (method === 'on_rsp_login') {
                     this.sendQryCommodity();
                     this.reconnectStartDetail();
@@ -72,17 +64,11 @@ export default class QuotationSocket {
                     // 訂閱合約
                     this.onRspQryCommodity(jsonData);
                 } else if (method === 'on_rsp_subscribe') {
-<<<<<<< HEAD
                     /*
                         订阅成功 新版本该接口不包含原始行情暂时不做处理
                         const moreData = JSON.parse(evt.data).Parameters.LastQuotation;
                         this.quotationStore.insertData(jsonData.data);
                     */
-=======
-                    //订阅成功 新版本该接口不包含原始行情暂时不做处理
-                    //const moreData = JSON.parse(evt.data).Parameters.LastQuotation;
-                    //this.quotationStore.insertData(jsonData.data);
->>>>>>> update
                 } else if (method === 'on_rsp_history_data') {//查询k线
                     // detail
                     this.quotationDetailStore.setChartHistory(jsonData);
