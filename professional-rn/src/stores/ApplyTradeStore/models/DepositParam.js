@@ -22,9 +22,24 @@ export default class DepositParam {
     @observable smaActualLever;         // 小原油
     @observable daxtranMinActualLever;  // 迷你德国DAX指数
     @observable naturalGasActualLever;  // 天然气指数
-    @observable hs300;  // 沪深300指数
-    @observable sz50;  // 上证50指数指数
-    @observable sc;  // 中国原油
+    @observable hs300;                  // 沪深300指数
+    @observable sz50;                   // 上证50指数指数
+    @observable sc;                     // 中国原油
+    @observable ic500;                  // 中证500指数
+    @observable lw;                     // 螺纹
+    @observable rj;                     // 热卷
+
+    @observable tk;                     // 铁矿
+    @observable jm;                     // 焦煤
+    @observable jt;                     // 焦炭
+    @observable xj;                     // 橡胶
+    @observable lq;                     // 沥青
+
+    @observable hj;                     // 沪金
+    @observable hy;                     // 沪银
+    @observable ht;                     // 沪铜
+    @observable hn;                     // 沪镍
+    @observable hx;                     // 沪锌
 
     constructor({ traderBond, traderTotal, lineLoss, inMultiple, tranLever, crudeTranLever, hsiTranLever, mdtranLever, mntranLever, mbtranLever, daxtranLever, nikkeiTranLever, lhsiTranActualLever, agTranActualLever, hIndexActualLever, xhIndexActualLever, aCopperActualLever, aSilverActualLever, smaActualLever, daxtranMinActualLever, naturalGasActualLever }) {
         this.traderBond = traderBond;
@@ -43,7 +58,46 @@ export default class DepositParam {
                     break;
                     case 'sc':
                     that.sc = obj.initialAmount;                       
-                    break;              
+                    break;   
+                    case 'IC':
+                    that.ic500 = obj.initialAmount;                       
+                    break;   
+                    case 'RB':
+                    that.lw = obj.initialAmount;                       
+                    break; 
+                    case 'HC':
+                    that.rj = obj.initialAmount;                       
+                    break;   
+                    case 'i':
+                    that.tk = obj.initialAmount;                       
+                    break;
+                    case 'jm':
+                    that.jm = obj.initialAmount;                       
+                    break;  
+                    case 'j':
+                    that.jt = obj.initialAmount;                       
+                    break;    
+                    case 'ru':
+                    that.xj = obj.initialAmount;                       
+                    break;  
+                    case 'bu':
+                    that.lq = obj.initialAmount;                       
+                    break; 
+                    case 'au':
+                    that.hj = obj.initialAmount;                       
+                    break; 
+                    case 'ag':
+                    that.hy = obj.initialAmount;                       
+                    break;
+                    case 'cu':
+                    that.ht = obj.initialAmount;                       
+                    break;
+                    case 'ni':
+                    that.hn = obj.initialAmount;                       
+                    break;
+                    case 'zn':
+                    that.hx = obj.initialAmount;                       
+                    break;
                     default:
                     break;
                 }

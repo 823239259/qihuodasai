@@ -123,6 +123,19 @@ export default class SocketManager {
             this.connectQuotationSocketError(err);
         });
     }
+
+    restartQuotationSocket() {
+        this.quotationSocket.socket.close();
+   
+        setTimeout(() => {
+            this.quotationSocket.connectSocket().then((msg) => {
+                this.connectQuotationSocketSuccess(msg);
+            }).catch((err) => {
+                this.connectQuotationSocketError(err);
+            });
+        }, Config.socketReconnectTime);
+    }
+
     startTradeSocket(account, password, onTradeLoginSuccess) {
         if (!account) {
             return;
@@ -186,7 +199,7 @@ export default class SocketManager {
         this.logger.warn(`quotationHeartbeat - quotationSocket socket state: ${Enum.socketState[this.quotationSocket.socket.readyState]}`);
         
         this.quotationSocket.isHeartBeating = false;
-        this.quotationSocket.sendQryCommodity(true);
+        this.quotationSocket.sendHeartBeat();
 
         this.quotationHeartBeatTimeoutId && clearTimeout(this.quotationHeartBeatTimeoutId);
 
@@ -202,7 +215,7 @@ export default class SocketManager {
                 this.quotationHeartbeat();
             } else {
                 this.connectionScreenStore.setIsQuotationSocketConnection(false);
-                this.startQuotationSocket();
+                this.restartQuotationSocket();
             }
         }, time);
     }

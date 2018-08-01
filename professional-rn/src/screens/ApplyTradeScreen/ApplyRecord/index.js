@@ -54,6 +54,7 @@ export default class ApplyRecord extends Component {
     );
     render() {
         const { tradeList } = this.props.ApplyTradeStore;
+        const { AccountStore } = this.props;
         // 讀取中
         if (tradeList === null) {
             return <Loading />;
@@ -70,8 +71,8 @@ export default class ApplyRecord extends Component {
                         <Text style={[Layout.fontBold, { color: Colors.greyText, marginTop: Layout.accountContainerPadding * 2 }]}>{'暂无操盘方案记录，赶快去申请吧！'}</Text>
                     </View>
                     <View style={{ flex: 1, padding: Layout.accountContainerPadding }}>
-                        <ButtonCommon text={'注册'} color={Colors.red} style={{ flex: 0, height: Layout.buttonLargeHeight, borderWidth: 1, borderColor: Colors.red }} onPress={() => this._toRegister()} />
-                        <ButtonCommon text={'登录'} style={{ flex: 0, height: Layout.buttonLargeHeight, marginTop: Layout.accountContainerPadding / 2 }} backgroundColor={Colors.red} color={Colors.white} onPress={() => this._toLogin()} />
+                        {!AccountStore.isLogged && <ButtonCommon text={'注册'} color={Colors.red} style={{ flex: 0, height: Layout.buttonLargeHeight, borderWidth: 1, borderColor: Colors.red }} onPress={() => this._toRegister()} />}
+                        {!AccountStore.isLogged && <ButtonCommon text={'登录'} style={{ flex: 0, height: Layout.buttonLargeHeight, marginTop: Layout.accountContainerPadding / 2 }} backgroundColor={Colors.red} color={Colors.white} onPress={() => this._toLogin()} />}
                     </View>
                 </View>
             );

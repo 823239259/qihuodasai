@@ -8,7 +8,6 @@ import PropTypes from 'prop-types'
 export default class TaBarCommodityType extends Component {
     constructor(props) {
         super(props);
-        // this.typeArr = ['国际期货','国内期货'];
         this.state = {
             currentIndex : 0
         }

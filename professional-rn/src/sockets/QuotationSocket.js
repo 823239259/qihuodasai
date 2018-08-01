@@ -41,9 +41,7 @@ export default class QuotationSocket {
             this.socket = new WebSocket(Config.marketSocketUrl);
             this.socket.onopen = () => {
                 // this.logger.info('onopen');
-                // 登入接口 Login
-                console.log('登录成功');
-                
+                // 登入接口 Login                
                 this.sendLogin();
             };
             // websocket中斷的話 就再連一次
@@ -61,34 +59,21 @@ export default class QuotationSocket {
                 }
                 const method = jsonData.method;
                 // this.logger.info(`onmessage - method ${method}`);
-                //console.log(this.futureTypeStore);
                 if (method === 'on_rsp_login') {
-                    this.sendQryCommodity(false);
+                    this.sendQryCommodity();
                     this.reconnectStartDetail();
                     resolve('QuotationSocket Login Success');
-                } else if (method === 'on_rsp_commodity_list') { // 返回品種
-                    //console.log(12313);
-                    //console.log(jsonData);
-                    
-                    
-                    if (this.isQryCommodityForheartBeat) {
-                        this.isQryCommodityForheartBeat = false;
-                        this.isHeartBeating = true;
-                        return;
-                    }
+                } else if (method === 'on_rsp_commodity_list') { // 返回品種                    
                     // 訂閱合約
                     this.onRspQryCommodity(jsonData);
                 } else if (method === 'on_rsp_subscribe') {
-                    //订阅成功
-                    // quotation
+                    //订阅成功 新版本该接口不包含原始行情暂时不做处理
                     //const moreData = JSON.parse(evt.data).Parameters.LastQuotation;
                     //this.quotationStore.insertData(jsonData.data);
                 } else if (method === 'on_rsp_history_data') {//查询k线
                     // detail
                     this.quotationDetailStore.setChartHistory(jsonData);
                 } else if (method === 'on_rtn_quote') { // 行情推送接口
-                    // console.log(jsonData);
-                    this.isHeartBeating = true;
                     // this.logger.info(`OnRtnQuote - isHeartBeating: ${this.isHeartBeating}`);
                     this.quotationStore.insertData(jsonData.data);
                     
@@ -103,6 +88,8 @@ export default class QuotationSocket {
                             Variables.trade.isLogged && this.tradeStore.updateTradeQuotation(param);
                         }
                     }
+                } else if (method === 'on_rsp_heartbeat') {
+                    this.isHeartBeating = true;
                 }
             };
         });
@@ -229,12 +216,13 @@ export default class QuotationSocket {
     sendLogin() {
         this.sendMessage('req_login', `{"user_name":"${Variables.user}", "password":" ${Variables.pwd}", "protoc_version":"6.2"}`);
     }
-    // 查詢品種接口 QryCommodity 並且用來測試heartbeat，因為OnRtnQuote可能頻率不高
-    sendQryCommodity(isQryCommodityForheartBeat) {
-        this.isQryCommodityForheartBeat = isQryCommodityForheartBeat;
-        //this.sendMessage('req_commodity_list', `{}`);
+    // 查詢品種接口 QryCommodity
+    sendQryCommodity() {
         this.sendMessage('req_commodity_list', `{"security_type":"${this.futureTypeStore.Futstring}"}`);
-        //this.sendMessage('req_commodity_list', '{"security_type":"FUT_IN"}');
+    }
+    // 心跳接口 
+    sendHeartBeat() {
+        this.sendMessage('req_heartbeat', `{"ref":"heartBeat"}`);
     }
     sendMessage(method, parameters) {
         // console.log(parameters);
