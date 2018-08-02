@@ -62,10 +62,10 @@ export default class DepositParam {
                     case 'IC':
                     that.ic500 = obj.initialAmount;                       
                     break;   
-                    case 'RB':
+                    case 'rb':
                     that.lw = obj.initialAmount;                       
                     break; 
-                    case 'HC':
+                    case 'hc':
                     that.rj = obj.initialAmount;                       
                     break;   
                     case 'i':
