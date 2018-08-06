@@ -1491,6 +1491,7 @@
 					"\"$(SRCROOT)/../node_modules/jpush-react-native/ios/RCTJPushModule\"",
 				);
 				INFOPLIST_FILE = incentfxRN/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../node_modules/jpush-react-native/ios/RCTJPushModule\"",
@@ -1533,6 +1534,7 @@
 					"\"$(SRCROOT)/../node_modules/jpush-react-native/ios/RCTJPushModule\"",
 				);
 				INFOPLIST_FILE = incentfxRN/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../node_modules/jpush-react-native/ios/RCTJPushModule\"",
