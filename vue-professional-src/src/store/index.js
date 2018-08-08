@@ -154,14 +154,15 @@ export default new Vuex.Store({
 		},
 		setklineoption: function(state) {
 			//			console.time('e');
-			let {jsonDataKline:{Parameters}, currentdetail} = state.market
+			let {jsonDataKline, currentdetail} = state.market
 			var rawData;
-			var dosizeL = currentdetail.DotSize;
-			var parameters = Parameters.Data;
+			var dosizeL = currentdetail.dot_size;
+			var parameters = jsonDataKline.data;
+			console.log(jsonDataKline.data)
 			//HisQuoteType 1440 为日K 划线
-			if(Parameters.HisQuoteType == 1440) {
-				rawData = parameters.reduce((arr1,parameter,index) => {
-					let timeStr = parameter[0].split(" ")[0];
+			if(Parameters.period === "KLINE_1DAY") {
+				rawData = parameters.Lines.reduce((arr1,parameter,index) => {
+					let timeStr = parameter[0].split(mTimeExg)[0];
 					let closePrice = parameter[1].toFixed(dosizeL);
 					let openPrice = parameter[2].toFixed(dosizeL);
 					let lowPrice =  parameter[3].toFixed(dosizeL);
@@ -172,7 +173,7 @@ export default new Vuex.Store({
 				},[])
 			} else {
 				rawData = parameters.reduce((arr1,parameter,index) => {
-					let time2 = parameter[0].split(" ");
+					let time2 = parameter[0].split(mTimeExg);
 					let str1 = time2[1].split(":");
 					let str2 = str1[0] + ":" + str1[1];
 					let closePrice = parameter[1].toFixed(dosizeL);
@@ -398,7 +399,7 @@ export default new Vuex.Store({
 				time = [];
 			var Ktime;
 			let barData = Parameters.Data.slice(-40);
-			// 取条形图的数据
+			// 取条形图的数据 todo
 			barData.forEach((parameter) =>{
 				vol.push(parameter[6]);
 				let timeArr = parameter[0].split(' ');
