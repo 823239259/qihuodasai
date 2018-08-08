@@ -2,9 +2,9 @@
 	<div id="detailselectbar">
 		<alert title="提示" line1="你还未登录，请先登录" jump="true" ref="alert"></alert>
 		<ul>
-			<li :class="[fontgray,fl,{current:sshow}]" @tap='sel'>闪电图</li>
-			<li :class="[fontgray,fl,{current:fshow}]" @tap='sel'>分时</li>
-			<li :class="[fontgray,fl,{current:kshow}]" @tap='sel' id="kline">
+			<!-- <li :class="[fontgray,fl,{current:sshow}]" @tap='switchTab'>闪电图</li>
+			<li :class="[fontgray,fl,{current:fshow}]" @tap='switchTab'>分时</li>
+			<li :class="[fontgray,fl,{current:kshow}]" @tap='switchTab' id="kline">
 				<span>K线</span>
 				<transition name="topdown" mode="out-in">
 					<ol v-show='olshow'>
@@ -16,8 +16,22 @@
 					</ol>
 				</transition>
 			</li>
-			<li :class="[fontgray,fl,{current:pshow}]" @tap='sel'>盘口</li>
-			<li :class="[fontgray,fl,{current:jshow}]" @tap.stop='sel'>交易中心</li>
+			<li :class="[fontgray,fl,{current:pshow}]" @tap='switchTab'>盘口</li>
+			<li :class="[fontgray,fl,{current:jshow}]" @tap.stop='switchTab'>交易中心</li> -->
+
+			<li :class="[fontgray,fl,{current:currentIndex==index}]" @tap='switchTab(item,index)' v-for="(item, index) in tabList" :key="index">
+				<template v-if="item==='K线'">
+					<span>K线</span>
+					<transition name="topdown" mode="out-in">
+						<ol v-show='olshow'>
+							<li class="fontwhite  fl" v-for="(kType, index) in kTypeList" :key="index" @tap.stop="olclick">{{kType}}</li>
+						</ol>
+					</transition>
+				</template>
+				<template v-else>
+					{{item}}
+				</template>
+			</li>
 		</ul>
 	</div>
 </template>
@@ -31,7 +45,10 @@
 		components: {alert},
 		data() {
 			return {
-				olshow: false
+				olshow: false,
+				tabList: ['闪电图', '分时', 'K线', '盘口', '交易中心'],
+				kTypeList: ['1分', '5分', '15分', '30分', '日K'],
+				currentIndex: 1,
 			}
 		},
 		computed: {
@@ -57,68 +74,72 @@
 				$(e.target).parent().parent('li').children('span').text(oltex);
 				if(oltex == '1分') {
 					this.$store.state.market.selectTime=1;
-					var b = '{"Method":"QryHistory","Parameters":{"ExchangeNo":"' + this.$parent.detail.LastQuotation.ExchangeNo + '","CommodityNo":"' + this.$parent.detail.CommodityNo + '","ContractNo":"' + this.$parent.detail.LastQuotation.ContractNo + '","HisQuoteType":' + 1 + ',"BeginTime":"","EndTime":"","Count":' + 0 + '}}'
+					var b = '{"Method":"QryHistory","Parameters":{"ExchangeNo":"' + this.$parent.detail.LastQuotation.ExchangeNo + '","commodity_no":"' + this.$parent.detail.commodity_no + '","ContractNo":"' + this.$parent.detail.LastQuotation.ContractNo + '","HisQuoteType":' + 1 + ',"BeginTime":"","EndTime":"","Count":' + 0 + '}}'
 					this.quoteSocket.send(b);
 				} else if(oltex == '5分') {
 					this.$store.state.market.selectTime=5;
-					var b = '{"Method":"QryHistory","Parameters":{"ExchangeNo":"' + this.$parent.detail.LastQuotation.ExchangeNo + '","CommodityNo":"' + this.$parent.detail.CommodityNo + '","ContractNo":"' + this.$parent.detail.LastQuotation.ContractNo + '","HisQuoteType":' + 5 + ',"BeginTime":"","EndTime":"","Count":' + 0 + '}}'
+					var b = '{"Method":"QryHistory","Parameters":{"ExchangeNo":"' + this.$parent.detail.LastQuotation.ExchangeNo + '","commodity_no":"' + this.$parent.detail.commodity_no + '","ContractNo":"' + this.$parent.detail.LastQuotation.ContractNo + '","HisQuoteType":' + 5 + ',"BeginTime":"","EndTime":"","Count":' + 0 + '}}'
 					this.quoteSocket.send(b);
 				} else if(oltex == '15分') {
 					this.$store.state.market.selectTime=15;
-					var b = '{"Method":"QryHistory","Parameters":{"ExchangeNo":"' + this.$parent.detail.LastQuotation.ExchangeNo + '","CommodityNo":"' + this.$parent.detail.CommodityNo + '","ContractNo":"' + this.$parent.detail.LastQuotation.ContractNo + '","HisQuoteType":' + 15 + ',"BeginTime":"","EndTime":"","Count":' + 0 + '}}'
+					var b = '{"Method":"QryHistory","Parameters":{"ExchangeNo":"' + this.$parent.detail.LastQuotation.ExchangeNo + '","commodity_no":"' + this.$parent.detail.commodity_no + '","ContractNo":"' + this.$parent.detail.LastQuotation.ContractNo + '","HisQuoteType":' + 15 + ',"BeginTime":"","EndTime":"","Count":' + 0 + '}}'
 					this.quoteSocket.send(b);
 				} else if(oltex == '30分') {
 					this.$store.state.market.selectTime=30;
-					var b = '{"Method":"QryHistory","Parameters":{"ExchangeNo":"' + this.$parent.detail.LastQuotation.ExchangeNo + '","CommodityNo":"' + this.$parent.detail.CommodityNo + '","ContractNo":"' + this.$parent.detail.LastQuotation.ContractNo + '","HisQuoteType":' + 30 + ',"BeginTime":"","EndTime":"","Count":' + 0 + '}}'
+					var b = '{"Method":"QryHistory","Parameters":{"ExchangeNo":"' + this.$parent.detail.LastQuotation.ExchangeNo + '","commodity_no":"' + this.$parent.detail.commodity_no + '","ContractNo":"' + this.$parent.detail.LastQuotation.ContractNo + '","HisQuoteType":' + 30 + ',"BeginTime":"","EndTime":"","Count":' + 0 + '}}'
 					this.quoteSocket.send(b);
 				} else if(oltex == '日K') {
 					this.$store.state.market.selectTime=1440;
-					var b = '{"Method":"QryHistory","Parameters":{"ExchangeNo":"' + this.$parent.detail.LastQuotation.ExchangeNo + '","CommodityNo":"' + this.$parent.detail.CommodityNo + '","ContractNo":"' + this.$parent.detail.LastQuotation.ContractNo + '","HisQuoteType":' + 1440 + ',"BeginTime":"","EndTime":"","Count":' + 0 + '}}'
+					var b = '{"Method":"QryHistory","Parameters":{"ExchangeNo":"' + this.$parent.detail.LastQuotation.ExchangeNo + '","commodity_no":"' + this.$parent.detail.commodity_no + '","ContractNo":"' + this.$parent.detail.LastQuotation.ContractNo + '","HisQuoteType":' + 1440 + ',"BeginTime":"","EndTime":"","Count":' + 0 + '}}'
 					this.quoteSocket.send(b);
 				}
 				this.olshow = false;
-//				this.$store.state.isshow.isklineshow = true;
+//				isshow.isklineshow = true;
 			},
-			sel: function(e) {
-				var tex = e.currentTarget.innerText;
-				switch(tex) {
+			switchTab (item,index) {
+
+				let isshow = this.$store.state.isshow
+
+				this.currentIndex = index
+
+				switch(item) {
 					case '闪电图':
-						this.$parent.cname = this.$parent.detail.CommodityName;
-						this.$parent.cnum = this.$parent.detail.CommodityNo + this.$parent.detail.MainContract;
-						this.$store.state.isshow.sshow = true;
-						this.$store.state.isshow.fshow = false;
-						this.$store.state.isshow.kshow = false;
-						this.$store.state.isshow.pshow = false;
-						this.$store.state.isshow.bottomshow = false;
+						this.$parent.cname = this.$parent.detail.commodity_name;
+						this.$parent.cnum = this.$parent.detail.commodity_no + this.$parent.detail.mainContract;
+						isshow.sshow = true;
+						isshow.fshow = false;
+						isshow.kshow = false;
+						isshow.pshow = false;
+						isshow.bottomshow = false;
 						this.olshow = false;
-						this.$store.state.isshow.isfensshow = false;
-						this.$store.state.isshow.isklineshow = false;
+						isshow.isfensshow = false;
+						isshow.isklineshow = false;
 						break;
 					case '分时':
-					
-						this.$parent.cname = this.$parent.detail.CommodityName;
-						this.$parent.cnum = this.$parent.detail.CommodityNo + this.$parent.detail.MainContract;
-						this.$store.state.isshow.sshow = false;
-						this.$store.state.isshow.fshow = true;
-						this.$store.state.isshow.kshow = false;
-						this.$store.state.isshow.pshow = false;
-						this.$store.state.isshow.bottomshow = false;
+						this.$parent.cname = this.$parent.detail.commodity_name;
+						this.$parent.cnum = this.$parent.detail.commodity_no + this.$parent.detail.mainContract;
+						isshow.sshow = false;
+						isshow.fshow = true;
+						isshow.kshow = false;
+						isshow.pshow = false;
+						isshow.bottomshow = false;
 						this.olshow = false;
-						this.$store.state.isshow.islightshow = false;
-						this.$store.state.isshow.isklineshow = false;
+						isshow.islightshow = false;
+						isshow.isklineshow = false;
+						//isshow.isfensshow = true;
 						break;
 					case '盘口':
-						this.$parent.cname = this.$parent.detail.CommodityName;
-						this.$parent.cnum = this.$parent.detail.CommodityNo + this.$parent.detail.MainContract;
-						this.$store.state.isshow.sshow = false;
-						this.$store.state.isshow.fshow = false;
-						this.$store.state.isshow.kshow = false;
-						this.$store.state.isshow.pshow = true;
-						this.$store.state.isshow.bottomshow = false;
+						this.$parent.cname = this.$parent.detail.commodity_name;
+						this.$parent.cnum = this.$parent.detail.commodity_no + this.$parent.detail.mainContract;
+						isshow.sshow = false;
+						isshow.fshow = false;
+						isshow.kshow = false;
+						isshow.pshow = true;
+						isshow.bottomshow = false;
 						this.olshow = false;
-						this.$store.state.isshow.isfensshow = false;
-						this.$store.state.isshow.islightshow = false;
-						this.$store.state.isshow.isklineshow = false;
+						isshow.isfensshow = false;
+						isshow.islightshow = false;
+						isshow.isklineshow = false;
 						break;
 					case '交易中心':
 //						var tradeConfig =this.$store.state.market.tradeConfig;
@@ -127,27 +148,28 @@
 						}else{
 							this.$parent.cname = '期货模拟账号';
 							this.$parent.cnum = JSON.parse(localStorage.tradeUser).username;
-							this.$store.state.isshow.sshow = false;
-							this.$store.state.isshow.fshow = false;
-							this.$store.state.isshow.kshow = false;
-							this.$store.state.isshow.pshow = false;
-							this.$store.state.isshow.bottomshow = true;
+							isshow.sshow = false;
+							isshow.fshow = false;
+							isshow.kshow = false;
+							isshow.pshow = false;
+							isshow.bottomshow = true;
 							this.olshow = false;
-							this.$store.state.isshow.isfensshow = false;
-							this.$store.state.isshow.islightshow = false;
-							this.$store.state.isshow.isklineshow = false;
+							isshow.isfensshow = false;
+							isshow.islightshow = false;
+							isshow.isklineshow = false;
+							
 						}
 						break;
 					case 'K线':
-						this.$parent.cname = this.$parent.detail.CommodityName;
-						this.$parent.cnum = this.$parent.detail.CommodityNo + this.$parent.detail.MainContract;
-						this.$store.state.isshow.sshow = false;
-						this.$store.state.isshow.fshow = false;
-						this.$store.state.isshow.kshow = true;
-						this.$store.state.isshow.pshow = false;
-						this.$store.state.isshow.bottomshow = false;
-						this.$store.state.isshow.isfensshow = false;
-						this.$store.state.isshow.islightshow = false;
+						this.$parent.cname = this.$parent.detail.commodity_name;
+						this.$parent.cnum = this.$parent.detail.commodity_no + this.$parent.detail.mainContract;
+						isshow.sshow = false;
+						isshow.fshow = false;
+						isshow.kshow = true;
+						isshow.pshow = false;
+						isshow.bottomshow = false;
+						isshow.isfensshow = false;
+						isshow.islightshow = false;
 						if(this.olshow == false) {
 							this.olshow = true;
 						} else {
@@ -155,17 +177,31 @@
 						}
 						//默认一分钟K线
 						this.$store.state.market.selectTime=1;
-						var b = '{"Method":"QryHistory","Parameters":{"ExchangeNo":"' + this.$parent.detail.LastQuotation.ExchangeNo + '","CommodityNo":"' + this.$parent.detail.CommodityNo + '","ContractNo":"' + this.$parent.detail.LastQuotation.ContractNo + '","HisQuoteType":' + 1 + ',"BeginTime":"","EndTime":"","Count":' + 0 + '}}'
-						this.quoteSocket.send(b);
+						var subscribeMessage = {
+							method: 'req_history_data',
+							data: {
+								contract_info: {
+									security_type: this.$parent.detail.security_type,
+									exchange_no: this.$parent.detail.exchange_no,
+									commodity_no: this.$parent.detail.commodity_no,
+									contract_no: this.$parent.detail.mainContract,
+								},
+								period: 'KLINE_1MIN',
+								count:40
+
+							}
+						}
+						//var b = '{"":""req_history_data"","Parameters":{"ExchangeNo":"' + this.$parent.detail.LastQuotation.ExchangeNo + '","commodity_no":"' + this.$parent.detail.commodity_no + '","ContractNo":"' + this.$parent.detail.LastQuotation.ContractNo + '","HisQuoteType":' + 1 + ',"BeginTime":"","EndTime":"","Count":' + 0 + '}}'
+						this.quoteSocket.send(JSON.stringify(subscribeMessage));
 						break;
 					default:
-						this.$store.state.isshow.sshow = false;
-						this.$store.state.isshow.fshow = false;
-						this.$store.state.isshow.kshow = true;
-						this.$store.state.isshow.pshow = false;
-						this.$store.state.isshow.bottomshow = false;
-						this.$store.state.isshow.isfensshow = false;
-						this.$store.state.isshow.islightshow = false;
+						isshow.sshow = false;
+						isshow.fshow = false;
+						isshow.kshow = true;
+						isshow.pshow = false;
+						isshow.bottomshow = false;
+						isshow.isfensshow = false;
+						isshow.islightshow = false;
 						if(this.olshow == false) {
 							this.olshow = true;
 						} else {

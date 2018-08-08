@@ -13,6 +13,9 @@
 	import { mapMutations,mapActions } from 'vuex'
 	export default {
 		name: 'chartfens',
+		props:{
+		   detail: Object
+		},
 		methods: {
 			...mapMutations([
 				'drawfens',
@@ -60,19 +63,43 @@
 //			}
 		},
 		activated: function() {
-			var b = '{"Method":"QryHistory","Parameters":{"ExchangeNo":"'+this.$parent.detail.LastQuotation.ExchangeNo+'","CommodityNo":"'+this.$parent.detail.CommodityNo+'","ContractNo":"'+this.$parent.detail.LastQuotation.ContractNo+'","HisQuoteType":'+0+',"BeginTime":"","EndTime":"","Count":'+0+'}}'
-			this.quoteSocket.send(b);
-			this.CommodityNo=this.$parent.detail.CommodityNo;
-			this.$store.state.market.currentNo=this.$parent.detail.CommodityNo;
+			var b  = {
+				method: 'req_history_data',
+				data: {
+					contract_info: {
+						security_type: this.detail.security_type,
+						exchange_no: this.detail.exchange_no,
+						commodity_no: this.detail.commodity_no,
+						contract_no: this.detail.mainContract,
+					},
+					period: 'TIME_SHARING',
+				}
+			}
+			//var b = '{"Method":"QryHistory","Parameters":{"ExchangeNo":"'+this.$parent.detail.LastQuotation.ExchangeNo+'","CommodityNo":"'+this.$parent.detail.CommodityNo+'","ContractNo":"'+this.$parent.detail.LastQuotation.ContractNo+'","HisQuoteType":'+0+',"BeginTime":"","EndTime":"","Count":'+0+'}}'
+			this.quoteSocket.send(JSON.stringify(b));
+			this.CommodityNo=this.detail.commodity_no;
+			this.$store.state.market.currentNo=this.detail.commodity_no;
 //			this.drawfens(this.obj);
 		},
-		mounted: function() {
-			var b = '{"Method":"QryHistory","Parameters":{"ExchangeNo":"'+this.$parent.detail.LastQuotation.ExchangeNo+'","CommodityNo":"'+this.$parent.detail.CommodityNo+'","ContractNo":"'+this.$parent.detail.LastQuotation.ContractNo+'","HisQuoteType":'+0+',"BeginTime":"","EndTime":"","Count":'+0+'}}'
-			this.quoteSocket.send(b);
-			this.CommodityNo=this.$parent.detail.CommodityNo;
-			this.$store.state.market.currentNo=this.$parent.detail.CommodityNo;
-//			this.drawfens(this.obj);
-		}
+		// mounted: function() {
+		// 	var b  = {
+		// 		method: 'req_history_data',
+		// 		data: {
+		// 			contract_info: {
+		// 				security_type: this.detail.security_type,
+		// 				exchange_no: this.detail.exchange_no,
+		// 				commodity_no: this.detail.commodity_no,
+		// 				contract_no: ''
+		// 			},
+		// 			period: 'TIME_SHARING',
+		// 		}
+		// 	}
+		// 	//var b = '{"Method":"QryHistory","Parameters":{"ExchangeNo":"'+this.$parent.detail.LastQuotation.ExchangeNo+'","CommodityNo":"'+this.$parent.detail.CommodityNo+'","ContractNo":"'+this.$parent.detail.LastQuotation.ContractNo+'","HisQuoteType":'+0+',"BeginTime":"","EndTime":"","Count":'+0+'}}'
+		// 	this.quoteSocket.send(JSON.stringify(b));
+		// 	this.CommodityNo=this.detail.commodity_no;
+		// 	this.$store.state.market.currentNo=this.detail.commodity_no;
+		// 	this.drawfens(this.obj);
+		// }
 	}
 </script>
 

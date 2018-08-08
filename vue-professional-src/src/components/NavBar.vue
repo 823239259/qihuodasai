@@ -2,9 +2,9 @@
 	<div id="navbar">
 		<nav>
 			<ul>
-				<li v-for="key in navList" class="fl" @tap="toPages">
-					<img :src="key.src" />
-					<p>{{key.name}}</p>
+				<li v-for="(key,index) in navList" class="fl" @tap="handleClick(key,index)" :key="index">
+					<img :src="currentIndex===index?key.currentSrc:key.src"  />
+					<p :class="{'current':currentIndex === index}">{{key.name}}</p>
 				</li>
 			</ul>
 		</nav>
@@ -16,136 +16,56 @@
 		name: 'navbar',
 		data() {
 			return {
+				currentIndex: 0,
 				navList: [{
 						name: '行情',
-						src: require('../assets/img/01.png')
+						src: require('../assets/img/01.png'),
+						currentSrc: require('../assets/img/01y.png'),
+						path: '/home'
 					},
 					{
 						name: '开户',
-						src: require('../assets/img/02.png')
+						src: require('../assets/img/02.png'),
+						currentSrc: require('../assets/img/02y.png'),
+						path: '/tradeapply'
 					},
 					{
 						name: '直播',
-						src: require('../assets/img/03.png')
+						src: require('../assets/img/03.png'),
+						currentSrc: require('../assets/img/03y.png'),
+						path: '/information'
 					},
 					{
 						name: '我的',
-						src: require('../assets/img/04.png')
+						src: require('../assets/img/04.png'),
+						currentSrc: require('../assets/img/04y.png'),
+						path: '/account'
 					}
 				]
 			}
 		},
-		computed:{
-			routepath(){
-				return this.$route.path;
-			}
-		},
-		watch:{
-			routepath:function(n,o){
-				switch(n){
-					case '/home':
-						$('nav li>p').removeClass('current');
-						$('nav li:first-child>p').addClass('current');
-						this.navList[0].src = require('../assets/img/01y.png');
-						this.navList[1].src = require('../assets/img/02.png');
-						this.navList[2].src = require('../assets/img/03.png');
-						this.navList[3].src = require('../assets/img/04.png');
-						break;
-					case '/tradeapply':
-						$('nav li>p').removeClass('current');
-						$('nav li:nth-child(2)>p').addClass('current');
-						this.navList[1].src = require('../assets/img/02y.png');
-						this.navList[0].src = require('../assets/img/01.png');
-						this.navList[2].src = require('../assets/img/03.png');
-						this.navList[3].src = require('../assets/img/04.png');
-						break;
-					case '/information':
-						$('nav li>p').removeClass('current');
-						$('nav li:nth-child(3)>p').addClass('current');
-						this.navList[2].src = require('../assets/img/03y.png');
-						this.navList[1].src = require('../assets/img/02.png');
-						this.navList[0].src = require('../assets/img/01.png');
-						this.navList[3].src = require('../assets/img/04.png');
-						break;
-					case '/account':
-						$('nav li>p').removeClass('current');
-						$('nav li:nth-child(4)>p').addClass('current');
-						this.navList[3].src = require('../assets/img/04y.png');
-						this.navList[2].src = require('../assets/img/03.png');
-						this.navList[1].src = require('../assets/img/02.png');
-						this.navList[0].src = require('../assets/img/01.png');
-						break;
-				}
-			}
-		},
 		methods: {
-			toPages: function(e) {
-				// 此方法用于跳转页面，并更改高亮图标
-				var tar = e.currentTarget.children[1].innerHTML;
-				switch(tar) {
-					case '行情':
-						this.$router.push({
-							path: '/home'
-						});
-						break;
-					case '开户':
-						this.$router.push({
-							path: '/tradeapply'
-						});
-						break;
-					case '直播':
-						this.$router.push({
-							path: '/information'
-						});
-						break;
-					case '我的':
-						if(!localStorage.user) {
-							this.$router.push({
-								path: '/login'
-							});
-							return;
-						}
-						this.$router.push({
-							path: '/account'
-						});
-						break;
+			goto (path) {
+				if (path === '/account'&&!localStorage.user) {
+					this.$router.push({
+						path: '/login'
+					});
+					return;
 				}
+				this.$router.push({
+					path
+				});
+			},
+			changeCurrentIndex (index) {
+				if (this.currentIndex === index) return;
+				this.currentIndex = index
+			},
+			handleClick (item, index) {
+				this.goto(item.path)
+				this.changeCurrentIndex(index)
 			}
 		},
-		mounted: function() {
-			//			var width=parseInt($('#navbar').css('width'));
-			//			var height=width*0.128;
-			//			$('#navbar').css({'height':height+'px'});
-			//			导航被挂载的时候,判定哪个按钮进行高亮
-			var path = this.$route.path;
-			switch(path) {
-				case '/home':
-					$('nav li>p').removeClass('current');
-					$('nav li:first-child>p').addClass('current');
-					this.navList[0].src = require('../assets/img/01y.png');
-					break;
-				case '/tradeapply':
-					$('nav li>p').removeClass('current');
-					$('nav li:nth-child(2)>p').addClass('current');
-					this.navList[1].src = require('../assets/img/02y.png');
-					break;
-				case '/information':
-					$('nav li>p').removeClass('current');
-					$('nav li:nth-child(3)>p').addClass('current');
-					this.navList[2].src = require('../assets/img/03y.png');
-					break;
-				case '/account':
-					$('nav li>p').removeClass('current');
-					$('nav li:nth-child(4)>p').addClass('current');
-					this.navList[3].src = require('../assets/img/04y.png');
-					break;
-				default:
-					$('nav li>p').removeClass('current');
-					$('nav li:first-child>p').addClass('current');
-					this.navList[0].src = require('../assets/img/01y.png');
-					break;
-			}
-		}
+		
 	}
 </script>
 

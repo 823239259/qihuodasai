@@ -240,7 +240,7 @@
 					if(this.commodityNo != undefined){
 						n.forEach(function(e,i){
 							if(this.commodityNo == e.CommodityNo){
-								this.lastPrice = this.orderTemplist[this.commodityNo].LastQuotation.LastPrice;
+								this.lastPrice = this.orderTemplist[this.commodityNo].LastQuotation.last;
 							}
 						}.bind(this));
 					}
@@ -248,7 +248,7 @@
 					if(this.commodityNo00 != undefined){
 						n.forEach(function(e,i){
 							if(this.commodityNo00 == e.CommodityNo){
-								this.lastPrice = this.orderTemplist[this.commodityNo00].LastQuotation.LastPrice;
+								this.lastPrice = this.orderTemplist[this.commodityNo00].LastQuotation.last;
 							}
 						}.bind(this));
 					}

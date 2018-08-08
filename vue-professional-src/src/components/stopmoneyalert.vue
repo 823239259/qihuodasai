@@ -166,7 +166,7 @@
 				if(this.condition.CommodityNo!=undefined){
 					n.forEach(function(e,i){
 						if(this.condition.CommodityNo==e.CommodityNo){
-							this.lastPrice00 = this.orderTemplist[this.condition.CommodityNo].LastQuotation.LastPrice;
+							this.lastPrice00 = this.orderTemplist[this.condition.CommodityNo].LastQuotation.last;
 						}
 					}.bind(this));
 				}

@@ -5,14 +5,13 @@
 			<i class="icon"></i>
 			<span>交易、行情未连接，网络恢复时会自动连接！</span>
 		</div>
-		<!--<topbar :cname='detail.CommodityName' :cnum='detail.CommodityNo + detail.MainContract' :colorName="bg"></topbar>-->
 		<topbar :cname="cname" :cnum="cnum" :colorName="bg" ref="topbar"></topbar>
 		<i class="icon_connected" v-show="iconIsconnected"></i>
 		<selectbar ref="selectBar"></selectbar>
 		<dish v-if="pshow"></dish>
 		<tradebottom v-if='s'></tradebottom>
 		<tradecenter v-if='jshow'></tradecenter>
-		<chartfens v-if='fshow'></chartfens>
+		<chartfens :detail='detail' v-show='fshow'></chartfens>
 		<kline v-if='kshow'></kline>
 		<lightchart v-if='sshow'></lightchart>
 		<novice v-if="helpshow"></novice>
@@ -38,7 +37,7 @@
 		components: {topbar, selectbar, tradebottom, tradecenter, dish, chartfens, kline, lightchart, tipsDialog, novice, orderTypeList},
 		data() {
 			return {
-				CommodityName: '',
+				commodity_name: '',
 				EngName: '',
 				msg: '',
 				iconIsconnected: false,
@@ -66,8 +65,8 @@
 				return this.$store.state.isshow.helpshow;
 			},
 			detail() {
-				this.cname = this.$store.state.market.currentdetail.CommodityName;
-				this.cnum = this.$store.state.market.currentdetail.CommodityNo + this.$store.state.market.currentdetail.MainContract;
+				this.cname = this.$store.state.market.currentdetail.commodity_name;
+				this.cnum = this.$store.state.market.currentdetail.commodity_no + this.$store.state.market.currentdetail.mainContract;
 				return this.$store.state.market.currentdetail;
 			},
 			Parameters() {
@@ -177,7 +176,7 @@
 			}
 		},
 		activated: function() {
-			this.CommodityName = this.$route.query.CommodityName;
+			this.commodity_name = this.$route.query.CommodityName;
 			this.EngName = this.$route.query.EngName;
 //			this.$store.state.isshow.sshow = false;
 //			this.$store.state.isshow.fshow = true;
@@ -217,8 +216,8 @@
 				overy = event.touches[0].clientY; 
 				if(this.sshow == true){
 					if(startx-overx > 50){
-						this.cname = this.detail.CommodityName;
-						this.cnum = this.detail.CommodityNo + this.detail.MainContract;
+						this.cname = this.detail.commodity_name;
+						this.cnum = this.detail.commodity_no + this.detail.mainContract;
 						this.$store.state.isshow.sshow = false;
 						this.$store.state.isshow.fshow = true;
 						this.$store.state.isshow.kshow = false;
@@ -235,8 +234,8 @@
 						return;
 					}
 					if(startx-overx > 50){         //左滑动判断
-						this.cname = this.detail.CommodityName;
-						this.cnum = this.detail.CommodityNo + this.detail.MainContract;
+						this.cname = this.detail.commodity_name;
+						this.cnum = this.detail.commodity_no + this.detail.mainContract;
 	                	this.$store.state.isshow.sshow = false;
 						this.$store.state.isshow.fshow = false;
 						this.$store.state.isshow.kshow = true;
@@ -246,11 +245,25 @@
 						this.$store.state.isshow.islightshow = false;
 						//默认一分钟K线
 						this.$store.state.market.selectTime=1;
-						var b = '{"Method":"QryHistory","Parameters":{"ExchangeNo":"' + this.detail.LastQuotation.ExchangeNo + '","CommodityNo":"' + this.detail.CommodityNo + '","ContractNo":"' + this.detail.LastQuotation.ContractNo + '","HisQuoteType":' + 1 + ',"BeginTime":"","EndTime":"","Count":' + 0 + '}}'
-						this.quoteSocket.send(b);
+						var b  = {
+							method: 'req_history_data',
+							data: {
+								contract_info: {
+									security_type: this.detail.security_type,
+									exchange_no: this.detail.exchange_no,
+									commodity_no: this.detail.commodity_no,
+									contract_no: ''
+								},
+								period: 'KLINE_1MIN',
+								begin_time: '',
+								end_time: '',
+								count: '',
+							}
+						}
+						this.quoteSocket.send(JSON.stringify(b));
 	                }else if(overx-startx > 50){       //右滑动判断
-	                	this.cname = this.detail.CommodityName;
-						this.cnum = this.detail.CommodityNo + this.detail.MainContract;
+	                	this.cname = this.detail.commodity_name;
+						this.cnum = this.detail.commodity_no + this.detail.mainContract;
                     	this.$store.state.isshow.sshow = true;
 						this.$store.state.isshow.fshow = false;
 						this.$store.state.isshow.kshow = false;
@@ -265,8 +278,8 @@
 						return;
 					}
 					if(startx-overx > 50){
-						this.cname = this.detail.CommodityName;
-						this.cnum = this.detail.CommodityNo + this.detail.MainContract;
+						this.cname = this.detail.commodity_name;
+						this.cnum = this.detail.commodity_no + this.detail.mainContract;
 						this.$store.state.isshow.sshow = false;
 						this.$store.state.isshow.fshow = false;
 						this.$store.state.isshow.kshow = false;
@@ -276,8 +289,8 @@
 						this.$store.state.isshow.islightshow = false;
 						this.$store.state.isshow.isklineshow = false;
 					}else if(overx-startx > 50){
-						this.cname = this.detail.CommodityName;
-						this.cnum = this.detail.CommodityNo + this.detail.MainContract;
+						this.cname = this.detail.commodity_name;
+						this.cnum = this.detail.commodity_no + this.detail.mainContract;
 						this.$store.state.isshow.sshow = false;
 						this.$store.state.isshow.fshow = true;
 						this.$store.state.isshow.kshow = false;
@@ -303,8 +316,8 @@
 							this.$store.state.isshow.isklineshow = false;
 						}
 					}else if(overx-startx > 50){
-						this.cname = this.detail.CommodityName;
-						this.cnum = this.detail.CommodityNo + this.detail.MainContract;
+						this.cname = this.detail.commodity_name;
+						this.cnum = this.detail.commodity_no + this.detail.mainContract;
 						this.$store.state.isshow.sshow = false;
 						this.$store.state.isshow.fshow = false;
 						this.$store.state.isshow.kshow = true;
@@ -314,8 +327,22 @@
 						this.$store.state.isshow.islightshow = false;
 						//默认一分钟K线
 						this.$store.state.market.selectTime=1;
-						var b = '{"Method":"QryHistory","Parameters":{"ExchangeNo":"' + this.detail.LastQuotation.ExchangeNo + '","CommodityNo":"' + this.detail.CommodityNo + '","ContractNo":"' + this.detail.LastQuotation.ContractNo + '","HisQuoteType":' + 1 + ',"BeginTime":"","EndTime":"","Count":' + 0 + '}}'
-						this.quoteSocket.send(b);
+						var b  = {
+							method: 'req_history_data',
+							data: {
+								contract_info: {
+									security_type: this.detail.security_type,
+									exchange_no: this.detail.exchange_no,
+									commodity_no: this.detail.commodity_no,
+									contract_no: ''
+								},
+								period: 'KLINE_1MIN',
+								begin_time: '',
+								end_time: '',
+								count: '',
+							}
+						}
+						this.quoteSocket.send(JSON.stringify(b));
 					}
 				}else{
 					var h = $(".list_cont_box").offset().top;
@@ -325,8 +352,8 @@
 						if(starty >= h){
 							return;
 						}
-						this.cname = this.detail.CommodityName;
-						this.cnum = this.detail.CommodityNo + this.detail.MainContract;
+						this.cname = this.detail.commodity_name;
+						this.cnum = this.detail.commodity_no + this.detail.mainContract;
 						this.$store.state.isshow.sshow = false;
 						this.$store.state.isshow.fshow = false;
 						this.$store.state.isshow.kshow = false;

@@ -366,7 +366,7 @@
 				return this.$store.state.market.Parameters;
 			},
 			tradePrice(){
-				return this.detail.LastQuotation.LastPrice;
+				return this.detail.LastQuotation.last;
 			},
 		},
 		watch:{
@@ -398,7 +398,7 @@
 					this.Parameters00.forEach(function(o, i){
 						if(o.CommodityName == this.commodityName00){
 							this.$store.state.market.currentdetail = o;
-							this.tradePrices = dealDotSize(o.LastQuotation.LastPrice,o.LastQuotation);
+							this.tradePrices = dealDotSize(o.LastQuotation.last,o.LastQuotation);
 							this.dotSize = this.orderTemplist[o.LastQuotation.CommodityNo].DotSize;
 						}
 					}.bind(this));
@@ -414,13 +414,13 @@
 					if(n == ''){
 						this.marketprice = '';
 					}else if(n.split('.')[1] && n.split('.')[1].length > this.dotSize || this.moneyReg.test(n) ==  false){
-						this.tradePrices = parseFloat(this.$store.state.market.currentdetail.LastQuotation.LastPrice).toFixed(this.dotSize);
+						this.tradePrices = parseFloat(this.$store.state.market.currentdetail.LastQuotation.last).toFixed(this.dotSize);
 						this.marketprice = this.tradePrices;
 					}else{
 						this.marketprice = n;
 					}
 					if(n.split('.')[1] == '' && this.dotSize == 0){
-						this.tradePrices = parseFloat(this.$store.state.market.currentdetail.LastQuotation.LastPrice).toFixed(this.dotSize);
+						this.tradePrices = parseFloat(this.$store.state.market.currentdetail.LastQuotation.last).toFixed(this.dotSize);
 						this.marketprice = this.tradePrices;
 					}
 				}
