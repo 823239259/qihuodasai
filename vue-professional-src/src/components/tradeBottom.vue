@@ -151,7 +151,7 @@
 			insertOrder: function(){
 				var obj = this.buyText.Parameters;
 				if(obj != undefined){
-					var contract=obj.commodity_no+obj.ContractNo;
+					var contract=obj.CommodityNo+obj.ContractNo;
 					var LimitPrice;
 					if(obj.PriceType == 1){
 						LimitPrice='市价';
@@ -222,15 +222,15 @@
 					var b ={
 						"Method":'InsertOrder',
 						"Parameters": {
-							"ExchangeNo":this.detail.LastQuotation.exchange_no,
-							"CommodityNo":this.detail.LastQuotation.commodity_no,
-							"ContractNo":this.detail.LastQuotation.mainContract,
+							"ExchangeNo":this.detail.exchange_no,
+							"CommodityNo":this.detail.commodity_no,
+							"ContractNo":this.detail.mainContract,
 							"OrderNum": this.lotnum,
 							"Drection": 0,
 							"PriceType": 1,
 							"LimitPrice": 0.00,
 							"TriggerPrice": 0,
-							"OrderRef": this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+							"OrderRef": this.$store.state.market.tradeConfig.Source+ new Date().getTime()+(buildIndex++)
 						}
 					};
 					this.buyText = b;
@@ -258,15 +258,15 @@
 					var b={
 						"Method":'InsertOrder',
 						"Parameters":{
-							"ExchangeNo":this.detail.LastQuotation.exchange_no,
-							"CommodityNo":this.detail.LastQuotation.commodity_no,
-							"ContractNo":this.detail.LastQuotation.mainContract,
+							"ExchangeNo":this.detail.exchange_no,
+							"CommodityNo":this.detail.commodity_no,
+							"ContractNo":this.detail.mainContract,
 							"OrderNum": this.lotnum,
 							"Drection":1,
 							"PriceType":1,
 							"LimitPrice":0.00,
 							"TriggerPrice":0,
-							"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+							"OrderRef":this.$store.state.market.tradeConfig.Source+ new Date().getTime()+(buildIndex++)
 						}
 					};
 					this.buyText = b;

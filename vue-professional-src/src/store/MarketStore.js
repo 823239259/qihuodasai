@@ -15,17 +15,17 @@ export default class Market {
                 intervalCheckTime : 15000  // 间隔检查时间：8秒
             },
             quoteConfig:{
-    //			url_real: "ws://192.168.0.232:19002",  //测试地址
-                url_real: "ws://quote.vs.com:9102",   //正式地址
+    			url_real: "ws://192.168.0.232:9102",  //测试地址
+                //url_real: "ws://quote.vs.com:9102",   //正式地址
                 userName:"fut_game_webapp",
                 passWord:"a123456"
             },
             tradeConfig:{
-                version : "3.3",	// 版本
-    //			url_real : "ws://192.168.0.232:6102",   //测试地址
-                url_real : "ws://139.196.176.60:6101",  //正式地址
+                version : "2.0.0",	// 版本
+    			url_real : "ws://192.168.0.227:26999",   //测试地址
+               // url_real : "ws://139.196.176.60:6101",  //正式地址
                 model : "1", // 实盘：0；	模拟盘：1
-                client_source : "N_WEB",	// 客户端渠道
+                Source : "app",	// 客户端渠道
     //			username : "000031",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)
     //			password : "YTEyMzQ1Ng==" 	// 密码：base64密文(明文：a123456——YTEyMzQ1Ng==     888888——ODg4ODg4	 74552102——NzQ1NTIxMDI=		123456=MTIzNDU2)
     //			username:JSON.parse(localStorage.getItem('tradeUser')).username,
@@ -97,7 +97,7 @@ export default class Market {
             
             openChangealertCurrentObj:null,
             
-            layer:null, //用户登出消息文本
+            layer:null, // 交易socket文本信息
             errorMsg: '', //交易错误消息文本
             
             queryHisList:[],
@@ -114,7 +114,7 @@ export default class Market {
             
             tradeLoginfailMsg:'',
             
-            layerOnRtnOrder: '',     //买入成功提示
+            layerOnRtnOrder: '',   //买入成功提示
             
     //		appendOrderMsg: '',     //委托提示
             
@@ -139,7 +139,7 @@ export default class Market {
             
             
             //选择K线时候的值
-            selectTime: 1,
+            selectTime: 0,
             //存进入详情页的No
             currentNo: '',
             //订阅成功后查询品种列表

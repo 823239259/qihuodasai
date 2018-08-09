@@ -107,7 +107,7 @@
 					tradeSocket.onopen = function(evt){
 					//登录
 						if(tradeSocket.readyState==1){ //连接已建立，可以进行通信。
-							tradeSocket.send('{"Method":"Login","Parameters":{"ClientNo":"'+ this.username +'","PassWord":"'+ Base64.encode(this.pwd) +'","IsMock":'+this.tradeConfig.model+',"Version":"'+this.tradeConfig.version+'","Source":"'+this.tradeConfig.client_source+'"}}');
+							tradeSocket.send('{"Method":"Login","Parameters":{"ClientNo":"'+ this.username +'","PassWord":"'+ Base64.encode(this.pwd) +'","IsMock":'+this.tradeConfig.model+',"Version":"'+this.tradeConfig.version+'","Source":"'+this.tradeConfig.Source+'"}}');
 						}
 					}.bind(this);
 					tradeSocket.onmessage = function(evt) {

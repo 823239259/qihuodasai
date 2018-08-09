@@ -19,7 +19,7 @@ export default class Account {
             programList: [],
             operateOrderLength: 0,   //操盘中方案的条数
             hotLine: '',
-            currentUrlHead: 'https:', //http or https
+            currentUrlHead: 'http:', //http or https
             realName: '',
             userVerified: false,
         }

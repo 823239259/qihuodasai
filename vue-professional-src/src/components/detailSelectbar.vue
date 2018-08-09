@@ -7,7 +7,7 @@
 			<li :class="[fontgray,fl,{current:kshow}]" @tap='switchTab' id="kline">
 				<span>K线</span>
 				<transition name="topdown" mode="out-in">
-					<ol v-show='olshow'>
+					<ol v-show='kTypeShow'>
 						<li class="fontwhite  fl" @tap.stop="olclick">1分</li>
 						<li class="fontwhite  fl" @tap.stop="olclick">5分</li>
 						<li class="fontwhite  fl" @tap.stop="olclick">15分</li>
@@ -21,10 +21,10 @@
 
 			<li :class="[fontgray,fl,{current:currentIndex==index}]" @tap='switchTab(item,index)' v-for="(item, index) in tabList" :key="index">
 				<template v-if="item==='K线'">
-					<span>K线</span>
+					<span>{{chooseTypeText||'K线'}}</span>
 					<transition name="topdown" mode="out-in">
-						<ol v-show='olshow'>
-							<li class="fontwhite  fl" v-for="(kType, index) in kTypeList" :key="index" @tap.stop="olclick">{{kType}}</li>
+						<ol v-show='kTypeShow'>
+							<li class="fontwhite  fl" v-for="(kType, index) in kTypeList" :key="index" @tap.stop="chooseKType(kType,index)">{{kType}}</li>
 						</ol>
 					</transition>
 				</template>
@@ -45,10 +45,11 @@
 		components: {alert},
 		data() {
 			return {
-				olshow: false,
+				kTypeShow: false,
 				tabList: ['闪电图', '分时', 'K线', '盘口', '交易中心'],
 				kTypeList: ['1分', '5分', '15分', '30分', '日K'],
 				currentIndex: 1,
+				chooseTypeText: ''
 			}
 		},
 		computed: {
@@ -69,32 +70,33 @@
 			}
 		},
 		methods: {
-			olclick: function(e) {
-				var oltex = e.target.innerText;
-				$(e.target).parent().parent('li').children('span').text(oltex);
-				if(oltex == '1分') {
-					this.$store.state.market.selectTime=1;
-					var b = '{"Method":"QryHistory","Parameters":{"ExchangeNo":"' + this.$parent.detail.LastQuotation.ExchangeNo + '","commodity_no":"' + this.$parent.detail.commodity_no + '","ContractNo":"' + this.$parent.detail.LastQuotation.ContractNo + '","HisQuoteType":' + 1 + ',"BeginTime":"","EndTime":"","Count":' + 0 + '}}'
-					this.quoteSocket.send(b);
-				} else if(oltex == '5分') {
-					this.$store.state.market.selectTime=5;
-					var b = '{"Method":"QryHistory","Parameters":{"ExchangeNo":"' + this.$parent.detail.LastQuotation.ExchangeNo + '","commodity_no":"' + this.$parent.detail.commodity_no + '","ContractNo":"' + this.$parent.detail.LastQuotation.ContractNo + '","HisQuoteType":' + 5 + ',"BeginTime":"","EndTime":"","Count":' + 0 + '}}'
-					this.quoteSocket.send(b);
-				} else if(oltex == '15分') {
-					this.$store.state.market.selectTime=15;
-					var b = '{"Method":"QryHistory","Parameters":{"ExchangeNo":"' + this.$parent.detail.LastQuotation.ExchangeNo + '","commodity_no":"' + this.$parent.detail.commodity_no + '","ContractNo":"' + this.$parent.detail.LastQuotation.ContractNo + '","HisQuoteType":' + 15 + ',"BeginTime":"","EndTime":"","Count":' + 0 + '}}'
-					this.quoteSocket.send(b);
-				} else if(oltex == '30分') {
-					this.$store.state.market.selectTime=30;
-					var b = '{"Method":"QryHistory","Parameters":{"ExchangeNo":"' + this.$parent.detail.LastQuotation.ExchangeNo + '","commodity_no":"' + this.$parent.detail.commodity_no + '","ContractNo":"' + this.$parent.detail.LastQuotation.ContractNo + '","HisQuoteType":' + 30 + ',"BeginTime":"","EndTime":"","Count":' + 0 + '}}'
-					this.quoteSocket.send(b);
-				} else if(oltex == '日K') {
-					this.$store.state.market.selectTime=1440;
-					var b = '{"Method":"QryHistory","Parameters":{"ExchangeNo":"' + this.$parent.detail.LastQuotation.ExchangeNo + '","commodity_no":"' + this.$parent.detail.commodity_no + '","ContractNo":"' + this.$parent.detail.LastQuotation.ContractNo + '","HisQuoteType":' + 1440 + ',"BeginTime":"","EndTime":"","Count":' + 0 + '}}'
-					this.quoteSocket.send(b);
+			chooseKType (item, index) {
+				this.chooseTypeText = item
+				const kType = {
+					'1分': ["KLINE_1MIN", 1],
+					'5分': ["KLINE_5MIN", 5],
+					'15分': ["KLINE_15MIN", 15],
+					'30分': ["KLINE_30MIN", 30],
+					'日K': ["KLINE_1DAY", 1440],
 				}
-				this.olshow = false;
-//				isshow.isklineshow = true;
+				let currentKType = kType[item]
+				let subscribeMessage = {
+					method: 'req_history_data',
+					data: {
+						contract_info: {
+							security_type: this.$parent.detail.security_type,
+							exchange_no: this.$parent.detail.exchange_no,
+							commodity_no: this.$parent.detail.commodity_no,
+							contract_no: this.$parent.detail.mainContract,
+						},
+						period: currentKType[0],
+						count:40
+
+					}
+				}
+				this.$store.state.market.selectTime = currentKType[1]
+				this.quoteSocket.send(JSON.stringify(subscribeMessage));
+				this.kTypeShow = false;
 			},
 			switchTab (item,index) {
 
@@ -111,7 +113,7 @@
 						isshow.kshow = false;
 						isshow.pshow = false;
 						isshow.bottomshow = false;
-						this.olshow = false;
+						this.kTypeShow = false;
 						isshow.isfensshow = false;
 						isshow.isklineshow = false;
 						break;
@@ -123,7 +125,7 @@
 						isshow.kshow = false;
 						isshow.pshow = false;
 						isshow.bottomshow = false;
-						this.olshow = false;
+						this.kTypeShow = false;
 						isshow.islightshow = false;
 						isshow.isklineshow = false;
 						//isshow.isfensshow = true;
@@ -136,7 +138,7 @@
 						isshow.kshow = false;
 						isshow.pshow = true;
 						isshow.bottomshow = false;
-						this.olshow = false;
+						this.kTypeShow = false;
 						isshow.isfensshow = false;
 						isshow.islightshow = false;
 						isshow.isklineshow = false;
@@ -153,7 +155,7 @@
 							isshow.kshow = false;
 							isshow.pshow = false;
 							isshow.bottomshow = true;
-							this.olshow = false;
+							this.kTypeShow = false;
 							isshow.isfensshow = false;
 							isshow.islightshow = false;
 							isshow.isklineshow = false;
@@ -170,11 +172,13 @@
 						isshow.bottomshow = false;
 						isshow.isfensshow = false;
 						isshow.islightshow = false;
-						if(this.olshow == false) {
-							this.olshow = true;
+						if(this.kTypeShow == false) {
+							this.kTypeShow = true;
 						} else {
-							this.olshow = false;
+							this.kTypeShow = false;
 						}
+						console.log(this.$store.state.market.selectTime)
+						if (this.$store.state.market.selectTime) return;
 						//默认一分钟K线
 						this.$store.state.market.selectTime=1;
 						var subscribeMessage = {
@@ -191,7 +195,6 @@
 
 							}
 						}
-						//var b = '{"":""req_history_data"","Parameters":{"ExchangeNo":"' + this.$parent.detail.LastQuotation.ExchangeNo + '","commodity_no":"' + this.$parent.detail.commodity_no + '","ContractNo":"' + this.$parent.detail.LastQuotation.ContractNo + '","HisQuoteType":' + 1 + ',"BeginTime":"","EndTime":"","Count":' + 0 + '}}'
 						this.quoteSocket.send(JSON.stringify(subscribeMessage));
 						break;
 					default:
@@ -202,10 +205,10 @@
 						isshow.bottomshow = false;
 						isshow.isfensshow = false;
 						isshow.islightshow = false;
-						if(this.olshow == false) {
-							this.olshow = true;
+						if(this.kTypeShow == false) {
+							this.kTypeShow = true;
 						} else {
-							this.olshow = false;
+							this.kTypeShow = false;
 						}
 						break;
 				}

@@ -25,7 +25,7 @@ export default new Vuex.Store({
 	},
 	state: {
 		//test 测试环境，online 正式环境
-		environment: 'online',
+		environment: 'test',
 		//打包的时候，值为 build ，开发的时候，值为 dev
 		setting: 'build',
 		//请求的操盘参数数据
@@ -158,9 +158,8 @@ export default new Vuex.Store({
 			var rawData;
 			var dosizeL = currentdetail.dot_size;
 			var parameters = jsonDataKline.data;
-			console.log(jsonDataKline.data)
 			//HisQuoteType 1440 为日K 划线
-			if(Parameters.period === "KLINE_1DAY") {
+			if(parameters.period === "KLINE_1DAY") {
 				rawData = parameters.Lines.reduce((arr1,parameter,index) => {
 					let timeStr = parameter[0].split(mTimeExg)[0];
 					let closePrice = parameter[1].toFixed(dosizeL);
@@ -172,7 +171,7 @@ export default new Vuex.Store({
 					return arr1
 				},[])
 			} else {
-				rawData = parameters.reduce((arr1,parameter,index) => {
+				rawData = parameters.Lines.reduce((arr1,parameter,index) => {
 					let time2 = parameter[0].split(mTimeExg);
 					let str1 = time2[1].split(":");
 					let str2 = str1[0] + ":" + str1[1];
@@ -398,11 +397,11 @@ export default new Vuex.Store({
 				price = [],
 				time = [];
 			var Ktime;
-			let barData = Parameters.Data.slice(-40);
+			let barData = parameters.Lines.slice(-40);
 			// 取条形图的数据 todo
 			barData.forEach((parameter) =>{
-				vol.push(parameter[6]);
-				let timeArr = parameter[0].split(' ');
+				vol.push(parameter[5]);
+				let timeArr = parameter[0].split(mTimeExg);
 				let SecondTime = timeArr[1].split(':');
 				Ktime = SecondTime[0] + ':'+SecondTime[1];
 				if(Ktime == '00:00'){
@@ -412,7 +411,6 @@ export default new Vuex.Store({
 				}
 				price.push(parameter[1]);
 			});
-
 			//成交量设置
 			state.market.option4 = {
 				grid: {
@@ -494,6 +492,7 @@ export default new Vuex.Store({
 					data: vol
 				}]
 			};
+
 		},
 		drawkline: function(state, x) {
 			
@@ -515,28 +514,29 @@ export default new Vuex.Store({
 				}
 			}
 			kline.setOption(state.market.option3);
+			//console.log(volume)
 			volume.setOption(state.market.option4);
 		},
 		drawfens: function(state, x) {
 			var fens, volume;
 			if(state.isshow.isfensshow == false) {
-				volume = echarts.init(document.getElementById(x.id1));
+				volume = echarts.init(document.getElementById(x.id2));
 				volume.group = 'group1';
 				// 基于准备好的dom，初始化echarts实例
-				fens = echarts.init(document.getElementById(x.id2));
+				fens = echarts.init(document.getElementById(x.id1));
 				fens.group = 'group1';
 				echarts.connect("group1");
 				state.isshow.isfensshow = true;
 			} else {
-				if(document.getElementById(x.id1) != null){
-					volume = echarts.getInstanceByDom(document.getElementById(x.id1));
-				}
 				if(document.getElementById(x.id2) != null){
-					fens = echarts.getInstanceByDom(document.getElementById(x.id2));
+					volume = echarts.getInstanceByDom(document.getElementById(x.id2));
+				}
+				if(document.getElementById(x.id1) != null){
+					fens = echarts.getInstanceByDom(document.getElementById(x.id1));
 				}
 			}
-			fens.setOption(state.market.option1);
-			volume.setOption(state.market.option2);
+			fens.setOption(state.market.option2);
+			volume.setOption(state.market.option1);
 		},
 		setfensoption: function(state) {
 			let vol = [],
@@ -553,6 +553,7 @@ export default new Vuex.Store({
 				price.push(parameter[1]);
 				
 			});
+			//bar图
 			state.market.option1 = {
 				grid: {
 					x: 50,
@@ -633,6 +634,7 @@ export default new Vuex.Store({
 					data: vol
 				}]
 			};
+			//折现图
 			state.market.option2 = {
 				backgroundColor: 'transparent',
 				tooltip: {
@@ -776,7 +778,7 @@ export default new Vuex.Store({
 			let {state} = context
 			let {market, tradeSocket} = state
 			let {HeartBeat, tradeConfig} = market
-			switch (data.method){
+			switch (data.Method){
 				case 'OnRtnHeartBeat': //处理行情心跳
 					HeartBeat.lastHeartBeatTimestamp = parameters.Ref; // 更新心跳最新时间戳
 //					console.log('lastHeartBeatTimestamp:'+context.state.market.HeartBeat.lastHeartBeatTimestamp);
@@ -790,7 +792,7 @@ export default new Vuex.Store({
 						const methodArr = ['QryHoldTotal', 'QryOrder', 'QryTrade', 'QryAccount', 'QryStopLoss', 'QryCondition']
 						// todo 初始化的时候tradeConfig没有username
 						methodArr.forEach(method => {
-							tradeSocket.send(`{"method":"${method}","Parameters":{"ClientNo":"${JSON.parse(localStorage.tradeUser).username}"}}`);
+							tradeSocket.send(`{"Method":"${method}","Parameters":{"ClientNo":"${JSON.parse(localStorage.tradeUser).username}"}}`);
 							//tradeSocket.send(`{"method":"${method}","Parameters":{"ClientNo":"${tradeConfig.username}"}}`);
 						})
 						// 查询历史成交
@@ -886,8 +888,9 @@ export default new Vuex.Store({
 					//更新挂单表
 					context.dispatch('updateApply',parameters);
 					break;
-				case 'OnRspOrderInsert':
+				case 'OnRspOrderInsert': //保单回复
 //					console.log('报单请求回复');
+					//更新保单回复消息
 					context.dispatch('layerMessage',parameters);
 					//添加到委托表
 					context.dispatch('appendOrder00',parameters);
@@ -898,13 +901,13 @@ export default new Vuex.Store({
 //					console.log('持仓合计变化推送通知');
 					context.dispatch('updateHold',parameters);
 					break;
-				case 'OnRtnOrderTraded':
+				case 'OnRtnOrderTraded': // 订单成交
 //					console.log('成交单通知');
 					if(parameters!=null){
 //						context.state.market.OnRspQryTradeDealListCont.push(parameters);
 						context.state.market.OnRspQryTradeDealListCont.unshift(parameters);
 					}
-					context.dispatch('layerOnRtnOrderTraded',parameters);
+					context.dispatch('layerOnRtnOrderTraded',parameters); //更新通知
 					break;
 				
 				case 'OnRspQryStopLoss':
@@ -1370,53 +1373,36 @@ export default new Vuex.Store({
 			date.setDate(date.getDate()-1);
 			var beginTime = _getDayString(date);
 //			context.state.tradeSocket.send('{"method":"QryHisTrade","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'"}}');
-			tradeSocket.send(`{"method":"QryHisTrade","Parameters":{"ClientNo":"${JSON.parse(localStorage.tradeUser).username}","BeginTime":"${beginTime}","EndTime":"${endTime}"}}`);
+			tradeSocket.send(`{"Method":"QryHisTrade","Parameters":{"ClientNo":"${JSON.parse(localStorage.tradeUser).username}","BeginTime":"${beginTime}","EndTime":"${endTime}"}}`);
 		
 		},
-		layerOnRtnOrderTraded:function(context,parameters){
+		layerOnRtnOrderTraded:function(context,parameters){ //订单成交通知信息更新
+			let {market} = context.state
 			if(parameters!=null){
-				var CommodityName =context.state.market.orderTemplist[parameters.CommodityNo].CommodityName;
-				var DirectionStr;
-				if(parameters.Drection==0){
-					DirectionStr='买';
-				}
-				if(parameters.Drection==1){
-					DirectionStr='卖';
-				}
+				var CommodityName = market.orderTemplist[parameters.CommodityNo].commodity_name;
+				var DirectionStr = parameters.Drection? '卖': '买';
 				var TradeNum = parameters.TradeNum;
-				var TradeNo = parameters.TradeNo;
-				var TradePrice = parseFloat(parameters.TradePrice).toFixed(context.state.market.orderTemplist[parameters.CommodityNo].DotSize);
-				context.state.market.layerOnRtnOrder = "成交（"+CommodityName+",价格:"+TradePrice+","+DirectionStr+TradeNum+"手）" + Math.floor(Math.random()*10);
+				//var TradeNo = parameters.TradeNo;
+				var TradePrice = parseFloat(parameters.TradePrice).toFixed(market.orderTemplist[parameters.CommodityNo].dot_size);
+				market.layerOnRtnOrder = "成交（"+CommodityName+",价格:"+TradePrice+","+DirectionStr+TradeNum+"手）" + Math.floor(Math.random()*10);
 			}
 		},
-		layerMessage:function(context,parameters){
+		layerMessage:function(context,parameters){ //委托成功消息更新
+			let {market} = context.state
 			if(parameters!=null){
-				if(parameters.OrderStatus==5){
-					context.state.market.layer = parameters.StatusMsg+Math.floor(Math.random()*10);
+				if(parameters.OrderStatus==5){ //下单失败
+					market.layer = parameters.StatusMsg+Math.floor(Math.random()*10);
 					return;
 				}
-				
-				var CommodityName =context.state.market.orderTemplist[parameters.CommodityNo].CommodityName;
-				var DirectionStr;
-				if(parameters.Drection==0){
-					DirectionStr='买';
-				}
-				if(parameters.Drection==1){
-					DirectionStr='卖';
-				}
-				var price;
-				if(parameters.OrderPriceType==1){
-					price = '市价';
-				}
-				if(parameters.OrderPriceType==0){
-					price = parseFloat(parameters.OrderPrice).toFixed(context.state.market.orderTemplist[parameters.CommodityNo].DotSize);
-				}
+				var CommodityName = market.orderTemplist[parameters.CommodityNo].commodity_name;
+				var DirectionStr = parameters.Drection? '卖': '买';
+				var OrderPrice = parseFloat(parameters.OrderPrice).toFixed(market.orderTemplist[parameters.CommodityNo].dot_size);
+				var price = parameters.OrderPriceType? '市价': OrderPrice;
 				var OrderNum = parameters.OrderNum;
 				var OrderID = parameters.OrderID;
-				
-				if(parameters.OrderStatus<4){
+				if(parameters.OrderStatus<4){ //0-单已提交 1-排队中 2-部分成交 3-完全成交
 					context.state.market.layer='委托成功（'+CommodityName+','+price+','+DirectionStr+OrderNum+'手,委托号:'+OrderID+'）'+Math.floor(Math.random()*10);
-				}else{
+				}else{ // 4-撤单
 					context.state.market.layer='委托失败（'+CommodityName+','+price+','+DirectionStr+OrderNum+'手,失败原因:'+parameters.StatusMsg+'）'+Math.floor(Math.random()*10);
 				}
 				
@@ -1801,7 +1787,7 @@ export default new Vuex.Store({
 				if(state.tradeSocket.readyState==1){ //连接已建立，可以进行通信。
 					let tradeUser = JSON.parse(localStorage.getItem('tradeUser'))||{}
 					const tradeMessage = {
-						method: 'Login',
+						Method: 'Login',
 						Parameters: {
 							ClientNo: tradeUser.username,
 							PassWord: tradeUser.password,
@@ -1956,7 +1942,7 @@ export default new Vuex.Store({
 						//debugger;
 						//更新当前合约
 						if (market.currentNo == RtnMarkettemp.commodity_no) {
-							console.log(123)
+							// console.log(123)
 							market.CacheLastQuote.push(val);
 							if (market.CacheLastQuote.length > 2){
 								market.CacheLastQuote.shift();
@@ -1993,12 +1979,11 @@ export default new Vuex.Store({
 										lastData.push(arr);
 									}
 									context.commit('setfensoption');
-								}else{
-									context.commit('drawfens', {
-										id1: 'fens',
-										id2: 'volume'
-									});	
 								}
+								context.commit('drawfens', {
+									id1: 'fens',
+									id2: 'volume1'
+								});
 								
 							}
 							//更新闪电图 
@@ -2006,15 +1991,14 @@ export default new Vuex.Store({
 								context.commit('setlightDate');
 								context.commit('drawlight', 'lightcharts');
 							}
-							//更新K线图 todo
+							//更新K线图
 							if(isshow.isklineshow == true) {
-								console.log(market.CacheLastQuote)
-								if(market.CacheLastQuote[1].TotalVolume <= market.CacheLastQuote[0].TotalVolume) return;
+								if(market.CacheLastQuote[1].volume <= market.CacheLastQuote[0].volume) return;
 								let {jsonDataKline} = market;
-								let historyTime =jsonDataKline.Parameters.Data[jsonDataKline.Parameters.Data.length - 1][0].split(' ');
+								let historyTime =jsonDataKline.data.Lines[jsonDataKline.data.Lines.length - 1][0].split(mTimeExg);
 								let historySecondArr = historyTime[1].split(':'); //历史时间 ["20", "48", "00"]
 								const _updateData = function () {
-									let newParameter = jsonDataKline.Parameters.Data;
+									let newParameter = jsonDataKline.data.Lines;
 									let newParameterLast = newParameter[newParameter.length - 1];
 									arr[0] = newParameterLast[0]; //更新时间
 									if(arr[1] <newParameterLast[3]) { //更新最新价
@@ -2036,7 +2020,7 @@ export default new Vuex.Store({
 								};
 								const _addData = function () {
 									var arrTemp = [];
-									jsonDataKline.Parameters.Data.shift();
+									jsonDataKline.data.Lines.shift();
 									market.volume = 0;
 									arrTemp[0] = arr[0].substring(0, arr[0].length - 2) + '00';
 									arrTemp[1] = arr[1];
@@ -2046,7 +2030,7 @@ export default new Vuex.Store({
 									arrTemp[5] = arr[5];
 									arrTemp[6] = arr[6];
 									arr = arrTemp;
-									jsonDataKline.Parameters.Data.push(arrTemp);
+									jsonDataKline.data.Lines.push(arrTemp);
 								}
 								const switchList = {
 									'5': 'switch5min',
@@ -2081,7 +2065,7 @@ export default new Vuex.Store({
 								context.commit('setklineoption');
 								context.commit('drawkline', {
 									id1: 'kliness',
-									id2: 'volume'
+									id2: 'volume2'
 								});
 							}
 						}
@@ -2100,7 +2084,7 @@ export default new Vuex.Store({
 							context.commit('setfensoption');
 							context.commit('drawfens', {
 								id1: 'fens',
-								id2: 'volume'
+								id2: 'volume1'
 							});
 						} else if(isshow.kshow == true) {
 							market.jsonDataKline = wsData;
@@ -2109,7 +2093,7 @@ export default new Vuex.Store({
 							context.commit('setklineoption');
 							context.commit('drawkline', {
 								id1: 'kliness',
-								id2: 'volume'
+								id2: 'volume2'
 							});
 						}
 						break;	

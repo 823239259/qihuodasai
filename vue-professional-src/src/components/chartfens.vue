@@ -3,7 +3,7 @@
 		<div id="fens" style="margin: 0 auto;">
 
 		</div>
-		<div id="volume" style="margin: 0 auto;">
+		<div id="volume1" style="margin: 0 auto;">
 
 		</div>
 	</div>
@@ -28,7 +28,7 @@
 			return {
 				obj: {
 					id1: 'fens',
-					id2: 'volume',
+					id2: 'volume1',
 					
 				},
 				CommodityNo:''
@@ -89,7 +89,7 @@
 		// 				security_type: this.detail.security_type,
 		// 				exchange_no: this.detail.exchange_no,
 		// 				commodity_no: this.detail.commodity_no,
-		// 				contract_no: ''
+		// 				contract_no: this.detail.mainContract,
 		// 			},
 		// 			period: 'TIME_SHARING',
 		// 		}
@@ -98,7 +98,7 @@
 		// 	this.quoteSocket.send(JSON.stringify(b));
 		// 	this.CommodityNo=this.detail.commodity_no;
 		// 	this.$store.state.market.currentNo=this.detail.commodity_no;
-		// 	this.drawfens(this.obj);
+		// 	//this.drawfens(this.obj);
 		// }
 	}
 </script>
@@ -116,7 +116,7 @@
 			width: 100%;
 			height: 390px/5*3*@ip5;
 		}
-		#volume {
+		#volume1 {
 			width: 100%;
 			height: 390px/5*2*@ip5;
 		}
@@ -132,7 +132,7 @@
 			width: 100%;
 			height: 390px/5*3*@ip6;
 		}
-		#volume {
+		#volume1 {
 			width: 100%;
 			height: 390px/5*2*@ip6;
 		}
@@ -148,7 +148,7 @@
 			width: 100%;
 			height: 390px/5*3*@ip6p;
 		}
-		#volume {
+		#volume1 {
 			width: 100%;
 			height: 390px/5*2*@ip6p;
 		}

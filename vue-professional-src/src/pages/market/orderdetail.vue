@@ -11,7 +11,7 @@
 		<dish v-if="pshow"></dish>
 		<tradebottom v-if='s'></tradebottom>
 		<tradecenter v-if='jshow'></tradecenter>
-		<chartfens :detail='detail' v-show='fshow'></chartfens>
+		<chartfens :detail='detail' v-if='fshow'></chartfens>
 		<kline v-if='kshow'></kline>
 		<lightchart v-if='sshow'></lightchart>
 		<novice v-if="helpshow"></novice>

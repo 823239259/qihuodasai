@@ -10,35 +10,35 @@
 				<ul>
 					<li>
 						<span>涨跌</span>
-						<span :class="[{'green':defaultParameters.ChangeValue<0},{'red':defaultParameters.ChangeValue>0},{'white':defaultParameters.ChangeValue==0}]">{{defaultParameters.ChangeValue | fixNum2(detail.DotSize)}}/{{defaultParameters.ChangeRate | fixNum}}%</span>
+						<span :class="[{'green':defaultParameters.change_value<0},{'red':defaultParameters.change_value>0},{'white':defaultParameters.change_value==0}]">{{defaultParameters.change_value | fixNum2(detail.dot_size)}}/{{defaultParameters.change_rate | fixNum}}%</span>
 					</li>
 					<li>
 						<span>成交量</span>
-						<span>{{defaultParameters.TotalVolume}}</span>
+						<span>{{defaultParameters.volume}}</span>
 					</li>
 					<li>
 						<span>持仓量</span>
-						<span>{{defaultParameters.Position}}</span>
+						<span>{{defaultParameters.position}}</span>
 					</li>
 					<li>
 						<span>昨结</span>
-						<span>{{defaultParameters.PreSettlePrice | fixNum2(detail.DotSize)}}</span>
+						<span>{{defaultParameters.pre_settle | fixNum2(detail.dot_size)}}</span>
 					</li>
 					<li>
 						<span>最新</span>
-						<span :class="{red: defaultParameters.LastPrice - defaultParameters.PreSettlePrice > 0,green: defaultParameters.LastPrice - defaultParameters.PreSettlePrice < 0}">{{defaultParameters.LastPrice | fixNum2(detail.DotSize)}}</span>
+						<span :class="{red: defaultParameters.last - defaultParameters.pre_settle > 0,green: defaultParameters.last - defaultParameters.pre_settle < 0}">{{defaultParameters.last | fixNum2(detail.dot_size)}}</span>
 					</li>
 					<li>
 						<span>开盘</span>
-						<span :class="{red: defaultParameters.OpenPrice - defaultParameters.PreSettlePrice > 0,green: defaultParameters.OpenPrice - defaultParameters.PreSettlePrice < 0}">{{defaultParameters.OpenPrice | fixNum2(detail.DotSize)}}</span>
+						<span :class="{red: defaultParameters.open - defaultParameters.pre_settle > 0,green: defaultParameters.open - defaultParameters.pre_settle < 0}">{{defaultParameters.open | fixNum2(detail.dot_size)}}</span>
 					</li>
 					<li>
 						<span>最高</span>
-						<span :class="{red: defaultParameters.HighPrice - defaultParameters.PreSettlePrice > 0,green: defaultParameters.HighPrice - defaultParameters.PreSettlePrice < 0}">{{defaultParameters.HighPrice | fixNum2(detail.DotSize)}}</span>
+						<span :class="{red: defaultParameters.high - defaultParameters.pre_settle > 0,green: defaultParameters.high - defaultParameters.pre_settle < 0}">{{defaultParameters.high | fixNum2(detail.dot_size)}}</span>
 					</li>
 					<li>
 						<span>最低</span>
-						<span :class="{red: defaultParameters.LowPrice - defaultParameters.PreSettlePrice > 0,green: defaultParameters.LowPrice - defaultParameters.PreSettlePrice < 0}">{{defaultParameters.LowPrice | fixNum2(detail.DotSize)}}</span>
+						<span :class="{red: defaultParameters.low - defaultParameters.pre_settle > 0,green: defaultParameters.low - defaultParameters.pre_settle < 0}">{{defaultParameters.low | fixNum2(detail.dot_size)}}</span>
 					</li>
 					<li>
 						<span></span>
@@ -55,52 +55,52 @@
 					<template>
 						<li>
 							<span>卖五</span>
-							<span :class="{red: defaultParameters.AskPrice5 - defaultParameters.PreSettlePrice > 0, green: defaultParameters.AskPrice5 - defaultParameters.PreSettlePrice < 0}">{{defaultParameters.AskPrice5 | fixNum2(detail.DotSize)}}</span>
+							<span :class="{red: defaultParameters.AskPrice5 - defaultParameters.pre_settle > 0, green: defaultParameters.AskPrice5 - defaultParameters.pre_settle < 0}">{{defaultParameters.AskPrice5 | fixNum2(detail.dot_size)}}</span>
 							<span>{{defaultParameters.AskQty5}}</span>
 						</li>
 						<li>
 							<span>卖四</span>
-							<span :class="{red: defaultParameters.AskPrice4 - defaultParameters.PreSettlePrice > 0, green: defaultParameters.AskPrice4 - defaultParameters.PreSettlePrice < 0}">{{defaultParameters.AskPrice4 | fixNum2(detail.DotSize)}}</span>
+							<span :class="{red: defaultParameters.AskPrice4 - defaultParameters.pre_settle > 0, green: defaultParameters.AskPrice4 - defaultParameters.pre_settle < 0}">{{defaultParameters.AskPrice4 | fixNum2(detail.dot_size)}}</span>
 							<span>{{defaultParameters.AskQty4}}</span>
 						</li>
 						<li>
 							<span>卖三</span>
-							<span :class="{red: defaultParameters.AskPrice3 - defaultParameters.PreSettlePrice > 0, green: defaultParameters.AskPrice3 - defaultParameters.PreSettlePrice < 0}">{{defaultParameters.AskPrice3 | fixNum2(detail.DotSize)}}</span>
+							<span :class="{red: defaultParameters.AskPrice3 - defaultParameters.pre_settle > 0, green: defaultParameters.AskPrice3 - defaultParameters.pre_settle < 0}">{{defaultParameters.AskPrice3 | fixNum2(detail.dot_size)}}</span>
 							<span>{{defaultParameters.AskQty3}}</span>
 						</li>
 						<li>
 							<span>卖二</span>
-							<span :class="{red: defaultParameters.AskPrice2 - defaultParameters.PreSettlePrice > 0, green: defaultParameters.AskPrice2 - defaultParameters.PreSettlePrice < 0}">{{defaultParameters.AskPrice2 | fixNum2(detail.DotSize)}}</span>
+							<span :class="{red: defaultParameters.AskPrice2 - defaultParameters.pre_settle > 0, green: defaultParameters.AskPrice2 - defaultParameters.pre_settle < 0}">{{defaultParameters.AskPrice2 | fixNum2(detail.dot_size)}}</span>
 							<span>{{defaultParameters.AskQty2}}</span>
 						</li>
 						<li>
 							<span>卖一</span>
-							<span :class="{red: defaultParameters.AskPrice1 - defaultParameters.PreSettlePrice > 0, green: defaultParameters.AskPrice1 - defaultParameters.PreSettlePrice < 0}">{{defaultParameters.AskPrice1 | fixNum2(detail.DotSize)}}</span>
+							<span :class="{red: defaultParameters.AskPrice1 - defaultParameters.pre_settle > 0, green: defaultParameters.AskPrice1 - defaultParameters.pre_settle < 0}">{{defaultParameters.AskPrice1 | fixNum2(detail.dot_size)}}</span>
 							<span>{{defaultParameters.AskQty1}}</span>
 						</li>
 						<li>
 							<span>买一</span>
-							<span :class="{red: defaultParameters.BidPrice1 - defaultParameters.PreSettlePrice > 0, green: defaultParameters.BidPrice1 - defaultParameters.PreSettlePrice < 0}">{{defaultParameters.BidPrice1 | fixNum2(detail.DotSize)}}</span>
+							<span :class="{red: defaultParameters.BidPrice1 - defaultParameters.pre_settle > 0, green: defaultParameters.BidPrice1 - defaultParameters.pre_settle < 0}">{{defaultParameters.BidPrice1 | fixNum2(detail.dot_size)}}</span>
 							<span>{{defaultParameters.BidQty1}}</span>
 						</li>
 						<li>
 							<span>买二</span>
-							<span :class="{red: defaultParameters.BidPrice2 - defaultParameters.PreSettlePrice > 0, green: defaultParameters.BidPrice2 - defaultParameters.PreSettlePrice < 0}">{{defaultParameters.BidPrice2 | fixNum2(detail.DotSize)}}</span>
+							<span :class="{red: defaultParameters.BidPrice2 - defaultParameters.pre_settle > 0, green: defaultParameters.BidPrice2 - defaultParameters.pre_settle < 0}">{{defaultParameters.BidPrice2 | fixNum2(detail.dot_size)}}</span>
 							<span>{{defaultParameters.BidQty2}}</span>
 						</li>
 						<li>
 							<span>买三</span>
-							<span :class="{red: defaultParameters.BidPrice3 - defaultParameters.PreSettlePrice > 0, green: defaultParameters.BidPrice3 - defaultParameters.PreSettlePrice < 0}">{{defaultParameters.BidPrice3 | fixNum2(detail.DotSize)}}</span>
+							<span :class="{red: defaultParameters.BidPrice3 - defaultParameters.pre_settle > 0, green: defaultParameters.BidPrice3 - defaultParameters.pre_settle < 0}">{{defaultParameters.BidPrice3 | fixNum2(detail.dot_size)}}</span>
 							<span>{{defaultParameters.BidQty3}}</span>
 						</li>
 						<li>
 							<span>买四</span>
-							<span :class="{red: defaultParameters.BidPrice4 - defaultParameters.PreSettlePrice > 0, green: defaultParameters.BidPrice4 - defaultParameters.PreSettlePrice < 0}">{{defaultParameters.BidPrice4 | fixNum2(detail.DotSize)}}</span>
+							<span :class="{red: defaultParameters.BidPrice4 - defaultParameters.pre_settle > 0, green: defaultParameters.BidPrice4 - defaultParameters.pre_settle < 0}">{{defaultParameters.BidPrice4 | fixNum2(detail.dot_size)}}</span>
 							<span>{{defaultParameters.BidQty4}}</span>
 						</li>
 						<li>
 							<span>买五</span>
-							<span :class="{red: defaultParameters.BidPrice5 - defaultParameters.PreSettlePrice > 0, green: defaultParameters.BidPrice5 - defaultParameters.PreSettlePrice < 0}">{{defaultParameters.BidPrice5 | fixNum2(detail.DotSize)}}</span>
+							<span :class="{red: defaultParameters.BidPrice5 - defaultParameters.pre_settle > 0, green: defaultParameters.BidPrice5 - defaultParameters.pre_settle < 0}">{{defaultParameters.BidPrice5 | fixNum2(detail.dot_size)}}</span>
 							<span>{{defaultParameters.BidQty5}}</span>
 						</li>
 						<!--<li>
@@ -151,15 +151,15 @@
 				buyText: {},
 				confirmName: '',
 				defaultParameters: {
-					ChangeValue: 0,
-					ChangeRate: 0,
-					TotalVolume: 0,
-					Position: 0,
-					PreSettlePrice: 0,
-					LastPrice: 0,
-					OpenPrice: 0,
-					HighPrice: 0,
-					LowPrice: 0,
+					change_value: 0,
+					change_rate: 0,
+					volume: 0,
+					position: 0,
+					pre_settle: 0,
+					last: 0,
+					open: 0,
+					high: 0,
+					low: 0,
 					AskPrice5: 0,
 					AskPrice4: 0,
 					AskPrice3: 0,
@@ -199,7 +199,7 @@
 				return this.$parent.detail;
 			},
 			Parameters(){
-				return this.$store.state.market.jsonTow.Parameters;
+				return this.$store.state.market.jsonTow;
 			},
 			templateList(){
 				return this.$store.state.market.templateList;
@@ -218,7 +218,7 @@
 			insertOrder: function(){
 				var obj = this.buyText.Parameters;
 				if(obj != undefined){
-					var contract=obj.CommodityNo+obj.ContractNo;
+					var contract=obj.commodity_no+obj.ContractNo;
 					var LimitPrice;
 					if(obj.PriceType == 1){
 						LimitPrice='市价';
@@ -240,37 +240,8 @@
 		mounted: function(){
 			$("#tradeCenter").css("height",window.screen.height + "px");
 			//初始化盘口
-			this.defaultParameters.ChangeValue = this.templateList[this.detail.CommodityNo].ChangeValue;
-			this.defaultParameters.ChangeRate = this.templateList[this.detail.CommodityNo].ChangeRate;
-			this.defaultParameters.TotalVolume = this.templateList[this.detail.CommodityNo].TotalVolume;
-			this.defaultParameters.Position = this.templateList[this.detail.CommodityNo].Position;
-			this.defaultParameters.PreSettlePrice = this.templateList[this.detail.CommodityNo].PreSettlePrice;
-			this.defaultParameters.LastPrice = this.templateList[this.detail.CommodityNo].LastPrice;
-			this.defaultParameters.OpenPrice = this.templateList[this.detail.CommodityNo].OpenPrice;
-			this.defaultParameters.HighPrice = this.templateList[this.detail.CommodityNo].HighPrice;
-			this.defaultParameters.LowPrice = this.templateList[this.detail.CommodityNo].LowPrice;
-			this.defaultParameters.AskPrice5 = this.templateList[this.detail.CommodityNo].AskPrice5;
-			this.defaultParameters.AskPrice4 = this.templateList[this.detail.CommodityNo].AskPrice4;
-			this.defaultParameters.AskPrice3 = this.templateList[this.detail.CommodityNo].AskPrice3;
-			this.defaultParameters.AskPrice2 = this.templateList[this.detail.CommodityNo].AskPrice2;
-			this.defaultParameters.AskPrice1 = this.templateList[this.detail.CommodityNo].AskPrice1;
-			this.defaultParameters.BidPrice1 = this.templateList[this.detail.CommodityNo].BidPrice1;
-			this.defaultParameters.BidPrice2 = this.templateList[this.detail.CommodityNo].BidPrice2;
-			this.defaultParameters.BidPrice3 = this.templateList[this.detail.CommodityNo].BidPrice3;
-			this.defaultParameters.BidPrice4 = this.templateList[this.detail.CommodityNo].BidPrice4;
-			this.defaultParameters.BidPrice5 = this.templateList[this.detail.CommodityNo].BidPrice5;
-			
-			this.defaultParameters.AskQty5 = this.templateList[this.detail.CommodityNo].AskQty5;
-			this.defaultParameters.AskQty4 = this.templateList[this.detail.CommodityNo].AskQty4;
-			this.defaultParameters.AskQty3 = this.templateList[this.detail.CommodityNo].AskQty3;
-			this.defaultParameters.AskQty2 = this.templateList[this.detail.CommodityNo].AskQty2;
-			this.defaultParameters.AskQty1 = this.templateList[this.detail.CommodityNo].AskQty1;
-			
-			this.defaultParameters.BidQty5 = this.templateList[this.detail.CommodityNo].BidQty5;
-			this.defaultParameters.BidQty4 = this.templateList[this.detail.CommodityNo].BidQty4;
-			this.defaultParameters.BidQty3 = this.templateList[this.detail.CommodityNo].BidQty3;
-			this.defaultParameters.BidQty2 = this.templateList[this.detail.CommodityNo].BidQty2;
-			this.defaultParameters.BidQty1 = this.templateList[this.detail.CommodityNo].BidQty1;
+			let currentItem = this.templateList[this.detail.commodity_no]
+			this.updateDefaultParameters(currentItem)
 		},
 		watch: {
 			layer: function(n, o){
@@ -281,7 +252,7 @@
 			},
 			Parameters: function(n, o){
 				if(n){
-					this.defaultParameters = n;
+					this.updateDefaultParameters(n)
 				}
 			}
 		},
@@ -298,6 +269,37 @@
 			}
 		},
 		methods:{
+			updateDefaultParameters (currentItem) {
+				this.defaultParameters.change_value = currentItem.change_value;
+				this.defaultParameters.change_rate = currentItem.change_rate;
+				this.defaultParameters.volume = currentItem.volume;
+				this.defaultParameters.position = currentItem.position;
+				this.defaultParameters.pre_settle = currentItem.pre_settle;
+				this.defaultParameters.last = currentItem.last;
+				this.defaultParameters.open = currentItem.open;
+				this.defaultParameters.high = currentItem.high;
+				this.defaultParameters.low = currentItem.low;
+				this.defaultParameters.AskPrice5 = currentItem.ask[4][0];
+				this.defaultParameters.AskPrice4 = currentItem.ask[3][0]
+				this.defaultParameters.AskPrice3 = currentItem.ask[2][0]
+				this.defaultParameters.AskPrice2 = currentItem.ask[1][0]
+				this.defaultParameters.AskPrice1 = currentItem.ask[0][0]
+				this.defaultParameters.BidPrice1 = currentItem.bid[0][0]
+				this.defaultParameters.BidPrice2 = currentItem.bid[1][0]
+				this.defaultParameters.BidPrice3 = currentItem.bid[2][0]
+				this.defaultParameters.BidPrice4 = currentItem.bid[3][0]
+				this.defaultParameters.BidPrice5 = currentItem.bid[4][0]
+				this.defaultParameters.AskQty5 = currentItem.ask[4][1];
+				this.defaultParameters.AskQty4 = currentItem.ask[3][1];
+				this.defaultParameters.AskQty3 = currentItem.ask[2][1];
+				this.defaultParameters.AskQty2 = currentItem.ask[1][1];
+				this.defaultParameters.AskQty1 = currentItem.ask[0][1];
+				this.defaultParameters.BidQty5 = currentItem.bid[4][1]
+				this.defaultParameters.BidQty4 = currentItem.bid[3][1]
+				this.defaultParameters.BidQty3 = currentItem.bid[2][1]
+				this.defaultParameters.BidQty2 = currentItem.bid[1][1]
+				this.defaultParameters.BidQty1 = currentItem.bid[0][1]
+			},
 			buy:function(){
 				if(JSON.parse(localStorage.getItem('tradeUser')) == null){
 					if(this.operateOrderLength > 0){
@@ -312,7 +314,7 @@
 					this.msg = '手数不能为0';
 				}else{
 					this.$children[0].isshow = true;
-					var commodityNo = this.detail.CommodityNo;
+					var commodityNo = this.detail.commodity_no;
 					var buildIndex=0;
 					if(buildIndex>100){
 						buildIndex=0;
@@ -321,7 +323,7 @@
 						"Method":'InsertOrder',
 						"Parameters":{
 							"ExchangeNo":this.orderTemplist[commodityNo].ExchangeNo,
-							"CommodityNo":this.templateList[commodityNo].CommodityNo,
+							"commodity_no":this.templateList[commodityNo].commodity_no,
 							"ContractNo":this.detail.LastQuotation.ContractNo,
 							"OrderNum":this.$children[1].defaultNum,
 							"Drection":0,
@@ -349,7 +351,7 @@
 					this.msg = '手数不能为0';
 				}else{
 					this.$children[0].isshow = true;
-					var commodityNo = this.detail.CommodityNo;
+					var commodityNo = this.detail.commodity_no;
 					var buildIndex=0;
 					if(buildIndex>100){
 						buildIndex=0;
@@ -358,7 +360,7 @@
 						"Method":'InsertOrder',
 						"Parameters":{
 							"ExchangeNo":this.orderTemplist[commodityNo].ExchangeNo,
-							"CommodityNo":this.templateList[commodityNo].CommodityNo,
+							"commodity_no":this.templateList[commodityNo].commodity_no,
 							"ContractNo":this.detail.LastQuotation.ContractNo,
 							"OrderNum":this.$children[1].defaultNum,
 							"Drection":1,

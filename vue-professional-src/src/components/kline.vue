@@ -3,7 +3,7 @@
 		<div id="kliness" style="margin: 0 auto;">
 			
 		</div>
-		<div id="volume" style="margin: 0 auto;">
+		<div id="volume2" style="margin: 0 auto;">
 
 		</div>
 	</div>
@@ -23,7 +23,7 @@
 			return {
 				obj: {
 					id1: 'kliness',
-					id2: 'volume'
+					id2: 'volume2'
 				}
 			}
 		},
@@ -58,7 +58,7 @@
 			width: 100%;
 			height: 390px/5*3*@ip5;
 		}
-		#volume {
+		#volume2 {
 			width: 100%;
 			height: 390px/5*2*@ip5;
 		}
@@ -74,7 +74,7 @@
 			width: 100%;
 			height: 390px/5*3*@ip6;
 		}
-		#volume {
+		#volume2 {
 			width: 100%;
 			height: 390px/5*2*@ip6;
 		}
@@ -90,7 +90,7 @@
 			width: 100%;
 			height: 390px/5*3*@ip6p;
 		}
-		#volume {
+		#volume2 {
 			width: 100%;
 			height: 390px/5*2*@ip6p;
 		}
