@@ -74,7 +74,7 @@ class AccountDeposit extends Component {
                 <CardBalance />
                 <FieldProvider form={this.store}>
                     <View style={{ marginHorizontal: Layout.fieldHorizontalMargin, flex: 1 }}>
-                        <InputFieldEnhanced name='deposit' type='int' label='充值金额' skin='underline' isErrorMsg={false} style={{ marginTop: Layout.fieldMargin }} />
+                        <InputFieldEnhanced name='deposit' type='float' label='充值金额' skin='underline' isErrorMsg={false} style={{ marginTop: Layout.fieldMargin }} />
                         <Submit text={'立即充值'} onSubmit={() => this._toDepositWebView()} />
 
                         <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'flex-end', marginTop: Layout.fieldMargin }}>

@@ -16,7 +16,7 @@ export default class InformationStore {
     @observable liveInformations = [];
 
     @computed get reverseInformations() {
-        return this.liveInformations.reverse();
+        return this.liveInformations; // .reverse(); 原本为顺序，修改为倒序
     }
     liveInformationIndex = 0;
     count = -1;

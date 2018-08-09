@@ -98,8 +98,8 @@ export default class ApplyEnd extends Component {
                 <DisplayWithButtonApply label={'折扣卷  '} text={'无折扣卷'} />
                 <View style={{ margin: 10, marginTop: 20 }}>
                     <Text style={{ color: Colors.titleTextColor }}>{'提示'}</Text>
-                    <Text style={{ color: Colors.greyText, marginTop: 10 }}>{'1.  最系统将在下个交易日开盘终结。'}</Text>
-                    <Text style={{ color: Colors.greyText, marginTop: 10 }}>{'2. 折扣券一般由盈盛期货交易平台活动发放，请大家多多关注。'}</Text>
+                    <Text style={{ color: Colors.greyText, marginTop: 10 }}>{'1.  最迟系统将在下个交易日开盘终结。'}</Text>
+                    <Text style={{ color: Colors.greyText, marginTop: 10 }}>{'2. 折扣券一般由平台活动发放，请大家多多关注。'}</Text>
                 </View>
                 <View style={[{ flex: 1 }]} />
                 <ButtonCommon

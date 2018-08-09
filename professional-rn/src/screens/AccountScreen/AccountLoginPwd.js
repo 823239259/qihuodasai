@@ -30,7 +30,7 @@ class AccountLoginPwdStore {
         this.navigator = navigator;
     }
     @action onVerificationPress() {
-        Api.sendSms(this.mobile, 2, null, () => this.sendSmsSuccess(), (result) => this.sendSmsFail(result));
+        Api.sendSecuritySms(this.mobile, 1,() => this.sendSmsSuccess(), (result) => this.sendSmsFail(result));
     }
     @action.bound sendSmsSuccess() {
         // 開始倒數
@@ -47,7 +47,7 @@ class AccountLoginPwdStore {
             ToastRoot.show('两次输入密码不一致');
             return;
         }
-        Api.resetPassword(this.mobile, this.newPwd, this.verification, () => this.resetPasswordSuccess(), (result) => this.resetPasswordFail(result));
+        Api.resetPassword(this.newPwd, this.verification, () => this.resetPasswordSuccess(), (result) => this.resetPasswordFail(result));
     }
     @action.bound resetPasswordFail(result) {
         if (result.code !== '1') {

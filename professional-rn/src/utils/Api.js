@@ -188,7 +188,7 @@ class Api {
             onSuccess();
             return;
         }
-        this.request('user/security/upphone', { mobile, newCode, oldCode }, onSuccess, onError);
+        this.request('user/security/upphone', { newMobile: mobile, newCode, oldCode }, onSuccess, onError);
     }
     // 设置提现密码
     setWithdrawPwd(code, password, onSuccess, onError) {
@@ -208,8 +208,9 @@ class Api {
         }
         this.request('regist', { parentGeneralizeId: ' ', channel: '57b2d65067e58e601d00258a', mobile, password, code: verification }, onSuccess, onError);
     }
-    resetPassword(mobile, password, verification, onSuccess, onError) {
-        this.request('reset_password', { mobile, password, code: verification }, onSuccess, onError);
+    resetPassword(password, verification, onSuccess, onError) {
+        ///user/security/update_loginPwd
+        this.request('user/security/update_loginPwd', { password, password, code: verification }, onSuccess, onError);
     }
     validateRealName(name, card, onSuccess, onError) {
         if (Config.mock) {
@@ -233,7 +234,7 @@ class Api {
         }
         this.request('user/withdraw/bank_list', {}, onSuccess);
     }
-    addBankCard(bank, province, city, address, card, onSuccess, onError) {
+    addBankCard(bank, province, city, address, card, name, onSuccess, onError) {
         this.logger.info(`addBankCard 增加銀行卡 - bank: ${bank}, province: ${province}, city: ${city}, address: ${address}, card: ${card}`);
         if (Config.mock) {
             const bankName = Enum.bankOptions.find((bo) => {
@@ -250,7 +251,7 @@ class Api {
             onSuccess();
             return;
         }
-        this.request('user/withdraw/add_bank', { bank, prov: province, city, address, card }, onSuccess, onError);
+        this.request('user/withdraw/add_bank', { bank, prov: province, city, address, card, realName: name }, onSuccess, onError);
     }
     setBankCardDefault(bankId, onSuccess, onError) {
         this.logger.info(`setBankCardDefault 設定當前使用銀行卡 - bankId: ${bankId}`);

@@ -44,7 +44,6 @@ class AccountAddBankCardStore {
         this.isDialogVisible = isDialogVisible;
     }
     @action setDialogContent() {
-        const username = this.accountStore.username;
         const bankOption = Enum.bankOptions.find((bank) => {
             return bank.value === this.bank;
         });
@@ -60,10 +59,10 @@ class AccountAddBankCardStore {
             return cd.value === city;
         });
         this.cityText = cityObject.text;
-        this.dialogContent = `开户姓名: ${username}\n开户地址: ${bank}\n开户地址: ${this.provinceText} ${this.cityText} ${this.addressDetail}\n银行卡号: ${this.card}`;
+        this.dialogContent = `开户地址: ${bank}\n开户地址: ${this.provinceText} ${this.cityText} ${this.addressDetail}\n银行卡号: ${this.card}`;
     }
     @action addBankCard() {
-        Api.addBankCard(this.bank, this.provinceText, this.cityText, this.addressDetail, this.card, () => this.addBankCardSuccess(), (result) => this.addBankCardError(result));
+        Api.addBankCard(this.bank, this.provinceText, this.cityText, this.addressDetail, this.card, this.accountStore.username, () => this.addBankCardSuccess(), (result) => this.addBankCardError(result));
     }
     @action.bound addBankCardSuccess() {
         this.setDialogVisible(false);
@@ -106,7 +105,7 @@ class AccountAddBankCard extends Component {
             <View style={styles.container}>
                 <FieldProvider form={this.store}>
                     <View style={{ marginHorizontal: Layout.fieldHorizontalMargin, flex: 1 }}>
-                        <DisplayUnderline label='开户姓名' text={AccountStore.username} style={{ marginTop: Layout.fieldMargin }} />
+                        <DisplayUnderline label='账户名' text={AccountStore.username} style={{ marginTop: Layout.fieldMargin }} />
                         <SelectFieldEnhanced name='bank' type='normal' label='开户银行' skin='underline' options={Enum.bankOptions} isErrorMsg={false} />
                         <SelectFieldEnhanced name='address' type='address' label='开户地址' skin='underline' isErrorMsg={false} />
                         <InputFieldEnhanced name='addressDetail' type='string' label='详细地址' skin='underline' isErrorMsg={false} />

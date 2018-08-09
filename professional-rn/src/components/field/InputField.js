@@ -80,7 +80,7 @@ export default class InputField extends Component {
             if (this.props.type === 'int') {
                 newText = FieldUtil.getInt(text);
             } else {
-                newText = FieldUtil.getFloat(text);
+                newText = FieldUtil.getAccessMoneyFloat(text);
             }
             if (newText !== null) {
                 form[name] = newText;

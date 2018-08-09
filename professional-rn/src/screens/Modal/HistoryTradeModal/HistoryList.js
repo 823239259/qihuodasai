@@ -5,7 +5,7 @@ import { Accordion, AccordionItem } from '../../../components';
 import { Enum, Layout } from '../../../global';
 import Logger from '../../../utils/Logger';
 
-@inject('HistoryTradeStore') @observer
+@inject('HistoryTradeStore', 'FutureTypeStore') @observer
 export default class HistoryList extends Component {
     static propTypes = {
         type: PropTypes.number
@@ -19,20 +19,53 @@ export default class HistoryList extends Component {
     render() {
         const { HistoryTradeStore } = this.props;
         const columnRemainingWidth = (Layout.screenWidth - (40 + (60 * 3) + 80 + 150)) / 3;
+        const headerArr = this.props.FutureTypeStore.isFutIn ? [
+            { text: '序号', style: { width: 40 } },
+            { text: '合约代码', style: { width: Layout.deviceSize === Enum.deviceSize.pad ? columnRemainingWidth : 70 } },
+            { text: '交易所', style: { width: Layout.deviceSize === Enum.deviceSize.pad ? columnRemainingWidth : 70 } },
+            { text: '币种', style: { width: Layout.deviceSize === Enum.deviceSize.pad ? columnRemainingWidth : 70 } },
+            { text: '买卖', style: { width: 60 } },
+            { text: '开平', style: { width: 60 } },
+            { text: '成交价', style: { width: 80 } },
+            { text: '成交量', style: { width: 60 } },
+            { text: '手续费', style: { width: 60 } },
+            { text: '成交时间', style: { width: 150 } }
+        ] : [
+            { text: '序号', style: { width: 40 } },
+            { text: '合约代码', style: { width: Layout.deviceSize === Enum.deviceSize.pad ? columnRemainingWidth : 70 } },
+            { text: '交易所', style: { width: Layout.deviceSize === Enum.deviceSize.pad ? columnRemainingWidth : 70 } },
+            { text: '币种', style: { width: Layout.deviceSize === Enum.deviceSize.pad ? columnRemainingWidth : 70 } },
+            { text: '买卖', style: { width: 60 } },
+            { text: '成交价', style: { width: 80 } },
+            { text: '成交量', style: { width: 60 } },
+            { text: '手续费', style: { width: 60 } },
+            { text: '成交时间', style: { width: 150 } }
+        ];
+        const keyArr = this.props.FutureTypeStore.isFutIn ? [
+            { name: 'serialNo' },
+            { name: 'productName' },
+            { name: 'exchangeNo' },
+            { name: 'currencyNo' },
+            { name: 'directionText', color: 'directionColor' },
+            { name: 'openCloseType' },
+            { name: 'tradePrice' },
+            { name: 'tradeNum' },
+            { name: 'tradeFee' },
+            { name: 'tradeDateTime' }
+        ] : [
+            { name: 'serialNo' },
+            { name: 'productName' },
+            { name: 'exchangeNo' },
+            { name: 'currencyNo' },
+            { name: 'directionText', color: 'directionColor' },
+            { name: 'tradePrice' },
+            { name: 'tradeNum' },
+            { name: 'tradeFee' },
+            { name: 'tradeDateTime' }
+        ];
         return (
             <Accordion
-                headers={[
-                    { text: '序号', style: { width: 40 } },
-                    { text: '合约代码', style: { width: Layout.deviceSize === Enum.deviceSize.pad ? columnRemainingWidth : 70 } },
-                    { text: '交易所', style: { width: Layout.deviceSize === Enum.deviceSize.pad ? columnRemainingWidth : 70 } },
-                    { text: '币种', style: { width: Layout.deviceSize === Enum.deviceSize.pad ? columnRemainingWidth : 70 } },
-                    { text: '买卖', style: { width: 60 } },
-                    { text: '开平', style: { width: 60 } },
-                    { text: '成交价', style: { width: 80 } },
-                    { text: '成交量', style: { width: 60 } },
-                    { text: '手续费', style: { width: 60 } },
-                    { text: '成交时间', style: { width: 150 } }
-                ]}
+                headers={headerArr}
                 count={HistoryTradeStore.historyData.length}
             >
                 { HistoryTradeStore.historyData.map((data, index) => {
@@ -40,18 +73,7 @@ export default class HistoryList extends Component {
                         <AccordionItem 
                             data={data}
                             key={index}
-                            keys={[
-                                { name: 'serialNo' },
-                                { name: 'productName' },
-                                { name: 'exchangeNo' },
-                                { name: 'currencyNo' },
-                                { name: 'directionText', color: 'directionColor' },
-                                { name: 'openCloseType' },
-                                { name: 'tradePrice' },
-                                { name: 'tradeNum' },
-                                { name: 'tradeFee' },
-                                { name: 'tradeDateTime' }
-                            ]}
+                            keys={keyArr}
                         />
                     );
                 })}

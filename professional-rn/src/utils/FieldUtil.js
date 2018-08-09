@@ -2,6 +2,28 @@ import _ from 'lodash';
 import { Config } from '../global';
 
 export default {
+    getAccessMoneyFloat(text) {
+        if (text.charAt(0) === '0'&& text.charAt(1) !== '.' && text.length >1) {
+            return text.charAt(1)
+        }
+        // 狀況：2.00.0
+        if (isNaN(text)) {
+            return text.slice(0, -1);
+        }
+        // 小數最多輸入2位數
+        const textArr = text.split('.');
+        if (textArr.length === 2) {
+            if (textArr[1].length > Config.maxAccessMoneyFractionLength) {
+                return text.slice(0, -1);
+            }
+        }
+        // 整數最多輸入maxIntegerLength位數
+        if (textArr[0].length > Config.maxIntegerLength) {
+            return text.slice(0, -1);
+        }
+        
+        return text;
+    },
     getFloat(text) {
         if (text.charAt(0) === '0'&& text.charAt(1) !== '.' && text.length >1) {
             return text.charAt(1)

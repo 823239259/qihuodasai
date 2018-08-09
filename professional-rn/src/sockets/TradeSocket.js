@@ -23,8 +23,9 @@ export default class TradeSocket {
     historyTradeStore= null;
     conditionStore = null;
     tradeLoginModalStore = null;
+    futureTypeStore = null;
 
-    constructor(tradeStore, tradeSend, workbenchDetailStore, quotationDetailStore, stopLossStore, historyTradeStore, conditionStore, tradeLoginModalStore) {
+    constructor(tradeStore, tradeSend, workbenchDetailStore, quotationDetailStore, stopLossStore, historyTradeStore, conditionStore, tradeLoginModalStore, futureTypeStore) {
         this.logger = new Logger(TradeSocket);
         this.tradeStore = tradeStore;
         this.tradeSend = tradeSend;
@@ -34,13 +35,14 @@ export default class TradeSocket {
         this.historyTradeStore = historyTradeStore;
         this.conditionStore = conditionStore;
         this.tradeLoginModalStore = tradeLoginModalStore;
+        this.futureTypeStore = futureTypeStore;
     }
     setEventEmitter(eventEmitter) {
         this.eventEmitter = eventEmitter;
     }
     connectSocket(account, password, onTradeLoginSuccess) {
         return new Promise((resolve, reject) => {
-            this.socket = new WebSocket(Config.tradeSocket.url);
+            this.socket = new WebSocket(this.futureTypeStore.isFutIn ? Config.tradeSocket.futinUrl :Config.tradeSocket.futoutUrl);
             this.tradeSend.setSocket(this.socket);
 
             this.socket.onopen = () => {

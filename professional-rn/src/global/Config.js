@@ -32,6 +32,8 @@ export default {
     /********************** url **********************/
     marketSocketUrl: 'ws://192.168.0.232:9102',//`ws://quote.${quoteDomainName}.com:9002`,                          //指向内部数据，由domainName 修改为quoteDomainName          by zihaoWang 18.6.8
     tradeSocket: {
+        futinUrl:'',
+        futoutUrl:'',
         url: 'ws://192.168.0.227:6999',//`ws://trade.${tradeDomainName}.cn:6101`,                                   //指向内部数据  old:'ws://trade.${domainName}.com:6102'   by zihaoWang 18.6.8
         isMock: 1,
         //version: 3.3,
@@ -41,10 +43,11 @@ export default {
     api_domain: `http://test.api.${apiDomainName}.cn`,                                       //指向内部数据  old:`http://api.${domainName}.com`        by zihaoWang 18.6.8
     base_images_url: `http://test.manage.${domainName}.cn`, //图片地址                       //暂未指向新url  by zihaoWang 18.6.8
     customer_service_url: `http://api.${apiDomainName}.cn/consistentbeauty.html`,      //old:`http://api.${domainName}.com/consistentbeauty.html`  by zihaoWang 18.6.8
-    api_recharge_url: `http://pay.${domainName}.com`,                                  //暂未指向新url  by zihaoWang 18.6.8
+    api_recharge_url: `http://test.pay.${domainName}.cn`,                                  //暂未指向新url  by zihaoWang 18.6.8
     /********************** input **********************/
-    maxStringLength: 12,   // 1.電話號碼11碼：15011469603 2.銀行卡12碼
+    maxStringLength: 18,   // 1.电话号码11位 2.银行卡16位 3.身份证18位
     maxFractionLength: 4,  // 小數點可以輸入幾位
+    maxAccessMoneyFractionLength: 2,  // 充值提现小数点位数
     maxIntegerLength: 11,   // 整數可以輸入幾位
     /********************** QuotationDetail **********************/
     chartDataLimited: 40,  // 最多取多少資料來畫圖

@@ -24,7 +24,7 @@ export default class AccountStore {
         { icon: require('../../../img/account/realNameCertification.png'), title: '实名认证', text: '未认证', screen: 'account.AccountRealNameCertification' },
         { icon: require('../../../img/account/creditCard.png'), title: '绑定银行卡', screen: 'account.AccountBankCard' },
         { icon: require('../../../img/account/cellphone.png'), title: '手机绑定', screen: 'account.AccountCellphone' },
-        { icon: require('../../../img/account/loginSecurity.png'), title: '登陆密码', screen: 'account.AccountLoginPwd' },
+        { icon: require('../../../img/account/loginSecurity.png'), title: '登录密码', screen: 'account.AccountLoginPwd' },
         { icon: require('../../../img/account/tradeAccount.png'), title: '交易账号', text: 'down', screen: 'applyRecord' },
     ];
     // BalanceRate 使用者明細
@@ -189,7 +189,7 @@ export default class AccountStore {
     }
     @action.bound getBalanceRateSuccess(result) {
         const { data } = result;
-        this.username = data.username ? data.username : `欢迎您，${this.getPhoneSecret(Variables.account.mobile.value)}`;
+        this.username = data.username ? data.username : `${this.getPhoneSecret(Variables.account.mobile.value)}`;
         this.balance = data.balance; // 0.00元
         this.isSetWithdrawPwd = data.isSetDrawPwd;
         this.withdrawHandleFee = data.drawHandleFee;

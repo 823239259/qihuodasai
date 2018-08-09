@@ -38,11 +38,11 @@ export default class InformationScreen extends Component {
         return (
             <View style={{ flex: 1 }}>
                 <RefreshableFlatList
-                    bottomPullingPrompt={'向上拉，获取更多资讯'}
-                    bottomHoldingPrompt={'下载中...'}
-                    bottomRefreshingPrompt={'已获取，正在处理资讯...'}
-                    showTopIndicator={false}
-                    bottomIndicatorComponent={IndicatorPullToRefresh}
+                    topPullingPrompt={'向下拉，获取更多资讯'}
+                    topHoldingPrompt={'下载中...'}
+                    topRefreshingPrompt={'已获取，正在处理资讯...'}
+                    showBottomIndicator={false}
+                    topIndicatorComponent={IndicatorPullToRefresh}
                     data={InformationStore.reverseInformations}
                     renderItem={({ item }) => (
                         <InformationItem

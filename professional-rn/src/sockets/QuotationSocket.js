@@ -24,18 +24,13 @@ export default class QuotationSocket {
         
 
     }
-    
-    //关闭socket
-
-    ss () {
-        this.socket.close()
-    }
-
     setEventEmitter(eventEmitter) {
         this.eventEmitter = eventEmitter;
+    }       
+    closeSocket () {
+        //关闭socket
+        if(this.socket !== null) this.socket.close();
     }
-    
-
     connectSocket() {
         return new Promise((resolve, reject) => {
             this.socket = new WebSocket(Config.marketSocketUrl);
@@ -212,7 +207,7 @@ export default class QuotationSocket {
     }
     // 其實行情傳入的UserName & PassWord都是''
     sendLogin() {
-        this.sendMessage('req_login', `{"user_name":"${Variables.user}", "password":" ${Variables.pwd}", "protoc_version":"6.2"}`);
+        this.sendMessage('req_login', `{"user_name":"${Variables.user}", "password":"${Variables.pwd}", "protoc_version":"6.2"}`);
     }
     // 查詢品種接口 QryCommodity
     sendQryCommodity() {

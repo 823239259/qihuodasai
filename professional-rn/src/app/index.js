@@ -68,7 +68,8 @@ export default class App {
     return new Promise((resolve) => {
       
       Api.getTradeSocketInfo((result) => {
-        Config.tradeSocket.url = result.data.socketUrl;//to fix...改为静态url // ws://trade.qhinom.com:6102 有可能會更改掉
+        Config.tradeSocket.futinUrl = result.data.socketUrl;
+        Config.tradeSocket.futoutUrl = result.data.socketModelUrl;
         resolve(true);
       });
     });

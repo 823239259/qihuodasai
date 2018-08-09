@@ -96,11 +96,9 @@ class StoreManager {
 
         const tradeLoginModalStore = new TradeLoginModalStore();
 
-        // 内外盘标识store
-        //const  futureTypeStore = new FutureTypeStore();
-        //const quotationSocket = new QuotationSocket(quotationStore, quotationDetailStore, tradeStore);
+        // futureTypeStore内外盘标识
         const quotationSocket = new QuotationSocket(quotationStore, quotationDetailStore, tradeStore, futureTypeStore);
-        const tradeSocket = new TradeSocket(tradeStore, tradeSend, workbenchDetailStore, quotationDetailStore, stopLossStore, historyTradeStore, conditionStore, tradeLoginModalStore);
+        const tradeSocket = new TradeSocket(tradeStore, tradeSend, workbenchDetailStore, quotationDetailStore, stopLossStore, historyTradeStore, conditionStore, tradeLoginModalStore, futureTypeStore);
         const connectionScreenStore = new ConnectionScreenStore();
         const socketManager = new SocketManager(quotationSocket, tradeSocket, quotationDetailStore, tradeLoginModalStore, connectionScreenStore, tradeSend);
 

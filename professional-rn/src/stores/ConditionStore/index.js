@@ -187,7 +187,7 @@ export default class ConditionStore {
             additionPrice: param.AdditionPrice,
 
             direction: param.Drection,
-            openCloseType: param.OpenCloseType,//to do ...添加开平类型
+            openCloseType: param.OpenCloseType,
             orderType: param.OrderType,
             num: param.Num,
 

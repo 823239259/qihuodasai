@@ -23,7 +23,7 @@ class AccountRealNameCertificationStore {
     id = '';
 
     @action validateRealName() {
-        Api.validateRealName(this.name, this.id, () => this.validateRealName(), (result) => this.validateRealNameFail(result));
+        Api.validateRealName(this.name, this.id, () => this.validateRealNameSuccess(), (result) => this.validateRealNameFail(result));
     }
     @action.bound validateRealNameSuccess() {
         // 更新帳戶資訊

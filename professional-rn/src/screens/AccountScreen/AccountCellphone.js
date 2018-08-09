@@ -33,7 +33,7 @@ class NewCellphoneStore {
     verification = '';
 
     @action onVerificationPress() {
-        Api.sendSecuritySms(this.mobile, 1, sendSmsSuccess.bind(this), sendSmsFail.bind(this));
+        Api.sendSecuritySms(this.mobile, 3, sendSmsSuccess.bind(this), sendSmsFail.bind(this));
     }
 }
 class OldCellphoneStore {
@@ -46,7 +46,7 @@ class OldCellphoneStore {
     verification = '';
 
     @action onVerificationPress() {
-        Api.sendSecuritySms(this.mobile, 2, sendSmsSuccess.bind(this), sendSmsFail.bind(this));
+        Api.sendSecuritySms(this.mobile, 3, sendSmsSuccess.bind(this), sendSmsFail.bind(this));
     }
 }
 class AccountCellphoneStore {
