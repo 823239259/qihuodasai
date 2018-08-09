@@ -77,7 +77,7 @@ class StoreManager {
         const workbenchDetailStore = new WorkbenchDetailStore();
         const tradeNumStore = new TradeNumStore(tradeSend);
         const tradeOptionStore = new TradeOptionStore(tradeSend);
-        const tradeStore = new TradeStore(quotationStore, tradeNumStore, tradeOptionStore);
+        const tradeStore = new TradeStore(quotationStore, tradeNumStore, tradeOptionStore, futureTypeStore);
         const tradeHoldPositionStore = new TradeHoldPositionStore(quotationStore, tradeStore, tradeSend);
         const tradeDesignateStore = new TradeDesignateStore(quotationStore, tradeStore, tradeSend);
 

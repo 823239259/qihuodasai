@@ -46,7 +46,7 @@ class OldCellphoneStore {
     verification = '';
 
     @action onVerificationPress() {
-        Api.sendSecuritySms(this.mobile, 3, sendSmsSuccess.bind(this), sendSmsFail.bind(this));
+        Api.sendSecuritySms(this.mobile, 4, sendSmsSuccess.bind(this), sendSmsFail.bind(this));
     }
 }
 class AccountCellphoneStore {

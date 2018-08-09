@@ -115,6 +115,7 @@ class AccountWithdraw extends Component {
                     label={withdrawPwdText} 
                     skin='underline' 
                     isErrorMsg={false}
+                    isErrorMsgSpace={false}
                 />
             );
         }
@@ -124,6 +125,7 @@ class AccountWithdraw extends Component {
                 isButton={true}
                 buttonText={'未设置'} 
                 onButtonPress={() => this._toSetWithdrawPwd()}
+                isBottomMargin={false}
             />
         );
     }
@@ -174,11 +176,11 @@ class AccountWithdraw extends Component {
                     <FieldProvider form={this.store}>
                         <View style={{ marginHorizontal: Layout.fieldHorizontalMargin, flex: 1 }}>
                             { this._renderCardBand() }
-                            <InputFieldEnhanced name='withdraw' type='float' label='提现金额' skin='underline' isErrorMsg={false} />
+                            <InputFieldEnhanced name='withdraw' type='float' label='提现金额' skin='underline' isErrorMsg={false} isErrorMsgSpace={false}/>
                             { this._renderPwd() }
-                            <DisplayUnderline label='手续费' text={`${this.store.real.handleFee} 元`} />
-                            <DisplayUnderline label='累计免手续费' text={`${this.store.operateMoney} 元`} />
-                            <DisplayUnderline label='实际到账' text={`${this.store.real.realMoney} 元`} />
+                            <DisplayUnderline label='手续费' text={`${this.store.real.handleFee} 元`} isBottomMargin={false}/>
+                            <DisplayUnderline label='累计免手续费' text={`${this.store.operateMoney} 元`} isBottomMargin={false}/>
+                            <DisplayUnderline label='实际到账' text={`${this.store.real.realMoney} 元`} isBottomMargin={false}/>
                             <Submit text={'确认提现'} onSubmit={() => this._submit()} />
                         </View>
                     </FieldProvider>

@@ -77,18 +77,20 @@ export default class DrawerTrade extends Component {
     _toAbout() {
         RootNavi.popToRoot();
         RootNavi.switchToTab(1);
-        // this.props.navigator.showModal({
-        //     screen: 'quotation.QuotationAboutModal',
-        //     title: '关于',
-        //     navigatorButtons: {
-        //     leftButtons: [
-        //         {
-        //             icon: Variables.icon.closeAbout.source,
-        //             id: Variables.icon.closeAbout.id
-        //         }
-        //     ]
-        //     }
-        // }); 
+        
+        /*
+        this.props.navigator.showModal({
+            screen: 'quotation.QuotationAboutModal',
+            title: '关于',
+            navigatorButtons: {
+            leftButtons: [
+                {
+                    icon: Variables.icon.closeAbout.source,
+                    id: Variables.icon.closeAbout.id
+                }
+            ]
+            }
+        }); */
     }
     _toStopLossList() {
         this.props.navigator.showModal({

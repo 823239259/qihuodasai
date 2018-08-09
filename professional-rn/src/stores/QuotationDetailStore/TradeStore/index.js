@@ -28,7 +28,6 @@ import { ToastRoot } from '../../../components';
 import { Logger, I18n, TradeUtil, ArrayUtil } from '../../../utils';
 
 export default class TradeStore {
-    type = true; //to fix ... true 内盘 false 外盘
     logger = null;
     // store
     quotationStore = null;
@@ -37,11 +36,12 @@ export default class TradeStore {
     
     product = null; // 當前處理的current product
 
-    constructor(quotationStore, tradeNumStore, tradeOptionStore) {
+    constructor(quotationStore, tradeNumStore, tradeOptionStore, futureTypeStore) {
         this.logger = new Logger(TradeStore);
         this.quotationStore = quotationStore;
         this.tradeNumStore = tradeNumStore;
         this.tradeOptionStore = tradeOptionStore;
+        this.futureTypeStore = futureTypeStore;
         // 用來計算updateAccountMoney(updateBalance)
         this.cache = new Map(); // key" 'USU || HKD-HKFE || EUR || JPY || CNY', value: Cache
 
@@ -191,7 +191,7 @@ export default class TradeStore {
         this.logger.warn(`manageHold - productName: ${product.productName}`);
         // 手數
         const holdNum = param.HoldNum;
-        const productName = this.type ? `${product.productName}${param.Drection}`:product.productName;
+        const productName = this.futureTypeStore.isFutIn ? `${product.productName}${param.Drection}`:product.productName;
         if (holdNum === 0) {
             this.deleteHold(productName);
             return;
@@ -209,13 +209,13 @@ export default class TradeStore {
         return this.holdPositions.get(this.getProductName(param));
     }
     @action updateHold(product, param) {
-        const productName = this.type ? `${product.productName}${param.Drection}`:product.productName;
+        const productName = this.futureTypeStore.isFutIn ? `${product.productName}${param.Drection}`:product.productName;
         const holdPosition = this.holdPositions.get(productName);
         // holdPosition.update(this.setHoldPosition(product, param));
         holdPosition.update(product, param);
     }
     @action addHold(product, param) {
-        const productName = this.type ? `${product.productName}${param.Drection}`:product.productName;
+        const productName = this.futureTypeStore.isFutIn ? `${product.productName}${param.Drection}`:product.productName;
         // this.holdPositions.set(productName, new HoldPosition(this.setHoldPosition(product, param)));
         this.holdPositions.set(productName, new HoldPosition(product, param));
     }

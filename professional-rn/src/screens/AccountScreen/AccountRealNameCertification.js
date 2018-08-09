@@ -29,6 +29,10 @@ class AccountRealNameCertificationStore {
         // 更新帳戶資訊
         this.accountStore.getBalance();
         ToastRoot.show('认证成功');
+        this.accountStore.navigator.pop({
+            animated: true,
+            animationType: 'fade',
+        });
     }
     @action.bound validateRealNameFail(result) {
         if (result.code == 2) {

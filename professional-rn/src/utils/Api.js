@@ -292,7 +292,7 @@ class Api {
             onSuccess();
             return;
         }
-        this.request('user/withdraw/handle', {}, onSuccess, onError);
+        this.request('user/withdraw/handle', { bank: bankAbbreviation, card, money, withdrawPwd }, onSuccess, onError);
     }
     // 判断是否显示马甲包
     getJudgeShow(onSuccess) {
