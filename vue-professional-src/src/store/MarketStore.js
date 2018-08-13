@@ -73,16 +73,16 @@ export default class Market {
             },
             
             //委托列表页面数据
-            entrustCont:[],
-            OnRspOrderInsertEntrustCont:[],
+            entrustCont:[], 
+            OnRspOrderInsertEntrustCont:[], //交易服务器返回的委托列表
             
             //挂单页面列表
             orderListCont:[],
-            OnRspOrderInsertOrderListCont:[],
+            OnRspOrderInsertOrderListCont:[], //交易服务器返回的挂单列表
             
             //成交记录列表
-            dealListCont:[],
-            OnRspQryTradeDealListCont:[],
+            dealListCont:[],  // 展示成交列表 (OnRspQryTradeDealListCont里提取部分数据)
+            OnRspQryTradeDealListCont:[], //交易服务器返回的成交列表
             
             // 订单状态
             OrderType:{
@@ -142,8 +142,7 @@ export default class Market {
             selectTime: 0,
             //存进入详情页的No
             currentNo: '',
-            //订阅成功后查询品种列表
-            orderTemplist:{},
+            orderTemplist:{}, //订阅成功后查询品种列表 初始信息 + 回推信息(LastQuotation)
             templateList:{}, //订阅后的最新行情列表
             //缓存数组，用于存最新行情的数据
             tempArr: [],
