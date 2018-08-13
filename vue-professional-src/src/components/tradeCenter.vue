@@ -268,7 +268,6 @@
 			},
 			cancelOrderAlert () {
 				var obj = this.buyText.Parameters;
-				console.log(obj)
 				if(obj!=undefined){
 					var contract=obj.CommodityNo+obj.ContractNo;
 					var orderNum = obj.OrderNum;
@@ -388,7 +387,7 @@
 				}.bind(this), 1000);
 			},
 			Parameters:function(n,o){
-				if(n.commodity_no == this.$store.state.market.currentNo){
+				if(n.contract_info.commodity_no == this.$store.state.market.currentNo){
 					this.showNewPrice = n
 				}
 			},
@@ -400,16 +399,21 @@
 					this.commodityNo00 = arr[1] + arr[2];
 					
 					var orderTemplist = this.orderTemplist;
-					this.Parameters00.forEach(function(o, i){
-						if(o.commodity_name == this.commodityName00){
-							this.$store.state.market.currentdetail = o;
-							this.tradePrices = dealDotSize(o.LastQuotation.last,o.LastQuotation);
-							this.dotSize = this.orderTemplist[o.LastQuotation.commodity_no].dot_size;
-						}
-					}.bind(this));
-					function dealDotSize(price,LastQuotation){
-					  	return  parseFloat(price).toFixed(orderTemplist[LastQuotation.commodity_no].dot_size) ;
-					}
+					console.log(orderTemplist[arr[1]])
+					this.$store.state.market.currentdetail = orderTemplist[arr[1]]
+					this.tradePrices = parseFloat(this.detail.LastQuotation.last).toFixed(this.detail.dot_size)
+					this.dotSize = this.detail.dot_size;
+
+					// this.Parameters00.forEach(function(o, i){
+					// 	if(o.commodity_name == this.commodityName00){
+					// 		this.$store.state.market.currentdetail = o;
+					// 		this.tradePrices = dealDotSize(o.LastQuotation.last,o.LastQuotation);
+					// 		this.dotSize = this.orderTemplist[o.LastQuotation.commodity_no].dot_size;
+					// 	}
+					// }.bind(this));
+					// function dealDotSize(price,LastQuotation){
+					//   	return  parseFloat(price).toFixed(orderTemplist[LastQuotation.commodity_no].dot_size) ;
+					// }
 				}
 			},
 			tradePrices: function(n, o){
@@ -622,7 +626,6 @@
 				}
 			},
 			buy(){
-				console.log(111)
 				var commodityNo = this.detail.commodity_no;
 				if(this.isShow==true){
 					if(this.$children[2].defaultNum == 0){
@@ -814,7 +817,7 @@
 		mounted: function(){
 			this.showNewPrice = this.Parameters;
 			//取小数点保留位数、改变正则
-			this.dotSize = this.orderTemplist[this.$store.state.market.currentdetail.commodity_no].dot_size;
+			this.dotSize = this.$store.state.market.currentdetail.dot_size;
 			//tab默认选中第一个
 			$("#tabBox .tab_box_col:first-child span").addClass("current");
 			//页面高度计算

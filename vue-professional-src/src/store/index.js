@@ -1867,29 +1867,35 @@ export default new Vuex.Store({
 							return templateList
 						},market.templateList)
 						market.Parameters = succ_list
-						// console.log(market.templateList)
-						// console.log(market.Parameters)
-
-						// templateList {key:Parameters}
-						//market.templateList[key] = Parameters;
-						//更新订阅合约列表Parameters 加入LastQuotation
-						// let OnRspMarkettempItem = market.markettemp.find(item => item.CommodityNo == Parameters.CommodityNo)
-						// OnRspMarkettempItem.LastQuotation = Parameters.LastQuotation;
-						// market.Parameters.push(OnRspMarkettempItem);
 						//初始化交易
 						if(market.subscribeIndex==1) context.dispatch('initTrade');
 						market.subscribeIndex++;
 						break;
 					case 'on_rtn_quote': // 最新行情
 						var val = wsData.data;
-						
 						var key = val.contract_info.commodity_no;
-						//
 						//找到当前的回推的合约及index
 						//console.log(market.Parameters)
-						var RtnParameters = market.Parameters.find((a) => a.commodity_no == key);
-						var RtnParametersIndex = market.Parameters.findIndex((a) => a.commodity_no == key);
+						var RtnParametersIndex;
+						var RtnParameters = market.Parameters.find((a, index) => {
+							if (a.commodity_no == key) {
+								RtnParametersIndex = index;
+								return true
+							}
+						});
 						if (!RtnParameters) return;
+						// 找到 对应的markettemp赋值  没必要
+						var RtnMarkettemp = market.markettemp.find((a) => a.commodity_no == key);
+						if (!RtnMarkettemp) return;
+						//处理掉行情回推成交量为0的情况
+						if(val.volume === 0) {
+							val.volume = (RtnMarkettemp.LastQuotation&&RtnMarkettemp.LastQuotation.volume)||0
+						}		
+						//重新给templateList 赋最新值
+						market.templateList[key] = val;
+						RtnMarkettemp.LastQuotation = val;
+						market.Parameters.splice(RtnParametersIndex, 1, RtnMarkettemp);
+
 						//处理变色 
 						if (RtnParameters.LastQuotation && val.last > RtnParameters.LastQuotation.last) {
 							market.quoteIndex = RtnParametersIndex;   //行情变颜色
@@ -1898,17 +1904,7 @@ export default new Vuex.Store({
 							market.quoteIndex = RtnParametersIndex;   //行情变颜色
 							market.quoteColor = 'green';
 						}
-						//重新给templateList 赋最新值
-						market.templateList[key] = val;
 
-						// 找到 对应的markettemp 赋最新价
-						var RtnMarkettemp = market.markettemp.find((a) => a.commodity_no == key);
-						if (!RtnMarkettemp) return;
-
-						RtnMarkettemp.LastQuotation = val;
-						//market.Parameters[RtnParametersIndex] = RtnMarkettemp
-						market.Parameters.splice(RtnParametersIndex, 1, RtnMarkettemp);
-						//debugger;
 						//更新当前合约
 						if (market.currentNo == RtnMarkettemp.commodity_no) {
 							// console.log(123)

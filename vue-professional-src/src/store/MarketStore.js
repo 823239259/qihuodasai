@@ -1,4 +1,13 @@
- //控制显示与否的模块
+ //行情 交易数据存放
+ /* 
+ 行情相关:
+    orderTemplist(object 回推消息+基本信息)  Parameters(array 回推消息+基本信息)  (最重要的字段)
+    templateList (object 回推消息) 
+ 
+交易相关: 
+    
+ 
+ */
 export default class Market {
     constructor () {
         this.state = {

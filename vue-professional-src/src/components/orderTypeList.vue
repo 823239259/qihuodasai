@@ -4,7 +4,7 @@
 		<div class="list">
 			<ul>
 				<template v-for="key in parameters">
-					<li :value="key.CommodityName + '&' + key.CommodityNo + '&' + key.MainContract" @tap="selectEvent">{{key.CommodityName}} {{key.CommodityNo}} {{key.MainContract}}</li>
+					<li :value="key.commodity_name + '&' + key.commodity_no + '&' + key.mainContract" @tap="selectEvent">{{concatInfo(key)}}</li>
 				</template>
 			</ul>
 		</div>
@@ -22,10 +22,13 @@
 		},
 		computed:{
 			parameters(){
-				return this.$store.state.market.Parameters;
+				return this.$store.state.market.Parameters.filter((item) => item.LastQuotation)
 			},
 		},
 		methods: {
+			concatInfo (key) {
+				return `${key.commodity_name} ${key.commodity_no} ${key.mainContract}`
+			},
 			selectEvent: function(e){
 				this.$store.state.market.selectId = $(e.currentTarget).attr('value');
 				this.isshow = false;
