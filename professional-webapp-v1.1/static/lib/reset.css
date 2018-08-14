@@ -1,0 +1,158 @@
+/*  
+ * @description: 清除默认样式
+ * @author: name  
+ * @update: 2017-10-11
+ */
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, 
+strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, 
+tfoot, thead, tr, th, td ,textarea {
+	margin: 0;
+  	padding: 0;
+}
+article, aside, details, figcaption, figure, footer, header, menu, nav, section {
+ 	display: block;
+}
+h1, h2, h3, h4, h5, h6{ 
+	font-size: 100%; 
+	font-weight: normal; 
+}
+table {
+ 	border-collapse: collapse;
+ 	border-spacing: 0;
+}
+ul, ol, li {
+ 	list-style: none;
+}
+input, button, select, textarea {
+    font-family: "\5B8B\4F53"; 
+    vertical-align: middle;
+    outline: none;
+    -webkit-appearance: none;
+}
+em, i{ 
+	font-style: normal;
+}
+div, p, ul, li, h1, h2, h3, h4, h5, h6{
+	box-sizing: border-box;
+}
+/*body {
+ 	-webkit-text-size-adjust: none;
+ 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0.5);
+}*/
+html{
+	-webkit-text-size-adjust: none;
+}
+html, body {
+	font-family: "\5B8B\4F53","\5FAE\8F6F\96C5\9ED1","arial";
+	background: #242633;
+ 	color: #a3aacc;
+ 	font-size: 14px;
+ 	line-height: 1;
+}
+.clearfix:before, .clearfix:after{
+	 clear: both; 
+	 content: ""; 
+	 display: block; 
+	 overflow: hidden 
+}
+a {
+	color: #333;
+ 	text-decoration: none;
+ 	-webkit-backface-visibility: hidden;
+}
+
+/*****实用字体库*****/
+@font-face {
+    font-family: 'ifont';
+    src: url('fonts/iconfont.eot'); /* IE9*/
+    src: url('fonts/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('fonts/iconfont.woff') format('woff'), /* chrome、firefox */
+    url('fonts/iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+    url('fonts/iconfont.svg#uxiconfont') format('svg'); /* iOS 4.1- */
+}
+.ifont{
+    color: #333;
+    font-size: 14px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+.ifont{ font-family: "ifont" !important;}
+
+/*下拉框*/
+.slt-box{
+	position: relative;
+	float: left;
+	width: 300px;
+	height: 30px;
+	border: 1px solid #474c66;
+	border-radius: 5px;
+}
+.slt-box.current{
+	border-color: #ffd400;
+}
+.slt-box.current .tal-box{
+	background: #ffd400;
+}
+.slt-box.current .tal-box .tal{
+	border-top: none;
+	border-bottom: 10px solid #2d3040;
+	margin-top: 8px;
+}
+.slt-box .slt{
+	width: 298px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	border: none;
+	background: none;
+	padding: 0 30px 0 5px;
+	box-sizing: border-box;
+	color: #fff;
+	cursor: pointer;
+}
+.slt-box .tal-box{
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 30px;
+	height: 28px !important;
+	overflow: hidden;
+	background: #474c66;
+	margin: 0;
+	cursor: pointer;
+}
+.slt-box .tal-box .tal{
+   	width: 0;
+    height: 0 !important;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 10px solid #2d3040;
+    margin: 10px 0 0 7px;
+}
+.slt-box .slt-list{
+	display: none;
+	position: absolute;
+	left: -1px;
+	top: 35px;
+	z-index: 999;
+	width: 300px;
+	height: 150px;
+	overflow-y: auto;
+	background: #596080;
+	border-radius: 5px;
+}
+.slt-box .slt-list li{
+	width: 300px;
+	height: 30px;
+	line-height: 30px;
+	padding: 0 10px;
+	cursor: pointer;
+	margin: 0 !important;
+}
+.slt-box .slt-list li:hover, .slt-box .slt-list li.select{
+	background: #474c66;
+	color: #fff;
+}

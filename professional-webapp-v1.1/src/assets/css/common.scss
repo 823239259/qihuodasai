@@ -1,0 +1,117 @@
+/*  
+ * @description: 公用css 
+ * @author: name  
+ * @update: 2017-10-11 
+ */
+
+/*****颜色*****/
+$black: #242633;
+$yellow: #ffd400;
+$red: #ff4c4c;
+$green: #3dcc85;
+$white: #ffffff;
+$deepblue: #292c3b;
+$blue: #2d3040;
+$lightblue: #a3aacc;
+$highLight: #474c66;
+$bottom_color: #36394d;
+
+/*****字体*****/
+$fs12: 12px;
+$fs14: 14px;
+$fs16: 16px;
+$fs18: 18px;
+$fs20: 20px;
+$fs24: 24px;
+$fs28: 28px;
+$fs56: 56px;
+
+/*****字体*****/
+$yh: "\5FAE\8F6F\96C5\9ED1"; /*微软雅黑*/
+$st: "\5B8B\4F53"; /*宋体*/
+$ht: "\9ED1\4F53"; /*黑体*/
+$arial: Arial;
+
+/*****排版*****/
+.clear{
+    clear: both;
+}
+.fl{ 
+    float: left;
+}
+.fr{ 
+    float: right;
+}
+
+table{
+    width: 100%;
+    tr{
+        background: $blue;
+        cursor: pointer;
+        &:nth-child(even){
+            background: $deepblue;
+        }
+        &:hover, &.current{
+            background: $highLight;
+        }
+    }
+    td{
+        text-align: left;
+    }
+    .red, .ifont.red{
+        color: $red !important;
+    }
+    .green, .ifont.green{
+        color: $green !important;
+    }
+}
+
+.icon{
+    display: inline-block;
+    overflow: hidden;
+}
+
+/*****按钮*****/
+.btn{
+    display: inline-block;
+    border-radius: 4px;
+    color: $black;
+    border: none;
+    font-size: $fs16;
+    cursor: pointer;
+    &.yellow{
+        background: $yellow;
+    }
+    &.blue{
+        background: $lightblue;
+    }
+}
+/*注册登录input框1为黄色2为蓝色*/
+input{
+    border: none;
+    background: none;
+    outline: none;
+}
+input:-webkit-autofill { 
+    -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+}
+/*input[type=text]:focus, input[type=password]:focus, textarea:focus {
+      -webkit-box-shadow: 0 0 0 1000px transparent inset; 
+} */
+.input_1 {
+    background-color: $blue;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 30px;
+}
+/*遮罩*/
+.bg{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 99;
+    background: #000;
+    opacity: 0.5;
+}
