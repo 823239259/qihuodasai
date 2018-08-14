@@ -9,7 +9,7 @@
 		<!--<h3 v-show="!istitle">{{user}}</h3>-->
 		<span class="rule" @tap="toRole">规则</span>
 		<refresh @tap.native="tradeRefresh"></refresh>
-		<menus></menus>
+		<menus />
 	</div>
 </template>
 

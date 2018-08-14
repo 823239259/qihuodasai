@@ -14,7 +14,7 @@
 					<li>
 						<ol class="cl">
 							<li class="fl fontgray">合约</li>
-							<li class="fl fontwhite">{{commodityObj.CommodityNo+commodityObj.MainContract}}</li>
+							<li class="fl fontwhite">{{commodityObj.commodity_no+commodityObj.mainContract}}</li>
 							<li class="fl fontgray">{{condition.Drection==0?'多':'空'}}</li>
 							<li class="fl fontgray">
 								<!--最新：<span class="fontwhite">{{templateListObj.LastPrice | toFixed(orderTemplistDotSize)}}</span>-->
@@ -56,7 +56,7 @@
 					<li>
 						<ol class="cl">
 							<li class="fl fontgray">合约</li>
-							<li class="fl fontwhite">{{commodityObj.CommodityNo+commodityObj.MainContract}}</li>
+							<li class="fl fontwhite">{{commodityObj.commodity_no+commodityObj.mainContract}}</li>
 							<li class="fl fontgray">{{condition.Drection==0?'多':'空'}}</li>
 							<li class="fl fontgray">
 								最新：<span class="fontwhite">{{lastPrice00 | toFixed(orderTemplistDotSize)}}</span>
@@ -152,21 +152,21 @@
 			},
 			orderTemplistDotSize(){
 				if(this.$store.state.market.orderTemplist[this.condition.CommodityNo]==undefined) return;
-				return	this.$store.state.market.orderTemplist[this.condition.CommodityNo].DotSize;
+				return	this.$store.state.market.orderTemplist[this.condition.CommodityNo].dot_size;
 			},
 			tradeSocket() {
 				return this.$store.state.tradeSocket;
 			},
 			miniTikeSize(){
-				return this.orderTemplist[this.condition.CommodityNo].MiniTikeSize;
+				return this.orderTemplist[this.condition.CommodityNo].mini_ticker_size;
 			}
 		},
 		watch:{
 			parameters:function(n,o){
 				if(this.condition.CommodityNo!=undefined){
 					n.forEach(function(e,i){
-						if(this.condition.CommodityNo==e.CommodityNo){
-							this.lastPrice00 = this.orderTemplist[this.condition.CommodityNo].LastQuotation.LastPrice;
+						if(this.condition.CommodityNo==e.commodity_no){
+							this.lastPrice00 = this.orderTemplist[this.condition.CommodityNo].LastQuotation.last;
 						}
 					}.bind(this));
 				}
@@ -184,10 +184,12 @@
 						this.percentLoss = '0.00';
 						return;
 					}
+					console.log(11)
 					var openAvgPrice = JSON.parse(this.val).HoldAvgPrice;
 //					this.inputPrice = openAvgPrice.toFixed(this.orderTemplistDotSize);
 					if(n.toString().split('.')[1] && n.toString().split('.')[1].length > this.orderTemplistDotSize){
 						this.inputPrice = openAvgPrice;
+						console.log(22)
 					}
 					this.percentLoss = parseFloat((n - openAvgPrice)/openAvgPrice*100).toFixed(2);
 				}
@@ -237,7 +239,7 @@
 					let a0,b0,d0;
 					if(!(this.inputPrice == '' || this.inputPrice == 0 || this.inputPrice == undefined)){
 						 a0 = this.inputPrice;
-						 b0 = this.orderTemplist[this.condition.CommodityNo].MiniTikeSize;
+						 b0 = this.orderTemplist[this.condition.CommodityNo].mini_ticker_size;
 						 d0 = a0%b0;
 					}
 					
@@ -279,9 +281,9 @@
 						let b={
 							"Method":'InsertStopLoss',
 							"Parameters":{
-								"ExchangeNo":this.orderTemplist[this.condition.CommodityNo].ExchangeNo,
-								"CommodityNo":this.orderTemplist[this.condition.CommodityNo].CommodityNo,
-								"ContractNo":this.orderTemplist[this.condition.CommodityNo].MainContract,
+								"ExchangeNo":this.orderTemplist[this.condition.CommodityNo].exchange_no,
+								"CommodityNo":this.orderTemplist[this.condition.CommodityNo].commodity_no,
+								"ContractNo":this.orderTemplist[this.condition.CommodityNo].mainContract,
 								"Num":parseInt(this.Num),
 								"StopLossType":parseInt(this.selectStopLossType00),
 								"StopLossPrice":(function(){
@@ -309,7 +311,7 @@
 					let a0,b0,d0;
 					if(!(this.zhiYinInputPrice == '' || this.zhiYinInputPrice == 0 || this.zhiYinInputPrice == undefined)){
 						 a0 = this.zhiYinInputPrice;
-						 b0 = this.orderTemplist[this.condition.CommodityNo].MiniTikeSize;
+						 b0 = this.orderTemplist[this.condition.CommodityNo].mini_ticker_size;
 						 d0 = a0%b0;
 					}
 					
@@ -345,9 +347,9 @@
 						let b={
 							"Method":'InsertStopLoss',
 							"Parameters":{
-								"ExchangeNo":this.orderTemplist[this.condition.CommodityNo].ExchangeNo,
-								"CommodityNo":this.orderTemplist[this.condition.CommodityNo].CommodityNo,
-								"ContractNo":this.orderTemplist[this.condition.CommodityNo].MainContract,
+								"ExchangeNo":this.orderTemplist[this.condition.CommodityNo].exchange_no,
+								"CommodityNo":this.orderTemplist[this.condition.CommodityNo].commodity_no,
+								"ContractNo":this.orderTemplist[this.condition.CommodityNo].mainContract,
 								"Num":parseInt(this.zhiYinNum),
 								"StopLossType":1,
 								"StopLossPrice":parseFloat(this.zhiYinInputPrice),

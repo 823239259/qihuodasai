@@ -29,18 +29,18 @@
 						</li>
 					</ul>
 					<ul class="cont">
-						<template v-for="(v,i) in Parameters">
-							<li class="list cl" @tap='toDetail'>
-								<ol>
+						<template v-for="(v,i) in Parameters" v-if="v.LastQuotation">
+							<li class="list cl" @tap='toDetail' :key='i'>
+								<ul>
 									<li>
-										<h5>{{v.CommodityName}}</h5>
-										<h5>{{v.CommodityNo}}{{v.MainContract}}</h5>
+										<h5>{{v.commodity_name}}</h5>
+										<h5>{{v.commodity_no}}{{v.MainContract}}</h5>
 									</li>
-									<li>{{v.LastQuotation.TotalVolume}}</li>
-									<li :class="{green: v.LastQuotation.ChangeRate < 0, red: v.LastQuotation.ChangeRate > 0}">{{v.LastQuotation.LastPrice | fixNum2(v.DotSize)}}</li>
-									<li :class="{green: v.LastQuotation.ChangeRate < 0, red: v.LastQuotation.ChangeRate > 0}" v-show="isswitch">{{v.LastQuotation.ChangeRate | fixNum}}%</li>
-									<li :class="{green: v.LastQuotation.ChangeRate < 0, red: v.LastQuotation.ChangeRate > 0}" v-show="!isswitch">{{v.LastQuotation.ChangeValue | fixNum2(v.DotSize)}}</li>
-								</ol>
+									<li>{{v.LastQuotation&&v.LastQuotation.volume}}</li>
+									<li :class="{green: v.LastQuotation&&v.LastQuotation.change_rate < 0, red: v.LastQuotation&&v.LastQuotation.change_rate > 0}">{{v.LastQuotation&&v.LastQuotation.last | fixNum2(v.dot_size)}}</li>
+									<li :class="{green: v.LastQuotation&&v.LastQuotation.change_rate < 0, red: v.LastQuotation&&v.LastQuotation.change_rate > 0}" v-show="isswitch">{{v.LastQuotation&&v.LastQuotation.change_rate | fixNum}}%</li>
+									<li :class="{green: v.LastQuotation&&v.LastQuotation.change_rate < 0, red: v.LastQuotation&&v.LastQuotation.change_rate > 0}" v-show="!isswitch">{{v.LastQuotation&&v.LastQuotation.change_value | fixNum2(v.dot_size)}}</li>	
+								</ul>
 							</li>
 						</template>
 						<p class="tips">没有更多的合约可加载啦~</p>
@@ -70,7 +70,6 @@
 			return {
 				time: 3,
 				msg: '',
-				title: '涨跌幅',
 				isdynamic: true,
 				isswitch: true,
 				colors: '',
@@ -81,11 +80,10 @@
 		},
 		filters:{
 			fixNum:function(num){
-				return num.toFixed(2);
+				return num&&num.toFixed(2);
 			},
 			fixNum2:function(num,dotsize){
-				dotsize=dotsize;
-				return num.toFixed(dotsize);
+				return num&&num.toFixed(dotsize)
 			}
 		},
 		components: {topbar, guide, tipsDialog, novice},
@@ -93,11 +91,18 @@
 			msgTips: function(){
 				return this.msg;
 			},
+			title () {
+				return this.isswitch?'涨跌幅':'涨跌额'
+			},
 			bg: function(){
 				if(this.colors) return this.colors;
 			},
 			Parameters(){
-				return this.$store.state.market.Parameters;
+				//return this.$store.state.market.Parameters.filters(item => item.LastQuotation)
+				if (this.$store.state.market.Parameters.length) {
+					return this.$store.state.market.Parameters;
+				}
+				
 			},
 			quoteIndex(){
 				return this.$store.state.market.quoteIndex;
@@ -181,17 +186,11 @@
 				$(e.target).addClass('current').siblings('li').removeClass('current');
 			},
 			switchEvent: function(e){
-				if($(e.currentTarget).text() == '涨跌幅'){
-					this.title = '涨跌额';
-					this.isswitch = false;
-				}else{
-					this.title = '涨跌幅';
-					this.isswitch = true;
-				}
+				this.isswitch = !this.isswitch
 			},
 			toDetail: function(a) {
 				this.Parameters.forEach(function(e){
-					if(e.CommodityName == $(a.currentTarget).children().find('h5:first-child').text()){
+					if(e.commodity_name == $(a.currentTarget).children().find('h5:first-child').text()){
 						this.$store.state.market.currentdetail=e;
 					}
 				}.bind(this));

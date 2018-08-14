@@ -7,18 +7,18 @@
 					<ul>
 						<li>
 							<div class="fontgray fl">
-								卖 <span class="fontred" :class="{red: detail.LastQuotation.AskPrice1 - detail.LastQuotation.PreSettlePrice > 0,green: detail.LastQuotation.AskPrice1 - detail.LastQuotation.PreSettlePrice < 0}">{{detail.LastQuotation.AskPrice1 | fixNum4(detail.DotSize)}}</span>
+								卖 <span class="fontred" :class="{red: detail.LastQuotation.ask[0][0] - detail.LastQuotation.pre_settle > 0,green: detail.LastQuotation.ask[0][0] - detail.LastQuotation.pre_settle < 0}">{{detail.LastQuotation.ask[0][0] | fixNum4(detail.dot_size)}}</span>
 							</div>
 							<p class="fontwhite fr">
-								{{detail.LastQuotation.AskQty1}}
+								{{detail.LastQuotation.ask[0][1]}}
 							</p>
 						</li>
 						<li>
 							<div class="fontgray fl">
-								买 <span class="fontred" :class="{red: detail.LastQuotation.BidPrice1 - detail.LastQuotation.PreSettlePrice > 0,green: detail.LastQuotation.BidPrice1 - detail.LastQuotation.PreSettlePrice < 0}">{{detail.LastQuotation.BidPrice1 | fixNum4(detail.DotSize)}}</span>
+								买 <span class="fontred" :class="{red: detail.LastQuotation.bid[0][0] - detail.LastQuotation.pre_settle > 0,green: detail.LastQuotation.bid[0][0] - detail.LastQuotation.pre_settle < 0}">{{detail.LastQuotation.bid[0][0] | fixNum4(detail.dot_size)}}</span>
 							</div>
 							<p class="fontwhite fr">
-								{{detail.LastQuotation.BidQty1}}
+								{{detail.LastQuotation.bid[0][1]}}
 							</p>
 						</li>
 						<li>
@@ -26,19 +26,19 @@
 								成交量
 							</div>
 							<div class="fontwhite fr">
-								{{detail.LastQuotation.TotalVolume}}
+								{{detail.LastQuotation.volume}}
 							</div>
 						</li>
 					</ul>
 				</div>
 				<div class="fl">
 					<ul>
-						<li class="fontred" :class="{red: detail.LastQuotation.LastPrice - detail.LastQuotation.PreSettlePrice > 0,green: detail.LastQuotation.LastPrice - detail.LastQuotation.PreSettlePrice < 0}">
+						<li class="fontred" :class="{red: detail.LastQuotation.last - detail.LastQuotation.pre_settle > 0,green: detail.LastQuotation.last - detail.LastQuotation.pre_settle < 0}">
 							{{lastPrice}}
 						</li>
 						<li class="fontred">
-							<span :class="{red: detail.LastQuotation.ChangeValue > 0,green: detail.LastQuotation.ChangeValue < 0}">{{detail.LastQuotation.ChangeValue | fixNum2(detail.DotSize)}}</span>
-							<span :class="{red: detail.LastQuotation.ChangeValue > 0,green: detail.LastQuotation.ChangeValue < 0}">{{detail.LastQuotation.ChangeRate | fixNum}}%</span>
+							<span :class="{red: detail.LastQuotation.change_value > 0,green: detail.LastQuotation.change_value < 0}">{{detail.LastQuotation.change_value | fixNum2(detail.dot_size)}}</span>
+							<span :class="{red: detail.LastQuotation.change_value > 0,green: detail.LastQuotation.change_value < 0}">{{detail.LastQuotation.change_rate | fixNum}}%</span>
 						</li>
 					</ul>
 				</div>
@@ -174,9 +174,9 @@
 			parameters: function(n, o){
 				if(this.detail != undefined){
 					n.forEach(function(o, i){
-						if(this.detail.CommodityNo == o.CommodityNo){
-							this.lastPrice = this.orderTemplist[this.detail.CommodityNo].LastQuotation.LastPrice;
-							this.lastPrice = parseFloat(this.lastPrice).toFixed(this.orderTemplist[this.detail.CommodityNo].DotSize);
+						if(this.detail.commodity_no == o.commodity_no){
+							this.lastPrice = this.orderTemplist[this.detail.commodity_no].LastQuotation.last;
+							this.lastPrice = parseFloat(this.lastPrice).toFixed(this.orderTemplist[this.detail.commodity_no].dot_size);
 						}
 					}.bind(this));
 				}
@@ -222,15 +222,15 @@
 					var b ={
 						"Method":'InsertOrder',
 						"Parameters": {
-							"ExchangeNo": this.detail.LastQuotation.ExchangeNo,
-							"CommodityNo": this.detail.LastQuotation.CommodityNo,
-							"ContractNo": this.detail.LastQuotation.ContractNo,
+							"ExchangeNo":this.detail.exchange_no,
+							"CommodityNo":this.detail.commodity_no,
+							"ContractNo":this.detail.mainContract,
 							"OrderNum": this.lotnum,
 							"Drection": 0,
 							"PriceType": 1,
 							"LimitPrice": 0.00,
 							"TriggerPrice": 0,
-							"OrderRef": this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+							"OrderRef": this.$store.state.market.tradeConfig.Source+ new Date().getTime()+(buildIndex++)
 						}
 					};
 					this.buyText = b;
@@ -258,15 +258,15 @@
 					var b={
 						"Method":'InsertOrder',
 						"Parameters":{
-							"ExchangeNo":this.detail.LastQuotation.ExchangeNo,
-							"CommodityNo":this.detail.LastQuotation.CommodityNo,
-							"ContractNo":this.detail.LastQuotation.ContractNo,
+							"ExchangeNo":this.detail.exchange_no,
+							"CommodityNo":this.detail.commodity_no,
+							"ContractNo":this.detail.mainContract,
 							"OrderNum": this.lotnum,
 							"Drection":1,
 							"PriceType":1,
 							"LimitPrice":0.00,
 							"TriggerPrice":0,
-							"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+							"OrderRef":this.$store.state.market.tradeConfig.Source+ new Date().getTime()+(buildIndex++)
 						}
 					};
 					this.buyText = b;

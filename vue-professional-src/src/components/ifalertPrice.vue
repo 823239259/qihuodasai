@@ -172,7 +172,7 @@
 				if(this.objstrParms != undefined){
 					n.forEach(function(e,i){
 						if(this.objstrParms.CommodityNo == e.CommodityNo){
-							this.lastPrice = this.orderTemplist[this.objstrParms.CommodityNo].LastQuotation.LastPrice;
+							this.lastPrice = this.orderTemplist[this.objstrParms.CommodityNo].LastQuotation.last;
 						}
 					}.bind(this));
 				}

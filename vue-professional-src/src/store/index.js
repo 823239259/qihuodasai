@@ -1,333 +1,22 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
-
+import Isshow from './isshowStore'
+import Account from './accountStore'
+import Market from './MarketStore'
+// 引入 ECharts 主模块
+var echarts = require('echarts/lib/echarts');
+// 引入柱状图
+require('echarts/lib/chart/bar');
+require('echarts/lib/chart/line');
+require('echarts/lib/component/tooltip');
+require('echarts/lib/chart/candlestick');
 Vue.use(Vuex)
 
-//控制显示与否的模块
-var isshow = {
-	state: {
-		navBarShow: true,
-		isconnected: false,
-		bottomshow: false,
-		pshow: false,
-		sshow: false,
-		fshow: true,
-		kshow: false,
-		guideshow: false,
-		helpshow: true,
-		//是否进入过分时
-		isfensshow: false,
-		//判断是否是直接画图
-		isfenssec: false,
-		islightshow: false,
-		isklineshow: false
-	}
-};
+const isshow = new Isshow();
+const account = new Account();
+const market = new Market();
 
-//控制个人数据
-var account = {
-	state: {
-		packChannel: '',   //统计代码
-		islogin: false, //是否登录
-		phone: '', //账户
-		password: '', //密码 
-		token: '',
-		secret: '',
-		isCertification: false, //是否实名认证
-		username: '', //实名
-		balance: 0.00, //余额
-		operateMoney: 0.00, //免提现手续费额度
-		bankList: [], //已绑定银行卡信息
-		//存不知道有用没的数据
-		tempList: [],
-		//存合约列表
-		programList: [],
-		operateOrderLength: 0,   //操盘中方案的条数
-		hotLine: '',
-		currentUrlHead: 'https:', //http or https
-		realName: '',
-		userVerified: false,
-	}
-}
-
-//控制行情数据
-var market = {
-	state: {
-		//存持仓列表
-		positionListCont:[],
-		//心跳信息
-		HeartBeat:{
-			lastHeartBeatTimestamp : 1,	// 最后心跳时间
-			oldHeartBeatTimestamp : 0,	// 上一次心跳时间
-			intervalCheckTime : 8000  // 间隔检查时间：8秒
-		},
-		HeartBeat00:{
-			lastHeartBeatTimestamp : 1,	// 最后心跳时间
-			oldHeartBeatTimestamp : 0,	// 上一次心跳时间
-			intervalCheckTime : 8000  // 间隔检查时间：8秒
-		},
-		quoteConfig:{
-//			url_real: "ws://192.168.0.232:19002",  //测试地址
-			url_real: "ws://quote.vs.com:9002",   //正式地址
-			userName:"13677622344",
-			passWord:"a123456"
-		},
-		tradeConfig:{
-			version : "3.3",	// 版本
-//			url_real : "ws://192.168.0.232:6102",   //测试地址
-			url_real : "ws://139.196.176.60:6101",  //正式地址
-			model : "1", // 实盘：0；	模拟盘：1
-			client_source : "N_WEB",	// 客户端渠道
-//			username : "000031",		// 账号(新模拟盘——000008、直达实盘——000140、易盛模拟盘——Q517029969)
-//			password : "YTEyMzQ1Ng==" 	// 密码：base64密文(明文：a123456——YTEyMzQ1Ng==     888888——ODg4ODg4	 74552102——NzQ1NTIxMDI=		123456=MTIzNDU2)
-//			username:JSON.parse(localStorage.getItem('tradeUser')).username,
-//			password:JSON.parse(localStorage.getItem('tradeUser')).password
-			username:'',
-			password:''
-		},
-		ifUpdateHoldProfit:false, //是否使用最新行情更新持仓盈亏
-		ifUpdateAccountProfit:false,//// 是否可以更新账户盈亏标志：资金信息显示完毕就可以更新盈亏
-		qryHoldTotalArr:[],//持仓合计回复数组
-		qryHoldTotalKV:{},
-		quoteIndex: '',
-		quoteColor: '',
-		/**
-		 * 缓存账户信息
-		 */
-		CacheAccount:{
-			moneyDetail:[],
-			jCacheAccount : {},	// key 为CurrencyNo
-			jCacheTotalAccount:{
-				TodayBalance : 0.0,	// 今权益
-				TodayCanUse : 0.0,	// 今可用
-				FloatingProfit : 0.0,	// 浮动盈亏
-				CloseProfit : 0.0,	// 平仓盈亏
-				FrozenMoney : 0.0,	// 冻结资金
-				Deposit : 0.0,	// 保证金
-				CounterFee : 0.0,	// 手续费
-				RiskRate : 0.0	// 风险率
-			}
-		},
-		//切换后合约的名字
-		selectId: '',
-		//订阅推送次数统计
-		subscribeIndex:1,
-		
-		//持仓合约浮盈处理
-		CacheHoldFloatingProfit:{
-			jHoldFloatingProfit : {},	// 持仓合约对应浮盈
-			jCurrencyNoFloatingProfit : {}	// 币种对应浮盈
-		},
-		
-		jContractFloatingProfitVO:{
-			currencyNo:'',
-			floatingProfit:0.0
-		},
-		
-		//委托列表页面数据
-		entrustCont:[],
-		OnRspOrderInsertEntrustCont:[],
-		
-		//挂单页面列表
-		orderListCont:[],
-		OnRspOrderInsertOrderListCont:[],
-		
-		//成交记录列表
-		dealListCont:[],
-		OnRspQryTradeDealListCont:[],
-		
-		// 订单状态
-		OrderType:{
-			0: "订单已提交",
-			1: "排队中",
-			2: "部分成交",
-			3: "完全成交",
-			4: "已撤单",
-			5: "下单失败",
-			6: "未知"
-		},
-		
-		openChangealertCurrentObj:null,
-		
-		layer:null,
-		errorMsg: '',
-		
-		queryHisList:[],
-		
-		forceLine:0.00,
-		
-		toast:'',
-		
-		quoteConnectedMsg:'',
-		
-		tradeConnectedMsg:'',
-		
-		tradeLoginSuccessMsg:'',
-		
-		tradeLoginfailMsg:'',
-		
-		layerOnRtnOrder: '',     //买入成功提示
-		
-//		appendOrderMsg: '',     //委托提示
-		
-		
-		//止损止盈---------------------------------
-		stopLossList:[],
-		hasNostopLossList:[],
-		
-		stopLossTriggeredList:[],//已触发列表
-		hasYesstopLossList:[],
-		
-		stopLossListSelectOneObj:{},
-		
-		//条件单--------------------------------
-		conditionList:[],//条件单未触发列表
-		conditionTriggeredList:[],//条件单已触发列表
-		noObj:'',
-//		noListCont:[],
-		
-		triggerConditionList:[],
-//		yesListCont:[],
-		
-		
-		//选择K线时候的值
-		selectTime: 1,
-		//存进入详情页的No
-		currentNo: '',
-		//订阅成功后查询品种列表
-		orderTemplist:{},
-		//存订阅成功后的行情信息
-		templateList:{},
-		//缓存数组，用于存最新行情的数据
-		tempArr: [],
-		jsonDatatemp: {},
-		currentdetail: {},
-		markettemp: [],
-		Parameters: [],
-		//		时间差
-		charttime: 0,
-		charttimetime: 0,
-		charttimems: 0,
-		charttimetime2: 0,
-		charttimems2: 0,
-		CacheLastQuote:[],
-		volume:0,
-		
-		jsonDataKline: {
-			"Method": "OnRspQryHistory",
-			"Parameters": {
-				"ColumNames": ["DateTimeStamp", "LastPrice", "OpenPrice", "LowPrice", "HighPrice", "Position", "Volume"],
-				"CommodityNo": "CL",
-				"ContractNo": "1708",
-				"Count": 102,
-				"Data": [
-					["2017-06-26 09:31:00", 43.38, 43.35, 43.34, 43.39, 548303, 634,0],
-					
-				],
-				"ExchangeNo": "NYMEX",
-				"HisQuoteType": 0
-			}
-		},
-
-		//用于存放从后台抓取的历史合约数据
-		jsonData: {
-			"Method": "OnRspQryHistory",
-			"Parameters": {
-				"ColumNames": ["DateTimeStamp", "LastPrice", "OpenPrice", "LowPrice", "HighPrice", "Position", "Volume"],
-				"CommodityNo": "CL",
-				"ContractNo": "1708",
-				"Count": 102,
-				"Data": [
-					["2017-06-26 09:31:00", 43.38, 43.35, 43.34, 43.39, 548303, 634,0],
-					
-				],
-				"ExchangeNo": "NYMEX",
-				"HisQuoteType": 0
-			}
-		},
-		
-		//用于存放从后台抓取的合约数据
-		jsonTow: {
-			"Method": "OnRtnQuote",
-			"Parameters": {
-				"AskPrice1": 0,
-				"AskPrice2": 0,
-				"AskPrice3": 0,
-				"AskPrice4": 0,
-				"AskPrice5": 0,
-				"AskQty1": 0,
-				"AskQty2": 0,
-				"AskQty3": 0,
-				"AskQty4": 0,
-				"AskQty5": 0,
-				"AveragePrice": 0,
-				"BidPrice1": 0,
-				"BidPrice2": 0,
-				"BidPrice3": 0,
-				"BidPrice4": 0,
-				"BidPrice5": 0,
-				"BidQty1": 0,
-				"BidQty2": 0,
-				"BidQty3": 0,
-				"BidQty4": 0,
-				"BidQty5": 0,
-				"ChangeRate": 0,
-				"ChangeValue": 0,
-				"ClosingPrice": 0,
-				"CommodityNo": "CL",
-				"ContractNo": "1708",
-				"DateTimeStamp": "2017-06-29 11:40:36",
-				"ExchangeNo": "NYMEX",
-				"HighPrice": 0,
-				"LastPrice": 0,
-				"LastVolume": 0,
-				"LimitDownPrice": 0,
-				"LimitUpPrice": 0,
-				"LowPrice": 0,
-				"OpenPrice": 0,
-				"Position": 0,
-				"PreClosingPrice": 0,
-				"PrePosition": 0,
-				"PreSettlePrice": 0,
-				"SettlePrice": 0,
-				"TotalAskQty": 0,
-				"TotalBidQty": 0,
-				"TotalTurnover": 0,
-				"TotalVolume": 0
-			}
-		},
-		//绘制分时的设置
-		option1: {
-
-		},
-		//绘制分时的设置
-		option2: {
-
-		},
-		//绘制K线的设置
-		option3: {
-
-		},
-		//绘制K线的设置
-		option4: {
-
-		},
-		//绘制闪电图的设置
-		option5: {
-
-		},
-		//K线用到的数据
-		rawData: [],
-		//K线用到的数据
-		chartDataC: null,
-		lightChartTime: {
-			"time": [],
-			"price": []
-		}
-	}
-}
-
+const mTimeExg = /[' '|'.']/g
 export default new Vuex.Store({
 	modules: {
 		isshow,
@@ -336,7 +25,7 @@ export default new Vuex.Store({
 	},
 	state: {
 		//test 测试环境，online 正式环境
-		environment: 'online',
+		environment: 'test',
 		//打包的时候，值为 build ，开发的时候，值为 dev
 		setting: 'build',
 		//请求的操盘参数数据
@@ -369,11 +58,8 @@ export default new Vuex.Store({
 		}
 	},
 	mutations: {
+		//画闪电图
 		drawlight: function(state, e) {
-			// 引入 ECharts 主模块
-			var echarts = require('echarts/lib/echarts');
-			// 引入柱状图
-			require('echarts/lib/chart/bar');
 			// 基于准备好的dom，初始化echarts图表
 			var lightChart;
 			if(state.isshow.islightshow == false) {
@@ -386,12 +72,14 @@ export default new Vuex.Store({
 			}
 			lightChart.setOption(state.market.option5);
 		},
+		//设置闪电图数据
 		setlightDate: function(state) {
-			var TimeLength = state.market.lightChartTime.time.length;
-			state.market.lightChartTime.price.push(state.market.jsonTow.Parameters.LastPrice.toFixed(state.market.currentdetail.DotSize));
-			state.market.lightChartTime.time.push((state.market.jsonTow.Parameters.DateTimeStamp).split(" ")[1]);
-			state.market.lightChartTime.time = state.market.lightChartTime.time.slice(-50);
-			state.market.lightChartTime.price = state.market.lightChartTime.price.slice(-50);
+			let { lightChartTime,jsonTow, currentdetail } = state.market;
+			
+			lightChartTime.price.push(jsonTow.last.toFixed(currentdetail.dot_size));
+			lightChartTime.time.push((jsonTow.time_flag).split(mTimeExg)[1]);
+			lightChartTime.time = lightChartTime.time.slice(-50);
+			lightChartTime.price = lightChartTime.price.slice(-50)
 			state.market.option5 = {
 				"tooltip": {
 					"show": false,
@@ -406,7 +94,8 @@ export default new Vuex.Store({
 				xAxis: [{
 					type: 'category',
 					show: true,
-					data: state.market.lightChartTime.time,
+					//data: state.market.lightChartTime.time,
+					data: lightChartTime.time,
 					axisLine: {
 						lineStyle: {
 							color: '#8392A5'
@@ -440,7 +129,7 @@ export default new Vuex.Store({
 						}
 					}
 				}],
-				"series": [{
+				series: [{
 					"name": "总数",
 					"type": "line",
 					"stack": "总量",
@@ -459,61 +148,59 @@ export default new Vuex.Store({
 							}
 						}
 					},
-					"data": state.market.lightChartTime.price
+					"data": lightChartTime.price
 				}]
 			}
 		},
-
 		setklineoption: function(state) {
 			//			console.time('e');
-			// 引入 ECharts 主模块
-			var echarts = require('echarts/lib/echarts');
-			// 引入柱状图
-			require('echarts/lib/chart/bar');
-			require('echarts/lib/chart/line');
-			require('echarts/lib/component/tooltip');
-			require('echarts/lib/chart/candlestick');
-
-			var dosizeL = state.market.currentdetail.DotSize;
-			var rawData = [];
-			var parameters = state.market.jsonDataKline.Parameters.Data;
-			var Len = parameters.length;
-			var lent = rawData.length;
-			if(state.market.jsonDataKline.Parameters.HisQuoteType == 1440) {
-				for(var i = 0; i < Len; i++) {
-					var timeStr = parameters[i][0].split(" ")[0];
-					var openPrice = parseFloat(parameters[i][2]).toFixed(dosizeL);
-					var closePrice = parseFloat(parameters[i][1]).toFixed(dosizeL);
-					var sgData = [timeStr, openPrice, closePrice, parseFloat(parameters[i][3]).toFixed(dosizeL), parseFloat(parameters[i][4]).toFixed(dosizeL), parameters[i][2]];
-					rawData[lent + i] = sgData;
-				};
+			let {jsonDataKline, currentdetail} = state.market
+			var rawData;
+			var dosizeL = currentdetail.dot_size;
+			var parameters = jsonDataKline.data;
+			//HisQuoteType 1440 为日K 划线
+			if(parameters.period === "KLINE_1DAY") {
+				rawData = parameters.Lines.reduce((arr1,parameter,index) => {
+					let timeStr = parameter[0].split(mTimeExg)[0];
+					let closePrice = parameter[1].toFixed(dosizeL);
+					let openPrice = parameter[2].toFixed(dosizeL);
+					let lowPrice =  parameter[3].toFixed(dosizeL);
+					let highPrice = parameter[4].toFixed(dosizeL);
+					let sgData = [timeStr, openPrice, closePrice, lowPrice, highPrice, parameter[2]] //[时间, 开, 关, 低, 高, ?]
+					arr1.push(sgData)
+					return arr1
+				},[])
 			} else {
-				for(var i = 0; i < Len; i++) {
-					var time2 = parameters[i][0].split(" ");
-					var str1 = time2[1].split(":");
-					var str2 = str1[0] + ":" + str1[1];
-					var openPrice = parseFloat(parameters[i][2]).toFixed(dosizeL);
-					var closePrice = parseFloat(parameters[i][1]).toFixed(dosizeL);
-					var sgData = [str2, openPrice, closePrice, parseFloat(parameters[i][3]).toFixed(dosizeL),parseFloat(parameters[i][4]).toFixed(dosizeL), parameters[i][0]];
-					rawData[lent + i] = sgData;
-				};
-
+				rawData = parameters.Lines.reduce((arr1,parameter,index) => {
+					let time2 = parameter[0].split(mTimeExg);
+					let str1 = time2[1].split(":");
+					let str2 = str1[0] + ":" + str1[1];
+					let closePrice = parameter[1].toFixed(dosizeL);
+					let openPrice = parameter[2].toFixed(dosizeL);
+					let lowPrice =  parameter[3].toFixed(dosizeL);
+					let highPrice = parameter[4].toFixed(dosizeL);
+					let sgData = [str2, openPrice, closePrice, lowPrice, highPrice, parameter[0]] //[时间, 开, 关, 低, 高, ?]
+					arr1.push(sgData)
+					return arr1
+				},[])
 			}
-			var categoryData = [];
-			var values = [];
-			var time = [];
-			for(var i = 0; i < rawData.slice(-40).length; i++) {
-				categoryData.push(rawData.slice(-40)[i][0]);
-				values.push([rawData.slice(-40)[i][1], rawData.slice(-40)[i][2], rawData.slice(-40)[i][3], rawData.slice(-40)[i][4]]);
-				time.push(rawData.slice(-40)[i][5])
-			}
+			let categoryData = [];
+			let values = [];
+			let time1 = [];
+			let lastFortyArr = rawData.slice(-40);
+			//处理最后40根数据
+			lastFortyArr.forEach(lastFortyItem => {
+				categoryData.push(lastFortyItem[0])
+				values.push([lastFortyItem[1], lastFortyItem[2], lastFortyItem[3], lastFortyItem[4]])
+				time1.push(lastFortyItem[5])
 
-			var chartDataC = {
-				categoryData: categoryData,
-				values: values,
-				time: time
+			})
+			let chartDataC = {
+				categoryData,
+				values,
+				time1
 			};
-
+			
 			/*MA5 10 20 30*/
 			function calculateMA(dayCount) {
 				var result = [];
@@ -556,11 +243,13 @@ export default new Vuex.Store({
 						var ma30 = params[4].data;
 						var rate = (kd[2] - kd[1]) / kd[1] * 100;
 						rate = parseFloat(rate).toFixed(2);
-						var res = "时间:" + params[0].name + '  涨跌幅: ' + rate+'%';
-						res += '<br/>  开盘 : ' + parseFloat(kd[1]).toFixed(dosizeL) + '  最高 : ' + parseFloat(kd[4]).toFixed(dosizeL);
-						res += '<br/>  收盘 : ' + parseFloat(kd[2]).toFixed(dosizeL) + ' 最低 : ' + parseFloat(kd[3]).toFixed(dosizeL);
-						res += '<br/> <span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#3689B3"></span> MA5 : ' + ma5 + '  <span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#B236B3"></span> MA10 : ' + ma10;
-						res += '<br/><span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#B37436"></span> MA20 : ' + ma20 + '  <span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#B2B336"></span> MA30 : ' + ma30;
+						var style = "display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:";
+						let res = `时间:${params[0].name} 涨跌幅: ${rate}%
+						<br/>开盘 : ${parseFloat(kd[1]).toFixed(dosizeL)} 最高 : ${parseFloat(kd[4]).toFixed(dosizeL)}
+						<br/>收盘 : ${parseFloat(kd[2]).toFixed(dosizeL)} 最低 : ${parseFloat(kd[3]).toFixed(dosizeL)}
+						<br/><span style="${style}#3689B3"></span> MA5 : ${ma5} <span style="${style}#B236B3"></span> MA10 : ${ma10}
+						<br/><span style="${style}#B37436"></span> MA20 : ${ma20} <span style="${style}#B2B336"></span> MA30 : ${ma30}
+						`
 						return res;
 					}
 				},
@@ -708,17 +397,20 @@ export default new Vuex.Store({
 				price = [],
 				time = [];
 			var Ktime;
-			state.market.jsonDataKline.Parameters.Data.slice(-40).forEach(function(e) {
-				vol.push(e[6]);
-				Ktime = e[0].split(' ')[1].split(':')[0] + ':' + e[0].split(' ')[1].split(':')[1];
+			let barData = parameters.Lines.slice(-40);
+			// 取条形图的数据 todo
+			barData.forEach((parameter) =>{
+				vol.push(parameter[5]);
+				let timeArr = parameter[0].split(mTimeExg);
+				let SecondTime = timeArr[1].split(':');
+				Ktime = SecondTime[0] + ':'+SecondTime[1];
 				if(Ktime == '00:00'){
-					time.push(e[0].split(' ')[0]);
+					time.push(timeArr[0]);
 				}else{
-					time.push(e[0].split(' ')[1].split(':')[0] + ':' + e[0].split(' ')[1].split(':')[1]);
+					time.push(Ktime);
 				}
-				price.push(e[1]);
+				price.push(parameter[1]);
 			});
-
 			//成交量设置
 			state.market.option4 = {
 				grid: {
@@ -800,15 +492,10 @@ export default new Vuex.Store({
 					data: vol
 				}]
 			};
+
 		},
 		drawkline: function(state, x) {
-			// 引入 ECharts 主模块
-			var echarts = require('echarts/lib/echarts');
-			// 引入柱状图
-			require('echarts/lib/chart/bar');
-			require('echarts/lib/chart/line');
-			require('echarts/lib/component/tooltip');
-			require('echarts/lib/chart/candlestick');
+			
 			var kline, volume;
 			if(state.isshow.isklineshow == false) {
 				kline = echarts.init(document.getElementById(x.id1));
@@ -827,278 +514,46 @@ export default new Vuex.Store({
 				}
 			}
 			kline.setOption(state.market.option3);
+			//console.log(volume)
 			volume.setOption(state.market.option4);
 		},
 		drawfens: function(state, x) {
-			// 引入 ECharts 主模块
-			var echarts = require('echarts/lib/echarts');
-			// 引入柱状图
-			require('echarts/lib/chart/bar');
-			require('echarts/lib/chart/line');
-			require('echarts/lib/component/tooltip');
 			var fens, volume;
 			if(state.isshow.isfensshow == false) {
-				volume = echarts.init(document.getElementById(x.id1));
+				volume = echarts.init(document.getElementById(x.id2));
 				volume.group = 'group1';
 				// 基于准备好的dom，初始化echarts实例
-				fens = echarts.init(document.getElementById(x.id2));
+				fens = echarts.init(document.getElementById(x.id1));
 				fens.group = 'group1';
 				echarts.connect("group1");
 				state.isshow.isfensshow = true;
 			} else {
-				if(document.getElementById(x.id1) != null){
-					volume = echarts.getInstanceByDom(document.getElementById(x.id1));
-				}
 				if(document.getElementById(x.id2) != null){
-					fens = echarts.getInstanceByDom(document.getElementById(x.id2));
+					volume = echarts.getInstanceByDom(document.getElementById(x.id2));
+				}
+				if(document.getElementById(x.id1) != null){
+					fens = echarts.getInstanceByDom(document.getElementById(x.id1));
 				}
 			}
-			fens.setOption(state.market.option1);
-			volume.setOption(state.market.option2);
+			fens.setOption(state.market.option2);
+			volume.setOption(state.market.option1);
 		},
-		//		drawfenssecond: function(state, x) {
-		//			fens.setOption(state.market.option1);
-		//			volume.setOption(state.market.option2);
-		//		},
-		setfensoptionsecond: function(state) {
-			var echarts = require('echarts/lib/echarts');
-			var vol = [],
-				price = [],
-				time = [],
-				averagePrices = [];
-				
-			state.market.jsonData.Parameters.Data.forEach(function(e) {
-				vol.push(e[6]);
-				time.push(e[0].split(' ')[1].split(':')[0] + ':' + e[0].split(' ')[1].split(':')[1]);
-				price.push(e[1]);
-				if(state.market.qryHoldTotalKV[state.market.currentdetail.CommodityNo]!=undefined){
-					averagePrices.push(state.market.qryHoldTotalKV[state.market.currentdetail.CommodityNo].HoldAvgPrice);
-				}
-			});
-			var dosizeL = state.market.currentdetail.DotSize;
-			state.market.option1 = {
-				grid: {
-					x: 50,
-					y: 30,
-					x2: 30,
-					y2: 20
-				},
-				color: ['#edf07c'],
-				tooltip: {},
-				xAxis: [{
-					type: 'category',
-					position: 'bottom',
-					boundaryGap: true,
-					axisTick: {
-						onGap: false
-					},
-					splitLine: {
-						show: false
-					},
-					axisLabel: {
-						textStyle: {
-							fontSize: 10,
-						}
-					},
-					axisLine: {
-						lineStyle: {
-							color: '#8392A5'
-						}
-					},
-					data: time
-				}],
-				yAxis: [{
-					type: 'value',
-					name: '成交量(万)',
-					axisLine: {
-						lineStyle: {
-							color: '#8392A5'
-						}
-					},
-					axisTick: {
-						show: false,
-					},
-					scale: true,
-					axisLabel: {
-						formatter: function(a) {
-							a = +a;
-							return isFinite(a) ?
-								echarts.format.addCommas(+a / 10000) :
-								'';
-						},
-						textStyle: {
-							fontSize: 10
-						}
-					},
-					splitLine: {
-						show: true,
-						lineStyle: {
-							color: "#8392A5"
-						}
-					}
-				}],
-				tooltip: {
-					trigger: 'axis',
-					axisPointer: {
-						type: 'line',
-						animation: false,
-						lineStyle: {
-							color: '#ffffff',
-							width: 1,
-							opacity: 1
-						}
-					},
-					triggerOn: 'mousemove|click'
-				},
-				series: [{
-					name: '成交量',
-					type: 'bar',
-					data: vol
-				}]
-			};
-			state.market.option2 = {
-				backgroundColor: 'transparent',
-				tooltip: {
-					show: true,
-					transitionDuration: 0,
-					trigger: 'axis',
-					axisPointer: {
-						type: 'line',
-						animation: false,
-						lineStyle: {
-							color: '#ffffff',
-							width: 1,
-							opacity: 1
-						}
-					},
-					formatter: function(params) {
-						var time = params[0].name;
-						var val = parseFloat(params[0].value).toFixed(dosizeL);
-						if(time == null || time == "") {
-							return
-						}
-						var html = '时间:' + time + '<br/>' +
-							'价格: ' + val + '<br/>';
-						return html;
-					},
-				},
-				toolbox: {
-					show: false,
-				},
-				animation: false,
-				xAxis: [{
-					type: 'category',
-					show: false,
-					data: time,
-					axisLine: {
-						lineStyle: {
-							color: '#8392A5'
-						}
-					},
-					boundaryGap: true
-				}],
-				yAxis: [{
-					type: 'value',
-					scale: true,
-					position: "left",
-					axisTick: {
-						show: false,
-					},
-					axisLine: {
-						lineStyle: {
-							color: '#8392A5'
-						}
-					},
-					splitArea: {
-						show: false
-					},
-					axisLabel: {
-						inside: false,
-						margin: 4,
-					},
-					splitLine: {
-						show: true,
-						lineStyle: {
-							color: "#8392A5"
-						}
-					},
-					
-				}],
-				grid: {
-					x: 50,
-					y: 20,
-					x2: 30,
-					y2: 5
-				},
-				series: [
-					{
-						type: 'line',
-						data: price,
-						markLine: {
-							symbol: ['none', 'none'],
-						  	data:[
-			                	{ value: 48.12, xAxis: -1, yAxis: 48.12},     
-        						{ xAxis:123 , yAxis: 48.12},
-				            ],
-				            lineStyle: {
-			                   normal: {
-			                       width: 1,
-			                       color: "#ff0000"
-			                   }
-			                },
-						}
-						
-					},
-					{
-						type: 'line',
-						itemStyle: {
-							normal: {
-								color: "#fff"
-							}
-						},
-						lineStyle: {
-							normal: {
-								width: 1,
-								type: 'dashed'
-							}
-						},
-						itemLine: {
-							normal: {
-								color: "#ffffff"
-							}
-						},
-						symbolSize: 0,
-						data: averagePrices,
-						label: {
-			                normal: {
-			                    show: false,
-			                    position: 'top'
-			                }
-			          },
-//			          markLine:{
-//			          	data:[
-//			                	{ value: 48.2, xAxis: -1, yAxis: 48.2},     
-//      						{ xAxis:500 , yAxis: 48.2},
-//				            ]
-//			          }
-					}
-				]
-			};
-		},
-
 		setfensoption: function(state) {
-			var echarts = require('echarts/lib/echarts');
-			var vol = [],
+			let vol = [],
 				price = [],
 				time = [];
-//				averagePrices = [];
-			var dosizeL = state.market.currentdetail.DotSize;	
-			state.market.jsonData.Parameters.Data.forEach(function(e) {
-				vol.push(e[6]);
-				time.push(e[0].split(' ')[1].split(':')[0] + ':' + e[0].split(' ')[1].split(':')[1]);
-				price.push(e[1]);
-//				averagePrices.push(45.6);
-			})
+				
+			let {jsonData, currentdetail} = state.market;	
+			var dosizeL = currentdetail.dot_size;	
+			if (!jsonData.data) return;
+			jsonData.data.Lines.forEach(function(parameter) {
+				let timeArr = parameter[0].split(mTimeExg)[1].split(':');
+				vol.push(parameter[5]);
+				time.push(timeArr[0] + ':' + timeArr[1]);
+				price.push(parameter[1]);
+				
+			});
+			//bar图
 			state.market.option1 = {
 				grid: {
 					x: 50,
@@ -1179,6 +634,7 @@ export default new Vuex.Store({
 					data: vol
 				}]
 			};
+			//折现图
 			state.market.option2 = {
 				backgroundColor: 'transparent',
 				tooltip: {
@@ -1298,88 +754,57 @@ export default new Vuex.Store({
 				}
 			};
 		},
-		updateTempdata: function(state, obj) {
-			state.market.markettemp.forEach(function(e) {
-				if(e.CommodityNo == obj) {
-					state.market.tempArr[0] = e.LastQuotation.DateTimeStamp;
-					state.market.tempArr[1] = e.LastQuotation.LastPrice.toFixed(e.DotSize);
-					state.market.tempArr[2] = e.LastQuotation.OpenPrice.toFixed(e.DotSize);
-					state.market.tempArr[3] = e.LastQuotation.LowPrice.toFixed(e.DotSize);
-					state.market.tempArr[4] = e.LastQuotation.HighPrice.toFixed(e.DotSize);
-					state.market.tempArr[5] = e.LastQuotation.Position;
-					state.market.tempArr[6] = e.LastQuotation.LastVolume;
-					
-				}
-			});
-			var arr1 = state.market.jsonData.Parameters.Data[state.market.jsonData.Parameters.Data.length - 1][0].split(' ');
-			var arr2 = arr1[1].split(':');
-			var arr3 = state.market.tempArr[0].split(' ');
-			var arr4 = arr3[1].split(':');
-			if(arr2[1] == arr4[1]) {
-				if(state.market.CacheLastQuote[1].TotalVolume<=state.market.CacheLastQuote[0].TotalVolume){
-					return;
-				} 
-				var time = state.market.jsonData.Parameters.Data[state.market.jsonData.Parameters.Data.length - 1][0];
-				var vol = parseInt(state.market.jsonData.Parameters.Data[state.market.jsonData.Parameters.Data.length - 1][6]) + parseInt(state.market.tempArr[6]);
-				state.market.jsonData.Parameters.Data[state.market.jsonData.Parameters.Data.length - 1] = state.market.tempArr;
-				state.market.jsonData.Parameters.Data[state.market.jsonData.Parameters.Data.length - 1][0] = time;
-				state.market.jsonData.Parameters.Data[state.market.jsonData.Parameters.Data.length - 1][6] = vol;
-				
-			} else {
-				state.market.jsonData.Parameters.Data.shift();
-				state.market.jsonData.Parameters.Data.push(state.market.tempArr);
-				var time = state.market.tempArr[0].split(' ');
-				time = time[0] + ' ' + arr4[0] + ':00:00';
-				state.market.jsonData.Parameters.Data[state.market.jsonData.Parameters.Data.length - 1][0] = time;
-			}
-		},
 		//保存真实姓名
 		setRealName (state,payload) {
 			state.account.realName = payload.realName
 			state.account.userVerified = payload.userVerified
+		},
+		sendMessage (state, message) {
+			let messageStr = typeof message === 'object'? JSON.stringify(message):message
+			state.quoteSocket.send(messageStr)
+		},
+		sendTradeMessage (state, message) {
+			let messageStr = typeof message === 'object'? JSON.stringify(message):message
+			state.tradeSocket.send(messageStr)
+		},
+		updateQryHoldTotalArr(state, payload) {
+			state.market.qryHoldTotalArr.push(payload)
 		}
 	},
 	actions: {
 		handleTradeMessage:function(context,evt){
 			var data = JSON.parse(evt.data);
 			var parameters = data.Parameters;
-			
+			let {state} = context
+			let {market, tradeSocket} = state
+			let {HeartBeat, tradeConfig} = market
 			switch (data.Method){
-				case 'OnRtnHeartBeat':
-					context.state.market.HeartBeat.lastHeartBeatTimestamp = parameters.Ref; // 更新心跳最新时间戳
+				case 'OnRtnHeartBeat': //处理行情心跳
+					HeartBeat.lastHeartBeatTimestamp = parameters.Ref; // 更新心跳最新时间戳
 //					console.log('lastHeartBeatTimestamp:'+context.state.market.HeartBeat.lastHeartBeatTimestamp);
 					break;
 				case 'OnRspLogin'://登录回复
-					if(parameters.Code==0){
-						
+					if(parameters.Code==0){ //code为0 代表成功
 //						console.log('交易服务器连接成功');
-						context.state.market.tradeLoginSuccessMsg='交易服务器连接成功';
-						
-						context.state.market.forceLine = parameters.ForceLine;
-						
-						// 查询持仓合计 QryHoldTotal
-						context.state.tradeSocket.send('{"Method":"QryHoldTotal","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
-						// 查询订单 QryOrder
-						context.state.tradeSocket.send('{"Method":"QryOrder","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
-						// 查询成交记录
-						context.state.tradeSocket.send('{"Method":"QryTrade","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
-						// 查询账户信息 QryAccount
-						context.state.tradeSocket.send('{"Method":"QryAccount","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
-						//查询止损单
-						context.state.tradeSocket.send('{"Method":"QryStopLoss","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
-						//查询条件单
-						context.state.tradeSocket.send('{"Method":"QryCondition","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'"}}');
+						market.tradeLoginSuccessMsg='交易服务器连接成功';
+						market.forceLine = parameters.ForceLine;
+						// 查询持仓合计 查询订单 查询成交记录 查询账户信息 查询止损单 查询条件单 查询历史成交 QryHoldTotal
+						const methodArr = ['QryHoldTotal', 'QryOrder', 'QryTrade', 'QryAccount', 'QryStopLoss', 'QryCondition']
+						// todo 初始化的时候tradeConfig没有username
+						methodArr.forEach(method => {
+							tradeSocket.send(`{"Method":"${method}","Parameters":{"ClientNo":"${JSON.parse(localStorage.tradeUser).username}"}}`);
+							//tradeSocket.send(`{"method":"${method}","Parameters":{"ClientNo":"${tradeConfig.username}"}}`);
+						})
 						// 查询历史成交
 						context.dispatch('qryHisTrade');
-						
 						//启动交易心跳定时检查
 						context.dispatch('HeartBeatTimingCheck');
 						
 						
 					}else{
 //						console.log('登录失败');
-						context.state.market.tradeLoginSuccessMsg=parameters.Message;
-						context.state.tradeSocket.close();
+						market.tradeLoginSuccessMsg=parameters.Message;
+						tradeSocket.close();
 						//清空本地交易登录信息
 						localStorage.tradeUser = null;
 					}
@@ -1387,51 +812,37 @@ export default new Vuex.Store({
 				case 'OnRspLogout': //登出回复
 					if(parameters.Code==0){
 //						console.log('登出成功');
-						context.state.market.layer='登出成功'+Math.floor(Math.random()*10);
+						market.layer='登出成功'+Math.floor(Math.random()*10);
 					}else{
 //						console.log('登出失败');
-						context.state.market.layer = parameters.Message+Math.floor(Math.random()*10);
-						context.state.market.errorMsg = parameters.Message + Math.floor(Math.random()*10);
+						market.layer = parameters.Message+Math.floor(Math.random()*10);
+						market.errorMsg = parameters.Message + Math.floor(Math.random()*10);
 						localStorage.removeItem('tradeUser');
 					}
 					break;
-				case 'OnRspQryHoldTotal': //查询持仓合计回复
+				case 'OnRspQryHoldTotal': //查询持仓合计回复 数据是一条一条回推的
 //					console.log('查询持仓合计回复');		
 					if (parameters == null || typeof(parameters) == "undefined" || parameters.length == 0){
-						context.state.market.ifUpdateHoldProfit=true;//可以使用最新行情更新持仓盈亏
+						market.ifUpdateHoldProfit=true;//可以使用最新行情更新持仓盈亏
 					}else{
-						//数据加载到页面
-						context.state.market.qryHoldTotalArr.push(parameters);
-						context.state.market.qryHoldTotalKV[parameters.CommodityNo] = parameters;
-						//初始化持仓列表中的浮动盈亏
+						//更新数据 qryHoldTotalArr 
+						context.commit('updateQryHoldTotalArr',parameters) 
+						//market.qryHoldTotalArr.push(parameters); 对象形式
+						market.qryHoldTotalKV[parameters.CommodityNo] = parameters;
+						var qryItem = market.orderTemplist[parameters.CommodityNo];
+						var positionListContItem = {
+							name: qryItem.commodity_name,
+							type: !parameters.Drection?'多':'空',
+							num: parameters.HoldNum,
+							price: parameters.HoldAvgPrice.toFixed(qryItem.dot_size),
+							showbar: false,
+							type_color: !parameters.Drection?'red':'green',
+							commodityNocontractNo: qryItem.commodity_no + qryItem.mainContract,
+						}
+						//首次更新positionListCont? 意义不大
+						market.positionListCont.unshift(positionListContItem);
+						//初始化持仓列表中的浮动盈亏? 意义不大
 						context.dispatch('updateHoldFloatingProfit',parameters);
-						
-						var obj={};
-						obj.name=context.state.market.orderTemplist[parameters.CommodityNo].CommodityName;
-						obj.type=function(){
-							if(parameters.Drection==0){
-								return '多'
-							}else{
-								return '空'
-							}
-						}();
-						obj.num=parameters.HoldNum;
-						obj.price=parameters.HoldAvgPrice.toFixed(context.state.market.orderTemplist[parameters.CommodityNo].DotSize);
-						obj.total=0;
-						obj.showbar=false;
-						obj.type_color=function(){
-							if(parameters.Drection==0){
-								return 'red'
-							}else{
-								return 'green'
-							}
-						}();
-						obj.total_color='green';
-						obj.commodityNocontractNo = context.state.market.orderTemplist[parameters.CommodityNo].LastQuotation.CommodityNo
-													+context.state.market.orderTemplist[parameters.CommodityNo].LastQuotation.ContractNo;
-						
-						context.state.market.positionListCont.unshift(obj);
-						
 					}
 					
 					break;
@@ -1477,25 +888,26 @@ export default new Vuex.Store({
 					//更新挂单表
 					context.dispatch('updateApply',parameters);
 					break;
-				case 'OnRspOrderInsert':
+				case 'OnRspOrderInsert': //保单回复
 //					console.log('报单请求回复');
+					//更新保单回复消息
 					context.dispatch('layerMessage',parameters);
 					//添加到委托表
 					context.dispatch('appendOrder00',parameters);
 					// 排队中委托单放入挂单列表
-					context.dispatch('appendApply',parameters);
+					context.dispatch('appendApply00',parameters);
 					break;
 				case 'OnRtnHoldTotal':
 //					console.log('持仓合计变化推送通知');
 					context.dispatch('updateHold',parameters);
 					break;
-				case 'OnRtnOrderTraded':
+				case 'OnRtnOrderTraded': // 订单成交
 //					console.log('成交单通知');
 					if(parameters!=null){
 //						context.state.market.OnRspQryTradeDealListCont.push(parameters);
 						context.state.market.OnRspQryTradeDealListCont.unshift(parameters);
 					}
-					context.dispatch('layerOnRtnOrderTraded',parameters);
+					context.dispatch('layerOnRtnOrderTraded',parameters); //更新通知
 					break;
 				
 				case 'OnRspQryStopLoss':
@@ -1947,115 +1359,102 @@ export default new Vuex.Store({
 				context.state.market.layer='提交失败,原因:【'+parameters.StatusMsg+'】'+Math.floor(Math.random()*10);
 			}
 		},
-		qryHisTrade:function(context){
+		qryHisTrade:function(context){ //查询历史交易
+			const {tradeSocket} = context.state
+			function _getDayString (date) { // '2018/03/01 00:00:00'
+				var year = date.getFullYear();
+				var day = date.getDate().toString().padStart(2,'0')
+				var month = (date.getMonth() + 1).toString().padStart(2,'0')
+				var timeString = year + '/' + month + '/' + day+' 00:00:00';
+				return timeString
+			}
 			var date = new Date(); 
-    		date.setDate(date.getDate()-1);
-    		var year = date.getFullYear();
-    		var day = date.getDate() > 9 ? date.getDate() : "0" + date.getDate();
-    		var month = (date.getMonth() + 1) > 9 ? (date.getMonth() + 1) : "0"+ (date.getMonth() + 1);
-    		var beginTime = year + '/' + month + '/' + day+' 00:00:00';
-    		
-    		var date00 = new Date(); 
-    		date00.setDate(date00.getDate());
-    		var year00 = date00.getFullYear();
-    		var day00 = date00.getDate() > 9 ? date00.getDate() : "0" + date00.getDate();
-    		var month00 = (date00.getMonth() + 1) > 9 ? (date00.getMonth() + 1) : "0"+ (date00.getMonth() + 1);
-    		
-    		var endTime= year00 + '/' + month00 + '/' + day00+' 00:00:00';
-//			context.state.tradeSocket.send('{"Method":"QryHisTrade","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'"}}');
-			context.state.tradeSocket.send('{"Method":"QryHisTrade","Parameters":{"ClientNo":"'+ JSON.parse(localStorage.tradeUser).username +'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'"}}');
+			var endTime = _getDayString(date);
+			date.setDate(date.getDate()-1);
+			var beginTime = _getDayString(date);
+//			context.state.tradeSocket.send('{"method":"QryHisTrade","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'"}}');
+			tradeSocket.send(`{"Method":"QryHisTrade","Parameters":{"ClientNo":"${JSON.parse(localStorage.tradeUser).username}","BeginTime":"${beginTime}","EndTime":"${endTime}"}}`);
 		
 		},
-		layerOnRtnOrderTraded:function(context,parameters){
+		layerOnRtnOrderTraded:function(context,parameters){ //订单成交通知信息更新
+			let {market} = context.state
 			if(parameters!=null){
-				var CommodityName =context.state.market.orderTemplist[parameters.CommodityNo].CommodityName;
-				var DirectionStr;
-				if(parameters.Drection==0){
-					DirectionStr='买';
-				}
-				if(parameters.Drection==1){
-					DirectionStr='卖';
-				}
+				var CommodityName = market.orderTemplist[parameters.CommodityNo].commodity_name;
+				var DirectionStr = parameters.Drection? '卖': '买';
 				var TradeNum = parameters.TradeNum;
-				var TradeNo = parameters.TradeNo;
-				var TradePrice = parseFloat(parameters.TradePrice).toFixed(context.state.market.orderTemplist[parameters.CommodityNo].DotSize);
-				context.state.market.layerOnRtnOrder = "成交（"+CommodityName+",价格:"+TradePrice+","+DirectionStr+TradeNum+"手）" + Math.floor(Math.random()*10);
+				//var TradeNo = parameters.TradeNo;
+				var TradePrice = parseFloat(parameters.TradePrice).toFixed(market.orderTemplist[parameters.CommodityNo].dot_size);
+				market.layerOnRtnOrder = "成交（"+CommodityName+",价格:"+TradePrice+","+DirectionStr+TradeNum+"手）" + Math.floor(Math.random()*10);
 			}
 		},
-		layerMessage:function(context,parameters){
+		layerMessage:function(context,parameters){ //委托成功消息更新
+			let {market} = context.state
 			if(parameters!=null){
-				if(parameters.OrderStatus==5){
-					context.state.market.layer = parameters.StatusMsg+Math.floor(Math.random()*10);
+				if(parameters.OrderStatus==5){ //下单失败
+					market.layer = parameters.StatusMsg+Math.floor(Math.random()*10);
 					return;
 				}
-				
-				var CommodityName =context.state.market.orderTemplist[parameters.CommodityNo].CommodityName;
-				var DirectionStr;
-				if(parameters.Drection==0){
-					DirectionStr='买';
-				}
-				if(parameters.Drection==1){
-					DirectionStr='卖';
-				}
-				var price;
-				if(parameters.OrderPriceType==1){
-					price = '市价';
-				}
-				if(parameters.OrderPriceType==0){
-					price = parseFloat(parameters.OrderPrice).toFixed(context.state.market.orderTemplist[parameters.CommodityNo].DotSize);
-				}
+				var CommodityName = market.orderTemplist[parameters.CommodityNo].commodity_name;
+				var DirectionStr = parameters.Drection? '卖': '买';
+				var OrderPrice = parseFloat(parameters.OrderPrice).toFixed(market.orderTemplist[parameters.CommodityNo].dot_size);
+				var price = parameters.OrderPriceType? '市价': OrderPrice;
 				var OrderNum = parameters.OrderNum;
 				var OrderID = parameters.OrderID;
-				
-				if(parameters.OrderStatus<4){
+				if(parameters.OrderStatus<4){ //0-单已提交 1-排队中 2-部分成交 3-完全成交
 					context.state.market.layer='委托成功（'+CommodityName+','+price+','+DirectionStr+OrderNum+'手,委托号:'+OrderID+'）'+Math.floor(Math.random()*10);
-				}else{
+				}else{ // 4-撤单
 					context.state.market.layer='委托失败（'+CommodityName+','+price+','+DirectionStr+OrderNum+'手,失败原因:'+parameters.StatusMsg+'）'+Math.floor(Math.random()*10);
 				}
 				
 			}
 		},
-		updateApply:function(context,parameters){
+		updateApply:function(context,parameters){ // todo 完全成交未正常更新
 			// 2 排队中 状态，新增/更新挂单列表
 			// 2.2 部分成交、完全成交、已撤单、下单失败、未知 状态，需处理挂单
+			const {market} = context.state
 			var isExist = false;
 			var index=0;
 			var currentObj=null;
-			context.state.market.orderListCont.forEach(function(e,i){
+			market.orderListCont.forEach(function(e,i){
 				if(e.OrderID == parameters.OrderID){
 					isExist = true;
 					index = i;
 					currentObj = e;
 				}
 			});
-			if(parameters.OrderStatus < 3 ){
-//				context.state.market.OnRspOrderInsertOrderListCont.push(parameters);
+			if(parameters.OrderStatus < 3 ){ //0-单已提交 1-排队中 2-部分成交 3-完全成交
+//				market.OnRspOrderInsertOrderListCont.push(parameters);
 				if(isExist==true){
 					currentObj.delegatePrice = parameters.OrderPrice;
 					currentObj.delegateNum = parameters.OrderNum;
-					currentObj.ApplyOrderNum = parameters.OrderNum- parameters.TradeNum;
-					context.state.market.orderListCont.splice(index,1,currentObj);
+					currentObj.ApplyOrderNum = parameters.OrderNum - parameters.TradeNum;
+					market.orderListCont.splice(index,1,currentObj);
 					
-					context.state.market.OnRspOrderInsertOrderListCont[context.state.market.OnRspOrderInsertOrderListCont.length-index-1].OrderPrice
+					market.OnRspOrderInsertOrderListCont[market.OnRspOrderInsertOrderListCont.length-index-1].OrderPrice
 						=parameters.OrderPrice;
-					context.state.market.OnRspOrderInsertOrderListCont[context.state.market.OnRspOrderInsertOrderListCont.length-index-1].OrderNum
+					market.OnRspOrderInsertOrderListCont[market.OnRspOrderInsertOrderListCont.length-index-1].OrderNum
 						=parameters.OrderNum;
-					context.state.market.layer = parameters.StatusMsg + ':合约【'+ parameters.ContractCode +'】,订单号:【'+ parameters.OrderID +'】' + Math.floor(Math.random()*10);
+					market.layer = parameters.StatusMsg + ':合约【'+ parameters.ContractCode +'】,订单号:【'+ parameters.OrderID +'】' + Math.floor(Math.random()*10);
 					
 				}
 			}else if(parameters.OrderStatus == 6){
 				return true;
 			}else{
 				if(isExist==true){
-					context.state.market.orderListCont.splice(index,1);
-					context.state.market.OnRspOrderInsertOrderListCont.splice(context.state.market.OnRspOrderInsertOrderListCont.length-index-1,1);
-					context.state.market.layer = parameters.StatusMsg + ':合约【'+ parameters.ContractCode +'】,订单号:【'+ parameters.OrderID +'】' + + Math.floor(Math.random()*10);
+					market.orderListCont.splice(index,1);
+					market.OnRspOrderInsertOrderListCont.splice(market.OnRspOrderInsertOrderListCont.length-index-1,1);
+					market.layer = parameters.StatusMsg + ':合约【'+ parameters.ContractCode +'】,订单号:【'+ parameters.OrderID +'】' + + Math.floor(Math.random()*10);
 				}
 			}
 		},
 		appendApply:function(context,parameters){
 			if( parameters.OrderStatus < 3 ) { // 订单已提交、排队中、部分成交 显示到挂单列表
 				context.state.market.OnRspOrderInsertOrderListCont.push(parameters);
+			}
+		},
+		appendApply00:function(context,parameters){
+			if( parameters.OrderStatus < 3 ) { // 订单已提交、排队中、部分成交 显示到挂单列表
+				context.state.market.OnRspOrderInsertOrderListCont.unshift(parameters);
 			}
 		},
 		appendOrder00:function(context,parameters){
@@ -2074,75 +1473,56 @@ export default new Vuex.Store({
 			});
 		},
 		//更新持仓
-		updateHold:function(context,parameters){
+		updateHold (context,parameters){ //已更新
+			const {market} = context.state;
 			var isExist = false;
-			var positionListContCurrent = null;
 			var positionListContCurrentIndex=0;
-			context.state.market.positionListCont.forEach(function(e,i){
-				if(e.commodityNocontractNo==parameters.ContractCode){
-					positionListContCurrent = e;
-					positionListContCurrentIndex = i;
-					isExist = true;
+			let positionListContCurrent = market.positionListCont.find((e,i) =>{
+				if(e.commodityNocontractNo === parameters.ContractCode){
+					isExist = true
+					positionListContCurrentIndex = i
+					return true
 				}
 			});
-			if(isExist==false){
-				var obj={};
-				obj.name=context.state.market.orderTemplist[parameters.CommodityNo].CommodityName;
-				obj.type=function(){
-					if(parameters.Drection==0){
-						return '多'
-					}else{
-						return '空'
-					}
-				}();
-				obj.num=parameters.HoldNum;
-				obj.price=parameters.HoldAvgPrice.toFixed(context.state.market.orderTemplist[parameters.CommodityNo].DotSize);
-				obj.total=0;
-				obj.showbar=false;
-				obj.type_color=function(){
-					if(parameters.Drection==0){
-						return 'red'
-					}else{
-						return 'green'
-					}
-				}();
-				obj.total_color='green';
-				obj.commodityNocontractNo = context.state.market.orderTemplist[parameters.CommodityNo].LastQuotation.CommodityNo
-											+context.state.market.orderTemplist[parameters.CommodityNo].LastQuotation.ContractNo;
-				
+			var currentCommodity = market.orderTemplist[parameters.CommodityNo];
+			if(!isExist){
+				var obj = {
+					name: currentCommodity.commodity_name,
+					Drection: parameters.Drection,
+					type: parameters.Drection?'空':'多',
+					num: parameters.HoldNum,
+					type_color: parameters.Drection?'green':'red',
+					total_color: 'green',
+					price: parameters.HoldAvgPrice.toFixed(currentCommodity.dot_size),
+					ExchangeNo: currentCommodity.exchange_no,
+					CommodityNo: currentCommodity.commodity_no,
+					ContractNo: currentCommodity.mainContract,
+					commodityNocontractNo: currentCommodity.commodity_no + currentCommodity.mainContract,
+					showbar: false,
+					total: 0
+				}
 				if(parameters.HoldNum!=0){
-					context.state.market.positionListCont.unshift(obj);	
-					context.state.market.qryHoldTotalArr.push(parameters);
+					market.positionListCont.unshift(obj);	
+					market.qryHoldTotalArr.push(parameters);
 				}
 				
 			}
-			
 			if(isExist==true){
 					if(parameters.HoldNum!=0){
-						
 						positionListContCurrent.num=parameters.HoldNum;
-						if(parameters.Drection==0){
-							 positionListContCurrent.type ='多';
-							 positionListContCurrent.type_color='red';
-						}
-						if(parameters.Drection==1){
-							 positionListContCurrent.type='空';
-							  positionListContCurrent.type_color='green';
-						}
-						
-						positionListContCurrent.price = parseFloat(parameters.OpenAvgPrice)
-															.toFixed(context.state.market.orderTemplist[parameters.CommodityNo].DotSize);
-															
-						context.state.market.positionListCont.splice(positionListContCurrentIndex,1,positionListContCurrent);
-						
-//						context.state.market.qryHoldTotalArr[context.state.market.qryHoldTotalArr.length-1-positionListContCurrentIndex].HoldNum = parameters.HoldNum;
-//						context.state.market.qryHoldTotalArr[context.state.market.qryHoldTotalArr.length-1-positionListContCurrentIndex].Drection = parameters.Drection;
-//						context.state.market.qryHoldTotalArr[context.state.market.qryHoldTotalArr.length-1-positionListContCurrentIndex].OpenAvgPrice = parameters.OpenAvgPrice;
-						context.state.market.qryHoldTotalArr[context.state.market.qryHoldTotalArr.length-1-positionListContCurrentIndex] = parameters;
+						positionListContCurrent.type = parameters.Drection?'空': '多';
+						positionListContCurrent.type_color = parameters.Drection?'green': 'red';
+						positionListContCurrent.price = parseFloat(parameters.OpenAvgPrice).toFixed(currentCommodity.dot_size);
+						market.positionListCont.splice(positionListContCurrentIndex,1,positionListContCurrent);
+
+//						market.qryHoldTotalArr[market.qryHoldTotalArr.length-1-positionListContCurrentIndex].HoldNum = parameters.HoldNum;
+//						market.qryHoldTotalArr[market.qryHoldTotalArr.length-1-positionListContCurrentIndex].Drection = parameters.Drection;
+//						market.qryHoldTotalArr[market.qryHoldTotalArr.length-1-positionListContCurrentIndex].OpenAvgPrice = parameters.OpenAvgPrice;
+						market.qryHoldTotalArr[market.qryHoldTotalArr.length-1-positionListContCurrentIndex] = parameters;
 					
 					}else{
-						context.state.market.positionListCont.splice(positionListContCurrentIndex,1);
-						context.state.market.qryHoldTotalArr.splice(context.state.market.qryHoldTotalArr.length-1-positionListContCurrentIndex,1);
+						market.positionListCont.splice(positionListContCurrentIndex,1);
+						market.qryHoldTotalArr.splice(market.qryHoldTotalArr.length-1-positionListContCurrentIndex,1);
 					}
 			}
 			
@@ -2274,85 +1654,62 @@ export default new Vuex.Store({
 			}
 		},
 		
-		UpdateHoldProfit:function(context,parameters){
-			if(context.state.market.ifUpdateHoldProfit){
-				if(parameters!=null){
-					var currentPositionListContObjIndex = 0;
-					var currentPositionListContObj;
-					context.state.market.positionListCont.forEach(function(e,i){
-							if(e.commodityNocontractNo==(parameters.CommodityNo+parameters.ContractNo)){
-								currentPositionListContObj=e;
-								currentPositionListContObjIndex=i;
-							}
-					});
-					if(currentPositionListContObj!=undefined){
-						// 价差 = 最新价-开仓价
-						var diff = parameters.LastPrice - currentPositionListContObj.price;
-						// 合约乘数 = 最小变动价格 / 最小变动点数
-						var mult = context.state.market.orderTemplist[parameters.CommodityNo].ContractSize/context.state.market.orderTemplist[parameters.CommodityNo].MiniTikeSize;
-						// 浮动盈亏 = (价差/最小变动) * (合约乘数 * 最小变动) * 手数 = 价差 * 合约乘数(最小变动价格 / 最小变动点数) * 手数
-						var tmpFloatingProfit = parseFloat(diff * mult * currentPositionListContObj.num).toFixed(2);
-						if(currentPositionListContObj.type == '空') { // 空反向
-									tmpFloatingProfit = -tmpFloatingProfit;
-						}	
-						if(tmpFloatingProfit>=0){
-							currentPositionListContObj.total_color = 'red';
-						}else{
-							currentPositionListContObj.total_color = 'green';
-						}
-						var floatingProfit=tmpFloatingProfit+':'+context.state.market.orderTemplist[parameters.CommodityNo].CurrencyNo;
-						currentPositionListContObj.total = floatingProfit;
-						context.state.market.positionListCont.splice(currentPositionListContObjIndex,1,currentPositionListContObj);
-						
-						context.state.market.CacheHoldFloatingProfit.jHoldFloatingProfit[parameters.CommodityNo+parameters.ContractNo] 
-							= {"currencyNo" : context.state.market.orderTemplist[parameters.CommodityNo].CurrencyNo, "floatingProfit" : tmpFloatingProfit};
-						
-						//更新账户资金盈亏
-						context.dispatch('updateAccountFloatingProfit',parameters);
-						
-					}
-					
-				}
-				
-			}
+		UpdateHoldProfit (context,lastQuoteData) { //已更新
+			const {market} = context.state;
+			if (!market.ifUpdateHoldProfit||!lastQuoteData) return;
+			let commodityNoContractNo = lastQuoteData.contract_info.commodity_no+lastQuoteData.contract_info.contract_no; // AD1809
+			//查找每个lastQuoteData 对应持仓item 
+			let currentPositionListContObjIndex;
+			let currentPositionListContObj = market.positionListCont.find((item, index)=> {
+				currentPositionListContObjIndex = index
+				return item.commodityNocontractNo === commodityNoContractNo
+			})
+			if (!currentPositionListContObj) return;
+			//查找每个lastQuoteData 对应的订阅合约信息
+			let orderItem = market.orderTemplist[lastQuoteData.contract_info.commodity_no]
+			// 价差 = 最新价-开仓价
+			let diff = lastQuoteData.last - currentPositionListContObj.price;
+			// 合约乘数 = 最小变动价格 / 最小变动点数  
+			let mult =orderItem.contract_size/orderItem.mini_ticker_size;
+			// 浮动盈亏 = (价差/最小变动) * (合约乘数 * 最小变动) * 手数 = 价差 * 合约乘数(最小变动价格 / 最小变动点数) * 手数
+			let tmpFloatingProfit = parseFloat(diff * mult * currentPositionListContObj.num).toFixed(lastQuoteData.dot_size);
+			if(currentPositionListContObj.type == '空') tmpFloatingProfit = -tmpFloatingProfit;// 空反向
+			currentPositionListContObj.total_color = tmpFloatingProfit>=0?'red':'green';
+
+			let floatingProfit = tmpFloatingProfit+':'+orderItem.currency_no;
+			currentPositionListContObj.total = floatingProfit;
+			market.positionListCont.splice(currentPositionListContObjIndex,1,currentPositionListContObj);
+			//更新 持仓合约浮盈处理
+			market.CacheHoldFloatingProfit.jHoldFloatingProfit[commodityNoContractNo] = {"currencyNo" : orderItem.currency_no, "floatingProfit" : tmpFloatingProfit};
+			//更新账户资金盈亏
+			context.dispatch('updateAccountFloatingProfit',lastQuoteData);
 			
 		},
-		updateHoldFloatingProfit:function(context,parameters){
+		updateHoldFloatingProfit(context,parameters){  //已更新
 //			console.log('根据订阅行情初始化持仓盈亏');
 //			console.log(context.state.market.orderTemplist[parameters.CommodityNo]);
-			var lastPrice = context.state.market.orderTemplist[parameters.CommodityNo].LastQuotation.LastPrice;
-			var contract=parameters.ContractCode;
-			var CommodityNo = context.state.market.orderTemplist[parameters.CommodityNo]
-			var isExist = false;
+			let {market} = context.state
+			var CommodityNo = market.orderTemplist[parameters.CommodityNo]
+			var lastPrice = CommodityNo.LastQuotation.last;
 			var currentObj = null;
-			var currentObjIndex=0;
-			context.state.market.qryHoldTotalArr.forEach(function(e,i){
-				if(e.ContractCode==parameters.ContractCode){
-					isExist = true;	
-					currentObj = e;
-					currentObjIndex=i;
-				}
-			});
-			
+			currentObj = market.qryHoldTotalArr.find((e)=>e.ContractCode==parameters.ContractCode)
 			// 价差 = 最新价-开仓价
 			var diff = lastPrice - currentObj.OpenAvgPrice;
 			// 合约乘数 = 最小变动价格 / 最小变动点数
-			var mult = context.state.market.orderTemplist[parameters.CommodityNo].ContractSize/context.state.market.orderTemplist[parameters.CommodityNo].MiniTikeSize;
+			var mult = CommodityNo.contract_size/CommodityNo.mini_ticker_size;
 			// 浮动盈亏 = (价差/最小变动) * (合约乘数 * 最小变动) * 手数 = 价差 * 合约乘数(最小变动价格 / 最小变动点数) * 手数
-			var tmpFloatingProfit = parseFloat(diff * mult * currentObj.HoldNum).toFixed(2);
+			var tmpFloatingProfit = parseFloat(diff * mult * currentObj.HoldNum).toFixed(parameters.dot_size);
 			if(currentObj.Drection === 1) { // 空反向
 				tmpFloatingProfit = -tmpFloatingProfit;
 			}
-			
-			var floatingProfit=tmpFloatingProfit+':'+context.state.market.orderTemplist[parameters.CommodityNo].CurrencyNo;
-			
-			var CommodityName = context.state.market.orderTemplist[parameters.CommodityNo].CommodityName;
+			var floatingProfit=tmpFloatingProfit+':'+CommodityNo.currency_no;
+			var CommodityName = CommodityNo.commodity_name;
 			
 			var currentPositionListContObj=null;
 			var currentPositionListContObjIndex=0;
 			var isExist00 = false;
-			
-			context.state.market.positionListCont.forEach(function(e,i){
+
+			market.positionListCont.forEach(function(e,i){
 				if(e.name==CommodityName){
 					isExist00 = true;
 					currentPositionListContObj = e;
@@ -2367,44 +1724,54 @@ export default new Vuex.Store({
 					currentPositionListContObj.total_color = 'green';
 				}
 				
-				context.state.market.positionListCont.splice(currentPositionListContObjIndex,1,currentPositionListContObj);
+				market.positionListCont.splice(currentPositionListContObjIndex,1,currentPositionListContObj);
 				
 			}
-			
-			
 		},
 		
 		HeartBeatTimingCheck:function(context){
-			
+			const {market} =context.state
+			const {HeartBeat} = market
 			setInterval(
-//				heartBeatUpdate,context.state.market.HeartBeat.intervalCheckTime
-				heartBeatUpdate,15000
+				heartBeatUpdate,HeartBeat.intervalCheckTime
 			);	
 			function heartBeatUpdate(){
-				if(context.state.market.HeartBeat.lastHeartBeatTimestamp == context.state.market.HeartBeat.oldHeartBeatTimestamp){
+				if(HeartBeat.lastHeartBeatTimestamp == HeartBeat.oldHeartBeatTimestamp){
 //					console.log('交易服务器断开，正在重连');
-					context.state.market.tradeConnectedMsg='交易服务器断开，正在重连'+Math.ceil(Math.random()*10);
+					market.tradeConnectedMsg='交易服务器断开，正在重连'+Math.ceil(Math.random()*10);
 				}else{
-					context.state.market.HeartBeat.oldHeartBeatTimestamp = context.state.market.HeartBeat.lastHeartBeatTimestamp; // 更新上次心跳时间
+					HeartBeat.oldHeartBeatTimestamp = HeartBeat.lastHeartBeatTimestamp; // 更新上次心跳时间
 //					console.log(context.state.market.HeartBeat.oldHeartBeatTimestamp);
 				}
 			}
 			heartBeatUpdate();
 		},
 		initTrade:function(context){
-			
-//			if(context.state.tradeSocket==null){
-				context.state.tradeSocket = new WebSocket(context.state.market.tradeConfig.url_real);
-//			}
-			context.state.tradeSocket.onopen = function(evt){
+			const {state} = context
+			const {market, isshow} = state
+			let {tradeConfig} = market
+			state.tradeSocket = new WebSocket(tradeConfig.url_real);
+			state.tradeSocket.onopen = function(evt){
 				//登录
-				if(context.state.tradeSocket.readyState==1){ //连接已建立，可以进行通信。
-					if(JSON.parse(localStorage.getItem('tradeUser'))){
-						context.state.tradeSocket.send('{"Method":"Login","Parameters":{"ClientNo":"'+JSON.parse(localStorage.getItem('tradeUser')).username+'","PassWord":"'+JSON.parse(localStorage.getItem('tradeUser')).password+'","IsMock":'+context.state.market.tradeConfig.model+',"Version":"'+context.state.market.tradeConfig.version+'","Source":"'+context.state.market.tradeConfig.client_source+'"}}');
+				if(state.tradeSocket.readyState==1){ //连接已建立，可以进行通信。
+					let tradeUser = JSON.parse(localStorage.getItem('tradeUser'))||{}
+					const tradeMessage = {
+						Method: 'Login',
+						Parameters: {
+							ClientNo: tradeUser.username,
+							PassWord: tradeUser.password,
+							IsMock: tradeConfig.model,
+							Version: tradeConfig.version,
+							Source: tradeConfig.client_source
+						}
+					}
+					if(tradeUser){
+						context.commit('sendTradeMessage',tradeMessage)
 					}else{
-						
-						if(context.state.market.tradeConfig.username!=''){
-							context.state.tradeSocket.send('{"Method":"Login","Parameters":{"ClientNo":"'+context.state.market.tradeConfig.username+'","PassWord":"'+context.state.market.tradeConfig.password+'","IsMock":'+context.state.market.tradeConfig.model+',"Version":"'+context.state.market.tradeConfig.version+'","Source":"'+context.state.market.tradeConfig.client_source+'"}}');
+						if(tradeConfig.username!=''){
+							tradeMessage.Parameters.ClientNo = tradeConfig.username
+							tradeMessage.Parameters.PassWord = tradeConfig.password
+							context.commit('sendTradeMessage',tradeMessage)
 						}	
 					}
 				}
@@ -2412,7 +1779,7 @@ export default new Vuex.Store({
 			context.state.tradeSocket.onclose = function(evt) {
 //				console.log('tradeClose:');
 //				console.log(evt);
-				context.state.tradeSocket=null;
+				state.tradeSocket=null;
 			};
 			context.state.tradeSocket.onerror = function(evt) {
 //				console.log('tradeError:');
@@ -2424,366 +1791,280 @@ export default new Vuex.Store({
 			
 		},
 		initQuoteClient: function(context) {
-			context.state.quoteSocket = new WebSocket(context.state.market.quoteConfig.url_real);
-			context.state.quoteSocket.onopen = function(evt) {
+			const {state} = context
+			const {market, isshow} = state
+			let {quoteConfig} = market
+			state.quoteSocket = new WebSocket(quoteConfig.url_real);
+			state.quoteSocket.onopen = function(evt) {
 //				console.log('open');
-				context.state.quoteSocket.send('{"Method":"Login","Parameters":{"UserName":"'+context.state.market.quoteConfig.userName+'","PassWord":"'+context.state.market.quoteConfig.passWord+'"}}');
-
+				const data = {
+					method: 'req_login',
+					data: {
+						user_name: quoteConfig.userName,
+						password: quoteConfig.passWord,
+						//protoc_version: '6.1'
+					}
+				}
+				context.commit('sendMessage',data)
 			};
-			context.state.quoteSocket.onclose = function(evt) {
+			
+			state.quoteSocket.onclose = function(evt) {
 //				console.log('close');
 			};
-			context.state.quoteSocket.onerror = function(evt) {
+			state.quoteSocket.onerror = function(evt) {
 //				console.log('error');
 			};
-			context.state.quoteSocket.onmessage = function(evt) {
-				context.state.wsjsondata = JSON.parse(evt.data);
-				if(context.state.wsjsondata.Method == "OnRspLogin") { // 登录行情服务器
-					context.state.market.quoteConnectedMsg='行情服务器连接成功' + Math.floor(Math.random()*10);
-					// 查询服务器支持品种用于订阅
-					context.state.quoteSocket.send('{"Method":"QryCommodity","Parameters":{' + null + '}}');
-				} else if(context.state.wsjsondata.Method == "OnRspQryCommodity") { // 行情服务器支持的品种
-					// 行情服务器支持的品种
-					context.state.market.markettemp = JSON.parse(evt.data).Parameters;
-					
-					context.state.market.markettemp.forEach(function(e) {
-						var key=e.CommodityNo;
-						context.state.market.orderTemplist[key]=e;
-						
-						if(e.IsUsed != 0) {
-							context.state.quoteSocket.send('{"Method":"Subscribe","Parameters":{"ExchangeNo":"' + e.ExchangeNo + '","CommodityNo":"' + e.CommodityNo + '","ContractNo":"' + e.MainContract + '"}}');
+			state.quoteSocket.onmessage = function(evt) {
+				let wsData = JSON.parse(evt.data);
+				state.wsjsondata = wsData;
+				const {method} = state.wsjsondata;
+				switch (method) {
+					case 'on_rsp_login': //登录服务器
+						market.quoteConnectedMsg='行情服务器连接成功' + Math.floor(Math.random()*10);
+						// 查询服务器支持品种用于订阅
+						var data = {
+							method: 'req_commodity_list',
+							data: {
+								security_type: 'FUT_OUT',
+							}
 						}
-					});
-				} else if(context.state.wsjsondata.Method == "OnRspSubscribe") { // 订阅成功信息
-					var key=JSON.parse(evt.data).Parameters.CommodityNo;
-					context.state.market.templateList[key]=JSON.parse(evt.data).Parameters;
-//					console.log(context.state.market.templateList);
-					context.state.market.markettemp.forEach(function(e) {
-						if(e.CommodityNo == JSON.parse(evt.data).Parameters.CommodityNo) {
-							e.LastQuotation = JSON.parse(evt.data).Parameters.LastQuotation;
-							context.state.market.Parameters.push(e);
+						context.commit('sendMessage',data)
+						break;
+					case 'on_rsp_commodity_list': //行情服务器支持的品种
+						//加入主力合约字段
+						wsData.data.commodity_list.forEach(item => {
+							var contract = item.contract_no_list.find( contract => contract.flags === 1)
+							item.mainContract = contract?contract.contract_no:'';
+							var key=item.commodity_no;
+						    market.orderTemplist[key]=item;
+						})
+						market.markettemp = wsData.data.commodity_list;
+						// 查询服务器支持品种用于订阅
+						var paramsArr = market.markettemp.reduce((arr,obj) =>{
+								var sendParams = {
+									security_type: obj.security_type,
+									exchange_no: obj.exchange_no,
+									commodity_no: obj.commodity_no,
+									contract_no: obj.mainContract							
+								}
+								arr.push(sendParams);
 							
+							return arr
+						},[])
+						var subscribeParams = {
+							method: 'req_subscribe',
+							data: paramsArr
 						}
-					});
-					if(context.state.market.subscribeIndex==1){
-						//初始化交易
-						context.dispatch('initTrade');
+
+						context.commit('sendMessage',subscribeParams)
+						break;
+					case 'on_rsp_subscribe': //订阅成功信息
+						//console.log(market.markettemp)
+						var  {succ_list} = wsData.data;
 						
-					}
-					
-					context.state.market.subscribeIndex++;
-				} else if(context.state.wsjsondata.Method == "OnRtnQuote") { // 最新行情
-					var val = JSON.parse(evt.data).Parameters;
-					var key = JSON.parse(evt.data).Parameters.CommodityNo;
-					context.state.market.Parameters.forEach(function(a, r) {
-						if(a.CommodityNo == key){
-							if(JSON.parse(evt.data).Parameters.LastPrice > a.LastQuotation.LastPrice){
-								context.state.market.quoteIndex = r;   //行情变颜色
-								context.state.market.quoteColor = 'red';
-							}else if(JSON.parse(evt.data).Parameters.LastPrice < a.LastQuotation.LastPrice){
-								context.state.market.quoteIndex = r;   //行情变颜色
-								context.state.market.quoteColor = 'green';
+						market.templateList = succ_list.reduce((templateList,item) =>{
+							templateList[item.commodity_no] = item;
+							return templateList
+						},market.templateList)
+						market.Parameters = succ_list
+						//初始化交易
+						if(market.subscribeIndex==1) context.dispatch('initTrade');
+						market.subscribeIndex++;
+						break;
+					case 'on_rtn_quote': // 最新行情
+						var val = wsData.data;
+						var key = val.contract_info.commodity_no;
+						//找到当前的回推的合约及index
+						//console.log(market.Parameters)
+						var RtnParametersIndex;
+						var RtnParameters = market.Parameters.find((a, index) => {
+							if (a.commodity_no == key) {
+								RtnParametersIndex = index;
+								return true
 							}
+						});
+						if (!RtnParameters) return;
+						// 找到 对应的markettemp赋值  没必要
+						var RtnMarkettemp = market.markettemp.find((a) => a.commodity_no == key);
+						if (!RtnMarkettemp) return;
+						//处理掉行情回推成交量为0的情况
+						if(val.volume === 0) {
+							val.volume = (RtnMarkettemp.LastQuotation&&RtnMarkettemp.LastQuotation.volume)||0
+						}		
+						//重新给templateList 赋最新值
+						market.templateList[key] = val;
+						RtnMarkettemp.LastQuotation = val;
+						market.Parameters.splice(RtnParametersIndex, 1, RtnMarkettemp);
+
+						//处理变色 
+						if (RtnParameters.LastQuotation && val.last > RtnParameters.LastQuotation.last) {
+							market.quoteIndex = RtnParametersIndex;   //行情变颜色
+							market.quoteColor = 'red';
+						}else if(RtnParameters.LastQuotation && val.last < RtnParameters.LastQuotation.last) {
+							market.quoteIndex = RtnParametersIndex;   //行情变颜色
+							market.quoteColor = 'green';
 						}
-					});
-					context.state.market.templateList[key]=JSON.parse(evt.data).Parameters;
-					context.state.market.markettemp.forEach(function(e, i) {
-						//如果拿到的数据的CommodityNo与缓存的数据的CommodityNo相等
-						if(JSON.parse(evt.data).Parameters.CommodityNo == e.CommodityNo) {
-							//就把拿到数据存入缓存中
-							e.LastQuotation = JSON.parse(evt.data).Parameters;
-							//将显示数据进行更新
-							context.state.market.Parameters.forEach(function(a, r) {
-								if(a.CommodityNo == e.CommodityNo) {
-									context.state.market.Parameters.splice(r, 1, e);
+
+						//更新当前合约
+						if (market.currentNo == RtnMarkettemp.commodity_no) {
+							// console.log(123)
+							market.CacheLastQuote.push(val);
+							if (market.CacheLastQuote.length > 2){
+								market.CacheLastQuote.shift();
+							}
+							market.jsonTow = wsData.data;
+							let RtnTime = val.time_flag.split(mTimeExg); //得到回推的时间  '2018-08-07 16:49:45.147'=> ['2018-08-07', '16:49:45', '147'] [日期,时间,毫秒数]
+							let RtnSecondArr = RtnTime[1].split(':'); //回推的时间 ['时', '分', '秒']
+							//  当前成交量 = 本次总成交量 - 上次成交量  回推的行情的volume可能是0 需处理
+							if(val.volume){
+								market.volume = market.lastTotalVolume?market.volume + (val.volume - market.lastTotalVolume):market.volume
+								// console.log(val.volume,'val.volume')
+								// console.log(market.volume,'market.volume')
+								// console.log(market.lastTotalVolume,'market.lastTotalVolume')
+								market.lastTotalVolume = val.volume
+								
+							}
+							//构造成历史数据结构
+							//var arr = [val.time_flag, val.last, val.open, val.low, val.high, val.position, market.volume];
+							var arr = [val.time_flag, val.last, val.open, val.low, val.high, market.volume];
+							//更新分时图 
+							if (isshow.fshow == true) {
+								if(isshow.isfensshow == true) {
+									let {jsonData} = market;
+									//console.log(jsonData)
+									let lastData = jsonData.data.Lines;
+									let historyTime =lastData[lastData.length - 1][0].split(mTimeExg);
+									let historySecondArr = historyTime[1].split(':'); //历史时间 ["20", "48", "00"]
+									// 根据总成交量来计算当前成交量
+									if(RtnSecondArr[1] == historySecondArr[1]) { // 1分钟内更新
+										var time = lastData[lastData.length - 1][0];
+										lastData[lastData.length - 1] = arr;
+										lastData[lastData.length - 1][0] = time;
+									} else{ //加一分钟 更新
+										market.volume = 0;
+										lastData.push(arr);
+									}
+									context.commit('setfensoption');
 								}
-							});
-							if(context.state.market.currentNo == e.CommodityNo) {
-								context.state.market.CacheLastQuote.push(JSON.parse(evt.data).Parameters);
-								if(context.state.market.CacheLastQuote.length>2){
-									context.state.market.CacheLastQuote.shift();
-								}else if(context.state.market.CacheLastQuote.length<=1){
-									return ;
-								}
-								context.state.market.jsonTow = JSON.parse(evt.data);
-//								context.commit('updateTempdata', context.state.market.currentNo);
-								context.commit('setfensoptionsecond');
-								if(context.state.isshow.isfensshow == true) {
-									var arr = [], arr1, arr2, arr3, arr4;
-									context.state.market.charttimetime = new Date();
-									context.state.market.charttimems = context.state.market.charttimetime.getTime();
-									context.state.market.charttime = context.state.market.charttimems - context.state.market.charttimems2;
-									if(context.state.market.charttime >= 1000 || context.state.market.charttimetemp >= 1000) {
-										arr = [];
-										arr[0] = JSON.parse(evt.data).Parameters.DateTimeStamp;
-										arr[1] = JSON.parse(evt.data).Parameters.LastPrice;
-										arr[2] = JSON.parse(evt.data).Parameters.OpenPrice;
-										arr[3] = JSON.parse(evt.data).Parameters.LowPrice;
-										arr[4] = JSON.parse(evt.data).Parameters.HighPrice;
-										arr[5] = JSON.parse(evt.data).Parameters.Position;
-										arr[6] = JSON.parse(evt.data).Parameters.LastVolume;
-										arr1 = JSON.parse(evt.data).Parameters.DateTimeStamp.split(' ');
-										arr2 = arr1[1].split(':'); //最新时间
-										arr3 = context.state.market.jsonData.Parameters.Data[context.state.market.jsonData.Parameters.Data.length - 1][0].split(' ');
-										arr4 = arr3[1].split(':'); //历史时间
-										if(arr2[1] == arr4[1]) {
-											var time = context.state.market.jsonData.Parameters.Data[context.state.market.jsonData.Parameters.Data.length - 1][0];
-											var vol = parseInt(context.state.market.jsonData.Parameters.Data[context.state.market.jsonData.Parameters.Data.length - 1][6]) + parseInt(arr[6]);
-											context.state.market.jsonData.Parameters.Data[context.state.market.jsonData.Parameters.Data.length - 1] = arr;
-											context.state.market.jsonData.Parameters.Data[context.state.market.jsonData.Parameters.Data.length - 1][0] = time;
-											context.state.market.jsonData.Parameters.Data[context.state.market.jsonData.Parameters.Data.length - 1][6] = vol;
-										}else{
-//											context.state.market.jsonData.Parameters.Data.shift();
-											context.state.market.jsonData.Parameters.Data.push(arr);
-										}
-										context.commit('setfensoption');
-										context.commit('drawfens', {
-											id1: 'fens',
-											id2: 'volume'
-										});
-										context.state.market.charttimetemp = 0;
+								context.commit('drawfens', {
+									id1: 'fens',
+									id2: 'volume1'
+								});
+								
+							}
+							//更新闪电图 
+							if(isshow.islightshow == true) {
+								context.commit('setlightDate');
+								context.commit('drawlight', 'lightcharts');
+							}
+							//更新K线图
+							if(isshow.isklineshow == true) {
+								if(market.CacheLastQuote[1].volume <= market.CacheLastQuote[0].volume) return;
+								let {jsonDataKline} = market;
+								let historyTime =jsonDataKline.data.Lines[jsonDataKline.data.Lines.length - 1][0].split(mTimeExg);
+								let historySecondArr = historyTime[1].split(':'); //历史时间 ["20", "48", "00"]
+								const _updateData = function () {
+									let newParameter = jsonDataKline.data.Lines;
+									let newParameterLast = newParameter[newParameter.length - 1];
+									arr[0] = newParameterLast[0]; //更新时间
+									if(arr[1] <newParameterLast[3]) { //更新最新价
+										arr[3] = arr[1];
 									} else {
-										context.state.market.charttimetemp += context.state.market.charttime;
+										arr[3] = newParameterLast[3]
 									}
-									context.state.market.charttimetime2 = new Date();
-									context.state.market.charttimems2 = context.state.market.charttimetime2.getTime();
-								}
-								if(context.state.isshow.islightshow == true) {
-									context.commit('setlightDate');
-									context.commit('drawlight', 'lightcharts');
-								}
-								if(context.state.isshow.isklineshow == true) {
-									
-									if(context.state.market.CacheLastQuote[1].TotalVolume 
-												<= context.state.market.CacheLastQuote[0].TotalVolume){
-												return;
+									if(arr[1] > newParameterLast[4]) { //更新最高价
+										arr[4] = arr[1];
+									} else {
+										arr[4] = newParameterLast[4]
 									}
-									
-									var arr = [];
-									arr[0] = JSON.parse(evt.data).Parameters.DateTimeStamp;
-									arr[1] = JSON.parse(evt.data).Parameters.LastPrice;
-									arr[2] = JSON.parse(evt.data).Parameters.OpenPrice;
-									arr[3] = JSON.parse(evt.data).Parameters.LowPrice;
-									arr[4] = JSON.parse(evt.data).Parameters.HighPrice;
-									arr[5] = JSON.parse(evt.data).Parameters.Position;
-									context.state.market.volume+=JSON.parse(evt.data).Parameters.LastVolume;
-									arr[6] = context.state.market.volume;
-									
-									
-									var arr1 = JSON.parse(evt.data).Parameters.DateTimeStamp.split(' '); //得到的时间
-									//["20", "47", "38"]
-									var arr2 = arr1[1].split(':'); //得到的数据
-									var arr3 = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][0].split(' ');
-									//["20", "48", "00"]
-									var arr4 = arr3[1].split(':'); //历史
-									if(context.state.market.selectTime == 1) {
-										if(arr2[1] == arr4[1]) {
-											
-											arr[0] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][0];
-											if(arr[1] < context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][3]) {
-												arr[3] = arr[1];
-											} else {
-												arr[3] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][3]
-											}
-											
-											if(arr[1] > context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][4]) {
-												arr[4] = arr[1];
-											} else {
-												arr[4] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][4]
-											}
-											arr[1] = arr[1];
-											arr[2] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][2];
-											arr[5] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][5];
-											
-											arr[6] = context.state.market.volume;
-											var length = context.state.market.jsonDataKline.Parameters.Data.length;
-											context.state.market.jsonDataKline.Parameters.Data.splice(length-1,1,arr);
-										} else{
-											var arrTemp = [];
-											context.state.market.jsonDataKline.Parameters.Data.shift();
-											context.state.market.volume = 0;
-											arrTemp[0] = arr[0].substring(0, arr[0].length - 2) + '00';
-											arrTemp[1] = arr[1];
-											arrTemp[2] = arr[1];
-											arrTemp[3] = arr[1];
-											arrTemp[4] = arr[1];
-											arrTemp[5] = arr[5];
-											arrTemp[6] = arr[6];
-											arr = arrTemp;
-											context.state.market.jsonDataKline.Parameters.Data.push(arrTemp);
-										}
-									}else if(context.state.market.selectTime == 5){
-										if(arr2[1]%5 != 0) {
-											arr[0] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][0];
-											if(arr[1] < context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][3]) {
-												arr[3] = arr[1];
-											} else {
-												arr[3] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][3]
-											}
-											if(arr[1] > context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][4]) {
-												arr[4] = arr[1];
-											} else {
-												arr[4] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][4]
-											}
-											arr[1] = arr[1];
-											arr[2] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][2];
-											arr[5] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][5];
-											//arr[6] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][6];
-											arr[6] = context.state.market.volume;
-											var length = context.state.market.jsonDataKline.Parameters.Data.length;
-											context.state.market.jsonDataKline.Parameters.Data.splice(length-1,1,arr);
-											//context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1] = arr;
-										} else if(arr2[1]%5 == 0 && arr2[2]=='00'){
-											
-											var arrTemp = [];
-											context.state.market.jsonDataKline.Parameters.Data.shift();
-											context.state.market.volume=0;
-											arrTemp[0] = arr[0].substring(0, arr[0].length - 2) + '00';
-											arrTemp[1] = arr[1];
-											arrTemp[2] = arr[1];
-											arrTemp[3] = arr[1];
-											arrTemp[4] = arr[1];
-											arrTemp[5] = arr[5];
-											arrTemp[6] = arr[6];
-											arr = arrTemp;
-											context.state.market.jsonDataKline.Parameters.Data.push(arr);
-										}
-									}else if(context.state.market.selectTime == 15){
-										if(arr2[1]%15 != 0) {
-											arr[0] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][0];
-											if(arr[1] < context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][3]) {
-												arr[3] = arr[1];
-											} else {
-												arr[3] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][3]
-											}
-											if(arr[1] > context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][4]) {
-												arr[4] = arr[1];
-											} else {
-												arr[4] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][4]
-											}
-											arr[1] = arr[1];
-											arr[2] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][2];
-											arr[5] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][5];
-											//arr[6] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][6];
-											//context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1] = arr;
-											arr[6] = context.state.market.volume;
-											var length = context.state.market.jsonDataKline.Parameters.Data.length;
-											context.state.market.jsonDataKline.Parameters.Data.splice(length-1,1,arr);
-										} else if(arr2[1]%15 == 0 && arr2[2]=='00'){
-											var arrTemp = [];
-											context.state.market.jsonDataKline.Parameters.Data.shift();
-											arrTemp[0] = arr[0].substring(0, arr[0].length - 2) + '00';
-											arrTemp[1] = arr[1];
-											arrTemp[2] = arr[1];
-											arrTemp[3] = arr[1];
-											arrTemp[4] = arr[1];
-											arrTemp[5] = arr[5];
-											arrTemp[6] = arr[6];
-											arr = arrTemp;
-											context.state.market.volume=0;
-											context.state.market.jsonDataKline.Parameters.Data.push(arr);
-										}
-									}else if(context.state.market.selectTime == 30){
-										if(arr2[1]%30 != 0) {
-											arr[0] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][0];
-											if(arr[1] < context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][3]) {
-												arr[3] = arr[1];
-											} else {
-												arr[3] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][3]
-											}
-											if(arr[1] > context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][4]) {
-												arr[4] = arr[1];
-											} else {
-												arr[4] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][4]
-											}
-											arr[1] = arr[1];
-											arr[2] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][2];
-											arr[5] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][5];
-											//arr[6] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][6];
-											//context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1] = arr;
-											arr[6] = context.state.market.volume;
-											var length = context.state.market.jsonDataKline.Parameters.Data.length;
-											context.state.market.jsonDataKline.Parameters.Data.splice(length-1,1,arr);
-										} else if(arr2[1]%30 == 0 && arr2[2]=='00'){
-											var arrTemp = [];
-											context.state.market.jsonDataKline.Parameters.Data.shift();
-											arrTemp[0] = arr[0].substring(0, arr[0].length - 2) + '00';
-											arrTemp[1] = arr[1];
-											arrTemp[2] = arr[1];
-											arrTemp[3] = arr[1];
-											arrTemp[4] = arr[1];
-											arrTemp[5] = arr[5];
-											arrTemp[6] = arr[6];
-											arr = arrTemp;
-											context.state.market.volume = 0;
-											context.state.market.jsonDataKline.Parameters.Data.push(arr);
-										}
-									}else if(context.state.market.selectTime == 1440){
-										if(arr2[1]=='00' && arr2[2]=='00') {
-											arr[0] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][0];
-											if(arr[1] < context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][3]) {
-												arr[3] = arr[1];
-											} else {
-												arr[3] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][3]
-											}
-											if(arr[1] > context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][4]) {
-												arr[4] = arr[1];
-											} else {
-												arr[4] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][4]
-											}
-											arr[1] = arr[1];
-											arr[2] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][2];
-											arr[5] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][5];
-											//arr[6] = context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1][6];
-											//context.state.market.jsonDataKline.Parameters.Data[context.state.market.jsonDataKline.Parameters.Data.length - 1] = arr;
-											arr[6] = context.state.market.volume;
-											var length = context.state.market.jsonDataKline.Parameters.Data.length;
-											context.state.market.jsonDataKline.Parameters.Data.splice(length-1,1,arr);
-										} else if(arr2[0]=='00' && arr2[1]=='00' && arr2[2]=='00'){
-											var arrTemp = [];
-											context.state.market.jsonDataKline.Parameters.Data.shift();
-											arrTemp[0] = arr[0].substring(0, arr[0].length - 2) + '00';
-											arrTemp[1] = arr[1];
-											arrTemp[2] = arr[1];
-											arrTemp[3] = arr[1];
-											arrTemp[4] = arr[1];
-											arrTemp[5] = arr[5];
-											arrTemp[6] = arr[6];
-											arr = arrTemp;
-											context.state.market.volume = 0;
-											context.state.market.jsonDataKline.Parameters.Data.push(arr);
-										}
-									}
-									context.commit('setklineoption');
-									context.commit('drawkline', {
-										id1: 'kliness',
-										id2: 'volume'
-									});
+									arr[1] = arr[1];
+									arr[2] = newParameterLast[2];
+									arr[5] = newParameterLast[5];
+									arr[6] = market.volume;
+									var length = newParameter.length;
+									newParameter.splice(length-1,1,arr);
+								};
+								const _addData = function () {
+									var arrTemp = [];
+									jsonDataKline.data.Lines.shift();
+									market.volume = 0;
+									arrTemp[0] = arr[0].substring(0, arr[0].length - 2) + '00';
+									arrTemp[1] = arr[1];
+									arrTemp[2] = arr[1];
+									arrTemp[3] = arr[1];
+									arrTemp[4] = arr[1];
+									arrTemp[5] = arr[5];
+									arrTemp[6] = arr[6];
+									arr = arrTemp;
+									jsonDataKline.data.Lines.push(arrTemp);
 								}
+								const switchList = {
+									'5': 'switch5min',
+									'15': 'switch15min',
+									'30': 'switch30min'
+								}
+								var selectTime = market.selectTime;
+								if (selectTime == 1) { //1分钟k
+									if(RtnSecondArr[1] == historySecondArr[1]) { // 1分钟内更新
+										_updateData()
+									} else{ //加一分钟 更新
+										_addData()
+									}
+								}else if (selectTime == 1440) {//日k
+									if (RtnSecondArr[0]=='00' && RtnSecondArr[1]=='00' && RtnSecondArr[2]=='00') {
+										_addData()
+									}else{
+										_updateData()
+									}
+								}else { // 5 15 30K
+									var switchItem = switchList[selectTime]
+									if(RtnSecondArr[1]%selectTime != 0||!market[switchItem]) {
+										if(RtnSecondArr[1]%selectTime != 0){
+											market[switchItem] = true
+										}
+										_updateData()
+									}else if(RtnSecondArr[1]%selectTime == 0 && market[switchItem]) {
+										market[switchItem] = false
+										_addData()
+									}
+								}
+								context.commit('setklineoption');
+								context.commit('drawkline', {
+									id1: 'kliness',
+									id2: 'volume2'
+								});
 							}
 						}
-					});
 					/**
 					 * 更新持仓盈亏
 					 */
-					context.dispatch('UpdateHoldProfit',JSON.parse(evt.data).Parameters);
-				} else if(context.state.wsjsondata.Method == "OnRspQryHistory") { // 历史行情
-					context.state.market.jsonData = JSON.parse(evt.data);
-					if(context.state.isshow.fshow == true) {
-						context.commit('setfensoption');
-						context.commit('drawfens', {
-							id1: 'fens',
-							id2: 'volume'
-						});
-					} else if(context.state.isshow.kshow == true) {
-						
-						context.state.market.jsonDataKline = JSON.parse(evt.data);
-						context.commit('setklineoption');
-						context.commit('drawkline', {
-							id1: 'kliness',
-							id2: 'volume'
-						});
-					}
+					context.dispatch('UpdateHoldProfit',val);
+						break;
+
+					case 'on_rsp_history_data': //历史查询
+						market.jsonData = wsData;
+						//console.log(market.jsonData)
+						if(isshow.fshow == true) {
+							//赋值当前成交量
+							market.volume = market.jsonData.data.Lines[market.jsonData.data.Lines.length - 1][5]
+							context.commit('setfensoption');
+							context.commit('drawfens', {
+								id1: 'fens',
+								id2: 'volume1'
+							});
+						} else if(isshow.kshow == true) {
+							market.jsonDataKline = wsData;
+							//赋值当前成交量
+							market.volume = market.jsonDataKline.data.Lines[market.jsonDataKline.data.Lines.length - 1][5]
+							context.commit('setklineoption');
+							context.commit('drawkline', {
+								id1: 'kliness',
+								id2: 'volume2'
+							});
+						}
+						break;	
+					default:
+						break;
 				}
 			}
 		},

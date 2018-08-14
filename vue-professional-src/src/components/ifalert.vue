@@ -14,7 +14,7 @@
 							<li class="fontgray">合约</li>
 							<li>
 								<select name="contract" class="selectlong fontwhite" v-model="selectId">
-									<option v-for="v in parameters" :value="v.CommodityNo+v.MainContract">{{v.CommodityName}}</option>
+									<option v-for="v in parameters" :value="v.commodity_no+v.mainContract">{{v.commodity_name}}</option>
 								</select>
 							</li>
 							<li>
@@ -79,7 +79,7 @@
 							<li class="fontgray">合约</li>
 							<li>
 								<select name="contract" class="selectlong fontwhite" v-model="selectTimeId">
-									<option v-for="v in parameters" :value="v.CommodityNo+v.MainContract">{{v.CommodityName}}</option>
+									<option v-for="v in parameters" :value="v.commodity_no+v.mainContract">{{v.commodity_name}}</option>
 								</select>
 							</li>
 							<li>
@@ -218,13 +218,13 @@
 				if(this.str) return JSON.stringify(this.str);
 			},
 			miniTikeSize(){
-				return this.orderTemplist[this.commodityNo].MiniTikeSize;
+				return this.orderTemplist[this.commodityNo].mini_ticker_size;
 			},
 			dosize(){
 				if(this.ifshow == true){
-					return this.orderTemplist[this.commodityNo].DotSize;
+					return this.orderTemplist[this.commodityNo].dot_size;
 				}else{
-					return this.orderTemplist[this.commodityNo00].DotSize;
+					return this.orderTemplist[this.commodityNo00].dot_size;
 				}
 			}
 		},
@@ -236,19 +236,20 @@
 		},
 		watch:{
 			parameters:function(n,o){
+				//console.log(n)
 				if(this.ifshow == true){
 					if(this.commodityNo != undefined){
 						n.forEach(function(e,i){
-							if(this.commodityNo == e.CommodityNo){
-								this.lastPrice = this.orderTemplist[this.commodityNo].LastQuotation.LastPrice;
+							if(this.commodityNo == e.commodity_no){
+								this.lastPrice = this.orderTemplist[this.commodityNo].LastQuotation.last;
 							}
 						}.bind(this));
 					}
 				}else{
 					if(this.commodityNo00 != undefined){
 						n.forEach(function(e,i){
-							if(this.commodityNo00 == e.CommodityNo){
-								this.lastPrice = this.orderTemplist[this.commodityNo00].LastQuotation.LastPrice;
+							if(this.commodityNo00 == e.commodity_no){
+								this.lastPrice = this.orderTemplist[this.commodityNo00].LastQuotation.last;
 							}
 						}.bind(this));
 					}
@@ -259,7 +260,7 @@
 					if(n == ''){
 						return true;
 					}else if(this.moneyReg.test(n) == false){
-						this.inputPrice = parseFloat(this.templateList[this.commodityNo].LastPrice).toFixed(this.orderTemplist[this.commodityNo].DotSize);
+						this.inputPrice = parseFloat(this.templateList[this.commodityNo].last).toFixed(this.orderTemplist[this.commodityNo].dot_size);
 					}
 				}
 			},
@@ -277,7 +278,7 @@
 				if(n != undefined){
 					this.commodityNo = n.substring(0,n.length-4);
 					this.contractNo = n.substring(n.length-4,n.length);
-					this.inputPrice =  parseFloat(this.templateList[this.commodityNo].LastPrice).toFixed(this.orderTemplist[this.commodityNo].DotSize);
+					this.inputPrice =  parseFloat(this.templateList[this.commodityNo].last).toFixed(this.orderTemplist[this.commodityNo].dot_size);
 				}
 			},
 			selectTimeId:function(n,o){
@@ -285,8 +286,8 @@
 //					this.commodityNo = n.substring(0,n.length-4);
 					this.commodityNo00 = n.substring(0,n.length-4);
 					this.contractNo00 = n.substring(n.length-4,n.length);
-//					this.timeAddtionPrice =  parseFloat(this.templateList[this.commodityNo00].LastPrice).toFixed(this.orderTemplist[this.commodityNo00].DotSize);
-					this.timeAddtionPrice00 =  parseFloat(this.templateList[this.commodityNo00].LastPrice).toFixed(this.orderTemplist[this.commodityNo00].DotSize);
+//					this.timeAddtionPrice =  parseFloat(this.templateList[this.commodityNo00].last).toFixed(this.orderTemplist[this.commodityNo00].dot_size);
+					this.timeAddtionPrice00 =  parseFloat(this.templateList[this.commodityNo00].last).toFixed(this.orderTemplist[this.commodityNo00].dot_size);
 				}
 			},
 			selectAdditionalPrice:function(n,o){
@@ -494,10 +495,10 @@
 			this.selectPrice = 0;
 			let arr=[];
 			arr = this.parameters;
-			this.selectId=arr[0].CommodityNo+arr[0].MainContract;
-			this.commodityNo = arr[0].CommodityNo;
-			this.contractNo = arr[0].MainContract;
-			this.inputPrice =  parseFloat(this.templateList[this.commodityNo].LastPrice).toFixed(this.orderTemplist[this.commodityNo].DotSize);
+			this.selectId=arr[0].commodity_no+arr[0].mainContract;
+			this.commodityNo = arr[0].commodity_no;
+			this.contractNo = arr[0].mainContract;
+			this.inputPrice =  parseFloat(this.orderTemplist[this.commodityNo].LastQuotation.last).toFixed(this.orderTemplist[this.commodityNo].dot_size);
 			this.selectAdditionalPrice = 5;
 			this.inputAdditionalPrice = this.inputPrice;
 			
@@ -510,10 +511,10 @@
 			
 			let arr00=[];
 			arr00 = this.parameters;
-			this.selectTimeId=arr00[0].CommodityNo+arr00[0].MainContract;
-			this.commodityNo00 = arr00[0].CommodityNo;
-			this.contractNo00 = arr00[0].MainContract;
-			this.addtionPrice = parseFloat(this.templateList[this.commodityNo00].LastPrice).toFixed(this.orderTemplist[this.commodityNo00].DotSize);
+			this.selectTimeId=arr00[0].commodity_no+arr00[0].mainContract;
+			this.commodityNo00 = arr00[0].commodity_no;
+			this.contractNo00 = arr00[0].mainContract;
+			this.addtionPrice = parseFloat(this.orderTemplist[this.commodityNo00].LastQuotation.last).toFixed(this.orderTemplist[this.commodityNo00].dot_size);
 			
 		}
 	}

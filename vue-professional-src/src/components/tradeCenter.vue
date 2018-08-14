@@ -25,7 +25,7 @@
 					<span>{{commodityNo00}}</span>
 					<i class="icon_search"></i>
 					<!--<select v-model="selectId">
-						<option  v-for="v in parameters" :value="v.CommodityName + '&' + v.CommodityNo + '&' + v.MainContract">{{v.CommodityName}} {{v.CommodityNo}} {{v.MainContract}}</option>
+						<option  v-for="v in parameters" :value="v.commodity_name + '&' + v.CommodityNo + '&' + v.MainContract">{{v.commodity_name}} {{v.CommodityNo}} {{v.MainContract}}</option>
 					</select>-->
 				</div>
 			</div>
@@ -33,20 +33,20 @@
 				<ul>
 					<li>
 						<span>新</span>
-						<span :class="{red: showNewPrice.LastPrice - showNewPrice.PreSettlePrice >=0, green: showNewPrice.LastPrice - showNewPrice.PreSettlePrice < 0}">{{showNewPrice.LastPrice}}</span>
-						<span>{{showNewPrice.TotalVolume}}</span>
+						<span :class="{red: showNewPrice.last - showNewPrice.pre_settle >=0, green: showNewPrice.last - showNewPrice.pre_settle < 0}">{{showNewPrice.last}}</span>
+						<span>{{showNewPrice.volume}}</span>
 					</li>
 					<li>
 						<span>卖</span>
-						<span :class="{red: showNewPrice.AskPrice1 - showNewPrice.PreSettlePrice >=0, green: showNewPrice.AskPrice1 - showNewPrice.PreSettlePrice < 0}">{{showNewPrice.AskPrice1}}</span>
-						<span>{{showNewPrice.AskQty1}}</span>
+						<span :class="{red: showNewPrice.ask[0]&&showNewPrice.ask[0][0] - showNewPrice.pre_settle >=0, green: showNewPrice.ask[0]&&showNewPrice.ask[0][0] - showNewPrice.pre_settle < 0}">{{showNewPrice.ask[0]&&showNewPrice.ask[0][0]}}</span>
+						<span>{{showNewPrice.ask[0]&&showNewPrice.ask[0][1]}}</span>
 					</li>
 					<li>
 						<span>买</span>
-						<span :class="{red: showNewPrice.BidPrice1 - showNewPrice.PreSettlePrice >=0, green: showNewPrice.BidPrice1 - showNewPrice.PreSettlePrice < 0}">{{showNewPrice.BidPrice1}}</span>
-						<span>{{showNewPrice.BidQty1}}</span>
+						<span :class="{red: showNewPrice.bid[0]&&showNewPrice.bid[0][0] - showNewPrice.pre_settle >=0, green: showNewPrice.bid[0]&&showNewPrice.bid[0][0] - showNewPrice.pre_settle < 0}">{{showNewPrice.bid[0]&&showNewPrice.bid[0][0]}}</span>
+						<span>{{showNewPrice.bid[0]&&showNewPrice.bid[0][1]}}</span>
 					</li>
-					 <!--| fixNum2(orderTemplist[showNewPrice.CommodityNo].DotSize)-->
+					 <!--| fixNum2(orderTemplist[showNewPrice.commodity_no].dot_size)-->
 				</ul>
 			</div>
 		</div>
@@ -168,6 +168,7 @@
 		<!--<orderlist :val="orderContEvent" id="orderCont" v-else-if="orderShow"></orderlist>
 		<orderlist :val="entrustContEvent" id="entrustCont" v-else-if="entrustShow"></orderlist>
 		<orderlist :val="dealContEvent" id="dealCont" v-else></orderlist>-->
+		
 		<alert title="确认撤单" :line1="cancelOrderAlert" :objstr='cancelOrderAlertObj'></alert>
 		<alert title="确认全部撤单"  :line1="cancelAllOrderAlert" :objstr='cancelAllOrderAlertObj' type="1"></alert>
 		<tipsDialog :msg="msgTips" ref="dialog"></tipsDialog>
@@ -225,7 +226,10 @@
 				numReg: /^[0-9]*$/,
 				moneyReg: /^(([1-9]\d*)|0)(\.\d*)?$/,
 				dotSize: '',
-				showNewPrice:{}
+				showNewPrice:{
+					ask: [],
+					bid: []
+				}
 			}
 		},
 		filters:{
@@ -262,7 +266,7 @@
 					return JSON.stringify(this.buyText);
 				}
 			},
-			cancelOrderAlert:function(){
+			cancelOrderAlert () {
 				var obj = this.buyText.Parameters;
 				if(obj!=undefined){
 					var contract=obj.CommodityNo+obj.ContractNo;
@@ -276,7 +280,7 @@
 					return JSON.stringify(this.buyText);
 				}
 			},
-			insertOrder: function(){
+			insertOrder () {
 				var obj = this.buyText.Parameters;
 				if(obj !=undefined){
 					var contract=obj.CommodityNo+obj.ContractNo;
@@ -354,7 +358,7 @@
 				return this.$store.state.market.Parameters;
 			},
 			Parameters(){
-				return this.$store.state.market.jsonTow.Parameters;
+				return this.$store.state.market.jsonTow;
 			},
 			positionContEvent: function(){
 				return JSON.stringify(this.positionListCont);
@@ -366,7 +370,7 @@
 				return this.$store.state.market.Parameters;
 			},
 			tradePrice(){
-				return this.detail.LastQuotation.LastPrice;
+				return this.detail.LastQuotation.last;
 			},
 		},
 		watch:{
@@ -383,7 +387,7 @@
 				}.bind(this), 1000);
 			},
 			Parameters:function(n,o){
-				if(n.CommodityNo == this.$store.state.market.currentNo){
+				if(n.contract_info.commodity_no == this.$store.state.market.currentNo){
 					this.showNewPrice = n
 				}
 			},
@@ -395,16 +399,21 @@
 					this.commodityNo00 = arr[1] + arr[2];
 					
 					var orderTemplist = this.orderTemplist;
-					this.Parameters00.forEach(function(o, i){
-						if(o.CommodityName == this.commodityName00){
-							this.$store.state.market.currentdetail = o;
-							this.tradePrices = dealDotSize(o.LastQuotation.LastPrice,o.LastQuotation);
-							this.dotSize = this.orderTemplist[o.LastQuotation.CommodityNo].DotSize;
-						}
-					}.bind(this));
-					function dealDotSize(price,LastQuotation){
-					  	return  parseFloat(price).toFixed(orderTemplist[LastQuotation.CommodityNo].DotSize) ;
-					}
+					console.log(orderTemplist[arr[1]])
+					this.$store.state.market.currentdetail = orderTemplist[arr[1]]
+					this.tradePrices = parseFloat(this.detail.LastQuotation.last).toFixed(this.detail.dot_size)
+					this.dotSize = this.detail.dot_size;
+
+					// this.Parameters00.forEach(function(o, i){
+					// 	if(o.commodity_name == this.commodityName00){
+					// 		this.$store.state.market.currentdetail = o;
+					// 		this.tradePrices = dealDotSize(o.LastQuotation.last,o.LastQuotation);
+					// 		this.dotSize = this.orderTemplist[o.LastQuotation.commodity_no].dot_size;
+					// 	}
+					// }.bind(this));
+					// function dealDotSize(price,LastQuotation){
+					//   	return  parseFloat(price).toFixed(orderTemplist[LastQuotation.commodity_no].dot_size) ;
+					// }
 				}
 			},
 			tradePrices: function(n, o){
@@ -414,73 +423,27 @@
 					if(n == ''){
 						this.marketprice = '';
 					}else if(n.split('.')[1] && n.split('.')[1].length > this.dotSize || this.moneyReg.test(n) ==  false){
-						this.tradePrices = parseFloat(this.$store.state.market.currentdetail.LastQuotation.LastPrice).toFixed(this.dotSize);
+						this.tradePrices = parseFloat(this.$store.state.market.currentdetail.LastQuotation.last).toFixed(this.dotSize);
 						this.marketprice = this.tradePrices;
 					}else{
 						this.marketprice = n;
 					}
 					if(n.split('.')[1] == '' && this.dotSize == 0){
-						this.tradePrices = parseFloat(this.$store.state.market.currentdetail.LastQuotation.LastPrice).toFixed(this.dotSize);
+						this.tradePrices = parseFloat(this.$store.state.market.currentdetail.LastQuotation.last).toFixed(this.dotSize);
 						this.marketprice = this.tradePrices;
 					}
 				}
 			},
-			OnRspOrderInsertEntrustCont:function(n,o){
+			OnRspOrderInsertEntrustCont (n,o){
 				this.appendOrderList(n);
 			},
 			
-			OnRspOrderInsertOrderListCont:function(n,o){
-				this.$store.state.market.orderListCont=[];
-				this.OnRspOrderInsertOrderListCont.forEach(function(e){
-					var obj={};
-					obj.commodityName=this.orderTemplist[e.CommodityNo].CommodityName;
-					obj.buyOrSell = function(){
-						if(e.Drection==0){
-							return '买';
-						}else{
-							return '卖';
-						}
-					}();
-					obj.delegatePrice = function(){
-						if(e.OrderPriceType==1){
-							return '市价';
-						}else{
-							return e.OrderPrice;
-						}
-					}();
-					
-					obj.delegateNum = e.OrderNum;
-					obj.ApplyOrderNum = e.OrderNum-e.TradeNum;
-					obj.InsertDateTime = e.InsertDateTime;
-					obj.ContractCode = e.ContractCode;
-					obj.OrderID = e.OrderID;
-					
-					this.$store.state.market.orderListCont.unshift(obj);
-				}.bind(this));
+			OnRspOrderInsertOrderListCont (n,o){
+				this.initOrderListCont(n)
 			},
 			
-			OnRspQryTradeDealListCont:function(n,o){
-				this.$store.state.market.dealListCont=[];
-				this.OnRspQryTradeDealListCont.forEach(function(e){
-					var obj={};
-					obj.commodityName=this.orderTemplist[e.CommodityNo].CommodityName;
-					obj.buyOrSell = function(){
-						if(e.Drection==0){
-							return '买';
-						}else{
-							return '卖';
-						}
-					}();
-					obj.tradePrice = e.TradePrice;
-					
-					obj.tradeNum = e.TradeNum;
-					obj.tradeDateTime = e.TradeDateTime;
-					obj.ContractCode = e.ContractCode;
-					obj.OrderID = e.OrderID;
-					
-					this.$store.state.market.dealListCont.unshift(obj);
-					
-				}.bind(this));
+			OnRspQryTradeDealListCont (n,o){
+				this.initTradeDealListCont(n)
 			},
 		},
 		methods: {
@@ -490,7 +453,7 @@
 			toMoneyDetails: function(){
 				this.$router.push({path: '/moneyDetails'});
 			},
-			cancelAllOrder:function(){
+			cancelAllOrder (){
 				if(this.$store.state.market.orderListCont.length > 0){
 					this.$children[6].isshow = true;
 					var arr=[];
@@ -502,9 +465,9 @@
 							"Parameters":{
 								"OrderSysID":'',
 								"OrderID":CurrentObj.OrderID,
-								"ExchangeNo":this.orderTemplist[Contract].ExchangeNo,
-								"CommodityNo":this.templateList[Contract].CommodityNo,
-								"ContractNo":this.templateList[Contract].ContractNo,
+								"ExchangeNo":this.orderTemplist[Contract].exchange_no,
+								"CommodityNo":this.orderTemplist[Contract].commodity_no,
+								"ContractNo":this.orderTemplist[Contract].mainContract,
 								"OrderNum":parseFloat(CurrentObj.delegateNum),
 								"Direction":function(){
 												if(CurrentObj.buyOrSell=='买'){
@@ -525,13 +488,13 @@
 					this.msg = '暂无合约需要撤单';
 				}
 			},
-			cancelOrder:function(){
+			cancelOrder () {
 				var orderListId= this.orderListId;
 				var isExist = false;
 				var CurrentObj = null;
 				var index = 0;
 				var len = 0;
-				this.$store.state.market.orderListCont.forEach(function(e,i){
+				this.$store.state.market.orderListCont.forEach((e,i) =>{
 					if(e.OrderID==orderListId){
 						len++;
 						this.$children[5].isshow = true;
@@ -539,17 +502,19 @@
 						index = i;
 						isExist = true;
 					}
-				}.bind(this));
+				});
 				if(isExist==true){
 					var Contract = CurrentObj.ContractCode.substring(0,CurrentObj.ContractCode.length-4);
+					console.log(Contract)
+					console.log(this.orderTemplist)
 					var b={
 						"Method":'CancelOrder',
 						"Parameters":{
 							"OrderSysID":'',
 							"OrderID":CurrentObj.OrderID,
-							"ExchangeNo":this.orderTemplist[Contract].ExchangeNo,
-							"CommodityNo":this.templateList[Contract].CommodityNo,
-							"ContractNo":this.templateList[Contract].ContractNo,
+							"ExchangeNo":this.orderTemplist[Contract].exchange_no,
+							"CommodityNo":this.orderTemplist[Contract].commodity_no,
+							"ContractNo":this.orderTemplist[Contract].mainContract,
 							"OrderNum":parseFloat(CurrentObj.delegateNum),
 							"Direction":function(){
 								if(CurrentObj.buyOrSell=='买'){
@@ -569,7 +534,7 @@
 					this.msg = '请选择一条数据';
 				}
 			},
-			openChangealert: function(){
+			openChangealert(){ //改单操作
 				var orderListId = this.orderListId;
 				var isExist = false;
 				var i = 0;
@@ -597,8 +562,8 @@
 					$(obj.currentTarget).removeClass("current");
 				}
 			},
-			sell:function(){
-				var commodityNo = this.detail.CommodityNo;
+			sell () {
+				var commodityNo = this.detail.commodity_no;
 				if(this.isShow==true){
 					if(this.$children[2].defaultNum == 0){
 						this.$children[7].isShow = true;
@@ -613,15 +578,15 @@
 						var b={
 								"Method":'InsertOrder',
 								"Parameters":{
-									"ExchangeNo":this.orderTemplist[commodityNo].ExchangeNo,
-									"CommodityNo":this.templateList[commodityNo].CommodityNo,
-									"ContractNo":this.detail.LastQuotation.ContractNo,
+									"ExchangeNo":this.detail.exchange_no,
+									"CommodityNo":this.detail.commodity_no,
+									"ContractNo":this.detail.mainContract,
 									"OrderNum":this.$children[2].defaultNum,
 									"Drection":1,
 									"PriceType":1,
 									"LimitPrice":0.00,
 									"TriggerPrice":0,
-									"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+									"OrderRef":this.$store.state.market.tradeConfig.Source+ new Date().getTime()+(buildIndex++)
 								}
 							};
 						this.buyText = b;	
@@ -645,23 +610,23 @@
 						var b={
 							"Method":'InsertOrder',
 							"Parameters":{
-								"ExchangeNo":this.orderTemplist[commodityNo].ExchangeNo,
-								"CommodityNo":this.templateList[commodityNo].CommodityNo,
-								"ContractNo":this.detail.LastQuotation.ContractNo,
+								"ExchangeNo":this.detail.exchange_no,
+								"CommodityNo":this.detail.commodity_no,
+								"ContractNo":this.detail.mainContract,
 								"OrderNum": parseInt(this.tradeNum),
 								"Drection":1,
 								"PriceType":0,
 								"LimitPrice":parseFloat(this.tradePrices),
 								"TriggerPrice":0,
-								"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+								"OrderRef":this.$store.state.market.tradeConfig.Source+ new Date().getTime()+(buildIndex++)
 							}
 						};
 						this.buyText = b;
 					}
 				}
 			},
-			buy:function(){
-				var commodityNo = this.detail.CommodityNo;
+			buy(){
+				var commodityNo = this.detail.commodity_no;
 				if(this.isShow==true){
 					if(this.$children[2].defaultNum == 0){
 						this.$children[7].isShow = true;
@@ -676,15 +641,15 @@
 						var b={
 							"Method":'InsertOrder',
 							"Parameters":{
-								"ExchangeNo":this.orderTemplist[commodityNo].ExchangeNo,
-								"CommodityNo":this.templateList[commodityNo].CommodityNo,
-								"ContractNo":this.detail.LastQuotation.ContractNo,
+								"ExchangeNo":this.detail.exchange_no,
+								"CommodityNo":this.detail.commodity_no,
+								"ContractNo":this.detail.mainContract,
 								"OrderNum":this.$children[2].defaultNum,
 								"Drection":0,
 								"PriceType":1,
 								"LimitPrice":0.00,
 								"TriggerPrice":0,
-								"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+								"OrderRef":this.$store.state.market.tradeConfig.Source+ new Date().getTime()+(buildIndex++)
 							}
 						};
 						this.buyText = b;
@@ -707,15 +672,15 @@
 						var b={
 							"Method":'InsertOrder',
 							"Parameters":{
-								"ExchangeNo":this.orderTemplist[commodityNo].ExchangeNo,
-								"CommodityNo":this.templateList[commodityNo].CommodityNo,
-								"ContractNo":this.detail.LastQuotation.ContractNo,
+								"ExchangeNo":this.detail.exchange_no,
+								"CommodityNo":this.detail.commodity_no,
+								"ContractNo":this.detail.mainContract,
 								"OrderNum": parseInt(this.tradeNum),
 								"Drection":0,
 								"PriceType":0,
 								"LimitPrice":parseFloat(this.tradePrices),
 								"TriggerPrice":0,
-								"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+								"OrderRef":this.$store.state.market.tradeConfig.Source+ new Date().getTime()+(buildIndex++)
 							}
 						};
 						this.buyText = b;
@@ -754,50 +719,105 @@
 					this.entrustShow = false;
 				}
 			},
-			appendOrderList: function(obj){
+			appendOrderList (obj) {
 				this.obj = [];
-				obj.forEach(function(e){
-					var orderTemplist = this.orderTemplist;
+				obj.forEach((e) =>{
+					var CommodityNo = this.orderTemplist;
 					if(e.CommodityNo!=''){
 						var obj={};
-						obj.commodityName=this.orderTemplist[e.CommodityNo].CommodityName;
+						obj.commodityName=CommodityNo[e.CommodityNo].commodity_name;
 						obj.commodityStatus=this.OrderType[e.OrderStatus];
-						obj.buyOrSell = function(){
-							if(e.Drection==0){
-								return '买';
-							}else{
-								return '卖';
-							}
-						}();
-						obj.delegatePrice = function(){
-							if(e.OrderPriceType==1){
-								return '市价';
-							}else{
-								return parseFloat(e.OrderPrice).toFixed(orderTemplist[e.CommodityNo].DotSize);
-							}
-						}();
-						
+						obj.buyOrSell = e.Drection?'卖':'买'
+						obj.delegatePrice = e.OrderPriceType==1?'市价': parseFloat(e.OrderPrice).toFixed(CommodityNo[e.CommodityNo].dot_size);
 						obj.delegateNum = e.OrderNum;
 						obj.TradeNum = e.TradeNum;
-						obj.RevokeNum=function(){
-							if(e.OrderStatus==4){
-								return e.OrderNum - e.TradeNum;
-							}else{
-								return 0;
-							}
-						}();
+						obj.RevokeNum = e.OrderStatus==4? e.OrderNum - e.TradeNum : 0;
 						obj.InsertDateTime = e.InsertDateTime;
 						obj.ContractCode = e.ContractCode;
 						obj.OrderID = e.OrderID;
-						this.obj.unshift(obj);
+						this.obj.push(obj);
+						//this.obj.unshift(obj);
 					}
-				}.bind(this));
+				});
+			},
+			initPositionListCont () {
+				this.$store.state.market.positionListCont=[];
+				this.qryHoldTotalArr.forEach( e =>{
+					var currentCommodity = this.orderTemplist[e.CommodityNo];
+					var obj = {
+							name: currentCommodity.commodity_name,
+							Drection:  e.Drection,
+							type: e.Drection?'空':'多',
+							num: e.HoldNum,
+							type_color: e.Drection?'green':'red',
+							price: e.HoldAvgPrice.toFixed(currentCommodity.dot_size),
+							ExchangeNo: currentCommodity.exchange_no,
+							CommodityNo: currentCommodity.commodity_no,
+							ContractNo: currentCommodity.mainContract,
+							commodityNocontractNo: currentCommodity.commodity_no + currentCommodity.mainContract,
+							showbar: false,
+						}
+					var CacheHoldFloatingProfit = this.CacheHoldFloatingProfit;
+					obj.total=function(){
+						//价差
+						var diff = currentCommodity.LastQuotation.last - e.HoldAvgPrice;
+						//合约层数
+						var mult = currentCommodity.contract_size/currentCommodity.mini_ticker_size;
+						var tmpFloatingProfit = parseFloat(diff * mult * e.HoldNum).toFixed(currentCommodity.dot_size);
+						if(isNaN(tmpFloatingProfit)){
+							tmpFloatingProfit=0;
+						}
+						if(e.Drection === 1) { // 空反向
+							tmpFloatingProfit = -tmpFloatingProfit;
+						}
+						obj.total_color = tmpFloatingProfit>=0?'red':'green';
+						var floatingProfit=tmpFloatingProfit+':'+currentCommodity.currency_no;
+						CacheHoldFloatingProfit.jHoldFloatingProfit[e.ContractCode] = {"currencyNo" : currentCommodity.currency_no, "floatingProfit" : tmpFloatingProfit};
+						return floatingProfit;
+					}();
+					this.$store.state.market.positionListCont.push(obj);
+					//this.$store.state.market.positionListCont.unshift(obj); //正序
+				});
+			},
+			initOrderListCont (OnRspOrderInsertOrderListCont) {
+				this.$store.state.market.orderListCont=[];
+				OnRspOrderInsertOrderListCont.forEach( e =>{
+					let currentCommodity = this.orderTemplist[e.CommodityNo];
+					let obj = {
+						commodityName: currentCommodity.commodity_name,
+						buyOrSell: e.Drection?'卖': '买',
+						delegatePrice: e.OrderPriceType==1?'市价': e.OrderPrice,
+						delegateNum: e.OrderNum,
+						ApplyOrderNum: e.OrderNum -e.TradeNum,
+						InsertDateTime: e.InsertDateTime,
+						ContractCode: e.ContractCode,
+						OrderID: e.OrderID,
+					}
+					this.$store.state.market.orderListCont.push(obj);
+					//this.$store.state.market.orderListCont.unshift(obj);
+				});
+			},
+			initTradeDealListCont (OnRspQryTradeDealListCont) {
+				this.$store.state.market.dealListCont=[];
+				OnRspQryTradeDealListCont.forEach(e =>{
+					var obj = {
+						commodityName: this.orderTemplist[e.CommodityNo].commodity_name,
+						tradePrice: e.TradePrice,
+						buyOrSell: e.Drection?'卖': '买',
+						tradeNum: e.TradeNum,
+						tradeDateTime: e.TradeDateTime,
+						ContractCode: e.ContractCode,
+						OrderID: e.OrderID,
+					}
+					this.$store.state.market.dealListCont.push(obj);
+					//this.$store.state.market.dealListCont.unshift(obj);
+				});
 			}
 		},
 		mounted: function(){
 			this.showNewPrice = this.Parameters;
 			//取小数点保留位数、改变正则
-			this.dotSize = this.orderTemplist[this.$store.state.market.currentdetail.LastQuotation.CommodityNo].DotSize;
+			this.dotSize = this.$store.state.market.currentdetail.dot_size;
 			//tab默认选中第一个
 			$("#tabBox .tab_box_col:first-child span").addClass("current");
 			//页面高度计算
@@ -818,117 +838,18 @@
 				default:
 					break;
 			}
-			this.$store.state.market.positionListCont=[];
-			this.qryHoldTotalArr.forEach(function(e){
-				var obj={};
-				obj.name=this.orderTemplist[e.CommodityNo].CommodityName;
-				obj.type=function(){
-					if(e.Drection==0){
-						return '多'
-					}else{
-						return '空'
-					}
-				}();
-				obj.num=e.HoldNum;
-				obj.price=e.HoldAvgPrice.toFixed(this.orderTemplist[e.CommodityNo].DotSize);
-				var currentCommodity = this.orderTemplist[e.CommodityNo];
-				var CacheHoldFloatingProfit = this.CacheHoldFloatingProfit;
-				obj.total=function(){
-					var diff = currentCommodity.LastPrice - e.HoldAvgPrice;
-					var mult = currentCommodity.ContractSize/currentCommodity.MiniTikeSize;
-					var tmpFloatingProfit = parseFloat(diff * mult * e.HoldNum).toFixed(2);
-					if(isNaN(tmpFloatingProfit)){
-						tmpFloatingProfit=0;
-					}
-					if(e.Drection === 1) { // 空反向
-						tmpFloatingProfit = -tmpFloatingProfit;
-					}
-					if(tmpFloatingProfit>=0){
-						obj.total_color = 'red';
-					}else{
-						obj.total_color = 'green';
-					}
-					var floatingProfit=tmpFloatingProfit+':'+currentCommodity.CurrencyNo;
-					CacheHoldFloatingProfit.jHoldFloatingProfit[e.ContractCode] 
-						= {"currencyNo" : currentCommodity.CurrencyNo, "floatingProfit" : tmpFloatingProfit};
-					return floatingProfit;
-				}();
-				obj.showbar=false;
-				obj.type_color=function(){
-					if(e.Drection==0){
-						return 'red'
-					}else{
-						return 'green'
-					}
-				}();
-				obj.ExchangeNo = this.orderTemplist[e.CommodityNo].ExchangeNo;
-				obj.CommodityNo=this.orderTemplist[e.CommodityNo].LastQuotation.CommodityNo;
-				obj.ContractNo=this.orderTemplist[e.CommodityNo].LastQuotation.ContractNo;
-				obj.Drection = e.Drection;
-				
-				obj.commodityNocontractNo = this.orderTemplist[e.CommodityNo].LastQuotation.CommodityNo
-											+this.orderTemplist[e.CommodityNo].LastQuotation.ContractNo;
-				this.$store.state.market.positionListCont.unshift(obj);
-			}.bind(this));
-			
+			//持仓列表
+			this.initPositionListCont()
 			//委托
 			this.appendOrderList(this.OnRspOrderInsertEntrustCont);
-			
-			this.$store.state.market.orderListCont=[];
-			this.OnRspOrderInsertOrderListCont.forEach(function(e){
-				var obj={};
-				obj.commodityName=this.orderTemplist[e.CommodityNo].CommodityName;
-				obj.buyOrSell = function(){
-					if(e.Drection==0){
-						return '买';
-					}else{
-						return '卖';
-					}
-				}();
-				obj.delegatePrice = function(){
-					if(e.OrderPriceType==1){
-						return '市价';
-					}else{
-						return e.OrderPrice;
-					}
-				}();
-				
-				obj.delegateNum = e.OrderNum;
-				obj.ApplyOrderNum = e.OrderNum-e.TradeNum;
-				obj.InsertDateTime = e.InsertDateTime;
-				obj.ContractCode = e.ContractCode;
-				obj.OrderID = e.OrderID;
-				this.$store.state.market.orderListCont.unshift(obj);
-			}.bind(this));
-			
-			
-			this.$store.state.market.dealListCont=[];
-			this.OnRspQryTradeDealListCont.forEach(function(e){
-				var obj={};
-				obj.commodityName=this.orderTemplist[e.CommodityNo].CommodityName;
-				obj.buyOrSell = function(){
-					if(e.Drection==0){
-						return '买';
-					}else{
-						return '卖';
-					}
-				}();
-				obj.tradePrice = e.TradePrice;
-				
-				obj.tradeNum = e.TradeNum;
-				obj.tradeDateTime = e.TradeDateTime;
-				obj.ContractCode = e.ContractCode;
-				obj.OrderID = e.OrderID;
-				
-				this.$store.state.market.dealListCont.unshift(obj);
-				
-			}.bind(this));
+			//挂单 
+			this.initOrderListCont(this.OnRspOrderInsertOrderListCont)
+			//成交
+			this.initTradeDealListCont(this.OnRspQryTradeDealListCont)
 			//初始合约名称
-			this.commodityName00 = this.detail.CommodityName;
-			this.commodityNo00 = this.detail.CommodityNo + this.detail.LastQuotation.ContractNo;
-			
-			
-			this.tradePrices = parseFloat(this.tradePrice).toFixed(this.orderTemplist[this.detail.CommodityNo].DotSize);
+			this.commodityName00 = this.detail.commodity_name;
+			this.commodityNo00 = this.detail.commodity_no + this.detail.mainContract;
+			this.tradePrices = parseFloat(this.tradePrice).toFixed(this.orderTemplist[this.detail.commodity_no].dot_size);
 		},
 		activated: function(){}
 		
