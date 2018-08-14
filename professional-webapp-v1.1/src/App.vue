@@ -2,9 +2,9 @@
 	<div id="app">
 		<div id="nav" class="container_left">
 			<ul>
-				<li @click="toIndex">
+				<!--<li @click="toIndex">
 					<img src="./assets/images/logo.png" alt="logo" />
-				</li>
+				</li>-->
 				<template v-for="(v, index) in navList">
 					<li :class="{current: currentNav == index}" @click="clickEvent(index)">
 						<i class="icon" :class="v.cs"></i>
@@ -18,10 +18,10 @@
 			<div class="fl">
 				<i class="ifont zoom" @click="fullScreen" v-show="!fullScreenCurrent">&#xe62e;</i>
 				<i class="ifont zoom" @click="fullScreen" v-show="fullScreenCurrent">&#xe612;</i>
-				<div class="customer_service fl" :class="{current: csAddressCurrent}" @click="customerService">
+				<!--<div class="customer_service fl" :class="{current: csAddressCurrent}" @click="customerService">
 					<i class="ifont">&#xe68f;</i>
 					<span>在线客服</span>
-				</div>
+				</div>-->
 				<iframe :src="csAddress" v-if="csAddressCurrent"></iframe>
 				<div class="tel fl">
 					<i class="ifont">&#xe611;</i>
@@ -235,15 +235,15 @@
 			...mapActions([
 				'initQuoteClient'
 			]),
-			customerService: function(){
-				if(this.csAddressCurrent == false){
-					this.csAddressCurrent = true;
-					this.csAddress = 'http://www.vs.com/topic/consistentBeauty/qiw_quoteApp_service.html?phone='+ this.userInfo.username +'&userName=aaa';
-				}else{
-					this.csAddressCurrent = false;
-					this.csAddress = '';
-				}
-			},
+//			customerService: function(){
+//				if(this.csAddressCurrent == false){
+//					this.csAddressCurrent = true;
+//					this.csAddress = 'http://www.vs.com/topic/consistentBeauty/qiw_quoteApp_service.html?phone='+ this.userInfo.username +'&userName=aaa';
+//				}else{
+//					this.csAddressCurrent = false;
+//					this.csAddress = '';
+//				}
+//			},
 			fullScreen: function(){
 				if(this.fullScreenCurrent == false){
 					this.fullScreenCurrent = true;
@@ -270,11 +270,11 @@
 					}
 				}
 			},
-			toIndex: function(){
-				this.$router.push({path: '/index'});
-				this.$store.state.account.currentNav = 0;
-				localStorage.currentNav = 0;
-			},
+//			toIndex: function(){
+//				this.$router.push({path: '/index'});
+//				this.$store.state.account.currentNav = 0;
+//				localStorage.currentNav = 0;
+//			},
 			clickEvent: function(index){
 				this.$store.state.isshow.isfens = false;
 				this.$store.state.isshow.iskline = false;
@@ -314,7 +314,7 @@
 						localStorage.currentNav = 4;
 						break;
 					case 5:
-						window.open(this.currentUrlHead + '//139.196.232.43/');
+						window.open('http://www.baidu.com');
 //					this.$router.push({path: '/download'});
 //						this.$store.state.account.currentNav = 5;
 						break;

@@ -219,7 +219,7 @@
 				<h3>操盘账号：</h3>
 				<p>方案申请成功后，交易日30分钟内分配操盘账号，非交易日时下个交易日开盘前15分钟分配操盘账号。</p>
 				<h3>模拟操盘：  </h3>
-				<p>目前国际综合模拟操盘账号有限，请致电<a href="#">400-180-1860</a>申请。</p>
+				<p>目前国际综合模拟操盘账号有限，请致电<a href="#">{{hotLine}}</a>申请。</p>
 				<h3>追加保证金： </h3>
 				<p>当您暂时亏损时，可选择追加保证金，始终保持操盘账号里实盘资金充足，在下次看准方向，狠狠地赚回来。</p>
 				<h3>终结方案： </h3>
@@ -386,10 +386,21 @@
 				procedures: false,
 				proceduresR: false,
 				showAgreement: false,
-				showTradeRules: false
+				showTradeRules: false,
+				hotLine:''
 			}
 		},
 		methods: {
+			getHotLine: function(){   //获取客服热线
+				pro.fetch('post', '/hotline', '', '').then(function(res){
+					if(res.success == true && res.code == 1){
+						this.hotLine = res.data.hotline;
+					}
+				}.bind(this)).catch(function(err){
+					var data = err.data;
+					layer.msg(data.message, {time: 1000});
+				});
+			},
 			showLossMark: function(){
 				this.lossMark = true;
 			},
@@ -811,6 +822,7 @@
 			this.showpage = true;
 		},
 		mounted:function(){
+			this.getHotLine();
 			this.getBtnList();
 			//初始化高度
 			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
