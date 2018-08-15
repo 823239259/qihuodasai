@@ -16,7 +16,6 @@
 				<input type="text" id="pwd" onfocus="this.type='password'"  class="input_1 input_5" placeholder="请输入密码（6-16位密码）" v-model.trim="pwd" autocomplete="off" v-on:focus="focusEvent" />
 				<i class="ifont ifont_eyes" v-on:click="eyeEvent">&#xe61c;</i>
 			</div>
-			<p class="color_light">注册即表示	同意并已阅读<a href="javascript:void(0);" class="span_white" @click="toRegisterAgreement">《用户注册协议》</a></p>
 			<button class="btn yellow" v-on:click="register">注册</button>
 			<p class="color_light">已有期货大赛账号？<span class="span_white" v-on:click="toLogin">立即登录</span></p>
 		</div>
@@ -76,9 +75,6 @@
 					$(e.currentTarget).attr("type", 'text');
 					$(e.currentTarget).css('background','none');
 				}
-			},
-			toRegisterAgreement: function(){
-				this.$router.push({path: '/registrationProtocol'});
 			},
 			getCode :function(e){
 				if($(e.target).hasClass('current')) return false;
