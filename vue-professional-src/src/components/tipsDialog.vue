@@ -52,7 +52,7 @@
     	bottom: 125px*@ip6;
     	left: 50%;
     	z-index: 1111;
-    	width: 220px*@ip6;
+    	width: 240px*@ip6;
     	line-height: 24px*@ip6;
     	padding: 10px*@ip6;
     	text-align: center;
@@ -72,7 +72,7 @@
     	bottom: 125px*@ip5;
     	left: 50%;
     	z-index: 1111;
-    	width: 220px*@ip5;
+    	width: 250px*@ip5;
     	line-height: 24px*@ip5;
     	padding: 10px*@ip5;
     	text-align: center;

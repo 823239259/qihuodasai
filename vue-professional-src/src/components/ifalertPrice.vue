@@ -85,7 +85,7 @@
 	import tipsDialog from './tipsDialog.vue'
 	import alert from './Tradealert.vue'
 	export default {
-		name: 'ifalert',
+		name: 'ifalertPrice',
 		data(){
 			return {
 				ifshow:true,
@@ -155,10 +155,10 @@
 				if(this.str) return JSON.stringify(this.str);
 			},
 			miniTikeSize(){
-				return this.orderTemplist[this.objstrParms.CommodityNo].MiniTikeSize;
+				return this.orderTemplist[this.objstrParms.CommodityNo].mini_ticker_size;
 			},
 			dosize(){
-				return this.orderTemplist[this.objstrParms.CommodityNo].DotSize;
+				return this.orderTemplist[this.objstrParms.CommodityNo].dot_size;
 			}
 		},
 		filters:{
@@ -168,11 +168,12 @@
 			}
 		},
 		watch:{
-			parameters:function(n,o){
+			parameters(n,o){
 				if(this.objstrParms != undefined){
+					let CommodityNo = this.objstrParms.CommodityNo
 					n.forEach(function(e,i){
-						if(this.objstrParms.CommodityNo == e.CommodityNo){
-							this.lastPrice = this.orderTemplist[this.objstrParms.CommodityNo].LastQuotation.last;
+						if(CommodityNo == e.commodity_no){
+							this.lastPrice = this.orderTemplist[CommodityNo].LastQuotation.last;
 						}
 					}.bind(this));
 				}
@@ -208,7 +209,7 @@
 				if(n == ''){
 					return;
 				}else if(n != undefined && this.moneyReg.test(n) == false){
-					this.inputPrice = parseFloat(this.templateList[this.objstrParms.CommodityNo].LastPrice).toFixed(this.orderTemplist[this.objstrParms.CommodityNo].DotSize);
+					this.inputPrice = parseFloat(this.templateList[this.objstrParms.CommodityNo].last).toFixed(this.orderTemplist[this.objstrParms.CommodityNo].dot_size);
 				}
 			},
 			inputAdditionalPrice: function(n, o){

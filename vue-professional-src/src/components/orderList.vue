@@ -153,9 +153,9 @@
 				for(positionCurrent in this.positionListCont){
 					if(this.orderListId == qryHoldTotalArr[length-1-positionCurrent].ContractCode){
 						i++;
-						this.$refs.stopmoneyalert.isshow = true;
 						this.selectedOrderList = qryHoldTotalArr[length-1-positionCurrent];
-						dotSize = this.$store.state.market.orderTemplist[this.selectedOrderList.CommodityNo].DotSize;
+						dotSize = this.$store.state.market.orderTemplist[this.selectedOrderList.CommodityNo].dot_size;
+						this.$refs.stopmoneyalert.isshow = true;
 						this.$refs.stopmoneyalert.inputPrice = parseFloat(this.selectedOrderList.OpenAvgPrice).toFixed(dotSize);  //设置默认止损价
 						this.$refs.stopmoneyalert.zhiYinInputPrice = parseFloat(this.selectedOrderList.OpenAvgPrice).toFixed(dotSize);   //设置默认止盈价
 						this.$refs.stopmoneyalert.selectStopLossType00 = 0;  //默认止损价

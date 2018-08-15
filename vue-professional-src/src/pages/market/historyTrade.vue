@@ -76,9 +76,14 @@
 				endDate: '',
 				dayShow: true,
 				weekShow: false,
-				tablist: [{
-					nav: '一天内'},{
-					nav: '一周内'},{
+				tablist: [
+					{
+					nav: '一天内'
+					},
+					{
+					nav: '一周内'
+					},
+					{
 					nav: '一月内',
 				}],
 				
@@ -109,7 +114,7 @@
 				var year = this.startDate.substring(0,4);
 				var month = this.startDate.substring(5,7);
 				var day =  this.startDate.substring(8,10);
-				var beginTime = year+'/'+month+'/'+day+' 00:00:00';
+				var beginTime = year+'-'+month+'-'+day+' 00:00:00';
 				
 				var year0 = this.endDate.substring(0,4);
 				var month0 = this.endDate.substring(5,7);
@@ -119,52 +124,57 @@
 				this.dataList = [];
 				this.$store.state.market.queryHisList = [];
 				this.tradeSocket.send('{"Method":"QryHisTrade","Parameters":{"ClientNo":"'+JSON.parse(localStorage.tradeUser).username	+'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'"}}');
-				setTimeout(function(){
-						this.eachData();
-				}.bind(this),1000);
+				setTimeout(() =>this.eachData(),1000);
 			},
-			eachData: function(){
+			eachData(){
 //				this.$store.state.market.queryHisList=[];
-				this.queryHisList.forEach(function(e,i){
-					var b ={};
-					b.index = i;
-					b.CommodityNoContractNo = e.ContractCode;
-					b.ExchangeNo = e.ExchangeNo;
-					b.CurrencyNo = e.CurrencyNo;
-					b.Drection =(function(){
-						if(e.Drection==0){
-							return '买';
-						}else{
-							return '卖';
-						}
-					})();
-					b.TradePrice = parseFloat(e.TradePrice).toFixed(this.orderTemplist[e.CommodityNo].DotSize);
-					b.TradeNum = e.TradeNum;
-					b.TradeFee = e.TradeFee;
-					b.TradeDateTime = e.TradeDateTime;
-					b.hedgeProfit = e.HedgeProfit;
+				this.queryHisList.forEach((e,i) =>{
+					var b = {
+						index: i,
+						CommodityNoContractNo: e.ContractCode,
+						ExchangeNo: e.ExchangeNo,
+						CurrencyNo: e.CurrencyNo,
+						Drection: !e.Drection?'买':'卖',
+						TradePrice: parseFloat(e.TradePrice).toFixed(this.orderTemplist[e.CommodityNo].dot_size),
+						TradeNum: e.TradeNum,
+						TradeFee: e.TradeFee,
+						TradeDateTime: e.TradeDateTime,
+						hedgeProfit: e.HedgeProfit
+					}
 					this.dataList.push(b);
-				}.bind(this));
-				
+				});
+			},
+			 _getDayString (date) { // '2018/03/01 00:00:00'
+				var year = date.getFullYear();
+				var day = date.getDate().toString().padStart(2,'0')
+				var month = (date.getMonth() + 1).toString().padStart(2,'0')
+				var timeString = year + '-' + month + '-' + day+' 00:00:00';
+				return timeString
 			},
 			showCont: function(e){
 				$(e.currentTarget).addClass('current').siblings().removeClass('current');
 				if($(e.currentTarget).index() == 0){ //一天
 					this.dataList = [];
+					// var date = new Date(); 
+		    		// date.setDate(date.getDate()-1);
+		    		// var year = date.getFullYear();
+		    		// var day = date.getDate() > 9 ? date.getDate() : "0" + date.getDate();
+		    		// var month = (date.getMonth() + 1) > 9 ? (date.getMonth() + 1) : "0"+ (date.getMonth() + 1);
+		    		// var beginTime = year + '/' + month + '/' + day+' 00:00:00';
+		    		
+		    		// var date00 = new Date(); 
+		    		// date00.setDate(date00.getDate());
+		    		// var year00 = date00.getFullYear();
+		    		// var day00 = date00.getDate() > 9 ? date00.getDate() : "0" + date00.getDate();
+		    		// var month00 = (date00.getMonth() + 1) > 9 ? (date00.getMonth() + 1) : "0"+ (date00.getMonth() + 1);
+		    		
+					// var endTime= year00 + '/' + month00 + '/' + day00+' 00:00:00';
+					
 					var date = new Date(); 
-		    		date.setDate(date.getDate()-1);
-		    		var year = date.getFullYear();
-		    		var day = date.getDate() > 9 ? date.getDate() : "0" + date.getDate();
-		    		var month = (date.getMonth() + 1) > 9 ? (date.getMonth() + 1) : "0"+ (date.getMonth() + 1);
-		    		var beginTime = year + '/' + month + '/' + day+' 00:00:00';
-		    		
-		    		var date00 = new Date(); 
-		    		date00.setDate(date00.getDate());
-		    		var year00 = date00.getFullYear();
-		    		var day00 = date00.getDate() > 9 ? date00.getDate() : "0" + date00.getDate();
-		    		var month00 = (date00.getMonth() + 1) > 9 ? (date00.getMonth() + 1) : "0"+ (date00.getMonth() + 1);
-		    		
-		    		var endTime= year00 + '/' + month00 + '/' + day00+' 00:00:00';
+					var endTime = this._getDayString(date);
+					date.setDate(date.getDate()-1);
+					var beginTime = this._getDayString(date);
+
 		    		this.$store.state.market.queryHisList = [];
 					this.tradeSocket.send('{"Method":"QryHisTrade","Parameters":{"ClientNo":"'+JSON.parse(localStorage.tradeUser).username	+'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'"}}');
 					setTimeout(function(){
@@ -173,19 +183,11 @@
 				}else if($(e.currentTarget).index() == 1){ //一周
 					this.dataList = [];
 					var date = new Date(); 
-		    		date.setDate(date.getDate()-7);
-		    		var year = date.getFullYear();
-		    		var day = date.getDate() > 9 ? date.getDate() : "0" + date.getDate();
-		    		var month = (date.getMonth() + 1) > 9 ? (date.getMonth() + 1) : "0"+ (date.getMonth() + 1);
-		    		var beginTime = year + '/' + month + '/' + day+' 00:00:00';
-		    		
-		    		var date00 = new Date(); 
-		    		date00.setDate(date00.getDate());
-		    		var year00 = date00.getFullYear();
-		    		var day00 = date00.getDate() > 9 ? date00.getDate() : "0" + date00.getDate();
-		    		var month00 = (date00.getMonth() + 1) > 9 ? (date00.getMonth() + 1) : "0"+ (date00.getMonth() + 1);
-		    		
-		    		var endTime= year00 + '/' + month00 + '/' + day00+' 00:00:00';
+					var endTime = this._getDayString(date);
+					date.setDate(date.getDate()-7);
+					var beginTime = this._getDayString(date);
+
+
 		    		this.$store.state.market.queryHisList = [];
 					this.tradeSocket.send('{"Method":"QryHisTrade","Parameters":{"ClientNo":"'+JSON.parse(localStorage.tradeUser).username+'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'"}}');
 					setTimeout(function(){
@@ -195,19 +197,10 @@
 					
 					this.dataList = [];
 					var date = new Date(); 
-		    		date.setDate(date.getDate()-30);
-		    		var year = date.getFullYear();
-		    		var day = date.getDate() > 9 ? date.getDate() : "0" + date.getDate();
-		    		var month = (date.getMonth() + 1) > 9 ? (date.getMonth() + 1) : "0"+ (date.getMonth() + 1);
-		    		var beginTime = year + '/' + month + '/' + day+' 00:00:00';
-		    		
-		    		var date00 = new Date(); 
-		    		date00.setDate(date00.getDate());
-		    		var year00 = date00.getFullYear();
-		    		var day00 = date00.getDate() > 9 ? date00.getDate() : "0" + date00.getDate();
-		    		var month00 = (date00.getMonth() + 1) > 9 ? (date00.getMonth() + 1) : "0"+ (date00.getMonth() + 1);
-		    		
-		    		var endTime= year00 + '/' + month00 + '/' + day00+' 00:00:00';
+					var endTime = this._getDayString(date);
+					date.setDate(date.getDate()-30);
+					var beginTime = this._getDayString(date);
+					
 		    		this.$store.state.market.queryHisList = [];
 					this.tradeSocket.send('{"Method":"QryHisTrade","Parameters":{"ClientNo":"'+JSON.parse(localStorage.tradeUser).username+'","BeginTime":"'+beginTime+'","EndTime":"'+endTime+'"}}');
 					setTimeout(function(){
@@ -225,10 +218,11 @@
 		},
 		activated: function(){
 			this.eachData();
+			//this.showCont()
 			//不更新画图
-			this.$store.state.isshow.isklineshow = false;
-			this.$store.state.isshow.isfensshow = false;
-			this.$store.state.isshow.islightshow =  false;
+			// this.$store.state.isshow.isklineshow = false;
+			// this.$store.state.isshow.isfensshow = false;
+			// this.$store.state.isshow.islightshow =  false;
 		}
 		
 	}

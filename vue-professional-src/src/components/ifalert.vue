@@ -236,7 +236,7 @@
 		},
 		watch:{
 			parameters:function(n,o){
-				//console.log(n)
+				
 				if(this.ifshow == true){
 					if(this.commodityNo != undefined){
 						n.forEach(function(e,i){

@@ -47,8 +47,8 @@
 			}
 		},
 		methods:{
-			toRole: function(){
-				var name = this.detail.CommodityNo;
+			toRole(){
+				var name = this.detail.commodity_no;
 				switch (name){
 					case 'CL':
 						this.pathName = 'cl';
