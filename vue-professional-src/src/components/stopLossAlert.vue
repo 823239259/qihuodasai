@@ -99,6 +99,7 @@
 				return this.$store.state.tradeSocket;
 			},
 			stopLossListSelectOneObj(){
+				// console.log(this.$store.state.market.stopLossListSelectOneObj)
 				return this.$store.state.market.stopLossListSelectOneObj;
 			},
 			templateList(){
@@ -106,10 +107,10 @@
 			},
 			lastPrice(){
 				let commodityNo = this.stopLossListSelectOneObj.CommodityNo;
-				return this.$store.state.market.templateList[commodityNo].LastPrice;
+				return this.$store.state.market.templateList[commodityNo].last;
 			},
 			miniTikeSize(){
-				return this.orderTemplist[this.stopLossListSelectOneObj.CommodityNo].MiniTikeSize;
+				return this.orderTemplist[this.stopLossListSelectOneObj.CommodityNo].mini_ticker_size;
 			}
 		},
 		filters:{
@@ -201,18 +202,8 @@
 							'Num':parseInt(this.Num),
 							'StopLossType':parseInt(this.selectStopLossType00),
 							'OrderType':parseInt(this.orderType),
-							'StopLossPrice':(function(){
-												if(parseInt(this.selectStopLossType00)==0)
-													return parseFloat(this.inputPrice);
-												if(parseInt(this.selectStopLossType00)==2)
-													return 0.0;
-											}.bind(this))(),
-							'StopLossDiff':(function(){
-												if(parseInt(this.selectStopLossType00)==0)
-													return 0;
-												if(parseInt(this.selectStopLossType00)==2)
-													return parseFloat(this.inputPrice);
-											}.bind(this))()
+							'StopLossPrice':parseInt(this.selectStopLossType00)==0?parseFloat(this.inputPrice):0.0,
+							'StopLossDiff':parseInt(this.selectStopLossType00)==0? 0 :parseFloat(this.inputPrice)
 						}
 					};
 					this.str = b;

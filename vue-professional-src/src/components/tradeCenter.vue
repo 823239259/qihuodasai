@@ -30,7 +30,7 @@
 				</div>
 			</div>
 			<div class="order_type_right fl">
-				<ul>
+				<ul v-if="showNewPrice.ask">
 					<li>
 						<span>新</span>
 						<span :class="{red: showNewPrice.last - showNewPrice.pre_settle >=0, green: showNewPrice.last - showNewPrice.pre_settle < 0}">{{showNewPrice.last}}</span>
@@ -47,6 +47,23 @@
 						<span>{{showNewPrice.bid[0]&&showNewPrice.bid[0][1]}}</span>
 					</li>
 					 <!--| fixNum2(orderTemplist[showNewPrice.commodity_no].dot_size)-->
+				</ul>
+				<ul v-else>
+					<li>
+						<span>新</span>
+						<span>0</span>
+						<span>0</span>
+					</li>
+					<li>
+						<span>卖</span>
+						<span>0</span>
+						<span>0</span>
+					</li>
+					<li>
+						<span>买</span>
+						<span>0</span>
+						<span>0</span>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -817,6 +834,7 @@
 		},
 		mounted: function(){
 			this.showNewPrice = this.Parameters;
+			console.log(this.showNewPrice)
 			//取小数点保留位数、改变正则
 			this.dotSize = this.$store.state.market.currentdetail.dot_size;
 			//tab默认选中第一个

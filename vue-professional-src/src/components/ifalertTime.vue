@@ -83,7 +83,7 @@
 	import tipsDialog from './tipsDialog.vue'
 	import alert from './Tradealert.vue'
 	export default {
-		name: 'ifalert',
+		name: 'changeAlert',
 		data(){
 			return {
 				ifshow:true,
@@ -177,10 +177,14 @@
 				}
 			},
 			objstrParms:function(n,o){
+				console.log(n)
 				let sb= n;
 				this.selectTimeId = sb.CommodityNo+sb.ContractNo;
-				let time00 = sb.TimeTriggerPoint.split(' ')[1];
-				this.time = time00.split(':')[0]+':'+time00.split(':')[1];
+				if(sb.TimeTriggerPoint){
+					let time00 = sb.TimeTriggerPoint.split(' ')[1];
+					this.time = time00.split(':')[0]+':'+time00.split(':')[1];
+				}
+				
 				
 				if(sb.AdditionFlag==0){ //没有附加价格
 					this.additionValue = 5;

@@ -96,7 +96,7 @@
 	import stopWinAlert from '../../components/stopWinAlert.vue'
 	import alert from '../../components/Tradealert.vue'
 	export default{
-		name:'conditions',
+		name:'stopMoney',
 		components:{topbar, back, cbtn, refresh, tipsDialog, stopLossAlert, stopWinAlert, alert},
 		data(){
 			return {
@@ -328,7 +328,7 @@
 					})();
 					s.StopLossDiff = e.StopLossDiff;
 					s.StopLossNo = e.StopLossNo;
-					s.StopLossPrice = parseFloat(e.StopLossPrice).toFixed(orderTemplist[e.CommodityNo].DotSize);
+					s.StopLossPrice = parseFloat(e.StopLossPrice).toFixed(orderTemplist[e.CommodityNo].dot_size);
 					s.StopLossType = (function(){
 						if(e.StopLossType==0)
 							return '限价止损';
@@ -339,9 +339,9 @@
 					})();
 					s.triggerCondition=(function(){
 						if(e.StopLossType==0 || e.StopLossType==1)
-							return '触发价:'+parseFloat(e.StopLossPrice).toFixed(orderTemplist[e.CommodityNo].DotSize);
+							return '触发价:'+parseFloat(e.StopLossPrice).toFixed(orderTemplist[e.CommodityNo].dot_size);
 						if(e.StopLossType==2)
-							return '动态价:'+parseFloat(e.StopLossDiff).toFixed(orderTemplist[e.CommodityNo].DotSize);	
+							return '动态价:'+parseFloat(e.StopLossDiff).toFixed(orderTemplist[e.CommodityNo].dot_size);	
 					})();
 					
 					s.entrustPrice=(function(){
@@ -402,7 +402,7 @@
 					})();
 					s.StopLossDiff = e.StopLossDiff;
 					s.StopLossNo = e.StopLossNo;
-					s.StopLossPrice = parseFloat(e.StopLossPrice).toFixed(this.orderTemplist[e.CommodityNo].DotSize);
+					s.StopLossPrice = parseFloat(e.StopLossPrice).toFixed(this.orderTemplist[e.CommodityNo].dot_size);
 					s.StopLossType = (function(){
 						if(e.StopLossType==0)
 							return '限价止损';
@@ -414,9 +414,9 @@
 					s.StopLossType00=e.StopLossType;
 					s.triggerCondition=(function(){
 						if(e.StopLossType==0 || e.StopLossType==1)
-							return '触发价:'+parseFloat(e.StopLossPrice).toFixed(this.orderTemplist[e.CommodityNo].DotSize);
+							return '触发价:'+parseFloat(e.StopLossPrice).toFixed(this.orderTemplist[e.CommodityNo].dot_size);
 						if(e.StopLossType==2)
-							return '动态价:'+parseFloat(e.StopLossDiff).toFixed(this.orderTemplist[e.CommodityNo].DotSize);
+							return '动态价:'+parseFloat(e.StopLossDiff).toFixed(this.orderTemplist[e.CommodityNo].dot_size);
 					}.bind(this))();
 					
 					s.entrustPrice=(function(){

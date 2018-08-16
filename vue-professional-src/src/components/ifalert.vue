@@ -156,7 +156,7 @@
 	import tipsDialog from './tipsDialog.vue'
 	import alert from './Tradealert.vue'
 	export default {
-		name: 'ifalert',
+		name: 'addAlert',
 		data(){
 			return {
 				ifshow:true,
@@ -406,7 +406,7 @@
 						let b={
 							"Method":'InsertCondition',
 							"Parameters":{
-								'ExchangeNo':this.templateList[this.commodityNo].ExchangeNo,
+								'ExchangeNo':this.orderTemplist[this.commodityNo].exchange_no,
 								'CommodityNo':this.commodityNo,
 								'ContractNo':this.contractNo,
 								'Num':parseInt(this.holdNum),
@@ -454,7 +454,7 @@
 					let b={
 						"Method":'InsertCondition',
 						"Parameters":{
-							'ExchangeNo':this.templateList[this.commodityNo00].ExchangeNo,
+							'ExchangeNo':this.orderTemplist[this.commodityNo00].exchange_no,
 							'CommodityNo':this.commodityNo00,
 							'ContractNo':this.contractNo00,
 							'Num':parseInt(this.timeHoldNum),

@@ -184,8 +184,6 @@
 						this.percentLoss = '0.00';
 						return;
 					}
-					console.log(n)
-					console.log(0,'old')
 					var openAvgPrice = JSON.parse(this.val).HoldAvgPrice;
 					//this.inputPrice = openAvgPrice.toFixed(this.orderTemplistDotSize);
 					if(n.toString().split('.')[1] && n.toString().split('.')[1].length > this.orderTemplistDotSize){

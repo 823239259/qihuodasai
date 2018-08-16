@@ -150,7 +150,7 @@
 							<span>{{key.commodityNo}}</span>
 							<span>{{key.buyNum}}</span>
 							<span>{{key.sellNum}}</span>
-							<span>{{key.tradePrice | fixNum2(orderTemplist[key.commodityNo.slice(0, -4)].DotSize)}}</span>
+							<span>{{key.tradePrice | fixNum2(orderTemplist[key.commodityNo.slice(0, -4)].dot_size)}}</span>
 							<span>{{key.hedgeProfit}}</span>
 							<span>{{key.free | getTwoNumber}}</span>
 							<!--<span :class="{red: key.type_color == 'red', green: key.type_color == 'green'}">{{key.type}}</span>-->

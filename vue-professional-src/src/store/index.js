@@ -75,7 +75,7 @@ export default new Vuex.Store({
 		//设置闪电图数据
 		setlightDate: function(state) {
 			let { lightChartTime,jsonTow, currentdetail } = state.market;
-			
+			if (!jsonTow.last) return ;
 			lightChartTime.price.push(jsonTow.last.toFixed(currentdetail.dot_size));
 			lightChartTime.time.push((jsonTow.time_flag).split(mTimeExg)[1]);
 			lightChartTime.time = lightChartTime.time.slice(-50);

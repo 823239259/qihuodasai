@@ -54,12 +54,12 @@
 			msgTips: function(){
 				return this.msg;
 			},
-			closeOutAlertObj:function(){
+			closeOutAlertObj(){
 				if(this.tempText){
 					return JSON.stringify(this.tempText);
 				}
 			},
-			closeOutAlert:function(){
+			closeOutAlert(){
 				var obj = this.tempText.Parameters;
 				if(obj!=undefined){
 					var contract=obj.CommodityNo+obj.ContractNo;
@@ -69,7 +69,7 @@
 					
 				}
 			},
-			closeAllOutAlertObj:function(){
+			closeAllOutAlertObj(){
 				if(this.tempText){
 					return JSON.stringify(this.tempText);
 				}
@@ -114,31 +114,52 @@
 				if(this.qryHoldTotalArr.length > 0){
 					this.$children[0].isshow = true;
 					var arr=[];
-					for(var i in this.qryHoldTotalArr){
-						var buildIndex=0;
-						var drection;
-						if(this.qryHoldTotalArr[i].Drection==0){
-							drection = 1;
-						}else if(this.qryHoldTotalArr[i].Drection==1){
-							drection = 0;
-						}
+					console.log(this.qryHoldTotalArr)
+					
+					this.qryHoldTotalArr.forEach((item,index) => {
+						var drection = item.Drection? 0 : 1;
 						var b = {
 							"Method":'InsertOrder',
 							"Parameters":{
-								"ExchangeNo":this.qryHoldTotalArr[i].ExchangeNo,
-								"CommodityNo":this.qryHoldTotalArr[i].CommodityNo,
-								"ContractNo":this.qryHoldTotalArr[i].ContractNo,
-								"OrderNum":this.qryHoldTotalArr[i].HoldNum,
+								"ExchangeNo":item.ExchangeNo,
+								"CommodityNo":item.CommodityNo,
+								"ContractNo":item.ContractNo,
+								"OrderNum":item.HoldNum,
 								"Drection":drection,
 								"PriceType":1,
 								"LimitPrice":0.00,
 								"TriggerPrice":0,
-								"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+								"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(index+1)
 							}
 						};
-						arr.push(b);
+						arr.push(b)
 						this.tempText = arr;
-					}
+					});
+					// for(var i in this.qryHoldTotalArr){
+					// 	var buildIndex=0;
+					// 	var drection ; 
+					// 	if(this.qryHoldTotalArr[i].Drection==0){
+					// 		drection = 1;
+					// 	}else if(this.qryHoldTotalArr[i].Drection==1){
+					// 		drection = 0;
+					// 	}
+					// 	var b = {
+					// 		"Method":'InsertOrder',
+					// 		"Parameters":{
+					// 			"ExchangeNo":this.qryHoldTotalArr[i].ExchangeNo,
+					// 			"CommodityNo":this.qryHoldTotalArr[i].CommodityNo,
+					// 			"ContractNo":this.qryHoldTotalArr[i].ContractNo,
+					// 			"OrderNum":this.qryHoldTotalArr[i].HoldNum,
+					// 			"Drection":drection,
+					// 			"PriceType":1,
+					// 			"LimitPrice":0.00,
+					// 			"TriggerPrice":0,
+					// 			"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
+					// 		}
+					// 	};
+					// 	arr.push(b);
+					// 	this.tempText = arr;
+					// }
 				}else{
 					this.$children[5].isShow = true;
 					this.msg = '暂无合约需要平仓';

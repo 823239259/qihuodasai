@@ -202,6 +202,7 @@
 							"ConditionNo":o.ConditionNo,
 							"ModifyFlag":1, //删除
 							"Num":o.Num,
+							//"ExchangeNo": o.,
 							"ConditionType":o.ConditionType,
 							"PriceTriggerPonit":o.PriceTriggerPonit,
 							"CompareType":o.CompareType,

@@ -3,6 +3,7 @@
 			<div id="lightcharts" style="margin: 0 auto;">
 				
 			</div>
+			<!-- <div>无图</div> -->
 		</div>
 	
 </template>
