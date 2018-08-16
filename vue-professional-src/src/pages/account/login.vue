@@ -102,6 +102,10 @@
 					this.$refs.codeDialog.path = this.path + '&' + Math.random();
 					//登录请求
 					this.$http.post(this.PATH + '/login', {emulateJSON: true}, {
+						// headers: {
+						// 	'token':  this.userInfo.token,
+						// 	'secret': this.userInfo.secret
+						// },
 						params: {
 							loginName: this.phone,
 							password: this.pwd
