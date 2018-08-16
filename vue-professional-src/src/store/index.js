@@ -848,7 +848,7 @@ export default new Vuex.Store({
 					break;
 				case 'OnRspQryOrder': //查询订单信息回复
 //					console.log('查询订单信息回复');
-					if(parameters!=null){
+					if(parameters){
 						context.dispatch('appendOrder',parameters);
 						context.dispatch('appendApply',parameters);
 					}
@@ -894,8 +894,8 @@ export default new Vuex.Store({
 					context.dispatch('layerMessage',parameters);
 					//添加到委托表
 					context.dispatch('appendOrder00',parameters);
-					// 排队中委托单放入挂单列表
-					context.dispatch('appendApply00',parameters);
+					// // 排队中委托单放入挂单列表
+					// context.dispatch('appendApply00',parameters);
 					break;
 				case 'OnRtnHoldTotal':
 //					console.log('持仓合计变化推送通知');
@@ -1408,44 +1408,75 @@ export default new Vuex.Store({
 				
 			}
 		},
-		updateApply:function(context,parameters){ // todo 完全成交未正常更新
+		updateApply (context,parameters){ // todo 完全成交未正常更新
 			// 2 排队中 状态，新增/更新挂单列表
 			// 2.2 部分成交、完全成交、已撤单、下单失败、未知 状态，需处理挂单
 			const {market} = context.state
-			var isExist = false;
-			var index=0;
-			var currentObj=null;
-			market.orderListCont.forEach(function(e,i){
-				if(e.OrderID == parameters.OrderID){
+			let isExist = false;
+			let index=0;
+			let currentObj=null;
+			currentObj = market.orderListCont.find((item, i)=> {
+				if(item.OrderID === parameters.OrderID) {
 					isExist = true;
 					index = i;
-					currentObj = e;
+					return true;
 				}
-			});
-			if(parameters.OrderStatus < 3 ){ //0-单已提交 1-排队中 2-部分成交 3-完全成交
-//				market.OnRspOrderInsertOrderListCont.push(parameters);
-				if(isExist==true){
+			})
+
+			if (!isExist&&parameters.OrderStatus==1){ //添加挂单 
+				market.OnRspOrderInsertOrderListCont.unshift(parameters)
+			}
+			
+			if (parameters.OrderStatus == 6) return true;
+			if (isExist) {
+				if (parameters.OrderStatus < 3) {//0-单已提交 1-排队中 2-部分成交 3-完全成交
 					currentObj.delegatePrice = parameters.OrderPrice;
 					currentObj.delegateNum = parameters.OrderNum;
 					currentObj.ApplyOrderNum = parameters.OrderNum - parameters.TradeNum;
 					market.orderListCont.splice(index,1,currentObj);
-					
-					market.OnRspOrderInsertOrderListCont[market.OnRspOrderInsertOrderListCont.length-index-1].OrderPrice
-						=parameters.OrderPrice;
-					market.OnRspOrderInsertOrderListCont[market.OnRspOrderInsertOrderListCont.length-index-1].OrderNum
-						=parameters.OrderNum;
+					market.OnRspOrderInsertOrderListCont[market.OnRspOrderInsertOrderListCont.length-index-1].OrderPrice = parameters.OrderPrice;
+					market.OnRspOrderInsertOrderListCont[market.OnRspOrderInsertOrderListCont.length-index-1].OrderNum = parameters.OrderNum;
 					market.layer = parameters.StatusMsg + ':合约【'+ parameters.ContractCode +'】,订单号:【'+ parameters.OrderID +'】' + Math.floor(Math.random()*10);
 					
-				}
-			}else if(parameters.OrderStatus == 6){
-				return true;
-			}else{
-				if(isExist==true){
-					market.orderListCont.splice(index,1);
-					market.OnRspOrderInsertOrderListCont.splice(market.OnRspOrderInsertOrderListCont.length-index-1,1);
+				}else if (parameters.OrderStatus === 4||3){ //处理撤单
+					console.log('111')
+					console.log(market.OnRspOrderInsertOrderListCont)
+					console.log('222')
+					console.log(market.orderListCont)
+					market.OnRspOrderInsertOrderListCont.splice(index,1); //OnRspOrderInsertOrderListCont orderListCont 排列顺序一直
+					//market.OnRspOrderInsertOrderListCont.splice(market.OnRspOrderInsertOrderListCont.length-index-1,1);
+					market.layer = parameters.StatusMsg + ':合约【'+ parameters.ContractCode +'】,订单号:【'+ parameters.OrderID +'】' + + Math.floor(Math.random()*10);
+				}else {
+					console.log('下单异常啊')
+					// market.orderListCont.splice(index,1);
+					// market.OnRspOrderInsertOrderListCont.splice(market.OnRspOrderInsertOrderListCont.length-index-1,1);
 					market.layer = parameters.StatusMsg + ':合约【'+ parameters.ContractCode +'】,订单号:【'+ parameters.OrderID +'】' + + Math.floor(Math.random()*10);
 				}
 			}
+			
+// 			if(parameters.OrderStatus < 3 ){ 
+// //				market.OnRspOrderInsertOrderListCont.push(parameters);
+// 				if(isExist==true){
+// 					currentObj.delegatePrice = parameters.OrderPrice;
+// 					currentObj.delegateNum = parameters.OrderNum;
+// 					currentObj.ApplyOrderNum = parameters.OrderNum - parameters.TradeNum;
+// 					market.orderListCont.splice(index,1,currentObj);
+					
+// 					market.OnRspOrderInsertOrderListCont[market.OnRspOrderInsertOrderListCont.length-index-1].OrderPrice = parameters.OrderPrice;
+// 					market.OnRspOrderInsertOrderListCont[market.OnRspOrderInsertOrderListCont.length-index-1].OrderNum = parameters.OrderNum;
+// 					market.layer = parameters.StatusMsg + ':合约【'+ parameters.ContractCode +'】,订单号:【'+ parameters.OrderID +'】' + Math.floor(Math.random()*10);
+					
+// 				}
+// 			}else if(parameters.OrderStatus == 6){
+// 				return true;
+// 			}else{
+// 				if(isExist==true){
+// 					market.orderListCont.splice(index,1);
+// 					market.OnRspOrderInsertOrderListCont.splice(market.OnRspOrderInsertOrderListCont.length-index-1,1);
+// 					market.layer = parameters.StatusMsg + ':合约【'+ parameters.ContractCode +'】,订单号:【'+ parameters.OrderID +'】' + + Math.floor(Math.random()*10);
+				
+// 				}
+// 			}
 		},
 		appendApply:function(context,parameters){
 			if( parameters.OrderStatus < 3 ) { // 订单已提交、排队中、部分成交 显示到挂单列表

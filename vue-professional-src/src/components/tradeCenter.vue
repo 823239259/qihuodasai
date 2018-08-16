@@ -51,10 +51,10 @@
 			</div>
 		</div>
 		<div class="order_num border_bottom">
-			<div class="operate_num fl" v-show="isShow">
+			<div class="operate_num fl" v-show="isShowNowPrice">
 				<operatenum w="sm"></operatenum>
 			</div>
-			<div class="limit_cont" v-show="!isShow">
+			<div class="limit_cont" v-show="!isShowNowPrice">
 				<div class="limit_cont_col">
 					<span>手数：</span>
 					<input type="number" class="ipt fl" v-model="tradeNum" />
@@ -190,7 +190,7 @@
 			return {
 				msg: '',
 //				selectId:'',
-				isShow: true,
+				isShowNowPrice: true,
 				positionShow: true,
 				orderShow: false,
 				entrustShow: false,
@@ -417,7 +417,7 @@
 				}
 			},
 			tradePrices: function(n, o){
-				if(this.isShow == true){
+				if(this.isShowNowPrice == true){
 					this.marketprice = '市价';
 				}else{
 					if(n == ''){
@@ -494,6 +494,7 @@
 				var CurrentObj = null;
 				var index = 0;
 				var len = 0;
+				console.log(this.$store.state.market.orderListCont)
 				this.$store.state.market.orderListCont.forEach((e,i) =>{
 					if(e.OrderID==orderListId){
 						len++;
@@ -564,7 +565,7 @@
 			},
 			sell () {
 				var commodityNo = this.detail.commodity_no;
-				if(this.isShow==true){
+				if(this.isShowNowPrice==true){
 					if(this.$children[2].defaultNum == 0){
 						this.$children[7].isShow = true;
 						this.$children[8].isShow = true;
@@ -627,7 +628,7 @@
 			},
 			buy(){
 				var commodityNo = this.detail.commodity_no;
-				if(this.isShow==true){
+				if(this.isShowNowPrice==true){
 					if(this.$children[2].defaultNum == 0){
 						this.$children[7].isShow = true;
 						this.$children[8].isShow = true;
@@ -688,12 +689,12 @@
 				}
 			},
 			showPrice: function(e){
-				if(this.isShow == true){
-					this.isShow = false;
+				if(this.isShowNowPrice == true){
+					this.isShowNowPrice = false;
 					$(e.currentTarget).find('span').text('限价');
 					this.marketprice = this.tradePrices;
 				}else{
-					this.isShow = true;
+					this.isShowNowPrice = true;
 					$(e.currentTarget).find('span').text('市价');
 					this.marketprice = '市价';
 				}
