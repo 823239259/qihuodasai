@@ -1359,7 +1359,7 @@ export default new Vuex.Store({
 				context.state.market.layer='提交失败,原因:【'+parameters.StatusMsg+'】'+Math.floor(Math.random()*10);
 			}
 		},
-		qryHisTrade:function(context){ //查询历史交易
+		qryHisTrade(context){ //查询历史交易
 			const {tradeSocket} = context.state
 			function _getDayString (date) { // '2018/03/01 00:00:00'
 				var year = date.getFullYear();

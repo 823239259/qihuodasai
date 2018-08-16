@@ -197,7 +197,8 @@
 		components: {alert, tipsDialog},
 		computed:{
 			parameters(){
-				return this.$store.state.market.Parameters;
+				//console.log(this.$store.state.market.Parameters)
+				return this.$store.state.market.Parameters.filter(item => item.LastQuotation)
 			},
 			orderTemplist(){
 				return	this.$store.state.market.orderTemplist;

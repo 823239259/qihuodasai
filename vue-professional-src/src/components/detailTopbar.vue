@@ -4,7 +4,10 @@
 		<back @tap.native='clearPositionListCont'></back>
 		<div class="title">
 			<h4 class="fontwhite">{{cname}}</h4>
-			<h6 class="fontwhite"><span>{{cnum}}</span><span>{{mc}}</span></h6>
+			<h6 class="fontwhite">
+				<span>{{cnum}}</span>
+				<!-- <span>{{mc}}</span> -->
+			</h6>
 		</div>
 		<!--<h3 v-show="!istitle">{{user}}</h3>-->
 		<span class="rule" @tap="toRole">规则</span>
@@ -21,13 +24,14 @@
 	export default{
 		name:'detailTopbar',
 		components:{back, refresh, menus, tipsDialog},
-		props:['cname','cnum','mc','colorName'],
+		props:['cname','cnum','colorName'],
 		data(){
 			return{
 				msg: '',
 //				istitle: true,
 //				user: '',
-				pathName: ''
+				pathName: '',
+
 			}
 		},
 		computed: {
@@ -48,63 +52,16 @@
 		},
 		methods:{
 			toRole(){
-				var name = this.detail.commodity_no;
-				switch (name){
-					case 'CL':
-						this.pathName = 'cl';
-						break;
-					case 'HSI':
-						this.pathName = 'hsi';
-						break;
-					case 'GC':
-						this.pathName = 'gc';
-						break;
-					case 'FDAX':
-						this.pathName = 'fdax';
-						break;
-					case 'MHI':
-						this.pathName = 'mhi';
-						break;
-					case 'CN':
-						this.pathName = 'cn';
-						break;
-					case 'HG':
-						this.pathName = 'hg';
-						break;
-					case 'SI':
-						this.pathName = 'si';
-						break;
-					case 'YM':
-						this.pathName = 'ym';
-						break;
-					case 'NQ':
-						this.pathName = 'nq';
-						break;
-					case 'ES':
-						this.pathName = 'es';
-						break;
-					case 'NK':
-						this.pathName = 'nk';
-						break;
-					case 'HHI':
-						this.pathName = 'hhi';
-						break;
-					case 'MCH':
-						this.pathName = 'mch';
-						break;
-					case 'QM':
-						this.pathName = 'qm';
-						break;
-					case 'FDXM':
-						this.pathName = 'fdxm';
-						break;
-					case 'NG':
-						this.pathName = 'ng';
-						break;
-					default:
-						break;
+				this.pathName = this.detail.commodity_no.toLowerCase()
+				let ruleList = ['cl', 'hsi', 'gc', 'fdax', 'mhi', 'cn', 'hg', 'si', 'ym', 'nq', 'es', 'nk', 'hhi', 'mch', 'qm', 'fdxm', 'ng'];
+
+				let isIn = ruleList.includes(this.pathName);
+				if(isIn){
+					this.$router.push({path: `/${this.pathName}`});
+				}else{
+					this.$refs.dialog.isShow = true;
+					this.msg = '该合约暂无规则';
 				}
-				this.$router.push({path: '/' + this.pathName});
 			},
 			clearPositionListCont:function(){
 				this.$store.state.market.positionListCont=[];
@@ -124,10 +81,10 @@
 		activated: function(){
 			if(localStorage.tradeUser && this.bottomshow == true){
 //				this.user = JSON.parse(localStorage.tradeUser).username;
-				'cname','cnum','mc'
+				// 'cname','cnum','mc'
 				this.cname = '期货模拟账号';
 				this.cnum = JSON.parse(localStorage.tradeUser).username;
-				this.mc = '';
+				//this.mc = '';
 //				this.istitle = false;
 			}
 		}
