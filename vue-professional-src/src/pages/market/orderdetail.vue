@@ -197,15 +197,15 @@
 				startx = event.touches[0].clientX;
 				starty = event.touches[0].clientY;
 			}, false);
+			//touchend事件,当鼠标离开屏幕时触发
 			obj.addEventListener('touchend', () => {
 				setTimeout(()=> this.touchFlag = true ,100)
 			},false);
 			//touchmove事件,当鼠标在屏幕移动时触发
-			obj.addEventListener('touchmove', function(event) {
+			obj.addEventListener('touchmove', (event) =>{
 				console.log(this.touchFlag)
 				if(!this.touchFlag) return;
 				clearTimeout(this.timer)
-				
 				this.timer = setTimeout(()=>{
 					overx = event.touches[0].clientX;
 					overy = event.touches[0].clientY; 
@@ -222,171 +222,8 @@
 						}
 					}
 				},100)
-				
-				
-				//console.log(showList[isshow.currentIndex])
-				// if (this[showList[isshow.currentIndex]]){
-				// 	this.cname = this.detail.commodity_name;
-				// 	this.cnum = this.detail.commodity_no + this.detail.mainContract;
-				// 	console.log(this.touchFlag)
-				// 	if(startx-overx > 500){    //左滑动判断
-					
-				// 		this.touchFlag = false
-				// 		if(isshow.currentIndex>0) {
-				// 				isshow.currentIndex--;
-				// 			}
-						
-				// 	}else if (overx - startx > 100) { //右滑动判断
-				// 		this.touchFlag = false
-				// 		if (isshow.currentIndex<4){
-				// 			isshow.currentIndex++;
-				// 		}
-						
-				// 	}
-				// }
-
-
-
-				// if(this.sshow == true){
-				// 	if(startx-overx > 50){
-				// 		this.cname = this.detail.commodity_name;
-				// 		this.cnum = this.detail.commodity_no + this.detail.mainContract;
-				// 		this.$store.state.isshow.sshow = false;
-				// 		this.$store.state.isshow.fshow = true;
-				// 		this.$store.state.isshow.kshow = false;
-				// 		this.$store.state.isshow.pshow = false;
-				// 		this.$store.state.isshow.bottomshow = false;
-				// 		this.$store.state.isshow.islightshow = false;
-				// 		this.$store.state.isshow.isklineshow = false;
-				// 	}else if(overx-startx > 50){
-				// 		return;
-				// 	}
-				// }else if(this.fshow == true){
-				// 	var chartfH = $("#chartfens").offset().top + $("#chartfens").height();
-				// 	if(starty < chartfH){
-				// 		return;
-				// 	}
-				// 	if(startx-overx > 50){         //左滑动判断
-				// 		this.cname = this.detail.commodity_name;
-				// 		this.cnum = this.detail.commodity_no + this.detail.mainContract;
-	            //     	this.$store.state.isshow.sshow = false;
-				// 		this.$store.state.isshow.fshow = false;
-				// 		this.$store.state.isshow.kshow = true;
-				// 		this.$store.state.isshow.pshow = false;
-				// 		this.$store.state.isshow.bottomshow = false;
-				// 		this.$store.state.isshow.isfensshow = false;
-				// 		this.$store.state.isshow.islightshow = false;
-				// 		//默认一分钟K线
-				// 		this.$store.state.market.selectTime=1;
-				// 		var b  = {
-				// 			method: 'req_history_data',
-				// 			data: {
-				// 				contract_info: {
-				// 					security_type: this.detail.security_type,
-				// 					exchange_no: this.detail.exchange_no,
-				// 					commodity_no: this.detail.commodity_no,
-				// 					contract_no: ''
-				// 				},
-				// 				period: 'KLINE_1MIN',
-				// 				begin_time: '',
-				// 				end_time: '',
-				// 				count: '',
-				// 			}
-				// 		}
-				// 		this.quoteSocket.send(JSON.stringify(b));
-	            //     }else if(overx-startx > 50){       //右滑动判断
-	            //     	this.cname = this.detail.commodity_name;
-				// 		this.cnum = this.detail.commodity_no + this.detail.mainContract;
-                //     	this.$store.state.isshow.sshow = true;
-				// 		this.$store.state.isshow.fshow = false;
-				// 		this.$store.state.isshow.kshow = false;
-				// 		this.$store.state.isshow.pshow = false;
-				// 		this.$store.state.isshow.bottomshow = false;
-				// 		this.$store.state.isshow.isfensshow = false;
-				// 		this.$store.state.isshow.isklineshow = false;
-	            //     }
-				// }else if(this.kshow == true){
-				// 	var chartkH = $("#klines").offset().top + $("#klines").height();
-				// 	if(starty < chartkH){
-				// 		return;
-				// 	}
-				// 	if(startx-overx > 50){
-				// 		this.cname = this.detail.commodity_name;
-				// 		this.cnum = this.detail.commodity_no + this.detail.mainContract;
-				// 		this.$store.state.isshow.sshow = false;
-				// 		this.$store.state.isshow.fshow = false;
-				// 		this.$store.state.isshow.kshow = false;
-				// 		this.$store.state.isshow.pshow = true;
-				// 		this.$store.state.isshow.bottomshow = false;
-				// 		this.$store.state.isshow.isfensshow = false;
-				// 		this.$store.state.isshow.islightshow = false;
-				// 		this.$store.state.isshow.isklineshow = false;
-				// 	}else if(overx-startx > 50){
-				// 		this.cname = this.detail.commodity_name;
-				// 		this.cnum = this.detail.commodity_no + this.detail.mainContract;
-				// 		this.$store.state.isshow.sshow = false;
-				// 		this.$store.state.isshow.fshow = true;
-				// 		this.$store.state.isshow.kshow = false;
-				// 		this.$store.state.isshow.pshow = false;
-				// 		this.$store.state.isshow.bottomshow = false;
-				// 		this.$store.state.isshow.islightshow = false;
-				// 		this.$store.state.isshow.isklineshow = false;
-				// 	}
-				// }else if(this.pshow == true){
-				// 	if(startx-overx > 50){
-				// 		if(JSON.parse(localStorage.getItem('tradeUser')) == null){
-				// 			this.$refs.selectBar.$refs.alert.isshow = true;
-				// 		}else{
-				// 			this.$store.state.isshow.currentIndex = 4;
-				// 			this.cname = '期货模拟账号';
-				// 			this.cnum = JSON.parse(localStorage.tradeUser).username;
-				// 		}
-				// 	}else if(overx-startx > 50){
-				// 		this.$store.state.isshow.currentIndex = 2;
-				// 		this.cname = this.detail.commodity_name;
-				// 		this.cnum = this.detail.commodity_no + this.detail.mainContract;
-				// 		// this.$store.state.isshow.sshow = false;
-				// 		// this.$store.state.isshow.fshow = false;
-				// 		// this.$store.state.isshow.kshow = true;
-				// 		// this.$store.state.isshow.pshow = false;
-				// 		// this.$store.state.isshow.bottomshow = false;
-				// 		// this.$store.state.isshow.isfensshow = false;
-				// 		// this.$store.state.isshow.islightshow = false;
-				// 		//默认一分钟K线
-				// 		// this.$store.state.market.selectTime=1;
-				// 		// var b  = {
-				// 		// 	method: 'req_history_data',
-				// 		// 	data: {
-				// 		// 		contract_info: {
-				// 		// 			security_type: this.detail.security_type,
-				// 		// 			exchange_no: this.detail.exchange_no,
-				// 		// 			commodity_no: this.detail.commodity_no,
-				// 		// 			contract_no: ''
-				// 		// 		},
-				// 		// 		period: 'KLINE_1MIN',
-				// 		// 		begin_time: '',
-				// 		// 		end_time: '',
-				// 		// 		count: '',
-				// 		// 	}
-				// 		// }
-				// 		// this.quoteSocket.send(JSON.stringify(b));
-				// 	}
-				// }else{
-				// 	var h = $(".list_cont_box").offset().top;
-				// 	if(startx-overx > 50){
-				// 		return;
-				// 	}else if(overx-startx > 50){
-				// 		if(starty >= h){
-				// 			return;
-				// 		}
-				// 		this.$store.state.isshow.currentIndex = 3;
-				// 		this.cname = this.detail.commodity_name;
-				// 		this.cnum = this.detail.commodity_no + this.detail.mainContract;
-						
-				// 	}
-				// }
-			}.bind(this), false);
-			//touchend事件,当鼠标离开屏幕时触发
+			}, false);
+			
 		},
 		updated: function(){
 			//判断网络

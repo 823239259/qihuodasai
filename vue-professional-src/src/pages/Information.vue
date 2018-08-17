@@ -68,7 +68,8 @@
 								<!--{{key.localDateTime | getTime('HH:mm')}}-->
 								{{key.timestamp | getTime('HH:mm')}}
 							</span>
-							<img :src="key.country | countryImg" />
+							<!-- <img :src="key.country | countryImg" /> -->
+							<img :src="key.flagUrl" />
 							<span class="state fontgray">
 								{{key.country}}
 							</span>
@@ -88,7 +89,7 @@
 			</ol>
 		</div>
 		<!--7x24-->
-		<div id="seven" v-else="isshow">
+		<div id="seven" v-else>
 			<div class="pull_down" v-show="isrefresh">
 				<p>
 					<i class="icon icon_refresh fl"></i>
@@ -108,10 +109,10 @@
 						<p class="fl">
 
 						</p>
-						<p class="fl fontgray ps">
+						<p class="fl fontgray ps" :class="{textHeight:key.zhankai}">
 							{{key.liveTitle}}
 						</p>
-						<button class="fontwhite fontxs" @tap='showmore'>展开</button>
+						<button class="fontwhite fontxs" v-if="key.liveTitle.length>70" @click="showAll1(key)">{{key.zhankai?'展开':'收起'}}</button>
 					</li>
 				</template>
 				<li id='showmore' class="fontgray" style="text-align: center;height: 40px; margin: 0;font-size: 14px; " @tap='getMore'> {{msg}} </li>
@@ -167,14 +168,7 @@
 				return this.$store.getters.PATH
 			},
 			weekday: function() {
-				var arr = [];
-				arr[0] = "日";
-				arr[1] = "一";
-				arr[2] = "二";
-				arr[3] = "三";
-				arr[4] = "四";
-				arr[5] = "五";
-				arr[6] = "六";
+				var arr = ['日', '一', '二', '三', '四', '五','六'];
 				return arr[this.day.D]
 			},
 			lastdayone: function() {
@@ -348,6 +342,12 @@
 				//				};
 			},
 			countryImg: function(e){
+				// const countryImgObj = {
+				// 	'中国': 'China',
+				// 	'英国': 'Britain',
+				// 	'意大利': 'Italy',
+				// 	'新西兰': 
+				// }
 				switch(e){
 					case '中国':
 						return require('../assets/img/country/China.png');
@@ -464,7 +464,7 @@
 			}
 		},
 		updated: function() {
-			this.getHeight();
+			//this.getHeight();
 		},
 		methods: {
 			//自动更改当前时间为前一天
@@ -558,20 +558,26 @@
 						timeout: 5000
 					}
 				).then(function(e) {
-					var sevenMore = e.body.data.data;
-					if(sevenMore != null){
-						sevenMore.forEach(function(o, i){
+					e.body.data.data&&e.body.data.data.forEach((o, i)=>{
+						if(o.liveTitle != null){
 							var str = o.liveTitle.replace(/<p>/g, '');
 							str = str.replace(/<\/p>/g, '');
 							o.liveTitle = str;
-							this.sevenlist.push(o);
-						}.bind(this));
-						$('#showmore').text('点击加载更多...');
+							if (o.liveTitle.length>70) {
+								o.zhankai = true
+							}
+						}
+					})
+					var sevenMore = e.body.data.data;
+					if (sevenMore) {
+						this.msg = '点击查看更多...';
+						this.sevenlist = this.sevenlist.concat(sevenMore)
 					}else{
-						$('#showmore').text('查询当日没有更多数据...点击加载前一天数据');
+						this.msg = '查询当日没有更多数据...点击加载前一天数据';
 						this.updateTime();
 						this.sevenlist=[];
 					}
+					
 				}, function() {
 					//					alert('服务器请求失败，请稍后再试');
 					$('#showmore').text('点击重新请求数据...');
@@ -588,15 +594,18 @@
 					},
 					timeout: 5000
 				}).then(function(e) {
-					this.sevenlist = e.body.data.data;
-					if(this.sevenlist != null){
-						this.sevenlist.forEach(function(o, i){
-							if(o.liveTitle != null){
-								var str = o.liveTitle.replace(/<p>/g, '');
-								str = str.replace(/<\/p>/g, '');
-								o.liveTitle = str;
+					e.body.data.data.forEach((o, i)=>{
+						if(o.liveTitle != null){
+							var str = o.liveTitle.replace(/<p>/g, '');
+							str = str.replace(/<\/p>/g, '');
+							o.liveTitle = str;
+							if (o.liveTitle.length>70) {
+								o.zhankai = true
 							}
-						}.bind(this));
+						}
+					})
+					this.sevenlist = e.body.data.data;
+					if (this.sevenlist) {
 						this.msg = '点击查看更多...';
 					}else{
 						this.msg = '查询当日没有更多数据...点击加载前一天数据';
@@ -633,37 +642,8 @@
 					this.isshow = false;
 				}
 			},
-			showmore: function(e) {
-				if($(e.target).text() == '展开') {
-					$(e.target).html('收起');
-					$(e.target).prev().css({
-						'overflow': 'visible',
-						'height': 'auto',
-						'line-height':"20px"
-					});
-				} else {
-					$(e.target).html('展开');
-					$(e.currentTarget).prev().css({
-						'overflow': 'hidden',
-						'height': '42px'
-					});
-				}
-			},
-			getHeight: function() {
-				for(var i = 0; i < document.getElementsByClassName('ps').length; i++) {
-					$(document.getElementsByClassName('ps')[i]).css({
-						'height': 'auto'
-					});
-					if(document.getElementsByClassName('ps')[i].offsetHeight > 42) {
-						$(document.getElementsByClassName('ps')[i]).next().show();
-					} else {
-						$(document.getElementsByClassName('ps')[i]).next().css('display', 'none');
-					}
-					$(document.getElementsByClassName('ps')[i]).css({
-						'height': '42px',
-						'overflow': 'hidden'
-					});
-				}
+			showAll1 (item) {
+				item.zhankai = !item.zhankai
 			},
 			getdate: function() {
 				this.time = new Date();
@@ -752,6 +732,10 @@
 <style scoped lang="less">
 @import url("../assets/css/base.less");
 @import url("../assets/css/main.less");
+.textHeight{
+	overflow: hidden;
+	height: 42px
+}
 #information {
 	padding-top: 90px;
 	padding-bottom: 50px;

@@ -87,6 +87,9 @@
 			},
 			PATH: function(){
 				return this.$store.getters.PATH;
+			},
+			errorCodeMsg () {
+				return this.$store.state.account.withdrawCode;
 			}
 		},
 		watch: {
@@ -265,66 +268,9 @@
 								}.bind(this),1000);
 							}
 						}else{
-							switch (data.code){
-								case '-1':
-									this.$children[0].isShow = true;
-									this.msg = '账号已变更，请重新重新登录';
-									break;
-								case '0':
-									this.$children[0].isShow = true;
-									this.msg = 'token失效';
-									break;
-								case '2':
-									this.$children[0].isShow = true;
-									this.msg = '提现失败，请联系客服';
-									break;
-								case '3':
-									this.$children[0].isShow = true;
-									this.msg = '用户信息不存在';
-									break;
-								case '4':
-									this.$children[0].isShow = true;
-									this.msg = '银行卡卡号不存在';
-									break;
-								case '5':
-									this.$children[0].isShow = true;
-									this.msg = '你的账户已被限制提现，具体原因为：121212，请联系客服解除限制！';
-									break;
-								case '6':
-									this.$children[0].isShow = true;
-									this.msg = '系统升级期间无法提现';
-									break;
-								case '7':
-									this.$children[0].isShow = true;
-									this.msg = '余额不足不能提现';
-									break;
-								case '8':
-									this.$children[0].isShow = true;
-									this.msg = '当天取款次数不能超过5次';
-									break;
-								case '9':
-									this.$children[0].isShow = true;
-									this.msg = '每次提现金额不能小于10元';
-									break;
-								case '10':
-									this.$children[0].isShow = true;
-									this.msg = '提现密码错误';
-									break;
-								case '11':
-									this.$children[0].isShow = true;
-									this.msg = '暂不支持此银行提现';
-									break;
-								case '12':
-									this.$children[0].isShow = true;
-									this.msg = '单笔提现金额不能超过5万元';
-									break;
-								case '15':
-									this.$children[0].isShow = true;
-									this.msg = '提现渠道设置参数错误';
-									break;
-								default:
-									break;
-							}
+							this.$children[0].isShow = true;
+							this.msg = this.errorCodeMsg[data.code];
+							
 						}
 					}.bind(this), function(){
 						this.$children[0].isShow = true;
