@@ -48,17 +48,42 @@
 				kTypeShow: false,
 				tabList: ['闪电图', '分时', 'K线', '盘口', '交易中心'],
 				kTypeList: ['1分', '5分', '15分', '30分', '日K'],
-				currentIndex: 1,
-				chooseTypeText: ''
+				// currentIndex: 1,
+				chooseTypeText: '',
+				fontwhite: 'fontwhite',
+				fl: 'fl',
+				fontgray: 'fontgray'
 			}
 		},
 		computed: {
 //			tradeConfig(){
 //				return this.$store.state.market.tradeConfig;
 //			},
+			quoteSocket() {
+				return this.$store.state.quoteSocket
+			},
+			jshow() {
+				return this.$store.state.isshow.bottomshow
+			},
+			pshow() {
+				return this.$store.state.isshow.pshow
+			},
+			sshow() {
+				return this.$store.state.isshow.sshow
+			},
+			fshow() {
+				return this.$store.state.isshow.fshow
+			},
+			kshow() {
+				return this.$store.state.isshow.kshow
+			},
 			detail() {
 				return this.$store.state.market.currentdetail;
 			},
+			currentIndex () {
+				return this.$store.state.isshow.currentIndex;
+				
+			}
 		},
 		watch: {
 			kshow: function(n, o) {
@@ -67,6 +92,10 @@
 				} else {
 					$('#kline').css('background-image', 'url(' + blue + ')');
 				}
+			},
+			currentIndex (n, o) {
+			
+				this.changeData(n)
 			}
 		},
 		methods: {
@@ -98,13 +127,9 @@
 				this.quoteSocket.send(JSON.stringify(subscribeMessage));
 				this.kTypeShow = false;
 			},
-			switchTab (item,index) {
-
+			changeData (n) {
 				let isshow = this.$store.state.isshow
-
-				this.currentIndex = index
-
-				switch(item) {
+				switch(this.tabList[n]) {
 					case '闪电图':
 						this.$parent.cname = this.$parent.detail.commodity_name;
 						this.$parent.cnum = this.$parent.detail.commodity_no + this.$parent.detail.mainContract;
@@ -177,7 +202,6 @@
 						} else {
 							this.kTypeShow = false;
 						}
-						console.log(this.$store.state.market.selectTime)
 						if (this.$store.state.market.selectTime) return;
 						//默认一分钟K线
 						this.$store.state.market.selectTime=1;
@@ -212,39 +236,18 @@
 						}
 						break;
 				}
-			}
-		},
-		computed: {
-			quoteSocket() {
-				return this.$store.state.quoteSocket
 			},
-			fontwhite() {
-				return 'fontwhite';
-			},
-			fl() {
-				return 'fl';
-			},
-			fontgray() {
-				return 'fontgray';
-			},
-			jshow() {
-				return this.$store.state.isshow.bottomshow
-			},
-			pshow() {
-				return this.$store.state.isshow.pshow
-			},
-			sshow() {
-				return this.$store.state.isshow.sshow
-			},
-			fshow() {
-				return this.$store.state.isshow.fshow
-			},
-			kshow() {
-				return this.$store.state.isshow.kshow
+			switchTab (item,index) {
+				
+				if (this.$store.state.isshow.currentIndex==2&&index==2){//用于强行唤起k线本次点击
+					this.changeData(2)
+				}
+				this.$store.state.isshow.currentIndex = index;
+				
 			}
 		},
 		mounted: function() {
-			this.$store.state.isshow.bottomshow = false
+			//this.$store.state.isshow.bottomshow = false
 		}
 	}
 </script>

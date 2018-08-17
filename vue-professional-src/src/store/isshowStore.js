@@ -14,7 +14,8 @@ export default class Isshow {
             isfensshow: false, //是否进入过分时
             isfenssec: false, //判断是否是直接画图
             islightshow: false, //是否进入过闪电图
-            isklineshow: false //是否进入过K线图
+            isklineshow: false, //是否进入过K线图
+            currentIndex: 1, //tabbar选中标识
         }
     }
    
