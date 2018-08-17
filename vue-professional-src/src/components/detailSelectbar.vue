@@ -113,10 +113,10 @@
 					method: 'req_history_data',
 					data: {
 						contract_info: {
-							security_type: this.$parent.detail.security_type,
-							exchange_no: this.$parent.detail.exchange_no,
-							commodity_no: this.$parent.detail.commodity_no,
-							contract_no: this.$parent.detail.mainContract,
+							security_type: this.detail.security_type,
+							exchange_no: this.detail.exchange_no,
+							commodity_no: this.detail.commodity_no,
+							contract_no: this.detail.mainContract,
 						},
 						period: currentKType[0],
 						count:40
@@ -129,79 +129,38 @@
 			},
 			changeData (n) {
 				let isshow = this.$store.state.isshow
+				this.$parent.cname = this.detail.commodity_name;
+				this.$parent.cnum = this.detail.commodity_no + this.detail.mainContract;
+				isshow.sshow = false;
+				isshow.fshow = false;
+				isshow.kshow = false;
+				isshow.pshow = false;
+				isshow.bottomshow = false;
+				this.kTypeShow = false;
+				isshow.isfensshow = false;
+				isshow.isklineshow = false;
 				switch(this.tabList[n]) {
 					case '闪电图':
-						this.$parent.cname = this.$parent.detail.commodity_name;
-						this.$parent.cnum = this.$parent.detail.commodity_no + this.$parent.detail.mainContract;
 						isshow.sshow = true;
-						isshow.fshow = false;
-						isshow.kshow = false;
-						isshow.pshow = false;
-						isshow.bottomshow = false;
-						this.kTypeShow = false;
-						isshow.isfensshow = false;
-						isshow.isklineshow = false;
 						break;
 					case '分时':
-						this.$parent.cname = this.$parent.detail.commodity_name;
-						this.$parent.cnum = this.$parent.detail.commodity_no + this.$parent.detail.mainContract;
-						isshow.sshow = false;
 						isshow.fshow = true;
-						isshow.kshow = false;
-						isshow.pshow = false;
-						isshow.bottomshow = false;
-						this.kTypeShow = false;
-						isshow.islightshow = false;
-						isshow.isklineshow = false;
-						//isshow.isfensshow = true;
 						break;
 					case '盘口':
-						this.$parent.cname = this.$parent.detail.commodity_name;
-						this.$parent.cnum = this.$parent.detail.commodity_no + this.$parent.detail.mainContract;
-						isshow.sshow = false;
-						isshow.fshow = false;
-						isshow.kshow = false;
 						isshow.pshow = true;
-						isshow.bottomshow = false;
-						this.kTypeShow = false;
-						isshow.isfensshow = false;
-						isshow.islightshow = false;
-						isshow.isklineshow = false;
 						break;
 					case '交易中心':
-//						var tradeConfig =this.$store.state.market.tradeConfig;
 						if(JSON.parse(localStorage.getItem('tradeUser')) == null){
 							this.$children[0].isshow = true;
 						}else{
 							this.$parent.cname = '期货模拟账号';
 							this.$parent.cnum = JSON.parse(localStorage.tradeUser).username;
-							isshow.sshow = false;
-							isshow.fshow = false;
-							isshow.kshow = false;
-							isshow.pshow = false;
 							isshow.bottomshow = true;
-							this.kTypeShow = false;
-							isshow.isfensshow = false;
-							isshow.islightshow = false;
-							isshow.isklineshow = false;
-							
 						}
 						break;
 					case 'K线':
-						this.$parent.cname = this.$parent.detail.commodity_name;
-						this.$parent.cnum = this.$parent.detail.commodity_no + this.$parent.detail.mainContract;
-						isshow.sshow = false;
-						isshow.fshow = false;
 						isshow.kshow = true;
-						isshow.pshow = false;
-						isshow.bottomshow = false;
-						isshow.isfensshow = false;
-						isshow.islightshow = false;
-						if(this.kTypeShow == false) {
-							this.kTypeShow = true;
-						} else {
-							this.kTypeShow = false;
-						}
+						this.kTypeShow = !this.kTypeShow
 						if (this.$store.state.market.selectTime) return;
 						//默认一分钟K线
 						this.$store.state.market.selectTime=1;
@@ -209,10 +168,10 @@
 							method: 'req_history_data',
 							data: {
 								contract_info: {
-									security_type: this.$parent.detail.security_type,
-									exchange_no: this.$parent.detail.exchange_no,
-									commodity_no: this.$parent.detail.commodity_no,
-									contract_no: this.$parent.detail.mainContract,
+									security_type: this.detail.security_type,
+									exchange_no: this.detail.exchange_no,
+									commodity_no: this.detail.commodity_no,
+									contract_no: this.detail.mainContract,
 								},
 								period: 'KLINE_1MIN',
 								count:40
@@ -222,18 +181,6 @@
 						this.quoteSocket.send(JSON.stringify(subscribeMessage));
 						break;
 					default:
-						isshow.sshow = false;
-						isshow.fshow = false;
-						isshow.kshow = true;
-						isshow.pshow = false;
-						isshow.bottomshow = false;
-						isshow.isfensshow = false;
-						isshow.islightshow = false;
-						if(this.kTypeShow == false) {
-							this.kTypeShow = true;
-						} else {
-							this.kTypeShow = false;
-						}
 						break;
 				}
 			},
