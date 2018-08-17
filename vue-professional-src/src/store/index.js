@@ -1905,6 +1905,7 @@ export default new Vuex.Store({
 					case 'on_rtn_quote': // 最新行情
 						var val = wsData.data;
 						var key = val.contract_info.commodity_no;
+						
 						//找到当前的回推的合约及index
 						//console.log(market.Parameters)
 						var RtnParametersIndex;
@@ -1958,8 +1959,11 @@ export default new Vuex.Store({
 							//构造成历史数据结构
 							//var arr = [val.time_flag, val.last, val.open, val.low, val.high, val.position, market.volume];
 							var arr = [val.time_flag, val.last, val.open, val.low, val.high, market.volume];
+
+							if (!val.last) return;
 							//更新分时图 
 							if (isshow.fshow == true) {
+								
 								if(isshow.isfensshow == true) {
 									let {jsonData} = market;
 									//console.log(jsonData)

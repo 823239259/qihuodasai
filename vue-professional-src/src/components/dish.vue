@@ -279,26 +279,28 @@
 				this.defaultParameters.open = currentItem.open;
 				this.defaultParameters.high = currentItem.high;
 				this.defaultParameters.low = currentItem.low;
-				this.defaultParameters.AskPrice5 = currentItem.ask[4][0];
-				this.defaultParameters.AskPrice4 = currentItem.ask[3][0]
-				this.defaultParameters.AskPrice3 = currentItem.ask[2][0]
-				this.defaultParameters.AskPrice2 = currentItem.ask[1][0]
-				this.defaultParameters.AskPrice1 = currentItem.ask[0][0]
-				this.defaultParameters.BidPrice1 = currentItem.bid[0][0]
-				this.defaultParameters.BidPrice2 = currentItem.bid[1][0]
-				this.defaultParameters.BidPrice3 = currentItem.bid[2][0]
-				this.defaultParameters.BidPrice4 = currentItem.bid[3][0]
-				this.defaultParameters.BidPrice5 = currentItem.bid[4][0]
-				this.defaultParameters.AskQty5 = currentItem.ask[4][1];
-				this.defaultParameters.AskQty4 = currentItem.ask[3][1];
-				this.defaultParameters.AskQty3 = currentItem.ask[2][1];
-				this.defaultParameters.AskQty2 = currentItem.ask[1][1];
-				this.defaultParameters.AskQty1 = currentItem.ask[0][1];
-				this.defaultParameters.BidQty5 = currentItem.bid[4][1]
-				this.defaultParameters.BidQty4 = currentItem.bid[3][1]
-				this.defaultParameters.BidQty3 = currentItem.bid[2][1]
-				this.defaultParameters.BidQty2 = currentItem.bid[1][1]
-				this.defaultParameters.BidQty1 = currentItem.bid[0][1]
+				if (currentItem.ask) {
+					this.defaultParameters.AskPrice5 = currentItem.ask[4][0];
+					this.defaultParameters.AskPrice4 = currentItem.ask[3][0]
+					this.defaultParameters.AskPrice3 = currentItem.ask[2][0]
+					this.defaultParameters.AskPrice2 = currentItem.ask[1][0]
+					this.defaultParameters.AskPrice1 = currentItem.ask[0][0]
+					this.defaultParameters.BidPrice1 = currentItem.bid[0][0]
+					this.defaultParameters.BidPrice2 = currentItem.bid[1][0]
+					this.defaultParameters.BidPrice3 = currentItem.bid[2][0]
+					this.defaultParameters.BidPrice4 = currentItem.bid[3][0]
+					this.defaultParameters.BidPrice5 = currentItem.bid[4][0]
+					this.defaultParameters.AskQty5 = currentItem.ask[4][1];
+					this.defaultParameters.AskQty4 = currentItem.ask[3][1];
+					this.defaultParameters.AskQty3 = currentItem.ask[2][1];
+					this.defaultParameters.AskQty2 = currentItem.ask[1][1];
+					this.defaultParameters.AskQty1 = currentItem.ask[0][1];
+					this.defaultParameters.BidQty5 = currentItem.bid[4][1]
+					this.defaultParameters.BidQty4 = currentItem.bid[3][1]
+					this.defaultParameters.BidQty3 = currentItem.bid[2][1]
+					this.defaultParameters.BidQty2 = currentItem.bid[1][1]
+					this.defaultParameters.BidQty1 = currentItem.bid[0][1]
+				}
 			},
 			buy:function(){
 				if(JSON.parse(localStorage.getItem('tradeUser')) == null){

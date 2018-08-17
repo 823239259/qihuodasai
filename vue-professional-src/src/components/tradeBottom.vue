@@ -4,7 +4,7 @@
 			<alert title="确认下单" :line1="insertOrder" :objstr='objst'></alert>
 			<div class="toppart">
 				<div class="fl">
-					<ul>
+					<ul v-if="detail.LastQuotation&&detail.LastQuotation.ask">
 						<li>
 							<div class="fontgray fl">
 								卖 <span class="fontred" :class="{red: detail.LastQuotation.ask[0][0] - detail.LastQuotation.pre_settle > 0,green: detail.LastQuotation.ask[0][0] - detail.LastQuotation.pre_settle < 0}">{{detail.LastQuotation.ask[0][0] | fixNum4(detail.dot_size)}}</span>
@@ -30,15 +30,42 @@
 							</div>
 						</li>
 					</ul>
+					<ul v-else>
+						<li>
+							<div class="fontgray fl">
+								卖 <span class="fontred" >0</span>
+							</div>
+							<p class="fontwhite fr">0</p>
+						</li>
+						<li>
+							<div class="fontgray fl">
+								买 <span class="fontred">0</span>
+							</div>
+							<p class="fontwhite fr">0</p>
+						</li>
+						<li>
+							<div class="fontgray fl">
+								成交量
+							</div>
+							<div class="fontwhite fr">0</div>
+						</li>
+					</ul>
 				</div>
 				<div class="fl">
-					<ul>
+					<ul v-if="detail.LastQuotation">
 						<li class="fontred" :class="{red: detail.LastQuotation.last - detail.LastQuotation.pre_settle > 0,green: detail.LastQuotation.last - detail.LastQuotation.pre_settle < 0}">
 							{{lastPrice}}
 						</li>
 						<li class="fontred">
 							<span :class="{red: detail.LastQuotation.change_value > 0,green: detail.LastQuotation.change_value < 0}">{{detail.LastQuotation.change_value | fixNum2(detail.dot_size)}}</span>
 							<span :class="{red: detail.LastQuotation.change_value > 0,green: detail.LastQuotation.change_value < 0}">{{detail.LastQuotation.change_rate | fixNum}}%</span>
+						</li>
+					</ul>
+					<ul v-else>
+						<li class="fontred">0</li>
+						<li class="fontred">
+							<span>0</span>
+							<span>0</span>
 						</li>
 					</ul>
 				</div>

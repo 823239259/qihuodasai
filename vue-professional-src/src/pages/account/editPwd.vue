@@ -161,6 +161,8 @@
 								this.msg = '密码修改成功';
 								this.$store.state.account.islogin = false;
 								localStorage.removeItem("user");
+								// this.$store.state.account.phone = this.userInfo.username;
+								// this.$store.state.account.password = this.pwd;
 								this.time = 0;
 								this.code = '';
 								this.pwd = '';

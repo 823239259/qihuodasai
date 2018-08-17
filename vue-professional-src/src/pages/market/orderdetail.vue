@@ -214,6 +214,7 @@
 			obj.addEventListener('touchmove', function(event) {
 				overx = event.touches[0].clientX;
 				overy = event.touches[0].clientY; 
+				
 				if(this.sshow == true){
 					if(startx-overx > 50){
 						this.cname = this.detail.commodity_name;

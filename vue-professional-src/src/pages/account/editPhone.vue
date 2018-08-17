@@ -93,7 +93,7 @@
 					},
 					params: {
 						mobile: this.userInfo.username,
-						type: 1
+						type: 3
 					},
 					timeout: 5000
 				}).then(function(e){
