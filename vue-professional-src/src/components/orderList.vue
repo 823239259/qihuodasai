@@ -10,8 +10,9 @@
 				<span>持仓均价</span>
 				<span>浮动盈利</span>
 			</li>
-			<template v-for="k in datas">
-				<li @tap="listTap" :id="k.commodityNocontractNo">
+			<!-- <template v-for="k in datas">
+				<li :class="{'current': currentindex}" @tap="listTap" :id="k.commodityNocontractNo"> -->
+				<li :class="{'current': currentIndex === index}" @tap="listTap(k, index)" :id="k.commodityNocontractNo"  v-for="(k,index) in datas" :key="index">
 					<div :class="[list_cont,{current:k.showbar}]">
 						<span>{{k.name}}</span>
 						<span :class="{red: k.type_color == 'red', green: k.type_color == 'green'}">{{k.type}}</span>
@@ -20,7 +21,7 @@
 						<span :class="{red: k.total_color == 'red', green: k.total_color == 'green'}">{{k.total}}</span>
 					</div>
 				</li>
-			</template>
+			<!-- </template> -->
 		</ul>
 		<div class="list_tools">
 			<cbtn name="全部平仓" @tap.native="closeAllOut"></cbtn>
@@ -47,7 +48,8 @@
 				datas: '',
 				orderListId: '',
 				tempText:{},
-				selectedOrderList: ''
+				selectedOrderList: '',
+				currentIndex: null
 			}
 		},
 		computed: {
@@ -100,17 +102,23 @@
 			},
 		},
 		methods: {
-			listTap: function(obj){
-				if(!$(obj.currentTarget).hasClass("current")){
-					$(obj.currentTarget).addClass("current");
-					$(obj.currentTarget).siblings().removeClass("current");
-					this.orderListId = $(obj.currentTarget).attr("id");
-				}else{
-					$(obj.currentTarget).removeClass("current");
-					this.orderListId =null;
-				}
+			// listTap (obj) { //选中
+				// if(!$(obj.currentTarget).hasClass("current")){
+				// 	$(obj.currentTarget).addClass("current");
+				// 	$(obj.currentTarget).siblings().removeClass("current");
+				// 	this.orderListId = $(obj.currentTarget).attr("id");
+				// }else{
+				// 	$(obj.currentTarget).removeClass("current");
+				// 	this.orderListId =null;
+				// }
+
+			// },
+			listTap (item,index) { //选中状态
+				if (this.currentIndex === index) return this.currentIndex = null;
+				this.currentIndex = index;
+				this.orderListId = item.commodityNocontractNo;
 			},
-			closeAllOut:function(){
+			closeAllOut () {
 				if(this.qryHoldTotalArr.length > 0){
 					this.$children[0].isshow = true;
 					var arr=[];
@@ -129,37 +137,12 @@
 								"PriceType":1,
 								"LimitPrice":0.00,
 								"TriggerPrice":0,
-								"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(index+1)
+								"OrderRef":this.$store.state.market.tradeConfig.Source+ new Date().getTime()+(index+1)
 							}
 						};
 						arr.push(b)
 						this.tempText = arr;
 					});
-					// for(var i in this.qryHoldTotalArr){
-					// 	var buildIndex=0;
-					// 	var drection ; 
-					// 	if(this.qryHoldTotalArr[i].Drection==0){
-					// 		drection = 1;
-					// 	}else if(this.qryHoldTotalArr[i].Drection==1){
-					// 		drection = 0;
-					// 	}
-					// 	var b = {
-					// 		"Method":'InsertOrder',
-					// 		"Parameters":{
-					// 			"ExchangeNo":this.qryHoldTotalArr[i].ExchangeNo,
-					// 			"CommodityNo":this.qryHoldTotalArr[i].CommodityNo,
-					// 			"ContractNo":this.qryHoldTotalArr[i].ContractNo,
-					// 			"OrderNum":this.qryHoldTotalArr[i].HoldNum,
-					// 			"Drection":drection,
-					// 			"PriceType":1,
-					// 			"LimitPrice":0.00,
-					// 			"TriggerPrice":0,
-					// 			"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
-					// 		}
-					// 	};
-					// 	arr.push(b);
-					// 	this.tempText = arr;
-					// }
 				}else{
 					this.$children[5].isShow = true;
 					this.msg = '暂无合约需要平仓';
@@ -188,51 +171,43 @@
 					this.msg = '请选择一条数据';
 				}
 			},
-			closeOut:function(obj){
-				var i = 0;
-				var positionCurrent=0;
-				var length= this.qryHoldTotalArr.length;
-				var qryHoldTotalArr = this.qryHoldTotalArr;
-				for(positionCurrent in this.positionListCont){
-					if(this.orderListId == qryHoldTotalArr[length-1-positionCurrent].ContractCode){
-						i++;
-						this.$children[1].isshow = true;
-						var buildIndex=0;
-						if(buildIndex>100){
-							buildIndex=0;
-						}
-						var drection;
-						if(qryHoldTotalArr[length-1-positionCurrent].Drection==0){
-							drection = 1;
-						}else if(qryHoldTotalArr[length-1-positionCurrent].Drection==1){
-							drection = 0;
-						}
-						var b={
-							"Method":'InsertOrder',
-							"Parameters":{
-								"ExchangeNo":qryHoldTotalArr[length-1-positionCurrent].ExchangeNo,
-								"CommodityNo":qryHoldTotalArr[length-1-positionCurrent].CommodityNo,
-								"ContractNo":qryHoldTotalArr[length-1-positionCurrent].ContractNo,
-								"OrderNum": qryHoldTotalArr[length-1-positionCurrent].HoldNum,
-								"Drection":drection,
-								"PriceType":1,
-								"LimitPrice":0.00,
-								"TriggerPrice":0,
-								"OrderRef":this.$store.state.market.tradeConfig.client_source+ new Date().getTime()+(buildIndex++)
-							}
-						};
-						this.tempText = b;
-						return false;
-						
+			closeOut(obj){ //更新平仓
+				let i = 0;
+				let positionCurrent = this.qryHoldTotalArr.find((item, index) =>{
+					if (this.orderListId == item.ContractCode) {
+						i = index
+						return true
 					}
-				}
-				if(i < 1){
+				})
+				if (!positionCurrent) {
 					this.$children[5].isShow = true;
 					this.msg = '请选择一条数据';
+					return;
 				}
-				
+				let quoteMsg = {
+					"Method":'InsertOrder',
+					"Parameters":{
+						"ExchangeNo": positionCurrent.ExchangeNo,
+						"CommodityNo": positionCurrent.CommodityNo,
+						"ContractNo": positionCurrent.ContractNo,
+						"OrderNum": positionCurrent.HoldNum,
+						"Drection": positionCurrent.Drection===1?0:1,
+						"PriceType":1,
+						"LimitPrice":0.00,
+						"TriggerPrice":0,
+						"OrderRef":this.$store.state.market.tradeConfig.Source+ new Date().getTime()+(i++)
+					}
+				};
+				this.tempText = quoteMsg;
+				this.$children[1].isshow = true; //唤起弹框
 			}
 			
+		},
+		watch: {
+			qryHoldTotalArr (n, o) {
+				this.currentIndex = null
+				this.orderListId = ''
+			}
 		}
 	}
 </script>

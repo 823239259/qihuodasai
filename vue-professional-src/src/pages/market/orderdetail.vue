@@ -203,7 +203,7 @@
 			},false);
 			//touchmove事件,当鼠标在屏幕移动时触发
 			obj.addEventListener('touchmove', (event) =>{
-				console.log(this.touchFlag)
+				// console.log(this.touchFlag)
 				if(!this.touchFlag) return;
 				clearTimeout(this.timer)
 				this.timer = setTimeout(()=>{

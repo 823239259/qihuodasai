@@ -462,6 +462,9 @@
 			OnRspQryTradeDealListCont (n,o){
 				this.initTradeDealListCont(n)
 			},
+			qryHoldTotalArr (n,o) {
+				this.initPositionListCont(n)
+			}
 		},
 		methods: {
 			showSelect: function(){
@@ -758,9 +761,9 @@
 					}
 				});
 			},
-			initPositionListCont () {
+			initPositionListCont (qryHoldTotalArr) {
 				this.$store.state.market.positionListCont=[];
-				this.qryHoldTotalArr.forEach( e =>{
+				qryHoldTotalArr.forEach( e =>{
 					var currentCommodity = this.orderTemplist[e.CommodityNo];
 					var obj = {
 							name: currentCommodity.commodity_name,
@@ -858,7 +861,7 @@
 					break;
 			}
 			//持仓列表
-			this.initPositionListCont()
+			this.initPositionListCont(this.qryHoldTotalArr)
 			//委托
 			this.appendOrderList(this.OnRspOrderInsertEntrustCont);
 			//挂单 

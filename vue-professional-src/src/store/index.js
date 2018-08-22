@@ -75,9 +75,10 @@ export default new Vuex.Store({
 		//设置闪电图数据
 		setlightDate: function(state) {
 			let { lightChartTime,jsonTow, currentdetail } = state.market;
-			if (!jsonTow.last) return ;
-			lightChartTime.price.push(jsonTow.last.toFixed(currentdetail.dot_size));
-			lightChartTime.time.push((jsonTow.time_flag).split(mTimeExg)[1]);
+			let NewJsonTow =  jsonTow.last?jsonTow:currentdetail.LastQuotation;
+			if (!NewJsonTow.last) return ;
+			lightChartTime.price.push(NewJsonTow.last.toFixed(currentdetail.dot_size));
+			lightChartTime.time.push((NewJsonTow.time_flag).split(mTimeExg)[1]);
 			lightChartTime.time = lightChartTime.time.slice(-50);
 			lightChartTime.price = lightChartTime.price.slice(-50)
 			state.market.option5 = {
@@ -790,7 +791,7 @@ export default new Vuex.Store({
 						market.forceLine = parameters.ForceLine;
 						// 查询持仓合计 查询订单 查询成交记录 查询账户信息 查询止损单 查询条件单 查询历史成交 QryHoldTotal
 						const methodArr = ['QryHoldTotal', 'QryOrder', 'QryTrade', 'QryAccount', 'QryStopLoss', 'QryCondition']
-						// todo 初始化的时候tradeConfig没有username
+						// 初始化的时候tradeConfig没有username
 						methodArr.forEach(method => {
 							tradeSocket.send(`{"Method":"${method}","Parameters":{"ClientNo":"${JSON.parse(localStorage.tradeUser).username}"}}`);
 							//tradeSocket.send(`{"method":"${method}","Parameters":{"ClientNo":"${tradeConfig.username}"}}`);
@@ -829,18 +830,18 @@ export default new Vuex.Store({
 						context.commit('updateQryHoldTotalArr',parameters) 
 						//market.qryHoldTotalArr.push(parameters); 对象形式
 						market.qryHoldTotalKV[parameters.CommodityNo] = parameters;
-						var qryItem = market.orderTemplist[parameters.CommodityNo];
-						var positionListContItem = {
-							name: qryItem.commodity_name,
-							type: !parameters.Drection?'多':'空',
-							num: parameters.HoldNum,
-							price: parameters.HoldAvgPrice.toFixed(qryItem.dot_size),
-							showbar: false,
-							type_color: !parameters.Drection?'red':'green',
-							commodityNocontractNo: qryItem.commodity_no + qryItem.mainContract,
-						}
-						//首次更新positionListCont? 意义不大
-						market.positionListCont.unshift(positionListContItem);
+						// var qryItem = market.orderTemplist[parameters.CommodityNo];
+						// var positionListContItem = {
+						// 	name: qryItem.commodity_name,
+						// 	type: !parameters.Drection?'多':'空',
+						// 	num: parameters.HoldNum,
+						// 	price: parameters.HoldAvgPrice.toFixed(qryItem.dot_size),
+						// 	showbar: false,
+						// 	type_color: !parameters.Drection?'red':'green',
+						// 	commodityNocontractNo: qryItem.commodity_no + qryItem.mainContract,
+						// }
+						// //首次更新positionListCont? 意义不大
+						// market.positionListCont.unshift(positionListContItem);
 						//初始化持仓列表中的浮动盈亏? 意义不大
 						context.dispatch('updateHoldFloatingProfit',parameters);
 					}
@@ -898,7 +899,7 @@ export default new Vuex.Store({
 					// context.dispatch('appendApply00',parameters);
 					break;
 				case 'OnRtnHoldTotal':
-//					console.log('持仓合计变化推送通知');
+					console.log('持仓合计变化推送通知');
 					context.dispatch('updateHold',parameters);
 					break;
 				case 'OnRtnOrderTraded': // 订单成交
@@ -1439,9 +1440,6 @@ export default new Vuex.Store({
 					market.layer = parameters.StatusMsg + ':合约【'+ parameters.ContractCode +'】,订单号:【'+ parameters.OrderID +'】' + Math.floor(Math.random()*10);
 					
 				}else if (parameters.OrderStatus === 4||3){ //处理撤单
-					console.log('111')
-					console.log(market.OnRspOrderInsertOrderListCont)
-					console.log('222')
 					console.log(market.orderListCont)
 					market.OnRspOrderInsertOrderListCont.splice(index,1); //OnRspOrderInsertOrderListCont orderListCont 排列顺序一直
 					//market.OnRspOrderInsertOrderListCont.splice(market.OnRspOrderInsertOrderListCont.length-index-1,1);
@@ -1453,30 +1451,6 @@ export default new Vuex.Store({
 					market.layer = parameters.StatusMsg + ':合约【'+ parameters.ContractCode +'】,订单号:【'+ parameters.OrderID +'】' + + Math.floor(Math.random()*10);
 				}
 			}
-			
-// 			if(parameters.OrderStatus < 3 ){ 
-// //				market.OnRspOrderInsertOrderListCont.push(parameters);
-// 				if(isExist==true){
-// 					currentObj.delegatePrice = parameters.OrderPrice;
-// 					currentObj.delegateNum = parameters.OrderNum;
-// 					currentObj.ApplyOrderNum = parameters.OrderNum - parameters.TradeNum;
-// 					market.orderListCont.splice(index,1,currentObj);
-					
-// 					market.OnRspOrderInsertOrderListCont[market.OnRspOrderInsertOrderListCont.length-index-1].OrderPrice = parameters.OrderPrice;
-// 					market.OnRspOrderInsertOrderListCont[market.OnRspOrderInsertOrderListCont.length-index-1].OrderNum = parameters.OrderNum;
-// 					market.layer = parameters.StatusMsg + ':合约【'+ parameters.ContractCode +'】,订单号:【'+ parameters.OrderID +'】' + Math.floor(Math.random()*10);
-					
-// 				}
-// 			}else if(parameters.OrderStatus == 6){
-// 				return true;
-// 			}else{
-// 				if(isExist==true){
-// 					market.orderListCont.splice(index,1);
-// 					market.OnRspOrderInsertOrderListCont.splice(market.OnRspOrderInsertOrderListCont.length-index-1,1);
-// 					market.layer = parameters.StatusMsg + ':合约【'+ parameters.ContractCode +'】,订单号:【'+ parameters.OrderID +'】' + + Math.floor(Math.random()*10);
-				
-// 				}
-// 			}
 		},
 		appendApply:function(context,parameters){
 			if( parameters.OrderStatus < 3 ) { // 订单已提交、排队中、部分成交 显示到挂单列表
@@ -1503,61 +1477,26 @@ export default new Vuex.Store({
 				}
 			});
 		},
-		//更新持仓
-		updateHold (context,parameters){ //已更新
+		//更新持仓 重写
+		updateHold (context,parameters){ //已更新 所有的持仓信息都在这里进行更新
 			const {market} = context.state;
-			var isExist = false;
-			var positionListContCurrentIndex=0;
-			let positionListContCurrent = market.positionListCont.find((e,i) =>{
-				if(e.commodityNocontractNo === parameters.ContractCode){
-					isExist = true
-					positionListContCurrentIndex = i
+			let positionListContCurrentIndex;
+			let nowHoldArrItem =  market.qryHoldTotalArr.find((e,index) => {
+				if(e.ContractCode === parameters.ContractCode){
+					positionListContCurrentIndex = index
 					return true
 				}
-			});
-			var currentCommodity = market.orderTemplist[parameters.CommodityNo];
-			if(!isExist){
-				var obj = {
-					name: currentCommodity.commodity_name,
-					Drection: parameters.Drection,
-					type: parameters.Drection?'空':'多',
-					num: parameters.HoldNum,
-					type_color: parameters.Drection?'green':'red',
-					total_color: 'green',
-					price: parameters.HoldAvgPrice.toFixed(currentCommodity.dot_size),
-					ExchangeNo: currentCommodity.exchange_no,
-					CommodityNo: currentCommodity.commodity_no,
-					ContractNo: currentCommodity.mainContract,
-					commodityNocontractNo: currentCommodity.commodity_no + currentCommodity.mainContract,
-					showbar: false,
-					total: 0
-				}
-				if(parameters.HoldNum!=0){
-					market.positionListCont.unshift(obj);	
-					market.qryHoldTotalArr.push(parameters);
-				}
-				
+			})
+			if (!nowHoldArrItem&&parameters.HoldNum!==0) { //加入持仓
+				market.qryHoldTotalArr.push(parameters);
 			}
-			if(isExist==true){
-					if(parameters.HoldNum!=0){
-						positionListContCurrent.num=parameters.HoldNum;
-						positionListContCurrent.type = parameters.Drection?'空': '多';
-						positionListContCurrent.type_color = parameters.Drection?'green': 'red';
-						positionListContCurrent.price = parseFloat(parameters.OpenAvgPrice).toFixed(currentCommodity.dot_size);
-						market.positionListCont.splice(positionListContCurrentIndex,1,positionListContCurrent);
-
-//						market.qryHoldTotalArr[market.qryHoldTotalArr.length-1-positionListContCurrentIndex].HoldNum = parameters.HoldNum;
-//						market.qryHoldTotalArr[market.qryHoldTotalArr.length-1-positionListContCurrentIndex].Drection = parameters.Drection;
-//						market.qryHoldTotalArr[market.qryHoldTotalArr.length-1-positionListContCurrentIndex].OpenAvgPrice = parameters.OpenAvgPrice;
-						market.qryHoldTotalArr[market.qryHoldTotalArr.length-1-positionListContCurrentIndex] = parameters;
-					
-					}else{
-						market.positionListCont.splice(positionListContCurrentIndex,1);
-						market.qryHoldTotalArr.splice(market.qryHoldTotalArr.length-1-positionListContCurrentIndex,1);
-					}
+			if (nowHoldArrItem) { //更新持仓
+				if (parameters.HoldNum) { //持仓不为空
+					market.qryHoldTotalArr.splice(positionListContCurrentIndex,1,parameters)
+				}else{ // 持仓为空 (平仓等操作时)
+					market.qryHoldTotalArr.splice(positionListContCurrentIndex,1)
+				}
 			}
-			
-					
 		},
 		updateAccountFloatingProfit:function(context,parameters){
 			if(context.state.market.ifUpdateAccountProfit){

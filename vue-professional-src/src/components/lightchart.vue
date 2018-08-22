@@ -3,7 +3,7 @@
 			<div id="lightcharts" style="margin: 0 auto;">
 				
 			</div>
-			<!-- <div>无图</div> -->
+			<!-- <div v-if="!timeLength">未到交易时间暂无闪电图</div> -->
 		</div>
 	
 </template>
@@ -17,6 +17,14 @@
 				id:'lightcharts'
 			}
 		},
+		computed: {
+			timeLength () {
+				return this.$store.state.market.lightChartTime.time.length
+			},
+			currentdetail () {
+				return this.$store.state.market.currentdetail
+			}
+		},
 		methods:{
 			...mapMutations([
 				'drawlight',
@@ -26,8 +34,12 @@
 		mounted:function(){
 			this.$store.state.market.lightChartTime.time=[],
 			this.$store.state.market.lightChartTime.price=[]	
-			this.setlightDate();
-			this.drawlight(this.id);
+			console.log(this.currentdetail)
+			if (this.currentdetail.LastQuotation){
+				this.setlightDate();
+				this.drawlight(this.id);
+			}
+			
 		}
 	}
 </script>
