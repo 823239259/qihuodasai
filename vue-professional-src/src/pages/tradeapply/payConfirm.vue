@@ -233,7 +233,8 @@
 								"vid":-1,
 								"traderBond":this.chooseType,
 								"tranLever":0,
-								"businessType":8
+								"businessType":8,
+								"version": 2
 							},
 							timeout: 5000
 						}

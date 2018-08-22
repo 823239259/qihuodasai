@@ -1411,7 +1411,7 @@ export default new Vuex.Store({
 				
 			}
 		},
-		updateApply (context,parameters){ // todo 完全成交未正常更新
+		updateApply (context,parameters){ //  完全成交正常更新
 			// 2 排队中 状态，新增/更新挂单列表
 			// 2.2 部分成交、完全成交、已撤单、下单失败、未知 状态，需处理挂单
 			const {market} = context.state
@@ -1479,7 +1479,7 @@ export default new Vuex.Store({
 				}
 			});
 		},
-		//更新持仓 重写
+		//更新持仓 已重写
 		updateHold (context,parameters){ //已更新 所有的持仓信息都在这里进行更新
 			const {market} = context.state;
 			let positionListContCurrentIndex;
