@@ -196,6 +196,24 @@
 				}.bind(this));
 				this.$router.push({path: '/orderdetail'});
 			},
+			getTradeURL () {
+				this.$http.post(this.PATH + '/socket/config/getVersions', {emulateJSON: true}, {
+						params: {
+							appVersions : '6.1'
+						},
+						timeout: 5000
+				}).then(function(e) {
+					var data = e.body;
+					if(data.success == true){
+						if(data.code == 1){
+							this.$store.state.market.quoteConfig.url_real = data.socketModelUrl
+						}
+					}
+				}.bind(this), function() {
+					this.$refs.dialog.isShow = true;
+					this.msg = '网络不给力，请稍后再试！'
+				});
+			},
 			getVersion: function(){
 				this.$http.post(this.PATH + '/getVersion', {emulateJSON: true}, {
 						params: {},
@@ -242,6 +260,8 @@
 			this.getVersion();
 			//获取客服热线
 			this.getHotLine();
+
+			this.getTradeURL()
 		},
 		beforeUpdate: function(){
 //			this.arr = this.Parameters;

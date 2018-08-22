@@ -31,7 +31,8 @@ export default class Market {
             },
             tradeConfig:{
                 version : "2.0.0",	// 版本
-                url_real : "ws://192.168.0.227:36999",   // 新的测试地址
+                url_real : "",   // 新的测试地址
+                // url_real : "ws://192.168.0.227:36999",   // 新的测试地址
     			//url_real : "ws://192.168.0.227:26999",   //测试地址
                // url_real : "ws://139.196.176.60:6101",  //正式地址
                 model : "1", // 实盘：0；	模拟盘：1
