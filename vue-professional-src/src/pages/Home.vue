@@ -206,13 +206,16 @@
 					var data = e.body;
 					if(data.success == true){
 						if(data.code == 1){
-							this.$store.state.market.quoteConfig.url_real = data.socketModelUrl
+							this.$store.state.market.tradeConfig.url_real = data.data.socketModelUrl;
 						}
 					}
 				}.bind(this), function() {
 					this.$refs.dialog.isShow = true;
 					this.msg = '网络不给力，请稍后再试！'
-				});
+				}).then((data)=> {
+					//初始化行情
+					this.initQuoteClient();
+				})
 			},
 			getVersion: function(){
 				this.$http.post(this.PATH + '/getVersion', {emulateJSON: true}, {
@@ -254,8 +257,6 @@
 		mounted: function() {
 			//初始化高度
 //			$("#datalist .cont").height(window.screen.height - $("#topbar").height() - $("#selectbar").height() - $("#datalist .head").height() - $("#navbar").height());
-			//初始化行情
-			this.initQuoteClient();
 			//取当前版本号
 			this.getVersion();
 			//获取客服热线
