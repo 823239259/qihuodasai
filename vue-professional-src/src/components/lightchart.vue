@@ -32,14 +32,10 @@
 			])
 		},
 		mounted:function(){
-			this.$store.state.market.lightChartTime.time=[],
-			this.$store.state.market.lightChartTime.price=[]	
-			console.log(this.currentdetail)
-			if (this.currentdetail.LastQuotation){
-				this.setlightDate();
-				this.drawlight(this.id);
-			}
-			
+			this.$store.state.market.lightChartTime.time=[];
+			this.$store.state.market.lightChartTime.price=[];
+			this.setlightDate();
+			this.drawlight(this.id);
 		}
 	}
 </script>

@@ -139,6 +139,7 @@
 				this.kTypeShow = false;
 				isshow.isfensshow = false;
 				isshow.isklineshow = false;
+				isshow.islightshow = false;
 				switch(this.tabList[n]) {
 					case '闪电图':
 						isshow.sshow = true;

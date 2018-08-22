@@ -247,6 +247,7 @@
 //			this.arr = this.Parameters;
 		},
 		updated: function(){
+
 			//判断网络
 			pro.netIsconnected(function(){    //手机
 				this.isconnected = true;
@@ -284,6 +285,11 @@
 		activated:function(){
 			this.$store.state.market.currentNo='';
 			this.$store.state.isshow.isklineshow = false;
+
+			//处理从详情内页返回强制刷新
+			// if (this.isBack == 1) {
+			// 	window.location.reload();
+			// }
 		}
 	}
 </script>

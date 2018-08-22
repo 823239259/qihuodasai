@@ -837,7 +837,6 @@
 		},
 		mounted: function(){
 			this.showNewPrice = this.Parameters;
-			console.log(this.showNewPrice)
 			//取小数点保留位数、改变正则
 			this.dotSize = this.$store.state.market.currentdetail.dot_size;
 			//tab默认选中第一个

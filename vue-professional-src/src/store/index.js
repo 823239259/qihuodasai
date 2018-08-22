@@ -70,12 +70,14 @@ export default new Vuex.Store({
 					lightChart = echarts.getInstanceByDom(document.getElementById(e));
 				}
 			}
+
 			lightChart.setOption(state.market.option5);
 		},
 		//设置闪电图数据
 		setlightDate: function(state) {
 			let { lightChartTime,jsonTow, currentdetail } = state.market;
 			let NewJsonTow =  jsonTow.last?jsonTow:currentdetail.LastQuotation;
+			//let NewJsonTow =  jsonTow
 			if (!NewJsonTow.last) return ;
 			lightChartTime.price.push(NewJsonTow.last.toFixed(currentdetail.dot_size));
 			lightChartTime.time.push((NewJsonTow.time_flag).split(mTimeExg)[1]);
@@ -1927,10 +1929,14 @@ export default new Vuex.Store({
 								
 							}
 							//更新闪电图 
-							if(isshow.islightshow == true) {
-								context.commit('setlightDate');
-								context.commit('drawlight', 'lightcharts');
+							if (isshow.sshow) {
+								
+								if(isshow.islightshow == true) {
+									context.commit('setlightDate');
+									context.commit('drawlight', 'lightcharts');
+								}
 							}
+							
 							//更新K线图
 							if(isshow.isklineshow == true) {
 								if(market.CacheLastQuote[1].volume <= market.CacheLastQuote[0].volume) return;

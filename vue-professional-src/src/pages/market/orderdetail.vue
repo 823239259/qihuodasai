@@ -165,12 +165,23 @@
 		activated: function() {
 			this.commodity_name = this.$route.query.CommodityName;
 			this.EngName = this.$route.query.EngName;
+			// 再次进入其他合约的时候修正到分时图
+			this.$store.state.isshow.currentIndex = 1;
 //			this.$store.state.isshow.sshow = false;
 //			this.$store.state.isshow.fshow = true;
 //			this.$store.state.isshow.kshow = false;
 //			this.$store.state.isshow.pshow = false;
 //			this.$store.state.isshow.bottomshow = false;
 //			this.$store.state.isshow.islightshow = false;
+		},
+		deactivated () {
+			this.$store.state.isshow.sshow = false;
+			this.$store.state.isshow.fshow = false;
+			this.$store.state.isshow.kshow = false;
+			this.$store.state.isshow.pshow = false;
+			this.$store.state.isshow.bottomshow = false;
+			this.$store.state.isshow.islightshow = false;
+			//this.$store.state.isshow.islightshow = false;
 		},
 		mounted: function() {
 //			this.$store.state.isshow.fshow = true;
@@ -193,36 +204,36 @@
 			var obj = document.getElementById("orderdetail");
 			var startx, starty, overx, overy;
 			//touchstart事件,当鼠标点击屏幕时触发
-			obj.addEventListener('touchstart', function(event) { 
-				startx = event.touches[0].clientX;
-				starty = event.touches[0].clientY;
-			}, false);
-			//touchend事件,当鼠标离开屏幕时触发
-			obj.addEventListener('touchend', () => {
-				setTimeout(()=> this.touchFlag = true ,100)
-			},false);
-			//touchmove事件,当鼠标在屏幕移动时触发
-			obj.addEventListener('touchmove', (event) =>{
-				// console.log(this.touchFlag)
-				if(!this.touchFlag) return;
-				clearTimeout(this.timer)
-				this.timer = setTimeout(()=>{
-					overx = event.touches[0].clientX;
-					overy = event.touches[0].clientY; 
-					let isshow = this.$store.state.isshow
-					if(startx-overx > 50){    //左滑动判断
-							this.touchFlag = false
-							if (isshow.currentIndex<4){
-								isshow.currentIndex++;
-							}
-					}else if ( startx - overx < -50) { //右滑动判断
-						this.touchFlag = false
-						if(isshow.currentIndex>0) {
-							isshow.currentIndex--;
-						}
-					}
-				},100)
-			}, false);
+			// obj.addEventListener('touchstart', function(event) { 
+			// 	startx = event.touches[0].clientX;
+			// 	starty = event.touches[0].clientY;
+			// }, false);
+			// //touchend事件,当鼠标离开屏幕时触发
+			// obj.addEventListener('touchend', () => {
+			// 	setTimeout(()=> this.touchFlag = true ,100)
+			// },false);
+			// //touchmove事件,当鼠标在屏幕移动时触发
+			// obj.addEventListener('touchmove', (event) =>{
+			// 	console.log(this.touchFlag)
+			// 	if(!this.touchFlag) return;
+			// 	clearTimeout(this.timer)
+			// 	this.timer = setTimeout(()=>{
+			// 		overx = event.touches[0].clientX;
+			// 		overy = event.touches[0].clientY; 
+			// 		let isshow = this.$store.state.isshow
+			// 		if(startx-overx > 50){    //左滑动判断
+			// 				this.touchFlag = false
+			// 				if (isshow.currentIndex<4){
+			// 					isshow.currentIndex++;
+			// 				}
+			// 		}else if ( startx - overx < -50) { //右滑动判断
+			// 			this.touchFlag = false
+			// 			if(isshow.currentIndex>0) {
+			// 				isshow.currentIndex--;
+			// 			}
+			// 		}
+			// 	},100)
+			// }, false);
 			
 		},
 		updated: function(){
