@@ -262,7 +262,7 @@
 			//获取客服热线
 			this.getHotLine();
 
-			this.getTradeURL()
+			this.getTradeURL();
 		},
 		beforeUpdate: function(){
 //			this.arr = this.Parameters;

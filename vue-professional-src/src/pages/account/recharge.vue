@@ -51,7 +51,7 @@
 		methods: {
 			backEvent: function(){
 				if(this.isRefresh == 1){
-					this.$router.go(-4);
+					//this.$router.go(-4);
 					this.isRefresh == '';
 				}
 			},

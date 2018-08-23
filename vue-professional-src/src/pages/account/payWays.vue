@@ -17,28 +17,42 @@
 		name:'payWays',
 		components: {topbar, back, cs},
 		data(){
-			return {}
+			return {
+				username: '',
+				money: '',
+				iframe: ''
+			}
 		},
 		computed: {
 			isTest () {
 				return this.$store.state.environment
 			},
-			iframe(){
-				if (this.isTest === 'test') {
-					return 'http://test.pay.duokongtai.cn/app/appPayinfo?mobile='+ this.$route.query.username +'&money='+ this.$route.query.money;
-				}else{
-					return 'http://pay.duokongtai.cn/app/appPayinfo?mobile='+ this.$route.query.username +'&money='+ this.$route.query.money;
-				}
-				
-				
-			}
 		},
 		methods: {
 			backEvent: function(){
 				this.$router.replace({path: '/recharge', query: {isRefresh: 1}});
+			},
+			setIframeUrl () {
+				if (this.isTest === 'test') {
+					this.iframe = 'http://test.pay.duokongtai.cn/app/appPayinfo?mobile='+ this.username +'&money='+ this.money;
+				}else{
+					this.iframe ='http://pay.duokongtai.cn/app/appPayinfo?mobile='+ this.username +'&money='+ this.money;
+				}
 			}
 		},
-		mounted: function(){}
+		// mounted: function(){
+		// 	this.username = this.$route.query.username
+		// 	this.money = this.$route.query.money
+		// 	this.setIframeUrl()
+		// },
+		activated() {
+			this.username = this.$route.query.username
+			this.money = this.$route.query.money
+			this.setIframeUrl()
+		},
+		deactivated() {
+			this.iframe = ''
+		},
 	}
 </script>
 

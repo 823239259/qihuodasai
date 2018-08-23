@@ -25,7 +25,7 @@ export default new Vuex.Store({
 	},
 	state: {
 		//test 测试环境，online 正式环境
-		environment: 'test',
+		environment: 'online',
 		//打包的时候，值为 build ，开发的时候，值为 dev
 		setting: 'build',
 		//请求的操盘参数数据
