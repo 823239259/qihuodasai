@@ -284,7 +284,7 @@
 				}else{    //资金不足的时候
 //					$(e.currentTarget).parent().attr("href","tel:4008528008");
 					this.$children[0].isShow = true;
-					this.msg = '账户余额不足';
+					this.msg = '系统不支持此功能';
 					// this.$router.replace({
 					// 	path: '/recharge'
 					// });
