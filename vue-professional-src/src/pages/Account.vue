@@ -1,6 +1,6 @@
 <template>
 	<div id="account">
-		<tipsDialog :msg="msgTips"></tipsDialog>
+		<tipsDialog ref="toast" :msg="msgTips"></tipsDialog>
 		<topbar title="我的"></topbar>
 		<cs title="客服"></cs>
 		<div class="top_tips">
@@ -12,8 +12,10 @@
 				<p>余额：{{balance}}元</p>
 			</div>
 			<div class="money_option_row">
-				<button class="fl yellow" @tap='recharge'>我要充值</button>
-				<button class="fr blue" @tap='withdrawal'>我要提现</button>
+				<!-- <button class="fl yellow" @tap='recharge'>我要充值</button>
+				<button class="fr blue" @tap='withdrawal'>我要提现</button> -->
+				<button class="fl yellow" @tap='alertNo'>我要充值</button>
+				<button class="fr blue" @tap='alertNo'>我要提现</button>
 			</div>
 		</div>
 		<div class="list_option mt10">
@@ -137,6 +139,10 @@
 				}else{
 					this.$router.push({path:'/nameCertification'});
 				}
+			},
+			alertNo () {
+				this.msg = '系统不支持此功能';
+				this.$refs.toast.isShow = true
 			},
 //			dialPhone: function(){
 //				pro.callService();
