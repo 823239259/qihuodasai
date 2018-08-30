@@ -283,9 +283,11 @@
 					});
 				}else{    //资金不足的时候
 //					$(e.currentTarget).parent().attr("href","tel:4008528008");
-					this.$router.replace({
-						path: '/recharge'
-					});
+					this.$children[0].isShow = true;
+					this.msg = '账户余额不足';
+					// this.$router.replace({
+					// 	path: '/recharge'
+					// });
 //					pro.callService();
 				}
 			}
