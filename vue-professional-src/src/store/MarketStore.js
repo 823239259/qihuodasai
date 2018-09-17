@@ -24,9 +24,7 @@ export default class Market {
                 intervalCheckTime : 15000  // 间隔检查时间：8秒
             },
             quoteConfig:{
-    		    url_real: "ws://192.168.0.232:9102",  //测试地址
-                // url_real: "ws://quote.vs.com:9102",   //正式地址
-                userName:"fut_game_webapp",
+                url_real: "ws://quote.vs.com:9102",   //正式地                userName:"fut_game_webapp",
                 passWord:"a123456"
             },
             tradeConfig:{

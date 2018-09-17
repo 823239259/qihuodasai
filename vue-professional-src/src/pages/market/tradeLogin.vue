@@ -106,9 +106,12 @@
 					var  tradeSocket = new WebSocket(this.tradeConfig.url_real);
 					tradeSocket.onopen = function(evt){
 					//登录
+					console.log(123)
+
 						if(tradeSocket.readyState==1){ //连接已建立，可以进行通信。
 							tradeSocket.send('{"Method":"Login","Parameters":{"ClientNo":"'+ this.username +'","PassWord":"'+ Base64.encode(this.pwd) +'","IsMock":'+this.tradeConfig.model+',"Version":"'+this.tradeConfig.version+'","Source":"'+this.tradeConfig.Source+'"}}');
 						}
+						//debugger;
 					}.bind(this);
 					tradeSocket.onmessage = function(evt) {
 						var data = JSON.parse(evt.data);

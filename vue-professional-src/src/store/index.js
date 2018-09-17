@@ -25,7 +25,7 @@ export default new Vuex.Store({
 	},
 	state: {
 		//test 测试环境，online 正式环境
-		environment: 'online',
+		environment: 'test',
 		//打包的时候，值为 build ，开发的时候，值为 dev
 		setting: 'build',
 		//请求的操盘参数数据
@@ -1779,10 +1779,10 @@ export default new Vuex.Store({
 			};
 			
 			state.quoteSocket.onclose = function(evt) {
-//				console.log('close');
+				console.log('close');
 			};
 			state.quoteSocket.onerror = function(evt) {
-//				console.log('error');
+				console.log('error');
 			};
 			state.quoteSocket.onmessage = function(evt) {
 				let wsData = JSON.parse(evt.data);
@@ -1803,6 +1803,8 @@ export default new Vuex.Store({
 					case 'on_rsp_commodity_list': //行情服务器支持的品种
 						//加入主力合约字段
 						wsData.data.commodity_list.forEach(item => {
+							// console.log(item)
+							//if(!item.contract_no_list) return;
 							var contract = item.contract_no_list.find( contract => contract.flags === 1)
 							item.mainContract = contract?contract.contract_no:'';
 							var key=item.commodity_no;
