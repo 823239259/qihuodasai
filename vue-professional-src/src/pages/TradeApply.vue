@@ -766,6 +766,7 @@
 					'path': '/login'
 				});
 			}
+			
 		}
 	}
 </script>

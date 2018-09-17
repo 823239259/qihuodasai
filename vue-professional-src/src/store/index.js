@@ -48,7 +48,7 @@ export default new Vuex.Store({
 				return '/api';
 			} else if(state.setting == 'build') {
 				if(state.environment == 'test'){
-					return state.account.currentUrlHead + '//test.api.duokongtai.cn';
+					return state.account.currentUrlHead + '//test.api.duokongtai.cn';z
 				}else{
 					return state.account.currentUrlHead + '//api.duokongtai.cn';
 				}
@@ -1598,11 +1598,9 @@ export default new Vuex.Store({
 				// 逐笔浮盈：直接从当前资金账户获取
 				var floatingProfit = jCacheAccount[e].FloatingProfit;
 				context.state.market.CacheAccount.jCacheTotalAccount.FloatingProfit  += floatingProfit * jCacheAccount[e].CurrencyRate;
-				
 				// 今权益 = 今结存 + 浮盈
 				var tmpTodayBalance = jCacheAccount[e].TodayAmount + floatingProfit;
 				context.state.market.CacheAccount.jCacheTotalAccount.TodayBalance += tmpTodayBalance * jCacheAccount[e].CurrencyRate;
-				
 				// 今可用=今权益-冻结资金-保证金
 				context.state.market.CacheAccount.jCacheTotalAccount.TodayCanUse += (tmpTodayBalance - jCacheAccount[e].FrozenMoney - jCacheAccount[e].Deposit) * jCacheAccount[e].CurrencyRate;
 				// 平仓盈亏
@@ -1846,7 +1844,12 @@ export default new Vuex.Store({
 					case 'on_rtn_quote': // 最新行情
 						var val = wsData.data;
 						var key = val.contract_info.commodity_no;
-						
+						console.log(11);
+						// console.time('sss')
+						// setTimeout(() => {
+						// 	console.log(2)
+						// 	// debugger;
+						// }, 1000);
 						//找到当前的回推的合约及index
 						//console.log(market.Parameters)
 						var RtnParametersIndex;
@@ -2019,6 +2022,7 @@ export default new Vuex.Store({
 					 * 更新持仓盈亏
 					 */
 					context.dispatch('UpdateHoldProfit',val);
+					// console.timeEnd('sss')
 						break;
 
 					case 'on_rsp_history_data': //历史查询

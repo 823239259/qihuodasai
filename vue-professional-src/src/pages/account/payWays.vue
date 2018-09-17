@@ -35,8 +35,10 @@
 			setIframeUrl () {
 				if (this.isTest === 'test') {
 					this.iframe = 'http://test.pay.duokongtai.cn/app/appPayinfo?mobile='+ this.username +'&money='+ this.money;
+					// this.iframe = 'http://117.139.13.188:8180/app/appPayinfo?mobile='+ this.username +'&money='+ this.money;
 				}else{
-					this.iframe ='http://pay.duokongtai.cn/app/appPayinfo?mobile='+ this.username +'&money='+ this.money;
+					// this.iframe ='http://pay.duokongtai.cn/app/appPayinfo?mobile='+ this.username +'&money='+ this.money;
+					this.iframe = 'http://117.139.13.188:8180/vs-pay/app/appPayinfo?mobile='+ this.username +'&money='+ this.money;
 				}
 			}
 		},
