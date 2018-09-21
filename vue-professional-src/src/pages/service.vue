@@ -24,10 +24,14 @@
 				return this.$store.getters.PATH;
 			},
 			iframe: function() {
-				return  /*this.PATH + */'http://www.vs.com/topic/consistentBeauty/qiw_quoteApp_service.html?phone=' + this.$store.state.account.phone + '&userName=' + this.$store.state.account.username;
-			}
+				// return  /*this.PATH + */'http://www.vs.com/topic/consistentBeauty/qiw_quoteApp_service.html?phone=' + this.$store.state.account.phone + '&userName=' + this.$store.state.account.username;
+				return 'http://www.vs.com/topic/consistentBeauty/qiw_quoteApp_service.html?phone=' + 18200295561 + '&userName=' + 'kelle'
+			},
 		},
-		methods: {}
+		methods: {},
+		activated() {
+			
+		},
 	}
 </script>
 <style scoped lang="less">

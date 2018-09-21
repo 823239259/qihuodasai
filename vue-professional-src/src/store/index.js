@@ -25,7 +25,7 @@ export default new Vuex.Store({
 	},
 	state: {
 		//test 测试环境，online 正式环境
-		environment: 'test',
+		environment: 'online',
 		//打包的时候，值为 build ，开发的时候，值为 dev
 		setting: 'build',
 		//请求的操盘参数数据
@@ -1812,7 +1812,8 @@ export default new Vuex.Store({
 						})
 						market.markettemp = wsData.data.commodity_list;
 						// 查询服务器支持品种用于订阅
-						var paramsArr = market.markettemp.reduce((arr,obj) =>{
+						var paramsArr = market.markettemp.reduce((arr,obj, index) =>{
+							// if (index < 20) return arr;
 								var sendParams = {
 									security_type: obj.security_type,
 									exchange_no: obj.exchange_no,
@@ -1868,20 +1869,19 @@ export default new Vuex.Store({
 						//处理掉行情回推成交量为0的情况
 						if(val.volume === 0) {
 							val.volume = (RtnMarkettemp.LastQuotation&&RtnMarkettemp.LastQuotation.volume)||0
-						}		
+						}	
+						//处理变色 
+						if (RtnParameters.LastQuotation && val.last > RtnParameters.LastQuotation.last) {
+						  market.quoteIndex = RtnParametersIndex; //行情变颜色
+						  market.quoteColor = 'red';
+						} else if (RtnParameters.LastQuotation && val.last < RtnParameters.LastQuotation.last) {
+						  market.quoteIndex = RtnParametersIndex; //行情变颜色
+						  market.quoteColor = 'green';
+						}
 						//重新给templateList 赋最新值
 						market.templateList[key] = val;
 						RtnMarkettemp.LastQuotation = val;
 						market.Parameters.splice(RtnParametersIndex, 1, RtnMarkettemp);
-
-						//处理变色 
-						if (RtnParameters.LastQuotation && val.last > RtnParameters.LastQuotation.last) {
-							market.quoteIndex = RtnParametersIndex;   //行情变颜色
-							market.quoteColor = 'red';
-						}else if(RtnParameters.LastQuotation && val.last < RtnParameters.LastQuotation.last) {
-							market.quoteIndex = RtnParametersIndex;   //行情变颜色
-							market.quoteColor = 'green';
-						}
 
 						//更新当前合约
 						if (market.currentNo == RtnMarkettemp.commodity_no) {
